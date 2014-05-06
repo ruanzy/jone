@@ -197,13 +197,13 @@ public final class DBMeta
 				for (int i = 0; i < l; i++)
 				{
 					String columnname = data.getColumnName(i + 1);
-					String typename = data.getColumnTypeName(i + 1);
-					if ("CHAR".equalsIgnoreCase(typename) || "VARCHAR".equalsIgnoreCase(typename) || "Date".equalsIgnoreCase(typename))
+					int type = data.getColumnType(i + 1);
+					if (!((type >= 2 && type <=8) || (type >=-7 && type <=-5)))
 					{
 						sb.append("'");
 					}
 					sb.append(rs.getObject(columnname));
-					if ("CHAR".equalsIgnoreCase(typename) || "VARCHAR".equalsIgnoreCase(typename) || "Date".equalsIgnoreCase(typename))
+					if (!((type >= 2 && type <=8) || (type >=-7 && type <=-5)))
 					{
 						sb.append("'");
 					}

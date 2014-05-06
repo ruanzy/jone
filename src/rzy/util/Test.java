@@ -16,7 +16,7 @@ public class Test
 		{
 			System.out.println(string);
 		}
-		DBMeta.export("users", "d:/meta");
+		DBMeta.export("a", "d:/meta");
 	}
 
 }
