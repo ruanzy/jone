@@ -1,6 +1,6 @@
 package rzy.util;
 
-import rzy.core.Dao;
+import rzy.core.DBMeta;
 
 public class ExportTask implements Runnable
 {
@@ -14,7 +14,7 @@ public class ExportTask implements Runnable
 
 	public void run()
 	{
-		Dao.export(table);
+		DBMeta.export(table, "d:/meta");
 		System.out.println(table + " done!");
 	}
 

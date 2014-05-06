@@ -1,10 +1,7 @@
 package rzy.core;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.sql.CallableStatement;
@@ -18,11 +15,9 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.slf4j.Logger;
@@ -704,120 +699,6 @@ public final class Dao
 		{
 			close(null, null, conn);
 		}
-	}
-
-	public static boolean existTable(String table)
-	{
-		boolean result = false;
-		Connection conn = null;
-		ResultSet rs = null;
-		try
-		{
-			conn = getConnection();
-			rs = conn.getMetaData().getTables(null, null, table, null);
-			if (rs.next())
-			{
-				result = true;
-			}
-		}
-		catch (Exception e)
-		{
-			throw new DataAccessException(e);
-		}
-		finally
-		{
-			close(rs, null, conn);
-		}
-		return result;
-	}
-
-	public static Set<String> getTable()
-	{
-		Set<String> tables = new HashSet<String>();
-		Connection conn = null;
-		ResultSet rs = null;
-		try
-		{
-			conn = getConnection();
-			rs = conn.getMetaData().getTables(null, null, null, new String[] { "TABLE" });
-			while (rs.next())
-			{
-				String tableName = rs.getString("TABLE_NAME");
-				tables.add(tableName);
-			}
-		}
-		catch (Exception e)
-		{
-			throw new DataAccessException(e);
-		}
-		finally
-		{
-			close(rs, null, conn);
-		}
-		return tables;
-	}
-
-	public static void export(String table)
-	{
-		StringBuffer sb = new StringBuffer();
-		StringBuffer sb2 = new StringBuffer();
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		FileWriter fw = null;
-		try
-		{
-			File f = new File("d:/51/" + table + ".txt");
-			f.createNewFile();
-			fw = new FileWriter(f);
-			conn = getConnection();
-			ps = conn.prepareStatement("select * from " + table);
-			rs = ps.executeQuery();
-			ResultSetMetaData data = rs.getMetaData();
-			int l = data.getColumnCount();
-			while (rs.next())
-			{
-				sb2.append("insert into ").append(table).append(" values(");
-				for (int i = 0; i<l; i++)
-				{
-					String columnname = data.getColumnName(i + 1);
-					//String typename = data.getColumnTypeName(i + 1);
-					sb.append(rs.getObject(columnname));
-					sb2.append(rs.getObject(columnname));
-					if(i!=l-1){
-					sb.append(",");
-					sb2.append(",");
-					}
-				}
-				sb.append("\r\n");
-				sb2.append(");\r\n");
-			}
-			//System.out.println(sb);
-			fw.append(sb2);
-			//System.out.println(sb2);
-		}
-		catch (Exception e)
-		{
-			throw new DataAccessException(e);
-		}
-		finally
-		{
-			try
-			{
-				fw.close();
-			}
-			catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			close(rs, ps, conn);
-		}
-	}
-
-	public static void main(String[] args)
-	{
-		
 	}
 }
 

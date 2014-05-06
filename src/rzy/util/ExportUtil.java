@@ -3,7 +3,7 @@ package rzy.util;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import rzy.core.Dao;
+import rzy.core.DBMeta;
 
 public class ExportUtil
 {
@@ -11,7 +11,7 @@ public class ExportUtil
 
 	public static void export()
 	{
-		Set<String> tables = Dao.getTable();
+		Set<String> tables = DBMeta.getTable();
 		for (String string : tables)
 		{
 			pool.execute(new ExportTask(string));
