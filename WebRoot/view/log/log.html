@@ -1,0 +1,59 @@
+<table><tr>
+	<td>操作员</td><td><input type="text" id="operators" name="operator2" class='txt'/></td>
+	<td>操作时间</td><td>
+	<input type="text" id='time1' name="time1" class='txt'/></td>
+	<td>~</td><td>
+	<input type="text" id='time2' name="time2" class='txt'/></td><td>
+<button class='btn btn-lightblue'><i class="icon-search"></i> 搜素</button>
+<button class='btn btn-success'><i class="icon-search"></i> 查看日志</button>
+	</td>
+	</tr>
+</table>
+<div id='kkk'></div>
+<script type="text/javascript">
+  $(function(){
+	 $('#time1').Datepicker({format:'yyyy-MM-dd 00:00:00'}); 
+	 $('#time2').Datepicker({format:'yyyy-MM-dd 23:59:59'}); 
+	 $('#operators').AutoComplete({
+	 	hideName:'operator',
+	 	url:'log/users',
+	 	emptyText:''
+	 }); 
+	 
+     $('#kkk').table({
+		title:'日志列表',
+		columns:[
+			{header:"ID",field:"id",width:50,align:'center'},
+			{header:"操作员",field:"operator",width:'10%'},
+			{header:"时间",field:"time",align:'center',width:180},
+			{header:"IP",field:"ip",align:'center',width:150},
+			{header:"操作",field:"methodname",width:120},
+			//{header:"接口",field:"method",width:200},
+			{header:"备注",field:"memo"}
+		],
+		url:'log/list',
+		selector:'m',
+		condition:condition
+	});
+     $('.btn-lightblue').click(function(){
+    	 $('#kkk').table('reload');
+     });
+     $('.btn-success').click(function(){
+    	 $.open({
+    		 title:'查看日志',
+    		 width:1000,
+    		 height:450,
+    		 url:'logs/log.html'
+    	 });
+     });
+     
+     function condition(){
+    	 var operator = $('input[name=operator]').val();
+    	 var operator_text = $('input[name=operator_text]').val();
+    	 var time1 = $('input[name=time1]').val();
+    	 var time2 = $('input[name=time2]').val();
+    	 var params = {operator: operator, operator_text: operator_text, time1: time1, time2: time2};
+    	 return params;
+     }
+  });  
+</script>

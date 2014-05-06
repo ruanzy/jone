@@ -1,0 +1,204 @@
+.accordion {
+	margin: 0;
+	padding: 0;
+}
+
+.accordion .title {
+	margin: 0;
+	padding-left: 3px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #1abc9c;
+	color: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.accordion ul {
+	margin: 0;
+	padding: 0;
+}
+
+.accordion li.item {
+	list-style: none;
+}
+
+.accordion .header {
+	margin: 0;
+	height: 28px;
+	line-height: 28px;
+	cursor: pointer;
+	
+		display: block;
+padding: 0;
+margin: 0;
+border-top: 1px solid #e5e5e5;
+position: relative;
+
+	box-shadow: 0px 1px 1px #ccc;
+height: 40px;
+line-height: 40px;
+padding: 0 16px 0 7px;
+background-color: #f9f9f9;
+color: #585858;
+text-shadow: none!important;
+font-size: 16px;
+text-decoration: none;
+font-weight: normal;
+white-space: nowrap;
+}
+
+.accordion .body {
+	padding: 0 0;
+	font-size: 13px;
+	text-align: center;
+	overflow: auto;
+	background-color: #fff;
+	white-space: nowrap;
+}
+
+.accordion ul.body li {
+	list-style: none;
+	text-align: left;
+	cursor: pointer;
+	margin: 15px;
+	height: 32px;
+	line-height: 32px;
+}
+
+.accordion span.icon {
+	float: left;
+	width: 16px;
+	height: 16px;
+}
+
+.ddd{
+border-bottom: 0px solid #e5e5e5;
+}
+.tabs {
+
+}
+
+.tabs ul.tabs-title {
+	margin: 0;
+	padding: 3px 0 0 20px;
+	border-bottom: 1px solid #e5e5e5;
+background-color: #f9f9f9;
+	height: 39px;
+	zoom:1;
+}
+
+.tabs li {
+	margin: 0 0 0 3px;
+	padding: 0 8px;
+	list-style: none;
+	border-top: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-left: 1px solid transparent;
+	float: left;
+	text-align: center;
+	height: 38px;
+	line-height: 38px;
+	display: block;
+	font-size: 15px;
+	cursor: default;
+}
+
+.tabs li.active {
+		border-top: 2px solid #438eb9;
+	border-right: 1px solid #e5e5e5;
+	border-left: 1px solid #e5e5e5;
+	background: #fff;
+	margin-bottom: -5px;
+	
+}
+
+.icon-close {
+    background-color:transparent;
+    border:0;
+    cursor:pointer;
+    outline:none;
+	color: #555;
+	padding:0;
+}
+
+.tabs-content {
+	overflow: auto;
+}
+
+.icon{
+	width: 32px;
+	height: 32px;
+	background: url(../images/icon32.png);
+	margin: 0 auto;
+	display: inline-block;
+	float:left;
+}
+
+.group{
+	background-position: 0px 0px;
+}
+
+.log{
+	background-position: 0px -42px;
+}
+
+.project{
+	background-position: 0px -84px;
+}
+
+.res{
+	background-position: 0px -126px;
+}
+
+.role{
+	background-position: 0px -168px;
+}
+
+.dic{
+	background-position: 0px -210px;
+}
+.btn {
+text-align: center;
+border: 1px solid transparent;
+font-size:14px;
+color:#fff;
+padding: 6px 12px;
+font-weight: normal;
+line-height: 1.428571429;
+cursor: pointer;
+white-space: nowrap;
+position: relative;
+margin-right:3px;
+}
+button.btn:active{
+top: 1px;
+left: 1px;
+}
+
+.btn-lg {
+line-height: 1.35;
+padding: 10px 16px;
+}
+
+.btn-sm {
+font-size: 13px;
+padding: 4px 9px;
+line-height: 1.39;
+}
+
+.btn-icon{
+	background-color:transparent;
+	padding: 0;
+	color:inherit;
+}
+button.btn-icon:active{
+top: 0;
+left: 0;
+}
+
+.blue{
+	color:blue;
+}
+.danger{
+color: rgb(209, 91, 71);
+}

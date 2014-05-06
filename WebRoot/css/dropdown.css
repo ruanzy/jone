@@ -1,0 +1,35 @@
+.r-dropdown {
+	font: 13px/20px "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+	background-color: #fff;
+	border: 1px solid #e5e5e5;
+	border-radius: 0 !important;
+	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	z-index: 2000;
+	padding: 5px 0;
+}
+
+.r-dropdown li {
+	list-style: none;
+}
+
+.r-dropdown li a {
+	display: block;
+	padding: 5px 8px;
+	text-decoration: none;
+	color: #000;
+}
+
+.r-dropdown li a:hover {
+	background-color: #08c;
+	text-decoration: none;
+	color: #fff;
+}
+
+.r-dropdown .divider {
+	height: 1px;
+	margin: 5px 0;
+	overflow: hidden;
+	background-color: #e5e5e5;
+}

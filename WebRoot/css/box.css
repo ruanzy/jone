@@ -1,0 +1,133 @@
+.mask {
+	background-color: #eee;
+	filter: alpha(opacity=20);
+	opacity: 0.2;
+	width:100%;
+	height:100%;
+	z-index:1999;
+	position:absolute;
+	top:0;
+	left:0;
+}
+.box {
+	box-shadow: 0px 10px 10px #666;
+	position: absolute;
+	left:35%;
+	top:50px;
+	background: #fff;
+	z-index:2000;
+}
+
+.box_head {
+	position: relative;
+	height: 35px;
+	line-height: 35px;
+	color: white;
+	background-color: #5579BA;
+	border-bottom: 1px solid #40619C;
+	cursor: move;
+}
+
+.box_title {
+	padding-left: 10px;
+	font-size: 14px;
+}
+
+.box_min {
+	right: 77px;
+	line-height: 20px;
+	font-size: 16px;
+}
+
+.box_max {
+	right: 41px;
+	line-height: 18px;
+	font-size: 22px;
+}
+
+.box_close {
+	right: 5px;
+}
+
+.box_min,.box_max,.box_close {
+	display: block;
+	position: absolute;
+	text-decoration: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 16px;
+	background: #7290C6;
+	color: white;
+	border-top: none;
+	top: 0px;
+	height: 22px;
+	width: 35px;
+	font-size: 20px;
+	line-height: 22px;
+	text-align: center;
+	font-family: Arial, sans-serif;
+}
+
+.box_min:hover,.box_max:hover,.box_close:hover {
+	text-decoration: none;
+	color: #fff;
+	background: #cc0000;
+}
+
+.box_body {
+	padding: 20px 30px;
+	font-size: 14px;
+	overflow: auto;
+}
+
+.box_buttons {
+	padding: 10px;
+	text-align: right;
+	white-space: nowrap;
+	background-color: #F6F6F6;
+	border-top: solid 1px #DADEE5;
+}
+
+.box_buttons button {
+	margin-right: 15px;
+	padding: 3px 10px;
+	height: 30px;
+	cursor: pointer;
+	display: inline-block;
+	text-align: center;
+	line-height: 1;
+	overflow: visible;
+	color: #000000;
+	border: none;
+	background: #aaa;
+	color: #fff;
+}
+
+button.box_button_ok {
+	background-color: #5579BA;
+}
+
+.tip {
+	background-color:#B74635;
+	padding: 15px;
+	font: 14px/20px 'Open Sans',"\5FAE\8F6F\96C5\9ED1",Arial,sans-serif;
+	min-width:200px;
+}
+
+.tip-danger {
+color: #fff;
+background-color: #B74635;
+border-color: #D15B47;
+}
+
+.tip .close {
+float: right;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-shadow: 0 1px 0 white;
+padding: 0;
+cursor: pointer;
+background-color: transparent;
+border: 0;
+}

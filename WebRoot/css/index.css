@@ -1,0 +1,249 @@
+* {
+	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+}
+
+html {
+	overflow: hidden;
+}
+
+body,button {
+	padding: 0;
+	margin: 0;
+}
+
+body,button,input,table {
+	font: 13px/20px "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+	line-height: 1.5;
+}
+
+#head {
+	margin-left: 0;
+	margin-right: 0;
+	border: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 0;
+	margin: 0;
+	padding-left: 0;
+	padding-right: 0;
+	min-height: 45px;
+	position: relative;
+	background: #438eb9;
+}
+
+#head-left {
+	color: #fff;
+	float: left;
+	line-height: 45px;
+	font-size: 20px;
+	padding-left: 15px;
+}
+
+#head-right {
+	color: #fff;
+	float: right;
+	padding-right: 20px;
+}
+
+#head-right ul {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#head-right ul li {
+	line-height: 45px;
+	height: 45px;
+	border-left: 1px solid #DDD;
+	padding: 0 8px;
+	position: relative;
+	float: left !important;
+	list-style: none;
+	cursor: pointer;
+}
+
+#head-right ul li a {
+	display: block;
+	height: 45px;
+	padding: 0 5px;
+}
+
+.purple {
+	background-color: purple;
+}
+
+.green {
+	background-color: #69aa46;
+}
+
+.light-blue {
+	background-color: #93cbf9;
+}
+
+#sidebar {
+	float: left;
+	border: 1px solid #ccc;
+	border-width: 0 1px 1px 0;
+	white-space: nowrap;
+	width: 17%;
+}
+
+.nav-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	white-space: nowrap;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.nav-list li {
+	display: block;
+	padding-left: 10px;
+	margin: 0;
+	border: 0;
+	height: 41px;
+	line-height: 41px;
+	border-top: 1px solid #fcfcfc;
+	position: relative;
+}
+
+.nav-list li a {
+	display: block;
+	height: 43px;
+	line-height: 43px;
+	padding: 0 16px 0 7px;
+	background-color: #f9f9f9;
+	color: #585858;
+	text-shadow: none !important;
+	font-size: 13px;
+	text-decoration: none;
+}
+
+.breadcrumbs {
+	position: relative;
+	border-bottom: 1px solid #e5e5e5;
+	background-color: #f5f5f5;
+	min-height: 39px;
+	line-height: 40px;
+	padding: 0 12px 0 0;
+	display: block;
+}
+
+.breadcrumb {
+	background-color: transparent;
+	display: inline-block;
+	line-height: 24px;
+	margin: 0 22px 0 12px;
+	padding: 0;
+	font-size: 13px;
+	color: #333;
+	border-radius: 0;
+}
+
+.breadcrumb>li {
+	display: inline-block;
+}
+
+.nav-search {
+	position: absolute;
+	top: 6px;
+	right: 22px;
+	line-height: 24px;
+}
+
+.page-content {
+	background: #fff;
+	margin: 0;
+	padding: 8px 20px 24px;
+}
+
+.btn-success {
+	border-color: rgb(135, 184, 127);
+	background-color: rgb(135, 184, 127);
+}
+
+.btn-info {
+	border-color: rgb(111, 179, 224);
+	background-color: rgb(111, 179, 224);
+}
+
+.btn-warning,.btn-warning:focus {
+	border-color: rgb(255, 183, 82);
+	background-color: rgb(255, 183, 82);
+}
+
+.btn-danger,.btn-danger:focus {
+	border-color: rgb(209, 91, 71);
+	background-color: rgb(209, 91, 71);
+	font-size: 18px;
+}
+
+.btn-primary {
+	background-color: #1B6AAA !important;
+	border-color: #428BCA
+}
+
+.btn-lightblue {
+	background-color: #93cbf9; ! important;
+	border-color: #93cbf9;
+}
+
+#toggle {
+	position: absolute;
+	top: 50%;
+	left: 181px;
+	cursor: pointer;
+}
+
+#pill {
+	height: 42px;
+	border-bottom: 1px solid #E1E1E1;
+	-webkit-box-shadow: 1px 0 3px #EEE, inset 0 0 3px white;
+	box-shadow: 1px 0 3px #EEE, inset 0 0 3px white;
+	color: #D84C31;
+	white-space: nowrap;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 42px;
+	padding-left: 10px;
+}
+
+.txt2 {
+	border: #abadb3 1px solid;
+	height: 32px;
+	line-height: 18px;
+	padding-left: 2px;
+	font-family: "微软雅黑", Arial, sans-serif;
+	color: #555;
+	margin: 0;
+	width: 158px;
+	font-size: 16px;
+	vertical-align: middle;
+	background: url('../images/text-bg1.gif');
+	padding: 0 30px 0 10px;
+	border: 1px solid #ccc;
+}
+
+.txt,.txt:focus {
+	outline: none;
+	box-shadow: none;
+	border: 1px solid #bbb;
+	padding: 6px 5px;
+	width: 190px;
+}
+
+.txt:focus {
+	border-color: #75A1F0;
+	outline: none;
+	box-shadow: 0 0 12px #75A1F0;
+	-webkit-transition: all 0.218s;
+	-moz-transition: all 0.218s;
+	-o-transition: all 0.218s;
+	-ms-transition: all 0.218s;
+	transition: all 0.218s;
+}

@@ -1,0 +1,63 @@
+.combox-wrapper {
+	display: inline-block;
+	position: relative;
+	margin-right: 5px;
+}
+
+.combox-input {
+	padding-left: 2px;
+	border: 1px solid #abadb3;
+	height: 22px;
+	line-height: 22px;
+	color: #555;
+	float:left;
+}
+
+.combox-trigger {
+	border: 1px solid #abadb3;
+	border-left: none;
+	background: #f1f1f1 url(../images/icon2.gif) no-repeat center;
+	height: 24px;
+	width: 20px;
+	cursor: pointer;
+	float:left;
+}
+
+.combox-dl {
+	position: absolute;
+	border: 1px solid #abadb3;
+	display: none;
+	background: #fff;
+	overflow: auto;
+	margin: 0;
+	padding: 0;
+	z-index: 1000;
+}
+
+.combox-dl li {
+	list-style: none;
+	height: 25px;
+	line-height: 25px;
+	border: 1px dotted #fff;
+	cursor: pointer;
+	font-size: 12px;
+	padding-left: 2px;
+	text-overflow: ellipsis;
+	outline: none;
+	white-space: nowrap;
+	text-align: left;
+}
+
+li.hover {
+	background: #dfe8f6;
+	border: 1px dotted #a3bae9;
+	outline: none;
+	color: #000;
+}
+
+li.selected {
+	background: #dfe8f6;
+	border: 1px dotted #a3bae9;
+	outline: none;
+	color: #000;
+}

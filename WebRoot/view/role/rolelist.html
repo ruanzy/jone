@@ -1,0 +1,109 @@
+
+<div style="float: left;">
+<button id='addbtn' class='btn btn-success'><i class="icon-plus-sign"></i> 增加</button>
+<button id='delbtn' class='btn btn-success'><i class="icon-remove-sign"></i> 删除</button>
+<button id='assignbtn' class='btn btn-success'><i class="icon-pencil"></i> 分配资源</button>
+</div>
+<div style="float: right;">
+	角色名 <input type="text" id='searchtxt' class='txt' name="name" autocomplete="off"/>
+	<button class='btn btn-lightblue'><i class="icon-search"></i> 搜素</button>
+	</div>
+<div id='kkk'></div>
+
+<script type="text/javascript">
+  
+     $('#kkk').table({
+		title:'角色列表',
+		columns:[
+			{header:"ID",field:"id",width:50,align:'center'},
+			{header:"角色名",field:"name"}
+		],
+		selector:'m',
+		condition:condition,
+		url:'role/list'
+	});
+     $('.btn-lightblue').click(function(){
+    	 $('#kkk').table('reload');
+     });
+     $('#addbtn').click(add);
+     $('#delbtn').click(del);
+     $('#assignbtn').click(mk);
+     function condition(){
+    	 var name = $('input[name=name]').val();
+    	 var params = {name: name};
+    	 return params;
+     }
+     
+     function add(){
+    	 $.dialog({
+    		 title:'角色新增',
+    		 url:'view/role/addrole.html',
+    		 ok:function(win){
+   		     	var name = win.find('input[name=name]').val();
+		    	var params = {name:name};
+		    	$.ajax({
+					url:'role/add',
+					type: 'post',
+					data: params,
+					dataType:'json',
+			        success:function(result){
+			        	if(result.success){
+							$('#kkk').table('reload');
+						}
+					}
+				});	
+    		 }
+    	 });
+     }
+     
+          
+     function del(){
+    	 var selected = $('#kkk').table('getSelected');
+    	 if(selected.length != 1){
+    		 $.tip({content:'请选择一条记录'});
+    		 return false;
+    	 }
+    	 $.confirm({content:'确定要干掉吗', ok:function(){
+	    	
+		   		$.ajax({
+		   			url:'role/del',
+		   			type: 'post',
+		   			data: {id:selected[0].id},
+		   			dataType: 'json',
+		   	        success: function(result){
+		   	        	$('#kkk').table('refresh');
+		   			}
+		   		});
+    	 }});
+     }
+     
+     function mk(){
+    	 var selected = $('#kkk').table('getSelected');
+    	 if(selected.length != 1){
+    		 $.tip({content:'请选择一条记录'});
+    		 return false;
+    	 }
+    	 $.dialog({
+    		 title:'分配资源',
+    		 width:230,
+    		 height:300,
+    		 url:'setres.jsp?id=' + selected[0].id,
+    		 ok:ok1
+    	 });
+     }
+     
+     function ok1(win){
+			var roleid = win.find('input[name=roleid]').val();
+			var ids = win.find("#tree").Tree('checkedNodes');
+			var data = {role:roleid,res:ids.join()};
+			$.ajax({ 
+				url: "role/setres", 
+				type: 'post',
+				data: data,
+				dataType: 'json',
+				success: function(r){
+					$('#kkk').table('reload');
+		  		}
+		  	});
+     }
+</script>
