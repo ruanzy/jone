@@ -1,0 +1,52 @@
+.rzy-datepicker{
+	float: left;
+	border: 1px solid #CFCFCF;
+	position: relative;
+	width: 200px;
+}
+
+.rzy-datepicker dt {
+	vertical-align: middle;
+	background-color: white;
+	padding: 0;
+}
+
+.rzy-datepicker dt input {
+	outline: none;
+	padding: 5px;
+	border: 0;
+	color: #343434;
+	background-color: transparent;
+	text-align: left;
+	width: 100%;
+}
+
+.rzy-datepicker dd {
+	position: absolute;
+	z-index: 100;
+	max-height: 300px;
+	overflow: auto;
+	-webkit-box-shadow: 0 2px 6px #CCC;
+	-moz-box-shadow: 0 2px 6px #ccc;
+	-ms-box-shadow: 0 2px 6px #ccc;
+	box-shadow: 0 2px 6px #CCC;
+	left: -1px;
+	top: 34px;
+	border: 1px solid #CFCFCF;
+	border-top: 0;
+	background-color: white;
+	width: auto;
+	display: none;
+	margin: 0;
+	padding: 5px;
+}
+
+.rzy-datepicker dd table{
+	text-align: center;
+}
+
+.rzy-datepicker dd table td {
+	border: 0px solid #ccc;
+	width: 25px;
+	text-align: center;
+}

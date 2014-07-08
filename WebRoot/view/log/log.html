@@ -1,20 +1,34 @@
-<table><tr>
-	<td>操作员</td><td><input type="text" id="operators" name="operator2" class='txt'/></td>
-	<td>操作时间</td><td>
-	<input type="text" id='time1' name="time1" class='txt'/></td>
-	<td>~</td><td>
-	<input type="text" id='time2' name="time2" class='txt'/></td><td>
-<button class='btn btn-lightblue'><i class="icon-search"></i> 搜素</button>
-<button class='btn btn-success'><i class="icon-search"></i> 查看日志</button>
-	</td>
+<table>
+	<tr>
+		<td>操作员</td>
+		<td id='ddddd'></td>
+		<td>操作时间</td>
+		<td id='time1'></td>
+		<td>~</td>
+		<td id='time2'></td>
+		<td>
+			<button class='btn btn-lightblue'><i class="icon-search"></i> 搜素</button>
+			<button class='btn btn-success'><i class="icon-search"></i> 查看日志</button>
+		</td>
 	</tr>
 </table>
 <div id='kkk'></div>
 <script type="text/javascript">
   $(function(){
-	 $('#time1').Datepicker({format:'yyyy-MM-dd 00:00:00'}); 
-	 $('#time2').Datepicker({format:'yyyy-MM-dd 23:59:59'}); 
+	 $('#time1').Datepicker2({
+	 	format:'yyyy-MM-dd 00:00:00',
+	 	hideName:'time1'
+	 }); 
+	 $('#time2').Datepicker2({
+	 	format:'yyyy-MM-dd 23:59:59',
+	 	hideName:'time2'
+	 }); 
 	 $('#operators').AutoComplete({
+	 	hideName:'operator',
+	 	url:'log/users',
+	 	emptyText:''
+	 }); 
+	 $('#ddddd').AutoComplete2({
 	 	hideName:'operator',
 	 	url:'log/users',
 	 	emptyText:''
@@ -39,7 +53,7 @@
     	 $('#kkk').table('reload');
      });
      $('.btn-success').click(function(){
-    	 $.open({
+    	 $.dialog({
     		 title:'查看日志',
     		 width:1000,
     		 height:450,

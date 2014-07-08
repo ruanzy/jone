@@ -15,19 +15,23 @@
 		href="awesome/css/font-awesome.css" />
 	<link rel="stylesheet" type="text/css" href="css/sidebar.css" />
 	<link rel="stylesheet" type="text/css" href="css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="css/dt.css" />
 	<link rel="stylesheet" type="text/css" href="css/dropdown.css" />
 	<link rel="stylesheet" type="text/css" href="css/box.css" />
 	<link rel="stylesheet" type="text/css" href="css/tree.css" />
 	<link rel="stylesheet" type="text/css" href="css/grid.css" />
 	<link rel="stylesheet" type="text/css" href="css/res.css" />
 	<link rel="stylesheet" type="text/css" href="css/ac.css" />
+	<link rel="stylesheet" type="text/css" href="css/au.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/box.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
 	<script type="text/javascript" src="js/sidebar.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/autocomplete.js"></script>
+	<script type="text/javascript" src="js/autocomplete2.js"></script>
 	<script type="text/javascript" src="js/datepicker.js"></script>
+	<script type="text/javascript" src="js/datepicker2.js"></script>
 	<script type="text/javascript" src="js/tabs.js"></script>
 	<script type="text/javascript" src="js/dropdown.js"></script>
 	<script type="text/javascript" src="js/tree.js"></script>

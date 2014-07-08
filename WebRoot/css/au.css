@@ -1,0 +1,74 @@
+.rzy-select {
+	float: left;
+	margin-right: 10px;
+	border: 1px solid #CFCFCF;
+	position: relative;
+}
+
+.rzy-select dt {
+	text-align: center;
+	vertical-align: middle;
+	background-color: white;
+	padding: 0 26px 0 0;
+}
+
+.rzy-select dt input {
+	outline: none;
+	padding: 5px;
+	float: left;
+	border: 0;
+	color: #343434;
+	background-color: transparent;
+	text-align: left;
+}
+
+.rzy-select dt span {
+	width: 29px;
+	padding: 8px 0 7px 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: block;
+	border-left: 1px solid #E6E6E6;
+	font-size: 18px;
+	background-color: #F6F6F6;
+	text-align: center;
+	cursor: pointer;
+	zoom: 1;
+}
+
+.rzy-select dd {
+	position: absolute;
+	z-index: 100;
+	max-height: 300px;
+	overflow: auto;
+	-webkit-box-shadow: 0 2px 6px #CCC;
+	-moz-box-shadow: 0 2px 6px #ccc;
+	-ms-box-shadow: 0 2px 6px #ccc;
+	box-shadow: 0 2px 6px #CCC;
+	left: -1px;
+	top: 34px;
+	border: 1px solid #CFCFCF;
+	border-top: 0;
+	background-color: white;
+	width: 100%;
+	display: none;
+	margin: 0;
+}
+
+.rzy-select dd a {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 6px;
+	outline-style: none;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.rzy-select dd a:hover {
+	background-color: #007EAD;
+	outline-style: none;
+	text-decoration: none;
+	color: white;
+}
