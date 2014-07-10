@@ -32,6 +32,7 @@
 		init: function(options) {
 			var settings = $.extend({}, $.fn.AutoComplete2.defaults, options);
 			return this.each(function(){
+				var me = $(this);
 				$(this).data('options', settings);
 				var hideName = settings.hideName;
 				var rdm = new Date().getTime();
@@ -79,9 +80,10 @@
 					}
 				});
 				var lis = $("li", dd);
-				lis.hover(function(){
+				lis.live('mouseenter',function(){
 				   $(this).addClass("hovers");
-				},function(){
+				});
+				lis.live('mouseleave',function(){
 				   $(this).removeClass("hovers");    
 				});
 				$(document).bind("click",function(e){ 
@@ -101,6 +103,33 @@
 				var num = lis.size();
 				var H = lis.eq(0).outerHeight();
 				var _idx = 0;
+				
+				txt.keyup(function(e){
+					if(e.which==37||e.which==38||e.which==39||e.which==13||e.which==40){
+						return false;
+					}
+					setTimeout(function(){
+						var data = me.data('list');
+						var k = $.trim(txt.val());
+						if(k.length>0){
+							var arr = grep(k, data, settings.filter);
+							loadItems(arr);
+						}else{
+							//loadItems(data);
+						}
+					}, 10);
+				});
+				
+				
+				function loadItems(data){
+					var dh = [];
+					$(data).each(function(i){
+						var a = "<li v='" + this[settings.valueField] + "' _idx=" + i + ">" + this[settings.textField] + "</li>" ;						
+						dh.push(a);
+					});
+					dd.empty().append(dh.join(''));
+				}
+				
 				txt.bind('keydown',function(e){
 		    		var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode; 
 		    		if(keyCode == 40){
