@@ -17,39 +17,36 @@
             $.error('Method ' + method + ' does not exist');
         }
     };
+    $.fn.AutoComplete2.defaults = {
+		data: [],
+		url: null,
+		hideName: 'rzy',
+		textField: 'text',
+		valueField: 'value',
+		filter: function(q, item, idx){
+			return item['text'].indexOf(q) != -1;
+		},
+		select: function(item){}	
+    };
 	$.fn.AutoComplete2.methods = {
 		init: function(options) {
-			var defaults = {
-				data: [],
-				url: null,
-				hideName: 'rzy',
-				textField: 'text',
-				valueField: 'value',
-				filter: function(q, item, idx){
-					return item['text'].indexOf(q) != -1;
-				},
-				select: function(item){}
-			};
-			var settings = $.extend({}, defaults, options);
+			var settings = $.extend({}, $.fn.AutoComplete2.defaults, options);
 			return this.each(function(){
 				$(this).data('options', settings);
 				var hideName = settings.hideName;
 				var rdm = new Date().getTime();
 				var html = [];
-				html.push("<dl class='rzy-select'>");		
-				html.push("<dt id='dt_");
+				html.push("<dl class='rzy-select'><dt id='dt_");
 				html.push(rdm);
 				html.push("'><input type='text' name='");
-				html.push(hideName + '_text');
-				html.push("' autocomplete='off'/>");
-				html.push("<input type='hidden' name='" + hideName + "'/>");
-				html.push("<span><i class='icon-caret-down'></i></span></dt>");
-				html.push("<dd></dd>");
-				html.push("</dl>");
+				html.push(hideName);
+				html.push("_text' autocomplete='off'/>");
+				html.push("<input type='hidden' name='");
+				html.push(hideName);
+				html.push("'/><span><i class='icon-caret-down'></i></span></dt><dd></dd></dl>");
 				$(this).append(html.join(''));
 				var url = settings.url;
-
-				var data = new Array();
+				var data = settings.data;
 				if(url){
 					$.ajax({
 						url:url,
@@ -60,39 +57,103 @@
 				        	data = result;
 						}
 					});
-				}else{
-					data = settings.data;
 				}
-				$(this).data('list', data);
-				
+				$(this).data('list', data);				
 				var dh = [];
 				$(data).each(function(i){
-					var item = this;
-					var a = "<a v='" + item[settings.valueField] + "'>" + item[settings.textField] + "</a>" ;						
+					var a = "<li v='" + this[settings.valueField] + "' _idx=" + i + ">" + this[settings.textField] + "</li>" ;						
 					dh.push(a);
 				});
-
-				var dt = $('dt', this);
 				var dd = $('dd', this);
 				dd.append(dh.join(''));
+				var dt = $('dt', this);
+				var txt = $('input[type=text]', dt);
+				var val = $('input[type=hidden]', dt);
 				dd.click(function(e){
 					var t = e.target;
-					if(t.tagName == 'A'){
-						$(this).siblings('dt').find('input[type=text]').val($(t).text());
-						$(this).siblings('dt').find('input[type=hidden]').val($(t).attr('v'));
+					if(t.tagName == 'LI'){
+						txt.val($(t).text());
+						val.val($(t).attr('v'));
 						$(this).hide();
 						settings.select({text:$(t).text(), value:$(t).attr('v')});
 					}
 				});
-				
+				var lis = $("li", dd);
+				lis.hover(function(){
+				   $(this).addClass("hovers");
+				},function(){
+				   $(this).removeClass("hovers");    
+				});
 				$(document).bind("click",function(e){ 
 					var target = $(e.target); 
 					if(target.closest('#dt_' + rdm).length == 0){ 
 						dd.hide(); 
 					} else{
+						lis.each(function(){
+							if(txt.val() && (txt.val()== $(this).text())){
+								$('li.hovers',dd).removeClass("hovers");  
+								$(this).addClass("hovers");
+							}							
+						});
 						dd.show(); 
 					}
-				}) 
+				});
+				var num = lis.size();
+				var H = lis.eq(0).outerHeight();
+				var _idx = 0;
+				txt.bind('keydown',function(e){
+		    		var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode; 
+		    		if(keyCode == 40){
+		    			var selected = $('li.hovers',dd);
+		    			if(selected.size()>0){
+							var next = selected.next('li');
+							var _idx = selected.attr('_idx');
+							selected.removeClass('hovers');
+							if(next.size()==0){
+								next = $('li:first',dd);
+								_idx = 0;
+								dd.scrollTop(0);
+							}
+							if(_idx*H>=(270 + dd.scrollTop())){
+								dd.scrollTop(dd.scrollTop() + H);
+							}
+		    			}else{
+		    				next = $('li:first',dd);
+		    				dd.scrollTop(0);
+						}
+		    			next.addClass('hovers');
+		    			$(this).val(next.text());
+		    			val.val(next.attr('v'));
+		    			$(this).focus();
+		    		}
+		    		if(keyCode == 38){
+		    			var selected = $('li.hovers',dd);
+		    			if(selected.size()>0){
+							var prev = selected.prev('li');
+							var _idx = selected.attr('_idx');
+							selected.removeClass('hovers');
+							if(prev.size()==0){
+								prev = $('li:last',dd);
+								_idx = num - 1;
+								dd.scrollTop(dd[0].scrollHeight);
+							}
+							if((_idx - 1)*H < dd.scrollTop()){
+								dd.scrollTop(dd.scrollTop() - H);
+							}
+		    			}else{
+		    				prev = $('li:last',dd);
+		    				dd.scrollTop(dd[0].scrollHeight);
+						}
+		    			prev.addClass('hovers');
+		    			$(this).val(prev.text());
+		    			val.val(prev.attr('v'));
+		    			$(this).focus();
+		    		}
+					if(keyCode == 13){
+						dd.hide();
+						return false;
+					}
+				});
 				
 				
 				

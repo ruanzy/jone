@@ -56,19 +56,15 @@
 	margin: 0;
 }
 
-.rzy-select dd a {
-	display: block;
-	height: 30px;
+.rzy-select dd LI {
+	list-style: none; 
 	line-height: 30px;
 	padding-left: 6px;
-	outline-style: none;
-	text-decoration: none;
 	font-size: 12px;
+	height: 30px;
 }
 
-.rzy-select dd a:hover {
+.hovers {
 	background-color: #007EAD;
-	outline-style: none;
-	text-decoration: none;
 	color: white;
 }
