@@ -28,6 +28,7 @@ public final class Dao
 	private static DataSource ds = null;
 	private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
 	private static Properties prop = new Properties();
+	static boolean showsql = false;
 	static Logger log = LoggerFactory.getLogger(Dao.class);
 
 	private Dao()
@@ -53,6 +54,10 @@ public final class Dao
 			log.debug("Create DataSource Exception!");
 			throw new DataAccessException("Create DataSource Exception!", e);
 		}
+	}
+	
+	public static synchronized void showSql(boolean isShowsql){
+		showsql = isShowsql;
 	}
 
 	private static synchronized Connection getConnection()
@@ -131,9 +136,9 @@ public final class Dao
 		try
 		{
 			Connection conn = tl.get();
-			showSQL(sql);
 			ps = conn.prepareStatement(sql);
 			result = ps.executeUpdate();
+			showSQL(sql);
 		}
 		catch (SQLException e)
 		{
@@ -550,7 +555,9 @@ public final class Dao
 	{
 		if (log.isDebugEnabled())
 		{
-			log.debug("SQL==>" + sql);
+			if(showsql){
+				log.debug("SQL==>" + sql);
+			}
 		}
 	}
 

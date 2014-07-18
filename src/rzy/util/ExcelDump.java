@@ -41,6 +41,7 @@ public class ExcelDump
 							cell.setCellValue(rs.getString(i + 1));
 						}
 					}
+					System.out.println("成功导入" + row + "条数据");
 				}
 			});
 			workbook.write(new FileOutputStream(file));
@@ -62,53 +63,43 @@ public class ExcelDump
 			HSSFWorkbook wrokbook = new HSSFWorkbook(new FileInputStream(file));
 			HSSFSheet sheet = wrokbook.getSheetAt(0);
 			int rows = sheet.getPhysicalNumberOfRows();
+			int size = 200;
 			HSSFRow row = null;
-			for (int i = 0; i < rows; i++)
+			int n = 0;
+			// Dao.showSql(true);
+			Dao.begin();
+			for (int i = 0; i < (rows / size) * size; i++)
 			{
 				row = sheet.getRow(i);
-				s.append("(");
-				if (row != null)
+				String values = buildValues(row);
+				s.append(values);
+				if ((i + 1) % size != 0)
 				{
-					int colCount = row.getPhysicalNumberOfCells();
-					for (int j = 0; j < colCount; j++)
-					{
-						HSSFCell cell = row.getCell(j);
-						int type = cell.getCellType();
-						if (type == 0)
-						{
-							if (DateUtil.isCellDateFormatted(cell))
-							{
-								SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-								s.append("'").append(df.format(cell.getDateCellValue())).append("'");
-							}
-							else
-							{
-								double d = cell.getNumericCellValue();
-								long l = Math.round(d);
-								if (Double.parseDouble(l + ".0") == d)
-									s.append(l);
-								else
-									s.append(d);
-							}
-						}
-						if (type == 1)
-						{
-							s.append("'").append(cell.getStringCellValue()).append("'");
-						}
-						if (j != colCount - 1)
-						{
-							s.append(",");
-						}
-					}
+					s.append(",");
 				}
-				s.append(")");
+				if ((i + 1) % size == 0)
+				{
+					n++;
+					Dao.update(s.toString());
+					String msg = String.format("成功导入第%s-%s条数据", (n - 1) * size + 1, n * size);
+					System.out.println(msg);
+					s.setLength(0);
+					s.append(sql);
+				}
+			}
+			for (int i = n * size; i < rows; i++)
+			{
+				row = sheet.getRow(i);
+				String values = buildValues(row);
+				s.append(values);
 				if (i != rows - 1)
 				{
 					s.append(",");
 				}
 			}
-			Dao.begin();
 			Dao.update(s.toString());
+			String msg = String.format("成功导入第%s-%s条数据", (n * size + 1), rows);
+			System.out.println(msg);
 			Dao.commit();
 			long end = System.currentTimeMillis();
 			System.out.println("cross time:" + (end - begin) * 1.0 / 1000);
@@ -119,9 +110,52 @@ public class ExcelDump
 		}
 	}
 
+	private static String buildValues(HSSFRow row)
+	{
+		StringBuffer s = new StringBuffer();
+		s.append("(");
+		if (row != null)
+		{
+			int colCount = row.getPhysicalNumberOfCells();
+			for (int j = 0; j < colCount; j++)
+			{
+				HSSFCell cell = row.getCell(j);
+				int type = cell.getCellType();
+				if (type == 0)
+				{
+					if (DateUtil.isCellDateFormatted(cell))
+					{
+						SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+						s.append("'").append(df.format(cell.getDateCellValue())).append("'");
+					}
+					else
+					{
+						double d = cell.getNumericCellValue();
+						long l = Math.round(d);
+						if (Double.parseDouble(l + ".0") == d)
+							s.append(l);
+						else s.append(d);
+					}
+				}
+				if (type == 1)
+				{
+					s.append("'").append(cell.getStringCellValue()).append("'");
+				}
+				if (j != colCount - 1)
+				{
+					s.append(",");
+				}
+			}
+		}
+		s.append(")");
+		return s.toString();
+	}
+
 	public static void main(String[] args)
 	{
-		imp("insert into th(id, name) values", "D://export.xls");
-	//exp("select * from th", "D://export.xls");
+
+		imp("insert into log(id, operator, ip, time, method, result, memo) values", "D://export.xls");
+
+		// exp("select * from log", "D://export.xls");
 	}
 }
