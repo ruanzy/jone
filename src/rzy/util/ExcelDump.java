@@ -21,7 +21,7 @@ public class ExcelDump
 		try
 		{
 			long begin = System.currentTimeMillis();
-			final HSSFWorkbook workbook = new HSSFWorkbook();
+			HSSFWorkbook workbook = new HSSFWorkbook();
 			final HSSFSheet sheet = workbook.createSheet();
 			Dao.find(sql, new ResultHandler()
 			{
