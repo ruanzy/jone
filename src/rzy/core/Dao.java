@@ -258,7 +258,7 @@ public final class Dao
 		}
 		return res;
 	}
-	
+
 	public static void find(String sql, ResultHandler rh)
 	{
 		Connection conn = null;
@@ -284,41 +284,31 @@ public final class Dao
 
 	public static List<Map<String, Object>> find(String sql)
 	{
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try
+		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		find(sql, new ResultHandler()
 		{
-			showSQL(sql);
-			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int colCount = rsmd.getColumnCount();
-			while (rs.next())
+
+			public void handler(ResultSet rs) throws SQLException
 			{
-				Map<String, Object> map = new HashMap<String, Object>();
-				for (int i = 0; i < colCount; i++)
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int colCount = rsmd.getColumnCount();
+				while (rs.next())
 				{
-					String key = rsmd.getColumnLabel(i + 1).toLowerCase();
-					Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
-					map.put(key, val);
+					Map<String, Object> map = new HashMap<String, Object>();
+					for (int i = 0; i < colCount; i++)
+					{
+						String key = rsmd.getColumnLabel(i + 1).toLowerCase();
+						Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
+						map.put(key, val);
+					}
+					list.add(map);
 				}
-				list.add(map);
 			}
-		}
-		catch (SQLException e)
-		{
-			throw new DataAccessException(e.getMessage(), e);
-		}
-		finally
-		{
-			close(rs, ps, conn);
-		}
+
+		});
 		return list;
 	}
-	
+
 	public static void find(String sql, Object[] params, ResultHandler rh)
 	{
 		Connection conn = null;
@@ -351,45 +341,27 @@ public final class Dao
 
 	public static List<Map<String, Object>> find(String sql, Object[] params)
 	{
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try
+		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		find(sql, new ResultHandler()
 		{
-			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			if (params != null)
+			public void handler(ResultSet rs) throws SQLException
 			{
-				for (int i = 0; i < params.length; i++)
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int colCount = rsmd.getColumnCount();
+				while (rs.next())
 				{
-					ps.setObject(i + 1, params[i]);
+					Map<String, Object> map = new HashMap<String, Object>();
+					for (int i = 0; i < colCount; i++)
+					{
+						String key = rsmd.getColumnLabel(i + 1).toLowerCase();
+						Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
+						map.put(key, val);
+					}
+					list.add(map);
 				}
-				showSQL(sql, params);
 			}
-			rs = ps.executeQuery();
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int colCount = rsmd.getColumnCount();
-			while (rs.next())
-			{
-				Map<String, Object> map = new HashMap<String, Object>();
-				for (int i = 0; i < colCount; i++)
-				{
-					String key = rsmd.getColumnLabel(i + 1).toLowerCase();
-					Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
-					map.put(key, val);
-				}
-				list.add(map);
-			}
-		}
-		catch (SQLException e)
-		{
-			throw new DataAccessException(e.getMessage(), e);
-		}
-		finally
-		{
-			close(rs, ps, conn);
-		}
+
+		});
 		return list;
 	}
 

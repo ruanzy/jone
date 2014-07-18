@@ -63,7 +63,7 @@ public class ExcelDump
 			HSSFSheet sheet = wrokbook.getSheetAt(0);
 			int rows = sheet.getPhysicalNumberOfRows();
 			HSSFRow row = null;
-			for (int i = 1; i < rows; i++)
+			for (int i = 0; i < rows; i++)
 			{
 				row = sheet.getRow(i);
 				s.append("(");
@@ -108,7 +108,7 @@ public class ExcelDump
 				}
 			}
 			Dao.begin();
-			Dao.update(sql.toString());
+			Dao.update(s.toString());
 			Dao.commit();
 			long end = System.currentTimeMillis();
 			System.out.println("cross time:" + (end - begin) * 1.0 / 1000);
@@ -121,7 +121,7 @@ public class ExcelDump
 
 	public static void main(String[] args)
 	{
-		imp("insert into users(id, username, pwd, regtime) values", "D://import.xls");
-		// exp("select * from users", "D://export.xls");
+		imp("insert into th(id, name) values", "D://export.xls");
+	//exp("select * from th", "D://export.xls");
 	}
 }
