@@ -258,6 +258,29 @@ public final class Dao
 		}
 		return res;
 	}
+	
+	public static void find(String sql, ResultHandler rh)
+	{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			showSQL(sql);
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			rh.handler(rs);
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
+		finally
+		{
+			close(rs, ps, conn);
+		}
+	}
 
 	public static List<Map<String, Object>> find(String sql)
 	{
@@ -294,6 +317,36 @@ public final class Dao
 			close(rs, ps, conn);
 		}
 		return list;
+	}
+	
+	public static void find(String sql, Object[] params, ResultHandler rh)
+	{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			if (params != null)
+			{
+				for (int i = 0; i < params.length; i++)
+				{
+					ps.setObject(i + 1, params[i]);
+				}
+				showSQL(sql, params);
+			}
+			rs = ps.executeQuery();
+			rh.handler(rs);
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
+		finally
+		{
+			close(rs, ps, conn);
+		}
 	}
 
 	public static List<Map<String, Object>> find(String sql, Object[] params)
@@ -699,6 +752,36 @@ public final class Dao
 		{
 			close(null, null, conn);
 		}
+	}
+
+	public static boolean existTable(String table)
+	{
+		boolean result = false;
+		Connection conn = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = getConnection();
+			rs = conn.getMetaData().getTables(null, null, table, null);
+			if (rs.next())
+			{
+				result = true;
+			}
+		}
+		catch (Exception e)
+		{
+			throw new DataAccessException(e);
+		}
+		finally
+		{
+			close(rs, null, conn);
+		}
+		return result;
+	}
+
+	public static void main(String[] args)
+	{
+		Dao.find("select * from log");
 	}
 }
 
