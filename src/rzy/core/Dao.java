@@ -27,6 +27,7 @@ public final class Dao
 {
 	private static DataSource ds = null;
 	private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
+	private static ThreadLocal<Statement> sl = new ThreadLocal<Statement>();
 	private static Properties prop = new Properties();
 	static boolean showsql = false;
 	static Logger log = LoggerFactory.getLogger(Dao.class);
@@ -55,8 +56,9 @@ public final class Dao
 			throw new DataAccessException("Create DataSource Exception!", e);
 		}
 	}
-	
-	public static synchronized void showSql(boolean isShowsql){
+
+	public static synchronized void showSql(boolean isShowsql)
+	{
 		showsql = isShowsql;
 	}
 
@@ -164,6 +166,87 @@ public final class Dao
 				showSQL(sql, params);
 			}
 			result = ps.executeUpdate();
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	public static void beginBatch(String sql)
+	{
+		Connection conn = tl.get();
+		PreparedStatement ps = null;
+		try
+		{
+			ps = conn.prepareStatement(sql);
+			sl.set(ps);
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	public static void addBatch(Object[] params)
+	{
+		PreparedStatement ps = (PreparedStatement) sl.get();
+		try
+		{
+			for (int i = 0; i < params.length; i++)
+			{
+				ps.setObject(i + 1, params[i]);
+			}
+			ps.addBatch();
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+
+	public static int[] excuteBatch()
+	{
+		PreparedStatement ps = (PreparedStatement) sl.get();
+		int[] result = null;
+		try
+		{
+			result = ps.executeBatch();
+			return result;
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
+	}
+	
+	public static void endBatch()
+	{
+		sl.remove();
+	}
+
+	public static int[] batch(String sql, List<Object[]> params)
+	{
+		int[] result = new int[params.size()];
+		Connection conn = tl.get();
+		PreparedStatement ps = null;
+		try
+		{
+			for (int i = 0, l = params.size(); i < l; i++)
+			{
+				showSQL(sql, params.get(i));
+			}
+			ps = conn.prepareStatement(sql);
+			for (Object[] objects : params)
+			{
+				for (int i = 0; i < objects.length; i++)
+				{
+					ps.setObject(i + 1, objects[i]);
+				}
+				ps.addBatch();
+			}
+			result = ps.executeBatch();
 		}
 		catch (SQLException e)
 		{
@@ -555,7 +638,8 @@ public final class Dao
 	{
 		if (log.isDebugEnabled())
 		{
-			if(showsql){
+			if (showsql)
+			{
 				log.debug("SQL==>" + sql);
 			}
 		}

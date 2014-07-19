@@ -14,7 +14,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import rzy.core.Dao;
 import rzy.core.ResultHandler;
 
-public class ExcelDump
+public class DB2Excel
 {
 	public static void exp(String sql, final String file)
 	{
@@ -41,7 +41,7 @@ public class ExcelDump
 							cell.setCellValue(rs.getString(i + 1));
 						}
 					}
-					System.out.println("成功导入" + row + "条数据");
+					System.out.println("成功导出" + row + "条数据");
 				}
 			});
 			workbook.write(new FileOutputStream(file));
@@ -57,48 +57,30 @@ public class ExcelDump
 	public static void imp(String sql, String file)
 	{
 		long begin = System.currentTimeMillis();
-		StringBuffer s = new StringBuffer(sql);
 		try
 		{
 			HSSFWorkbook wrokbook = new HSSFWorkbook(new FileInputStream(file));
 			HSSFSheet sheet = wrokbook.getSheetAt(0);
 			int rows = sheet.getPhysicalNumberOfRows();
 			int size = 200;
-			HSSFRow row = null;
 			int n = 0;
-			// Dao.showSql(true);
 			Dao.begin();
-			for (int i = 0; i < (rows / size) * size; i++)
+			Dao.beginBatch(sql);
+			for (int i = 1; i <= rows; i++)
 			{
-				row = sheet.getRow(i);
-				String values = buildValues(row);
-				s.append(values);
-				if ((i + 1) % size != 0)
+				Object[] params = buildValues(sheet.getRow(i - 1));
+				Dao.addBatch(params);
+				if (i % size == 0)
 				{
-					s.append(",");
-				}
-				if ((i + 1) % size == 0)
-				{
+					Dao.excuteBatch();
 					n++;
-					Dao.update(s.toString());
 					String msg = String.format("成功导入第%s-%s条数据", (n - 1) * size + 1, n * size);
 					System.out.println(msg);
-					s.setLength(0);
-					s.append(sql);
 				}
 			}
-			for (int i = n * size; i < rows; i++)
-			{
-				row = sheet.getRow(i);
-				String values = buildValues(row);
-				s.append(values);
-				if (i != rows - 1)
-				{
-					s.append(",");
-				}
-			}
-			Dao.update(s.toString());
-			String msg = String.format("成功导入第%s-%s条数据", (n * size + 1), rows);
+			Dao.excuteBatch();
+			Dao.endBatch();
+			String msg = String.format("成功导入第%s-%s条数据", n * size + 1, rows);
 			System.out.println(msg);
 			Dao.commit();
 			long end = System.currentTimeMillis();
@@ -107,16 +89,17 @@ public class ExcelDump
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			Dao.rollback();
 		}
 	}
 
-	private static String buildValues(HSSFRow row)
+	private static Object[] buildValues(HSSFRow row)
 	{
-		StringBuffer s = new StringBuffer();
-		s.append("(");
+		Object[] params = null;
 		if (row != null)
 		{
 			int colCount = row.getPhysicalNumberOfCells();
+			params = new Object[colCount];
 			for (int j = 0; j < colCount; j++)
 			{
 				HSSFCell cell = row.getCell(j);
@@ -126,36 +109,29 @@ public class ExcelDump
 					if (DateUtil.isCellDateFormatted(cell))
 					{
 						SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-						s.append("'").append(df.format(cell.getDateCellValue())).append("'");
+						params[j] = df.format(cell.getDateCellValue());
 					}
 					else
 					{
 						double d = cell.getNumericCellValue();
 						long l = Math.round(d);
 						if (Double.parseDouble(l + ".0") == d)
-							s.append(l);
-						else s.append(d);
+							params[j] = l;
+						else params[j] = d;
 					}
 				}
 				if (type == 1)
 				{
-					s.append("'").append(cell.getStringCellValue()).append("'");
-				}
-				if (j != colCount - 1)
-				{
-					s.append(",");
+					params[j] = cell.getStringCellValue();
 				}
 			}
 		}
-		s.append(")");
-		return s.toString();
+		return params;
 	}
 
 	public static void main(String[] args)
 	{
-
-		imp("insert into log(id, operator, ip, time, method, result, memo) values", "D://export.xls");
-
-		// exp("select * from log", "D://export.xls");
+		//exp("select * from log", "D://export.xls");
+		//imp("insert into log(id, operator, ip, time, method, result, memo) values(?,?,?,?,?,?,?)", "D://export.xls");
 	}
 }
