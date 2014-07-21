@@ -298,7 +298,7 @@ public final class Dao
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			rh.handler(rs);
+			rh.handle(rs);
 		}
 		catch (SQLException e)
 		{
@@ -315,8 +315,7 @@ public final class Dao
 		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		find(sql, new ResultHandler()
 		{
-
-			public void handler(ResultSet rs) throws SQLException
+			public void handle(ResultSet rs) throws SQLException
 			{
 				ResultSetMetaData rsmd = rs.getMetaData();
 				int colCount = rsmd.getColumnCount();
@@ -332,7 +331,6 @@ public final class Dao
 					list.add(map);
 				}
 			}
-
 		});
 		return list;
 	}
@@ -355,7 +353,7 @@ public final class Dao
 				showSQL(sql, params);
 			}
 			rs = ps.executeQuery();
-			rh.handler(rs);
+			rh.handle(rs);
 		}
 		catch (SQLException e)
 		{
@@ -372,7 +370,7 @@ public final class Dao
 		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		find(sql, new ResultHandler()
 		{
-			public void handler(ResultSet rs) throws SQLException
+			public void handle(ResultSet rs) throws SQLException
 			{
 				ResultSetMetaData rsmd = rs.getMetaData();
 				int colCount = rsmd.getColumnCount();

@@ -25,7 +25,7 @@ public class DB2Excel
 			final HSSFSheet sheet = workbook.createSheet();
 			Dao.find(sql, new ResultHandler()
 			{
-				public void handler(ResultSet rs) throws SQLException
+				public void handle(ResultSet rs) throws SQLException
 				{
 					int row = 0;
 					HSSFRow r = null;
