@@ -308,7 +308,15 @@ public class PmsService
 			Object value = map2.get("value");
 			params.add(new Object[] { text, value });
 		}
-		Dao.batchUpdate(sql, params);
+		Dao.beginBatch(sql);
+		for (Map<String, Object> map2 : list)
+		{
+			Object text = map2.get("text");
+			Object value = map2.get("value");
+			Dao.addBatch(new Object[] { text, value });
+		}
+		Dao.excuteBatch();
+		Dao.endBatch();
 	}
 
 	public void addres(Map<String, Object> map)
@@ -513,13 +521,13 @@ public class PmsService
 		{
 			String sql2 = "insert into userrole(userid,roleid) values(?,?)";
 			String[] arr = roles.split(",");
-			List<Object[]> params = new ArrayList<Object[]>();
+			Dao.beginBatch(sql2);
 			for (String r : arr)
 			{
-				Object[] p = new Object[] { user, r };
-				params.add(p);
+				Dao.addBatch(new Object[] { user, r });
 			}
-			Dao.batchUpdate(sql2, params);
+			Dao.excuteBatch();
+			Dao.endBatch();
 		}
 	}
 

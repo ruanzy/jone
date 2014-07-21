@@ -182,6 +182,7 @@ public final class Dao
 		{
 			ps = conn.prepareStatement(sql);
 			sl.set(ps);
+			showSQL(sql);
 		}
 		catch (SQLException e)
 		{
@@ -194,10 +195,7 @@ public final class Dao
 		PreparedStatement ps = (PreparedStatement) sl.get();
 		try
 		{
-			for (int i = 0; i < params.length; i++)
-			{
-				ps.setObject(i + 1, params[i]);
-			}
+			setParams(ps, params);
 			ps.addBatch();
 		}
 		catch (SQLException e)
@@ -220,68 +218,10 @@ public final class Dao
 			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
-	
+
 	public static void endBatch()
 	{
 		sl.remove();
-	}
-
-	public static int[] batch(String sql, List<Object[]> params)
-	{
-		int[] result = new int[params.size()];
-		Connection conn = tl.get();
-		PreparedStatement ps = null;
-		try
-		{
-			for (int i = 0, l = params.size(); i < l; i++)
-			{
-				showSQL(sql, params.get(i));
-			}
-			ps = conn.prepareStatement(sql);
-			for (Object[] objects : params)
-			{
-				for (int i = 0; i < objects.length; i++)
-				{
-					ps.setObject(i + 1, objects[i]);
-				}
-				ps.addBatch();
-			}
-			result = ps.executeBatch();
-		}
-		catch (SQLException e)
-		{
-			throw new DataAccessException(e.getMessage(), e);
-		}
-		return result;
-	}
-
-	public static int[] batchUpdate(String sql, List<Object[]> params)
-	{
-		int[] result = new int[params.size()];
-		Connection conn = tl.get();
-		PreparedStatement ps = null;
-		try
-		{
-			for (int i = 0, l = params.size(); i < l; i++)
-			{
-				showSQL(sql, params.get(i));
-			}
-			ps = conn.prepareStatement(sql);
-			for (Object[] objects : params)
-			{
-				for (int i = 0; i < objects.length; i++)
-				{
-					ps.setObject(i + 1, objects[i]);
-				}
-				ps.addBatch();
-			}
-			result = ps.executeBatch();
-		}
-		catch (SQLException e)
-		{
-			throw new DataAccessException(e.getMessage(), e);
-		}
-		return result;
 	}
 
 	public static Object scalar(String sql)
@@ -674,6 +614,26 @@ public final class Dao
 				}
 				log.debug("SQL==>" + returnSQL.toString());
 			}
+		}
+	}
+
+	private static void setParams(PreparedStatement ps, Object[] params)
+	{
+		try
+		{
+			if (params != null)
+			{
+				log.debug("set parameters");
+				for (int i = 0; i < params.length; i++)
+				{
+					ps.setObject(i + 1, params[i]);
+					log.debug("s%:s%", i + 1, params[i]);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
