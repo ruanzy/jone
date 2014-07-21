@@ -49,19 +49,20 @@ public class LogHandler
 	private static void write(String log)
 	{
 		String sql = "insert into log(id,operator,ip,time,method,result,memo) values(?,?,?,?,?,?,?)";
+		Dao dao = Dao.getInstance();
 		try
 		{
-			Dao.begin();
-			int id = Dao.getID("log");
+			dao.begin();
+			int id = dao.getID("log");
 			String[] arr = log.split("\\|");
 			Object[] params = new Object[] { id, arr[0], arr[1], arr[2], arr[3], arr[4], arr[5] };
-			Dao.update(sql, params);
-			Dao.commit();
+			dao.update(sql, params);
+			dao.commit();
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			Dao.rollback();
+			dao.rollback();
 		}
 	}
 }

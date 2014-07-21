@@ -23,7 +23,8 @@ public class DB2Excel
 			long begin = System.currentTimeMillis();
 			HSSFWorkbook workbook = new HSSFWorkbook();
 			final HSSFSheet sheet = workbook.createSheet();
-			Dao.find(sql, new ResultHandler()
+			Dao dao = Dao.getInstance();
+			dao.find(sql, new ResultHandler()
 			{
 				public void handle(ResultSet rs) throws SQLException
 				{
@@ -44,7 +45,8 @@ public class DB2Excel
 					System.out.println("成功导出" + row + "条数据");
 				}
 			});
-			workbook.write(new FileOutputStream(file));
+			FileOutputStream fos = new FileOutputStream(file);
+			workbook.write(fos);
 			long end = System.currentTimeMillis();
 			System.out.println("cross time:" + (end - begin) * 1.0 / 1000);
 		}
@@ -52,11 +54,15 @@ public class DB2Excel
 		{
 			e.printStackTrace();
 		}
+		finally{
+			
+		}
 	}
 
 	public static void imp(String sql, String file)
 	{
 		long begin = System.currentTimeMillis();
+		Dao dao = Dao.getInstance();
 		try
 		{
 			HSSFWorkbook wrokbook = new HSSFWorkbook(new FileInputStream(file));
@@ -64,32 +70,32 @@ public class DB2Excel
 			int rows = sheet.getPhysicalNumberOfRows();
 			int size = 200;
 			int n = 0;
-			Dao.begin();
-			Dao.beginBatch(sql);
+			dao.begin();
+			dao.beginBatch(sql);
 			for (int i = 1; i <= rows; i++)
 			{
 				Object[] params = buildValues(sheet.getRow(i - 1));
-				Dao.addBatch(params);
+				dao.addBatch(params);
 				if (i % size == 0)
 				{
-					Dao.excuteBatch();
+					dao.excuteBatch();
 					n++;
 					String msg = String.format("成功导入第%s-%s条数据", (n - 1) * size + 1, n * size);
 					System.out.println(msg);
 				}
 			}
-			Dao.excuteBatch();
-			Dao.endBatch();
+			dao.excuteBatch();
+			dao.endBatch();
 			String msg = String.format("成功导入第%s-%s条数据", n * size + 1, rows);
 			System.out.println(msg);
-			Dao.commit();
+			dao.commit();
 			long end = System.currentTimeMillis();
 			System.out.println("cross time:" + (end - begin) * 1.0 / 1000);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			Dao.rollback();
+			dao.rollback();
 		}
 	}
 
@@ -132,6 +138,6 @@ public class DB2Excel
 	public static void main(String[] args)
 	{
 		//exp("select * from log", "D://export.xls");
-		imp("insert into log(id, operator, ip, time, method, result, memo) values(?,?,?,?,?,?,?)", "D://export.xls");
+		//imp("insert into log(id, operator, ip, time, method, result, memo) values(?,?,?,?,?,?,?)", "D://export.xls");
 	}
 }

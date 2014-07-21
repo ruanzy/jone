@@ -13,6 +13,8 @@ import rzy.util.TimeUtil;
 
 public class PmsService
 {
+	private Dao dao = Dao.getInstance();
+	
 	public Map<String, Object> finduser(Map<String, Object> map)
 	{
 		int total = 0;
@@ -35,7 +37,7 @@ public class PmsService
 				where.add("state", "=", state);
 			}
 		}
-		Object scalar = Dao.scalar(where.appendTo(sql1));
+		Object scalar = dao.scalar(where.appendTo(sql1));
 		if (scalar != null)
 		{
 			total = Integer.valueOf(scalar.toString());
@@ -51,7 +53,7 @@ public class PmsService
 			{
 				page = (pagecount < page) ? pagecount : page;
 			}
-			data = Dao.pager(where.appendTo(sql2), page, pagesize);
+			data = dao.pager(where.appendTo(sql2), page, pagesize);
 			result.put("page", page);
 			result.put("data", data);
 		}
@@ -61,14 +63,14 @@ public class PmsService
 	public void adduser(Map<String, Object> map)
 	{
 		String sql = "insert into topic(id,title,memo,content,creator,createtime,updatetime,toptime) values(?,?,?,?,?,?,?,?)";
-		int id = Dao.getID("topic");
+		int id = dao.getID("topic");
 		Object title = map.get("title");
 		Object memo = map.get("memo");
 		Object content = map.get("content");
 		Object creator = map.get("creator");
 		String time = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { id, title, memo, content, creator, time, time, time };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void deluser(String ids)
@@ -84,7 +86,7 @@ public class PmsService
 			}
 		}
 		sql1.append(")");
-		Dao.update(sql1.toString(), arr);
+		dao.update(sql1.toString(), arr);
 		StringBuffer sql2 = new StringBuffer("delete from users where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
@@ -95,7 +97,7 @@ public class PmsService
 			}
 		}
 		sql2.append(")");
-		Dao.update(sql2.toString(), arr);
+		dao.update(sql2.toString(), arr);
 	}
 
 	public void moduser(Map<String, Object> map)
@@ -107,7 +109,7 @@ public class PmsService
 		String updatetime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object id = map.get("id");
 		Object[] params = new Object[] { title, memo, content, updatetime, id };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void activeuser(String ids)
@@ -123,7 +125,7 @@ public class PmsService
 			}
 		}
 		sql.append(")");
-		Dao.update(sql.toString(), arr);
+		dao.update(sql.toString(), arr);
 	}
 
 	public void canceluser(String ids)
@@ -139,14 +141,14 @@ public class PmsService
 			}
 		}
 		sql.append(")");
-		Dao.update(sql.toString(), arr);
+		dao.update(sql.toString(), arr);
 	}
 
 	public Map<String, Object> getuser(String id)
 	{
 		Map<String, Object> map = null;
 		String sql = "select * from topic where id=?";
-		List<Map<String, Object>> list = Dao.find(sql, new Object[] { id });
+		List<Map<String, Object>> list = dao.find(sql, new Object[] { id });
 		if (list.size() == 1)
 		{
 			map = list.get(0);
@@ -157,7 +159,7 @@ public class PmsService
 	public List<Map<String, Object>> getContents(String id)
 	{
 		String sql = "select * from reply where tid=? order by createtime desc";
-		return Dao.find(sql, new Object[] { id });
+		return dao.find(sql, new Object[] { id });
 	}
 
 	public Map<String, Object> login(Map<String, Object> map)
@@ -167,7 +169,7 @@ public class PmsService
 		String username = (String) map.get("username");
 		String password = (String) map.get("password");
 		password = MD5Util.md5(username + password);
-		List<Map<String, Object>> list = Dao.find(sql, new Object[] { username, password });
+		List<Map<String, Object>> list = dao.find(sql, new Object[] { username, password });
 		if (list.size() == 1)
 		{
 			result = list.get(0);
@@ -178,25 +180,25 @@ public class PmsService
 	public void addContent(Map<String, Object> map)
 	{
 		String sql = "insert into reply(id,tid,content,creator,createtime) values(?,?,?,?,?)";
-		int id = Dao.getID("reply");
+		int id = dao.getID("reply");
 		Object tid = map.get("tid");
 		Object content = map.get("content");
 		Object creator = map.get("creator");
 		String createtime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { id, tid, content, creator, createtime };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void reg(Map<String, Object> map)
 	{
 		String sql = "insert into users(id,username,pwd,regtime) values(?,?,?,?)";
-		int id = Dao.getID("users");
+		int id = dao.getID("users");
 		String username = (String) map.get("username");
 		String pwd = (String) map.get("password");
 		pwd = MD5Util.md5(username + pwd);
 		String regtime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { id, username, pwd, regtime };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void top(String id)
@@ -204,20 +206,20 @@ public class PmsService
 		String sql = "update topic set toptime=? where id=?";
 		String toptime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { toptime, id };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public List<Map<String, Object>> getTopics()
 	{
 		String sql = "select * from topic";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public void delContent(String id)
 	{
 		String sql = "delete from reply where id=?";
 		Object[] params = new Object[] { id };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public String userexist(String username)
@@ -225,7 +227,7 @@ public class PmsService
 		String count = "0";
 		String sql = "select count(*) from users where username=?";
 		Object[] params = new Object[] { username };
-		Object scalar = Dao.scalar(sql, params);
+		Object scalar = dao.scalar(sql, params);
 		if (scalar != null)
 		{
 			count = scalar.toString();
@@ -236,7 +238,7 @@ public class PmsService
 	public List<Map<String, Object>> getCatalogs()
 	{
 		String sql = "select * from catalog order by value";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public Map<String, Object> findlog(Map<String, Object> map)
@@ -265,7 +267,7 @@ public class PmsService
 				where.add("time", "<=", time2);
 			}
 		}
-		Object scalar = Dao.scalar(where.appendTo(sql1));
+		Object scalar = dao.scalar(where.appendTo(sql1));
 		if (scalar != null)
 		{
 			total = Integer.valueOf(scalar.toString());
@@ -281,7 +283,7 @@ public class PmsService
 			{
 				page = (pagecount < page) ? pagecount : page;
 			}
-			data = Dao.pager(where.appendTo(sql2), page, pagesize);
+			data = dao.pager(where.appendTo(sql2), page, pagesize);
 			result.put("page", page);
 			result.put("data", data);
 		}
@@ -294,7 +296,7 @@ public class PmsService
 		Object text = map.get("text");
 		Object value = map.get("value");
 		Object[] params = new Object[] { text, value };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void addBatchcatalog(List<Map<String, Object>> list)
@@ -308,21 +310,21 @@ public class PmsService
 			Object value = map2.get("value");
 			params.add(new Object[] { text, value });
 		}
-		Dao.beginBatch(sql);
+		dao.beginBatch(sql);
 		for (Map<String, Object> map2 : list)
 		{
 			Object text = map2.get("text");
 			Object value = map2.get("value");
-			Dao.addBatch(new Object[] { text, value });
+			dao.addBatch(new Object[] { text, value });
 		}
-		Dao.excuteBatch();
-		Dao.endBatch();
+		dao.excuteBatch();
+		dao.endBatch();
 	}
 
 	public void addres(Map<String, Object> map)
 	{
 		String sql = "insert into resources(id,name,url,icon,type,pid,path,method,flag) values(?,?,?,?,?,?,?,?,?)";
-		int id = Dao.getID("resources");
+		int id = dao.getID("resources");
 		Object type = map.get("type");
 		Object url = map.get("url");
 		Object name = map.get("name");
@@ -335,28 +337,28 @@ public class PmsService
 			path = getParentPath(pid) + "/" + id;
 		}
 		Object[] params = new Object[] { id, name, url, icon, type, pid, path, method, 1 };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	private String getParentPath(String pid)
 	{
 		String sql = "select path from resources where id = ?";
 		Object[] params = new Object[] { pid };
-		String path = (String) Dao.scalar(sql, params);
+		String path = (String) dao.scalar(sql, params);
 		return path;
 	}
 
 	public List<Map<String, Object>> getRes()
 	{
 		String sql = "select r.*,'true' as open from resources r where r.id>=100";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public List<Map<String, Object>> menubymoudle(String pid)
 	{
 		String sql = "select * from resources where pid=?";
 		Object[] params = new Object[] { pid };
-		return Dao.find(sql, params);
+		return dao.find(sql, params);
 	}
 
 	public Map<String, Object> finddic(Map<String, Object> map)
@@ -375,7 +377,7 @@ public class PmsService
 				where.add("type", "like", type.toString().trim());
 			}
 		}
-		Object scalar = Dao.scalar(where.appendTo(sql1));
+		Object scalar = dao.scalar(where.appendTo(sql1));
 		if (scalar != null)
 		{
 			total = Integer.valueOf(scalar.toString());
@@ -391,7 +393,7 @@ public class PmsService
 			{
 				page = (pagecount < page) ? pagecount : page;
 			}
-			data = Dao.pager(where.appendTo(sql2), page, pagesize);
+			data = dao.pager(where.appendTo(sql2), page, pagesize);
 			result.put("page", page);
 			result.put("data", data);
 		}
@@ -401,13 +403,13 @@ public class PmsService
 	public void adddic(Map<String, Object> map)
 	{
 		String sql = "insert into dic(id,name,val,type,memo) values(?,?,?,?,?)";
-		int id = Dao.getID("dic");
+		int id = dao.getID("dic");
 		Object type = map.get("type");
 		Object val = map.get("val");
 		Object name = map.get("name");
 		Object memo = map.get("memo");
 		Object[] params = new Object[] { id, name, val, type, memo };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void deldic(String ids)
@@ -423,7 +425,7 @@ public class PmsService
 			}
 		}
 		sql.append(")");
-		Dao.update(sql.toString(), arr);
+		dao.update(sql.toString(), arr);
 	}
 
 	public void moddic(Map<String, Object> map)
@@ -434,13 +436,13 @@ public class PmsService
 		Object val = map.get("val");
 		Object name = map.get("name");
 		Object[] params = new Object[] { name, val, type, id };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public Object menu()
 	{
 		String sql = "select * from resources where type in(1,2)";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public Map<String, Object> findrole(Map<String, Object> map)
@@ -459,7 +461,7 @@ public class PmsService
 				where.add("name", "like", name.toString().trim());
 			}
 		}
-		Object scalar = Dao.scalar(where.appendTo(sql1));
+		Object scalar = dao.scalar(where.appendTo(sql1));
 		if (scalar != null)
 		{
 			total = Integer.valueOf(scalar.toString());
@@ -475,7 +477,7 @@ public class PmsService
 			{
 				page = (pagecount < page) ? pagecount : page;
 			}
-			data = Dao.pager(where.appendTo(sql2), page, pagesize);
+			data = dao.pager(where.appendTo(sql2), page, pagesize);
 			result.put("page", page);
 			result.put("data", data);
 		}
@@ -485,16 +487,16 @@ public class PmsService
 	public void addrole(Map<String, Object> map)
 	{
 		String sql = "insert into role(id,name) values(?,?)";
-		int id = Dao.getID("role");
+		int id = dao.getID("role");
 		Object name = map.get("name");
 		Object[] params = new Object[] { id, name };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void setres(String role, String res)
 	{
 		String sql1 = "delete from roleres where roleid=?";
-		Dao.update(sql1, new Object[] { role });
+		dao.update(sql1, new Object[] { role });
 		if (StringUtils.isNotBlank(res))
 		{
 			String sql2 = "insert into roleres(roleid,resid) values(?,?)";
@@ -502,7 +504,7 @@ public class PmsService
 			for (String r : arr)
 			{
 				Object[] params = new Object[] { role, r };
-				Dao.update(sql2, params);
+				dao.update(sql2, params);
 			}
 		}
 	}
@@ -510,24 +512,24 @@ public class PmsService
 	public List<Map<String, Object>> allrole()
 	{
 		String sql = "select * from role";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public void setrole(String user, String roles)
 	{
 		String sql1 = "delete from userrole where userid=?";
-		Dao.update(sql1, new Object[] { user });
+		dao.update(sql1, new Object[] { user });
 		if (StringUtils.isNotBlank(roles))
 		{
 			String sql2 = "insert into userrole(userid,roleid) values(?,?)";
 			String[] arr = roles.split(",");
-			Dao.beginBatch(sql2);
+			dao.beginBatch(sql2);
 			for (String r : arr)
 			{
-				Dao.addBatch(new Object[] { user, r });
+				dao.addBatch(new Object[] { user, r });
 			}
-			Dao.excuteBatch();
-			Dao.endBatch();
+			dao.excuteBatch();
+			dao.endBatch();
 		}
 	}
 
@@ -535,7 +537,7 @@ public class PmsService
 	{
 		List<String> ret = new ArrayList<String>();
 		String sql = "select roleid from userrole where userid=?";
-		List<Map<String, Object>> list = Dao.find(sql, new Object[] { user });
+		List<Map<String, Object>> list = dao.find(sql, new Object[] { user });
 		for (Map<String, Object> map : list)
 		{
 			ret.add(String.valueOf(map.get("roleid")));
@@ -547,7 +549,7 @@ public class PmsService
 	{
 		List<String> ret = new ArrayList<String>();
 		String sql = "select resid from roleres where roleid=?";
-		List<Map<String, Object>> list = Dao.find(sql, new Object[] { role });
+		List<Map<String, Object>> list = dao.find(sql, new Object[] { role });
 		for (Map<String, Object> map : list)
 		{
 			ret.add(String.valueOf(map.get("resid")));
@@ -559,8 +561,8 @@ public class PmsService
 	{
 		String sql1 = "delete from roleres where resid in(select id from resources where path like '%" + id + "%')";
 		String sql = "delete from resources where path like '%" + id + "%'";
-		Dao.update(sql1);
-		Dao.update(sql);
+		dao.update(sql1);
+		dao.update(sql);
 	}
 
 	public void delroles(String id)
@@ -568,9 +570,9 @@ public class PmsService
 		String sql1 = "delete from roleres where roleid=" + id;
 		String sql2 = "delete from userrole where roleid=" + id;
 		String sql3 = "delete from role where id=" + id;
-		Dao.update(sql1);
-		Dao.update(sql2);
-		Dao.update(sql3);
+		dao.update(sql1);
+		dao.update(sql2);
+		dao.update(sql3);
 	}
 
 	public Map<String, List<Map<String, Object>>> userres(String user)
@@ -582,13 +584,13 @@ public class PmsService
 		if ("-1".equals(user))
 		{
 			String sql1 = "select * from resources";
-			res = Dao.find(sql1);
+			res = dao.find(sql1);
 		}
 		else
 		{
 			String sql2 = "select * from resources where id in(select distinct resid from roleres where roleid in (select roleid from userrole where userid=?))";
 			Object[] params = new Object[] { user };
-			res = Dao.find(sql2, params);
+			res = dao.find(sql2, params);
 		}
 		if (res != null)
 		{
@@ -616,24 +618,24 @@ public class PmsService
 	{
 
 		String sql = "select * from dic";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public List<Map<String, Object>> res()
 	{
 		String sql = "select * from resources";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public List<Map<String, Object>> alluser()
 	{
 		String sql = "select u.id as value, u.username as text from users u";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public List<Map<String, Object>> test(Map<String, Object> p, int page, int pagesize)
 	{
 		String sql = "select * from users";
-		return Dao.pager(sql, page, pagesize);
+		return dao.pager(sql, page, pagesize);
 	}
 }

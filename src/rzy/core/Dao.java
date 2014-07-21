@@ -25,19 +25,24 @@ import org.slf4j.LoggerFactory;
 
 public final class Dao
 {
-	private static DataSource ds = null;
-	private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
-	private static ThreadLocal<Statement> sl = new ThreadLocal<Statement>();
-	private static Properties prop = new Properties();
-	static boolean showsql = false;
-	static Logger log = LoggerFactory.getLogger(Dao.class);
+	private DataSource ds = null;
+	private ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
+	private ThreadLocal<Statement> sl = new ThreadLocal<Statement>();
+	private Properties prop = new Properties();
+	boolean showsql = false;
+	Logger log = LoggerFactory.getLogger(Dao.class);
 
-	private Dao()
+	private static class SingletonHolder
 	{
-
+		private final static Dao INSTANCE = new Dao();
 	}
 
-	static
+	public static Dao getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+
+	private Dao()
 	{
 		InputStream is = null;
 		try
@@ -57,12 +62,12 @@ public final class Dao
 		}
 	}
 
-	public static synchronized void showSql(boolean isShowsql)
+	public synchronized void showSql(boolean isShowsql)
 	{
 		showsql = isShowsql;
 	}
 
-	private static synchronized Connection getConnection()
+	private synchronized Connection getConnection()
 	{
 		Connection conn = null;
 		try
@@ -79,14 +84,14 @@ public final class Dao
 		return conn;
 	}
 
-	private static void close(ResultSet rs, PreparedStatement ps, Connection conn)
+	private void close(ResultSet rs, PreparedStatement ps, Connection conn)
 	{
 		closeResultSet(rs);
 		closeStatement(ps);
 		closeConnection(conn);
 	}
 
-	private static void closeConnection(Connection conn)
+	private void closeConnection(Connection conn)
 	{
 		try
 		{
@@ -101,7 +106,7 @@ public final class Dao
 		}
 	}
 
-	private static void closeStatement(Statement st)
+	private void closeStatement(Statement st)
 	{
 		try
 		{
@@ -116,7 +121,7 @@ public final class Dao
 		}
 	}
 
-	private static void closeResultSet(ResultSet rs)
+	private void closeResultSet(ResultSet rs)
 	{
 		try
 		{
@@ -131,7 +136,7 @@ public final class Dao
 		}
 	}
 
-	public static int update(String sql)
+	public int update(String sql)
 	{
 		int result = 0;
 		PreparedStatement ps = null;
@@ -149,7 +154,7 @@ public final class Dao
 		return result;
 	}
 
-	public static int update(String sql, Object[] params)
+	public int update(String sql, Object[] params)
 	{
 		int result = 0;
 		PreparedStatement ps = null;
@@ -174,7 +179,7 @@ public final class Dao
 		return result;
 	}
 
-	public static void beginBatch(String sql)
+	public void beginBatch(String sql)
 	{
 		Connection conn = tl.get();
 		PreparedStatement ps = null;
@@ -190,7 +195,7 @@ public final class Dao
 		}
 	}
 
-	public static void addBatch(Object[] params)
+	public void addBatch(Object[] params)
 	{
 		PreparedStatement ps = (PreparedStatement) sl.get();
 		try
@@ -204,7 +209,7 @@ public final class Dao
 		}
 	}
 
-	public static int[] excuteBatch()
+	public int[] excuteBatch()
 	{
 		PreparedStatement ps = (PreparedStatement) sl.get();
 		int[] result = null;
@@ -219,12 +224,12 @@ public final class Dao
 		}
 	}
 
-	public static void endBatch()
+	public void endBatch()
 	{
 		sl.remove();
 	}
 
-	public static Object scalar(String sql)
+	public Object scalar(String sql)
 	{
 		Object res = null;
 		Connection conn = null;
@@ -252,7 +257,7 @@ public final class Dao
 		return res;
 	}
 
-	public static Object scalar(String sql, Object[] params)
+	public Object scalar(String sql, Object[] params)
 	{
 		Object res = null;
 		Connection conn = null;
@@ -287,7 +292,7 @@ public final class Dao
 		return res;
 	}
 
-	public static void find(String sql, ResultHandler rh)
+	public void find(String sql, ResultHandler rh)
 	{
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -310,7 +315,7 @@ public final class Dao
 		}
 	}
 
-	public static List<Map<String, Object>> find(String sql)
+	public List<Map<String, Object>> find(String sql)
 	{
 		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		find(sql, new ResultHandler()
@@ -335,7 +340,7 @@ public final class Dao
 		return list;
 	}
 
-	public static void find(String sql, Object[] params, ResultHandler rh)
+	public void find(String sql, Object[] params, ResultHandler rh)
 	{
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -365,7 +370,7 @@ public final class Dao
 		}
 	}
 
-	public static List<Map<String, Object>> find(String sql, Object[] params)
+	public List<Map<String, Object>> find(String sql, Object[] params)
 	{
 		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		find(sql, new ResultHandler()
@@ -391,7 +396,7 @@ public final class Dao
 		return list;
 	}
 
-	public static Map<String, Object> findOne(String sql)
+	public Map<String, Object> findOne(String sql)
 	{
 		List<Map<String, Object>> list = find(sql);
 		if (list != null && list.size() > 0)
@@ -401,7 +406,7 @@ public final class Dao
 		return null;
 	}
 
-	public static Map<String, Object> findOne(String sql, Object[] params)
+	public Map<String, Object> findOne(String sql, Object[] params)
 	{
 		List<Map<String, Object>> list = find(sql, params);
 		if (list != null && list.size() > 0)
@@ -411,7 +416,7 @@ public final class Dao
 		return null;
 	}
 
-	public static List<Map<String, Object>> pager(String sql, int currPage, int pageSize)
+	public List<Map<String, Object>> pager(String sql, int currPage, int pageSize)
 	{
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Connection conn = null;
@@ -451,7 +456,7 @@ public final class Dao
 		return list;
 	}
 
-	public static List<Map<String, Object>> pager(String sql, Object[] params, int currPage, int pageSize)
+	public List<Map<String, Object>> pager(String sql, Object[] params, int currPage, int pageSize)
 	{
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Connection conn = null;
@@ -498,7 +503,7 @@ public final class Dao
 		return list;
 	}
 
-	public static String[] call(String procName, Object[] params, int outParamNum)
+	public String[] call(String procName, Object[] params, int outParamNum)
 	{
 		String[] ret = new String[outParamNum];
 		Connection conn = null;
@@ -534,7 +539,7 @@ public final class Dao
 		return ret;
 	}
 
-	private static String getCallStr(String procName, int inParamNum, int outParamNum)
+	private String getCallStr(String procName, int inParamNum, int outParamNum)
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("{call ").append(procName);
@@ -556,7 +561,7 @@ public final class Dao
 		return sb.toString();
 	}
 
-	private static String getPageSql(String dialect, String sql, int currPage, int pageSize)
+	private String getPageSql(String dialect, String sql, int currPage, int pageSize)
 	{
 		StringBuffer pageSql = new StringBuffer(0);
 		if ("oracle".equalsIgnoreCase(dialect))
@@ -572,7 +577,7 @@ public final class Dao
 		return pageSql.toString();
 	}
 
-	private static void showSQL(String sql)
+	private void showSQL(String sql)
 	{
 		if (log.isDebugEnabled())
 		{
@@ -583,7 +588,7 @@ public final class Dao
 		}
 	}
 
-	private static void showSQL(String sql, Object[] params)
+	private void showSQL(String sql, Object[] params)
 	{
 		if (log.isDebugEnabled())
 		{
@@ -615,17 +620,17 @@ public final class Dao
 		}
 	}
 
-	private static void setParams(PreparedStatement ps, Object[] params)
+	private void setParams(PreparedStatement ps, Object[] params)
 	{
 		try
 		{
 			if (params != null)
 			{
-				//log.debug("set parameters");
+				// log.debug("set parameters");
 				for (int i = 0; i < params.length; i++)
 				{
 					ps.setObject(i + 1, params[i]);
-					//log.debug("{}:{}", i + 1, params[i]);
+					// log.debug("{}:{}", i + 1, params[i]);
 				}
 			}
 		}
@@ -635,7 +640,7 @@ public final class Dao
 		}
 	}
 
-	public static int getID(String table)
+	public int getID(String table)
 	{
 		int id = 1;
 		Object currid = null;
@@ -679,7 +684,7 @@ public final class Dao
 		return id;
 	}
 
-	public static void begin()
+	public void begin()
 	{
 		try
 		{
@@ -698,7 +703,7 @@ public final class Dao
 		}
 	}
 
-	public static void commit()
+	public void commit()
 	{
 		try
 		{
@@ -715,7 +720,7 @@ public final class Dao
 		}
 	}
 
-	public static void rollback()
+	public void rollback()
 	{
 		try
 		{
@@ -732,7 +737,7 @@ public final class Dao
 		}
 	}
 
-	public static void runScript(Reader reader)
+	public void runScript(Reader reader)
 	{
 		Connection conn = null;
 		try
@@ -775,7 +780,7 @@ public final class Dao
 		}
 	}
 
-	public static boolean existTable(String table)
+	public boolean existTable(String table)
 	{
 		boolean result = false;
 		Connection conn = null;
@@ -802,7 +807,8 @@ public final class Dao
 
 	public static void main(String[] args)
 	{
-		Dao.find("select * from log");
+		Dao dao = Dao.getInstance();
+		dao.find("select * from log");
 	}
 }
 

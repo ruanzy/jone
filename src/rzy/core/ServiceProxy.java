@@ -16,15 +16,16 @@ public class ServiceProxy
 		public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
 		{
 			Object result = null;
+			Dao dao = Dao.getInstance();
 			try
 			{
-				Dao.begin();
+				dao.begin();
 				result = methodProxy.invokeSuper(obj, args);
-				Dao.commit();
+				dao.commit();
 			}
 			catch (Exception e)
 			{
-				Dao.rollback();
+				dao.rollback();
 				throw e;
 			}
 			return result;

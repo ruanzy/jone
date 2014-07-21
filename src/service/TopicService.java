@@ -11,6 +11,8 @@ import rzy.util.TimeUtil;
 
 public class TopicService
 {
+	private Dao dao = Dao.getInstance();
+	
 	public Map<String, Object> list(Map<String, Object> map)
 	{
 		int total = 0;
@@ -38,7 +40,7 @@ public class TopicService
 				where.add("creator", "=", username);
 			}
 		}
-		Object scalar = Dao.scalar(where.appendTo(sql1));
+		Object scalar = dao.scalar(where.appendTo(sql1));
 		if (scalar != null)
 		{
 			total = Integer.valueOf(scalar.toString());
@@ -54,7 +56,7 @@ public class TopicService
 			{
 				page = (pagecount < page) ? pagecount : page;
 			}
-			data = Dao.pager(where.appendTo(sql2), page, pagesize);
+			data = dao.pager(where.appendTo(sql2), page, pagesize);
 			result.put("page", page);
 			result.put("data", data);
 		}
@@ -64,20 +66,20 @@ public class TopicService
 	public void add(Map<String, Object> map)
 	{
 		String sql = "insert into topic(id,title,memo,content,creator,createtime,updatetime,toptime) values(?,?,?,?,?,?,?,?)";
-		int id = Dao.getID("topic");
+		int id = dao.getID("topic");
 		Object title = map.get("title");
 		Object memo = map.get("memo");
 		Object content = map.get("content");
 		Object creator = map.get("creator");
 		String time = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { id, title, memo, content, creator, time, time, time };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void del(int id)
 	{
 		String sql = "delete from topic where id=?";
-		Dao.update(sql, new Object[] { id });
+		dao.update(sql, new Object[] { id });
 	}
 
 	public void mod(Map<String, Object> map)
@@ -89,14 +91,14 @@ public class TopicService
 		String updatetime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object id = map.get("id");
 		Object[] params = new Object[] { title, memo, content, updatetime, id };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public Map<String, Object> get(String id)
 	{
 		Map<String, Object> map = null;
 		String sql = "select * from topic where id=?";
-		List<Map<String, Object>> list = Dao.find(sql, new Object[] { id });
+		List<Map<String, Object>> list = dao.find(sql, new Object[] { id });
 		if (list.size() == 1)
 		{
 			map = list.get(0);
@@ -107,19 +109,19 @@ public class TopicService
 	public List<Map<String, Object>> getContents(String id)
 	{
 		String sql = "select * from reply where tid=? order by createtime desc";
-		return Dao.find(sql, new Object[] { id });
+		return dao.find(sql, new Object[] { id });
 	}
 
 	public void addContent(Map<String, Object> map)
 	{
 		String sql = "insert into reply(id,tid,content,creator,createtime) values(?,?,?,?,?)";
-		int id = Dao.getID("reply");
+		int id = dao.getID("reply");
 		Object tid = map.get("tid");
 		Object content = map.get("content");
 		Object creator = map.get("creator");
 		String createtime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { id, tid, content, creator, createtime };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public void top(String id)
@@ -127,26 +129,26 @@ public class TopicService
 		String sql = "update topic set toptime=? where id=?";
 		String toptime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { toptime, id };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public List<Map<String, Object>> getTopics()
 	{
 		String sql = "select * from topic";
-		return Dao.find(sql);
+		return dao.find(sql);
 	}
 
 	public void delContent(String id)
 	{
 		String sql = "delete from reply where id=?";
 		Object[] params = new Object[] { id };
-		Dao.update(sql, params);
+		dao.update(sql, params);
 	}
 
 	public List<Map<String, Object>> export()
 	{
 		String sql = "select * from topic t";
-		List<Map<String, Object>> list = Dao.find(sql);
+		List<Map<String, Object>> list = dao.find(sql);
 		return list;
 	}
 }

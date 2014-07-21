@@ -10,6 +10,8 @@ import rzy.core.Where;
 
 public class UserService
 {
+	private Dao dao = Dao.getInstance();
+	
 	public Map<String, Object> find(Map<String, Object> map)
 	{
 		int total = 0;
@@ -32,7 +34,7 @@ public class UserService
 				where.add("state", "=", state);
 			}
 		}
-		Object scalar = Dao.scalar(where.appendTo(sql1));
+		Object scalar = dao.scalar(where.appendTo(sql1));
 		if (scalar != null)
 		{
 			total = Integer.valueOf(scalar.toString());
@@ -48,7 +50,7 @@ public class UserService
 			{
 				page = (pagecount < page) ? pagecount : page;
 			}
-			data = Dao.pager(where.appendTo(sql2), page, pagesize);
+			data = dao.pager(where.appendTo(sql2), page, pagesize);
 			result.put("page", page);
 			result.put("data", data);
 		}
