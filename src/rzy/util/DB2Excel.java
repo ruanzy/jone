@@ -132,6 +132,6 @@ public class DB2Excel
 	public static void main(String[] args)
 	{
 		//exp("select * from log", "D://export.xls");
-		//imp("insert into log(id, operator, ip, time, method, result, memo) values(?,?,?,?,?,?,?)", "D://export.xls");
+		imp("insert into log(id, operator, ip, time, method, result, memo) values(?,?,?,?,?,?,?)", "D://export.xls");
 	}
 }

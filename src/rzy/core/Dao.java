@@ -621,11 +621,11 @@ public final class Dao
 		{
 			if (params != null)
 			{
-				log.debug("set parameters");
+				//log.debug("set parameters");
 				for (int i = 0; i < params.length; i++)
 				{
 					ps.setObject(i + 1, params[i]);
-					log.debug("s%:s%", i + 1, params[i]);
+					//log.debug("{}:{}", i + 1, params[i]);
 				}
 			}
 		}
