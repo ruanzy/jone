@@ -373,7 +373,7 @@ public final class Dao
 	public List<Map<String, Object>> find(String sql, Object[] params)
 	{
 		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		find(sql, new ResultHandler()
+		find(sql, params, new ResultHandler()
 		{
 			public void handle(ResultSet rs) throws SQLException
 			{
