@@ -2,7 +2,7 @@ package org.rzy.test;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.rzy.dao.Dao;
+import org.rzy.dao.Query;
 import org.rzy.util.Pager;
 
 public class Test
@@ -16,8 +16,7 @@ public class Test
 		params.put("state", 1);
 		params.put("page", 2);
 		params.put("pagesize", 2);
-		Dao d = Dao.getInstance();
-		Pager all = d.dynamicPager(sqlid1, sqlid2, params);
+		Pager all = Query.pager(sqlid1, sqlid2, params);
 		System.out.println(all.getTotal());
 		for (Map<String, Object> map : all.getData())
 		{

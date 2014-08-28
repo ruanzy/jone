@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
-import org.rzy.util.Pager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -502,34 +501,6 @@ public final class Dao
 			close(rs, ps, conn);
 		}
 		return list;
-	}
-
-	public Pager dynamicPager(String countsqlid, String pagersqlid, Map<String, ?> params)
-	{
-		int page = org.apache.commons.lang.math.NumberUtils.toInt(params.get("page").toString(), 1);
-		int pagesize = org.apache.commons.lang.math.NumberUtils.toInt(params.get("pagesize").toString(), 10);
-		Pager pager = new Pager(page, pagesize);
-		String sql1 = DynamicSQL.getSQL(countsqlid, params);
-		String sql2 = DynamicSQL.getSQL(pagersqlid, params);
-		int total = 0;
-		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
-		Object scalar = scalar(sql1);
-		if (scalar != null)
-		{
-			total = Integer.valueOf(scalar.toString());
-			pager.setTotal(total);
-		}
-		if (total > 0)
-		{
-			int pagecount = (total % pagesize == 0) ? (total / pagesize) : (total / pagesize + 1);
-			if (pagecount > 0)
-			{
-				page = (pagecount < page) ? pagecount : page;
-			}
-			data = pager(sql2, page, pagesize);
-			pager.setData(data);
-		}
-		return pager;
 	}
 
 	public String[] call(String procName, Object[] params, int outParamNum)
