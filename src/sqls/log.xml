@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sqls>
-	<sql id='count2'>
+	<sql id='count'>
 	 <![CDATA[
-		select count(*) from users
-	 	where id>-1
-		<#if username??>
-			and username like '%${username}%'
+		select count(*) from log
+		where 1=1
+		<#if operator??>
+			and operator='${operator_text}'
 		</#if>
-		<#if state??>
-			and state=${state}
+		<#if time1??>
+			and time>='${time1}'
+		</#if>
+		<#if time2??>
+			and time<='${time2}'
 		</#if>
 	  ]]>
 	</sql>
-	<sql id='selectAll2'>
+	<sql id='selectAll'>
 	 <![CDATA[
-		select * from users
-	 	where id>-1
-		<#if username??>
-			and username like '%${username}%'
+		select l.*,r.name as methodname 
+		from log l 
+		left join resources r 
+		on l.method=r.method
+		where 1=1
+		<#if operator??>
+			and operator='${operator_text}'
 		</#if>
-		<#if state??>
-			and state=${state}
+		<#if time1??>
+			and time>='${time1}'
+		</#if>
+		<#if time2??>
+			and time<='${time2}'
 		</#if>
 		order by id desc
 	  ]]>

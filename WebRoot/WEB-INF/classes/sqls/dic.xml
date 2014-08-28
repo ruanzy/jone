@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<sql id='count'>
+	 <![CDATA[
+		select count(*) from dic where 1=1
+		<#if type??>
+			and type='${type}'
+		</#if>
+	  ]]>
+	</sql>
+	<sql id='selectAll'>
+	 <![CDATA[
+		select * from dic where 1=1
+		<#if type??>
+			and type='${type}'
+		</#if>
+	  ]]>
+	</sql>
+</sqls>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<sql id='count'>
+	 <![CDATA[
+		select count(*) from role where 1=1
+		<#if name??>
+			and name like '%${name}%'
+		</#if>
+	  ]]>
+	</sql>
+	<sql id='selectAll'>
+	 <![CDATA[
+		select * from role where 1=1
+		<#if name??>
+			and name like '%${name}%'
+		</#if>
+		order by id desc
+	  ]]>
+	</sql>
+</sqls>

@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.rzy.dao.Dao;
 import org.rzy.util.MD5Util;
 import org.rzy.util.Pager;
 import org.rzy.util.TimeUtil;
-import org.rzy.util.Where;
 
 public class PmsService
 {
@@ -207,53 +205,14 @@ public class PmsService
 		return dao.find(sql);
 	}
 
-	public Map<String, Object> findlog(Map<String, Object> map)
+	public Pager findlog(Map<String, Object> map)
 	{
-		int total = 0;
-		List<Map<String, Object>> data = null;
-		Map<String, Object> result = new HashMap<String, Object>();
-		String sql1 = "select count(*) from log";
-		String sql2 = "select l.*,r.name as methodname from log l left join resources r on l.method=r.method";
-		Where where = Where.create();
-		if (map != null && !map.isEmpty())
-		{
-			Object operator = map.get("operator_text");
-			Object time1 = map.get("time1");
-			Object time2 = map.get("time2");
-			if (StringUtils.isNotBlank(ObjectUtils.toString(operator)))
-			{
-				where.add("operator", "=", operator.toString().trim());
-			}
-			if (StringUtils.isNotBlank(ObjectUtils.toString(time1)))
-			{
-				where.add("time", ">=", time1);
-			}
-			if (StringUtils.isNotBlank(ObjectUtils.toString(time2)))
-			{
-				where.add("time", "<=", time2);
-			}
-		}
-		Object scalar = dao.scalar(where.appendTo(sql1));
-		if (scalar != null)
-		{
-			total = Integer.valueOf(scalar.toString());
-		}
-		result.put("total", total);
-		if (total > 0)
-		{
-			where.orderby("l.id desc");
-			int page = Integer.valueOf(map.get("page").toString());
-			int pagesize = Integer.valueOf(map.get("pagesize").toString());
-			int pagecount = (total % pagesize == 0) ? (total / pagesize) : (total / pagesize + 1);
-			if (pagecount > 0)
-			{
-				page = (pagecount < page) ? pagecount : page;
-			}
-			data = dao.pager(where.appendTo(sql2), page, pagesize);
-			result.put("page", page);
-			result.put("data", data);
-		}
-		return result;
+		int page = Integer.valueOf(map.get("page").toString());
+		int pagesize = Integer.valueOf(map.get("pagesize").toString());
+		String sqlid1 = "log.count";
+		String sqlid2 = "log.selectAll";
+		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map, page, pagesize);
+		return pager;
 	}
 
 	public void addcatalog(Map<String, Object> map)
@@ -327,43 +286,14 @@ public class PmsService
 		return dao.find(sql, params);
 	}
 
-	public Map<String, Object> finddic(Map<String, Object> map)
+	public Pager finddic(Map<String, Object> map)
 	{
-		int total = 0;
-		List<Map<String, Object>> data = null;
-		Map<String, Object> result = new HashMap<String, Object>();
-		String sql1 = "select count(*) from dic";
-		String sql2 = "select * from dic";
-		Where where = Where.create();
-		if (map != null && !map.isEmpty())
-		{
-			Object type = map.get("type");
-			if (StringUtils.isNotBlank(ObjectUtils.toString(type)))
-			{
-				where.add("type", "like", type.toString().trim());
-			}
-		}
-		Object scalar = dao.scalar(where.appendTo(sql1));
-		if (scalar != null)
-		{
-			total = Integer.valueOf(scalar.toString());
-		}
-		result.put("total", total);
-		if (total > 0)
-		{
-			where.orderby("id desc");
-			int page = Integer.valueOf(map.get("page").toString());
-			int pagesize = Integer.valueOf(map.get("pagesize").toString());
-			int pagecount = (total % pagesize == 0) ? (total / pagesize) : (total / pagesize + 1);
-			if (pagecount > 0)
-			{
-				page = (pagecount < page) ? pagecount : page;
-			}
-			data = dao.pager(where.appendTo(sql2), page, pagesize);
-			result.put("page", page);
-			result.put("data", data);
-		}
-		return result;
+		int page = Integer.valueOf(map.get("page").toString());
+		int pagesize = Integer.valueOf(map.get("pagesize").toString());
+		String sqlid1 = "dic.count";
+		String sqlid2 = "dic.selectAll";
+		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map, page, pagesize);
+		return pager;
 	}
 
 	public void adddic(Map<String, Object> map)
@@ -411,43 +341,14 @@ public class PmsService
 		return dao.find(sql);
 	}
 
-	public Map<String, Object> findrole(Map<String, Object> map)
+	public Pager findrole(Map<String, Object> map)
 	{
-		int total = 0;
-		List<Map<String, Object>> data = null;
-		Map<String, Object> result = new HashMap<String, Object>();
-		String sql1 = "select count(*) from role";
-		String sql2 = "select * from role";
-		Where where = Where.create();
-		if (map != null && !map.isEmpty())
-		{
-			Object name = map.get("name");
-			if (StringUtils.isNotBlank(ObjectUtils.toString(name)))
-			{
-				where.add("name", "like", name.toString().trim());
-			}
-		}
-		Object scalar = dao.scalar(where.appendTo(sql1));
-		if (scalar != null)
-		{
-			total = Integer.valueOf(scalar.toString());
-		}
-		result.put("total", total);
-		if (total > 0)
-		{
-			where.orderby("id desc");
-			int page = Integer.valueOf(map.get("page").toString());
-			int pagesize = Integer.valueOf(map.get("pagesize").toString());
-			int pagecount = (total % pagesize == 0) ? (total / pagesize) : (total / pagesize + 1);
-			if (pagecount > 0)
-			{
-				page = (pagecount < page) ? pagecount : page;
-			}
-			data = dao.pager(where.appendTo(sql2), page, pagesize);
-			result.put("page", page);
-			result.put("data", data);
-		}
-		return result;
+		int page = Integer.valueOf(map.get("page").toString());
+		int pagesize = Integer.valueOf(map.get("pagesize").toString());
+		String sqlid1 = "role.count";
+		String sqlid2 = "role.selectAll";
+		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map, page, pagesize);
+		return pager;
 	}
 
 	public void addrole(Map<String, Object> map)
