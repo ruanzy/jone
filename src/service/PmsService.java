@@ -6,45 +6,24 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
-import rzy.core.Dao;
-import rzy.core.Where;
-import rzy.core.dao.DynamicQuery;
-import rzy.util.MD5Util;
-import rzy.util.TimeUtil;
+import org.rzy.dao.Dao;
+import org.rzy.util.MD5Util;
+import org.rzy.util.Pager;
+import org.rzy.util.TimeUtil;
+import org.rzy.util.Where;
 
 public class PmsService
 {
 	private Dao dao = Dao.getInstance();
 	
-	public Map<String, Object> finduser(Map<String, Object> map)
+	public Pager finduser(Map<String, Object> map)
 	{
-		int total = 0;
-		List<Map<String, Object>> data = null;
-		Map<String, Object> result = new HashMap<String, Object>();
-		String sqlid1 = "count";
-		String sqlid2 = "selectAll";
-		String sql1 = DynamicQuery.getSQL(sqlid1, map);
-		Object scalar = dao.scalar(sql1);
-		if (scalar != null)
-		{
-			total = Integer.valueOf(scalar.toString());
-		}
-		result.put("total", total);
-		if (total > 0)
-		{
-			int page = Integer.valueOf(map.get("page").toString());
-			int pagesize = Integer.valueOf(map.get("pagesize").toString());
-			int pagecount = (total % pagesize == 0) ? (total / pagesize) : (total / pagesize + 1);
-			if (pagecount > 0)
-			{
-				page = (pagecount < page) ? pagecount : page;
-			}
-			String sql2 = DynamicQuery.getSQL(sqlid2, map);
-			data = dao.pager(sql2, page, pagesize);
-			result.put("page", page);
-			result.put("data", data);
-		}
-		return result;
+		int page = Integer.valueOf(map.get("page").toString());
+		int pagesize = Integer.valueOf(map.get("pagesize").toString());
+		String sqlid1 = "user.count";
+		String sqlid2 = "user.selectAll";
+		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map, page, pagesize);
+		return pager;
 	}
 
 	public void adduser(Map<String, Object> map)
