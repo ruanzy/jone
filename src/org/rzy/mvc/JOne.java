@@ -73,7 +73,7 @@ public class JOne implements Filter
 			String action_method_name = (parts.length > 1) ? parts[1] : "execute";
 			Class<?> cls = Class.forName("action." + action_name);
 			Object[] ps = new Object[] { url, action_name, action_method_name };
-			log.debug("[url:{}, action:{}, method:{}]", ps);
+			log.debug("url={}, action={}, method={}", ps);
 			Object result = MethodUtils.invokeMethod(cls.newInstance(), action_method_name, null);
 			if(result instanceof Result){
 				((Result)result).render();

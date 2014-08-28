@@ -82,7 +82,7 @@ public class DynamicSQL
 			Template template = cfg.getTemplate(sqlid);
 			StringWriter writer = new StringWriter();
 			template.process(params, writer);
-			System.out.println(writer.toString());
+			//System.out.println(writer.toString());
 			return writer.toString();
 		}
 		catch (Exception e)
