@@ -1,6 +1,7 @@
 package org.rzy.mvc;
 
 import java.util.Map;
+import org.rzy.util.Context;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 

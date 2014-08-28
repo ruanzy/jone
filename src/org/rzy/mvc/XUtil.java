@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.MethodUtils;
 import org.apache.commons.lang.StringUtils;
 import org.rzy.log.LogHandler;
+import org.rzy.util.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
@@ -100,19 +100,9 @@ public class XUtil
 		}
 	}
 
-	public static Map<String, Object> getParameterMap()
+	public static Map<String, String> getParameters()
 	{
-		Map<String, Object> map = new HashMap<String, Object>();
-		Enumeration<?> em = Context.getRequest().getParameterNames();
-		while (em.hasMoreElements())
-		{
-			String k = (String) em.nextElement();
-			String v = Context.getRequest().getParameter(k);
-			if(StringUtils.isNotBlank(v)){
-				map.put(k, v);
-			}
-		}
-		return map;
+		return Context.getParameters();
 	}
 
 	public static String getParameter(String name)

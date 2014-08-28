@@ -8,14 +8,14 @@ public class Dic
 {
 	public String list()
 	{
-		Map<String, Object> map = XUtil.getParameterMap();
+		Map<String, String> map = XUtil.getParameters();
 		XUtil.calljson("PmsService.finddic", map);
 		return null;
 	}
 
 	public String add()
 	{
-		Map<String, Object> map = XUtil.getParameterMap();
+		Map<String, String> map = XUtil.getParameters();
 		XUtil.call("PmsService.adddic", map);
 		XUtil.ok();
 		return null;

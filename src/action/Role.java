@@ -8,7 +8,7 @@ public class Role
 {
 	public String list()
 	{
-		Map<String, Object> map = XUtil.getParameterMap();
+		Map<String, String> map = XUtil.getParameters();
 		XUtil.calljson("PmsService.findrole", map);
 		return null;
 	}

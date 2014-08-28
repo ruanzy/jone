@@ -16,11 +16,9 @@ public class PmsService
 	
 	public Pager finduser(Map<String, Object> map)
 	{
-		int page = Integer.valueOf(map.get("page").toString());
-		int pagesize = Integer.valueOf(map.get("pagesize").toString());
 		String sqlid1 = "user.count";
 		String sqlid2 = "user.selectAll";
-		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map, page, pagesize);
+		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map);
 		return pager;
 	}
 
@@ -207,11 +205,9 @@ public class PmsService
 
 	public Pager findlog(Map<String, Object> map)
 	{
-		int page = Integer.valueOf(map.get("page").toString());
-		int pagesize = Integer.valueOf(map.get("pagesize").toString());
 		String sqlid1 = "log.count";
 		String sqlid2 = "log.selectAll";
-		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map, page, pagesize);
+		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map);
 		return pager;
 	}
 
@@ -288,11 +284,9 @@ public class PmsService
 
 	public Pager finddic(Map<String, Object> map)
 	{
-		int page = Integer.valueOf(map.get("page").toString());
-		int pagesize = Integer.valueOf(map.get("pagesize").toString());
 		String sqlid1 = "dic.count";
 		String sqlid2 = "dic.selectAll";
-		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map, page, pagesize);
+		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map);
 		return pager;
 	}
 
@@ -343,11 +337,9 @@ public class PmsService
 
 	public Pager findrole(Map<String, Object> map)
 	{
-		int page = Integer.valueOf(map.get("page").toString());
-		int pagesize = Integer.valueOf(map.get("pagesize").toString());
 		String sqlid1 = "role.count";
 		String sqlid2 = "role.selectAll";
-		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map, page, pagesize);
+		Pager pager = dao.dynamicPager(sqlid1, sqlid2, map);
 		return pager;
 	}
 

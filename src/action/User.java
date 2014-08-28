@@ -12,13 +12,13 @@ public class User
 {
 	public Result list()
 	{
-		Map<String, Object> map = XUtil.getParameterMap();
+		Map<String, String> map = XUtil.getParameters();
 		return new Json(XUtil.call("PmsService.finduser", map));
 	}
 
 	public String add()
 	{
-		Map<String, Object> map = XUtil.getParameterMap();
+		Map<String, String> map = XUtil.getParameters();
 		XUtil.call("PmsService.reg", map);
 		XUtil.ok();
 		return null;

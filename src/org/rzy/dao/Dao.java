@@ -504,9 +504,11 @@ public final class Dao
 		return list;
 	}
 
-	public Pager dynamicPager(String countsqlid, String pagersqlid, Map<String, ?> params, int currPage, int pageSize)
+	public Pager dynamicPager(String countsqlid, String pagersqlid, Map<String, ?> params)
 	{
-		Pager pager = new Pager(currPage, pageSize);
+		int page = org.apache.commons.lang.math.NumberUtils.toInt(params.get("page").toString(), 1);
+		int pagesize = org.apache.commons.lang.math.NumberUtils.toInt(params.get("pagesize").toString(), 10);
+		Pager pager = new Pager(page, pagesize);
 		String sql1 = DynamicSQL.getSQL(countsqlid, params);
 		String sql2 = DynamicSQL.getSQL(pagersqlid, params);
 		int total = 0;
@@ -519,12 +521,12 @@ public final class Dao
 		}
 		if (total > 0)
 		{
-			int pagecount = (total % pageSize == 0) ? (total / pageSize) : (total / pageSize + 1);
+			int pagecount = (total % pagesize == 0) ? (total / pagesize) : (total / pagesize + 1);
 			if (pagecount > 0)
 			{
-				currPage = (pagecount < currPage) ? pagecount : currPage;
+				page = (pagecount < page) ? pagecount : page;
 			}
-			data = pager(sql2, currPage, pageSize);
+			data = pager(sql2, page, pagesize);
 			pager.setData(data);
 		}
 		return pager;

@@ -7,8 +7,8 @@ public class Project
 {
 	public String list()
 	{
-		Map<String, Object> map = XUtil.getParameterMap();
-		Object username = XUtil.getUsername();
+		Map<String, String> map = XUtil.getParameters();
+		String username = XUtil.getUsername();
 		map.put("username", username);
 		XUtil.calljson("0202", map);
 		return null;
@@ -17,7 +17,7 @@ public class Project
 	public String add()
 	{
 		String creator = XUtil.getUsername();
-		Map<String, Object> map = XUtil.getParameterMap();
+		Map<String, String> map = XUtil.getParameters();
 		map.put("creator", creator);
 		XUtil.call("0204", map);
 		XUtil.redirect("projectmgr.jsp");

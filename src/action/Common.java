@@ -68,7 +68,7 @@ public class Common
 			XUtil.error("20000");
 			return null;
 		}
-		Map<String, Object> map = XUtil.getParameterMap();
+		Map<String, String> map = XUtil.getParameters();
 		Object user = XUtil.call("PmsService.login", map);
 		if (user == null)
 		{

@@ -14,8 +14,10 @@ public class Test
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("username", "a");
 		params.put("state", 1);
+		params.put("page", 2);
+		params.put("pagesize", 2);
 		Dao d = Dao.getInstance();
-		Pager all = d.dynamicPager(sqlid1, sqlid2, params, 2, 2);
+		Pager all = d.dynamicPager(sqlid1, sqlid2, params);
 		System.out.println(all.getTotal());
 		for (Map<String, Object> map : all.getData())
 		{

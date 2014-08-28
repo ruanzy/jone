@@ -1,7 +1,10 @@
-package org.rzy.mvc;
+package org.rzy.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -20,16 +23,19 @@ public class Context
 	private HttpServletResponse response;
 	
 	private boolean isAjax;
+	
+	private  Map<String, String> parameters;
 
 	private final static ThreadLocal<Context> context = new ThreadLocal<Context>();
 
-	protected static Context begin(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res)
+	public static Context begin(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res)
 			throws UnsupportedEncodingException
 	{
 		Context ac = new Context();
 		ac.servletContext = servletContext;
 		req.setCharacterEncoding("UTF-8");
 		ac.request = req;
+		ac.parameters = new HashMap<String, String>();
 		String xhr = req.getHeader("x-requested-with");
 		if (StringUtils.isNotBlank(xhr))
 		{
@@ -37,11 +43,20 @@ public class Context
 		}
 		ac.response = res;
 		ac.session = req.getSession();
+		Enumeration<?> em = ac.request.getParameterNames();
+		while (em.hasMoreElements())
+		{
+			String k = (String) em.nextElement();
+			String v = ac.request.getParameter(k);
+			if(StringUtils.isNotBlank(v)){
+				ac.parameters.put(k, v);
+			}
+		}
 		context.set(ac);
 		return ac;
 	}
 
-	protected void end()
+	public void end()
 	{
 		this.servletContext = null;
 		this.request = null;
@@ -50,32 +65,37 @@ public class Context
 		context.remove();
 	}
 
-	protected static ServletContext getServletContext()
+	public static ServletContext getServletContext()
 	{
 		return context.get().servletContext;
 	}
 
-	protected static HttpSession getSession()
+	public static HttpSession getSession()
 	{
 		return context.get().session;
 	}
 
-	protected static HttpServletRequest getRequest()
+	public static HttpServletRequest getRequest()
 	{
 		return context.get().request;
 	}
 
-	protected static HttpServletResponse getResponse()
+	public static HttpServletResponse getResponse()
 	{
 		return context.get().response;
 	}
 	
-	protected static boolean isAjax()
+	public static boolean isAjax()
 	{
 		return context.get().isAjax;
 	}
+	
+	public static Map<String, String> getParameters()
+	{
+		return context.get().parameters;
+	}
 
-	protected static void redirect(String url)
+	public static void redirect(String url)
 	{
 		try
 		{
@@ -90,7 +110,7 @@ public class Context
 		}
 	}
 
-	protected static void forward(String url)
+	public static void forward(String url)
 	{
 		RequestDispatcher rd = getRequest().getRequestDispatcher(url);
 		try
