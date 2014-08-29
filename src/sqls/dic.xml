@@ -4,7 +4,7 @@
 	 <![CDATA[
 		select count(*) from dic where 1=1
 		<#if type??>
-			and type='${type}'
+			and type=:{type}
 		</#if>
 	  ]]>
 	</sql>
@@ -12,7 +12,7 @@
 	 <![CDATA[
 		select * from dic where 1=1
 		<#if type??>
-			and type='${type}'
+			and type=:{type}
 		</#if>
 	  ]]>
 	</sql>

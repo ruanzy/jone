@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.rzy.dao.Dao;
-import org.rzy.dao.Query;
+import org.rzy.dao.SQLMapper;
 import org.rzy.util.MD5Util;
 import org.rzy.util.Pager;
 import org.rzy.util.TimeUtil;
@@ -19,7 +19,7 @@ public class PmsService
 	{
 		String sqlid1 = "user.count";
 		String sqlid2 = "user.selectAll";
-		Pager pager = Query.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
 		return pager;
 	}
 
@@ -208,7 +208,7 @@ public class PmsService
 	{
 		String sqlid1 = "log.count";
 		String sqlid2 = "log.selectAll";
-		Pager pager = Query.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
 		return pager;
 	}
 
@@ -287,7 +287,7 @@ public class PmsService
 	{
 		String sqlid1 = "dic.count";
 		String sqlid2 = "dic.selectAll";
-		Pager pager = Query.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
 		return pager;
 	}
 
@@ -340,7 +340,7 @@ public class PmsService
 	{
 		String sqlid1 = "role.count";
 		String sqlid2 = "role.selectAll";
-		Pager pager = Query.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
 		return pager;
 	}
 

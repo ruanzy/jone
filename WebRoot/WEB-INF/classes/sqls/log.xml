@@ -5,13 +5,13 @@
 		select count(*) from log
 		where 1=1
 		<#if operator??>
-			and operator='${operator_text}'
+			and operator=:{operator_text}
 		</#if>
 		<#if time1??>
-			and time>='${time1}'
+			and time>=:{time1}
 		</#if>
 		<#if time2??>
-			and time<='${time2}'
+			and time<=:{time2}
 		</#if>
 	  ]]>
 	</sql>
@@ -23,13 +23,13 @@
 		on l.method=r.method
 		where 1=1
 		<#if operator??>
-			and operator='${operator_text}'
+			and operator=:{operator_text}
 		</#if>
 		<#if time1??>
-			and time>='${time1}'
+			and time>=:{time1}
 		</#if>
 		<#if time2??>
-			and time<='${time2}'
+			and time<=:{time2}
 		</#if>
 		order by id desc
 	  ]]>
