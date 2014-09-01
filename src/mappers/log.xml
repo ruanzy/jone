@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<sql id='selectAll'>
+	 <![CDATA[
+		select l.*,r.name as methodname 
+		from log l 
+		left join resources r 
+		on l.method=r.method
+	  ]]>
+		<where>
+			<if test="operator != null and operator != ''">
+				and operator=#{operator_text}#
+			</if>
+			<if test="time1 != null and time1 != ''">
+				and time>=#{time1}#
+			</if>
+		</where>
+		order by id #{orderby}#
+	</sql>
+</sqls>
