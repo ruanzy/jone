@@ -9,12 +9,12 @@
 	  ]]>
 		<where>
 			<if test="operator != null and operator != ''">
-				and operator=#{operator_text}#
+				and operator=#{operator_text}
 			</if>
 			<if test="time1 != null and time1 != ''">
-				and time>=#{time1}#
+				and time>=#{time1}
 			</if>
 		</where>
-		order by id #{orderby}#
+		order by id #{orderby}
 	</sql>
 </sqls>
