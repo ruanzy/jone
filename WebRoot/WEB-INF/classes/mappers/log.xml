@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sqls>
 	<sql id='selectAll'>
-	 <![CDATA[
-		select l.*,r.name as methodname 
-		from log l 
-		left join resources r 
+		select l.*,r.name as methodname
+		from log l
+		left join resources r
 		on l.method=r.method
-	  ]]>
 		<where>
 			<if test="operator != null and operator != ''">
 				and operator=#{operator_text}
@@ -14,7 +12,10 @@
 			<if test="time1 != null and time1 != ''">
 				and time>=#{time1}
 			</if>
+			<if test="time2 != null and time2 != ''">
+				<![CDATA[and time<=#{time2}]]>
+			</if>
 		</where>
-		order by id #{orderby}
+		order by id desc
 	</sql>
 </sqls>
