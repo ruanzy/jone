@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<sql id='count'>
+		select count(*) from dic
+		<where>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
+		</where>
+	</sql>
+	<sql id='selectAll'>
+		select * from dic
+		<where>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
+		</where>
+	</sql>
+</sqls>

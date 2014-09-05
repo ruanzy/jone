@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<sql id='count'>
+		select count(*) from role
+		<where>
+			<if test="name != null and name != ''">
+				and name like CONCAT('%',#{name},'%')
+			</if>
+		</where>
+	</sql>
+	<sql id='selectAll'>
+		select * from role
+		<where>
+			<if test="name != null and name != ''">
+				and name like CONCAT('%',#{name},'%')
+			</if>
+		</where>
+		order by id desc
+	</sql>
+</sqls>

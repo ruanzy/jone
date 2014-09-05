@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import ognl.Ognl;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
@@ -107,14 +108,13 @@ public final class SQLMapper
 
 	public static Pager pager(String countsqlid, String pagersqlid, Map<String, ?> params)
 	{
-		int page = org.apache.commons.lang.math.NumberUtils.toInt(params.get("page").toString(), 1);
-		int pagesize = org.apache.commons.lang.math.NumberUtils.toInt(params.get("pagesize").toString(), 10);
+		int page = NumberUtils.toInt(params.get("page").toString(), 1);
+		int pagesize = NumberUtils.toInt(params.get("pagesize").toString(), 10);
 		Pager pager = new Pager(page, pagesize);
 		SQL s1 = getSQL(countsqlid, params);
 		SQL s2 = getSQL(pagersqlid, params);
 		String sql1 = s1.getSql();
 		String sql2 = s2.getSql();
-		;
 		int total = 0;
 		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 		Object scalar = dao.scalar(sql1, s1.getPs().toArray());
@@ -158,7 +158,7 @@ public final class SQLMapper
 				}
 				else
 				{
-					int end = text.indexOf(closeToken, start);
+					int end = text.indexOf(closeToken, start + 1);
 					if (end == -1)
 					{// 如果不存在openToken，则直接将offset位置后的字符添加到builder中
 						builder.append(src, offset, src.length - offset);
@@ -193,7 +193,11 @@ public final class SQLMapper
 	{
 		SQL tt = null;
 		String sqlxml = sqls.get(sqlid);
-		String regEx = "\\w*(<where>[\\s\\S]*?</where>)\\w*";
+		if (sqlxml == null)
+		{
+			throw new RuntimeException("sql未发现");
+		}
+		String regEx = "(<where>[\\s\\S]*?</where>)";
 		Pattern pat = Pattern.compile(regEx);
 		Matcher mat = pat.matcher(sqlxml);
 		String wherestr = "";
@@ -212,9 +216,9 @@ public final class SQLMapper
 				doc = saxReader.read(new StringReader(wherexml));
 				Node where = doc.selectSingleNode("where");
 				StringBuilder sb = new StringBuilder();
-				if (where != null)
+				List<Element> ifs = where.selectNodes("if");
+				if (ifs != null && ifs.size() > 0)
 				{
-					List<Element> ifs = where.selectNodes("if");
 					for (Element e : ifs)
 					{
 						String exp = e.attributeValue("test");
@@ -227,28 +231,48 @@ public final class SQLMapper
 						}
 					}
 				}
-				wherestr = sb.toString().replaceFirst("and", "where").trim();
+				if (sb.length() > 0)
+				{
+					String temp = sb.toString().trim();
+					if (temp.startsWith("and"))
+					{
+						wherestr = "where " + temp.substring(3);
+					}
+					else if (temp.startsWith("or"))
+					{
+						wherestr = "where " + temp.substring(2);
+					}
+					else
+					{
+						wherestr = "where " + temp;
+					}
+				}
+				sqlxml = sqlxml.replaceAll("<where>[\\s\\S]*?</where>", wherestr);
 			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
 			}
 		}
-		String sql = sqlxml.replaceAll("<where>[\\s\\S]*?</where>", wherestr);
-		sql = sql.replaceAll("\n\t*", " ").replaceAll("\\s{2,}", " ").trim();
-		tt = parse(sql, "#{", "}", params);
+		String sqltext = sqlxml.replaceAll("\n\t*", " ").replaceAll("\\s{2,}", " ").trim();
+		tt = parse(sqltext, "#{", "}", params);
 		return tt;
 	}
 
 	public static void main(String[] args)
 	{
-		String sqlid = "log.selectAll";
+		// String sqlid = "log.selectAll";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("operator", "admin");
 		params.put("operator_text", "admin");
 		params.put("time1", "2014-08-28");
-		params.put("time2", "2014-08-29");
-		List<Map<String, Object>> list = SQLMapper.find(sqlid, params);
-		System.out.println(list.size());
+		// params.put("time2", "2014-08-29");
+		// List<Map<String, Object>> list = SQLMapper.find(sqlid, params);
+		// System.out.println(list.size());
+
+		String a = "AASDD#time1#dfkadfdj#time2#as";
+		SQL sql = parse(a, "#", "#", params);
+		System.out.println(sql.getSql());
+		System.out.println(sql.getPs());
 	}
 }
