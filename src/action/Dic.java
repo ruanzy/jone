@@ -2,7 +2,7 @@ package action;
 
 import java.util.List;
 import java.util.Map;
-import org.rzy.mvc.XUtil;
+import org.rzy.web.util.XUtil;
 
 public class Dic
 {

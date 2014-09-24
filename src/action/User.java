@@ -3,10 +3,10 @@ package action;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.rzy.mvc.Ftl;
-import org.rzy.mvc.Json;
-import org.rzy.mvc.Result;
-import org.rzy.mvc.XUtil;
+import org.rzy.web.Result;
+import org.rzy.web.result.Ftl;
+import org.rzy.web.result.Json;
+import org.rzy.web.util.XUtil;
 
 public class User
 {

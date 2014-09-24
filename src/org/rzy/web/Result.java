@@ -1,4 +1,4 @@
-package org.rzy.mvc;
+package org.rzy.web;
 
 
 public interface Result

@@ -1,4 +1,4 @@
-package org.rzy.mvc;
+package org.rzy.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.MethodUtils;
 import org.apache.commons.lang.StringUtils;
-import org.rzy.util.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +22,7 @@ public class JOne implements Filter
 	private ServletContext context;
 	static Logger log = LoggerFactory.getLogger(Filter.class);
 
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
-			ServletException
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
@@ -39,26 +37,27 @@ public class JOne implements Filter
 				chain.doFilter(Context.getRequest(), Context.getResponse());
 				return;
 			}
-//			boolean flag = Pattern.compile("(login.*|common/vc|common/login|common/logout)$").matcher(url).find();
-//			if (!flag)
-//			{
-//				Object user = request.getSession().getAttribute("user");
-//				if (user == null)
-//				{
-//					if (Context.isAjax())
-//					{
-//						response.sendError(1111);
-//					}
-//					else
-//					{
-//						response.setCharacterEncoding("UTF-8");
-//						String script = "<script>alert('" + XUtil.get("10000")
-//								+ "');document.location='login.html';</script>";
-//						response.getWriter().println(script);
-//					}
-//					return;
-//				}
-//			}
+			// boolean flag =
+			// Pattern.compile("(login.*|common/vc|common/login|common/logout)$").matcher(url).find();
+			// if (!flag)
+			// {
+			// Object user = request.getSession().getAttribute("user");
+			// if (user == null)
+			// {
+			// if (Context.isAjax())
+			// {
+			// response.sendError(1111);
+			// }
+			// else
+			// {
+			// response.setCharacterEncoding("UTF-8");
+			// String script = "<script>alert('" + XUtil.get("10000")
+			// + "');document.location='login.html';</script>";
+			// response.getWriter().println(script);
+			// }
+			// return;
+			// }
+			// }
 			if (url.indexOf(".") > 0)
 			{
 				chain.doFilter(Context.getRequest(), Context.getResponse());
@@ -76,8 +75,9 @@ public class JOne implements Filter
 			Object[] ps = new Object[] { url, action_name, action_method_name };
 			log.debug("url={}, action={}, method={}", ps);
 			Object result = MethodUtils.invokeMethod(cls.newInstance(), action_method_name, null);
-			if(result instanceof Result){
-				((Result)result).render();
+			if (result instanceof Result)
+			{
+				((Result) result).render();
 			}
 			long t2 = System.currentTimeMillis();
 			log.debug("time=" + (t2 - t1) + "ms");

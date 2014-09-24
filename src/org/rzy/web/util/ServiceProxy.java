@@ -1,4 +1,4 @@
-package org.rzy.mvc;
+package org.rzy.web.util;
 
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;

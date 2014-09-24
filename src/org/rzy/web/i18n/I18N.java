@@ -1,4 +1,4 @@
-package org.rzy.mvc;
+package org.rzy.web.i18n;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

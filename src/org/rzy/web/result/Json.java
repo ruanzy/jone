@@ -1,6 +1,7 @@
-package org.rzy.mvc;
+package org.rzy.web.result;
 
-import org.rzy.util.Context;
+import org.rzy.web.Context;
+import org.rzy.web.Result;
 import com.alibaba.fastjson.JSON;
 
 public class Json implements Result

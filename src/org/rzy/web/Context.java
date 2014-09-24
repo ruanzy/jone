@@ -1,4 +1,4 @@
-package org.rzy.util;
+package org.rzy.web;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -14,22 +14,21 @@ import org.apache.commons.lang.StringUtils;
 
 public class Context
 {
-    private ServletContext servletContext;
+	private ServletContext servletContext;
 
 	private HttpSession session;
 
 	private HttpServletRequest request;
 
 	private HttpServletResponse response;
-	
+
 	private boolean isAjax;
-	
-	private  Map<String, String> parameters;
+
+	private Map<String, String> parameters;
 
 	private final static ThreadLocal<Context> context = new ThreadLocal<Context>();
 
-	public static Context begin(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res)
-			throws UnsupportedEncodingException
+	public static Context begin(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException
 	{
 		Context ac = new Context();
 		ac.servletContext = servletContext;
@@ -48,7 +47,8 @@ public class Context
 		{
 			String k = (String) em.nextElement();
 			String v = ac.request.getParameter(k);
-			if(StringUtils.isNotBlank(v)){
+			if (StringUtils.isNotBlank(v))
+			{
 				ac.parameters.put(k, v);
 			}
 		}
@@ -84,12 +84,12 @@ public class Context
 	{
 		return context.get().response;
 	}
-	
+
 	public static boolean isAjax()
 	{
 		return context.get().isAjax;
 	}
-	
+
 	public static Map<String, String> getParameters()
 	{
 		return context.get().parameters;
@@ -100,8 +100,7 @@ public class Context
 		try
 		{
 			HttpServletRequest request = getRequest();
-			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-					+ request.getContextPath() + "/";
+			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
 			getResponse().sendRedirect(basePath + url);
 		}
 		catch (IOException e)
@@ -121,5 +120,11 @@ public class Context
 		{
 			e.printStackTrace();
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String, String> currentUser()
+	{
+		return (Map<String, String>) getSession().getAttribute("user");
 	}
 }
