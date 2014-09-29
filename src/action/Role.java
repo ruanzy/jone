@@ -2,20 +2,23 @@ package action;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.rzy.web.Context;
+import org.rzy.web.Result;
+import org.rzy.web.result.Json;
 import org.rzy.web.util.XUtil;
 
 public class Role
 {
-	public String list()
+	public Result list()
 	{
-		Map<String, String> map = XUtil.getParameters();
-		XUtil.calljson("PmsService.findrole", map);
-		return null;
+		Map<String, String> map = Context.getParameters();
+		return new Json(XUtil.call("PmsService.findrole", map));
 	}
 
 	public String add()
 	{
-		String name = XUtil.getParameter("name");
+		String name = Context.getParameter("name");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		XUtil.call("PmsService.addrole", map);
@@ -25,28 +28,26 @@ public class Role
 	
 	public String del()
 	{
-		String id = XUtil.getParameter("id");
+		String id = Context.getParameter("id");
 		XUtil.call("PmsService.delroles", id);
 		return null;
 	}
 
-	public String allres()
+	public Result allres()
 	{
-		XUtil.calljson("PmsService.getRes");
-		return null;
+		return new Json(XUtil.call("PmsService.getRes"));
 	}
 
-	public String ownres()
+	public Result ownres()
 	{
-		String role = XUtil.getParameter("role");
-		XUtil.calljson("PmsService.roleres", role);
-		return null;
+		String role = Context.getParameter("role");
+		return new Json(XUtil.call("PmsService.roleres", role));
 	}
 
 	public String setres()
 	{
-		String role = XUtil.getParameter("role");
-		String res = XUtil.getParameter("res");
+		String role = Context.getParameter("role");
+		String res = Context.getParameter("res");
 		XUtil.call("PmsService.setres", role, res);
 		XUtil.ok("设置资源ok...");
 		return null;

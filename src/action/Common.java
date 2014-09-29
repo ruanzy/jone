@@ -3,14 +3,17 @@ package action;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.rzy.web.Context;
 import org.rzy.web.Result;
 import org.rzy.web.result.Ftl;
+import org.rzy.web.result.Json;
 import org.rzy.web.util.XUtil;
 
 public class Common
 {
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> menu()
+	public Result menu()
 	{
 		Object o = XUtil.attr("res", "session");
 		List<Map<String, Object>> list = null;
@@ -19,12 +22,11 @@ public class Common
 			Map<String, List<Map<String, Object>>> userres = (Map<String, List<Map<String, Object>>>) o;
 			list = userres.get("menus");
 		}
-		XUtil.toJSON(list);
-		return null;
+		return new Json(list);
 	}
 
 	@SuppressWarnings("unchecked")
-	public String op()
+	public Result op()
 	{
 		Object o = XUtil.attr("res", "session");
 		List<Map<String, Object>> list = null;
@@ -33,14 +35,13 @@ public class Common
 			Map<String, List<Map<String, Object>>> userres = (Map<String, List<Map<String, Object>>>) o;
 			list = userres.get("ops");
 		}
-		XUtil.toJSON(list);
-		return null;
+		return new Json(list);
 	}
 
 	@SuppressWarnings("unchecked")
-	public String dic()
+	public Result dic()
 	{
-		String type = XUtil.getParameter("type");
+		String type = Context.getParameter("type");
 		Map<String, Object> map = null;
 		Object o = XUtil.attr("dic", "application");
 		if (o != null)
@@ -48,27 +49,25 @@ public class Common
 			Map<String, Map<String, Object>> dics = (Map<String, Map<String, Object>>) o;
 			map = dics.get(type);
 		}
-		XUtil.toJSON(map);
-		return null;
+		return new Json(map);
 	}
 
-	public String lineusers()
+	public Result lineusers()
 	{
 		Integer numSessions = (Integer) XUtil.attr("numSessions", "application");
-		XUtil.toJSON(numSessions);
-		return null;
+		return new Json(numSessions);
 	}
 
 	public String login()
 	{
-		String svc = XUtil.getVC();
-		String vc = XUtil.getParameter("vc");
+		String svc = Context.getVC();
+		String vc = Context.getParameter("vc");
 		if (!svc.equalsIgnoreCase(vc))
 		{
 			XUtil.error("20000");
 			return null;
 		}
-		Map<String, String> map = XUtil.getParameters();
+		Map<String, String> map = Context.getParameters();
 		Object user = XUtil.call("PmsService.login", map);
 		if (user == null)
 		{
@@ -112,17 +111,11 @@ public class Common
 		XUtil.redirect("login.html");
 		return null;
 	}
-
-	public String vc()
-	{
-		XUtil.createVC();
-		return null;
-	}
 	
 	public Result welcome()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", XUtil.getParameter("id"));
+		map.put("user", Context.getParameter("id"));
 		return new Ftl("welcome.ftl", map);
 	}
 }
