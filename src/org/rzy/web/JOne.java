@@ -2,7 +2,6 @@ package org.rzy.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
 import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
