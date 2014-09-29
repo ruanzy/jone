@@ -7,6 +7,8 @@ import com.alibaba.fastjson.JSON;
 public class Json implements Result
 {
 	Object o;
+	
+	boolean code;
 
 	public Json(Object o)
 	{
