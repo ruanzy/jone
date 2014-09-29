@@ -14,7 +14,7 @@ $(function() {
 		return false;
 	};
 	var changeVC = function() {
-		$('#vc').attr('src', "common/vc?_=" + new Date().getTime());
+		$('#vc').attr('src', "captcha?_=" + new Date().getTime());
 	};
 	$(document).keydown(function(e) {
 		if (e.keyCode == 13) {

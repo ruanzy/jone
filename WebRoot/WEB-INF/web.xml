@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<filter>
 		<filter-name>JOne</filter-name>
-		<filter-class>org.rzy.mvc.JOne</filter-class>
+		<filter-class>org.rzy.web.JOne</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>JOne</filter-name>

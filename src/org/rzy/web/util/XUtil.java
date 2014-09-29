@@ -132,7 +132,16 @@ public class XUtil
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("success", true);
 		result.put("msg", null);
-		//toJSON(result);
+		try
+		{
+			HttpServletResponse response = Context.getResponse();
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(JSON.toJSONString(result));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public static void ok(String msg, Object... args)
