@@ -5,11 +5,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 
 public class Context
@@ -94,6 +96,11 @@ public class Context
 	{
 		return context.get().parameters;
 	}
+	
+	public static String getParameter(String name)
+	{
+		return getRequest().getParameter(name);
+	}
 
 	public static void redirect(String url)
 	{
@@ -123,8 +130,23 @@ public class Context
 	}
 
 	@SuppressWarnings("unchecked")
-	public static Map<String, String> currentUser()
+	public static Map<String, String> getCurrentUser()
 	{
 		return (Map<String, String>) getSession().getAttribute("user");
+	}
+	
+	public static void setCurrentUser(Object user)
+	{
+		getSession().setAttribute("user", user);
+	}
+	
+	public static String getVC()
+	{
+		return (String) getSession().getAttribute("vc");
+	}
+	
+	public static void setVC(String vc)
+	{
+		getSession().setAttribute("vc", vc);
 	}
 }

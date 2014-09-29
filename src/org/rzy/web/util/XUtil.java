@@ -83,34 +83,6 @@ public class XUtil
 		return result;
 	}
 
-	public static void calljson(String sid, Object... args)
-	{
-		toJSON(call(sid, args));
-	}
-
-	public static void toJSON(Object obj)
-	{
-		Context.getResponse().setContentType("text/javascript;charset=UTF-8");
-		try
-		{
-			Context.getResponse().getWriter().print(JSON.toJSONString(obj));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public static Map<String, String> getParameters()
-	{
-		return Context.getParameters();
-	}
-
-	public static String getParameter(String name)
-	{
-		return Context.getRequest().getParameter(name);
-	}
-
 	public static Object getUser()
 	{
 		if (Context.getSession() != null)
@@ -160,7 +132,7 @@ public class XUtil
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("success", true);
 		result.put("msg", null);
-		toJSON(result);
+		//toJSON(result);
 	}
 
 	public static void ok(String msg, Object... args)
