@@ -125,12 +125,12 @@ public class PmsService
 		return dao.find(sql, new Object[] { id });
 	}
 
-	public Map<String, Object> login(Map<String, Object> map)
+	public Map<String, Object> login(Map<String, String> map)
 	{
 		Map<String, Object> result = null;
 		String sql = "select * from users where username=? and pwd=?";
-		String username = (String) map.get("username");
-		String password = (String) map.get("password");
+		String username = map.get("username");
+		String password = map.get("password");
 		password = MD5Util.md5(username + password);
 		List<Map<String, Object>> list = dao.find(sql, new Object[] { username, password });
 		if (list.size() == 1)
