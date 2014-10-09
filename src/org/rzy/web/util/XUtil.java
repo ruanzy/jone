@@ -13,15 +13,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Pattern;
+
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.MethodUtils;
-import org.apache.commons.lang.StringUtils;
 import org.rzy.log.LogHandler;
+import org.rzy.util.StringUtils;
 import org.rzy.web.Context;
 import org.rzy.web.i18n.I18N;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 

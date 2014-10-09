@@ -12,14 +12,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import ognl.Ognl;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
+
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import org.rzy.util.Pager;
+import org.rzy.util.StringUtils;
 
 @SuppressWarnings("unchecked")
 public final class SQLMapper
@@ -108,8 +109,8 @@ public final class SQLMapper
 
 	public static Pager pager(String countsqlid, String pagersqlid, Map<String, ?> params)
 	{
-		int page = NumberUtils.toInt(params.get("page").toString(), 1);
-		int pagesize = NumberUtils.toInt(params.get("pagesize").toString(), 10);
+		int page = StringUtils.toInt(params.get("page").toString(), 1);
+		int pagesize = StringUtils.toInt(params.get("pagesize").toString(), 10);
 		Pager pager = new Pager(page, pagesize);
 		SQL s1 = getSQL(countsqlid, params);
 		SQL s2 = getSQL(pagersqlid, params);
