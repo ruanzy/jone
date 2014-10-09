@@ -659,18 +659,18 @@ public final class Dao
 			}
 			if (currid == null)
 			{
-				ps = conn.prepareStatement("insert into seq(currid,tname) values(?,?)");
-				ps.setInt(1, 1);
-				ps.setString(2, table);
-				ps.executeUpdate();
+				PreparedStatement ps1 = conn.prepareStatement("insert into seq(currid,tname) values(?,?)");
+				ps1.setInt(1, 1);
+				ps1.setString(2, table);
+				ps1.executeUpdate();
 			}
 			else
 			{
 				id = Integer.parseInt(currid.toString()) + 1;
-				ps = conn.prepareStatement("update seq set currid=? where tname=?");
-				ps.setInt(1, id);
-				ps.setString(2, table);
-				ps.executeUpdate();
+				PreparedStatement ps2 = conn.prepareStatement("update seq set currid=? where tname=?");
+				ps2.setInt(1, id);
+				ps2.setString(2, table);
+				ps2.executeUpdate();
 			}
 		}
 		catch (SQLException e)

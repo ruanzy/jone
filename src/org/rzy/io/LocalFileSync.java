@@ -110,13 +110,15 @@ public class LocalFileSync implements FileSync
 		FileChannel fc = null;
 		try
 		{
-			fc = new RandomAccessFile(filename, "r").getChannel();
+			RandomAccessFile rf = new RandomAccessFile(filename, "r");
+			fc = rf.getChannel();
 			MappedByteBuffer byteBuffer = fc.map(MapMode.READ_ONLY, 0, fc.size()).load();
 			byte[] result = new byte[(int) fc.size()];
 			if (byteBuffer.remaining() > 0)
 			{
 				byteBuffer.get(result, 0, byteBuffer.remaining());
 			}
+			rf.close();
 			return result;
 		}
 		catch (IOException e)
