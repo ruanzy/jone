@@ -57,7 +57,7 @@ public class Captcha {
 		}
 	}
 
-	private static Color getRandomColor(int fc, int bc)
+	private Color getRandomColor(int fc, int bc)
 	{
 		Random random = new Random();
 		if (fc > 255)
