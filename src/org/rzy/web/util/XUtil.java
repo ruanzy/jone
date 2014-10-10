@@ -213,21 +213,6 @@ public class XUtil
 		}
 	}
 
-	public static void redirect(String url)
-	{
-		Context.redirect(url);
-	}
-
-	public static void forward(String url)
-	{
-		Context.forward(url);
-	}
-
-	public static void invalidate()
-	{
-		Context.getSession().invalidate();
-	}
-
 	public static void main(String[] args)
 	{
 		String text = I18N.get("20000");

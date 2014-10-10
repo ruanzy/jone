@@ -107,8 +107,8 @@ public class Common
 
 	public String logout()
 	{
-		XUtil.invalidate();
-		XUtil.redirect("login.html");
+		Context.clearSession();
+		Context.redirect("login.html");
 		return null;
 	}
 	

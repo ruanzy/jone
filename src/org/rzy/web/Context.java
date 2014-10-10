@@ -145,6 +145,11 @@ public class Context
 		return Context.getRequest().getRemoteAddr();
 	}
 	
+	public static void clearSession()
+	{
+		Context.getSession().invalidate();
+	}
+	
 	public static String getVC()
 	{
 		return (String) getSession().getAttribute("vc");
