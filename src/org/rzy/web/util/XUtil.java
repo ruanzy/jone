@@ -33,7 +33,17 @@ public class XUtil
 
 	public static Object call(String sid, Object... args)
 	{
-		log.debug("sid==>" + sid);
+		StringBuffer sb = new StringBuffer();
+		sb.append(sid).append("(");
+		for (int i = 0, len = args.length; i < len; i++)
+		{
+			sb.append("Parameter" + i);
+			if(i != len - 1){
+				sb.append(",");
+			}
+		}
+		sb.append(")");
+		log.debug(sb.toString());
 		for (int i = 0, len = args.length; i < len; i++)
 		{
 			log.debug("Parameter" + i + "==>" + args[i]);
@@ -227,72 +237,6 @@ public class XUtil
 	public static void invalidate()
 	{
 		Context.getSession().invalidate();
-	}
-
-	public static void createVC()
-	{
-		int width = 60;
-		int height = 20;
-		String rchars = "1234567890ABCDEFGHJKLMNPQRSTUVWXYZ";
-		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics g = img.getGraphics();
-		g.setColor(getRandomColor(210, 250));
-		g.fillRect(0, 0, width, height);
-		g.setFont(new Font("Courier New", Font.BOLD, 18));
-		g.drawRect(0, 0, width - 1, height - 1);
-
-		g.setColor(getRandomColor(150, 250));
-		Random random = new Random();
-		for (int i = 0; i < 155; i++)
-		{
-			int x = random.nextInt(width);
-			int y = random.nextInt(height);
-			int x1 = random.nextInt(12);
-			int y1 = random.nextInt(12);
-			g.drawLine(x, y, x + x1, y + y1);
-		}
-		String randomStr = "";
-		for (int i = 0; i < 4; i++)
-		{
-			int len = rchars.length();
-			int randomNum = random.nextInt(len);
-			String rand = rchars.substring(randomNum, randomNum + 1);
-			randomStr += rand;
-			g.setColor(new Color(25 + random.nextInt(110), 25 + random.nextInt(110), 25 + random.nextInt(110)));
-			g.drawString(rand, 13 * i + 5, 16);
-		}
-		g.dispose();
-		XUtil.attr("vc", randomStr.toLowerCase(), "session");
-		try
-		{
-			ImageIO.write(img, "JPEG", Context.getResponse().getOutputStream());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	private static Color getRandomColor(int fc, int bc)
-	{
-		Random random = new Random();
-		if (fc > 255)
-		{
-			fc = 255;
-		}
-		if (bc > 255)
-		{
-			bc = 255;
-		}
-		int r = fc + random.nextInt(bc - fc);
-		int g = fc + random.nextInt(bc - fc);
-		int b = fc + random.nextInt(bc - fc);
-		return new Color(r, g, b);
-	}
-
-	public static String getVC()
-	{
-		return (String) XUtil.attr("vc", "session");
 	}
 
 	public static void main(String[] args)
