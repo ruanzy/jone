@@ -71,10 +71,14 @@ public class JOne implements Filter
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return;
 			}
+			String pck_name = "action";
 			String action_name = StringUtils.capitalize(parts[0]);
 			String action_method_name = (parts.length > 1) ? parts[1] : "execute";
-			Class<?> cls = Class.forName("action." + action_name);
-			Object[] ps = new Object[] { url, action_name, action_method_name };
+			if("Captcha".equals(action_name)){
+				pck_name = "org.rzy.web.action";
+			}
+			Class<?> cls = Class.forName(pck_name + "." + action_name);
+			Object[] ps = new Object[] { url, pck_name + "." + action_name, action_method_name };
 			log.debug("url={}, action={}, method={}", ps);
 			Object result = MethodUtils.invokeMethod(cls.newInstance(), action_method_name, null);
 			if (result instanceof Result)
