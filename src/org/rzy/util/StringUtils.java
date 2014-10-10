@@ -36,11 +36,10 @@ public class StringUtils {
 	
 	public static String capitalize(String str)
 	{
-		int strLen;
-	    if ((str == null) || ((strLen = str.length()) == 0)) {
+	    if ((str == null) || (str.length() == 0)) {
 	      return str;
 	    }
-	    return strLen + Character.toTitleCase(str.charAt(0)) + str.substring(1);
+	    return Character.toTitleCase(str.charAt(0)) + str.substring(1);
 	}
 	
 	public static String[] split(String str, char separatorChar)
