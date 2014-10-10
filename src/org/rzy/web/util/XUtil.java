@@ -1,21 +1,15 @@
 package org.rzy.web.util;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.regex.Pattern;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.beanutils.MethodUtils;
 import org.rzy.log.LogHandler;
 import org.rzy.util.StringUtils;
@@ -62,7 +56,7 @@ public class XUtil
 				StringBuffer logs = new StringBuffer();
 				String username = getUsername();
 				String requestBody = JSON.toJSONString(args);
-				String ip = getIP();
+				String ip = Context.getIP();
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String time = df.format(new Date());
 				logs.append(username).append("|");
@@ -116,11 +110,6 @@ public class XUtil
 	{
 		Object obj = getUser();
 		return obj == null ? null : String.valueOf(((Map<String, String>) obj).get("id"));
-	}
-
-	protected static String getIP()
-	{
-		return Context.getRequest().getRemoteAddr();
 	}
 
 	public static List<Map<String, Object>> toList(String str)

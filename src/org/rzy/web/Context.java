@@ -140,6 +140,11 @@ public class Context
 		getSession().setAttribute("user", user);
 	}
 	
+	public static String getIP()
+	{
+		return Context.getRequest().getRemoteAddr();
+	}
+	
 	public static String getVC()
 	{
 		return (String) getSession().getAttribute("vc");
