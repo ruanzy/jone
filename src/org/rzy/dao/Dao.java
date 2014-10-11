@@ -28,7 +28,6 @@ public final class Dao
 	private DataSource ds = null;
 	private ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
 	private ThreadLocal<Statement> sl = new ThreadLocal<Statement>();
-	private Properties prop = new Properties();
 	boolean showsql = false;
 	Logger log = LoggerFactory.getLogger(Dao.class);
 
@@ -45,6 +44,7 @@ public final class Dao
 	private Dao()
 	{
 		InputStream is = null;
+		Properties prop = new Properties();
 		try
 		{
 			is = Dao.class.getClassLoader().getResourceAsStream("db.properties");

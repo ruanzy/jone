@@ -103,8 +103,7 @@ public class JOne implements Filter
 				Throwable t = e.getCause();
 				log.debug(t.getMessage());
 				t.printStackTrace();
-				String xhr = request.getHeader("x-requested-with");
-				if (StringUtils.isNotBlank(xhr))
+				if (Context.isAjax())
 				{
 					response.setStatus(9999);
 					response.getWriter().print(t.getMessage());
