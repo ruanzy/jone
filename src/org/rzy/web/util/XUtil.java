@@ -1,17 +1,13 @@
 package org.rzy.web.util;
 
 import java.lang.reflect.InvocationTargetException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.MethodUtils;
-import org.rzy.log.LogHandler;
 import org.rzy.util.StringUtils;
 import org.rzy.web.Context;
 import org.rzy.web.i18n.I18N;
@@ -43,30 +39,11 @@ public class XUtil
 			log.debug("Parameter" + i + "==>" + args[i]);
 		}
 		Object result = null;
-		String className = StringUtils.substringBeforeLast(sid, ".");
 		String methodName = StringUtils.substringAfterLast(sid, ".");
 		try
-		{
-			Class<?> cls = Class.forName("service." + className);
-			Object serviceProxy = ServiceProxy.create(cls);
+		{	
+			Object serviceProxy = ServiceProxy.create(sid);
 			result = MethodUtils.invokeMethod(serviceProxy, methodName, args);
-			boolean flag = Pattern.compile("^(add|del|mod|set|reg|active|cancel)").matcher(methodName).find();
-			if (flag)
-			{
-				StringBuffer logs = new StringBuffer();
-				String username = getUsername();
-				String requestBody = JSON.toJSONString(args);
-				String ip = Context.getIP();
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String time = df.format(new Date());
-				logs.append(username).append("|");
-				logs.append(ip).append("|");
-				logs.append(time).append("|");
-				logs.append(sid).append("|");
-				logs.append(1).append("|");
-				logs.append(requestBody);
-				LogHandler.put(logs.toString());
-			}
 		}
 		catch (Exception e)
 		{
