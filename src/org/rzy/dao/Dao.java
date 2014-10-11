@@ -84,53 +84,31 @@ public final class Dao
 		return conn;
 	}
 
-	private void close(ResultSet rs, PreparedStatement ps, Connection conn)
-	{
-		closeResultSet(rs);
-		closeStatement(ps);
-		closeConnection(conn);
-	}
-
-	private void closeConnection(Connection conn)
+	private void close(Object ... sqlObjs)
 	{
 		try
 		{
-			if (conn != null)
+			for(Object obj : sqlObjs)
 			{
-				conn.close();
+				if(obj == null)
+				{
+					continue;
+				}
+				if(obj instanceof Connection)
+				{
+					((Connection)obj).close();
+				}
+				else if(obj instanceof Statement)
+				{
+					((Statement)obj).close();
+				}
+				else if(obj instanceof ResultSet)		
+				{
+					((ResultSet)obj).close();
+				}
 			}
 		}
-		catch (SQLException e)
-		{
-			throw new DataAccessException(e.getMessage(), e);
-		}
-	}
-
-	private void closeStatement(Statement st)
-	{
-		try
-		{
-			if (st != null)
-			{
-				st.close();
-			}
-		}
-		catch (SQLException e)
-		{
-			throw new DataAccessException(e.getMessage(), e);
-		}
-	}
-
-	private void closeResultSet(ResultSet rs)
-	{
-		try
-		{
-			if (rs != null)
-			{
-				rs.close();
-			}
-		}
-		catch (SQLException e)
+		catch(SQLException e)
 		{
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -629,7 +607,15 @@ public final class Dao
 				// log.debug("set parameters");
 				for (int i = 0; i < params.length; i++)
 				{
-					ps.setObject(i + 1, params[i]);
+					Object o = params[i];
+					if(o != null)
+					{
+						ps.setObject(i + 1, params[i]);						
+					}
+					else
+					{
+						ps.setNull(i + 1, java.sql.Types.NULL);
+					}
 					// log.debug("{}:{}", i + 1, params[i]);
 				}
 			}
