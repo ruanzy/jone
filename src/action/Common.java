@@ -4,18 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.rzy.web.Context;
 import org.rzy.web.Result;
+import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
-import org.rzy.web.util.XUtil;
 
 public class Common
 {
 	@SuppressWarnings("unchecked")
 	public Result menu()
 	{
-		Object o = XUtil.attr("res", "session");
+		Object o = WebUtil.attr("res", "session");
 		List<Map<String, Object>> list = null;
 		if (o != null)
 		{
@@ -28,7 +27,7 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result op()
 	{
-		Object o = XUtil.attr("res", "session");
+		Object o = WebUtil.attr("res", "session");
 		List<Map<String, Object>> list = null;
 		if (o != null)
 		{
@@ -41,9 +40,9 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result dic()
 	{
-		String type = Context.getParameter("type");
+		String type = WebUtil.getParameter("type");
 		Map<String, Object> map = null;
-		Object o = XUtil.attr("dic", "application");
+		Object o = WebUtil.attr("dic", "application");
 		if (o != null)
 		{
 			Map<String, Map<String, Object>> dics = (Map<String, Map<String, Object>>) o;
@@ -54,42 +53,42 @@ public class Common
 
 	public Result lineusers()
 	{
-		Integer numSessions = (Integer) XUtil.attr("numSessions", "application");
+		Integer numSessions = (Integer) WebUtil.attr("numSessions", "application");
 		return new Json(numSessions);
 	}
 
 	public String login()
 	{
-		String svc = Context.getVC();
-		String vc = Context.getParameter("vc");
+		String svc = WebUtil.getVC();
+		String vc = WebUtil.getParameter("vc");
 		if (!svc.equalsIgnoreCase(vc))
 		{
-			XUtil.error("20000");
+			WebUtil.error("20000");
 			return null;
 		}
-		Map<String, String> map = Context.getParameters();
-		Object user = XUtil.call("PmsService.login", map);
+		Map<String, String> map = WebUtil.getParameters();
+		Object user = WebUtil.call("PmsService.login", map);
 		if (user == null)
 		{
-			XUtil.error("用户名或密码错误！");
+			WebUtil.error("用户名或密码错误！");
 			return null;
 		}
-		XUtil.attr("user", user, "session");
+		WebUtil.setCurrentUser(user);
 		loadResandDic();
-		XUtil.ok();
+		WebUtil.ok();
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	public static void loadResandDic()
 	{
-		XUtil.attr("res", XUtil.call("PmsService.userres", XUtil.getUserid()), "session");
+		WebUtil.attr("res", WebUtil.call("PmsService.userres", WebUtil.getUserid()), "session");
 		Map<String, Map<String, Object>> dic = null;
-		Object o = XUtil.attr("dic", "application");
+		Object o = WebUtil.attr("dic", "application");
 		if (o == null)
 		{
 			dic = new HashMap<String, Map<String, Object>>();
-			List<Map<String, Object>> all = (List<Map<String, Object>>) XUtil.call("PmsService.dics");
+			List<Map<String, Object>> all = (List<Map<String, Object>>) WebUtil.call("PmsService.dics");
 			for (Map<String, Object> m : all)
 			{
 				String key = String.valueOf(m.get("type"));
@@ -101,21 +100,21 @@ public class Common
 				}
 				dic.get(key).put(val, name);
 			}
-			XUtil.attr("dic", dic, "application");
+			WebUtil.attr("dic", dic, "application");
 		}
 	}
 
 	public String logout()
 	{
-		Context.clearSession();
-		Context.redirect("login.html");
+		WebUtil.clearSession();
+		WebUtil.redirect("login.html");
 		return null;
 	}
 	
 	public Result welcome()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", Context.getParameter("id"));
+		map.put("user", WebUtil.getParameter("id"));
 		return new Ftl("welcome.ftl", map);
 	}
 }

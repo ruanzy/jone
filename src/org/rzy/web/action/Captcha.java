@@ -9,7 +9,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import org.rzy.web.Context;
+import org.rzy.web.WebUtil;
 
 public class Captcha {
 	
@@ -46,10 +46,10 @@ public class Captcha {
 			g.drawString(rand, 13 * i + 5, 16);
 		}
 		g.dispose();
-		Context.getSession().setAttribute("vc", randomStr.toLowerCase());
+		WebUtil.getSession().setAttribute("vc", randomStr.toLowerCase());
 		try
 		{
-			ImageIO.write(img, "JPEG", Context.getResponse().getOutputStream());
+			ImageIO.write(img, "JPEG", WebUtil.getResponse().getOutputStream());
 		}
 		catch (IOException e)
 		{

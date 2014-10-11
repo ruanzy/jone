@@ -20,7 +20,6 @@ import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import org.rzy.util.Pager;
-import org.rzy.util.StringUtils;
 
 @SuppressWarnings("unchecked")
 public final class SQLMapper
@@ -109,8 +108,8 @@ public final class SQLMapper
 
 	public static Pager pager(String countsqlid, String pagersqlid, Map<String, ?> params)
 	{
-		int page = StringUtils.toInt(params.get("page").toString(), 1);
-		int pagesize = StringUtils.toInt(params.get("pagesize").toString(), 10);
+		int page = toInt(params.get("page").toString(), 1);
+		int pagesize = toInt(params.get("pagesize").toString(), 10);
 		Pager pager = new Pager(page, pagesize);
 		SQL s1 = getSQL(countsqlid, params);
 		SQL s2 = getSQL(pagersqlid, params);
@@ -207,7 +206,7 @@ public final class SQLMapper
 		{
 			wherexml = mat.group(1);
 		}
-		if (StringUtils.isNotBlank(wherexml))
+		if (isNotBlank(wherexml))
 		{
 			SAXReader saxReader = new SAXReader();
 			Document doc = null;
@@ -258,6 +257,38 @@ public final class SQLMapper
 		String sqltext = sqlxml.replaceAll("\n\t*", " ").replaceAll("\\s{2,}", " ").trim();
 		tt = parse(sqltext, "#{", "}", params);
 		return tt;
+	}
+	
+	private static boolean isBlank(String str)
+	{
+		int strLen;
+	    if ((str == null) || ((strLen = str.length()) == 0)) {
+	      return true;
+	    }
+	    for (int i = 0; i < strLen; i++) {
+	      if (!Character.isWhitespace(str.charAt(i))) {
+	        return false;
+	      }
+	    }
+	    return true;
+	}
+	
+	private static boolean isNotBlank(String str)
+	{
+		return !isBlank(str);
+	}
+	
+	public static int toInt(String str, int defaultValue)
+	{
+		try
+		{
+			return Integer.parseInt(str); 
+		} 
+		catch (NumberFormatException nfe) 
+		{
+			
+		}
+		return defaultValue;
 	}
 
 	public static void main(String[] args)
