@@ -73,7 +73,7 @@ public class Common
 			WebUtil.error("用户名或密码错误！");
 			return null;
 		}
-		WebUtil.setCurrentUser(user);
+		WebUtil.setUser(user);
 		loadResandDic();
 		WebUtil.ok();
 		return null;

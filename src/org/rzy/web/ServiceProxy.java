@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 
 class ServiceProxy
 {
+	static String express = "^(add|del|mod|set|reg|active|cancel)";
 	static String serviceId;
 	static MethodInterceptor interceptor = new MethodInterceptor()
 	{
@@ -31,7 +32,7 @@ class ServiceProxy
 				result = methodProxy.invokeSuper(obj, args);
 				dao.commit();
 				StringBuffer logs = new StringBuffer();
-				String username = WebUtil.getCurrentUser().get("username");
+				String username = WebUtil.getUser().get("username");
 				String requestBody = JSON.toJSONString(args);
 				String ip = WebUtil.getIP();
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -57,7 +58,7 @@ class ServiceProxy
 	{
 		public int accept(Method arg0)
 		{
-			return Pattern.compile("^(add|del|mod|set|reg|active|cancel)").matcher(arg0.getName()).find() ? 0 : 1;
+			return Pattern.compile(express).matcher(arg0.getName()).find() ? 0 : 1;
 		}
 	};
 

@@ -86,12 +86,12 @@ public class WebUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static Map<String, String> getCurrentUser()
+	public static Map<String, String> getUser()
 	{
 		return (Map<String, String>) getSession().getAttribute("user");
 	}
 	
-	public static void setCurrentUser(Object user)
+	public static void setUser(Object user)
 	{
 		getSession().setAttribute("user", user);
 	}
@@ -109,11 +109,6 @@ public class WebUtil {
 	public static String getVC()
 	{
 		return (String) getSession().getAttribute("vc");
-	}
-	
-	public static void setVC(String vc)
-	{
-		getSession().setAttribute("vc", vc);
 	}
 
 	public static Object call(String sid, Object... args)
@@ -163,7 +158,7 @@ public class WebUtil {
 
 	public static String getUserid()
 	{
-		Map<String, String> obj = getCurrentUser();
+		Map<String, String> obj = getUser();
 		return obj == null ? null : String.valueOf(obj.get("id"));
 	}
 
