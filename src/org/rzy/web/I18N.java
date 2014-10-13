@@ -1,12 +1,9 @@
 package org.rzy.web;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import org.apache.commons.io.IOUtils;
 
 public class I18N
 {
@@ -28,24 +25,6 @@ public class I18N
 		catch (NullPointerException e)
 		{
 			return null;
-		}
-	}
-
-	public static String loadFromResource(String resource)
-	{
-		InputStream in = null;
-		try
-		{
-			in = new FileInputStream(resource);
-			return IOUtils.toString(in, "utf-8");
-		}
-		catch (Exception excp)
-		{
-			throw new RuntimeException(excp);
-		}
-		finally
-		{
-			IOUtils.closeQuietly(in);
 		}
 	}
 
