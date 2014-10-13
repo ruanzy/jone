@@ -1,4 +1,4 @@
-package org.rzy.web;
+package org.rzy.util;
 
 import java.util.ArrayList;
 import java.util.List;

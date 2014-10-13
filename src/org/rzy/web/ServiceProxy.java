@@ -84,7 +84,7 @@ class ServiceProxy
 	public static <T> T create(String sid)
 	{
 		serviceId = sid;
-		String className = StringUtils.substringBeforeLast(sid, ".");
+		String className = substringBeforeLast(sid, ".");
 		try
 		{
 			Class<?> cls = Class.forName("service." + className);
@@ -120,5 +120,22 @@ class ServiceProxy
 			e.printStackTrace();
 			dao.rollback();
 		}
+	}
+	
+	private static String substringBeforeLast(String str, String separator)
+	{
+		if ((isEmpty(str)) || (isEmpty(separator))) {
+	      return str;
+	    }
+	    int pos = str.lastIndexOf(separator);
+	    if (pos == -1) {
+	      return str;
+	    }
+	    return str.substring(0, pos);
+	}
+	
+	private static boolean isEmpty(String str)
+	{
+		return (str == null) || (str.length() == 0);
 	}
 }

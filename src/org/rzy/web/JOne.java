@@ -2,6 +2,8 @@ package org.rzy.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
@@ -64,14 +66,14 @@ public class JOne implements Filter
 				chain.doFilter(Context.getRequest(), Context.getResponse());
 				return;
 			}
-			String[] parts = StringUtils.split(url, '/');
+			String[] parts = split(url, '/');
 			if (parts.length < 1)
 			{
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return;
 			}
 			String pck_name = "action";
-			String action_name = StringUtils.capitalize(parts[0]);
+			String action_name = capitalize(parts[0]);
 			String action_method_name = (parts.length > 1) ? parts[1] : "execute";
 			if("Captcha".equals(action_name)){
 				pck_name = "org.rzy.web.action";
@@ -130,5 +132,43 @@ public class JOne implements Filter
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		this.context = cfg.getServletContext();
+	}
+	
+	private static String capitalize(String str)
+	{
+	    if ((str == null) || (str.length() == 0)) {
+	      return str;
+	    }
+	    return Character.toTitleCase(str.charAt(0)) + str.substring(1);
+	}
+	
+	private static String[] split(String str, char separatorChar)
+	{
+	    if (str == null) {
+	        return null;
+	      }
+	      int len = str.length();
+	      if (len == 0) {
+	        return new String[0];
+	      }
+	      List<String> list = new ArrayList<String>();
+	      int i = 0; int start = 0;
+	      boolean match = false;
+	      while (i < len)
+	        if (str.charAt(i) == separatorChar) {
+	          if ((match) || (false)) {
+	            list.add(str.substring(start, i));
+	            match = false;
+	          }
+	          i++; start = i;
+	        }
+	        else {
+	          match = true;
+	          i++;
+	        }
+	      if ((match) || false) {
+	        list.add(str.substring(start, i));
+	      }
+	      return (String[])list.toArray(new String[list.size()]);
 	}
 }

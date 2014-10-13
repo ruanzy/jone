@@ -34,7 +34,7 @@ public class Context
 		ac.request = req;
 		ac.parameters = new HashMap<String, String>();
 		String xhr = req.getHeader("x-requested-with");
-		if (StringUtils.isNotBlank(xhr))
+		if (isNotBlank(xhr))
 		{
 			ac.isAjax = true;
 		}
@@ -45,7 +45,7 @@ public class Context
 		{
 			String k = (String) em.nextElement();
 			String v = ac.request.getParameter(k);
-			if (StringUtils.isNotBlank(v))
+			if (isNotBlank(v))
 			{
 				ac.parameters.put(k, v);
 			}
@@ -91,5 +91,24 @@ public class Context
 	protected static Map<String, String> getParameters()
 	{
 		return context.get().parameters;
+	}
+	
+	private static boolean isBlank(String str)
+	{
+		int strLen;
+	    if ((str == null) || ((strLen = str.length()) == 0)) {
+	      return true;
+	    }
+	    for (int i = 0; i < strLen; i++) {
+	      if (!Character.isWhitespace(str.charAt(i))) {
+	        return false;
+	      }
+	    }
+	    return true;
+	}
+
+	private static boolean isNotBlank(String str)
+	{
+		return !isBlank(str);
 	}
 }
