@@ -2,6 +2,7 @@ package org.rzy.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
@@ -14,7 +15,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +80,9 @@ public class JOne implements Filter
 			Class<?> cls = Class.forName(pck_name + "." + action_name);
 			Object[] ps = new Object[] { url, pck_name + "." + action_name, action_method_name };
 			log.debug("url={}, action={}, method={}", ps);
-			Object result = MethodUtils.invokeMethod(cls.newInstance(), action_method_name, null);
+			//Object result = MethodUtils.invokeMethod(cls.newInstance(), action_method_name, null);
+			Method method = cls.getMethod(action_method_name);
+			Object result = method.invoke(cls.newInstance());
 			if (result instanceof Result)
 			{
 				((Result) result).render();

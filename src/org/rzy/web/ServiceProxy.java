@@ -19,7 +19,6 @@ import com.alibaba.fastjson.JSON;
 class ServiceProxy
 {
 	static String express = "^(add|del|mod|set|reg|active|cancel)";
-	static String serviceId;
 	static MethodInterceptor interceptor = new MethodInterceptor()
 	{
 		public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
@@ -37,10 +36,12 @@ class ServiceProxy
 				String ip = WebUtil.getIP();
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String time = df.format(new Date());
+				String pcls = obj.getClass().getSimpleName();
+				String sid = pcls.split("\\$\\$")[0] + "." + method.getName();
 				logs.append(username).append("|");
 				logs.append(ip).append("|");
 				logs.append(time).append("|");
-				logs.append(serviceId).append("|");
+				logs.append(sid).append("|");
 				logs.append(1).append("|");
 				logs.append(requestBody);
 				writeLog(logs.toString());
@@ -78,29 +79,7 @@ class ServiceProxy
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static <T> T create(String sid)
-	{
-		serviceId = sid;
-		String className = substringBeforeLast(sid, ".");
-		try
-		{
-			Class<?> cls = Class.forName("service." + className);
-			Enhancer en = new Enhancer();
-			en.setSuperclass(cls);
-			en.setCallbacks(new Callback[] { interceptor, NoOp.INSTANCE });
-			en.setCallbackFilter(filter);
-			return (T) en.create();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
+	}	
 	
 	private static void writeLog(String log)
 	{
@@ -120,22 +99,5 @@ class ServiceProxy
 			e.printStackTrace();
 			dao.rollback();
 		}
-	}
-	
-	private static String substringBeforeLast(String str, String separator)
-	{
-		if ((isEmpty(str)) || (isEmpty(separator))) {
-	      return str;
-	    }
-	    int pos = str.lastIndexOf(separator);
-	    if (pos == -1) {
-	      return str;
-	    }
-	    return str.substring(0, pos);
-	}
-	
-	private static boolean isEmpty(String str)
-	{
-		return (str == null) || (str.length() == 0);
 	}
 }

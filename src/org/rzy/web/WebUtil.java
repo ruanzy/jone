@@ -129,10 +129,12 @@ public class WebUtil {
 			log.debug("Parameter" + i + "==>" + args[i]);
 		}
 		Object result = null;
+		String className = substringBeforeLast(sid, ".");
 		String methodName = substringAfterLast(sid, ".");
 		try
 		{	
-			Object serviceProxy = ServiceProxy.create(sid);
+			Class<?> cls = Class.forName("service." + className);
+			Object serviceProxy = ServiceProxy.create(cls);
 			result = MethodUtils.invokeMethod(serviceProxy, methodName, args);
 		}
 		catch (Exception e)
@@ -266,6 +268,18 @@ public class WebUtil {
 	public static String i18n(String key, Object... args)
 	{
 		return I18N.get(key, args);
+	}
+	
+	public static String substringBeforeLast(String str, String separator)
+	{
+	    if ((isEmpty(str)) || (isEmpty(separator))) {
+	      return str;
+	    }
+	    int pos = str.lastIndexOf(separator);
+	    if (pos == -1) {
+	      return str;
+	    }
+	    return str.substring(0, pos);
 	}
 	
 	public static String substringAfterLast(String str, String separator)
