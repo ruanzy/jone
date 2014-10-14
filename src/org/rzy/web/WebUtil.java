@@ -270,7 +270,7 @@ public class WebUtil {
 		return I18N.get(key, args);
 	}
 	
-	public static String substringBeforeLast(String str, String separator)
+	private static String substringBeforeLast(String str, String separator)
 	{
 	    if ((isEmpty(str)) || (isEmpty(separator))) {
 	      return str;
@@ -282,7 +282,7 @@ public class WebUtil {
 	    return str.substring(0, pos);
 	}
 	
-	public static String substringAfterLast(String str, String separator)
+	private static String substringAfterLast(String str, String separator)
 	{
 	    if (isEmpty(str)) {
 	      return str;
