@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.MethodUtils;
+import org.rzy.web.result.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -180,57 +181,22 @@ public class WebUtil {
 		return data;
 	}
 
-	public static void ok()
+	public static Json json(String msg)
 	{
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("success", true);
-		result.put("msg", null);
-		try
-		{
-			HttpServletResponse response = getResponse();
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(JSON.toJSONString(result));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public static void ok(String msg, Object... args)
-	{
-		// msg = Resource.get(msg)!=null?Resource.get(msg):msg;
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("success", true);
 		result.put("msg", msg);
-		try
-		{
-			HttpServletResponse response = getResponse();
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(JSON.toJSONString(result));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		return new Json(result);
 	}
 
-	public static void error(String msg, Object... args)
+
+
+	public static Json jsonError(String msg)
 	{
-		msg = I18N.get(msg) != null ? I18N.get(msg) : msg;
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("success", false);
 		result.put("msg", msg);
-		try
-		{
-			HttpServletResponse response = getResponse();
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(JSON.toJSONString(result));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		return new Json(result);
 	}
 
 	public static void attr(String key, Object value, String scope)

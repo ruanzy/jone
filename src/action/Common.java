@@ -57,26 +57,24 @@ public class Common
 		return new Json(numSessions);
 	}
 
-	public String login()
+	public Result login()
 	{
 		String svc = WebUtil.getVC();
 		String vc = WebUtil.getParameter("vc");
 		if (!svc.equalsIgnoreCase(vc))
 		{
-			WebUtil.error("20000");
-			return null;
+			String msg = WebUtil.i18n("20000");
+			return WebUtil.json(msg);
 		}
 		Map<String, String> map = WebUtil.getParameters();
 		Object user = WebUtil.call("PmsService.login", map);
 		if (user == null)
 		{
-			WebUtil.error("用户名或密码错误！");
-			return null;
+			return WebUtil.json("用户名或密码错误！");
 		}
 		WebUtil.setUser(user);
 		loadResandDic();
-		WebUtil.ok();
-		return null;
+		return WebUtil.json("login success");
 	}
 
 	@SuppressWarnings("unchecked")

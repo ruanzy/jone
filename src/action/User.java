@@ -17,15 +17,14 @@ public class User
 		return new Json(WebUtil.call("PmsService.finduser", map));
 	}
 
-	public String add()
+	public Result add()
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.reg", map);
-		WebUtil.ok();
-		return null;
+		return WebUtil.json("add success");
 	}
 
-	public String save()
+	public Result save()
 	{
 		String data = WebUtil.getParameter("data");
 		List<Map<String, Object>> list = WebUtil.toList(data);
@@ -33,8 +32,7 @@ public class User
 		{
 			WebUtil.call("PmsService.reg", map);
 		}
-		WebUtil.ok();
-		return null;
+		return WebUtil.json("add success");
 	}
 
 	public String del()
@@ -77,12 +75,11 @@ public class User
 		return new Json(WebUtil.call("PmsService.assignedroles", user));
 	}
 
-	public String setrole()
+	public Result setrole()
 	{
 		String user = WebUtil.getParameter("user");
 		String roles = WebUtil.getParameter("roles");
 		WebUtil.call("PmsService.setrole", user, roles);
-		WebUtil.ok("设置角色ok...");
-		return null;
+		return WebUtil.json("设置角色ok...");
 	}
 }

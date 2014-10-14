@@ -15,15 +15,14 @@ public class Dic
 		return new Json(WebUtil.call("PmsService.finddic", map));
 	}
 
-	public String add()
+	public Result add()
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.adddic", map);
-		WebUtil.ok();
-		return null;
+		return WebUtil.json("add success");
 	}
 
-	public String save()
+	public Result save()
 	{
 		String data = WebUtil.getParameter("data");
 		List<Map<String, Object>> list = WebUtil.toList(data);
@@ -31,8 +30,7 @@ public class Dic
 		{
 			WebUtil.call("PmsService.adddic", map);
 		}
-		WebUtil.ok();
-		return null;
+		return WebUtil.json("add success");
 	}
 
 	public String del()

@@ -13,20 +13,18 @@ public class Res
 		return new Json(WebUtil.call("PmsService.getRes"));
 	}
 
-	public String add()
+	public Result add()
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.addres", map);
-		WebUtil.ok("增加成功");
-		return null;
+		return WebUtil.json("增加成功");
 	}
 
-	public String del()
+	public Result del()
 	{
 		String id = WebUtil.getParameter("id");
 		WebUtil.call("PmsService.delres", id);
-		WebUtil.ok("删除成功");
-		return null;
+		return WebUtil.json("删除成功");
 	}
 
 	public Result menubymoudle()

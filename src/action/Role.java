@@ -15,14 +15,13 @@ public class Role
 		return new Json(WebUtil.call("PmsService.findrole", map));
 	}
 
-	public String add()
+	public Result add()
 	{
 		String name = WebUtil.getParameter("name");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		WebUtil.call("PmsService.addrole", map);
-		WebUtil.ok();
-		return null;
+		return WebUtil.json("add success");
 	}
 	
 	public String del()
@@ -43,12 +42,11 @@ public class Role
 		return new Json(WebUtil.call("PmsService.roleres", role));
 	}
 
-	public String setres()
+	public Result setres()
 	{
 		String role = WebUtil.getParameter("role");
 		String res = WebUtil.getParameter("res");
 		WebUtil.call("PmsService.setres", role, res);
-		WebUtil.ok("设置资源ok...");
-		return null;
+		return WebUtil.json("设置资源ok...");
 	}
 }
