@@ -3,7 +3,6 @@ package org.rzy.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.rzy.util.Pager;
 
 public class Test
 {
