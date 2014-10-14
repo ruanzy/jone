@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.MethodUtils;
+import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -189,14 +190,9 @@ public class WebUtil {
 		return new Json(result);
 	}
 
-
-
-	public static Json jsonError(String msg)
+	public static Ftl ftl(String ftl, Map<String, Object> map)
 	{
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("success", false);
-		result.put("msg", msg);
-		return new Json(result);
+		return new Ftl(ftl, map);
 	}
 
 	public static void attr(String key, Object value, String scope)
