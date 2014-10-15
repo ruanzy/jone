@@ -3,6 +3,8 @@ package org.rzy.web;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import net.sf.cglib.proxy.Callback;
@@ -19,6 +21,7 @@ import com.alibaba.fastjson.JSON;
 class ServiceProxy
 {
 	static String express = "^(add|del|mod|set|reg|active|cancel)";
+	static Map<String, Object> service_cache = new HashMap<String, Object>();
 	static MethodInterceptor interceptor = new MethodInterceptor()
 	{
 		public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
@@ -85,12 +88,20 @@ class ServiceProxy
 	{
 		try
 		{
-			Class<?> cls = Class.forName("service." + className);
-			Enhancer en = new Enhancer();
-			en.setSuperclass(cls);
-			en.setCallbacks(new Callback[] { interceptor, NoOp.INSTANCE });
-			en.setCallbackFilter(filter);
-			return en.create();
+			String key = "service." + className;
+			if(!service_cache.containsKey(key)){
+				Class<?> cls = Class.forName(key);
+				Enhancer en = new Enhancer();
+				en.setSuperclass(cls);
+				en.setCallbacks(new Callback[] { interceptor, NoOp.INSTANCE });
+				en.setCallbackFilter(filter);
+				Object obj = en.create();
+				service_cache.put(key, obj);
+				return obj;
+			}else
+			{
+				return service_cache.get(key);
+			}
 		}
 		catch (Exception e)
 		{
