@@ -81,6 +81,24 @@ class ServiceProxy
 		}
 	}	
 	
+	public static Object create(String className)
+	{
+		try
+		{
+			Class<?> cls = Class.forName("service." + className);
+			Enhancer en = new Enhancer();
+			en.setSuperclass(cls);
+			en.setCallbacks(new Callback[] { interceptor, NoOp.INSTANCE });
+			en.setCallbackFilter(filter);
+			return en.create();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	private static void writeLog(String log)
 	{
 		String sql = "insert into log(id,operator,ip,time,method,result,memo) values(?,?,?,?,?,?,?)";
