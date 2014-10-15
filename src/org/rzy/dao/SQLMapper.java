@@ -12,9 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import ognl.Ognl;
-
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
@@ -257,35 +255,38 @@ public final class SQLMapper
 		tt = parse(sqltext, "#{", "}", params);
 		return tt;
 	}
-	
+
 	private static boolean isBlank(String str)
 	{
 		int strLen;
-	    if ((str == null) || ((strLen = str.length()) == 0)) {
-	      return true;
-	    }
-	    for (int i = 0; i < strLen; i++) {
-	      if (!Character.isWhitespace(str.charAt(i))) {
-	        return false;
-	      }
-	    }
-	    return true;
+		if ((str == null) || ((strLen = str.length()) == 0))
+		{
+			return true;
+		}
+		for (int i = 0; i < strLen; i++)
+		{
+			if (!Character.isWhitespace(str.charAt(i)))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
-	
+
 	private static boolean isNotBlank(String str)
 	{
 		return !isBlank(str);
 	}
-	
+
 	public static int toInt(String str, int defaultValue)
 	{
 		try
 		{
-			return Integer.parseInt(str); 
-		} 
-		catch (NumberFormatException nfe) 
+			return Integer.parseInt(str);
+		}
+		catch (NumberFormatException nfe)
 		{
-			
+
 		}
 		return defaultValue;
 	}

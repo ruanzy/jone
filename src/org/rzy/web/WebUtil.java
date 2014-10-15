@@ -5,24 +5,22 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.beanutils.MethodUtils;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
-public class WebUtil {
-	
+public class WebUtil
+{
+
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
 
 	public static ServletContext getServletContext()
@@ -54,7 +52,7 @@ public class WebUtil {
 	{
 		return Context.getParameters();
 	}
-	
+
 	public static String getParameter(String name)
 	{
 		return getRequest().getParameter(name);
@@ -65,7 +63,8 @@ public class WebUtil {
 		try
 		{
 			HttpServletRequest request = getRequest();
-			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
+			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+					+ request.getContextPath() + "/";
 			getResponse().sendRedirect(basePath + url);
 		}
 		catch (IOException e)
@@ -92,22 +91,22 @@ public class WebUtil {
 	{
 		return (Map<String, String>) getSession().getAttribute("user");
 	}
-	
+
 	public static void setUser(Object user)
 	{
 		getSession().setAttribute("user", user);
 	}
-	
+
 	public static String getIP()
 	{
 		return getRequest().getRemoteAddr();
 	}
-	
+
 	public static void clearSession()
 	{
 		getSession().invalidate();
 	}
-	
+
 	public static String getVC()
 	{
 		return (String) getSession().getAttribute("vc");
@@ -120,7 +119,8 @@ public class WebUtil {
 		for (int i = 0, len = args.length; i < len; i++)
 		{
 			sb.append("Parameter" + i);
-			if(i != len - 1){
+			if (i != len - 1)
+			{
 				sb.append(",");
 			}
 		}
@@ -134,7 +134,7 @@ public class WebUtil {
 		String className = substringBeforeLast(sid, ".");
 		String methodName = substringAfterLast(sid, ".");
 		try
-		{	
+		{
 			Object proxy = ServiceProxy.get(className);
 			result = MethodUtils.invokeMethod(proxy, methodName, args);
 		}
@@ -225,39 +225,44 @@ public class WebUtil {
 			return getRequest().getAttribute(key);
 		}
 	}
-	
+
 	public static String i18n(String key, Object... args)
 	{
 		return I18N.get(key, args);
 	}
-	
+
 	private static String substringBeforeLast(String str, String separator)
 	{
-	    if ((isEmpty(str)) || (isEmpty(separator))) {
-	      return str;
-	    }
-	    int pos = str.lastIndexOf(separator);
-	    if (pos == -1) {
-	      return str;
-	    }
-	    return str.substring(0, pos);
+		if ((isEmpty(str)) || (isEmpty(separator)))
+		{
+			return str;
+		}
+		int pos = str.lastIndexOf(separator);
+		if (pos == -1)
+		{
+			return str;
+		}
+		return str.substring(0, pos);
 	}
-	
+
 	private static String substringAfterLast(String str, String separator)
 	{
-	    if (isEmpty(str)) {
-	      return str;
-	    }
-	    if (isEmpty(separator)) {
-	      return "";
-	    }
-	    int pos = str.lastIndexOf(separator);
-	    if ((pos == -1) || (pos == str.length() - separator.length())) {
-	      return "";
-	    }
-	    return str.substring(pos + separator.length());
+		if (isEmpty(str))
+		{
+			return str;
+		}
+		if (isEmpty(separator))
+		{
+			return "";
+		}
+		int pos = str.lastIndexOf(separator);
+		if ((pos == -1) || (pos == str.length() - separator.length()))
+		{
+			return "";
+		}
+		return str.substring(pos + separator.length());
 	}
-	
+
 	private static boolean isEmpty(String str)
 	{
 		return (str == null) || (str.length() == 0);

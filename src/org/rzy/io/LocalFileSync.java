@@ -1,4 +1,5 @@
 package org.rzy.io;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -198,8 +199,8 @@ public class LocalFileSync implements FileSync
 					output.write(getBytes(des, c.getNo()));
 				}
 			}
-			//String str = new String(output.toByteArray(), "utf-8");
-			//System.out.println(str);
+			// String str = new String(output.toByteArray(), "utf-8");
+			// System.out.println(str);
 			output.writeTo(fos);
 		}
 		catch (Exception e)

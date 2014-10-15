@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.rzy.dao.Dao;
 import org.rzy.dao.Pager;
 import org.rzy.dao.SQLMapper;
@@ -15,7 +14,7 @@ import org.rzy.util.TimeUtil;
 public class PmsService
 {
 	private Dao dao = Dao.getInstance();
-	
+
 	public Pager finduser(Map<String, Object> map)
 	{
 		String sqlid1 = "user.count";

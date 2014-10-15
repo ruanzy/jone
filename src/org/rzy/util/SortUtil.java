@@ -137,8 +137,8 @@ public class SortUtil
 			step /= 2;
 		}
 	}
-    
-    public static void ShellSort2(int[] arr)
+
+	public static void ShellSort2(int[] arr)
 	{
 		int j;
 		int len = arr.length;

@@ -6,16 +6,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.proxy.NoOp;
-
 import org.rzy.dao.Dao;
-
 import com.alibaba.fastjson.JSON;
 
 class ServiceProxy
@@ -82,14 +79,15 @@ class ServiceProxy
 			e.printStackTrace();
 			return null;
 		}
-	}	
-	
+	}
+
 	public static Object get(String className)
 	{
 		try
 		{
 			String key = "service." + className;
-			if(!service_cache.containsKey(key)){
+			if (!service_cache.containsKey(key))
+			{
 				Class<?> cls = Class.forName(key);
 				Enhancer en = new Enhancer();
 				en.setSuperclass(cls);
@@ -98,7 +96,8 @@ class ServiceProxy
 				Object obj = en.create();
 				service_cache.put(key, obj);
 				return obj;
-			}else
+			}
+			else
 			{
 				return service_cache.get(key);
 			}
@@ -109,7 +108,7 @@ class ServiceProxy
 			return null;
 		}
 	}
-	
+
 	private static void writeLog(String log)
 	{
 		String sql = "insert into log(id,operator,ip,time,method,result,memo) values(?,?,?,?,?,?,?)";

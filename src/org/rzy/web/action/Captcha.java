@@ -6,13 +6,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
-
 import org.rzy.web.WebUtil;
 
-public class Captcha {
-	
+public class Captcha
+{
+
 	public void execute()
 	{
 		int width = 60;

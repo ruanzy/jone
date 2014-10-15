@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -14,7 +13,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +21,8 @@ public class JOne implements Filter
 	private ServletContext context;
 	static Logger log = LoggerFactory.getLogger(Filter.class);
 
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
+			ServletException
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
@@ -74,13 +73,15 @@ public class JOne implements Filter
 			String _action_name = parts[0];
 			String action_name = Character.toTitleCase(_action_name.charAt(0)) + _action_name.substring(1);
 			String action_method_name = (parts.length > 1) ? parts[1] : "execute";
-			if("Captcha".equals(action_name)){
+			if ("Captcha".equals(action_name))
+			{
 				pck_name = "org.rzy.web.action";
 			}
 			Class<?> cls = Class.forName(pck_name + "." + action_name);
 			Object[] ps = new Object[] { url, pck_name + "." + action_name, action_method_name };
 			log.debug("url={}, action={}, method={}", ps);
-			//Object result = MethodUtils.invokeMethod(cls.newInstance(), action_method_name, null);
+			// Object result = MethodUtils.invokeMethod(cls.newInstance(),
+			// action_method_name, null);
 			Method method = cls.getMethod(action_method_name);
 			Object result = method.invoke(cls.newInstance());
 			if (result instanceof Result)

@@ -2,7 +2,6 @@ package action;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Json;
@@ -23,7 +22,7 @@ public class Role
 		WebUtil.call("PmsService.addrole", map);
 		return WebUtil.json("add success");
 	}
-	
+
 	public String del()
 	{
 		String id = WebUtil.getParameter("id");

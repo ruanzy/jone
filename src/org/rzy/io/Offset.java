@@ -1,10 +1,11 @@
 package org.rzy.io;
+
 public class Offset extends Data
 {
 	private int start;
 
 	private int len;
-	
+
 	public byte[] getData()
 	{
 		return data;
@@ -16,7 +17,6 @@ public class Offset extends Data
 	}
 
 	private byte[] data = new byte[len];
-	
 
 	public Offset(byte[] data)
 	{

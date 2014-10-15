@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +25,8 @@ public class Context
 
 	private final static ThreadLocal<Context> context = new ThreadLocal<Context>();
 
-	protected static Context begin(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException
+	protected static Context begin(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res)
+			throws UnsupportedEncodingException
 	{
 		Context ac = new Context();
 		ac.servletContext = servletContext;
@@ -92,19 +92,22 @@ public class Context
 	{
 		return context.get().parameters;
 	}
-	
+
 	private static boolean isBlank(String str)
 	{
 		int strLen;
-	    if ((str == null) || ((strLen = str.length()) == 0)) {
-	      return true;
-	    }
-	    for (int i = 0; i < strLen; i++) {
-	      if (!Character.isWhitespace(str.charAt(i))) {
-	        return false;
-	      }
-	    }
-	    return true;
+		if ((str == null) || ((strLen = str.length()) == 0))
+		{
+			return true;
+		}
+		for (int i = 0; i < strLen; i++)
+		{
+			if (!Character.isWhitespace(str.charAt(i)))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private static boolean isNotBlank(String str)

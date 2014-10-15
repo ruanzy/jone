@@ -1,10 +1,8 @@
 package org.rzy.web.result;
 
 import java.util.Map;
-
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
-
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 

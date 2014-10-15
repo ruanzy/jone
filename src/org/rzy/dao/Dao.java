@@ -84,31 +84,31 @@ public final class Dao
 		return conn;
 	}
 
-	private void close(Object ... sqlObjs)
+	private void close(Object... sqlObjs)
 	{
 		try
 		{
-			for(Object obj : sqlObjs)
+			for (Object obj : sqlObjs)
 			{
-				if(obj == null)
+				if (obj == null)
 				{
 					continue;
 				}
-				if(obj instanceof Connection)
+				if (obj instanceof Connection)
 				{
-					((Connection)obj).close();
+					((Connection) obj).close();
 				}
-				else if(obj instanceof Statement)
+				else if (obj instanceof Statement)
 				{
-					((Statement)obj).close();
+					((Statement) obj).close();
 				}
-				else if(obj instanceof ResultSet)		
+				else if (obj instanceof ResultSet)
 				{
-					((ResultSet)obj).close();
+					((ResultSet) obj).close();
 				}
 			}
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -608,9 +608,9 @@ public final class Dao
 				for (int i = 0; i < params.length; i++)
 				{
 					Object o = params[i];
-					if(o != null)
+					if (o != null)
 					{
-						ps.setObject(i + 1, params[i]);						
+						ps.setObject(i + 1, params[i]);
 					}
 					else
 					{

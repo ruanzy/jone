@@ -14,7 +14,8 @@ public class I18N
 	{
 		try
 		{
-			ResourceBundle rb = ResourceBundle.getBundle("resource", Locale.getDefault(), I18N.class.getClassLoader(), ctl);
+			ResourceBundle rb = ResourceBundle.getBundle("resource", Locale.getDefault(), I18N.class.getClassLoader(),
+					ctl);
 			String text = (rb != null) ? rb.getString(key) : null;
 			return (text != null) ? MessageFormat.format(text, args) : null;
 		}
@@ -37,7 +38,8 @@ public class I18N
 		}
 
 		@Override
-		public boolean needsReload(String baseName, Locale locale, String format, ClassLoader loader, ResourceBundle bundle, long loadTime)
+		public boolean needsReload(String baseName, Locale locale, String format, ClassLoader loader,
+				ResourceBundle bundle, long loadTime)
 		{
 			return true;
 		}

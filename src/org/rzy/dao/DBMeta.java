@@ -198,12 +198,12 @@ public final class DBMeta
 				{
 					String columnname = data.getColumnName(i + 1);
 					int type = data.getColumnType(i + 1);
-					if (!((type >= 2 && type <=8) || (type >=-7 && type <=-5)))
+					if (!((type >= 2 && type <= 8) || (type >= -7 && type <= -5)))
 					{
 						sb.append("'");
 					}
 					sb.append(rs.getObject(columnname));
-					if (!((type >= 2 && type <=8) || (type >=-7 && type <=-5)))
+					if (!((type >= 2 && type <= 8) || (type >= -7 && type <= -5)))
 					{
 						sb.append("'");
 					}

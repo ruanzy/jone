@@ -6,7 +6,6 @@ public class SQL
 {
 	private String sql;
 	private List<Object> ps;
-	
 
 	public String getSql()
 	{

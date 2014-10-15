@@ -2,13 +2,12 @@ package org.rzy.web.result;
 
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
-
 import com.alibaba.fastjson.JSON;
 
 public class Json implements Result
 {
 	Object o;
-	
+
 	boolean code;
 
 	public Json(Object o)

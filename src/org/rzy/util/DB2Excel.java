@@ -54,8 +54,9 @@ public class DB2Excel
 		{
 			e.printStackTrace();
 		}
-		finally{
-			
+		finally
+		{
+
 		}
 	}
 
@@ -123,7 +124,8 @@ public class DB2Excel
 						long l = Math.round(d);
 						if (Double.parseDouble(l + ".0") == d)
 							params[j] = l;
-						else params[j] = d;
+						else
+							params[j] = d;
 					}
 				}
 				if (type == 1)
@@ -138,6 +140,7 @@ public class DB2Excel
 	public static void main(String[] args)
 	{
 		exp("select * from log", "D://export.xls");
-		//imp("insert into log(id, operator, ip, time, method, result, memo) values(?,?,?,?,?,?,?)", "D://export.xls");
+		// imp("insert into log(id, operator, ip, time, method, result, memo) values(?,?,?,?,?,?,?)",
+		// "D://export.xls");
 	}
 }
