@@ -35,7 +35,7 @@
 				var me = $(this);
 				$(this).data('options', settings);
 				var hideName = settings.hideName;
-				var rdm = new Date().getTime();
+				var rdm = new Date().getTime() + '_' + Math.floor(Math.random()*(100 - 1 + 1) + 1);
 				var html = [];
 				html.push("<dl class='rzy-select'><dt id='dt_");
 				html.push(rdm);
