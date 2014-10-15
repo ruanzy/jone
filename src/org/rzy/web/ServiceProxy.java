@@ -67,7 +67,7 @@ class ServiceProxy
 	};
 
 	@SuppressWarnings("unchecked")
-	public static <T> T create(Class<T> cls)
+	public static <T> T get(Class<T> cls)
 	{
 		try
 		{
@@ -84,7 +84,7 @@ class ServiceProxy
 		}
 	}	
 	
-	public static Object create(String className)
+	public static Object get(String className)
 	{
 		try
 		{

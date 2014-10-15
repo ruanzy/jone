@@ -135,8 +135,8 @@ public class WebUtil {
 		String methodName = substringAfterLast(sid, ".");
 		try
 		{	
-			Object serviceProxy = ServiceProxy.create(className);
-			result = MethodUtils.invokeMethod(serviceProxy, methodName, args);
+			Object proxy = ServiceProxy.get(className);
+			result = MethodUtils.invokeMethod(proxy, methodName, args);
 		}
 		catch (Exception e)
 		{
