@@ -23,6 +23,53 @@ public class WebUtil
 
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
 
+	public static Object call(String sid, Object... args)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("service=").append(sid).append("(");
+		for (int i = 0, len = args.length; i < len; i++)
+		{
+			sb.append("arg" + i);
+			if (i != len - 1)
+			{
+				sb.append(",");
+			}
+		}
+		sb.append(")");
+		log.debug(sb.toString());
+		for (int i = 0, len = args.length; i < len; i++)
+		{
+			log.debug("arg" + i + "=" + args[i]);
+		}
+		Object result = null;
+		String className = substringBeforeLast(sid, ".");
+		String methodName = substringAfterLast(sid, ".");
+		try
+		{
+			Object proxy = ServiceProxy.get(className);
+			result = MethodUtils.invokeMethod(proxy, methodName, args);
+		}
+		catch (Exception e)
+		{
+			if (e instanceof ClassNotFoundException)
+			{
+				log.debug(e.getMessage() + " Not Found.");
+			}
+			else if (e instanceof NoSuchMethodException)
+			{
+				log.debug(e.getMessage());
+			}
+			else if (e instanceof InvocationTargetException)
+			{
+				Throwable t = e.getCause();
+				log.debug(t.getMessage());
+			}
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		return result;
+	}
+
 	public static ServletContext getServletContext()
 	{
 		return Context.getServletContext();
@@ -110,53 +157,6 @@ public class WebUtil
 	public static String getVC()
 	{
 		return (String) getSession().getAttribute("vc");
-	}
-
-	public static Object call(String sid, Object... args)
-	{
-		StringBuffer sb = new StringBuffer();
-		sb.append(sid).append("(");
-		for (int i = 0, len = args.length; i < len; i++)
-		{
-			sb.append("Parameter" + i);
-			if (i != len - 1)
-			{
-				sb.append(",");
-			}
-		}
-		sb.append(")");
-		log.debug(sb.toString());
-		for (int i = 0, len = args.length; i < len; i++)
-		{
-			log.debug("Parameter" + i + "==>" + args[i]);
-		}
-		Object result = null;
-		String className = substringBeforeLast(sid, ".");
-		String methodName = substringAfterLast(sid, ".");
-		try
-		{
-			Object proxy = ServiceProxy.get(className);
-			result = MethodUtils.invokeMethod(proxy, methodName, args);
-		}
-		catch (Exception e)
-		{
-			if (e instanceof ClassNotFoundException)
-			{
-				log.debug(e.getMessage() + " Not Found.");
-			}
-			else if (e instanceof NoSuchMethodException)
-			{
-				log.debug(e.getMessage());
-			}
-			else if (e instanceof InvocationTargetException)
-			{
-				Throwable t = e.getCause();
-				log.debug(t.getMessage());
-			}
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		return result;
 	}
 
 	public static String getUserid()

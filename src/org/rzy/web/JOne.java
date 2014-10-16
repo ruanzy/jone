@@ -90,6 +90,7 @@ public class JOne implements Filter
 			}
 			long t2 = System.currentTimeMillis();
 			log.debug("time=" + (t2 - t1) + "ms");
+			log.debug("----------");
 		}
 		catch (Exception e)
 		{
