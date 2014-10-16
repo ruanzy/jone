@@ -41,14 +41,15 @@ public class Context
 		ac.response = res;
 		ac.session = req.getSession();
 		Enumeration<?> em = ac.request.getParameterNames();
-		while (em.hasMoreElements())
-		{
-			String k = (String) em.nextElement();
-			String v = ac.request.getParameter(k);
-			if (isNotBlank(v))
+		if(em.hasMoreElements()){
+			Map<String, String> ps = new HashMap<String, String>();
+			while (em.hasMoreElements())
 			{
-				ac.parameters.put(k, v);
+				String k = (String) em.nextElement();
+				String v = ac.request.getParameter(k);
+				ps.put(k, v);
 			}
+			ac.parameters = ps;
 		}
 		context.set(ac);
 		return ac;
