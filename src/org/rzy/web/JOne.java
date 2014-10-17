@@ -89,7 +89,6 @@ public class JOne implements Filter
 				((Result) result).render();
 			}
 			long t2 = System.currentTimeMillis();
-			log.debug("result=" + result.getClass().getSimpleName());
 			log.debug("time=" + (t2 - t1) + "ms");
 			log.debug("----------");
 		}

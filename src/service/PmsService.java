@@ -7,7 +7,7 @@ import java.util.Map;
 import org.rzy.dao.Dao;
 import org.rzy.dao.Pager;
 import org.rzy.dao.SQLMapper;
-import org.rzy.util.MD5Util;
+import org.rzy.util.CryptUtil;
 import org.rzy.util.StringUtils;
 import org.rzy.util.TimeUtil;
 
@@ -131,7 +131,7 @@ public class PmsService
 		String sql = "select * from users where username=? and pwd=?";
 		String username = map.get("username");
 		String password = map.get("password");
-		password = MD5Util.md5(username + password);
+		password = CryptUtil.encrypt(username + password);
 		List<Map<String, Object>> list = dao.find(sql, new Object[] { username, password });
 		if (list.size() == 1)
 		{
@@ -158,7 +158,7 @@ public class PmsService
 		int id = dao.getID("users");
 		String username = (String) map.get("username");
 		String pwd = (String) map.get("password");
-		pwd = MD5Util.md5(username + pwd);
+		pwd = CryptUtil.encrypt(username + pwd);
 		String regtime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { id, username, pwd, regtime };
 		dao.update(sql, params);

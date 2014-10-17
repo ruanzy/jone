@@ -9,7 +9,33 @@ import javax.crypto.spec.DESKeySpec;
 public class CryptUtil
 {
 
-	private final static String DES = "DES";
+	final static String DES = "DES";
+
+	final static String KEY = "0102030405060708";
+
+	public final static String decrypt(String data)
+	{
+		return decrypt(data, KEY);
+	}
+
+	public final static String encrypt(String data)
+	{
+		return encrypt(data, KEY);
+	}
+
+	public final static String decrypt(String data, String key)
+	{
+		return new String(decrypt(hex2byte(data.getBytes()), key.getBytes()));
+	}
+
+	public final static String encrypt(String data, String key)
+	{
+		if (data != null)
+		{
+			return byte2hex(encrypt(data.getBytes(), key.getBytes()));
+		}
+		return null;
+	}
 
 	private static byte[] encrypt(byte[] src, byte[] key) throws RuntimeException
 	{
@@ -47,25 +73,6 @@ public class CryptUtil
 		}
 	}
 
-	public final static String decrypt(String data, String key) throws Exception
-	{
-		return new String(decrypt(hex2byte(data.getBytes()), key.getBytes()));
-	}
-
-	public final static String encrypt(String data, String key)
-	{
-		if (data != null)
-			try
-			{
-				return byte2hex(encrypt(data.getBytes(), key.getBytes()));
-			}
-			catch (Exception e)
-			{
-				throw new RuntimeException(e);
-			}
-		return null;
-	}
-
 	private static String byte2hex(byte[] b)
 	{
 		StringBuilder hs = new StringBuilder();
@@ -93,4 +100,11 @@ public class CryptUtil
 		return b2;
 	}
 
+	public static void main(String[] args)
+	{
+		String a = encrypt("admin162534");
+		System.out.println(a);
+		String b = decrypt(a);
+		System.out.println(b);
+	}
 }

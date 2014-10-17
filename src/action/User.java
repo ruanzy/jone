@@ -34,11 +34,11 @@ public class User
 		return WebUtil.json("add success");
 	}
 
-	public String del()
+	public Result del()
 	{
 		String ids = WebUtil.getParameter("ids");
 		WebUtil.call("PmsService.deluser", ids);
-		return null;
+		return WebUtil.json("del success");
 	}
 
 	public String active()
