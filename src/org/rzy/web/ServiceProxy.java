@@ -31,7 +31,7 @@ class ServiceProxy
 				result = methodProxy.invokeSuper(obj, args);
 				dao.commit();
 				StringBuffer logs = new StringBuffer();
-				String username = WebUtil.getUser().get("username");
+				String user = WebUtil.getUser();
 				String requestBody = JSON.toJSONString(args);
 				String ip = WebUtil.getIP();
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -39,7 +39,7 @@ class ServiceProxy
 				String pcls = obj.getClass().getSimpleName();
 				String sid = pcls.split("\\$\\$")[0] + "." + method.getName();
 				String op = WebUtil.getOP(sid);
-				logs.append(username).append("|");
+				logs.append(user).append("|");
 				logs.append(ip).append("|");
 				logs.append(time).append("|");
 				logs.append(op).append("|");

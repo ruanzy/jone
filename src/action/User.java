@@ -59,7 +59,7 @@ public class User
 	public Result tosetrole()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", WebUtil.getParameter("id"));
+		map.put("user", WebUtil.getParameter("user"));
 		map.put("roles", WebUtil.call("PmsService.allrole"));
 		return new Ftl("setrole.ftl", map);
 	}
@@ -71,7 +71,7 @@ public class User
 
 	public Result assignedroles()
 	{
-		String user = WebUtil.getParameter("id");
+		String user = WebUtil.getParameter("user");
 		return new Json(WebUtil.call("PmsService.assignedroles", user));
 	}
 

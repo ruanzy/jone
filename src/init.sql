@@ -7,7 +7,7 @@ CREATE TABLE seq (
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
 	id int(11) NOT NULL,
-	username varchar(100) NOT NULL,
+	username varchar(40) NOT NULL,
 	pwd varchar(200) NOT NULL,
 	state char(1) default '1' NOT NULL,
 	regtime varchar(20) NOT NULL
@@ -46,7 +46,7 @@ CREATE TABLE role (
 
 DROP TABLE IF EXISTS userrole;
 CREATE TABLE userrole (
-	userid int(11) NOT NULL,
+	userid varchar(40) NOT NULL,
 	roleid int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

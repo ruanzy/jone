@@ -14,9 +14,9 @@
 </#list>
 </table>
 <script type="text/javascript">
-	var id = jQuery('input[name=user]').val();
+	var user = jQuery('input[name=user]').val();
 	jQuery.ajax({
-		url:'user/assignedroles?id=' + id,
+		url:'user/assignedroles?user=' + user,
 		cache: false,
 		async:false,
 		dataType:'json',

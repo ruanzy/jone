@@ -1,7 +1,6 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.dao.Dao;
@@ -125,12 +124,10 @@ public class PmsService
 		return dao.find(sql, new Object[] { id });
 	}
 
-	public Map<String, Object> login(Map<String, String> map)
+	public Map<String, Object> login(String username, String password)
 	{
 		Map<String, Object> result = null;
 		String sql = "select * from users where username=? and pwd=?";
-		String username = map.get("username");
-		String password = map.get("password");
 		password = CryptUtil.encrypt(username + password);
 		List<Map<String, Object>> list = dao.find(sql, new Object[] { username, password });
 		if (list.size() == 1)
@@ -435,43 +432,11 @@ public class PmsService
 		dao.update(sql3);
 	}
 
-	public Map<String, List<Map<String, Object>>> userres(String user)
+	public List<Map<String, Object>> userres(String user)
 	{
-		Map<String, List<Map<String, Object>>> ret = new HashMap<String, List<Map<String, Object>>>();
-		List<Map<String, Object>> menus = null;
-		List<Map<String, Object>> ops = null;
-		List<Map<String, Object>> res = null;
-		if ("-1".equals(user))
-		{
-			String sql1 = "select * from resources";
-			res = dao.find(sql1);
-		}
-		else
-		{
-			String sql2 = "select * from resources where id in(select distinct resid from roleres where roleid in (select roleid from userrole where userid=?))";
-			Object[] params = new Object[] { user };
-			res = dao.find(sql2, params);
-		}
-		if (res != null)
-		{
-			menus = new ArrayList<Map<String, Object>>();
-			ops = new ArrayList<Map<String, Object>>();
-			for (Map<String, Object> map : res)
-			{
-				String type = String.valueOf(map.get("type"));
-				if ("3".equals(type))
-				{
-					ops.add(map);
-				}
-				else
-				{
-					menus.add(map);
-				}
-			}
-		}
-		ret.put("menus", menus);
-		ret.put("ops", ops);
-		return ret;
+		String sql2 = "select * from resources where id in(select distinct resid from roleres where roleid in (select roleid from userrole where userid=?))";
+		Object[] params = new Object[] { user };
+		return dao.find(sql2, params);
 	}
 
 	public List<Map<String, Object>> dics()

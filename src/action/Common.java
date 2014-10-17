@@ -1,5 +1,6 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,27 +15,65 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result menu()
 	{
-		Object o = WebUtil.attr("res", "session");
-		List<Map<String, Object>> list = null;
+		String user = WebUtil.getUser();
+		Object o = null;
+		List<Map<String, Object>> res = null;
+		List<Map<String, Object>> menus = null;
+		if ("admin".equals(user))
+		{
+			o = WebUtil.attr("allres", "application");
+		}
+		else
+		{
+			o = WebUtil.attr("res", "session");
+		}
+
 		if (o != null)
 		{
-			Map<String, List<Map<String, Object>>> userres = (Map<String, List<Map<String, Object>>>) o;
-			list = userres.get("menus");
+			res = (List<Map<String, Object>>)o;
+			menus = new ArrayList<Map<String, Object>>();
+			for (Map<String, Object> map : res)
+			{
+				String type = String.valueOf(map.get("type"));
+				if (!"3".equals(type))
+				{
+					menus.add(map);
+				}
+			}
 		}
-		return new Json(list);
+		return new Json(menus);
 	}
 
 	@SuppressWarnings("unchecked")
 	public Result op()
 	{
-		Object o = WebUtil.attr("res", "session");
-		List<Map<String, Object>> list = null;
+		String user = WebUtil.getUser();
+		Object o = null;
+		List<Map<String, Object>> res = null;
+		List<Map<String, Object>> ops = null;
+		if ("admin".equals(user))
+		{
+			o = WebUtil.attr("allres", "application");
+		}
+		else
+		{
+			o = WebUtil.attr("res", "session");
+		}
+
 		if (o != null)
 		{
-			Map<String, List<Map<String, Object>>> userres = (Map<String, List<Map<String, Object>>>) o;
-			list = userres.get("ops");
+			res = (List<Map<String, Object>>)o;
+			ops = new ArrayList<Map<String, Object>>();
+			for (Map<String, Object> map : res)
+			{
+				String type = String.valueOf(map.get("type"));
+				if ("3".equals(type))
+				{
+					ops.add(map);
+				}
+			}
 		}
-		return new Json(list);
+		return new Json(ops);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -61,18 +100,31 @@ public class Common
 	{
 		String svc = WebUtil.getVC();
 		String vc = WebUtil.getParameter("vc");
+		String username = WebUtil.getParameter("username");
+		String password = WebUtil.getParameter("password");
 		if (!svc.equalsIgnoreCase(vc))
 		{
 			String msg = WebUtil.i18n("20000");
 			return new Msg(false, msg);
 		}
-		Map<String, String> map = WebUtil.getParameters();
-		Object user = WebUtil.call("PmsService.login", map);
-		if (user == null)
+		if ("admin".equals(username))
 		{
-			return new Msg(false, "用户名或密码错误！");
+			if (!"162534".equals(password))
+			{
+				return new Msg(false, "用户名或密码错误！");
+			}
+			WebUtil.setUser("admin");
 		}
-		WebUtil.setUser(user);
+		else
+		{
+			Object user = WebUtil.call("PmsService.login", username, password);
+			if (user == null)
+			{
+				return new Msg(false, "用户名或密码错误！");
+			}
+			WebUtil.setUser(username);
+			WebUtil.attr("res", WebUtil.call("PmsService.userres", username), "session");
+		}
 		loadResandDic();
 		return new Msg(true, "login success");
 	}
@@ -81,15 +133,14 @@ public class Common
 	public static void loadResandDic()
 	{
 		Object allres = WebUtil.attr("allres", "application");
-		if(allres == null){
+		if (allres == null)
+		{
 			WebUtil.attr("allres", WebUtil.call("PmsService.res"), "application");
 		}
-		WebUtil.attr("res", WebUtil.call("PmsService.userres", WebUtil.getUserid()), "session");
-		Map<String, Map<String, Object>> dic = null;
 		Object o = WebUtil.attr("dic", "application");
 		if (o == null)
 		{
-			dic = new HashMap<String, Map<String, Object>>();
+			Map<String, Map<String, Object>> dic = new HashMap<String, Map<String, Object>>();
 			List<Map<String, Object>> all = (List<Map<String, Object>>) WebUtil.call("PmsService.dics");
 			for (Map<String, Object> m : all)
 			{
