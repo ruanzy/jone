@@ -61,10 +61,14 @@
 				}
 				$(this).data('list', data);				
 				var dh = [];
+				var span = $('<span>');
 				$(data).each(function(i){
-					var a = "<li v='" + this[settings.valueField] + "' _idx=" + i + ">" + this[settings.textField] + "</li>" ;						
+					var txt = this[settings.textField];
+					txt = span.text(txt).html();
+					var a = "<li v='" + this[settings.valueField] + "' _idx=" + i + ">" + txt + "</li>" ;						
 					dh.push(a);
 				});
+				span.remove();
 				var dd = $('dd', this);
 				dd.append(dh.join(''));
 				var dt = $('dt', this);
