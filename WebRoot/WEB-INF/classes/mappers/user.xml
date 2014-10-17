@@ -3,9 +3,6 @@
 	<sql id='count'>
 		select count(*) from users
 		<where>
-			<if test="1==1">
-				id>-1
-			</if>
 			<if test="username != null and username != ''">
 				and username like CONCAT('%',#{username},'%' )
 			</if>
@@ -17,9 +14,6 @@
 	<sql id='selectAll'>
 		select * from users
 		<where>
-			<if test="1==1">
-				id>-1
-			</if>
 			<if test="username != null and username != ''">
 				and username like CONCAT('%',#{username},'%' )
 			</if>
