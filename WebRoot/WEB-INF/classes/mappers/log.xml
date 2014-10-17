@@ -2,11 +2,9 @@
 <sqls>
 	<sql id='count'>
 		select count(*)
-		from log l
-		left join resources r
-		on l.method=r.method
+		from log
 		<where>
-			<if test="operator != null and operator != ''">
+			<if test="operator_text != null and operator_text != ''">
 				and operator=#{operator_text}
 			</if>
 			<if test="time1 != null and time1 != ''">
@@ -18,12 +16,9 @@
 		</where>
 	</sql>
 	<sql id='selectAll'>
-		select l.*,r.name as methodname
-		from log l
-		left join resources r
-		on l.method=r.method
+		select * from log
 		<where>
-			<if test="operator != null and operator != ''">
+			<if test="operator_text != null and operator_text != ''">
 				and operator=#{operator_text}
 			</if>
 			<if test="time1 != null and time1 != ''">

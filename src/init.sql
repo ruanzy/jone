@@ -32,6 +32,7 @@ CREATE TABLE log (
 	operator varchar(20) NOT NULL,
 	ip varchar(40) NOT NULL,
 	time varchar(20) NOT NULL,
+	op varchar(40) NOT NULL,
 	method varchar(40) NOT NULL,
 	result char(1) NOT NULL,
 	memo varchar(1000)

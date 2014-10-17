@@ -38,9 +38,11 @@ class ServiceProxy
 				String time = df.format(new Date());
 				String pcls = obj.getClass().getSimpleName();
 				String sid = pcls.split("\\$\\$")[0] + "." + method.getName();
+				String op = WebUtil.getOP(sid);
 				logs.append(username).append("|");
 				logs.append(ip).append("|");
 				logs.append(time).append("|");
+				logs.append(op).append("|");
 				logs.append(sid).append("|");
 				logs.append(1).append("|");
 				logs.append(requestBody);
@@ -111,14 +113,14 @@ class ServiceProxy
 
 	private static void writeLog(String log)
 	{
-		String sql = "insert into log(id,operator,ip,time,method,result,memo) values(?,?,?,?,?,?,?)";
+		String sql = "insert into log(id,operator,ip,time,op,method,result,memo) values(?,?,?,?,?,?,?,?)";
 		Dao dao = Dao.getInstance();
 		try
 		{
 			dao.begin();
 			int id = dao.getID("log");
 			String[] arr = log.split("\\|");
-			Object[] params = new Object[] { id, arr[0], arr[1], arr[2], arr[3], arr[4], arr[5] };
+			Object[] params = new Object[] { id, arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6] };
 			dao.update(sql, params);
 			dao.commit();
 		}

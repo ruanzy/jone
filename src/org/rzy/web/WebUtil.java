@@ -209,6 +209,20 @@ public class WebUtil
 			return getRequest().getAttribute(key);
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static String getOP(String method)
+	{
+		List<Map<String, Object>> allres = (List<Map<String, Object>>)WebUtil.attr("allres", "application");
+		for (Map<String, Object> map : allres)
+		{
+			String m = String.valueOf(map.get("method"));
+			if(method.equals(m)){
+				return String.valueOf(map.get("name"));
+			}
+		}
+		return null;
+	}
 
 	public static String i18n(String key, Object... args)
 	{

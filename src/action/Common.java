@@ -80,6 +80,10 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public static void loadResandDic()
 	{
+		Object allres = WebUtil.attr("allres", "application");
+		if(allres == null){
+			WebUtil.attr("allres", WebUtil.call("PmsService.res"), "application");
+		}
 		WebUtil.attr("res", WebUtil.call("PmsService.userres", WebUtil.getUserid()), "session");
 		Map<String, Map<String, Object>> dic = null;
 		Object o = WebUtil.attr("dic", "application");
