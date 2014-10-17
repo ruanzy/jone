@@ -63,17 +63,17 @@ public class Common
 		if (!svc.equalsIgnoreCase(vc))
 		{
 			String msg = WebUtil.i18n("20000");
-			return WebUtil.json(msg);
+			return new Json(false, msg);
 		}
 		Map<String, String> map = WebUtil.getParameters();
 		Object user = WebUtil.call("PmsService.login", map);
 		if (user == null)
 		{
-			return WebUtil.json("用户名或密码错误！");
+			return new Json(false, "用户名或密码错误！");
 		}
 		WebUtil.setUser(user);
 		loadResandDic();
-		return WebUtil.json("login success");
+		return new Json(true, "login success");
 	}
 
 	@SuppressWarnings("unchecked")

@@ -40,7 +40,7 @@ $(function() {
 			data : data,
 			dataType : 'json',
 			success : function(result) {
-				if (result.success) {
+				if (result.result) {
 					document.location = './';
 				} else {
 					$('#error').html(result.msg);

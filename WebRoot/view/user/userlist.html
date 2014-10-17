@@ -47,7 +47,8 @@
 			data: params,
 			dataType:'json',
 	        success:function(result){
-	        	if(result.success){
+	        	if(result.result){
+					$.alert({content:result.msg});
 					$('#kkk').table('reload');
 				}
 			}

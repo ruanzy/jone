@@ -18,7 +18,7 @@ public class Dic
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.adddic", map);
-		return WebUtil.json("add success");
+		return new Json(true, "add success");
 	}
 
 	public Result save()
@@ -29,7 +29,7 @@ public class Dic
 		{
 			WebUtil.call("PmsService.adddic", map);
 		}
-		return WebUtil.json("add success");
+		return new Json(true, "add success");
 	}
 
 	public String del()

@@ -16,14 +16,14 @@ public class Res
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.addres", map);
-		return WebUtil.json("增加成功");
+		return new Json(true, "增加成功");
 	}
 
 	public Result del()
 	{
 		String id = WebUtil.getParameter("id");
 		WebUtil.call("PmsService.delres", id);
-		return WebUtil.json("删除成功");
+		return new Json(true, "删除成功");
 	}
 
 	public Result menubymoudle()

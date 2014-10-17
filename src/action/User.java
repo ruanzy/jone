@@ -20,7 +20,7 @@ public class User
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.reg", map);
-		return WebUtil.json("add success");
+		return new Json(true, "add success");
 	}
 
 	public Result save()
@@ -31,14 +31,14 @@ public class User
 		{
 			WebUtil.call("PmsService.reg", map);
 		}
-		return WebUtil.json("add success");
+		return new Json(true, "add success");
 	}
 
 	public Result del()
 	{
 		String ids = WebUtil.getParameter("ids");
 		WebUtil.call("PmsService.deluser", ids);
-		return WebUtil.json("del success");
+		return new Json(true, "del success");
 	}
 
 	public String active()
@@ -79,6 +79,6 @@ public class User
 		String user = WebUtil.getParameter("user");
 		String roles = WebUtil.getParameter("roles");
 		WebUtil.call("PmsService.setrole", user, roles);
-		return WebUtil.json("设置角色ok...");
+		return new Json(true, "设置角色ok...");
 	}
 }

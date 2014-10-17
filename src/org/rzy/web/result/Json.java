@@ -6,13 +6,58 @@ import com.alibaba.fastjson.JSON;
 
 public class Json implements Result
 {
-	Object o;
+	boolean result = true;
 
-	boolean code;
+	String msg;
 
-	public Json(Object o)
+	Object data;
+
+	public boolean isResult()
 	{
-		this.o = o;
+		return result;
+	}
+
+	public void setResult(boolean result)
+	{
+		this.result = result;
+	}
+
+	public String getMsg()
+	{
+		return msg;
+	}
+
+	public void setMsg(String msg)
+	{
+		this.msg = msg;
+	}
+
+	public Object getData()
+	{
+		return data;
+	}
+
+	public void setData(Object data)
+	{
+		this.data = data;
+	}
+
+	public Json(boolean result, String msg, Object data)
+	{
+		this.result = result;
+		this.msg = msg;
+		this.data = data;
+	}
+
+	public Json(boolean result, String msg)
+	{
+		this.result = result;
+		this.msg = msg;
+	}
+
+	public Json(Object data)
+	{
+		this.data = data;
 	}
 
 	public void render()
@@ -20,7 +65,7 @@ public class Json implements Result
 		WebUtil.getResponse().setContentType("text/javascript;charset=UTF-8");
 		try
 		{
-			WebUtil.getResponse().getWriter().print(JSON.toJSONString(o));
+			WebUtil.getResponse().getWriter().print(JSON.toJSONString(this));
 		}
 		catch (Exception e)
 		{

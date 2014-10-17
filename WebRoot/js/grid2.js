@@ -292,7 +292,7 @@
 			data: param,
 			dataType: 'json',
 	        success: function(result){
-	        	ret = result;
+	        	ret = result.data;
 			}
 		});
 		return ret;

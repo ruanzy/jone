@@ -55,7 +55,7 @@
 						async:false,
 						dataType:'json',
 				        success:function(result){
-				        	data = result;
+				        	data = result.data;
 						}
 					});
 				}

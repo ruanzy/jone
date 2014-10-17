@@ -2,7 +2,6 @@ package org.rzy.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -11,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.MethodUtils;
-import org.rzy.web.result.Ftl;
-import org.rzy.web.result.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
@@ -179,19 +176,6 @@ public class WebUtil
 			throw new RuntimeException(e.getMessage(), e.getCause());
 		}
 		return data;
-	}
-
-	public static Json json(String msg)
-	{
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("success", true);
-		result.put("msg", msg);
-		return new Json(result);
-	}
-
-	public static Ftl ftl(String ftl, Map<String, Object> map)
-	{
-		return new Ftl(ftl, map);
 	}
 
 	public static void attr(String key, Object value, String scope)
