@@ -4,7 +4,7 @@
 		select count(*) from users
 		<where>
 			<if test="username != null and username != ''">
-				and username like CONCAT('%',#{username},'%' )
+				and username like CONCAT('%',#{username},'%')
 			</if>
 			<if test="state != null and state != ''">
 				and state=#{state}
@@ -15,7 +15,7 @@
 		select * from users
 		<where>
 			<if test="username != null and username != ''">
-				and username like CONCAT('%',#{username},'%' )
+				and username like CONCAT('%',#{username},'%')
 			</if>
 			<if test="state != null and state != ''">
 				and state=#{state}
