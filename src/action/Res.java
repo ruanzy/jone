@@ -4,6 +4,7 @@ import java.util.Map;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Json;
+import org.rzy.web.result.Msg;
 
 public class Res
 {
@@ -16,14 +17,14 @@ public class Res
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.addres", map);
-		return new Json(true, "增加成功");
+		return new Msg("增加成功");
 	}
 
 	public Result del()
 	{
 		String id = WebUtil.getParameter("id");
 		WebUtil.call("PmsService.delres", id);
-		return new Json(true, "删除成功");
+		return new Msg("删除成功");
 	}
 
 	public Result menubymoudle()

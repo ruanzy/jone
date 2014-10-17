@@ -31,7 +31,7 @@
 						async:false,
 						dataType:'json',
 				        success:function(result){
-				        	data = result.data;
+				        	data = result;
 						}
 					});
 				}else{

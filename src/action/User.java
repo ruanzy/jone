@@ -7,6 +7,7 @@ import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
+import org.rzy.web.result.Msg;
 
 public class User
 {
@@ -20,7 +21,7 @@ public class User
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.reg", map);
-		return new Json(true, "add success");
+		return new Msg("add success");
 	}
 
 	public Result save()
@@ -31,14 +32,14 @@ public class User
 		{
 			WebUtil.call("PmsService.reg", map);
 		}
-		return new Json(true, "add success");
+		return new Msg("add success");
 	}
 
 	public Result del()
 	{
 		String ids = WebUtil.getParameter("ids");
 		WebUtil.call("PmsService.deluser", ids);
-		return new Json(true, "del success");
+		return new Msg("del success");
 	}
 
 	public String active()
@@ -79,6 +80,6 @@ public class User
 		String user = WebUtil.getParameter("user");
 		String roles = WebUtil.getParameter("roles");
 		WebUtil.call("PmsService.setrole", user, roles);
-		return new Json(true, "设置角色ok...");
+		return new Msg("设置角色ok...");
 	}
 }

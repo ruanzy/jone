@@ -5,6 +5,7 @@ import java.util.Map;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Json;
+import org.rzy.web.result.Msg;
 
 public class Role
 {
@@ -20,7 +21,7 @@ public class Role
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		WebUtil.call("PmsService.addrole", map);
-		return new Json(true, "add success");
+		return new Msg("add success");
 	}
 
 	public String del()
@@ -46,6 +47,6 @@ public class Role
 		String role = WebUtil.getParameter("role");
 		String res = WebUtil.getParameter("res");
 		WebUtil.call("PmsService.setres", role, res);
-		return new Json(true, "设置资源ok...");
+		return new Msg("设置资源ok...");
 	}
 }

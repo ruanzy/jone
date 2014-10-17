@@ -473,7 +473,7 @@ function dic(type){
 		data: {"type" : type},
 		dataType: 'json',
         success: function(data){
-        	ret = data.data;
+        	ret = data;
 		}
 	});
 	return ret;

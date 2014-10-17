@@ -7,6 +7,7 @@ import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
+import org.rzy.web.result.Msg;
 
 public class Common
 {
@@ -63,17 +64,17 @@ public class Common
 		if (!svc.equalsIgnoreCase(vc))
 		{
 			String msg = WebUtil.i18n("20000");
-			return new Json(false, msg);
+			return new Msg(false, msg);
 		}
 		Map<String, String> map = WebUtil.getParameters();
 		Object user = WebUtil.call("PmsService.login", map);
 		if (user == null)
 		{
-			return new Json(false, "用户名或密码错误！");
+			return new Msg(false, "用户名或密码错误！");
 		}
 		WebUtil.setUser(user);
 		loadResandDic();
-		return new Json(true, "login success");
+		return new Msg(true, "login success");
 	}
 
 	@SuppressWarnings("unchecked")

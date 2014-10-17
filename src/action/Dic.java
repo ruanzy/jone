@@ -5,6 +5,7 @@ import java.util.Map;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Json;
+import org.rzy.web.result.Msg;
 
 public class Dic
 {
@@ -18,7 +19,7 @@ public class Dic
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("PmsService.adddic", map);
-		return new Json(true, "add success");
+		return new Msg("add success");
 	}
 
 	public Result save()
@@ -29,7 +30,7 @@ public class Dic
 		{
 			WebUtil.call("PmsService.adddic", map);
 		}
-		return new Json(true, "add success");
+		return new Msg("add success");
 	}
 
 	public String del()

@@ -91,7 +91,7 @@
 						async: false,
 						dataType: 'json',
 				        success: function(result){
-				        	ds = p2s(result.data);
+				        	ds = p2s(result);
 						}
 					});
 				}else{
