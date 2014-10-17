@@ -37,7 +37,7 @@
      $('#kkk').table({
 		title:'日志列表',
 		columns:[
-			{header:"ID",field:"id",width:50,align:'center'},
+			//{header:"ID",field:"id",width:50,align:'center'},
 			{header:"操作员",field:"operator",width:'10%'},
 			{header:"时间",field:"time",align:'center',width:180},
 			{header:"IP",field:"ip",align:'center',width:150},
@@ -46,7 +46,7 @@
 			{header:"备注",field:"memo"}
 		],
 		url:'log/list',
-		selector:'m',
+		//selector:'m',
 		condition:condition
 	});
      $('.btn-lightblue').click(function(){
