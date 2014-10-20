@@ -20,7 +20,8 @@ class ServiceProxy
 	static String express = null;
 	static LogHandler logHandler = null;
 	static Map<String, Object> service_cache = new HashMap<String, Object>();
-	static {
+	static
+	{
 		InputStream is = null;
 		Properties prop = new Properties();
 		try
@@ -31,13 +32,13 @@ class ServiceProxy
 				is = new FileInputStream("service.properties");
 			}
 			prop.load(is);
-			express = prop.getProperty("express", "^(add|del|mod|set|reg|active|cancel)");
-			String logHandlerName = prop.getProperty("logHandler", "org.rzy.web.DefaultLogHandler");
-			logHandler = (LogHandler)Class.forName(logHandlerName).newInstance();
+			express = prop.getProperty("express", "^(add|delete|update)");
+			String logHandlerName = prop.getProperty("logHandler");
+			logHandler = (LogHandler) Class.forName(logHandlerName).newInstance();
 		}
 		catch (Exception e)
 		{
-			
+
 		}
 	}
 	static MethodInterceptor interceptor = new MethodInterceptor()
@@ -54,7 +55,10 @@ class ServiceProxy
 				String pcls = obj.getClass().getSimpleName();
 				String sid = pcls.split("\\$\\$")[0] + "." + method.getName();
 				Log log = new Log(sid, args);
-				logHandler.handler(log);
+				if (logHandler != null)
+				{
+					logHandler.handler(log);
+				}
 			}
 			catch (Exception e)
 			{

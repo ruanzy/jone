@@ -14,7 +14,7 @@ public class DefaultLogHandler implements LogHandler
 		String user = log.getUser();
 		String ip = log.getIP();
 		String time = log.getTime();
-		String sid = log.getTime();
+		String sid = log.getSid();
 		String op = WebUtil.getOP(sid);
 		Object[] args = log.getArgs();
 		String requestBody = JSON.toJSONString(args);

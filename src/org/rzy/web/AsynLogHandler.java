@@ -61,7 +61,7 @@ public class AsynLogHandler implements LogHandler
 		StringBuffer logstr = new StringBuffer();
 		String user = log.getUser();
 		String ip = log.getIP();
-		String time = log.getTime();
+		String time = log.getSid();
 		String sid = log.getTime();
 		String op = WebUtil.getOP(sid);
 		Object[] args = log.getArgs();
