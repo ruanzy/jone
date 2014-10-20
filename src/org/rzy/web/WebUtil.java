@@ -2,8 +2,17 @@ package org.rzy.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Map;
+import javassist.ClassClassPath;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.NotFoundException;
+import javassist.bytecode.CodeAttribute;
+import javassist.bytecode.LocalVariableAttribute;
+import javassist.bytecode.MethodInfo;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +31,14 @@ public class WebUtil
 
 	public static Object call(String sid, Object... args)
 	{
+		String className = substringBeforeLast(sid, ".");
+		String methodName = substringAfterLast(sid, ".");
+		String[] parameterNames = getParameterName("service." + className, methodName);
 		StringBuffer sb = new StringBuffer();
 		sb.append("service=").append(sid).append("(");
 		for (int i = 0, len = args.length; i < len; i++)
 		{
-			sb.append("arg" + i);
+			sb.append(parameterNames[i]);
 			if (i != len - 1)
 			{
 				sb.append(",");
@@ -36,11 +48,9 @@ public class WebUtil
 		log.debug(sb.toString());
 		for (int i = 0, len = args.length; i < len; i++)
 		{
-			log.debug("arg" + i + "=" + args[i]);
+			log.debug(parameterNames[i] +"=" + JSON.toJSONString(args[i]));
 		}
 		Object result = null;
-		String className = substringBeforeLast(sid, ".");
-		String methodName = substringAfterLast(sid, ".");
 		try
 		{
 			Object proxy = ServiceProxy.get(className);
@@ -258,5 +268,35 @@ public class WebUtil
 	private static boolean isEmpty(String str)
 	{
 		return (str == null) || (str.length() == 0);
+	}
+
+	private static String[] getParameterName(String cls, String method)
+	{
+		try
+		{
+			ClassPool pool = ClassPool.getDefault();
+			pool.insertClassPath(new ClassClassPath((WebUtil.class)));
+			CtClass cc = pool.get(cls);
+			CtMethod cm = cc.getDeclaredMethod(method);
+			MethodInfo methodInfo = cm.getMethodInfo();
+			CodeAttribute codeAttribute = methodInfo.getCodeAttribute();
+			LocalVariableAttribute attr = (LocalVariableAttribute) codeAttribute
+					.getAttribute(LocalVariableAttribute.tag);
+			if (attr == null)
+			{
+				// exception
+			}
+			String[] paramNames = new String[cm.getParameterTypes().length];
+			int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
+			for (int i = 0; i < paramNames.length; i++)
+				paramNames[i] = attr.variableName(i + pos);
+			return paramNames;
+
+		}
+		catch (NotFoundException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
