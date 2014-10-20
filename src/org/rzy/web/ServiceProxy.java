@@ -1,10 +1,11 @@
 package org.rzy.web;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.regex.Pattern;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
@@ -13,12 +14,32 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.proxy.NoOp;
 import org.rzy.dao.Dao;
-import com.alibaba.fastjson.JSON;
 
 class ServiceProxy
 {
-	static String express = "^(add|del|mod|set|reg|active|cancel)";
+	static String express = null;
+	static LogHandler logHandler = null;
 	static Map<String, Object> service_cache = new HashMap<String, Object>();
+	static {
+		InputStream is = null;
+		Properties prop = new Properties();
+		try
+		{
+			is = ServiceProxy.class.getClassLoader().getResourceAsStream("service.properties");
+			if (is == null)
+			{
+				is = new FileInputStream("service.properties");
+			}
+			prop.load(is);
+			express = prop.getProperty("express", "^(add|del|mod|set|reg|active|cancel)");
+			String logHandlerName = prop.getProperty("logHandler", "org.rzy.web.DefaultLogHandler");
+			logHandler = (LogHandler)Class.forName(logHandlerName).newInstance();
+		}
+		catch (Exception e)
+		{
+			
+		}
+	}
 	static MethodInterceptor interceptor = new MethodInterceptor()
 	{
 		public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
@@ -30,23 +51,10 @@ class ServiceProxy
 				dao.begin();
 				result = methodProxy.invokeSuper(obj, args);
 				dao.commit();
-				StringBuffer logs = new StringBuffer();
-				String user = WebUtil.getUser();
-				String requestBody = JSON.toJSONString(args);
-				String ip = WebUtil.getIP();
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String time = df.format(new Date());
 				String pcls = obj.getClass().getSimpleName();
 				String sid = pcls.split("\\$\\$")[0] + "." + method.getName();
-				String op = WebUtil.getOP(sid);
-				logs.append(user).append("|");
-				logs.append(ip).append("|");
-				logs.append(time).append("|");
-				logs.append(op).append("|");
-				logs.append(sid).append("|");
-				logs.append(1).append("|");
-				logs.append(requestBody);
-				writeLog(logs.toString());
+				Log log = new Log(sid, args);
+				logHandler.handler(log);
 			}
 			catch (Exception e)
 			{
@@ -108,26 +116,6 @@ class ServiceProxy
 		{
 			e.printStackTrace();
 			return null;
-		}
-	}
-
-	private static void writeLog(String log)
-	{
-		String sql = "insert into log(id,operator,ip,time,op,method,result,memo) values(?,?,?,?,?,?,?,?)";
-		Dao dao = Dao.getInstance();
-		try
-		{
-			dao.begin();
-			int id = dao.getID("log");
-			String[] arr = log.split("\\|");
-			Object[] params = new Object[] { id, arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6] };
-			dao.update(sql, params);
-			dao.commit();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			dao.rollback();
 		}
 	}
 }

@@ -31,15 +31,19 @@ public class JOne implements Filter
 		try
 		{
 			long t1 = System.currentTimeMillis();
+			boolean loginpage = Pattern.compile("(login.jsp|.html|.htm*)$").matcher(url).find();
+			boolean extension = url.lastIndexOf(".") != -1;
 			boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(url).find();
-			if (url.indexOf(".") > 0 && !page)
+			if (loginpage || extension && !page)
 			{
 				chain.doFilter(Context.getRequest(), Context.getResponse());
 				return;
 			}
-			// boolean flag =
-			// Pattern.compile("(login.*|common/vc|common/login|common/logout)$").matcher(url).find();
-			// if (!flag)
+			
+			
+			//boolean nologin =
+			//Pattern.compile("(captcha|common/login|common/logout)$").matcher(url).find();
+			// if (!nologin)
 			// {
 			// Object user = request.getSession().getAttribute("user");
 			// if (user == null)
@@ -58,7 +62,7 @@ public class JOne implements Filter
 			// return;
 			// }
 			// }
-			if (url.indexOf(".") > 0)
+			if (page)
 			{
 				chain.doFilter(Context.getRequest(), Context.getResponse());
 				return;
