@@ -1,6 +1,9 @@
-package org.rzy.web;
+package org.rzy.log;
 
 import org.rzy.dao.Dao;
+import org.rzy.web.Log;
+import org.rzy.web.LogHandler;
+import org.rzy.web.WebUtil;
 import com.alibaba.fastjson.JSON;
 
 public class DBLogHandler implements LogHandler

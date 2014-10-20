@@ -1,10 +1,13 @@
-package org.rzy.web;
+package org.rzy.log;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.rzy.dao.Dao;
+import org.rzy.web.Log;
+import org.rzy.web.LogHandler;
+import org.rzy.web.WebUtil;
 import com.alibaba.fastjson.JSON;
 
 public class AsynLogHandler implements LogHandler
