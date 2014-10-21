@@ -53,7 +53,7 @@ public class WebUtil
 		Object result = null;
 		try
 		{
-			Object proxy = ServiceProxy.get(className);
+			Object proxy = ServiceProxy.get("service." + className);
 			result = MethodUtils.invokeMethod(proxy, methodName, args);
 		}
 		catch (Exception e)

@@ -3,8 +3,6 @@ package org.rzy.web;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import net.sf.cglib.proxy.Callback;
@@ -19,7 +17,6 @@ class ServiceProxy
 {
 	static String express = null;
 	static LogHandler logHandler = null;
-	static Map<String, Object> service_cache = new HashMap<String, Object>();
 	static
 	{
 		InputStream is = null;
@@ -77,44 +74,16 @@ class ServiceProxy
 		}
 	};
 
-	@SuppressWarnings("unchecked")
-	public static <T> T get(Class<T> cls)
-	{
-		try
-		{
-			Enhancer en = new Enhancer();
-			en.setSuperclass(cls);
-			en.setCallbacks(new Callback[] { interceptor, NoOp.INSTANCE });
-			en.setCallbackFilter(filter);
-			return (T) en.create();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	public static Object get(String className)
 	{
 		try
 		{
-			String key = "service." + className;
-			if (!service_cache.containsKey(key))
-			{
-				Class<?> cls = Class.forName(key);
-				Enhancer en = new Enhancer();
-				en.setSuperclass(cls);
-				en.setCallbacks(new Callback[] { interceptor, NoOp.INSTANCE });
-				en.setCallbackFilter(filter);
-				Object obj = en.create();
-				service_cache.put(key, obj);
-				return obj;
-			}
-			else
-			{
-				return service_cache.get(key);
-			}
+			Class<?> cls = Class.forName(className);
+			Enhancer en = new Enhancer();
+			en.setSuperclass(cls);
+			en.setCallbacks(new Callback[] { interceptor, NoOp.INSTANCE });
+			en.setCallbackFilter(filter);
+			return en.create();
 		}
 		catch (Exception e)
 		{
