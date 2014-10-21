@@ -99,11 +99,11 @@ public class JOne implements Filter
 		{
 			if (e instanceof ClassNotFoundException)
 			{
-				log.debug(e.getMessage() + " Not Found.");
+				e.printStackTrace();
 			}
 			else if (e instanceof NoSuchMethodException)
 			{
-				log.debug(e.getMessage());
+				e.printStackTrace();
 			}
 			else if (e instanceof InvocationTargetException)
 			{
