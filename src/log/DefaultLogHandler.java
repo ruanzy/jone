@@ -1,4 +1,4 @@
-package org.rzy.log;
+package log;
 
 import org.rzy.web.Log;
 import org.rzy.web.LogHandler;
