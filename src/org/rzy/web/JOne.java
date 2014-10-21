@@ -97,9 +97,10 @@ public class JOne implements Filter
 				String path = result.toString();
 				if (path.startsWith("redirect:"))
 				{
+					path = path.substring(9);
 					String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 							+ request.getServerPort() + request.getContextPath() + "/";
-					response.sendRedirect(basePath + url);
+					response.sendRedirect(basePath + path);
 				}
 				else
 				{
