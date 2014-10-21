@@ -2,7 +2,6 @@ package log;
 
 import org.rzy.web.Log;
 import org.rzy.web.LogHandler;
-import org.rzy.web.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
@@ -18,7 +17,7 @@ public class DefaultLogHandler implements LogHandler
 		String ip = log.getIP();
 		String time = log.getTime();
 		String sid = log.getSid();
-		String op = WebUtil.getOP(sid);
+		String op = Util.getOP(sid);
 		Object[] args = log.getArgs();
 		String requestBody = JSON.toJSONString(args);
 		logs.append(user).append("|");

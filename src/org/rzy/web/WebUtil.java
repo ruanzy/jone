@@ -28,12 +28,14 @@ public class WebUtil
 {
 
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
+	static String pck = "service";
 
 	public static Object call(String sid, Object... args)
 	{
 		String className = substringBeforeLast(sid, ".");
 		String methodName = substringAfterLast(sid, ".");
-		String[] parameterNames = getParameterName("service." + className, methodName);
+		String fullName = pck + className;
+		String[] parameterNames = getParameterName(fullName, methodName);
 		StringBuffer sb = new StringBuffer();
 		sb.append("service=").append(sid).append("(");
 		for (int i = 0, len = args.length; i < len; i++)
@@ -53,7 +55,7 @@ public class WebUtil
 		Object result = null;
 		try
 		{
-			Object proxy = ServiceProxy.get("service." + className);
+			Object proxy = ServiceProxy.get(fullName);
 			result = MethodUtils.invokeMethod(proxy, methodName, args);
 		}
 		catch (Exception e)
@@ -211,21 +213,6 @@ public class WebUtil
 		{
 			return getRequest().getAttribute(key);
 		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public static String getOP(String method)
-	{
-		List<Map<String, Object>> allres = (List<Map<String, Object>>) WebUtil.attr("allres", "application");
-		for (Map<String, Object> map : allres)
-		{
-			String m = String.valueOf(map.get("method"));
-			if (method.equals(m))
-			{
-				return String.valueOf(map.get("name"));
-			}
-		}
-		return null;
 	}
 
 	public static String i18n(String key, Object... args)

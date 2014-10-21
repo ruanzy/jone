@@ -3,7 +3,6 @@ package log;
 import org.rzy.dao.Dao;
 import org.rzy.web.Log;
 import org.rzy.web.LogHandler;
-import org.rzy.web.WebUtil;
 import com.alibaba.fastjson.JSON;
 
 public class DBLogHandler implements LogHandler
@@ -15,7 +14,7 @@ public class DBLogHandler implements LogHandler
 		String ip = log.getIP();
 		String time = log.getTime();
 		String sid = log.getSid();
-		String op = WebUtil.getOP(sid);
+		String op = Util.getOP(sid);
 		Object[] args = log.getArgs();
 		String requestBody = JSON.toJSONString(args);
 		String sql = "insert into log(id,operator,ip,time,op,method,result,memo) values(?,?,?,?,?,?,?,?)";

@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import org.rzy.dao.Dao;
 import org.rzy.web.Log;
 import org.rzy.web.LogHandler;
-import org.rzy.web.WebUtil;
 import com.alibaba.fastjson.JSON;
 
 public class AsynLogHandler implements LogHandler
@@ -66,7 +65,7 @@ public class AsynLogHandler implements LogHandler
 		String ip = log.getIP();
 		String time = log.getSid();
 		String sid = log.getTime();
-		String op = WebUtil.getOP(sid);
+		String op = Util.getOP(sid);
 		Object[] args = log.getArgs();
 		String requestBody = JSON.toJSONString(args);
 		logstr.append(user).append("|");
