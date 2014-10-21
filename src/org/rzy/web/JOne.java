@@ -95,7 +95,7 @@ public class JOne implements Filter
 			if (result instanceof String)
 			{
 				String path = result.toString();
-				if ("redirect:".startsWith(path))
+				if (path.startsWith("redirect:"))
 				{
 					String basePath = request.getScheme() + "://" + request.getServerName() + ":"
 							+ request.getServerPort() + request.getContextPath() + "/";
