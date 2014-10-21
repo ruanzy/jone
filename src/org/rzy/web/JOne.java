@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -90,6 +91,11 @@ public class JOne implements Filter
 			if (result instanceof Result)
 			{
 				((Result) result).render();
+			}
+			if (result instanceof String)
+			{
+				RequestDispatcher rd = request.getRequestDispatcher(url);
+				rd.forward(request, response);
 			}
 			long t2 = System.currentTimeMillis();
 			log.debug("time=" + (t2 - t1) + "ms");
