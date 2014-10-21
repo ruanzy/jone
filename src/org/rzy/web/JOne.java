@@ -94,8 +94,18 @@ public class JOne implements Filter
 			}
 			if (result instanceof String)
 			{
-				RequestDispatcher rd = request.getRequestDispatcher(url);
-				rd.forward(request, response);
+				String path = result.toString();
+				if ("redirect:".startsWith(path))
+				{
+					String basePath = request.getScheme() + "://" + request.getServerName() + ":"
+							+ request.getServerPort() + request.getContextPath() + "/";
+					response.sendRedirect(basePath + url);
+				}
+				else
+				{
+					RequestDispatcher rd = request.getRequestDispatcher(path);
+					rd.forward(request, response);
+				}
 			}
 			long t2 = System.currentTimeMillis();
 			log.debug("time=" + (t2 - t1) + "ms");
