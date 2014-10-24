@@ -2,7 +2,6 @@ package org.rzy.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,7 +12,6 @@ import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 
 public class WebUtil
 {
@@ -155,22 +153,6 @@ public class WebUtil
 	public static String getVC()
 	{
 		return (String) getSession().getAttribute("vc");
-	}
-
-	public static List<Map<String, Object>> toList(String str)
-	{
-		List<Map<String, Object>> data = null;
-		try
-		{
-			data = JSON.parseObject(str, new TypeReference<List<Map<String, Object>>>()
-			{
-			});
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException(e.getMessage(), e.getCause());
-		}
-		return data;
 	}
 
 	public static void attr(String key, Object value, String scope)

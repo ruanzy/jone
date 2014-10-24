@@ -2,6 +2,7 @@ package action;
 
 import java.util.List;
 import java.util.Map;
+import org.rzy.util.JSONUtil;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Json;
@@ -25,7 +26,7 @@ public class Dic
 	public Result save()
 	{
 		String data = WebUtil.getParameter("data");
-		List<Map<String, Object>> list = WebUtil.toList(data);
+		List<Map<String, Object>> list = JSONUtil.toList(data);
 		for (Map<String, Object> map : list)
 		{
 			WebUtil.call("PmsService.adddic", map);
