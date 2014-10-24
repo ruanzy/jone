@@ -187,11 +187,6 @@ public class WebUtil
 		}
 	}
 
-	public static String i18n(String key, Object... args)
-	{
-		return I18N.get(key, args);
-	}
-
 	private static String substringBeforeLast(String str, String separator)
 	{
 		if ((isEmpty(str)) || (isEmpty(separator)))

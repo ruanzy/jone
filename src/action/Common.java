@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.rzy.web.I18N;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
@@ -104,7 +105,7 @@ public class Common
 		String password = WebUtil.getParameter("password");
 		if (!svc.equalsIgnoreCase(vc))
 		{
-			String msg = WebUtil.i18n("20000");
+			String msg = I18N.get("20000");
 			return new Msg(false, msg);
 		}
 		if ("admin".equals(username))
