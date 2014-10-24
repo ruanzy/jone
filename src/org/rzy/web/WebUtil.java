@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSON;
 
 public class WebUtil
 {
-
+	final static String USERKEY = "USER";
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
 	static String pck = "service";
 
@@ -132,12 +132,13 @@ public class WebUtil
 
 	public static String getUser()
 	{
-		return String.valueOf(getSession().getAttribute("user"));
+		Object user = getSession().getAttribute(USERKEY);
+		return user == null ? null : String.valueOf(user);
 	}
 
 	public static void setUser(String user)
 	{
-		getSession().setAttribute("user", user);
+		getSession().setAttribute(USERKEY, user);
 	}
 
 	public static String getIP()
