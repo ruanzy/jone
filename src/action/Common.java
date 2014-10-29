@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.rzy.util.UploadUtil;
 import org.rzy.web.I18N;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
@@ -31,7 +32,7 @@ public class Common
 
 		if (o != null)
 		{
-			res = (List<Map<String, Object>>)o;
+			res = (List<Map<String, Object>>) o;
 			menus = new ArrayList<Map<String, Object>>();
 			for (Map<String, Object> map : res)
 			{
@@ -63,7 +64,7 @@ public class Common
 
 		if (o != null)
 		{
-			res = (List<Map<String, Object>>)o;
+			res = (List<Map<String, Object>>) o;
 			ops = new ArrayList<Map<String, Object>>();
 			for (Map<String, Object> map : res)
 			{
@@ -170,5 +171,11 @@ public class Common
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", WebUtil.getParameter("id"));
 		return new Ftl("welcome.ftl", map);
+	}
+
+	public void upload()
+	{
+        String path = "d:/upload/";
+        UploadUtil.upload(path);
 	}
 }

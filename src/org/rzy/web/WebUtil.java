@@ -23,7 +23,7 @@ public class WebUtil
 	{
 		String className = substringBeforeLast(sid, ".");
 		String methodName = substringAfterLast(sid, ".");
-		String fullName = pck + className;
+		String fullName = pck + "." + className;
 		StringBuffer sb = new StringBuffer();
 		sb.append("service=").append(sid).append("(");
 		for (int i = 0, len = args.length; i < len; i++)
