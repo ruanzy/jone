@@ -16,10 +16,11 @@
 </head>
 <body>
     <!-- 这里我们只使用最基本的html结构：一个选择文件的按钮，一个开始上传文件的按钮(甚至该按钮也可以不要) -->
-    <p>
+    <form>
+    	<input name='flag' type="text"/>
         <button id="browse">选择文件</button>
         <button id="start_upload">开始上传</button>
-    </p>
+    </form>
     
     		<ul id="file-list">
 
@@ -29,7 +30,8 @@
     //实例化一个plupload上传对象
     var uploader = new plupload.Uploader({
         browse_button : 'browse', //触发文件选择对话框的按钮，为那个元素id
-        url : 'common/upload', //服务器端的上传页面地址
+        url : 'common/upload2', //服务器端的上传页面地址
+        headers:{flag:'asd',id:'12345'},
         flash_swf_url : 'js/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
         silverlight_xap_url : 'js/Moxie.xap' //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
     });    
@@ -57,6 +59,27 @@
 	//上传按钮
 	$('#start_upload').click(function(){
 		uploader.start(); //开始上传
+	});
+	
+		$('form').submit(function(e) {
+		
+
+		// Validate number of uploaded files
+		if (uploader.total.uploaded == 0) {
+			// Files in queue upload them first
+			if (uploader.files.length > 0) {
+				// When all files are uploaded submit form
+				uploader.bind('UploadProgress', function() {
+					if (uploader.total.uploaded == uploader.files.length)
+						$('form').submit();
+				});
+
+				uploader.start();
+			} else
+				alert('You must at least upload one file.');
+
+			e.preventDefault();
+		}
 	});
 
     </script>

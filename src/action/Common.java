@@ -178,4 +178,12 @@ public class Common
         String path = "d:/upload/";
         UploadUtil.upload(path);
 	}
+	
+	public void upload2()
+	{
+        String path = "d:/upload/";
+        String flag = WebUtil.getHeader("flag");
+        String id = WebUtil.getHeader("id");
+        UploadUtil.upload(path);
+	}
 }

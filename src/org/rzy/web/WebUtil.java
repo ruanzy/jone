@@ -101,6 +101,11 @@ public class WebUtil
 	{
 		return getRequest().getParameter(name);
 	}
+	
+	public static String getHeader(String name)
+	{
+		return getRequest().getHeader(name);
+	}
 
 	public static void redirect(String url)
 	{
