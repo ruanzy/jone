@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.rzy.util.UploadUtil;
+import org.apache.commons.fileupload.FileItem;
+import org.rzy.util.Uploader;
 import org.rzy.web.I18N;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
@@ -175,15 +176,11 @@ public class Common
 
 	public void upload()
 	{
-        String path = "d:/upload/";
-        UploadUtil.upload(path);
-	}
-	
-	public void upload2()
-	{
-        String path = "d:/upload/";
-        String flag = WebUtil.getHeader("flag");
-        String id = WebUtil.getHeader("id");
-        UploadUtil.upload(path);
+		String path = "d:/upload/";
+		Uploader uploader = Uploader.prepare();
+		Map<String, String> parameters = uploader.getParameters();
+		List<FileItem> items = uploader.getItems();
+		String flag = parameters.get("flag");
+		String id = parameters.get("id");
 	}
 }
