@@ -22,6 +22,7 @@ $(function() {
 		}
 	});
 	$("#username").focus();
+	$("#username").Tip({mode : 'focus', content : 'asdhg'});
 	$('#vc').css('border', '1px solid #999');
 	changeVC();
 	$('#vc').click(changeVC);

@@ -1,17 +1,17 @@
-.r-tip{position: absolute;padding: 6px 10px 5px;*padding: 7px 10px 4px;line-height: 16px;color: #DB7C22;background-color: #FFFCEF;border: solid 1px #FFBB76;box-shadow: 0 0 3px #ddd;width:200px;}
-.r-tip-arrow{position: absolute;overflow: hidden;font-style: normal;font-family: simsun;text-shadow:0 0 2px #ccc;}
+.r-tip{position: absolute;padding-top:8px;line-height: 16px;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 0px;z-index:10000;}
+.r-tip-arrow{position: absolute;overflow: hidden;font-style: normal;font-family: simsun;}
 .r-tip-arrow em,.r-tip-arrow i{position: absolute;left:0;top:0;font-style: normal;}
-.r-tip-arrow em{color: #FFBB76;}
-.r-tip-arrow i{color: #FFFCEF;text-shadow:none;}
-.r-tip-arrow-top,.r-tip-arrow-bottom{height: 18px;width: 16px;left:10%;margin-left:-8px;}
+.r-tip-arrow em{color: rgba(0, 0, 0, 0.2);font-size:32px;}
+.r-tip-arrow i{color: #fff;text-shadow:none;font-size:32px;}
+.r-tip-arrow-top,.r-tip-arrow-bottom{height: 18px;width: 16px;left:10%;}
 .r-tip-arrow-left,.r-tip-arrow-right{height: 18px;width: 16px;top: 30%;margin-top:-6px;}
-.r-tip-arrow-top{top: -8px;}
+.r-tip-arrow-top{top: -9px;}
 .r-tip-arrow-top em{top: 0px;}
 .r-tip-arrow-top i{top: 2px;}
 .r-tip-arrow-bottom{bottom: -18px;}
 .r-tip-arrow-bottom em{top: -6px;}
 .r-tip-arrow-bottom i{top: -8px;}
-.r-tip-arrow-left{left:-10px;}
+.r-tip-arrow-left{left:-9px;}
 .r-tip-arrow-left em{left:1px;}
 .r-tip-arrow-left i{left:3px;}
 .r-tip-arrow-right{right:-11px;}

@@ -9,7 +9,7 @@ $(function() {
 	 * $('#center').Tabs(); $('#center').Tabs('add', { title : '欢迎使用', url :
 	 * 'welcome.jsp' });
 	 **************************************************************************/
-	$('#info').bind(
+	/**$('#info').bind(
 			'click',
 			function(e) {
 				e.preventDefault();
@@ -34,7 +34,50 @@ $(function() {
 				$(document).click(function() {
 					$.dropdown.close();
 				});
-			});
+			});**/
+	var items = [ {
+		icon : 'icon-cog',
+		text : '设置'
+	}, {
+		icon : 'icon-user',
+		text : '个人资料'
+	}, '-', {
+		icon : 'icon-off',
+		text : '退出',
+		url : 'common/logout'
+	} ];
+	var content = [];
+	content.push('<ul class=r-dropdown>');
+	for(var k in items){
+		if(items[k] === '-'){
+			content.push("<li class='divider'></li>");
+		}else{
+			var icon = items[k].icon||'';
+			var text = items[k].text||'';
+			var url = items[k].url;
+			var action = items[k].action;
+			var tag = "<li><a";
+			if(url&&!action){
+				tag += " href='" + url + "'";
+			}
+			tag += "><i class='" + icon + "'></i><span style='padding-left:8px;'>" + text + "</span></a></li>";
+			content.push(tag);
+			/**var row = $(tag).appendTo(ul);	
+			if(action){									
+				row.find('a').click(function(e){
+					e.preventDefault();
+					e.stopPropagation();
+					action();
+					$.dropdown.close();
+				});
+			}**/				
+		}
+	}
+	content.push('</ul>');
+	$('#info').Tip({
+		pos:'b',
+		content:content.join('')
+	});
 	$('#dd').toggle(function(e) {
 		$('#sidebar').css('width', 40);
 		$('#center').css('marginLeft', 40);

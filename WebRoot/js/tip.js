@@ -11,64 +11,82 @@
 	};
 	$.fn.Tip.defaults = {
 		pos : 'r',
-		width : 200,
+		width : 120,
+		mode : 'hover',
 		content : 'Hi，知道吗？ <br>CSS常用浮出提示层对三角的写法！'
 	};
 	$.fn.Tip.methods = {
 		init : function(options) {
-			var settings = $.extend({}, $.fn.Tip.defaults, options);
+			var opts = $.extend({}, $.fn.Tip.defaults, options);
 			return this
 					.each(function() {
-						var offset = this.offset();
-						var h1 = this.outerHeight();
-						var w1 = this.outerWidth();
+						var me = $(this).css({position:'relative'});
+						var offset = me.offset();
+						var h1 = me.outerHeight();
+						var w1 = me.outerWidth();
+						var padding = parseInt(me.attr('padding'));
 						var t = offset.top;
 						var l = offset.left;
 						var css = 'r-tip-arrow-left';
-						if (cfg.pos == 't') {
+						var pos = opts.pos;
+						if (pos == 't') {
 							css = 'r-tip-arrow-bottom';
 						}
-						if (cfg.pos == 'r') {
+						if (pos == 'r') {
 							css = 'r-tip-arrow-left';
 						}
-						if (cfg.pos == 'b') {
+						if (pos == 'b') {
 							css = 'r-tip-arrow-top';
 						}
-						if (cfg.pos == 'l') {
+						if (pos == 'l') {
 							css = 'r-tip-arrow-right';
 						}
 						var span = '<span class="r-tip-arrow '
 								+ css
 								+ '"><em>&#9670;</em><i>&#9670;</i></span><span class="r-tip-content">'
-								+ cfg.content + '</span>';
+								+ opts.content + '</span>';
 						var tip = $('<div/>').addClass('r-tip')
-								.width(cfg.width).append(span).appendTo('body')
-								.hide();
+								.width(opts.width).append(span).appendTo(me);//.hide();
 						var h2 = tip.outerHeight();
 						var w2 = tip.outerWidth();
-						if (cfg.pos == 't') {
+						if (pos == 't') {
 							t = t - h2 - 8;
 						}
-						if (cfg.pos == 'r') {
+						if (pos == 'r') {
 							l = l + w1 + 8;
 						}
-						if (cfg.pos == 'b') {
-							t = t + h1 + 8;
+						if (pos == 'b') {
+							t = h1 + 8;
+							l = 0;
 						}
-						if (cfg.pos == 'l') {
+						if (pos == 'l') {
 							l = l - w2 - 8;
 						}
 						tip.css({
 							top : t,
 							left : l
 						});
-						this.focus(function(e) {
-							e.stopPropagation();
-							tip.fadeIn('slow');
-						}).blur(function(e) {
-							e.stopPropagation();
-							// tip.fadeOut('slow');
-						});
+						var mode = opts.mode;
+						if (mode == 'hover') {
+							me.bind('mouseenter', function(e) {
+								e.stopPropagation();
+								tip.show();
+							});
+							me.bind('mouseleave', function(e) {
+								e.stopPropagation();
+								tip.hide();
+							});
+						}
+						if (mode == 'click') {
+							me.bind('click', function(e) {
+								//e.stopPropagation();
+								tip.fadeIn('slow');
+							});
+							me.bind('blur', function(e) {
+								//e.stopPropagation();
+								tip.fadeOut('slow');
+							});
+						}
 					});
 		}
 	};

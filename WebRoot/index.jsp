@@ -23,8 +23,10 @@
 	<link rel="stylesheet" type="text/css" href="css/res.css" />
 	<link rel="stylesheet" type="text/css" href="css/ac.css" />
 	<link rel="stylesheet" type="text/css" href="css/au.css" />
+	<link rel="stylesheet" type="text/css" href="css/tip.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/box.js"></script>
+	<script type="text/javascript" src="js/tip.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
 	<script type="text/javascript" src="js/sidebar.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
