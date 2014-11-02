@@ -40,12 +40,25 @@ $(function() {
 		text : '设置'
 	}, {
 		icon : 'icon-user',
-		text : '个人资料'
+		text : '个人资料',
+		action : info
 	}, '-', {
 		icon : 'icon-off',
 		text : '退出',
-		url : 'common/logout'
+		action : logout
 	} ];
+	
+	function info(){
+		$.dialog({
+			title:'asd',
+			width: 800,
+			height:390,
+			url:'view/income/list.html'
+		});
+	}
+	function logout(){
+		document.location = 'common/logout';
+	}
 	var content = [];
 	content.push('<ul class=r-dropdown>');
 	for(var k in items){

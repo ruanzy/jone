@@ -35,14 +35,36 @@
 							var action = items[k].action;
 							var str = "<div class='item'><a";
 							if(url&&!action){
-								str += " href='" + url + "'";
+								str += " href='javascript:" + url + "'";
 							}
 							str += "><i class='" + icon + "'></i><span style='padding-left:8px;'>" + text + "</span></a></div>";
 							html.push(str);
 						}
 					}
 					dd.html(html.join(''));
-				}
+					
+					for(var k in items){
+						if(items[k] === '-'){
+							continue;
+						}else{
+							var action = items[k].action;
+							if(action){
+								var div = $('div:nth(' + k + ')', dd);
+								div.click(function(e){
+									e.preventDefault();
+									e.stopPropagation();
+									action();
+								});
+							}
+							var str = "<div class='item'><a";
+							if(url&&!action){
+								str += " href='javascript:" + url + "'";
+							}
+							str += "><i class='" + icon + "'></i><span style='padding-left:8px;'>" + text + "</span></a></div>";
+							html.push(str);
+						}
+					}
+				}	
 				dt.click(function(e){
 					//var t = e.target;
 					//if(t.tagName == 'DT'){
