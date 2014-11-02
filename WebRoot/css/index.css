@@ -51,7 +51,7 @@ body,button,input,table {
 	padding: 0;
 }
 
-#head-right ul li {
+#head-right .headitem {
 	line-height: 45px;
 	height: 45px;
 	border-left: 1px solid #DDD;
@@ -60,12 +60,6 @@ body,button,input,table {
 	float: left !important;
 	list-style: none;
 	cursor: pointer;
-}
-
-#head-right ul li a {
-	display: block;
-	height: 45px;
-	padding: 0 5px;
 }
 
 .purple {

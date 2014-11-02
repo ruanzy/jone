@@ -68,7 +68,7 @@
 				}else{
 					H = el.height() - headers.size()*(headers.outerHeight());
 				}
-				var H = $(window).height()-$('#head').outerHeight()-42 - headers.size()*(headers.outerHeight()) -2;
+				var H = $(window).height()-$('#head').outerHeight() - headers.size()*(headers.outerHeight()) -2;
 				headers.next('.body').height(H).hide();
 				headers.click(function(){
 					$('.ddd', el).removeClass('ddd').next('.body').hide();
@@ -79,7 +79,7 @@
 				$('ul.body li', el).click(function(){
 					var url = $(this).attr('url');
 					var title = $(this).text();
-					$('#pill').html("<i class='icon-home'></i> " + title);
+					$('#nav').html("<i class='icon-home'></i> " + title);
 					$('#main').load(url + '?_=' + new Date().getTime(), function(){
 						permit('#main');
 					});

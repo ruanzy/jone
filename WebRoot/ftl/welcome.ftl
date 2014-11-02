@@ -21,6 +21,7 @@
 	如果你对该系统采用的技术感兴趣，请联系我。后续我们会不断重构代码重构。
 </pre>
 			<button type="button" onclick="a()">保存</button>
+			
 			<script type="text/javascript">
 			function a(){
 			$.dialog({

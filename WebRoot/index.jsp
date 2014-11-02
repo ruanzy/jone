@@ -24,6 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/ac.css" />
 	<link rel="stylesheet" type="text/css" href="css/au.css" />
 	<link rel="stylesheet" type="text/css" href="css/tip.css" />
+	<link rel="stylesheet" type="text/css" href="css/down.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/box.js"></script>
 	<script type="text/javascript" src="js/tip.js"></script>
@@ -39,6 +40,7 @@
 	<script type="text/javascript" src="js/tree.js"></script>
 	<script type="text/javascript" src="js/grid2.js"></script>
 	<script type="text/javascript" src="js/checkboxlist.js"></script>
+	<script type="text/javascript" src="js/down.js"></script>
 </head>
 <BODY>
 	<div id="head" class="station-icon">
@@ -47,42 +49,27 @@
 		</div>
 		<div id="head-right">
 			<ul>
-				<li class='light-blue'><a id='info'><i class="icon-user"></i>
-						欢迎您,admin <i class="icon-angle-down"></i>
-				</a>
+				<li class='headitem light-blue'>
+				<dl id='asd' class='rzy-sidedown'><dt><i class="icon-user"></i>欢迎您,admin <i class="icon-angle-down"></i></dt><dd></dd></dl>
 				</li>
-				<li class='purple'><a><i class="icon-envelope"></i> 信息</a>
+				<li class='headitem purple'><a><i class="icon-envelope"></i> 信息</a>
 				</li>
-				<li class='green'><a><i class="icon-bell"></i> 更换样式</a>
+				<li class='headitem green'><a><i class="icon-bell"></i> 更换样式</a>
 				</li>
 			</ul>
 		</div>
 	</div>
 	<div id="sidebar">
-		<ul class="nav nav-list">
-			<li>
-
-
-				<button class="btn btn-success">
-					<i class="icon-signal"></i>
-				</button>
-
-				<button class="btn btn-info">
-					<i class="icon-pencil"></i>
-				</button>
-
-				<button id='dd1' class="btn btn-danger">
-					<i class="icon-double-angle-left"></i>
-				</button></li>
-		</ul>
 		<div id="west"></div>
-	</div>
-	<div id="toggle">
-		<i class='icon-caret-left icon-2x danger'></i>
 	</div>
 	<div id="center">
 		<div id="pill">
+		<a id='dd1' class="btn btn-danger">
+			<i class="icon-double-angle-left"></i>
+		</a>
+		<span id='nav'>
 			<i class='icon-home'></i> 欢迎您
+		</span>
 		</div>
 		<div id="main"
 			style='padding:30px;border:0px solid red;overflow: auto;'></div>

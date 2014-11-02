@@ -74,9 +74,8 @@ $(function() {
 		}
 	}
 	content.push('</ul>');
-	$('#info').Tip({
-		pos:'b',
-		content:content.join('')
+	$('#asd').SideDown({
+		items:items
 	});
 	$('#dd').toggle(function(e) {
 		$('#sidebar').css('width', 40);
@@ -101,4 +100,17 @@ $(function() {
 						'icon-caret-left');
 				$('#center').css('marginLeft', 190);
 			});
+	
+	$('#dd1').toggle(
+			function(e) {
+				$('#sidebar').hide();
+				$('#center').css('marginLeft', 0);
+				$('i', this).removeClass().addClass("icon-double-angle-right");
+			},
+			function(e) {
+				$('#sidebar').show();
+				$('#center').css('marginLeft', 190);
+				$('i', this).removeClass().addClass("icon-double-angle-right");
+			}
+	);
 });

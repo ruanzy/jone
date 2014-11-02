@@ -45,8 +45,7 @@
 								+ css
 								+ '"><em>&#9670;</em><i>&#9670;</i></span><span class="r-tip-content">'
 								+ opts.content + '</span>';
-						var tip = $('<div/>').addClass('r-tip')
-								.width(opts.width).append(span).appendTo(me);//.hide();
+						var tip = $('<div><div class=r-tip>' + span + '</div></div>').appendTo(me);//.hide();
 						var h2 = tip.outerHeight();
 						var w2 = tip.outerWidth();
 						if (pos == 't') {
@@ -74,7 +73,7 @@
 							});
 							me.bind('mouseleave', function(e) {
 								e.stopPropagation();
-								tip.hide();
+								//tip.hide();
 							});
 						}
 						if (mode == 'click') {

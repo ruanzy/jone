@@ -1,0 +1,56 @@
+.rzy-sidedown {
+	float: left;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	border: 0px solid #CFCFCF;
+}
+
+.rzy-sidedown dt {
+	text-align: center;
+	vertical-align: middle;
+	padding: 0 26px 2px 0;
+}
+
+.rzy-sidedown dd {
+	position: absolute;
+	z-index: 100;
+	-webkit-box-shadow: 0 2px 6px #CCC;
+	-moz-box-shadow: 0 2px 6px #ccc;
+	-ms-box-shadow: 0 2px 6px #ccc;
+	box-shadow: 0 2px 6px #CCC;
+	left: -1px;
+	border: 1px solid #CFCFCF;
+	border-top: 0;
+	background-color: white;
+	width: 100%;
+	display: none;
+	margin: 0;
+}
+
+.rzy-sidedown .item {
+	line-height: 30px;
+	font-size: 12px;
+	height: 30px;
+}
+
+.rzy-sidedown .item a {
+	display: block;
+	padding-left: 6px;
+	height: 30px;
+	line-height: 30px;
+	text-decoration: none;
+	color: #000;
+}
+
+.rzy-sidedown .item a:hover {
+	background-color: #007EAD;
+	color: white;
+}
+
+.divider {
+	height: 1px;
+	margin: 5px 0;
+	overflow: hidden;
+	background-color: #e5e5e5;
+}

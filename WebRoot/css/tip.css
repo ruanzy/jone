@@ -1,5 +1,5 @@
 .r-tip{position: absolute;padding-top:8px;line-height: 16px;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 0px;z-index:10000;}
-.r-tip-arrow{position: absolute;overflow: hidden;font-style: normal;font-family: simsun;}
+.r-tip-arrow{position: absolute;overflow: hidden;font-style: normal;font-family: simsun;width: 100%;}
 .r-tip-arrow em,.r-tip-arrow i{position: absolute;left:0;top:0;font-style: normal;}
 .r-tip-arrow em{color: rgba(0, 0, 0, 0.2);font-size:32px;}
 .r-tip-arrow i{color: #fff;text-shadow:none;font-size:32px;}
