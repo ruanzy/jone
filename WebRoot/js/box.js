@@ -10,7 +10,8 @@
 			title : 'Window',
 			width : 380,
 			height : 100,
-			content : ''
+			content : '',
+			onShow : function(){}
 		};
 		options = $.extend({}, defaults, options);
 		var dialog = $('div.box');
@@ -32,7 +33,7 @@
 		html.push("</div>");
 		html.push("</div>");
 		dialog.append(html.join('')).show();
-		var bd = $(".box_body", dialog).load(options.url);
+		var bd = $(".box_body", dialog).load(options.url, options.onShow);
 		var head = $(".box_head", dialog).click(function(e) {
 			e.preventDefault();
 			e.stopPropagation();

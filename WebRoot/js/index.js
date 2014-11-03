@@ -25,9 +25,12 @@ $(function() {
 	function set(){
 		$.dialog({
 			title:'set',
-			width: 500,
-			height:200,
+			width: 350,
+			height:180,
 			url:'view/user/set.html',
+			onShow : function(){
+				
+			},
    		 	ok:function(){
    		 		return false;
    		 	}
