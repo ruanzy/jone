@@ -29,6 +29,7 @@ body,button,input,table {
 	min-height: 45px;
 	position: relative;
 	background: #438eb9;
+	
 }
 
 #head-left {
@@ -37,6 +38,7 @@ body,button,input,table {
 	line-height: 45px;
 	font-size: 20px;
 	padding-left: 15px;
+	position: absolute;
 }
 
 #head-right {

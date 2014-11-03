@@ -26,9 +26,10 @@
 					var H = $(window).height();
 					var NH = $('#head').outerHeight();
 					var WW = $('#sidebar').outerWidth();
-					$('#sidebar').height(H - NH - 2);
-					$('#center').height(H - NH - 1);
-					$('#main').height(H - NH - 101);
+					$('#sidebar').css({top : NH, left:0});
+					//$('#sidebar').height(H - NH - 2);
+					//$('#center').height(H - NH - 1);
+					//$('#main').height(H - NH - 101);
 				}
 				$(window).resize(resize);
 				resize();
