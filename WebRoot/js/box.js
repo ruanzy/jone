@@ -55,8 +55,10 @@
 			$.dialog.opened = false;
 		}
 		$(".box_button_ok", dialog).click(function() {
-			options.ok(bd);
-			close();
+			var ret = options.ok(bd);
+			if(ret){
+				close();
+			}
 		});
 		$(".box_button_cancel", dialog).click(function() {
 			close();

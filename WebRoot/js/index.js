@@ -11,7 +11,8 @@ $(function() {
 	 **************************************************************************/
 	var items = [ {
 		icon : 'icon-cog',
-		text : '设置'
+		text : '设置',
+		action : set
 	}, {
 		icon : 'icon-user',
 		text : '个人资料',
@@ -21,7 +22,17 @@ $(function() {
 		text : '退出',
 		action : logout
 	} ];
-	
+	function set(){
+		$.dialog({
+			title:'set',
+			width: 500,
+			height:200,
+			url:'view/user/set.html',
+   		 	ok:function(){
+   		 		return false;
+   		 	}
+		});
+	}
 	function info(){
 		$.dialog({
 			title:'asd',
