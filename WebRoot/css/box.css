@@ -109,14 +109,37 @@ button.box_button_ok {
 }
 
 .tip {
-	background-color:#B74635;
 	padding: 10px;
 	font: 12px/20px 'Open Sans',"\5FAE\8F6F\96C5\9ED1",Arial,sans-serif;
 	min-width:200px;
 	opacity: 1;
 }
 
-.tip-danger {
+.tip-info {
+border-style: solid;
+border-width:0 0 0 5px;
+color: #fff;
+border-color: #11a9cc;
+background: #57b5e3;
+}
+
+.tip-success {
+border-style: solid;
+border-width:0 0 0 5px;
+color: #fff;
+border-color: #8cc474;
+background: #a0d468;
+}
+
+.tip-error {
+border-style: solid;
+border-width:0 0 0 5px;
+color: #fff;
+border-color: #df5138;
+background: #e46f61;
+}
+
+.tip-warning {
 border-style: solid;
 border-width:0 0 0 5px;
 border-color: #ffce55;

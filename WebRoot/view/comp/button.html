@@ -1,7 +1,7 @@
 <h3>Buttons</h3>
 <p>
 <a class='btn btn-link'>Link</a>
-<a class='btn btn-default'>Default</a>
+<a class='btn btn-default' id='Default'>Default</a>
 <a class='btn btn-primary'>Primary</a>
 <a class='btn btn-success'>Success</a>
 <a class='btn btn-info'>Info</a>
@@ -19,3 +19,7 @@
 <a class='btn btn-warning'><i class='icon-plus'></i> Warning</a>
 <a class='btn btn-danger'><i class='icon-plus'></i> Danger</a>
 </p>
+
+<script type="text/javascript">
+$('#Default').click(function(){$.tip({type:'error',  content:'sadasd'})});
+</script>

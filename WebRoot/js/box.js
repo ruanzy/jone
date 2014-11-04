@@ -335,12 +335,14 @@
             content: '',
             width: 400,
             height: 100,
+            type:'info',
 			draggable: false
         };
         cfg = $.extend({}, defaults, cfg);       
 		var mask = $('<div/>').addClass('mask');
 		var wrap_out = $('<div/>').addClass('box');
-		var box = $('<div/>').addClass('tip tip-danger');
+		var cls = "tip tip-" + cfg.type;
+		var box = $('<div/>').addClass(cls);
 		
 		
 			$("<button/>").addClass("close").click(function(e){
@@ -348,8 +350,10 @@
 				e.stopPropagation();
 				$.tip.close();
 			}).html("<i class='icon-remove'></i>").appendTo(box);
-			
-		box.append("<i class='icon-warning-sign'></i> <strong>Warning</strong>&nbsp;");
+		
+		var icon = "<i class='icon-" + cfg.type + "'></i>";
+		var txt = " <strong>" + cfg.type + "!</strong>&nbsp;";
+		box.append(icon + txt);
 		box.append(cfg.content);
 		wrap_out.append(box);
 		mask.appendTo($('body'));
