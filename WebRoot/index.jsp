@@ -26,6 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="css/tip.css" />
 	<link rel="stylesheet" type="text/css" href="css/down.css" />
 	<link rel="stylesheet" type="text/css" href="css/button.css" />
+	<link rel="stylesheet" type="text/css" href="css/label.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/box.js"></script>
 	<script type="text/javascript" src="js/tip.js"></script>
@@ -54,7 +55,7 @@
 				<dl id='asd' class='rzy-sidedown'><dt><i class="icon-user"></i>欢迎您,admin <i class="icon-angle-down"></i></dt><dd></dd></dl>
 				</li>
 				<li class='headitem purple'><a><i class="icon-envelope"></i> 信息</a>
-				<button id='assignbtn2' class='btn btn-circle btn-s btn-success'>5</button>
+					<span class='badge label-warning'>5</span>
 				</li>
 				<li class='headitem green'><a><i class="icon-bell"></i> 更换样式</a>
 				</li>

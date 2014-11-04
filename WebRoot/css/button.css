@@ -8,16 +8,50 @@
 	margin-right: 3px;
 }
 
+.btn.icon-only {
+	width: 36px;
+	height: 34px;
+	padding: 5px 3px;
+}
+
+.btn-link {
+	color: blue;
+}
+
 .btn-default {
-	background-color: #fff;
-	color: #000;
+	background-color: #fff !important;
 	border: 1px solid #ccc;
+	color: #000;
+}
+
+.btn-primary {
+	background-color: #427fed !important;
+	border: 1px solid #427fed;
+	color: #fff;
+}
+
+.btn-info {
+	background-color: #57b5e3 !important;
+	border: 1px solid #57b5e3;
+	color: #fff;
 }
 
 .btn-success {
-	background-color: green;
+	background-color: #53a93f !important;
+	border: 1px solid #53a93f;
 	color: #fff;
-	border: 1px solid green;
+}
+
+.btn-warning {
+	background-color: #f4b400 !important;
+	border: 1px solid #f4b400;
+	color: #fff;
+}
+
+.btn-danger {
+	background-color: #d73d32 !important;
+	border: 1px solid #d73d32;
+	color: #fff;
 }
 
 .btn-lg {
