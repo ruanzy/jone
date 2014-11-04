@@ -78,12 +78,10 @@ $(function() {
 			function(e) {
 				$('#sidebar').hide();
 				$('#center').css('marginLeft', 0);
-				$('i', this).removeClass().addClass("icon-double-angle-right");
 			},
 			function(e) {
 				$('#sidebar').show();
 				$('#center').css('marginLeft', 190);
-				$('i', this).removeClass().addClass("icon-double-angle-right");
 			}
 	);
 });

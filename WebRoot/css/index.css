@@ -41,6 +41,17 @@ body,button,input,table {
 	position: absolute;
 }
 
+#head-collapse {
+	color: #fff;
+	float: left;
+	height: 45px;
+	line-height: 45px;
+	font-size: 20px;
+	padding-left: 15px;
+	left:200px;
+	position: absolute;
+}
+
 #head-right {
 	color: #fff;
 	float: right;
@@ -187,6 +198,11 @@ ul {
 .btn-lightblue {
 	background-color: #93cbf9; ! important;
 	border-color: #93cbf9;
+}
+
+.btn-blue {
+	background-color: #438eb9; ! important;
+	border-color: #438eb9;
 }
 
 #toggle {

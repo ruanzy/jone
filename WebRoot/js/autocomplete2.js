@@ -44,7 +44,7 @@
 				html.push("_text' autocomplete='off'/>");
 				html.push("<input type='hidden' name='");
 				html.push(hideName);
-				html.push("'/><span><i class='icon-caret-down'></i></span></dt><dd></dd></dl>");
+				html.push("'/><span><i class='icon-angle-down'></i></span></dt><dd></dd></dl>");
 				$(this).append(html.join(''));
 				var url = settings.url;
 				var data = settings.data;

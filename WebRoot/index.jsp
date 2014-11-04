@@ -45,7 +45,7 @@
 <BODY>
 	<div id="head" class="station-icon">
 		<div id="head-left">
-			<i class="icon-desktop"></i> RDP后台管理系统
+			<i class="icon-desktop"></i> RDP后台管理系统		<span id='dd1'><i class="icon-reorder"></i></span>
 		</div>
 		<div id="head-right">
 			<ul>
@@ -64,9 +64,6 @@
 	</div>
 	<div id="center">
 		<div id="pill">
-		<a id='dd1' class="btn btn-danger">
-			<i class="icon-double-angle-left"></i>
-		</a>
 		<span id='nav'>
 			<i class='icon-home'></i> 欢迎您
 		</span>
