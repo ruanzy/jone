@@ -170,6 +170,29 @@ white-space: nowrap;
 position: relative;
 margin-right:3px;
 }
+
+.btn.btn-circle {
+-webkit-border-radius: 50%;
+-webkit-background-clip: padding-box;
+-moz-border-radius: 50%;
+-moz-background-clip: padding;
+border-radius: 50%;
+background-clip: padding-box;
+}
+
+.btn.btn-circle.btn-xs{
+width:30px;
+height:30px;
+padding:5px;
+}
+
+.btn.btn-circle.btn-s{
+width:20px;
+height:20px;
+padding:1px;
+font-size:10px;
+}
+
 button.btn:active{
 top: 0px;
 left: 0px;

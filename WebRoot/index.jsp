@@ -53,6 +53,7 @@
 				<dl id='asd' class='rzy-sidedown'><dt><i class="icon-user"></i>欢迎您,admin <i class="icon-angle-down"></i></dt><dd></dd></dl>
 				</li>
 				<li class='headitem purple'><a><i class="icon-envelope"></i> 信息</a>
+				<button id='assignbtn2' class='btn btn-circle btn-s btn-success'>5</button>
 				</li>
 				<li class='headitem green'><a><i class="icon-bell"></i> 更换样式</a>
 				</li>

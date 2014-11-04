@@ -333,7 +333,7 @@
         }
         var defaults = {
             content: '',
-            width: 380,
+            width: 400,
             height: 100,
 			draggable: false
         };
@@ -348,7 +348,8 @@
 				e.stopPropagation();
 				$.tip.close();
 			}).html("<i class='icon-remove'></i>").appendTo(box);
-		
+			
+		box.append("<i class='icon-warning-sign'></i> <strong>Warning</strong>&nbsp;");
 		box.append(cfg.content);
 		wrap_out.append(box);
 		mask.appendTo($('body'));
