@@ -1,12 +1,14 @@
 <div style="float: left;">
-<button id='addbtn' class='btn btn-success'><i class="icon-plus-sign"></i> 增加</button>
-<button id='delbtn' class='btn btn-success'><i class="icon-remove-sign"></i> 删除</button>
-<button id='assignbtn' class='btn btn-success'><i class="icon-pencil"></i> 分配角色</button>
+<button id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</button>
+<button id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</button>
+<button id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配角色</button>
 </div>
 <div style="float: right;">
-	用户名 <input type="text" id='searchtxt' class='txt' name="name" autocomplete="off"/>
-	<button class='btn btn-lightblue'><i class="icon-search"></i> 搜素</button>
-	</div>
+	<form id='search-form' class='search-form'>
+		<input type="text" id='searchtxt' class='txt' name="name" autocomplete="off" placeholder="请输入用户名"/>
+		<button type="button"><i class="icon-search"></i></button>
+	</form>
+</div>
 <div id='kkk'></div>
 
 <script type="text/javascript">
@@ -135,7 +137,7 @@
     	 }});
      }
      
-     $('.btn-lightblue').click(function(){
+     $('#search-form button').click(function(){
     	 $('#kkk').table('reload');
      });
      

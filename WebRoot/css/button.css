@@ -1,0 +1,63 @@
+.btn {
+	text-align: center;
+	border: 1px solid transparent;
+	line-height: 1.428571429;
+	cursor: pointer;
+	white-space: nowrap;
+	position: relative;
+	margin-right: 3px;
+}
+
+.btn-default {
+	background-color: #fff;
+	color: #000;
+	border: 1px solid #ccc;
+}
+
+.btn-success {
+	background-color: green;
+	color: #fff;
+	border: 1px solid green;
+}
+
+.btn-lg {
+	line-height: 1.35;
+	padding: 10px 16px;
+}
+
+.btn-sm {
+	font-size: 13px;
+	padding: 4px 9px;
+	line-height: 1.39;
+}
+
+.btn-circle {
+	-webkit-border-radius: 50%;
+	-webkit-background-clip: padding-box;
+	-moz-border-radius: 50%;
+	-moz-background-clip: padding;
+	border-radius: 50%;
+	background-clip: padding-box;
+}
+
+.search-form {
+	width: 100px;
+	position: relative;
+	display: inline;
+}
+
+.search-form input {
+	padding: 5px 25px 5px 10px;
+	display: inline;
+	outline: none;
+	border: 1px solid #ddd;
+}
+
+.search-form button {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	background: none;
+	border: none;
+	outline: none;
+}

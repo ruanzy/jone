@@ -25,6 +25,7 @@
 	<link rel="stylesheet" type="text/css" href="css/au.css" />
 	<link rel="stylesheet" type="text/css" href="css/tip.css" />
 	<link rel="stylesheet" type="text/css" href="css/down.css" />
+	<link rel="stylesheet" type="text/css" href="css/button.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/box.js"></script>
 	<script type="text/javascript" src="js/tip.js"></script>

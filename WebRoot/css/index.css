@@ -169,27 +169,6 @@ ul {
 	padding: 8px 20px 24px;
 }
 
-.btn-success {
-	border-color: rgb(135, 184, 127);
-	background-color: rgb(135, 184, 127);
-}
-
-.btn-info {
-	border-color: rgb(111, 179, 224);
-	background-color: rgb(111, 179, 224);
-}
-
-.btn-warning,.btn-warning:focus {
-	border-color: rgb(255, 183, 82);
-	background-color: rgb(255, 183, 82);
-}
-
-.btn-danger,.btn-danger:focus {
-	border-color: rgb(209, 91, 71);
-	background-color: rgb(209, 91, 71);
-	font-size: 18px;
-}
-
 .btn-primary {
 	background-color: #1B6AAA !important;
 	border-color: #428BCA
@@ -241,21 +220,10 @@ ul {
 	border: 1px solid #ccc;
 }
 
-.txt,.txt:focus {
+.txt {
 	outline: none;
 	box-shadow: none;
 	border: 1px solid #bbb;
 	padding: 6px 5px;
 	width: 190px;
-}
-
-.txt:focus {
-	border-color: #75A1F0;
-	outline: none;
-	box-shadow: 0 0 12px #75A1F0;
-	-webkit-transition: all 0.218s;
-	-moz-transition: all 0.218s;
-	-o-transition: all 0.218s;
-	-ms-transition: all 0.218s;
-	transition: all 0.218s;
 }
