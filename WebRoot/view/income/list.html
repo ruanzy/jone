@@ -4,14 +4,14 @@
 <div style="float: right;">
 入库日期:2014-05-01
 	</div>
-<div id='kkk'></div>
+<div id='kkk2'></div>
 
 <script type="text/javascript">
 
  
   
       var state = dic('userstate');
-	  	  $('#kkk').table({
+	  	  $('#kkk2').table({
 		columns:[
 			//{header:"ID",field:"id",width:50,align:'center'},
 			{header:"用户名",field:"username",tip:true,editor:'text'},
@@ -45,14 +45,14 @@
 			dataType:'json',
 	        success:function(result){
 	        	if(result.success){
-					$('#kkk').table('reload');
+					$('#kkk2').table('reload');
 				}
 			}
 		});	
      }
      
      function save(){
-    	 $('#kkk').Grid('save');
+    	 $('#kkk2').Grid('save');
      }
      
      function del(){
@@ -74,7 +74,7 @@
 		   			data: {ids:ids.join(',')},
 		   			dataType: 'json',
 		   	        success: function(result){
-		   	        	$('#kkk').table('refresh');
+		   	        	$('#kkk2').table('refresh');
 		   			}
 		   		});
 	    	}
@@ -82,7 +82,7 @@
      }
      
      function cancel(){
-    	 var selected = $('#kkk').Grid('getSelected');
+    	 var selected = $('#kkk2').Grid('getSelected');
     	 if(selected.length == 0){
     		 $.alert({msg:'请选择至少一条记录'});
     		 return false;
@@ -107,7 +107,7 @@
      }
      
      function active(){
-    	 var selected = $('#kkk').Grid('getSelected');
+    	 var selected = $('#kkk2').Grid('getSelected');
     	 if(selected.length == 0){
     		 $.alert({msg:'请选择至少一条记录'});
     		 return false;
@@ -124,7 +124,7 @@
 		   			data: {ids:ids.join(',')},
 		   			dataType: 'json',
 		   	        success: function(result){
-		   	        	$('#kkk').Grid('refresh');
+		   	        	$('#kkk2').Grid('refresh');
 		   			}
 		   		});
 	    	}
@@ -132,7 +132,7 @@
      }
      
      $('.btn-lightblue').click(function(){
-    	 $('#kkk').table('reload');
+    	 $('#kkk2').table('reload');
      });
      
      function condition(){
@@ -153,7 +153,7 @@
      }
      
      function mk(){
-    	 var selected = $('#kkk').table('getSelected');
+    	 var selected = $('#kkk2').table('getSelected');
     	 if(selected.length != 1){
     		 $.tip({content:'请选择一条记录'});
     		 return false;
@@ -180,7 +180,7 @@
 			dataType: 'json',
 			success: function(r){
         		if(r.success){
-					$('#kkk').table('reload');
+					$('#kkk2').table('reload');
         		}
 	  		}
 	  	});
