@@ -96,14 +96,13 @@
 		}
 		var defaults = {
 			title : 'Window',
-			width : 380,
+			width : 'auto',
 			height : 100,
 			content : '',
-			onShow : function() {
+			ok:function(){
+				$.dialog.close();
 			},
-			ok : function(bd) {
-				dialog.hide().empty().remove();
-				$.dialog.opened = false;
+			onShow : function() {
 			}
 		};
 		options = $.extend({}, defaults, options);
@@ -112,7 +111,8 @@
 			dialog = $("<div class='message'></div>").appendTo($('body'));
 		}
 		var html = [];
-		html.push("<div class='message-dialog-window'>");
+		html.push("<div class='message-dialog-window' style='width:"
+				+ options.width + "px'>");
 		html.push("<div class='message-header message-header-success'>");
 		html.push("<a class='message-close'><i class='icon-remove'></i></a>");
 		html.push("<i class='icon-desktop'></i> ");
@@ -139,17 +139,20 @@
 		$(".message-footer-bg", dialog).click(function(e) {
 			var t = $(e.target);
 			if (t.hasClass('btn-success')) {
-				var ret = options.ok(bd);
-				if (ret) {
-					dialog.hide().empty().remove();
-					$.dialog.opened = false;
-				}
+				options.ok(bd);
 			}
 			if (t.hasClass('btn-default')) {
 				dialog.hide().empty().remove();
 				$.dialog.opened = false;
 			}
 		});
+		dialog.close = function() {
+			dialog.hide().empty().remove();
+			$.dialog.opened = false;
+		};
+		dialog.text = function(content) {
+			$(".message-body", dialog).html(content);
+		};
 		_dialog = dialog;
 		return _dialog;
 	};
@@ -207,65 +210,78 @@ function ddresize() {
 	$(window).resize(resize);
 }
 
-function permit(context){
+function permit(context) {
 	var opts = $(context).find('[funcid]');
-	if(opts.size()>0){
+	if (opts.size() > 0) {
 		var powers = [];
 		$.ajax({
-			url:'common/op',
-			cache: false,
-			async:false,
-			dataType:'json',
-	        success:function(result){
-				$.each(result,function(){
-					powers.push(this.id);		
+			url : 'common/op',
+			cache : false,
+			async : false,
+			dataType : 'json',
+			success : function(result) {
+				$.each(result, function() {
+					powers.push(this.id);
 				});
 			}
-		});	
-		opts.each(function(){
+		});
+		opts.each(function() {
 			var funcid = parseInt($(this).attr('funcid'));
-			if($.inArray(funcid, powers)==-1){
+			if ($.inArray(funcid, powers) == -1) {
 				$(this).hide();
-			}		
+			}
 		});
 	}
 }
 
-$(document).ajaxError(function(event, xhr, options, exc){
+$(document).ajaxError(function(event, xhr, options, exc) {
 	alert(xhr.status);
-	if(xhr.status==1111){
-        $.alert({msg:'您的登录已过期,请重新登录！',fn:function(){
-        	top.document.location = './';
-        }});
-    }else if(xhr.status==1112){
-        $.alert({msg:'请求异常！'});
-    }else if(xhr.status==2222){
-        alert('您没有权限！');
-    }else if(xhr.status==404){
-        alert('您访问的资源不存在！');
-    }else if(xhr.status==3333){
-    	R.alert({msg:'业务接口请求异常！'});
-    }else if(xhr.status==5555){
-    	$.alert({msg:'业务接口连接异常！'});
-    }else{
-    	$.alert({msg:xhr.responseText});
-    }
+	if (xhr.status == 1111) {
+		$.alert({
+			msg : '您的登录已过期,请重新登录！',
+			fn : function() {
+				top.document.location = './';
+			}
+		});
+	} else if (xhr.status == 1112) {
+		$.alert({
+			msg : '请求异常！'
+		});
+	} else if (xhr.status == 2222) {
+		alert('您没有权限！');
+	} else if (xhr.status == 404) {
+		alert('您访问的资源不存在！');
+	} else if (xhr.status == 3333) {
+		R.alert({
+			msg : '业务接口请求异常！'
+		});
+	} else if (xhr.status == 5555) {
+		$.alert({
+			msg : '业务接口连接异常！'
+		});
+	} else {
+		$.alert({
+			msg : xhr.responseText
+		});
+	}
 });
 $.extend({
-	close:function(cfg){
+	close : function(cfg) {
 		top.$.close(cfg);
 	}
 });
-function dic(type){
+function dic(type) {
 	var ret = null;
 	$.ajax({
-		url:'common/dic',
-		type: 'post',
-		async: false,
-		data: {"type" : type},
-		dataType: 'json',
-        success: function(data){
-        	ret = data;
+		url : 'common/dic',
+		type : 'post',
+		async : false,
+		data : {
+			"type" : type
+		},
+		dataType : 'json',
+		success : function(data) {
+			ret = data;
 		}
 	});
 	return ret;

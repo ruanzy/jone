@@ -41,9 +41,11 @@
 		});
 	});
 	$('#bbb2').click(function(e) {
-		$.dialog({
-			//content : 'Are you sure delete it!',
-			url:'view/income/list.html'
+		var dialog = $.dialog({
+			url : 'view/income/list.html',
+			ok : function() {
+				dialog.close();
+			}
 		});
 	});
 </script>

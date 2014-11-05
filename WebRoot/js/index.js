@@ -23,7 +23,7 @@ $(function() {
 		action : logout
 	} ];
 	function set(){
-		$.dialog({
+		var dialog = $.dialog({
 			title:'set',
 			width: 350,
 			height:180,
@@ -32,7 +32,7 @@ $(function() {
 				
 			},
    		 	ok:function(){
-   		 		return false;
+   		 		dialog.text('asdas');
    		 	}
 		});
 	}
