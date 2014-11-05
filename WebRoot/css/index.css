@@ -169,21 +169,6 @@ ul {
 	padding: 8px 20px 24px;
 }
 
-.btn-primary {
-	background-color: #1B6AAA !important;
-	border-color: #428BCA
-}
-
-.btn-lightblue {
-	background-color: #93cbf9; ! important;
-	border-color: #93cbf9;
-}
-
-.btn-blue {
-	background-color: #438eb9; ! important;
-	border-color: #438eb9;
-}
-
 #toggle {
 	position: absolute;
 	top: 50%;

@@ -27,6 +27,7 @@
 	<link rel="stylesheet" type="text/css" href="css/down.css" />
 	<link rel="stylesheet" type="text/css" href="css/button.css" />
 	<link rel="stylesheet" type="text/css" href="css/label.css" />
+	<link rel="stylesheet" type="text/css" href="css/msg.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/box.js"></script>
 	<script type="text/javascript" src="js/tip.js"></script>
@@ -43,6 +44,7 @@
 	<script type="text/javascript" src="js/grid2.js"></script>
 	<script type="text/javascript" src="js/checkboxlist.js"></script>
 	<script type="text/javascript" src="js/down.js"></script>
+	<script type="text/javascript" src="js/msg.js"></script>
 </head>
 <BODY>
 	<div id="head" class="station-icon">

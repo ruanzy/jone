@@ -1,0 +1,49 @@
+<h3>Alert</h3>
+<p>
+	<a class='btn btn-success'>Success</a> <a class='btn btn-info'>Info</a>
+	<a class='btn btn-warning'>Warning</a> <a class='btn btn-danger'>Danger</a>
+</p>
+<h3>Confirm</h3>
+<div>
+	<a class='btn btn-danger' id='bbb'>Confirm</a>
+</div>
+<h3>dialog</h3>
+<div>
+	<a class='btn btn-danger' id='bbb2'>Dialog</a>
+</div>
+<div id='mk'></div>
+<script type="text/javascript">
+	$('p a:nth(0)').click(function(e) {
+		$.alert('success', "Are you sure delete it!", function() {
+			alert('asdasd...');
+		});
+	});
+	$('p a:nth(1)').click(function(e) {
+		$.alert('info', "Are you sure delete it!", function() {
+			alert('asdasd...');
+		});
+	});
+	$('p a:nth(2)').click(function(e) {
+		$.alert('warning', "Are you sure delete it!", function() {
+			alert('asdasd...');
+		});
+	});
+	$('p a:nth(3)').click(function(e) {
+		$.alert('danger', "Are you sure delete it!", function() {
+			alert('asdasd...');
+		});
+	});
+	$('#bbb').click(function(e) {
+		$.confirm("Are you sure delete it!", function(btn) {
+			alert(btn);
+			if (btn) {
+			}
+		});
+	});
+	$('#bbb2').click(function(e) {
+		$.dialog({
+			//content : 'Are you sure delete it!',
+			url:'view/income/list.html'
+		});
+	});
+</script>

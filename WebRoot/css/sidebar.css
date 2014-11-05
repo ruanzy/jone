@@ -157,63 +157,14 @@ background-color: #f9f9f9;
 .dic{
 	background-position: 0px -210px;
 }
-.btn {
-text-align: center;
-border: 1px solid transparent;
-font-size:14px;
-color:#fff;
-padding: 6px 12px;
-font-weight: normal;
-line-height: 1.428571429;
-cursor: pointer;
-white-space: nowrap;
-position: relative;
-margin-right:3px;
-}
 
-.btn.btn-circle {
--webkit-border-radius: 50%;
--webkit-background-clip: padding-box;
--moz-border-radius: 50%;
--moz-background-clip: padding;
-border-radius: 50%;
-background-clip: padding-box;
-}
 
-.btn.btn-circle.btn-xs{
-width:30px;
-height:30px;
-padding:5px;
-}
-
-.btn.btn-circle.btn-s{
-width:20px;
-height:20px;
-padding:1px;
-font-size:10px;
-}
 
 button.btn:active{
 top: 0px;
 left: 0px;
 }
 
-.btn-lg {
-line-height: 1.35;
-padding: 10px 16px;
-}
-
-.btn-sm {
-font-size: 13px;
-padding: 4px 9px;
-line-height: 1.39;
-}
-
-.btn-icon{
-	background-color:transparent;
-	padding: 0;
-	color:inherit;
-}
 button.btn-icon:active{
 top: 0;
 left: 0;
