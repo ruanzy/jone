@@ -33,6 +33,7 @@
      function add(){
     	 $.dialog({
     		 title:'用户新增',
+    		 width:350,
     		 url:'view/user/adduser.html',
     		 ok:ok
     	 });
@@ -50,8 +51,10 @@
 			dataType:'json',
 	        success:function(result){
 	        	if(result.result){
-					$.alert({content:result.msg});
-					$('#kkk').table('reload');
+					win.close();
+					$.alert('success', result.msg, function(){
+						$('#kkk').table('reload');
+					});
 				}
 			}
 		});	
@@ -67,23 +70,22 @@
     		 $.tip({content:'Please select one record!'});
     		 return false;
     	 }
-    	 $.confirm({
-    	 	content:'确定要干掉吗', 
-    	 	ok:function(){
-	    		var ids = [];
-		    	for(var k in selected){
-		    		ids.push(selected[k].id); 
-		    	}
-		   		$.ajax({
-		   			url:'user/del',
-		   			type: 'post',
-		   			data: {ids:ids.join(',')},
-		   			dataType: 'json',
-		   	        success: function(result){
-		   	        	$('#kkk').table('refresh');
-		   			}
-		   		});
-	    	}
+    	 $.confirm('确定要干掉吗',function(btn){
+	    		if(btn){
+		    		var ids = [];
+			    	for(var k in selected){
+			    		ids.push(selected[k].id); 
+			    	}
+			   		$.ajax({
+			   			url:'user/del',
+			   			type: 'post',
+			   			data: {ids:ids.join(',')},
+			   			dataType: 'json',
+			   	        success: function(result){
+			   	        	$('#kkk').table('refresh');
+			   			}
+			   		});
+		   		}
     	 });
      }
      

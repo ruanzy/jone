@@ -8,6 +8,7 @@
 	overflow: hidden;
 	outline: 0;
 	opacity: 1;
+	display: none;
 }
 
 .message-dialog {
@@ -21,6 +22,7 @@
 }
 
 .message-dialog-window {
+	min-width: 350px;
 	max-width: 1000px;
 	margin: 100px auto;
 	position: relative;

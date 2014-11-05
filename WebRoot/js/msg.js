@@ -123,14 +123,13 @@
 		html.push("<a class='btn btn-success'>OK</a>");
 		html.push("<a class='btn btn-default'>Close</a>");
 		html.push("</div>");
-		dialog.append(html.join('')).show();
+		dialog.append(html.join(''));
 		var bd = $(".message-body", dialog);
 		if (options.content) {
 			bd.html(options.content);
-			options.onShow();
 		}
 		if (options.url) {
-			bd.load(options.url, options.onShow);
+			bd.load(options.url);
 		}
 		$(".message-close", dialog).click(function(e) {
 			dialog.hide().empty().remove();
@@ -139,7 +138,7 @@
 		$(".message-footer-bg", dialog).click(function(e) {
 			var t = $(e.target);
 			if (t.hasClass('btn-success')) {
-				options.ok(bd);
+				options.ok(dialog);
 			}
 			if (t.hasClass('btn-default')) {
 				dialog.hide().empty().remove();
@@ -153,6 +152,8 @@
 		dialog.text = function(content) {
 			$(".message-body", dialog).html(content);
 		};
+		dialog.show();
+		options.onShow();
 		_dialog = dialog;
 		return _dialog;
 	};

@@ -32,7 +32,7 @@ $(function() {
 				
 			},
    		 	ok:function(){
-   		 		dialog.text('asdas');
+   		 		dialog.close();
    		 	}
 		});
 	}
