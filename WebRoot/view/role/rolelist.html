@@ -1,13 +1,15 @@
 
 <div style="float: left;">
-<button id='addbtn' class='btn btn-success'><i class="icon-plus-sign"></i> 增加</button>
-<button id='delbtn' class='btn btn-success'><i class="icon-remove-sign"></i> 删除</button>
-<button id='assignbtn' class='btn btn-success'><i class="icon-pencil"></i> 分配资源</button>
+<button id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</button>
+<button id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</button>
+<button id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配资源</button>
 </div>
 <div style="float: right;">
-	角色名 <input type="text" id='searchtxt' class='txt' name="name" autocomplete="off"/>
-	<button class='btn btn-lightblue'><i class="icon-search"></i> 搜素</button>
-	</div>
+	<form id='search-form' class='search-form'>
+		<input type="text" id='searchtxt' class='txt' name="name" autocomplete="off" placeholder="请输入角色名"/>
+		<button type="button"><i class="icon-search"></i></button>
+	</form>
+</div>	
 <div id='kkk'></div>
 
 <script type="text/javascript">
@@ -22,7 +24,7 @@
 		condition:condition,
 		url:'role/list'
 	});
-     $('.btn-lightblue').click(function(){
+     $('#search-form button').click(function(){
     	 $('#kkk').table('reload');
      });
      $('#addbtn').click(add);
@@ -37,6 +39,7 @@
      function add(){
     	 $.dialog({
     		 title:'角色新增',
+    		 width:350,
     		 url:'view/role/addrole.html',
     		 ok:function(win){
    		     	var name = win.find('input[name=name]').val();
@@ -47,8 +50,11 @@
 					data: params,
 					dataType:'json',
 			        success:function(result){
-			        	if(result.success){
-							$('#kkk').table('reload');
+			        	if(result.result){
+			        		win.close();
+							$.alert('success', result.msg, function(){
+								$('#kkk').table('reload');
+							});
 						}
 					}
 				});	
@@ -63,8 +69,8 @@
     		 $.tip({content:'请选择一条记录'});
     		 return false;
     	 }
-    	 $.confirm({content:'确定要干掉吗', ok:function(){
-	    	
+    	 $.confirm('确定要干掉吗', function(btn){
+	    	if(btn){
 		   		$.ajax({
 		   			url:'role/del',
 		   			type: 'post',
@@ -74,7 +80,8 @@
 		   	        	$('#kkk').table('refresh');
 		   			}
 		   		});
-    	 }});
+		   	}
+    	 });
      }
      
      function mk(){
