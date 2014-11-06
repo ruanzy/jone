@@ -38,7 +38,7 @@ position: relative;
 height: 40px;
 line-height: 40px;
 padding: 0 16px 0 7px;
-background-color: #f9f9f9;
+background-color: #fff;
 color: #585858;
 text-shadow: none!important;
 font-size: 16px;
@@ -52,7 +52,7 @@ white-space: nowrap;
 	font-size: 13px;
 	text-align: center;
 	overflow: auto;
-	background-color: #fff;
+	background-color: #f9f9f9;
 	white-space: nowrap;
 }
 
