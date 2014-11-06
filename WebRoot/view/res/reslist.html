@@ -1,267 +1,264 @@
-<p><font color="red">切记:FAQ管理、项目管理不要删,数字即为页面控制权限的funcid</font></p>
-<table width='100%'>
-<tr>
-<td valign='top' width='15%'>
-<ul id="tree"></ul>
-</td>
-<td valign='top' >
-<UL id=topic-title class=topic-title>
-<LI href="moudlefrm"><A>增加模块</A></LI>
-<LI href="menufrm" id='addmenuli'><A>增加菜单</A></LI>
-<LI href="opfrm" id='addopli'><A>增加操作</A></LI>
-</UL>
-<div id='cnt'>
-<form id='moudlefrm' style='display:none;' method='post' action='resadd'>
-	<table>
-		<tr>
-			<td align='right' width='30%'>模块名称</td>
-			<td>
-				<input type="hidden" name="type" value="1"/>
-				<input type="hidden" name="pid" value="0"/>
-				<input type="text" name="name" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>图标</td>
-			<td>
-				<input type="text" name="icon" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'></td>
-			<td>
-				<button type="button" id='addmoudle' class='btn btn-success'><i class="icon-plus-sign"></i> 增加</button>
-				<button type="reset" class='btn btn-success'><i class="icon-remove-sign"></i> 清空</button>
-			</td>
-		</tr>
-	</table>
-</form>
-<form id='menufrm' style='display:none;' method='post' action='resadd'>
-	<table>
-		<tr>
-			<td align='right' width='30%'>模块</td>
-			<td>
-				<select name="pid" id='moudle'>
-					<option value='-100'>请选择模块</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>菜单名称</td>
-			<td>
-				<input type="hidden" name="type" value="2"/>
-				<input type="text" name="name" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>图标</td>
-			<td>
-				<input type="text" name="icon" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>URL</td>
-			<td>
-				<input type="text" name="url" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'></td>
-			<td>
-				<button type="button" id='addmenu' class='btn btn-success'><i class="icon-plus-sign"></i> 增加</button>
-				<button type="reset" class='btn btn-success'><i class="icon-remove-sign"></i> 清空</button>
-			</td>
-		</tr>
-	</table>
-</form>
-<form id='opfrm' style='display:none;' method='post' action='resadd'>
-	<table>
-		<tr>
-			<td align='right' width='30%'>模块</td>
-			<td>
-				<select id='moudle2'>
-					<option value='-100'>请选择模块</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td align='right' width='30%'>菜单</td>
-			<td>
-				<select name="pid" id='menu'>
-					<option value='-1'>请选择菜单</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>操作名称</td>
-			<td>
-				<input type="hidden" name="type" value="3"/>
-				<input type="text" name="name" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>图标</td>
-			<td>
-				<input type="text" name="icon" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>URL</td>
-			<td>
-				<input type="text" name="url" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>Method</td>
-			<td>
-				<input type="text" name="method" class='txt' autocomplete="off"/>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'></td>
-			<td>
-				<button type="button" id='addop' class='btn btn-success'><i class="icon-plus-sign"></i> 增加</button>
-				<button type="reset" class='btn btn-success'><i class="icon-remove-sign"></i> 清空</button>
-			</td>
-		</tr>
-	</table>
-</form>
+<div class="well" style='height:auto;'>
+	<div class="well-header well-header-success">
+		<i class="icon-desktop"></i> 资源树
+	</div>
+	<div class="well-body">
+		<ul id="tree"></ul>
+	</div>
 </div>
-</td>
-</tr>
-</table>	
 
-
-
+<div class="well" style='width:auto;'>
+	<div class="well-header well-header-success">
+		<i class="icon-desktop"></i> 增加资源
+	</div>
+	<div class="well-body">
+			<UL id=topic-title class=topic-title>
+		<LI href="moudlefrm"><A>增加模块</A></LI>
+		<LI href="menufrm" id='addmenuli'><A>增加菜单</A></LI>
+		<LI href="opfrm" id='addopli'><A>增加操作</A></LI>
+	</UL>
+	<div id='cnt'>
+		<form id='moudlefrm' style='display:none;' method='post'
+			action='resadd'>
+			<table>
+				<tr>
+					<td align='right' width='30%'>模块名称</td>
+					<td><input type="hidden" name="type" value="1" /> <input
+						type="hidden" name="pid" value="0" /> <input type="text"
+						name="name" class='txt' autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'>图标</td>
+					<td><input type="text" name="icon" class='txt'
+						autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'></td>
+					<td>
+						<button type="button" id='addmoudle' class='btn btn-success'>
+							<i class="icon-plus-sign"></i> 增加
+						</button>
+						<button type="reset" class='btn btn-success'>
+							<i class="icon-remove-sign"></i> 清空
+						</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<form id='menufrm' style='display:none;' method='post' action='resadd'>
+			<table>
+				<tr>
+					<td align='right' width='30%'>模块</td>
+					<td><select name="pid" id='moudle'>
+							<option value='-100'>请选择模块</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td align='right'>菜单名称</td>
+					<td><input type="hidden" name="type" value="2" /> <input
+						type="text" name="name" class='txt' autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'>图标</td>
+					<td><input type="text" name="icon" class='txt'
+						autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'>URL</td>
+					<td><input type="text" name="url" class='txt'
+						autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'></td>
+					<td>
+						<button type="button" id='addmenu' class='btn btn-success'>
+							<i class="icon-plus-sign"></i> 增加
+						</button>
+						<button type="reset" class='btn btn-success'>
+							<i class="icon-remove-sign"></i> 清空
+						</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<form id='opfrm' style='display:none;' method='post' action='resadd'>
+			<table>
+				<tr>
+					<td align='right' width='30%'>模块</td>
+					<td><select id='moudle2'>
+							<option value='-100'>请选择模块</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td align='right' width='30%'>菜单</td>
+					<td><select name="pid" id='menu'>
+							<option value='-1'>请选择菜单</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td align='right'>操作名称</td>
+					<td><input type="hidden" name="type" value="3" /> <input
+						type="text" name="name" class='txt' autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'>图标</td>
+					<td><input type="text" name="icon" class='txt'
+						autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'>URL</td>
+					<td><input type="text" name="url" class='txt'
+						autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'>Method</td>
+					<td><input type="text" name="method" class='txt'
+						autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td align='right'></td>
+					<td>
+						<button type="button" id='addop' class='btn btn-success'>
+							<i class="icon-plus-sign"></i> 增加
+						</button>
+						<button type="reset" class='btn btn-success'>
+							<i class="icon-remove-sign"></i> 清空
+						</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	</div>
+</div>
 
 <script language="javascript">
-
-	$("#topic-title li").click(function(){
+	$("#topic-title li").click(function() {
 		$(this).siblings().removeClass('current');
 		$(this).addClass('current');
 		$('#cnt form').hide();
 		$('#' + $(this).attr('href')).show();
 		var id = $(this).attr('id');
-		if(id=='addmenuli'){
-			$.ajax({ 
-				url: "res/list", 
-				async: false,
-				cache: false,
-				dataType: 'json',
-				success: function(d){
+		if (id == 'addmenuli') {
+			$.ajax({
+				url : "res/list",
+				async : false,
+				cache : false,
+				dataType : 'json',
+				success : function(d) {
 					$("#moudle")[0].options.length = 1;
-					$(d).each(function(){
-						if(this.type==1){
-							var opt = new Option(this.name,this.id);
+					$(d).each(function() {
+						if (this.type == 1) {
+							var opt = new Option(this.name, this.id);
 							$("#moudle")[0].add(opt);
 						}
 					});
-		  		}
+				}
 			});
 		}
-		if(id=='addopli'){
-			$.ajax({ 
-				url: "res/list", 
-				async: false,
-				cache: false,
-				dataType: 'json',
-				success: function(d){
+		if (id == 'addopli') {
+			$.ajax({
+				url : "res/list",
+				async : false,
+				cache : false,
+				dataType : 'json',
+				success : function(d) {
 					$("#moudle2")[0].options.length = 1;
-					$(d).each(function(){
-						if(this.type==1){
-							var opt = new Option(this.name,this.id);
+					$(d).each(function() {
+						if (this.type == 1) {
+							var opt = new Option(this.name, this.id);
 							$("#moudle2")[0].add(opt);
 						}
 					});
-		  		}
+				}
 			});
 		}
 	});
 	$("#topic-title li:first").click();
 	$("#tree").Tree({
-		url:"res/list?_=" + new Date().getTime(),
-		showIcon: true,
-		remove:remove
-	});	
-	$("#tree").Tree('expandAll');	
+		url : "res/list?_=" + new Date().getTime(),
+		showIcon : true,
+		remove : remove
+	});
+	$("#tree").Tree('expandAll');
 	function remove(nodeid) {
-		$.ajax({ 
-			url: "res/del", 
-			async: false,
-			type: 'post',
-			data: {id:nodeid},
-			dataType: 'json',
-			success: function(r){
-	       		if(r.success){
-	       			$("#tree").Tree('refresh');
-	       		}
-	  		}
+		$.ajax({
+			url : "res/del",
+			async : false,
+			type : 'post',
+			data : {
+				id : nodeid
+			},
+			dataType : 'json',
+			success : function(r) {
+				if (r.success) {
+					$("#tree").Tree('refresh');
+				}
+			}
 		});
 	}
-			
 
-	
-
-	$("#addmoudle").click(function(){
+	$("#addmoudle").click(function() {
 		var data = $('#moudlefrm').serialize();
-		$.ajax({ 
-			url: "res/add", 
-			type: 'post',
-			data: data,
-			dataType: 'json',
-			success: function(r){
-        		if(r.success){
-        			$("#tree").Tree('refresh');
-        		}
-	  		}
-	  	});
+		$.ajax({
+			url : "res/add",
+			type : 'post',
+			data : data,
+			dataType : 'json',
+			success : function(r) {
+				if (r.success) {
+					$("#tree").Tree('refresh');
+				}
+			}
+		});
 	});
-	
-	$("#addmenu").click(function(){
+
+	$("#addmenu").click(function() {
 		var data = $('#menufrm').serialize();
-		$.ajax({ 
-			url: "res/add", 
-			type: 'post',
-			data: data,
-			dataType: 'json',
-			success: function(r){
-          		if(r.success){
-          			$("#tree").Tree('refresh');
-        		}
-	  		}
-	  	});
+		$.ajax({
+			url : "res/add",
+			type : 'post',
+			data : data,
+			dataType : 'json',
+			success : function(r) {
+				if (r.success) {
+					$("#tree").Tree('refresh');
+				}
+			}
+		});
 	});
-	
-	$("#addop").click(function(){
+
+	$("#addop").click(function() {
 		var data = $('#opfrm').serialize();
-		$.ajax({ 
-			url: "res/add", 
-			type: 'post',
-			data: data,
-			dataType: 'json',
-			success: function(r){
-        		if(r.success){
-        			$("#tree").Tree('refresh');
-        		}
-	  		}
-	  	});
+		$.ajax({
+			url : "res/add",
+			type : 'post',
+			data : data,
+			dataType : 'json',
+			success : function(r) {
+				if (r.success) {
+					$("#tree").Tree('refresh');
+				}
+			}
+		});
 	});
-	
-	$("#moudle2").change(function(){
+
+	$("#moudle2").change(function() {
 		$('#menu')[0].options.length = 1;
 		var mid = $(this).val();
-		$.ajax({ 
-			url: "res/menubymoudle", 
-			type: 'post',
-			data: {pid:mid},
-			dataType: 'json',
-			success: function(d){
-				$(d).each(function(){
-					var opt = new Option(this.name,this.id);
+		$.ajax({
+			url : "res/menubymoudle",
+			type : 'post',
+			data : {
+				pid : mid
+			},
+			dataType : 'json',
+			success : function(d) {
+				$(d).each(function() {
+					var opt = new Option(this.name, this.id);
 					$('#menu')[0].add(opt);
 				});
-	  		}
-	  	});
+			}
+		});
 	});
-
 </script>

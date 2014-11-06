@@ -28,6 +28,7 @@
 	<link rel="stylesheet" type="text/css" href="css/button.css" />
 	<link rel="stylesheet" type="text/css" href="css/label.css" />
 	<link rel="stylesheet" type="text/css" href="css/msg.css" />
+	<link rel="stylesheet" type="text/css" href="css/well.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/box.js"></script>
 	<script type="text/javascript" src="js/tip.js"></script>

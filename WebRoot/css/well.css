@@ -1,63 +1,64 @@
 .well {
-	text-align: center;
-	border: 1px solid transparent;
-	line-height: 1.428571429;
-	cursor: pointer;
-	white-space: nowrap;
-	position: relative;
-	margin-right: 3px;
-}
-
-.btn-default {
-	background-color: #fff;
+	width: 300px;
+	min-width: 200px;
+	max-width: 1000px;
+	box-shadow: 0 0 2px rgba(0, 0, 0, .5);
 	color: #000;
-	border: 1px solid #ccc;
+	background-color: #fff;
+	border: rgba(0, 0, 0, 0);
+	margin: 0 20px 20px 0;
+	float:left;
 }
 
-.btn-success {
-	background-color: green;
-	color: #fff;
-	border: 1px solid green;
+.well-header {
+	color: #53a93f;
+	border-bottom: 3px solid #53a93f;
+	padding: 10px;
+	font-size: 15px;
+	font-weight: bold;
 }
 
-.btn-lg {
-	line-height: 1.35;
-	padding: 10px 16px;
+.well-header-success {
+	color: #53a93f;
+	border-bottom: 3px solid #53a93f;
 }
 
-.btn-sm {
-	font-size: 13px;
-	padding: 4px 9px;
-	line-height: 1.39;
+.well-header-danger {
+	color: #d73d32;
+	border-bottom: 3px solid #d73d32;
 }
 
-.btn-circle {
-	-webkit-border-radius: 50%;
-	-webkit-background-clip: padding-box;
-	-moz-border-radius: 50%;
-	-moz-background-clip: padding;
-	border-radius: 50%;
-	background-clip: padding-box;
-}
-
-.search-form {
-	width: 100px;
-	position: relative;
-	display: inline;
-}
-
-.search-form input {
-	padding: 5px 25px 5px 10px;
-	display: inline;
-	outline: none;
-	border: 1px solid #ddd;
-}
-
-.search-form button {
-	position: absolute;
-	right: 5px;
-	top: 5px;
-	background: none;
+.well-body {
+	color: #737373;
+	background: 0 0;
 	border: none;
-	outline: none;
+	margin: 0;
+	padding: 20px;
+	max-width: 1000px;
+	max-height: 300px;
+	overflow: auto;
+}
+
+.well-footer {
+	margin: 0 0 20px 0;
+	padding-bottom: 10px;
+	text-align: center !important;
+}
+
+.well-footer-bg {
+	margin: 0 0 20px 0;
+	padding: 15px 15px 15px 0;
+	border-top: 1px solid #53a93f;
+	background-color: #f5f5f5;
+}
+
+.well-close {
+	float: right;
+	font-size: 16px;
+	font-weight: 700;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	filter: alpha(opacity = 20);
+	opacity: .2;
+	cursor: pointer;
 }
