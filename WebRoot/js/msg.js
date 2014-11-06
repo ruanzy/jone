@@ -96,10 +96,11 @@
 		}
 		var defaults = {
 			title : 'Window',
-			width : 'auto',
+			width : 350,
 			height : 100,
 			content : '',
-			ok:function(){
+			params : null,
+			ok : function() {
 				$.dialog.close();
 			},
 			onShow : function() {
@@ -129,7 +130,7 @@
 			bd.html(options.content);
 		}
 		if (options.url) {
-			bd.load(options.url);
+			bd.load(options.url, options.params);
 		}
 		$(".message-close", dialog).click(function(e) {
 			dialog.hide().empty().remove();

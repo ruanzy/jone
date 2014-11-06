@@ -39,8 +39,7 @@ $(function() {
 	function info(){
 		$.dialog({
 			title:'asd',
-			width: 800,
-			height:390,
+			width: 'auto',
 			url:'view/income/list.html'
 		});
 	}

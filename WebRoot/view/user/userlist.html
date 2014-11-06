@@ -1,7 +1,9 @@
 <div style="float: left;">
 <a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</a>
+<!-- 
 <a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
 <a id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配角色</a>
+ -->
 </div>
 <div style="float: right;">
 	<form id='search-form' class='search-form'>
@@ -21,7 +23,8 @@
 			//{header:"ID",field:"id",width:50,align:'center'},
 			{header:"用户名",field:"username",tip:true,editor:'text'},
 			{header:"注册时间",field:"regtime",align:'center',width:180,editor:'datebox'},
-			{header:"状态",field:"state",align:'center',width:100,render:stateRender}
+			{header:"状态",field:"state",align:'center',width:100,render:stateRender},
+			{header:"操作",field:"",align:'center',width:180,render:opRender}
 		],
 		url:'user/list',
 		selector:'m',
@@ -33,7 +36,6 @@
      function add(){
     	 $.dialog({
     		 title:'用户新增',
-    		 width:350,
     		 url:'view/user/adduser.html',
     		 ok:ok
     	 });
@@ -161,8 +163,36 @@
      
      function opRender(v, r){
        var h = [];
-       h.push("<a href='javascript:void(0);' onclick=javascript:mk('" + r.id + "')>分配角色</a>");
+       h.push("<a class='btn btn-default btn-sm' onclick=del2('" + r.id + "')><i class='icon-remove'></i> 删除</a>");
+       h.push("<a class='btn btn-default btn-sm' onclick=assignrole('" + r.username + "')><i class='icon-pencil'></i> 分配角色</a>");
        return h.join('');
+     }
+     
+     function del2(id){
+    	 $.confirm('确定要干掉吗',function(btn){
+	    		if(btn){
+		    		var ids = [];
+			    	ids.push(id); 
+			   		$.ajax({
+			   			url:'user/del',
+			   			type: 'post',
+			   			data: {ids:ids.join(',')},
+			   			dataType: 'json',
+			   	        success: function(result){
+			   	        	$('#kkk').table('refresh');
+			   			}
+			   		});
+		   		}
+    	 });
+     }
+     
+     function assignrole(username){
+    	 $.dialog({
+    		 title:'分配角色',
+    		 url:'user/tosetrole',
+    		 params:{user:username},
+    		 ok:ok1
+    	 });
      }
      
      function mk(){
@@ -173,7 +203,6 @@
     	 }
     	 $.dialog({
     		 title:'分配角色',
-    		 height:120,
     		 url:'user/tosetrole?user=' + selected[0].username,
     		 ok:ok1
     	 });
@@ -191,9 +220,12 @@
 			type: 'post',
 			data: data,
 			dataType: 'json',
-			success: function(r){
-        		if(r.success){
-					$('#kkk').table('reload');
+			success: function(result){
+        		if(result.result){
+					win.close();
+					$.alert('success', result.msg, function(){
+						$('#kkk').table('reload');
+					});
         		}
 	  		}
 	  	});

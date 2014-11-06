@@ -16,7 +16,9 @@
 <script type="text/javascript">
 	var user = jQuery('input[name=user]').val();
 	jQuery.ajax({
-		url:'user/assignedroles?user=' + user,
+		url:'user/assignedroles',
+		type: 'post',
+		data:{user:user},
 		cache: false,
 		async:false,
 		dataType:'json',

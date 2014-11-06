@@ -14,7 +14,6 @@ font-family: "微软雅黑", "宋体", Arial, sans-serif;
 .table thead tr th {
 vertical-align: bottom;
 border: 1px solid #ccc;
-text-align: left;
 height:30px;
 line-height: 30px;
 padding-left: 6px;
@@ -28,7 +27,6 @@ height:32px;
 line-height: 32px;	
 padding-left: 6px;
 border: 1px solid #ccc;
-text-align: left;
 color:#333;
 font-size: 13px;
 }

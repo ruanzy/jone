@@ -457,9 +457,13 @@
 		$(opts.columns).each(function(){
 			var h = this.header;
 			var w = this.width;
+			var align = this.align;
 			code.push("<th");
 			if(w){
 				code.push(" width=" + w);
+			}
+			if(align){
+				code.push(" align='" + align + "'");
 			}
 			code.push(">" + h + "</th>");
 			
