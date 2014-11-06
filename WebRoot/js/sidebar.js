@@ -93,7 +93,7 @@
 				$(window).resize(function(){
 					var headers = $('.header', el);
 					var padding = parseInt(headers.css('padding'), 10);
-					var H = $(window).height()-$('#head').outerHeight()-42 - headers.size()*(headers.outerHeight()) -2;
+					var H = $(window).height()-$('#head').outerHeight() - headers.size()*(headers.outerHeight()) -2;
 					headers.next('.body').height(H);
 				}); 
 			});
