@@ -188,8 +188,8 @@
 	$("#topic-title li:first").click();
 	$("#tree").Tree({
 		url : "res/list?_=" + new Date().getTime(),
-		showIcon : true,
-		remove : remove
+		//remove : remove,
+		showIcon : true
 	});
 	$("#tree").Tree('expandAll');
 	function remove(nodeid) {
