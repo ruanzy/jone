@@ -6,171 +6,32 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script type="text/javascript">
-	$(function() {
-
-		$('a.accordion-toggle').click(function() {
-			$('.panel-collapse').slideUp();
-			var href = $(this).addClass('bold').attr('href');
-			$(href).slideDown();
-		});
-	});
+$(function(){
+    $("dl.tabs dt").click(function(){
+        $(this)
+            .siblings().removeClass("active").end()
+            .next("dd").andSelf().addClass("active");
+    });
+});
 </script>
 <style type="text/css">
-.bold {
-	font-weight: bold;
-}
+dl.tabs {}
+dl.tabs dt {float:left;position:relative;background:#fff;height:15px;padding:4px 12px 0;margin-bottom:0;cursor:pointer;}
+dl.tabs dt:hover {}
+dl.tabs dd {display:none;float:right;position:relative;width:100%;border:1px solid #CCCCD1;border-width:1px;}
+dl.tabs dd div {padding:10px;}
+dl.tabs dt.active {background:#fff;border:1px solid #CCCCD1;font-weight:bold;margin-bottom:-2px;border-bottom:none;}
+dl.tabs dd.active {display:block;}
 
-.accordion {
-	border: 1px solid #d8d8d8;
-	border-top-width: 0;
-}
-
-.panel-default {
-	border-color: #ddd;
-}
-
-div.heading {
-	color: #333;
-	background-color: #f5f5f5;
-	border-color: #ddd;
-	border-top: 1px solid #ddd;
-}
-
-.panel-title {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 16px;
-	color: inherit;
-}
-
-h4 {
-	font-size: 18px;
-}
-
-h1,h2,h3,h4,h5,h6 {
-	font-weight: 300 !important;
-	font-family: 'Open Sans', 'Segoe UI';
-}
-
-.accordion .panel-group .panel .collapse {
-	background-color: #fff;
-}
-
-.in {
-	display: block;
-}
-
-.collapse {
-	display: none;
-}
-
-.accordion.panel-group .panel-heading .accordion-toggle:hover {
-	color: #262626;
-	text-decoration: none;
-}
-
-.accordion-toggle {
-	color: #737373;
-	background-color: #fff;
-	position: relative;
-	font-size: 13px;
-	line-height: 1;
-	padding: 10px;
-	display: block;
-}
-
-a {
-	text-decoration: none;
-}
-
-.panel-body {
-	border-top-color: #d5d5d5 !important;
-	border-top: 1px solid #ddd;
-	background-color: #eee;
-	border-left: 2px solid #eee;
-	color: #262626 !important;
-}
 </style>
 </head>
 <body>
-	<div class="panel-group accordion" id="accordions">
-		<div class="panel panel-default">
-			<div class="heading">
-				<h4 class="panel-title">
-					<a class="accordion-toggle collapsed" data-toggle="collapse"
-						data-parent="#accordions" href="#collapseOnes"> <i
-						class="fa-fw fa fa-check"></i> Collapsible Group Item #1
-					</a>
-				</h4>
-			</div>
-			<div id="collapseOnes" class="panel-collapse collapse"
-				style="display: none;">
-				<div class="panel-body border-red">Anim pariatur cliche
-					reprehenderit, enim eiusmod high life accusamus terry richardson ad
-					squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-					brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin
-					coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-					helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-					proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-					craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-					probably haven't heard of them accusamus labore sustainable
-					VHS.Anim pariatur cliche reprehenderit, enim eiusmod high life
-					accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-					cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-					laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-					on it squid single-origin coffee nulla assumenda shoreditch et.
-					Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-					nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-					lomo. Leggings occaecat craft beer farm-to-table, raw denim
-					aesthetic synth nesciunt you probably haven't heard of them
-					accusamus labore sustainable VHS.</div>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="heading">
-				<h4 class="panel-title">
-					<a class="accordion-toggle collapsed" data-toggle="collapse"
-						data-parent="#accordions" href="#collapseTwos"> Collapsible
-						Group Item #2 </a>
-				</h4>
-			</div>
-			<div id="collapseTwos" class="panel-collapse collapse"
-				style="display: none;">
-				<div class="panel-body border-red">Anim pariatur cliche
-					reprehenderit, enim eiusmod high life accusamus terry richardson ad
-					squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-					brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin
-					coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-					helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-					proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-					craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-					probably haven't heard of them accusamus labore sustainable VHS.</div>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="heading">
-				<h4 class="panel-title">
-					<a class="accordion-toggle collapsed" data-toggle="collapse"
-						data-parent="#accordions" href="#collapseThrees"> Collapsible
-						Group Item #3 </a>
-				</h4>
-			</div>
-			<div id="collapseThrees" class="panel-collapse collapse">
-				<div class="panel-body border-gold">Anim pariatur cliche
-					reprehenderit, enim eiusmod high life accusamus terry richardson ad
-					squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-					brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin
-					coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-					helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-					proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-					craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-					probably haven't heard of them accusamus labore sustainable VHS.</div>
-			</div>
-		</div>
-	</div>
+<dl class="tabs">
+    <dt class="active">Вкладка 1</dt>
+    <dd class="active"><div>Содержимое 1</div></dd>
+    <dt>Вкладка 2</dt>
+    <dd><div>Содержимое 2</div></dd>
+</dl>
 
 </body>
 </html>
