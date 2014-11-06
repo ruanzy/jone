@@ -10,7 +10,6 @@ border-collapse: collapse;
 border-spacing: 0;
 border: 1px solid #DDD;
 font-family: "微软雅黑", "宋体", Arial, sans-serif;
-text-shadow: 1px 2px 1px #FFFFFF;
 }
 .table thead tr th {
 vertical-align: bottom;
@@ -22,6 +21,7 @@ padding-left: 6px;
 background-color: #DFF9FF;
 color:#333;
 font-size: 14px;
+text-shadow: 1px 2px 1px #FFFFFF;
 }
 .table tbody tr td{
 height:32px;
@@ -30,7 +30,6 @@ padding-left: 6px;
 border: 1px solid #ccc;
 text-align: left;
 color:#333;
-text-shadow: 1px 2px 1px #FFFFFF;
 font-size: 13px;
 }
 

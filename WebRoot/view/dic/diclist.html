@@ -1,11 +1,13 @@
 <div style="float: left;">
-<button id='addbtn' class='btn btn-success'><i class="icon-plus-sign"></i> 增加</button>
-<button id='delbtn' class='btn btn-success'><i class="icon-remove-sign"></i> 删除</button>
+<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</a>
+<a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
 </div>
 <div style="float: right;">
-	类别 <input type="text" id='searchtxt' class='txt' name="type" autocomplete="off"/>
-	<button class='btn btn-lightblue'><i class="icon-search"></i> 搜素</button>
-	</div>
+	<form id='search-form' class='search-form'>
+		<input type="text" id='searchtxt' class='txt' name="type" autocomplete="off" placeholder="请输入字典类型"/>
+		<button type="button"><i class="icon-search"></i></button>
+	</form>
+</div>	
 <div id='kkk'></div>
 <script type="text/javascript">
   
@@ -20,13 +22,16 @@
 		selector:'m',
 		condition:condition
 	});
+	 $('#search-form button').click(function(){
+    	 $('#kkk').table('reload');
+     });
           $('#addbtn').click(add);
      $('#delbtn').click(del);
      function add(){
     	 $.dialog({
     		 title:'字典新增',
     		 url:'view/dic/adddic.html',
-    		 height:180,
+    		 width:350,
     		 ok:ok
     	 });
      }
@@ -42,8 +47,11 @@
 				data: params,
 				dataType:'json',
 		        success:function(result){
-		        	if(result.success){
-						$('#kkk').table('reload');
+		        	if(result.result){
+						win.close();
+						$.alert('success', result.msg, function(){
+							$('#kkk').table('reload');
+						});
 					}
 				}
 			});	
@@ -59,21 +67,23 @@
     		 $.tip({content:'请选择至少一条记录'});
     		 return false;
     	 }
-    	 $.confirm({content:'确定要干掉吗', ok:function(){
-	    		var ids = [];
-		    	for(var k in selected){
-		    		ids.push(selected[k].id); 
-		    	}
-		   		$.ajax({
-		   			url:'dic/del',
-		   			type: 'post',
-		   			data: {ids:ids.join(',')},
-		   			dataType: 'json',
-		   	        success: function(result){
-		   	        	$('#kkk').table('refresh');
-		   			}
-		   		});
-    	 }});
+    	 $.confirm('确定要干掉吗', function(btn){
+	    		if(btn){
+		    		var ids = [];
+			    	for(var k in selected){
+			    		ids.push(selected[k].id); 
+			    	}
+			   		$.ajax({
+			   			url:'dic/del',
+			   			type: 'post',
+			   			data: {ids:ids.join(',')},
+			   			dataType: 'json',
+			   	        success: function(result){
+			   	        	$('#kkk').table('refresh');
+			   			}
+			   		});
+		   		}
+    	 });
      }
      
      function mod(){
@@ -84,10 +94,6 @@
     	 }
     	 
      }
-     
-     $('.btn-lightblue').click(function(){
-    	 $('#kkk').table('reload');
-     });
      
      function condition(){
     	 var type = $('input[name=type]').val();
