@@ -2,23 +2,22 @@
 	width: 300px;
 	min-width: 200px;
 	max-width: 1000px;
-	box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+	box-shadow: 1px 0 10px 1px rgba(0,0,0,.3);
 	color: #000;
 	background-color: #fff;
 	border: rgba(0, 0, 0, 0);
 	margin: 0 20px 20px 0;
-	float:left;
+	float: left;
 }
 
 .well-header {
 	color: #53a93f;
-	border-bottom: 3px solid #53a93f;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 	padding: 10px;
-	font-size: 15px;
-	font-weight: bold;
+	line-height: 1;
 }
 
-.well-header-success {
+.well-header-success1 {
 	color: #53a93f;
 	border-bottom: 3px solid #53a93f;
 }
@@ -26,6 +25,19 @@
 .well-header-danger {
 	color: #d73d32;
 	border-bottom: 3px solid #d73d32;
+}
+
+.well-header-title {
+	font-size: 14px;
+	font-weight: bold;
+	color: #53a93f;
+}
+
+.well-header-buttons {
+	color: #777;
+	font-size: 14px;
+	float: right;
+	text-align: left;
 }
 
 .well-body {
