@@ -30,6 +30,7 @@
 	<link rel="stylesheet" type="text/css" href="css/msg.css" />
 	<link rel="stylesheet" type="text/css" href="css/well.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/cache.js"></script>
 	<script type="text/javascript" src="js/box.js"></script>
 	<script type="text/javascript" src="js/tip.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
@@ -39,7 +40,7 @@
 	<script type="text/javascript" src="js/autocomplete2.js"></script>
 	<script type="text/javascript" src="js/datepicker.js"></script>
 	<script type="text/javascript" src="js/datepicker2.js"></script>
-	<script type="text/javascript" src="js/tabs.js"></script>
+	<script type="text/javascript" src="js/tabs2.js"></script>
 	<script type="text/javascript" src="js/dropdown.js"></script>
 	<script type="text/javascript" src="js/tree.js"></script>
 	<script type="text/javascript" src="js/grid2.js"></script>

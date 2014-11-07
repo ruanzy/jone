@@ -2,7 +2,7 @@
 	width: 300px;
 	min-width: 200px;
 	max-width: 1000px;
-	box-shadow: 1px 0 10px 1px rgba(0,0,0,.3);
+	box-shadow: 1px 0 10px 1px rgba(0, 0, 0, .3);
 	color: #000;
 	background-color: #fff;
 	border: rgba(0, 0, 0, 0);
@@ -72,4 +72,48 @@
 	filter: alpha(opacity = 20);
 	opacity: .2;
 	cursor: pointer;
+}
+
+dl.tabs {
+	width: 350px;
+	margin: 0;
+}
+
+dl.tabs dt {
+	background-color: #eee;
+}
+
+dl.tabs dt a {
+	display: inline-block;
+	height: 25px;
+	border: 0px solid #CCCCD1;
+	border-bottom: none;
+	cursor: pointer;
+	margin-left: 10px;
+	padding: 8px 10px 0 10px;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+dl.tabs dd {
+	border: 1px solid #CCCCD1;
+	padding: 10px;
+	margin: 0;
+	display: none;
+	height: 300px;
+}
+
+dl.tabs dt a.active {
+	background: #fff;
+	border: 1px solid #CCCCD1;
+	border-top: 2px solid #f4b400;
+	font-weight: bold;
+	margin-bottom: -1px;
+	border-bottom: none;
+	height: 24px;
+	padding-bottom: 2px;
+}
+
+dl.tabs dd.active {
+	display: block;
 }

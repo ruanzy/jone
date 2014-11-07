@@ -1,37 +1,76 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>Plupload使用指南</title>
-<!-- 首先需要引入plupload的源代码 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script type="text/javascript">
-$(function(){
-    $("dl.tabs dt").click(function(){
-        $(this)
-            .siblings().removeClass("active").end()
-            .next("dd").andSelf().addClass("active");
-    });
-});
+	$(function() {
+		var tabs = $("dl.tabs dt a");
+		var panels = $("dl.tabs dd");
+
+		tabs.click(function() {
+			var index = tabs.index(this);
+			$(this).siblings().removeClass("active").end().addClass("active");
+			panels.removeClass("active").eq(index).addClass("active");
+		});
+	});
 </script>
 <style type="text/css">
-dl.tabs {}
-dl.tabs dt {float:left;position:relative;background:#fff;height:15px;padding:4px 12px 0;margin-bottom:0;cursor:pointer;}
-dl.tabs dt:hover {}
-dl.tabs dd {display:none;float:right;position:relative;width:100%;border:1px solid #CCCCD1;border-width:1px;}
-dl.tabs dd div {padding:10px;}
-dl.tabs dt.active {background:#fff;border:1px solid #CCCCD1;font-weight:bold;margin-bottom:-2px;border-bottom:none;}
-dl.tabs dd.active {display:block;}
+dl.tabs {
+	width: 350px;
+}
 
+dl.tabs dt {
+	background-color: #eee;
+}
+
+dl.tabs dt a {
+	display: inline-block;
+	height: 25px;
+	border: 0px solid #CCCCD1;
+	border-bottom: none;
+	cursor: pointer;
+	margin-left: 10px;
+	padding: 8px 10px 0 10px;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+dl.tabs dd {
+	border: 1px solid #CCCCD1;
+	padding: 10px;
+	margin: 0;
+	display: none;
+	height: 300px;
+}
+
+dl.tabs dt a.active {
+	background: #fff;
+	border: 1px solid #CCCCD1;
+	border-top: 2px solid #f4b400;
+	font-weight: bold;
+	margin-bottom: -1px;
+	border-bottom: none;
+	height: 24px;
+	padding-bottom: 2px;
+}
+
+dl.tabs dd.active {
+	display: block;
+}
 </style>
 </head>
 <body>
-<dl class="tabs">
-    <dt class="active">Вкладка 1</dt>
-    <dd class="active"><div>Содержимое 1</div></dd>
-    <dt>Вкладка 2</dt>
-    <dd><div>Содержимое 2</div></dd>
-</dl>
+	<dl class="tabs">
+		<dt>
+			<a class='active'>切换卡1</a><a>切换卡2</a><a>切换卡3</a>
+		</dt>
+		<dd class='active'>内容1</dd>
+		<dd>内容2</dd>
+		<dd>内容3</dd>
+	</dl>
 
 </body>
 </html>

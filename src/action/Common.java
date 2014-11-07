@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.fileupload.FileItem;
-import org.rzy.util.Uploader;
 import org.rzy.web.I18N;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
@@ -79,18 +77,16 @@ public class Common
 		return new Json(ops);
 	}
 
-	@SuppressWarnings("unchecked")
 	public Result dic()
 	{
-		String type = WebUtil.getParameter("type");
-		Map<String, Object> map = null;
 		Object o = WebUtil.attr("dic", "application");
-		if (o != null)
-		{
-			Map<String, Map<String, Object>> dics = (Map<String, Map<String, Object>>) o;
-			map = dics.get(type);
-		}
-		return new Json(map);
+		return new Json(o);
+	}
+	
+	public Result res()
+	{
+		Object o = WebUtil.attr("allres", "application");
+		return new Json(o);
 	}
 
 	public Result lineusers()
@@ -176,11 +172,11 @@ public class Common
 
 	public void upload()
 	{
-		String path = "d:/upload/";
-		Uploader uploader = Uploader.prepare();
-		Map<String, String> parameters = uploader.getParameters();
-		List<FileItem> items = uploader.getItems();
-		String flag = parameters.get("flag");
-		String id = parameters.get("id");
+//		String path = "d:/upload/";
+//		Uploader uploader = Uploader.prepare();
+//		Map<String, String> parameters = uploader.getParameters();
+//		List<FileItem> items = uploader.getItems();
+//		String flag = parameters.get("flag");
+//		String id = parameters.get("id");
 	}
 }
