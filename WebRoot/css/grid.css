@@ -14,7 +14,7 @@ font-family: "微软雅黑", "宋体", Arial, sans-serif;
 .table thead tr th {
 vertical-align: bottom;
 border: 1px solid #ddd;
-border-bottom: 3px solid #a0d468;
+border-bottom: 2px solid #a0d468;
 height:30px;
 line-height: 30px;
 padding-left: 6px;
