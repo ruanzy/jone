@@ -77,10 +77,13 @@
 dl.tabs {
 	width: 350px;
 	margin: 0;
+	border: 1px solid #CCCCD1;
+	box-shadow: 1px 0 10px 1px rgba(0, 0, 0, .3);
 }
 
 dl.tabs dt {
-	background-color: #eee;
+	background-color: #fbfbfb;
+	padding-top:2px;
 }
 
 dl.tabs dt a {
@@ -96,7 +99,7 @@ dl.tabs dt a {
 }
 
 dl.tabs dd {
-	border: 1px solid #CCCCD1;
+	border-top: 1px solid #CCCCD1;
 	padding: 10px;
 	margin: 0;
 	display: none;
