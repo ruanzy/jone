@@ -66,7 +66,7 @@ CREATE TABLE dic (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
+--insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
 
 insert into resources values ('1', '系统管理', '1', null, null, '0', null, '1', '1');
 insert into resources values ('2', '用户管理', '2', null, 'view/user/userlist.html', '1', null, '1/2', '1');
@@ -96,3 +96,8 @@ insert into resources values(101,'测试菜单',2,null,'test.jsp',100,null,'100/
 insert into resources values(102,'增加',3,'TestService.add','testadd',101,null,'100/101/102',1);
 insert into resources values(103,'修改',3,'TestService.mod','testmod',101,null,'100/101/103',1);
 insert into resources values(104,'删除',3,'TestService.del','testdel',101,null,'100/101/104',1);
+
+insert into resources values(200,'UI模块',1,null,null,0,null,'200',1);
+insert into resources values(201,'Label',2,null,'view/comp/label.html',200,null,'200/201',1);
+insert into resources values(202,'Button',2,null,'view/comp/button.html',200,null,'200/202',1);
+insert into resources values(203,'Dialog',2,null,'view/comp/msg.html',200,null,'200/203',1);
