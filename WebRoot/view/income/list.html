@@ -10,7 +10,6 @@
 
  
   
-      var state = dic('userstate');
 	  	  $('#kkk2').table({
 		columns:[
 			//{header:"ID",field:"id",width:50,align:'center'},
@@ -142,8 +141,11 @@
      }
      
      function stateRender(s){
-    	 s = s||'1';
-    	 return "<font title='" + state[s] + "' color='" + {0:'red', 1:'green'}[s] + "'>"  +  state[s]  + "</font>";
+    	 if(s == 1){
+    	 	return "<label class='label label-success'>正常</label>";
+    	 }else{
+    	 	return "<label class='label label-danger'>禁止</label>";
+    	 }
      }
      
      function opRender(v, r){
