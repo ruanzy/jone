@@ -24,7 +24,7 @@ public class Log
 	public Result view()
 	{
 		String logfile = System.getProperty("logDir") + File.separator + "JOne.log";
-		String content = IOUtil.tail(logfile, 10L);
-		return new Text(content);
+		String content = IOUtil.tail(logfile, 50L);
+		return new Text("<pre>" + content + "</pre>");
 	}
 }
