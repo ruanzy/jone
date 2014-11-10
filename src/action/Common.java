@@ -10,6 +10,7 @@ import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
 import org.rzy.web.result.Msg;
+import org.rzy.web.result.Page;
 
 public class Common
 {
@@ -156,11 +157,10 @@ public class Common
 		}
 	}
 
-	public String logout()
+	public Result logout()
 	{
 		WebUtil.clearSession();
-		WebUtil.redirect("login.html");
-		return null;
+		return new Page("login.html", true);
 	}
 
 	public Result welcome()

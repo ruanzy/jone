@@ -9,6 +9,11 @@ public class Page implements Result
 
 	boolean redirect;
 
+	public Page(String page)
+	{
+		this.page = page;
+	}
+	
 	public Page(String page, boolean redirect)
 	{
 		this.page = page;

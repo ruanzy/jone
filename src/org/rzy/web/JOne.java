@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -91,22 +90,6 @@ public class JOne implements Filter
 			if (result instanceof Result)
 			{
 				((Result) result).render();
-			}
-			if (result instanceof String)
-			{
-				String path = result.toString();
-				if (path.startsWith("redirect:"))
-				{
-					path = path.substring(9);
-					String basePath = request.getScheme() + "://" + request.getServerName() + ":"
-							+ request.getServerPort() + request.getContextPath() + "/";
-					response.sendRedirect(basePath + path);
-				}
-				else
-				{
-					RequestDispatcher rd = request.getRequestDispatcher(path);
-					rd.forward(request, response);
-				}
 			}
 			long t2 = System.currentTimeMillis();
 			log.debug("time=" + (t2 - t1) + "ms");
