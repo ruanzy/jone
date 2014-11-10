@@ -1,5 +1,6 @@
 package log;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,10 +34,13 @@ public class FileLogHandler implements LogHandler
 		logs.append(requestBody);
 		String logfile = System.getProperty("logDir") + File.separator + "log.txt";
 		FileWriter fw = null;
+		BufferedWriter bw = null;
 		try
 		{
-			fw = new FileWriter(logfile);
-			fw.write(logs.toString());
+			fw = new FileWriter(logfile, true);
+			bw = new BufferedWriter(fw);
+			bw.write(logs.toString());
+			bw.write(13);
 		}
 		catch (IOException e)
 		{
@@ -44,6 +48,7 @@ public class FileLogHandler implements LogHandler
 		}
 		finally
 		{
+			IOUtils.closeQuietly(bw);
 			IOUtils.closeQuietly(fw);
 		}
 	}
