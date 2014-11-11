@@ -29,7 +29,27 @@ body,button,input,table {
 	min-height: 45px;
 	position: relative;
 	background: #438eb9;
-	
+}
+
+#sidebar {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	border: 1px solid #ccc;
+	border-width: 0 1px 0 1px;
+	white-space: nowrap;
+	width: 17%;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
+}
+
+#center {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 #head-left {
@@ -48,7 +68,7 @@ body,button,input,table {
 	line-height: 45px;
 	font-size: 20px;
 	padding-left: 15px;
-	left:200px;
+	left: 200px;
 	position: absolute;
 }
 
@@ -87,14 +107,6 @@ body,button,input,table {
 	background-color: #93cbf9;
 }
 
-#sidebar {
-	float: left;
-	border: 1px solid #ccc;
-	border-width: 0 1px 1px 0;
-	white-space: nowrap;
-	width: 17%;
-	box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
-}
 
 .nav-list {
 	margin: 0;
@@ -180,7 +192,6 @@ ul {
 #pill {
 	height: 41px;
 	border-bottom: 1px solid #E1E1E1;
-	-webkit-box-shadow: 1px 0 3px #EEE, inset 0 0 3px white;
 	box-shadow: 1px 0 3px #EEE, inset 0 0 3px white;
 	color: #D84C31;
 	white-space: nowrap;

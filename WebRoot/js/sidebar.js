@@ -68,7 +68,7 @@
 				}else{
 					H = el.height() - headers.size()*(headers.outerHeight());
 				}
-				var H = $(window).height()-$('#head').outerHeight() - headers.size()*(headers.outerHeight()) -2;
+				var H = $(window).height()-$('#header').outerHeight() - headers.size()*(headers.outerHeight()) -2;
 				headers.next('.body').height(H).hide();
 				headers.click(function(){
 					$('.ddd', el).removeClass('ddd').next('.body').hide();
@@ -93,7 +93,7 @@
 				$(window).resize(function(){
 					var headers = $('.header', el);
 					var padding = parseInt(headers.css('padding'), 10);
-					var H = $(window).height()-$('#head').outerHeight() - headers.size()*(headers.outerHeight()) -2;
+					var H = $(window).height()-$('#header').outerHeight() - headers.size()*(headers.outerHeight()) -2;
 					headers.next('.body').height(H);
 				}); 
 			});
