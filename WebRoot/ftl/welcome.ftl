@@ -51,6 +51,9 @@ JAVA版本: ${version}
 	</div>
 </div>
 <script type="text/javascript">
+	$('.well-header-buttons').click(function(){
+		$(this).parent().siblings('.well-body').toggle();
+	});
 	var ctx = document.getElementById("chart-area").getContext("2d");
 	var data = [
 		{
