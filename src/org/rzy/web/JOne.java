@@ -40,27 +40,26 @@ public class JOne implements Filter
 				return;
 			}
 
-			// boolean nologin =
-			// Pattern.compile("(captcha|common/login|common/logout)$").matcher(url).find();
-			// if (!nologin)
-			// {
-			// Object user = request.getSession().getAttribute("user");
-			// if (user == null)
-			// {
-			// if (Context.isAjax())
-			// {
-			// response.sendError(1111);
-			// }
-			// else
-			// {
-			// response.setCharacterEncoding("UTF-8");
-			// String script = "<script>alert('" + XUtil.get("10000")
-			// + "');document.location='login.html';</script>";
-			// response.getWriter().println(script);
-			// }
-			// return;
-			// }
-			// }
+			 boolean nologin =
+			 Pattern.compile("(captcha|common/login|common/logout)$").matcher(url).find();
+			 if (!nologin)
+			 {
+			 Object user = request.getSession().getAttribute("USER");
+			 if (user == null)
+			 {
+			 if (Context.isAjax())
+			 {
+			 response.sendError(1111);
+			 }
+			 else
+			 {
+			 response.setCharacterEncoding("UTF-8");
+			 String script = "<script>document.location='login.html';</script>";
+			 response.getWriter().println(script);
+			 }
+			 return;
+			 }
+			 }
 			if (page)
 			{
 				chain.doFilter(Context.getRequest(), Context.getResponse());
