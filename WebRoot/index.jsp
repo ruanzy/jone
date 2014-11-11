@@ -47,6 +47,11 @@
 	<script type="text/javascript" src="js/checkboxlist.js"></script>
 	<script type="text/javascript" src="js/down.js"></script>
 	<script type="text/javascript" src="js/msg.js"></script>
+	<script type="text/javascript" src="js/ajax-pushlet-client.js"></script>
+	<script type="text/javascript" src="js/Chart.min.js"></script>
+	<!--[if lt IE 9]>
+		<script language="javascript" type="text/javascript" src="js/excanvas.js"></script>
+	<![endif]-->
 </head>
 <BODY>
 	<div id="head" class="station-icon">

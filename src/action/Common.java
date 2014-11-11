@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.rzy.util.ServerInfo;
 import org.rzy.web.I18N;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
@@ -83,7 +84,7 @@ public class Common
 		Object o = WebUtil.attr("dic", "application");
 		return new Json(o);
 	}
-	
+
 	public Result res()
 	{
 		Object o = WebUtil.attr("allres", "application");
@@ -167,16 +168,24 @@ public class Common
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", WebUtil.getParameter("id"));
+		map = ServerInfo.base();
+		map.putAll(ServerInfo.mem());
 		return new Ftl("welcome.ftl", map);
 	}
 
 	public void upload()
 	{
-//		String path = "d:/upload/";
-//		Uploader uploader = Uploader.prepare();
-//		Map<String, String> parameters = uploader.getParameters();
-//		List<FileItem> items = uploader.getItems();
-//		String flag = parameters.get("flag");
-//		String id = parameters.get("id");
+		// String path = "d:/upload/";
+		// Uploader uploader = Uploader.prepare();
+		// Map<String, String> parameters = uploader.getParameters();
+		// List<FileItem> items = uploader.getItems();
+		// String flag = parameters.get("flag");
+		// String id = parameters.get("id");
+	}
+
+	public Result base()
+	{
+		Map<String, Object> map = ServerInfo.base();
+		return new Json(map);
 	}
 }

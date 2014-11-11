@@ -90,3 +90,22 @@
 	-o-transition: width .6s ease;
 	transition: width .6s ease;
 }
+
+.block {
+	display:inline-block;
+	width:10px;
+	height:10px;
+	margin-right:10px;
+}
+
+.block-success {
+	background-color:#53a93f;
+}
+
+.block-warning {
+	background-color:#f4b400;
+}
+
+.block-danger {
+	background-color:#d73d32;
+}
