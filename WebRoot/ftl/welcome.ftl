@@ -1,4 +1,4 @@
-<div class="well" style='width:auto;height:auto;'>
+<div class="well" style='width:45%;height:auto;'>
 	<div class="well-header well-header-success">
 		<span class='well-header-title'> <i class="icon-desktop"></i>
 			服务器信息
@@ -8,20 +8,33 @@
 		</div>
 	</div>
 	<div class="well-body">
-		<pre>
+		<p>
 服务器IP: ${ip}
-
+</p>
+<p>
 操作系统: ${os}
-
+</p>
+<p>
 CPU个数: ${processors}
-
+</p>
+<p>
 JAVA版本: ${version}
-
+</p>
+<p>
 最大可用内存: ${max}G
-		</pre>
+</p>
+<p>		
+当前线程总数:<span id='totalThread'><span>
+</p>
+<p>		
+<span>CPU使用情况:</span><div class='progress'><div class='progress-bar' id='pb1'></div></div>
+</p>
+<p>		
+<span>内存使用情况:</span><div class='progress'><div class='progress-bar' id='pb2'></div></div>
+</p>
 	</div>
 </div>
-<div class="well" style='width:auto;height:auto;'>
+<div class="well" style='width:auto;height:auto;display:none;'>
 	<div class="well-header well-header-success">
 		<span class='well-header-title'> <i class="icon-desktop"></i>
 			内存情况
@@ -59,11 +72,18 @@ JAVA版本: ${version}
 		var total = event.get("total");
 		var free = event.get("free");
 		var use = event.get("use");
+		var totalThread = event.get("totalThread");
+		var cpuRatio = event.get("cpuRatio");
 		$('#total').html(total);
 		$('#free').html(free);
 		$('#use').html(use);
 		//chart.segments[0].value = use;
 		chart.segments[0].value = free;
 		chart.update();
+		var pv1 = '0.00%';
+		var pv2 = ((use/total)*100).toFixed(2) + '%';
+		$('#pb1').width(pv1).html(pv1);
+		$('#pb2').width(pv2).html(pv2);
+		$('#totalThread').text(totalThread);
 	}
 </script>

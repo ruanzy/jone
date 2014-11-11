@@ -169,7 +169,6 @@ public class Common
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", WebUtil.getParameter("id"));
 		map = ServerInfo.base();
-		map.putAll(ServerInfo.mem());
 		return new Ftl("welcome.ftl", map);
 	}
 
