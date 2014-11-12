@@ -99,6 +99,11 @@ public class JOne implements Filter
 			if (e instanceof ClassNotFoundException)
 			{
 				e.printStackTrace();
+				if (Context.isAjax())
+				{
+					response.setStatus(9999);
+					response.getWriter().print(e);
+				}
 			}
 			else if (e instanceof NoSuchMethodException)
 			{

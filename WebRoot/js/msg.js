@@ -39,7 +39,9 @@
 		$('.message-footer .btn', alert).click(function() {
 			alert.hide().remove();
 			$.alert.opened = false;
-			callback();
+			if(callback){
+				callback();
+			}
 		});
 		_alert = alert;
 		return _alert;
@@ -237,13 +239,9 @@ function permit(context) {
 }
 
 $(document).ajaxError(function(event, xhr, options, exc) {
-	alert(xhr.status);
 	if (xhr.status == 1111) {
-		$.alert({
-			msg : '您的登录已过期,请重新登录！',
-			fn : function() {
+		$.alert('success', '您的登录已过期,请重新登录！', function() {
 				top.document.location = './';
-			}
 		});
 	} else if (xhr.status == 1112) {
 		$.alert({
@@ -252,7 +250,7 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 	} else if (xhr.status == 2222) {
 		alert('您没有权限！');
 	} else if (xhr.status == 404) {
-		alert('您访问的资源不存在！');
+		$.alert('success', '您访问的资源不存在！');
 	} else if (xhr.status == 3333) {
 		R.alert({
 			msg : '业务接口请求异常！'
@@ -262,9 +260,7 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 			msg : '业务接口连接异常！'
 		});
 	} else {
-		$.alert({
-			msg : xhr.responseText
-		});
+		$.alert('success', xhr.responseText);
 	}
 });
 $.extend({

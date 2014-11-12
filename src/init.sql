@@ -65,6 +65,13 @@ CREATE TABLE dic (
 	memo varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS depart;
+CREATE TABLE depart (
+	id int(11) NOT NULL,
+	name varchar(100) NOT NULL,
+	memo varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
 
@@ -85,6 +92,7 @@ insert into resources values ('14', '字典删除', '3', 'PmsService.deldic', 'p
 insert into resources values ('15', '用户增加', '3', 'PmsService.reg', 'pmsreg', '2', null, '1/2/15', '1');
 insert into resources values ('16', '用户激活', '3', 'PmsService.activeuser', 'pmsactiveuser', '2', null, '1/2/16', '1');
 insert into resources values ('17', '用户禁止', '3', 'PmsService.canceluser', 'pmscanceluser', '2', null, '1/2/17', '1');
+insert into resources values ('18', '组织机构管理', '2', null, 'view/organize/list.html', '1', null, '1/18', '1');
 
 insert into seq values(1000,'resources');
 insert into seq values(2,'dic');

@@ -1,0 +1,19 @@
+<div id='kkk'></div>
+
+<script type="text/javascript">
+
+ 
+  
+      //var state = dic('userstate');
+	  	  $('#kkk').table({
+		columns:[
+			//{header:"ID",field:"id",width:50,align:'center'},
+			{header:"用户名",field:"username",tip:true,editor:'text'},
+			{header:"注册时间",field:"regtime",align:'center',width:180}
+		],
+		url:'user/list',
+		selector:'m',
+		condition:condition
+	});
+	
+</script>
