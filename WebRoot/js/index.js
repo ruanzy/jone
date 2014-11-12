@@ -52,9 +52,11 @@ $(function() {
 		$('#dd1').toggle(
 				function(e) {
 					$('#sidebar').hide();
+					$('#content', body).css('margin-left', 0);
 				},
 				function(e) {
 					$('#sidebar').show();
+					$('#content', body).css('margin-left', sw);
 				}
 		);
 	});
