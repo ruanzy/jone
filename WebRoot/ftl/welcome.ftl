@@ -26,9 +26,10 @@ JAVA版本: ${version}
 <p>		
 当前线程总数:<span id='totalThread'><span>
 </p>
+<!--
 <p>		
 <span>CPU使用情况:</span><div class='progress'><div class='progress-bar' id='pb1'></div></div>
-</p>
+</p>-->
 <p>		
 <span>内存使用情况:</span><div class='progress'><div class='progress-bar' id='pb2'></div></div>
 </p>
