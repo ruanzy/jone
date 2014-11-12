@@ -54,7 +54,16 @@
 </head>
 <BODY>
 	<div id="header" class="station-icon"></div>
-	<div id="sidebar"></div>
-	<div id="center"></div>
+	<div id='center'>
+		<div id="sidebar"></div>
+		<div id="content">
+			<div id="pill">
+				<span id='nav'>
+					<i class='icon-home'></i> 欢迎您
+				</span>
+			</div>
+			<div id="main"></div>
+		</div>
+	</div>
 </BODY>
 <HTML>

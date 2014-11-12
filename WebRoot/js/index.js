@@ -1,13 +1,13 @@
 $(function() {	
 	var body = $('body');
-	var W1 = $(window).width();
+	var WW = $(window).width();
+	var WH = $(window).height();
 	var sw = 190;
-	body.addClass('layout');
 	$('#sidebar', body).width(sw);
 	var NH = $('#header').outerHeight();
-	$('#sidebar', body).css('margin-top', NH);
 	$('#center', body).css('margin-top', NH);
-	$('#center', body).css('margin-left', sw);
+	$('#content', body).css('margin-left', sw);
+	$('#content', body).height(WH - NH);
 	$('#header').load('common/header', function(){
 		var items = [ {
 			icon : 'icon-cog',
@@ -52,11 +52,9 @@ $(function() {
 		$('#dd1').toggle(
 				function(e) {
 					$('#sidebar').hide();
-					$('#center').css('marginLeft', 0);
 				},
 				function(e) {
 					$('#sidebar').show();
-					$('#center').css('marginLeft', 190);
 				}
 		);
 	});
@@ -64,7 +62,9 @@ $(function() {
 		title : '导航菜单',
 		url : 'common/menu'
 	});
-	$('#center').load('common/center',function(){
-		$('#main').load('common/welcome');
-	});
+	var CH = $('#content', body).outerHeight();
+	$('#main', body).height(CH - 41 - 60);
+	$('#main').load('common/welcome');
+	/**$('#content').load('common/center',function(){
+	});**/
 });
