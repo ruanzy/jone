@@ -371,6 +371,13 @@ public class PmsService
 		String sql = "select * from role";
 		return dao.find(sql);
 	}
+	
+	public List<Map<String, Object>> userrole(String user)
+	{
+		String sql = "select r.id, r.name, EXISTS(select * from userrole where userrole.userid = ? and userrole.roleid = r.id) as checked from role r";
+		Object[] params = new Object[] { user };
+		return dao.find(sql, params);
+	}
 
 	public void setrole(String user, String roles)
 	{
@@ -462,5 +469,14 @@ public class PmsService
 	{
 		String sql = "select * from users";
 		return dao.pager(sql, page, pagesize);
+	}
+	
+	public static void main(String[] args)
+	{
+		List<Map<String, Object>> list = new PmsService().userrole("用户测试");
+		for (Map<String, Object> map : list)
+		{
+			System.out.println(map.get("name")+ "==" + map.get("checked"));
+		}
 	}
 }

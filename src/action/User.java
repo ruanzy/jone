@@ -59,9 +59,10 @@ public class User
 
 	public Result tosetrole()
 	{
+		String user = WebUtil.getParameter("user");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", WebUtil.getParameter("user"));
-		map.put("roles", WebUtil.call("PmsService.allrole"));
+		map.put("roles", WebUtil.call("PmsService.userrole", user));
 		return new Ftl("setrole.ftl", map);
 	}
 
