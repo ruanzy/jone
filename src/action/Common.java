@@ -18,7 +18,7 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result menu()
 	{
-		String user = WebUtil.getUser();
+		String user = WebUtil.getUser().getName();
 		Object o = null;
 		List<Map<String, Object>> res = null;
 		List<Map<String, Object>> menus = null;
@@ -50,7 +50,7 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result op()
 	{
-		String user = WebUtil.getUser();
+		String user = WebUtil.getUser().getName();
 		Object o = null;
 		List<Map<String, Object>> res = null;
 		List<Map<String, Object>> ops = null;

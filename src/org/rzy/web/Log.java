@@ -13,7 +13,7 @@ public class Log
 
 	public Log(String sid, Object[] args)
 	{
-		this.user = WebUtil.getUser();
+		this.user = WebUtil.getUser().getName();
 		this.ip = WebUtil.getIP();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.time = df.format(new Date());

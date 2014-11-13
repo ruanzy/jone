@@ -135,10 +135,10 @@ public class WebUtil
 		}
 	}
 
-	public static String getUser()
+	public static User getUser()
 	{
 		Object user = getSession().getAttribute(USERKEY);
-		return user == null ? null : String.valueOf(user);
+		return user == null ? null : (User)user;
 	}
 
 	public static void setUser(User user)
