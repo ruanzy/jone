@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.util.ServerInfo;
-import org.rzy.web.I18N;
 import org.rzy.web.Result;
+import org.rzy.web.User;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
@@ -103,29 +103,21 @@ public class Common
 		String vc = WebUtil.getParameter("vc");
 		String username = WebUtil.getParameter("username");
 		String password = WebUtil.getParameter("password");
+		User u = new User(username, password);
 		if (!svc.equalsIgnoreCase(vc))
 		{
-			String msg = I18N.get("20000");
-			return new Msg(false, msg);
+			return new Msg(false, "验证码不正确!");
 		}
-		if ("admin".equals(username))
-		{
-			if (!"162534".equals(password))
-			{
-				return new Msg(false, "用户名或密码错误！");
-			}
-			WebUtil.setUser("admin");
-		}
-		else
+		if (!u.isAdmin())
 		{
 			Object user = WebUtil.call("PmsService.login", username, password);
 			if (user == null)
 			{
-				return new Msg(false, "用户名或密码错误！");
+				return new Msg(false, "用户名或密码错误!");
 			}
-			WebUtil.setUser(username);
 			WebUtil.attr("res", WebUtil.call("PmsService.userres", username), "session");
 		}
+		WebUtil.setUser(u);
 		loadResandDic();
 		return new Msg(true, "login success");
 	}

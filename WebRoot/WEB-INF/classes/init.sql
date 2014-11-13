@@ -69,6 +69,8 @@ DROP TABLE IF EXISTS depart;
 CREATE TABLE depart (
 	id int(11) NOT NULL,
 	name varchar(100) NOT NULL,
+	pid int(11) NOT NULL,
+	path varchar(100) NOT NULL,
 	memo varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

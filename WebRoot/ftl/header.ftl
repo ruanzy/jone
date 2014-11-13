@@ -4,7 +4,7 @@
 <div id="head-right">
 	<ul>
 		<li class='headitem light-blue'>
-		<dl id='asd' class='rzy-sidedown'><dt><i class="icon-user"></i>欢迎您,${user} <i class="icon-angle-down"></i></dt><dd></dd></dl>
+		<dl id='asd' class='rzy-sidedown'><dt><i class="icon-user"></i>欢迎您,${user.name} <i class="icon-angle-down"></i></dt><dd></dd></dl>
 		</li>
 		<li class='headitem purple'><a><i class="icon-envelope"></i> 信息</a>
 			<span class='badge label-warning'>5</span>

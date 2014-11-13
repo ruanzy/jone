@@ -141,7 +141,7 @@ public class WebUtil
 		return user == null ? null : String.valueOf(user);
 	}
 
-	public static void setUser(String user)
+	public static void setUser(User user)
 	{
 		getSession().setAttribute(USERKEY, user);
 	}
