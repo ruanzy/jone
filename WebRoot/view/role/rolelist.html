@@ -41,27 +41,43 @@
     		 title:'角色新增',
     		 width:350,
     		 url:'view/role/addrole.html',
-    		 ok:function(win){
-   		     	var name = win.find('input[name=name]').val();
-		    	var params = {name:name};
-		    	$.ajax({
-					url:'role/add',
-					type: 'post',
-					data: params,
-					dataType:'json',
-			        success:function(result){
-			        	if(result.result){
-			        		win.close();
-							$.alert('success', result.msg, function(){
-								$('#kkk').table('reload');
-							});
-						}
-					}
-				});	
-    		 }
+			buttons:[
+			    {
+			    	text : 'OK',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		ok(d);
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			]
     	 });
      }
-     
+         		function ok(win){
+	   		     	var name = win.find('input[name=name]').val();
+			    	var params = {name:name};
+			    	$.ajax({
+						url:'role/add',
+						type: 'post',
+						data: params,
+						dataType:'json',
+				        success:function(result){
+				        	if(result.result){
+				        		win.close();
+								$.alert('success', result.msg, function(){
+									$('#kkk').table('reload');
+								});
+							}
+						}
+					});	
+    		 }
           
      function del(){
     	 var selected = $('#kkk').table('getSelected');
@@ -91,11 +107,27 @@
     		 return false;
     	 }
     	 $.dialog({
-    		 title:'分配资源',
-    		 width:230,
-    		 height:300,
-    		 url:'setres.jsp?id=' + selected[0].id,
-    		 ok:ok1
+			title:'分配资源',
+			width:230,
+			height:300,
+			url:'setres.jsp?id=' + selected[0].id,
+			buttons:[
+			    {
+			    	text : 'OK',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		ok1(d);
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			]
     	 });
      }
      
@@ -109,6 +141,7 @@
 				data: data,
 				dataType: 'json',
 				success: function(r){
+					win.close();
 					$('#kkk').table('reload');
 		  		}
 		  	});

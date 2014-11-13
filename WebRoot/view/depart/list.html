@@ -47,7 +47,23 @@
     	 $.dialog({
     		 title:'部门新增',
     		 url:'view/depart/add.html',
-    		 ok:ok
+			buttons:[
+			    {
+			    	text : 'OK',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		ok(d);
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			]
     	 });
     	 //$('#kkk').Grid('addRow', {username:'asd'});
      }
@@ -163,9 +179,26 @@
     	 $.dialog({
     		 title:'添加员工',
     		 width:600,
+    		 padding:'1px',
     		 url:'view/depart/addemp.html',
     		 params:{departname:name},
-    		 ok:ok1
+			buttons:[
+			    {
+			    	text : 'OK',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		ok1(d);
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			]
     	 });
      }
 </script>

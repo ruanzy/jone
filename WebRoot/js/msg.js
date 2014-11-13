@@ -100,12 +100,28 @@
 			title : 'Window',
 			width : 350,
 			height : 100,
-			padding : 20,
+			padding : '20px',
 			content : '',
 			params : null,
-			ok : function() {
-				$.dialog.close();
-			},
+			/**buttons:[
+			    {
+			    	text : 'OK',
+			    	icon : 'ok',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	icon : 'remove',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			],**/
 			onShow : function() {
 			}
 		};
@@ -123,9 +139,21 @@
 		html.push(options.title);
 		html.push("</div>");
 		html.push("<div class='message-body'></div>");
-		html.push("<div class='message-footer-bg align-rignt'>");
-		html.push("<a class='btn btn-success'>OK</a>");
-		html.push("<a class='btn btn-default'>Close</a>");
+		if(options.buttons){
+			html.push("<div class='message-footer-bg align-rignt'>");
+			$(options.buttons).each(function(){
+				var txt = this.text;
+				var icon = this.icon;
+				var cls = this.cls;
+				html.push("<a class='btn " + cls + "'>");
+				if(icon){
+					html.push("<i class='icon-" + icon + "'></i> ");
+				}
+				html.push(txt + "</a>");
+			});
+		}
+		//html.push("<a class='btn btn-success'>OK</a>");
+		//html.push("<a class='btn btn-default'>Close</a>");
 		html.push("</div>");
 		dialog.append(html.join(''));
 		var bd = $(".message-body", dialog).css({padding: options.padding});
@@ -140,13 +168,18 @@
 			$.dialog.opened = false;
 		});
 		$(".message-footer-bg", dialog).click(function(e) {
-			var t = $(e.target);
-			if (t.hasClass('btn-success')) {
-				options.ok(dialog);
-			}
-			if (t.hasClass('btn-default')) {
-				dialog.hide().empty().remove();
-				$.dialog.opened = false;
+			var t = e.target;
+			var btns = $('a', this);
+			if(t.tagName == 'A'){
+				var index = btns.index(t);
+				options.buttons[index].action(dialog);
+				/**if (t.hasClass('btn-success')) {
+					options.ok(dialog);
+				}
+				if (t.hasClass('btn-default')) {
+					dialog.hide().empty().remove();
+					$.dialog.opened = false;
+				}**/
 			}
 		});
 		dialog.close = function() {

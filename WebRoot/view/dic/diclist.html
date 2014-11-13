@@ -32,7 +32,23 @@
     		 title:'字典新增',
     		 url:'view/dic/adddic.html',
     		 width:350,
-    		 ok:ok
+			buttons:[
+			    {
+			    	text : 'OK',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		ok(d);
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			]
     	 });
      }
      

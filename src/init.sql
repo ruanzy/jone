@@ -72,6 +72,11 @@ CREATE TABLE depart (
 	memo varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS depart;
+CREATE TABLE departemp (
+	departid int(11) NOT NULL,
+	empid varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
 

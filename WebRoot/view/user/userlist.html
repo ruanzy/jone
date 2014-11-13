@@ -33,11 +33,27 @@
      $('#addbtn').click(add);
      $('#delbtn').click(del);
       $('#assignbtn').click(mk);
-     function add(){
-    	 $.dialog({
-    		 title:'用户新增',
-    		 url:'view/user/adduser.html',
-    		 ok:ok
+		function add(){
+		 $.dialog({
+			title:'用户新增',
+			url:'view/user/adduser.html',
+			buttons:[
+			    {
+			    	text : 'OK',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		ok(d);
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			]
     	 });
     	 //$('#kkk').Grid('addRow', {username:'asd'});
      }
@@ -191,7 +207,23 @@
     		 title:'分配角色',
     		 url:'user/tosetrole',
     		 params:{user:username},
-    		 ok:ok1
+			buttons:[
+			    {
+			    	text : 'OK',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		ok1(d);
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			]
     	 });
      }
      
@@ -202,9 +234,25 @@
     		 return false;
     	 }
     	 $.dialog({
-    		 title:'分配角色',
-    		 url:'user/tosetrole?user=' + selected[0].username,
-    		 ok:ok1
+			title:'分配角色',
+			url:'user/tosetrole?user=' + selected[0].username,
+			buttons:[
+			    {
+			    	text : 'OK',
+			    	cls : 'btn-success',
+			    	action : function(d) {
+			    		ok1(d);
+			    	}
+			    },
+			    {
+			    	text : 'Close',
+			    	cls : 'btn-default',
+			    	action : function(d) {
+			    		d.close();
+			    	}
+			    	
+			    }
+			]
     	 });
      }
      
