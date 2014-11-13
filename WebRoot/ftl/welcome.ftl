@@ -89,5 +89,6 @@ JAVA版本: ${version}
 		$('#pb1').width(pv1).html(pv1);
 		$('#pb2').width(pv2).html(pv2);
 		$('#totalThread').text(totalThread);
+		PL.leave();
 	}
 </script>

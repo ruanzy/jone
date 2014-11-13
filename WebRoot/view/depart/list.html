@@ -21,7 +21,7 @@
 	  	  $('#kkk').table({
 		columns:[
 			//{header:"ID",field:"id",width:50,align:'center'},
-			{header:"部门名",field:"name",tip:true,editor:'text'},
+			{header:"部门名",field:"name",tip:true},
 			{header:"备注",field:"memo"},
 			{header:"操作",field:"",align:'center',width:180,render:opRender}
 		],
@@ -29,9 +29,20 @@
 		selector:'m',
 		condition:condition
 	});
+     function condition(){
+    	 var name = $('input[name=name]').val();
+    	 var params = {name: name};
+    	 return params;
+     }
+
+     
+     function opRender(v, r){
+       var h = [];
+       h.push("<a class='btn btn-default btn-sm' onclick=del2('" + r.id + "')><i class='icon-remove'></i> 删除</a>");
+       h.push("<a class='btn btn-default btn-sm' onclick=addemployee('" + r.name + "')><i class='icon-pencil'></i> 添加员工</a>");
+       return h.join('');
+     }
      $('#addbtn').click(add);
-     $('#delbtn').click(del);
-      $('#assignbtn').click(mk);
      function add(){
     	 $.dialog({
     		 title:'部门新增',
@@ -61,10 +72,6 @@
 		});	
      }
      
-     function save(){
-    	 $('#kkk').Grid('save');
-     }
-     
      function del(){
     	 var selected = $('#kkk').table('getSelected');
     	 if(selected.length == 0){
@@ -90,82 +97,11 @@
     	 });
      }
      
-     function cancel(){
-    	 var selected = $('#kkk').Grid('getSelected');
-    	 if(selected.length == 0){
-    		 $.alert({msg:'请选择至少一条记录'});
-    		 return false;
-    	 }
-    	 $.confirm({msg:'确定要禁止吗', callback:function(btn){
-	    	if(btn){
-	    		var ids = [];
-		    	for(var k in selected){
-		    		ids.push(selected[k].id); 
-		    	}
-		   		$.ajax({
-		   			url:'user/cancel',
-		   			type: 'post',
-		   			data: {ids:ids.join(',')},
-		   			dataType: 'json',
-		   	        success: function(result){
-		   	        	$('#kkk').Grid('refresh');
-		   			}
-		   		});
-	    	}
-    	 }});
-     }
-     
-     function active(){
-    	 var selected = $('#kkk').Grid('getSelected');
-    	 if(selected.length == 0){
-    		 $.alert({msg:'请选择至少一条记录'});
-    		 return false;
-    	 }
-    	 $.confirm({msg:'确定要激活吗', callback:function(btn){
-	    	if(btn){
-	    		var ids = [];
-		    	for(var k in selected){
-		    		ids.push(selected[k].id); 
-		    	}
-		   		$.ajax({
-		   			url:'user/active',
-		   			type: 'post',
-		   			data: {ids:ids.join(',')},
-		   			dataType: 'json',
-		   	        success: function(result){
-		   	        	$('#kkk').Grid('refresh');
-		   			}
-		   		});
-	    	}
-    	 }});
-     }
-     
      $('#search-form button').click(function(){
     	 $('#kkk').table('reload');
      });
      
-     function condition(){
-    	 var name = $('input[name=name]').val();
-    	 var params = {name: name};
-    	 return params;
-     }
      
-     function stateRender(s){
-    	 //s = s||'1';
-    	 //return "<font title='" + state[s] + "' color='" + {0:'red', 1:'green'}[s] + "'>"  +  state[s]  + "</font>";
-    	 if(s == 1){
-    	 	return "<label class='label label-success'>正常</label>";
-    	 }else{
-    	 	return "<label class='label label-danger'>禁止</label>";
-    	 }
-     }
-     
-     function opRender(v, r){
-       var h = [];
-       h.push("<a class='btn btn-default btn-sm' onclick=del2('" + r.id + "')><i class='icon-remove'></i> 删除</a>");
-       h.push("<a class='btn btn-default btn-sm' onclick=addemployee('" + r.name + "')><i class='icon-pencil'></i> 添加员工</a>");
-       return h.join('');
-     }
      
      function del2(id){
     	 $.confirm('确定要干掉吗',function(btn){
@@ -185,14 +121,7 @@
     	 });
      }
      
-     function addemployee(name){
-    	 $.dialog({
-    		 title:'添加员工',
-    		 url:'view/depart/addemp.html,
-    		 params:{departname:name},
-    		 ok:ok1
-    	 });
-     }
+
      
      function mk(){
     	 var selected = $('#kkk').table('getSelected');
@@ -230,5 +159,13 @@
 	  	});
      }
      
-  
+       function addemployee(name){
+    	 $.dialog({
+    		 title:'添加员工',
+    		 width:600,
+    		 url:'view/depart/addemp.html',
+    		 params:{departname:name},
+    		 ok:ok1
+    	 });
+     }
 </script>

@@ -100,6 +100,7 @@
 			title : 'Window',
 			width : 350,
 			height : 100,
+			padding : 20,
 			content : '',
 			params : null,
 			ok : function() {
@@ -127,7 +128,7 @@
 		html.push("<a class='btn btn-default'>Close</a>");
 		html.push("</div>");
 		dialog.append(html.join(''));
-		var bd = $(".message-body", dialog);
+		var bd = $(".message-body", dialog).css({padding: options.padding});
 		if (options.content) {
 			bd.html(options.content);
 		}
