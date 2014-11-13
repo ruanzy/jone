@@ -38,7 +38,7 @@ $(function() {
 			});
 		}
 		function logout(){
-			document.location = 'common/logout';
+			document.location = 'logout';
 		}
 		$('#asd').SideDown({
 			items:items

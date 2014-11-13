@@ -41,7 +41,7 @@ public class JOne implements Filter
 			}
 
 			 boolean nologin =
-			 Pattern.compile("(captcha|common/login|common/logout)$").matcher(url).find();
+			 Pattern.compile("(captcha|login|logout)$").matcher(url).find();
 			 if (!nologin)
 			 {
 			 Object user = request.getSession().getAttribute("USER");
@@ -75,7 +75,7 @@ public class JOne implements Filter
 			String _action_name = parts[0];
 			String action_name = Character.toTitleCase(_action_name.charAt(0)) + _action_name.substring(1);
 			String action_method_name = (parts.length > 1) ? parts[1] : "execute";
-			if ("Captcha".equals(action_name))
+			if ("Captcha".equals(action_name) || "Logout".equals(action_name))
 			{
 				pck_name = "org.rzy.web.action";
 			}

@@ -36,7 +36,7 @@ $(function() {
 			vc : vc
 		};
 		$.ajax({
-			url : 'common/login',
+			url : 'login',
 			type : 'post',
 			data : data,
 			dataType : 'json',
