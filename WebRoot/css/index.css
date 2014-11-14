@@ -260,3 +260,55 @@ dl.form textarea {
 	border: 1px solid #bbb;
 	width: 190px;
 }
+
+dl.accordion {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+dl.accordion dt {
+	margin: 0;
+	height: 28px;
+	line-height: 28px;
+	cursor: pointer;
+	display: block;
+	padding: 0;
+	margin: 0;
+	border-top: 1px solid #e5e5e5;
+	position: relative;
+	box-shadow: 0px 1px 1px #ccc;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 16px 0 7px;
+	background-color: #fff;
+	color: #585858;
+	text-shadow: none !important;
+	font-size: 16px;
+	text-decoration: none;
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+dl.accordion dd {
+	display: none;
+	padding: 20px 0;
+	margin: 0;
+	overflow: auto;
+}
+
+dl.accordion dd.active {
+	display: block;
+}
+
+dl.accordion dd a {
+	display: block;
+	text-align: left;
+	cursor: pointer;
+	margin: 5px;
+	padding-left: 30px;
+	height: 32px;
+	line-height: 32px;
+	color: #585858;
+}

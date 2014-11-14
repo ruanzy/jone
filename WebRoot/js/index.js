@@ -57,9 +57,18 @@ $(function() {
 				}
 		);
 	});
+	$('#sidebar').height(WH - 45);
 	$('#sidebar').Accordion({
 		title : '导航菜单',
-		url : 'common/menu'
+		url : 'common/menu',
+		itemClick:function(item){
+			var url = item['url'];
+			var title = item['text'];
+			$('#nav').html(title);
+			$('#main').load(url + '?_=' + new Date().getTime(), function(){
+				permit('#main');
+			});
+		}
 	});
 	$('#main').load('common/welcome');
 	/**$('#content').load('common/center',function(){
