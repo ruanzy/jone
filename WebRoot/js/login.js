@@ -21,15 +21,15 @@ $(function() {
 			$('#submit').click();
 		}
 	});
-	$("#username").focus();
-	$("#username").Tip({mode : 'focus', content : 'asdhg'});
+	var loginfrm = $('#loginfrm');
+	$("#username", loginfrm).focus();
 	$('#vc').css('border', '1px solid #999');
 	changeVC();
 	$('#vc').click(changeVC);
-	$('#submit').click(function() {
-		var un = $("#username").val();
-		var ps = $("#password").val();
-		var vc = $("#vcinput").val();
+	$('#submit', loginfrm).click(function() {
+		var un = $("#username", loginfrm).val();
+		var ps = $("#password", loginfrm).val();
+		var vc = $("#vcinput", loginfrm).val();
 		var data = {
 			username : un,
 			password : ps,

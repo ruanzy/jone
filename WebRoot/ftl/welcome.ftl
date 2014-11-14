@@ -70,25 +70,27 @@ JAVA版本: ${version}
 	$('#total').html(110.5);
 	$('#free').html(90);
 	$('#use').html(20);
-	PL._init();
-	PL.joinListen('/serverinfo');
-	function onData(event) {
-		var total = event.get("total");
-		var free = event.get("free");
-		var use = event.get("use");
-		var totalThread = event.get("totalThread");
-		var cpuRatio = event.get("cpuRatio");
-		$('#total').html(total);
-		$('#free').html(free);
-		$('#use').html(use);
-		//chart.segments[0].value = use;
-		chart.segments[0].value = free;
-		chart.update();
-		var pv1 = '0.00%';
-		var pv2 = ((use/total)*100).toFixed(2) + '%';
-		$('#pb1').width(pv1).html(pv1);
-		$('#pb2').width(pv2).html(pv2);
-		$('#totalThread').text(totalThread);
-		PL.leave();
+	//PL._init();
+	//PL.joinListen('/serverinfo');
+	function onData() {
+ 		$.ajax({
+			url : 'svr/mem',
+			type : 'get',
+			async : false,
+			dataType : 'json',
+			success : function(result) {
+				var total = result.total;
+				var free = result.free;
+				var use = result.use;
+				var totalThread = result.totalThread;
+				var pv1 = '0.00%';
+				var pv2 = ((use/total)*100).toFixed(2) + '%';
+				$('#pb1').width(pv1).html(pv1);
+				$('#pb2').width(pv2).html(pv2);
+				$('#totalThread').text(totalThread);			
+			}
+		});
+		//setTimeout(onData, 2000);
 	}
+	onData();
 </script>
