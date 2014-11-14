@@ -53,14 +53,12 @@
 	<![endif]-->
 </head>
 <BODY>
-	<div id="header" class="station-icon"></div>
+	<div id="header"></div>
 	<div id='center'>
 		<div id="sidebar"></div>
 		<div id="content">
 			<div id="pill">
-				<span id='nav'>
-					<i class='icon-home'></i> 欢迎您
-				</span>
+				<i class='icon-home'></i> <span id='nav'>欢迎您</span>
 			</div>
 			<div id="main"></div>
 		</div>

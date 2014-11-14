@@ -79,7 +79,7 @@
 				$('ul.body li', el).click(function(){
 					var url = $(this).attr('url');
 					var title = $(this).text();
-					$('#nav').html("<i class='icon-home'></i> " + title);
+					$('#nav').html(title);
 					$('#main').load(url + '?_=' + new Date().getTime(), function(){
 						permit('#main');
 					});
