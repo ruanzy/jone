@@ -36,3 +36,36 @@ word-wrap:break-word;
 tr.strips {
 	background: #f9f9f9;
 }
+
+div.pagination{
+	margin: 5px 5px 5px 0;
+}
+
+.pagination a, .pagination span {
+display:inline-block;
+padding: 5px 10px;
+margin-left: -1px;
+line-height: 1.42857143;
+color: #777;
+text-decoration: none;
+background-color: #fff;
+border: 1px solid #ddd;
+}
+
+.pagination a:hover {
+color: #2a6496;
+background-color: #eee;
+border-color: #ddd;
+}
+
+.pagination a.active {
+background-color: #53a93f;
+border-color: #53a93f;
+color: #fff;
+-webkit-text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+.pagination span {
+color: #ccc;
+}

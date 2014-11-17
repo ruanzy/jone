@@ -48,8 +48,8 @@
 				html.push("</table>");
 				if(settings.pager){
 					var total = parseInt(el.data('total'));
-					html.push("<div class=pager>");
-					html.push(pager(total, 1, 10));
+					html.push("<div class='pagination'>");
+					html.push(pager2(total, 1, 10));
 					html.push("</div>");
 				}
 				el.append(html.join(''));
@@ -118,7 +118,34 @@
 					el.data('ds', dd);
 					var opts = el.data('options');
 					$('tbody',el).empty().append(body(dd.data, opts));
-					$('.pager',el).empty().append(pager(dd.total, p, pagesize));
+					$('.pager',el).empty().append(pager2(dd.total, p, pagesize));
+					$('tbody tr:odd', el).addClass('strips');
+				});
+				$('div.pagination a', el).live('click',function(e){
+					var p = 1;
+					$(':checkbox[name=checkall]', el).attr("checked",false);
+					var curpage = parseInt($('div.pagination a.active', el).text());
+					if($(this).hasClass('prev')){
+						p = curpage - 1;
+					}else if($(this).hasClass('next')){
+						p = curpage + 1;
+					}else{
+						p = parseInt($(this).text());
+					}
+					var pagesize = parseInt(el.data('pagesize'));
+					var url = el.data('url');
+					
+					var baseparams = {page: p, pagesize: pagesize};
+					if(settings.condition){
+						if($.isFunction(settings.condition)){
+							baseparams = $.extend(baseparams, settings.condition());
+						}
+					}
+					var dd = ds(url, baseparams);
+					el.data('ds', dd);
+					var opts = el.data('options');
+					$('tbody',el).empty().append(body(dd.data, opts));
+					$('div.pagination',el).empty().append(pager2(dd.total, p, pagesize));
 					$('tbody tr:odd', el).addClass('strips');
 				});
 			});
@@ -143,7 +170,7 @@
 				var dd = ds(url, p);
 				$(this).data('ds', dd);
 				$('tbody',this).empty().append(body(dd.data, opts));
-				$('.pager',this).empty().append(pager(dd.total, 1, pagesize));
+				$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
 				$('tbody tr:odd', this).addClass('strips');
         	});
         },
@@ -168,7 +195,7 @@
  				var dd = ds(url, p);
 				$(this).data('ds', dd);
 				$('tbody',this).empty().append(body(dd.data, opts));
-				$('.pager',this).empty().append(pager(dd.total, 1, pagesize));
+				$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
 				$('tbody tr:odd', this).addClass('strips');
         	});
         },
@@ -385,6 +412,72 @@
 				}
 		}
 	
+		return code.join('');
+	}
+	
+	function pager2(total, page, pagesize){
+		var pc = Math.ceil(total/pagesize);
+		var code = new Array();
+		if(page == 1){
+			code.push("<span>Prev</span>");
+		}else{
+			code.push("<a class='prev' href='#'>Prev</a>");		
+		}
+		if(pc <= 7){
+			for (var i = 1; i <= pc; i++) {
+				code.push("<a");
+				if(i == page){
+					code.push(" class='active'");
+				}
+				code.push(" href='#'>");
+				code.push(i);
+				code.push("</a>");
+			}
+		}else{			
+			if(page <= 4){
+				for (var i = 1; i <= 5; i++) {
+					code.push("<a");
+					if(i == page){
+						code.push(" class='active'");
+					}
+					code.push(" href='#'>");
+					code.push(i);
+					code.push("</a>");
+				}
+				code.push("<span>...</span>");
+				code.push("<a href='#'>" + pc + "</a>");
+			}else{
+				code.push("<a href='#'>1</a>");
+				code.push("<span>...</span>");
+				var begin = page -2;
+				var end = page + 2;
+				if(end +2 > pc){
+					begin = pc -4;
+					end = pc;
+				}
+				for (var i = begin; i <= end; i++) {
+					code.push("<a");
+					if(i == page){
+						code.push(" class='active'");
+					}
+					code.push(" href='#'>");
+					code.push(i);
+					code.push("</a>");
+				}
+				if(page + 3 < pc){
+					code.push("<span>...</span>");
+				}
+				if(end < pc){
+					code.push("<a href='#'>" + pc + "</a>");
+				}
+			}
+		}
+		if(page == pc){
+			code.push("<span>Next</span>");
+		}else{
+			code.push("<a class='next' href='#'>Next</a>");		
+		}
+		code.push("<span>共" + total + "条</span>");
 		return code.join('');
 	}
 	
