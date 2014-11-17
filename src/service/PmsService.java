@@ -154,7 +154,7 @@ public class PmsService
 		String sql = "insert into users(id,username,pwd,regtime) values(?,?,?,?)";
 		int id = dao.getID("users");
 		String username = (String) map.get("username");
-		String pwd = (String) map.get("password");
+		String pwd = "111111";
 		pwd = CryptUtil.encrypt(username + pwd);
 		String regtime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
 		Object[] params = new Object[] { id, username, pwd, regtime };
