@@ -111,13 +111,15 @@
 		if (mask.size() == 0) {
 			mask = $("<div class='mask'></div>").appendTo($('body'));
 		}
-		var dialog = $('div.message');
+		mask.click(function(){
+			dialog.close();
+		});
+		var dialog = $('div.message-dialog-window');
 		if (dialog.size() == 0) {
-			dialog = $("<div class='message'></div>").appendTo($('body'));
+			dialog = $("<div class='message-dialog-window' style='width:"
+					+ options.width + "px'></div>").appendTo($('body'));
 		}
 		var html = [];
-		html.push("<div class='message-dialog-window' style='width:"
-				+ options.width + "px'>");
 		html.push("<div class='message-header message-header-success'>");
 		html.push("<a class='message-close'><i class='icon-remove'></i></a>");
 		html.push("<i class='icon-desktop'></i> ");
@@ -136,8 +138,8 @@
 				}
 				html.push(txt + "</a>");
 			});
+			html.push("</div>");
 		}
-		html.push("</div>");
 		dialog.append(html.join(''));
 		var bd = $(".message-body", dialog).css({padding: options.padding});
 		if (options.content) {

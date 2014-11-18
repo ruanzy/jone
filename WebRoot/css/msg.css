@@ -24,8 +24,9 @@
 .message-dialog-window {
 	min-width: 350px;
 	max-width: 1000px;
-	margin: 100px auto;
+	margin: 0 auto;
 	position: relative;
+	z-index: 1050;
 	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
 	color: #000;
 	background-color: #fff;
