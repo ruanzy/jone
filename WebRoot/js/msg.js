@@ -35,14 +35,18 @@
 		html.push("<a class='btn btn-" + type + "'>");
 		html.push("OK</a>");
 		html.push("</div>");
-		alert.append(html.join('')).show();
-		$('.message-footer .btn', alert).click(function() {
-			alert.hide().remove();
+		alert.append(html.join(''));
+		alert.close = function() {
+			alert.hide().empty().remove();
 			$.alert.opened = false;
+		};
+		$('.message-footer .btn', alert).click(function() {
+			alert.close();
 			if(callback){
 				callback();
 			}
 		});
+		alert.show();
 		_alert = alert;
 		return _alert;
 	}
