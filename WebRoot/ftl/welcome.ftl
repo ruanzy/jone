@@ -32,6 +32,7 @@ JAVA版本: ${version}
 </p>-->
 <p>		
 <span>内存使用情况:</span><div class='progress'><div class='progress-bar' id='pb2'></div></div>
+<div style='font-size:10px;'><span id='used' style='color:red;'></span>/<span id='total'></span></div>
 </p>
 	</div>
 </div>
@@ -87,7 +88,9 @@ JAVA版本: ${version}
 				var pv2 = ((use/total)*100).toFixed(2) + '%';
 				$('#pb1').width(pv1).html(pv1);
 				$('#pb2').width(pv2).html(pv2);
-				$('#totalThread').text(totalThread);			
+				$('#totalThread').text(totalThread);
+				$('#used').html(use + 'M');
+				$('#total').html(total + 'M');
 			}
 		});
 		//setTimeout(onData, 2000);
