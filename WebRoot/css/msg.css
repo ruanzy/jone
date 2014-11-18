@@ -116,3 +116,16 @@
 	opacity: .35;
 	display: none;
 }
+
+.message-pop {
+	width: 150px;
+	margin: 0 auto;
+	padding: 10px;
+	position: relative;
+	z-index: 1050;
+	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
+	color: #53a93f;
+	background-color: #fff;
+	overflow: hidden;
+	display: none;
+}

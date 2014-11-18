@@ -174,6 +174,20 @@
 	};
 })(jQuery);
 
+(function($) {
+	$.pop = function(msg, callback) {
+		var pop = $('div.message-pop').empty();
+		if (pop.size() == 0) {
+			pop = $("<div class='message-pop'></div>").appendTo($('body'));
+		}
+		pop.append("<i class='icon-ok'></i> " + msg).show().delay(1000).hide(0, function(){
+			if(callback){
+				callback();
+			}
+		});
+	}
+})(jQuery);
+
 function ddresize() {
 	var _x = 0, _y = 0;
 	var ww = $(window).width() + $(window).scrollLeft();

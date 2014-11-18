@@ -70,9 +70,12 @@
 	        success:function(result){
 	        	if(result.result){
 					win.close();
-					$.alert('success', result.msg, function(){
+					$.pop(result.msg, function(){
 						$('#kkk').table('reload');
 					});
+					/**$.alert('success', result.msg, function(){
+						$('#kkk').table('reload');
+					});**/
 				}
 			}
 		});	
@@ -100,7 +103,10 @@
 			   			data: {ids:ids.join(',')},
 			   			dataType: 'json',
 			   	        success: function(result){
-			   	        	$('#kkk').table('refresh');
+			   	        	$.pop(result.msg, function(){
+								//$('#kkk').table('reload');
+							});
+			   	        	//$('#kkk').table('refresh');
 			   			}
 			   		});
 		   		}
@@ -195,7 +201,9 @@
 			   			data: {ids:ids.join(',')},
 			   			dataType: 'json',
 			   	        success: function(result){
-			   	        	$('#kkk').table('refresh');
+			   	        	$.pop(result.msg, function(){
+								$('#kkk').table('refresh');
+							});
 			   			}
 			   		});
 		   		}
