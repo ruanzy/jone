@@ -55,7 +55,7 @@ body,button,input,table {
 }
 
 #pill {
-	height: 41px;
+	height: 39px;
 	border-bottom: 1px solid #E1E1E1;
 	box-shadow: 1px 0 3px #EEE, inset 0 0 3px white;
 	color: #D84C31;
