@@ -34,16 +34,14 @@ public class JOne implements Filter
 			boolean loginpage = Pattern.compile("login.(jsp|html|htm)$").matcher(url).find();
 			boolean extension = url.lastIndexOf(".") != -1;
 			boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(url).find();
-			if (loginpage || extension && !page)
+			boolean nologin = Pattern.compile("(captcha|login|logout)$").matcher(url).find();
+			if (loginpage || (extension && !page) || nologin)
 			{
 				chain.doFilter(Context.getRequest(), Context.getResponse());
 				return;
 			}
 
-			 boolean nologin =
-			 Pattern.compile("(captcha|login|logout)$").matcher(url).find();
-			 if (!nologin)
-			 {
+
 			 Object user = request.getSession().getAttribute("USER");
 			 if (user == null)
 			 {
@@ -59,7 +57,7 @@ public class JOne implements Filter
 			 }
 			 return;
 			 }
-			 }
+
 			if (page)
 			{
 				chain.doFilter(Context.getRequest(), Context.getResponse());
