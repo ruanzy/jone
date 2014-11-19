@@ -62,7 +62,7 @@
 					$(this).removeClass('strips');
 				});
 				
-				$('tbody tr:odd', el).addClass('strips');
+				//$('tbody tr:odd', el).addClass('strips');
 				function getEditor(field){
 		        	var editor = null;
 					$(settings.columns).each(function(){
@@ -201,14 +201,11 @@
         },
         getSelected: function(){
         	var ret = [];
-        	var rows = null;
-        	var grid = $(this);
-        	this.each(function(){
-        		rows = $('tbody :checkbox:checked', this).parent().parent();
-        	});
-        	rows.each(function() {   
-        		var rowIndex = this.rowIndex - 1;   
-        		ret.push(grid.data('ds').data[rowIndex]);   
+        	var checked = $('tbody :checkbox:checked', this);
+        	var grid = this;
+        	checked.each(function() {   
+        		var idx = $(this).val();   
+        		ret.push(grid.data('ds').data[idx]);   
         	});  
         	return ret;
         },
@@ -484,21 +481,24 @@
 	
 	function body(records, opts){
 		var code = new Array();
-		$(records).each(function(){
-			var r = this;
-			code.push(buildRow(r, opts));
+		$(records).each(function(index){
+			code.push(buildRow(this, index, opts));
 		});
 		return code.join('');
 	}
-	function buildRow(record, opts){
+	function buildRow(record, index, opts){
 		var code = new Array();
 		var span = $('<span>');
-		code.push("<tr>");
+		code.push("<tr");
+		if((index + 1) % 2 == 0){
+			code.push(" class='strips'");
+		}
+		code.push(">");
 		if(opts.selector&&(opts.selector == 'm')){
-			code.push("<td align=center width=30><input type=checkbox hideFocus></td>");
+			code.push("<td align=center width=30><input type=checkbox hideFocus value=" + index + "></td>");
 		}
 		else if(opts.selector&&(opts.selector == 's')){
-			code.push("<td align=center width=30><input type=radio hideFocus name=ids></td>");
+			code.push("<td align=center width=30><input type=radio hideFocus name=ids value=" + index + "></td>");
 		}
 		$(opts.columns).each(function(){
 			var f = this.field;
