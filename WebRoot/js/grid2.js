@@ -148,6 +148,33 @@
 					$('div.pagination',el).empty().append(pager2(dd.total, p, pagesize));
 					$('tbody tr:odd', el).addClass('strips');
 				});
+				var len = settings.columns.length;
+				$(settings.columns).each(function(index){
+					var idx = index;
+					if(settings.selector){
+						idx += 1;
+						len += 1;
+					}
+					if(this.editor){					
+						var selector = "tbody td:nth-child(" + len  + 'n + ' + (idx + 1) + ")";
+						var cols = $(selector, el);
+						cols.click(function() {
+							var cell = $(this);
+							var text = cell.html();
+							cell.html("");
+							var editor = $("<input type='text' class='txt'/>").width(cell.width() - 14).val(text).appendTo(cell);
+							// 是文本框插入之后被选中
+							editor.get(0).select();
+							editor.click(function() {
+								return false;
+							});
+							editor.blur(function() {
+								var v = $(this).val();
+								cell.html(v);
+							});
+						});
+					}
+				});
 			});
         },
         reload: function(params){
@@ -521,15 +548,15 @@
 				code.push(" editable='true'");
 			}
 			code.push(">");
-			code.push("<span class='content'>");
+			//code.push("<span class='content'>");
 			if(render){
 				code.push(render(v, record));
 			}else{					
 				code.push(span.text(v).html());
 			}
-			code.push("</span>");
+			//code.push("</span>");
 			if(editor){
-				code.push("<div class='editorDiv' style='display:none;'></div>");
+				//code.push("<div class='editorDiv' style='display:none;'></div>");
 			}
 			code.push("</td>");
 		});
