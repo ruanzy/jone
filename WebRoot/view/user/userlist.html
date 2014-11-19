@@ -24,7 +24,7 @@
 			{header:"用户名",field:"username",tip:true,editor:'text'},
 			{header:"注册时间",field:"regtime",align:'center',width:180,editor:'datebox'},
 			{header:"状态",field:"state",align:'center',width:100,render:stateRender},
-			{header:"操作",field:"",align:'center',width:180,render:opRender}
+			{header:"操作",field:"",align:'center',width:100,render:opRender}
 		],
 		url:'user/list',
 		selector:'m',
@@ -185,8 +185,8 @@
      
      function opRender(v, r){
        var h = [];
-       h.push("<a class='btn btn-default btn-sm' onclick=del2('" + r.id + "')><i class='icon-remove'></i> 删除</a>");
-       h.push("<a class='btn btn-default btn-sm' onclick=assignrole('" + r.username + "')><i class='icon-pencil'></i> 分配角色</a>");
+       h.push("<a class='btn btn-sm' onclick=del2('" + r.id + "') title='删除'><i class='icon-remove'></i></a>");
+       h.push("<a class='btn btn-sm' onclick=assignrole('" + r.username + "') title='分配角色'><i class='icon-pencil'></i></a>");
        return h.join('');
      }
      
