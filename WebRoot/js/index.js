@@ -19,8 +19,6 @@ $(function() {
 		function set(){
 			var dialog = $.dialog({
 				title:'设置',
-				width: 350,
-				height:180,
 				url:'view/user/set.html',
 				onShow : function(){
 					

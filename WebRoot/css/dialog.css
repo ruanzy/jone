@@ -1,25 +1,46 @@
-.dialog {
-	position: fixed;
+.dialog-wrap {
+	position: relative;
+	margin: 0 auto;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 1050;
 	overflow: hidden;
-	outline: 0;
 	opacity: 1;
-	display: none;
+	display: none;	
 }
 
-.dialog-content {
-	min-width: 350px;
+.dialog {
 	max-width: 1000px;
-	margin: 100px auto;
+	max-height: 800px;
+	margin: 0 auto;
 	position: relative;
 	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
 	color: #000;
 	background-color: #fff;
 	border: rgba(0, 0, 0, 0);
+	z-index: 1050;
+}
+
+.dialog-mask {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #ccc;
+	z-index: 1040;
+	opacity: .5;
+}
+
+.dialog-loading {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #fff;
+	z-index: 1060;
 }
 
 .dialog-header {
@@ -52,12 +73,6 @@
 
 .dialog-body {
 	color: #737373;
-	background: 0 0;
-	border: none;
-	padding: 20px;
-	margin: 0;
-	max-width: 1000px;
-	max-height: 800px;
 	overflow: auto;
 }
 
@@ -81,17 +96,4 @@
 
 .align-rignt {
 	text-align: right !important;
-}
-
-.dialog-mask{
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 1040;
-	overflow: hidden;
-	outline: 0;
-	opacity: 1;
-	display: none;
 }
