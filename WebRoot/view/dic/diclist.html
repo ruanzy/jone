@@ -84,7 +84,7 @@
     		 return false;
     	 }
     	 $.confirm('确定要干掉吗', function(btn){
-	    		if(btn){
+	    		if(btn == 'YES'){
 		    		var ids = [];
 			    	for(var k in selected){
 			    		ids.push(selected[k].id); 

@@ -4,7 +4,6 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 1050;
 	overflow: hidden;
 	outline: 0;
 	opacity: 1;
@@ -14,17 +13,6 @@
 .message-dialog {
 	width: 300px;
 	margin: 100px auto;
-	position: relative;
-	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
-	color: #000;
-	background-color: #fff;
-	border: rgba(0, 0, 0, 0);
-}
-
-.message-dialog-window {
-	min-width: 350px;
-	max-width: 1000px;
-	margin: 0 auto;
 	position: relative;
 	z-index: 1050;
 	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
@@ -61,10 +49,6 @@
 	border-bottom: 3px solid #d73d32;
 }
 
-.message-title {
-	
-}
-
 .message-body {
 	color: #737373;
 	background: 0 0;
@@ -82,13 +66,6 @@
 	text-align: center !important;
 }
 
-.message-footer-bg {
-	margin: 0 0 20px 0;
-	padding: 15px 15px 15px 0;
-	border-top: 1px solid #53a93f;
-	background-color: #f5f5f5;
-}
-
 .message-close {
 	float: right;
 	font-size: 16px;
@@ -98,6 +75,17 @@
 	filter: alpha(opacity = 20);
 	opacity: .2;
 	cursor: pointer;
+}
+
+.message-mask {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #ccc;
+	z-index: 1040;
+	opacity: .5;
 }
 
 .align-rignt {

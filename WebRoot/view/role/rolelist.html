@@ -87,7 +87,7 @@
     		 return false;
     	 }
     	 $.confirm('确定要干掉吗', function(btn){
-	    	if(btn){
+	    	if(btn == 'YES'){
 		   		$.ajax({
 		   			url:'role/del',
 		   			type: 'post',

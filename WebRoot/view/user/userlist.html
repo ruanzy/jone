@@ -193,7 +193,7 @@
      
      function del2(id){
     	 $.confirm('确定要干掉吗',function(btn){
-	    		if(btn){
+	    		if(btn == 'YES'){
 		    		var ids = [];
 			    	ids.push(id); 
 			   		$.ajax({

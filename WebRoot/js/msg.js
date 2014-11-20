@@ -35,16 +35,20 @@
 		html.push("<a class='btn btn-" + type + "'>");
 		html.push("OK</a>");
 		html.push("</div>");
-		alert.append(html.join(''));
+		alert.append(html.join('')).append("<div class='message-mask'></div>");
+		var mask = $(".message-mask", alert);
+		mask.click(function(){
+			alert.close();
+		});
 		alert.close = function() {
 			alert.hide().empty().remove();
 			$.alert.opened = false;
-		};
-		$('.message-footer .btn', alert).click(function() {
-			alert.close();
 			if(callback){
 				callback();
 			}
+		};
+		$('.message-footer .btn', alert).click(function() {
+			alert.close();
 		});
 		alert.show();
 		_alert = alert;
@@ -73,20 +77,27 @@
 		html.push(msg);
 		html.push("</div>");
 		html.push("<div class='message-footer'>");
-		html.push("<a class='btn btn-success'>OK</a>");
+		html.push("<a class='btn btn-success'>YES</a>");
 		html.push("<a class='btn btn-default'>NO</a>");
 		html.push("</div>");
-		confirm.append(html.join('')).show();
-		$('.message-footer', confirm).click(function(e) {
-			var btn = false;
-			var t = $(e.target);
-			if (t.hasClass('btn-success')) {
-				btn = true;
-			}
-			confirm.hide().remove();
+		confirm.append(html.join('')).append("<div class='message-mask'></div>");
+		var mask = $(".message-mask", confirm);
+		mask.click(function(){
+			confirm.hide().empty().remove();
 			$.confirm.opened = false;
-			callback(btn);
+			if(callback){
+				callback('CLOSE');
+			}
 		});
+		$(".message-footer").delegate('a', 'click', function(e) {
+			var btn = $(this).text();
+			confirm.hide().empty().remove();
+			$.confirm.opened = false;
+			if(callback){
+				callback(btn);
+			}
+		});
+		confirm.show();
 		_confirm = confirm;
 		return _confirm;
 	}
