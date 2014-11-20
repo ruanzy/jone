@@ -143,19 +143,13 @@
 		mask.click(function(){
 			dialog.close();
 		});
+		$(".dialog", dialog).css({"margin-top": 45});
 		var bd = $(".dialog-body", dialog).css({padding: options.padding});
 		if (options.content) {
 			bd.html(options.content);
-			var WH = $(window).height();
-			var CH = $(".dialog", dialog).outerHeight();
-			$(".dialog", dialog).css({"margin-top": (WH - CH)/2});
 		}
 		if (options.url) {
-			bd.load(options.url, options.params, function(){
-				var WH = $(window).height();
-				var CH = $(".dialog", dialog).outerHeight();
-				$(".dialog", dialog).css({"margin-top": (WH - CH)/2});
-			});
+			bd.load(options.url, options.params);
 		}
 		$(".dialog-close", dialog).click(function(e) {
 			dialog.close();

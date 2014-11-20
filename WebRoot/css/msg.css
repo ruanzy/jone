@@ -165,6 +165,7 @@
 }
 
 .dialog-body {
+	position: relative;
 	color: #737373;
 	overflow: auto;
 }
