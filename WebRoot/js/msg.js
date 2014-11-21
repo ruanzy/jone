@@ -188,7 +188,7 @@
 		if (pop.size() == 0) {
 			pop = $("<div class='message-pop'></div>").appendTo($('body'));
 		}
-		pop.append("<i class='icon-ok'></i> " + msg).slideDown().delay(1000).hide(0, function(){
+		pop.append("<i class='icon-ok'></i> " + msg).slideDown().slideUp(800, function(){
 			if(callback){
 				callback();
 			}

@@ -61,8 +61,8 @@ $(function() {
 		url : 'common/menu',
 		itemClick:function(item){
 			var url = item['url'];
-			var title = item['text'];
-			$('#nav').html(title);
+			var title = item['title'];
+			$('#nav').text(title);
 			$('#main').load(url + '?_=' + new Date().getTime(), function(){
 				permit('#main');
 			});

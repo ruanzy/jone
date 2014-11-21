@@ -96,4 +96,20 @@ JAVA版本: ${version}
 		//setTimeout(onData, 2000);
 	}
 	onData();
+	$('div.cell').contextmenu({
+	  items:[
+	   {icon:'icon-home',text:'aaa', url:'www.baidu.com'},
+	   {icon:'icon-home',text:'aaakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', subitems:[
+	   	{icon:'icon-home',text:'aaa', url:'www.baidu.com'},
+	   	{icon:'icon-home',text:'aaa', subitems:[
+	   		{icon:'icon-home',text:'aaa', url:'www.baidu.com'},
+	   		{icon:'icon-home',text:'aaa'}
+	   	]}
+	   ]},
+	   '-',
+	   {icon:'icon-home',text:'aaa',url:'www.baidu.com', action:function(item){alert('kkk,,,');}}
+	  ]
+    });
+    
+    function kkk(){}
 </script>
