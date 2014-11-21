@@ -53,6 +53,7 @@ JAVA版本: ${version}
 	</div>
 </div>
 <script type="text/javascript">
+$('#box').DDR();
 	$('.well-header-buttons').click(function(){
 		$(this).parent().siblings('.well-body').toggle();
 	});
