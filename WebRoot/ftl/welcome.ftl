@@ -96,7 +96,7 @@ JAVA版本: ${version}
 		//setTimeout(onData, 2000);
 	}
 	onData();
-	$('div.cell').contextmenu({
+	$('div.well').contextmenu({
 	  items:[
 	   {icon:'icon-home',text:'aaa', url:'www.baidu.com'},
 	   {icon:'icon-home',text:'aaakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', subitems:[
