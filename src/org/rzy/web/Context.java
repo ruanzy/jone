@@ -93,6 +93,12 @@ class Context
 	{
 		return context.get().parameters;
 	}
+	
+	public static String getUser()
+	{
+		Object user = getSession().getAttribute("USER");
+		return (String) user;
+	}
 
 	private static boolean isBlank(String str)
 	{

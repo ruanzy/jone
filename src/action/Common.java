@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Map;
 import org.rzy.util.ServerInfo;
 import org.rzy.web.Result;
-import org.rzy.web.User;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
-import org.rzy.web.result.Msg;
 import org.rzy.web.result.Page;
 
 public class Common
@@ -18,7 +16,7 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result menu()
 	{
-		String user = WebUtil.getUser().getName();
+		String user = WebUtil.getUser();
 		Object o = null;
 		List<Map<String, Object>> res = null;
 		List<Map<String, Object>> menus = null;
@@ -50,7 +48,7 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result op()
 	{
-		String user = WebUtil.getUser().getName();
+		String user = WebUtil.getUser();
 		Object o = null;
 		List<Map<String, Object>> res = null;
 		List<Map<String, Object>> ops = null;
@@ -95,31 +93,6 @@ public class Common
 	{
 		Integer numSessions = (Integer) WebUtil.attr("numSessions", "application");
 		return new Json(numSessions);
-	}
-
-	public Result login()
-	{
-		String svc = WebUtil.getVC();
-		String vc = WebUtil.getParameter("vc");
-		String username = WebUtil.getParameter("username");
-		String password = WebUtil.getParameter("password");
-		User u = new User(username, password);
-		if (!svc.equalsIgnoreCase(vc))
-		{
-			return new Msg(false, "验证码不正确!");
-		}
-		if (!u.isAdmin())
-		{
-			Object user = WebUtil.call("PmsService.login", username, password);
-			if (user == null)
-			{
-				return new Msg(false, "用户名或密码错误!");
-			}
-			WebUtil.attr("res", WebUtil.call("PmsService.userres", username), "session");
-		}
-		WebUtil.setUser(u);
-		loadResandDic();
-		return new Msg(true, "login success");
 	}
 
 	@SuppressWarnings("unchecked")

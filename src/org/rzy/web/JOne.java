@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 public class JOne implements Filter
 {
@@ -41,9 +42,9 @@ public class JOne implements Filter
 				return;
 			}
 
+			Object user = request.getSession().getAttribute("USER");
 			 if (!nologin)
 			 {
-			 Object user = request.getSession().getAttribute("USER");
 			 if (user == null)
 			 {
 			 if (Context.isAjax())
@@ -64,6 +65,7 @@ public class JOne implements Filter
 				chain.doFilter(Context.getRequest(), Context.getResponse());
 				return;
 			}
+			MDC.put("user", Context.getUser());
 			String[] parts = url.substring(1).split("/");
 			if (parts.length < 1)
 			{

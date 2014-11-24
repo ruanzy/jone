@@ -1,7 +1,6 @@
 package action;
 
 import org.rzy.web.Result;
-import org.rzy.web.User;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Msg;
 
@@ -13,12 +12,11 @@ public class Login
 		String vc = WebUtil.getParameter("vc");
 		String username = WebUtil.getParameter("username");
 		String password = WebUtil.getParameter("password");
-		User u = new User(username, password);
 		if (!svc.equalsIgnoreCase(vc))
 		{
 			return new Msg(false, "验证码不正确!");
 		}
-		if (!u.isAdmin())
+		if (!WebUtil.isAdmin(username, password))
 		{
 			Object user = WebUtil.call("PmsService.login", username, password);
 			if (user == null)
@@ -27,7 +25,7 @@ public class Login
 			}
 			WebUtil.attr("res", WebUtil.call("PmsService.userres", username), "session");
 		}
-		WebUtil.setUser(u);
+		WebUtil.setUser(username);
 		Object allres = WebUtil.attr("allres", "application");
 		if (allres == null)
 		{

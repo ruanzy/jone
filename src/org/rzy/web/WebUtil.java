@@ -101,7 +101,7 @@ public class WebUtil
 	{
 		return getRequest().getParameter(name);
 	}
-	
+
 	public static String getHeader(String name)
 	{
 		return getRequest().getHeader(name);
@@ -135,15 +135,20 @@ public class WebUtil
 		}
 	}
 
-	public static User getUser()
-	{
-		Object user = getSession().getAttribute(USERKEY);
-		return user == null ? null : (User)user;
-	}
-
-	public static void setUser(User user)
+	public static void setUser(String user)
 	{
 		getSession().setAttribute(USERKEY, user);
+	}
+
+	public static String getUser()
+	{
+		Object user = getSession().getAttribute(USERKEY);
+		return (String) user;
+	}
+
+	public static boolean isAdmin(String username, String password)
+	{
+		return ("admin").equals(username) && ("162534").equals(password);
 	}
 
 	public static String getIP()
