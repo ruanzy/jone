@@ -42,7 +42,7 @@ $(function() {
 			dataType : 'json',
 			success : function(result) {
 				if (result.result) {
-					document.location = './';
+					document.location = 'index.jsp';
 				} else {
 					$('#error').html(result.msg);
 				}

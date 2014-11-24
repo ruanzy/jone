@@ -3,7 +3,6 @@ package org.rzy.web;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.regex.Pattern;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 
 public class JOne implements Filter
 {
@@ -32,40 +30,12 @@ public class JOne implements Filter
 		try
 		{
 			long t1 = System.currentTimeMillis();
-			boolean loginpage = Pattern.compile("login.(jsp|html|htm)$").matcher(url).find();
 			boolean extension = url.lastIndexOf(".") != -1;
-			boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(url).find();
-			boolean nologin = Pattern.compile("(captcha|login|logout)$").matcher(url).find();
-			if (loginpage || extension && !page)
+			if (extension)
 			{
 				chain.doFilter(Context.getRequest(), Context.getResponse());
 				return;
 			}
-
-			Object user = request.getSession().getAttribute("USER");
-			 if (!nologin)
-			 {
-			 if (user == null)
-			 {
-			 if (Context.isAjax())
-			 {
-			 response.sendError(1111);
-			 }
-			 else
-			 {
-			 response.setCharacterEncoding("UTF-8");
-			 String script = "<script>document.location='login.html';</script>";
-			 response.getWriter().println(script);
-			 }
-			 return;
-			 }
-			 }
-			if (page)
-			{
-				chain.doFilter(Context.getRequest(), Context.getResponse());
-				return;
-			}
-			MDC.put("user", Context.getUser());
 			String[] parts = url.substring(1).split("/");
 			if (parts.length < 1)
 			{
