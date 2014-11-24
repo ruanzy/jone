@@ -445,7 +445,7 @@
 		if(page == 1){
 			code.push("<span>Prev</span>");
 		}else{
-			code.push("<a class='prev' href='#'>Prev</a>");		
+			code.push("<a class='prev' href='javascript:;'>Prev</a>");		
 		}
 		if(pc <= 7){
 			for (var i = 1; i <= pc; i++) {
@@ -453,7 +453,7 @@
 				if(i == page){
 					code.push(" class='active'");
 				}
-				code.push(" href='#'>");
+				code.push(" href='javascript:;'>");
 				code.push(i);
 				code.push("</a>");
 			}
@@ -464,14 +464,14 @@
 					if(i == page){
 						code.push(" class='active'");
 					}
-					code.push(" href='#'>");
+					code.push(" href='javascript:;'>");
 					code.push(i);
 					code.push("</a>");
 				}
 				code.push("<span>...</span>");
-				code.push("<a href='#'>" + pc + "</a>");
+				code.push("<a href='javascript:;'>" + pc + "</a>");
 			}else{
-				code.push("<a href='#'>1</a>");
+				code.push("<a href='javascript:;'>1</a>");
 				code.push("<span>...</span>");
 				var begin = page -2;
 				var end = page + 2;
@@ -484,7 +484,7 @@
 					if(i == page){
 						code.push(" class='active'");
 					}
-					code.push(" href='#'>");
+					code.push(" href='javascript:;'>");
 					code.push(i);
 					code.push("</a>");
 				}
@@ -492,14 +492,14 @@
 					code.push("<span>...</span>");
 				}
 				if(end < pc){
-					code.push("<a href='#'>" + pc + "</a>");
+					code.push("<a href='javascript:;'>" + pc + "</a>");
 				}
 			}
 		}
 		if(page == pc){
 			code.push("<span>Next</span>");
 		}else{
-			code.push("<a class='next' href='#'>Next</a>");		
+			code.push("<a class='next' href='javascript:;'>Next</a>");		
 		}
 		code.push("<span>共" + total + "条</span>");
 		return code.join('');
