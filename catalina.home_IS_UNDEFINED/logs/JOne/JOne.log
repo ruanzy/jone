@@ -1,0 +1,1 @@
+2014-11-24 18:20:41.057 SQL==>select r.id, r.name, EXISTS(select * from userrole where userrole.userid = '用户测试' and userrole.roleid = r.id) as checked from role r
