@@ -165,6 +165,11 @@ public class WebUtil
 	{
 		return (String) getSession().getAttribute("vc");
 	}
+	
+	public static String getWebRoot()
+	{
+		return getServletContext().getRealPath("/");
+	}
 
 	public static void attr(String key, Object value, String scope)
 	{

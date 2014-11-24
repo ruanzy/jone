@@ -23,7 +23,7 @@ public class Log
 	
 	public Result view()
 	{
-		File f = new File(System.getProperty("root"), "log/log.txt");
+		File f = new File(WebUtil.getWebRoot(), "log/log.txt");
 		String content = IOUtil.tail(f, 50L);
 		return new Text("<pre>" + content + "</pre>");
 	}

@@ -113,7 +113,5 @@ public class JOne implements Filter
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		this.context = cfg.getServletContext();
-		String root = this.context.getRealPath("/");
-		System.setProperty("root", root);
 	}
 }

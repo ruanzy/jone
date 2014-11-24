@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.apache.commons.io.IOUtils;
 import org.rzy.web.Log;
 import org.rzy.web.LogHandler;
+import org.rzy.web.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
@@ -32,7 +33,7 @@ public class FileLogHandler implements LogHandler
 		logs.append(sid).append("|");
 		logs.append(1).append("|");
 		logs.append(requestBody);
-		File f = new File(System.getProperty("root"), "log/log.txt");
+		File f = new File(WebUtil.getWebRoot(), "log/log.txt");
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		try
