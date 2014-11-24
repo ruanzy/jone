@@ -6,11 +6,15 @@
 			</pattern>
 		</encoder>
 	</appender>
-	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${catalina.home}/log/JOne.log</file>  
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.home}/logs/JOne/JOne.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>JOne-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss} %msg%n
-			</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %msg%n</pattern>
 		</encoder>
 	</appender>
 	<root level="DEBUG">
