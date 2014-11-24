@@ -45,7 +45,7 @@ public class IOUtil
 				}
 				byte[] bytes = new byte[(int) (length - pos)];
 				rf.read(bytes);
-				result = new String(bytes);
+				result = new String(bytes, "UTF-8");
 			}
 		}
 		catch (IOException e)

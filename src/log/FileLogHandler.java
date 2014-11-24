@@ -1,10 +1,8 @@
 package log;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import org.apache.commons.io.IOUtils;
+import java.io.RandomAccessFile;
 import org.rzy.web.Log;
 import org.rzy.web.LogHandler;
 import org.rzy.web.WebUtil;
@@ -34,23 +32,18 @@ public class FileLogHandler implements LogHandler
 		logs.append(1).append("|");
 		logs.append(requestBody);
 		File f = new File(WebUtil.getWebRoot(), "log/log.txt");
-		FileWriter fw = null;
-		BufferedWriter bw = null;
 		try
 		{
-			fw = new FileWriter(f, true);
-			bw = new BufferedWriter(fw);
-			bw.write(logs.toString());
-			bw.write(13);
+			RandomAccessFile rf = new RandomAccessFile(f, "rw");
+			long fileLength = rf.length();
+			rf.seek(fileLength);
+			rf.write(logs.toString().getBytes("UTF-8"));
+			rf.write(System.getProperty("line.separator").getBytes("UTF-8"));
+			rf.close();
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		}
-		finally
-		{
-			IOUtils.closeQuietly(bw);
-			IOUtils.closeQuietly(fw);
 		}
 	}
 }

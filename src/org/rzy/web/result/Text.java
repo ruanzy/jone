@@ -17,6 +17,7 @@ public class Text implements Result
 	{
 		try
 		{
+			WebUtil.getResponse().setContentType("text/plain;charset=UTF-8");
 			WebUtil.getResponse().getWriter().write(txt);
 		}
 		catch (IOException e)
