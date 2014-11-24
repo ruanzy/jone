@@ -57,7 +57,7 @@
 	margin: 0;
 	max-width: 1000px;
 	max-height: 800px;
-	overflow: auto;
+	word-break : break-all;
 }
 
 .message-footer {
