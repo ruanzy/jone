@@ -6,11 +6,10 @@ import java.io.RandomAccessFile;
 
 public class IOUtil
 {
-	public static String tail(String file, long lines)
+	public static String tail(File f, long lines)
 	{
 		String result = null;
 		long count = 0;
-		File f = new File(file);
 		if (!f.exists() || f.isDirectory() || !f.canRead())
 		{
 			return null;

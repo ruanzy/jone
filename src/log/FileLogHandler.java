@@ -32,12 +32,12 @@ public class FileLogHandler implements LogHandler
 		logs.append(sid).append("|");
 		logs.append(1).append("|");
 		logs.append(requestBody);
-		String logfile = System.getProperty("logDir") + File.separator + "log.txt";
+		File f = new File(System.getProperty("root"), "log/log.txt");
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		try
 		{
-			fw = new FileWriter(logfile, true);
+			fw = new FileWriter(f, true);
 			bw = new BufferedWriter(fw);
 			bw.write(logs.toString());
 			bw.write(13);

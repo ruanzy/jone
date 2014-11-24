@@ -23,8 +23,8 @@ public class Log
 	
 	public Result view()
 	{
-		String logfile = System.getProperty("logDir") + File.separator + "JOne.log";
-		String content = IOUtil.tail(logfile, 50L);
+		File f = new File(System.getProperty("root"), "log/log.txt");
+		String content = IOUtil.tail(f, 50L);
 		return new Text("<pre>" + content + "</pre>");
 	}
 }
