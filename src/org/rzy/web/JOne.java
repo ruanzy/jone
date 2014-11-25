@@ -3,7 +3,6 @@ package org.rzy.web;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Timer;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -115,6 +114,6 @@ public class JOne implements Filter
 	{
 		this.context = cfg.getServletContext();
 		String webRoot = this.context.getRealPath("/");
-		new Timer().scheduleAtFixedRate(new LogStat(webRoot), 0, 1000);
+		new LogStat(webRoot).start();
 	}
 }
