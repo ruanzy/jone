@@ -185,9 +185,9 @@
 
 (function($) {
 	$.pop = function(msg, callback) {
-		var pop = $('div.message-pop').empty();
+		var pop = $('p.message-pop').empty();
 		if (pop.size() == 0) {
-			pop = $("<div class='message-pop'></div>").appendTo($('body'));
+			pop = $("<p class='message-pop bg-red bg-inverse'></p>").appendTo($('body'));
 		}
 		pop.append("<i class='icon-ok'></i> " + msg).slideDown().slideUp(800, function(){
 			if(callback){

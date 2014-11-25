@@ -200,3 +200,11 @@
 	overflow: hidden;
 	display: none;
 }
+
+.bg-red{
+	background-color: #e33;
+}
+
+.bg-inverse {
+	color: #fff;
+}
