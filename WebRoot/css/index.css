@@ -303,3 +303,38 @@ dl.accordion dd a {
 	line-height: 32px;
 	color: #585858;
 }
+
+div.multi-radio {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+
+div.multi-radio a {
+	float: left;
+	border: 1px solid #d4d4d4;
+	padding: 5px 15px;
+	height: 20px;
+	margin-left: -1px; 
+	line-height: 20px;
+	text-decoration: none;
+	color:#333;
+}
+
+div.multi-radio a:hover {
+	background: lightblue;
+}
+
+div.multi-radio a.active {
+	background: #16a0d3;
+	border-color: #1096c7;
+	color:#fff;
+}
+
+div.multi-radio:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
