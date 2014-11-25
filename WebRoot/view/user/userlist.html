@@ -67,7 +67,8 @@
     	var email = win.find('input[name=email]').val();
     	var phone = win.find('input[name=phone]').val();
     	var memo = win.find('textarea[name=memo]').val();
-    	var params = {username:username,password:password,email:email,phone:phone,memo:memo};
+    	var state = win.find('input[name=state]').val();
+    	var params = {username:username,password:password,email:email,phone:phone,memo:memo,state:state};
     	$.ajax({
 			url:'user/add',
 			type: 'post',
