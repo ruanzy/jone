@@ -239,26 +239,17 @@ ul {
 	width: 190px;
 }
 
-dl.form dt {
-	float: left;
+.textarea {
+	outline: none;
+	box-shadow: none;
+	border: 1px solid #bbb;
+	padding: 3px;
+	width: 190px;
+}
+
+td.form-label {
 	font-weight: bold;
-	padding: 12px 0 4px;
 	width: 60px;
-}
-
-dl.form input {
-	outline: none;
-	box-shadow: none;
-	border: 1px solid #bbb;
-	padding: 6px 5px;
-	width: 190px;
-}
-
-dl.form textarea {
-	outline: none;
-	box-shadow: none;
-	border: 1px solid #bbb;
-	width: 190px;
 }
 
 dl.accordion {

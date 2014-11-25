@@ -37,6 +37,8 @@
 		 $.dialog({
 			title:'用户新增',
 			url:'view/user/adduser.html',
+			padding:0,
+			width: 500,
 			buttons:[
 			    {
 			    	text : 'OK',
@@ -61,7 +63,10 @@
      function ok(win){
     	var username = win.find('input[name=username]').val();
     	var password = win.find('input[name=password]').val();
-    	var params = {username:username,password:password};
+    	var email = win.find('input[name=email]').val();
+    	var phone = win.find('input[name=phone]').val();
+    	var memo = win.find('textarea[name=memo]').val();
+    	var params = {username:username,password:password,email:email,phone:phone,memo:memo};
     	$.ajax({
 			url:'user/add',
 			type: 'post',
@@ -178,8 +183,10 @@
     	 //return "<font title='" + state[s] + "' color='" + {0:'red', 1:'green'}[s] + "'>"  +  state[s]  + "</font>";
     	 if(s == 1){
     	 	return "<label class='label label-success'>正常</label>";
+    	 }else if(s == 0){
+    	 	return "<label class='label label-danger'>锁定</label>";
     	 }else{
-    	 	return "<label class='label label-danger'>禁止</label>";
+    	 	return "<label class='label label-warning'>离职</label>";
     	 }
      }
      

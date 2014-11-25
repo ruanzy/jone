@@ -151,13 +151,16 @@ public class PmsService
 
 	public void reg(Map<String, Object> map)
 	{
-		String sql = "insert into users(id,username,pwd,regtime) values(?,?,?,?)";
+		String sql = "insert into users(id,username,pwd,regtime,email,phone,memo) values(?,?,?,?,?,?,?)";
 		int id = dao.getID("users");
 		String username = (String) map.get("username");
 		String pwd = "111111";
 		pwd = CryptUtil.encrypt(username + pwd);
 		String regtime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
-		Object[] params = new Object[] { id, username, pwd, regtime };
+		String email = (String) map.get("email");
+		String phone = (String) map.get("phone");
+		String memo = (String) map.get("memo");
+		Object[] params = new Object[] { id, username, pwd, regtime, email, phone, memo };
 		dao.update(sql, params);
 	}
 
