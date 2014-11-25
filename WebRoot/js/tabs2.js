@@ -20,6 +20,7 @@
 			var opts = $.extend({}, $.fn.Tabs.defaults, options);
 			return this.each(function() {
 				var me = $(this);
+				debugger;
 				me.data('options', opts);
 				var tabs = $("dt a", me);
 				var panels = $("dd", me);

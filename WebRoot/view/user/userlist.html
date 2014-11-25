@@ -37,8 +37,6 @@
 		 $.dialog({
 			title:'用户新增',
 			url:'view/user/adduser.html',
-			padding:0,
-			width: 500,
 			buttons:[
 			    {
 			    	text : 'OK',
@@ -55,7 +53,10 @@
 			    	}
 			    	
 			    }
-			]
+			],
+			onShow:function(){
+		
+			}
     	 });
     	 //$('#kkk').Grid('addRow', {username:'asd'});
      }

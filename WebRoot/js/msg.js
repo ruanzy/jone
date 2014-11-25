@@ -147,9 +147,10 @@
 		var bd = $(".dialog-body", dialog).css({padding: options.padding});
 		if (options.content) {
 			bd.html(options.content);
+			options.onShow();
 		}
 		if (options.url) {
-			bd.load(options.url, options.params);
+			bd.load(options.url, options.params, options.onShow);
 		}
 		$(".dialog-close", dialog).click(function(e) {
 			dialog.close();
@@ -166,7 +167,7 @@
 		dialog.text = function(content) {
 			$(".dialog-body", dialog).html(content);
 		};
-		dialog.show(options.onShow());
+		dialog.show();
 		_dialog = dialog;
 		return _dialog;
 	};
