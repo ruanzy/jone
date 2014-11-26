@@ -1,54 +1,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<title id='i18n_login.title'></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link type="text/css" rel="stylesheet"
-	href="awesome/css/font-awesome.css" />
-<link type="text/css" rel="stylesheet" href="css/tip.css" />
-<link type="text/css" rel="stylesheet" href="css/login.css" />
-<link type="text/css" rel="stylesheet" href="css/button.css" />
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/i18n.js"></script>
-<script type="text/javascript" src="js/login.js"></script>
-<script type="text/javascript" src="js/tip.js"></script>
-</head>
-<body>
-	<div class="loginbox">
-		<h3 style='height:42px;background: #1da0d0 url(css/logo.png) no-repeat center;'></h3>
-		<h3 class='form-title'>请输入你的帐号和密码</h3>
-		<form id='loginfrm'>
-			<table>
-				<tr>
-					<td class='input-icon'><i class='icon-user'></i> <input
-						class='left-icon' id="username" name='name' type="text"
-						placeholder="用户名" value="admin" autocomplete="off" /></td>
-				</tr>
-				<tr>
-					<td class='input-icon'><i class='icon-user'></i> <input
-						class='left-icon' id="password" name='password' type="password"
-						placeholder="密码" value="162534" autocomplete="off" /></td>
-				</tr>
-				<tr>
-					<td>
-						<div class='pull-left'>
-							<input class='verifycode' id="vcinput" name='vc' type="text"
-								placeholder="验证码" /> <img
-								style="cursor: pointer; vertical-align:top;" src="captcha"
-								id="VerifyImage" title="看不清？点击换一个"
-								onclick="javascript:document.getElementById('VerifyImage').src='captcha?_r=' + new Date().getTime();return false;" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <title></title>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link type="text/css" rel="stylesheet"
+			href="awesome/css/font-awesome.css" />
+		<link type="text/css" rel="stylesheet" href="css/login.css" />
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/i18n.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
+		<script type="text/javascript" src="js/tip.js"></script>
+	</head>
+	<body>
+		<div class="loginwrap">
+			<h3
+				style='height: 42px; background: #1da0d0 url(css/logo.png) no-repeat center;'></h3>
+			<h3 class='form-title'>
+				请输入你的帐号和密码
+			</h3>
+
+			<form id='loginfrm'>
+				<div class="logininput-icon">
+					<i class='icon-user'></i>
+					<input type="text" id="username" name='name' type="text"
+						placeholder="用户名" value="admin" autocomplete="off" />
+				</div>
+				<div class="logininput-icon">
+					<i class='icon-user'></i>
+					<input type="password" id="password" name='password'
+						type="password" placeholder="密码" value="162534" />
+				</div>
+				<div class="logininput">
+					<div class="loginsubmit fr">
+						<a id="submit">登&nbsp;&nbsp;&nbsp;录 <i
+							class='icon-circle-arrow-right'></i> </a>
+						<div class="loginsubmiting">
+							<div class="loginsubmiting_inner"></div>
 						</div>
-						<div class='pull-right'>
-							<a id="submit" class='btn btn-success pull-right'>登&nbsp;&nbsp;&nbsp;录
-								<i class='icon-circle-arrow-right'></i>
-							</a>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</form>
-		<div id="error"></div>
-		<div style="clear:both;"></div>
-	</div>
-</body>
+					</div>
+					<div class="fl">
+						<input id="vcinput" name='vc' type="text" placeholder="验证码" />
+						<img style="cursor: pointer; vertical-align: top;" src="captcha"
+							id="VerifyImage" title="看不清？点击换一个"
+							onclick="javascript:document.getElementById('VerifyImage').src='captcha?_r=' + new Date().getTime();return false;" />
+					</div>
+					<div class="clear"></div>
+				</div>
+			</form>
+			<div id="error"></div>
+		</div>
+	</body>
 </html>
