@@ -15,7 +15,7 @@ public class Captcha
 	public void execute()
 	{
 		int width = 60;
-		int height = 32;
+		int height = 20;
 		String rchars = "1234567890ABCDEFGHJKLMNPQRSTUVWXYZ";
 		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics g = img.getGraphics();
@@ -42,7 +42,7 @@ public class Captcha
 			String rand = rchars.substring(randomNum, randomNum + 1);
 			randomStr += rand;
 			g.setColor(new Color(25 + random.nextInt(110), 25 + random.nextInt(110), 25 + random.nextInt(110)));
-			g.drawString(rand, 13 * i + 5, 22);
+			g.drawString(rand, 13 * i + 5, 16);
 		}
 		g.dispose();
 		WebUtil.getSession().setAttribute("vc", randomStr.toLowerCase());
