@@ -1,5 +1,5 @@
 body {
-	background: #444;
+    background: #444;
 	font-size: 13px;
 	padding: 0px;
 	margin: 0px;
@@ -7,37 +7,64 @@ body {
 	color: #666;
 }
 
-.loginbox {
-	background-color: #fff;
-	width: 25%;
-	min-width: 25%;
-	margin: 120px auto;
-	margin-bottom: 50px;
+h3 {
+	display: block;
+	font-size: 1.4em;
+}
+
+.loginwrap {
+	width: 340px;
+	margin: 100px auto;
+	background: #fff;
 	padding: 30px;
 }
 
-.loginbox .form-title {
-	font-size: 18px;
-	font-weight: 100;
-	color: #000;
-}
-
-#loginfrm table {
-	padding: 0;
-	margin: 0;
-	width: 100%;
-}
-
-#loginfrm table td {
-	padding: 10px 0;
-	height: 30px;
-}
-
-.input-icon {
+.loginsubmit {
+	width: 130px;
+	height: 40px;
 	position: relative;
 }
 
-.input-icon i {
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.loginsubmit a {
+	padding: 8px 10px;
+	color: #fff;
+	background: #70CA10;
+	display: block;
+	text-align: center;
+	border: none;
+	font-family: '微软雅黑';
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.loginsubmiting {
+	height: 35px;
+	line-height: 35px;
+	background: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 130px;
+	opacity: 0.8;
+	filter: alpha(opacity =           80);
+	display: none;
+}
+
+.logininput,.logininput-icon {
+	position: relative;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+.logininput-icon i {
 	color: #ccc;
 	display: block !important;
 	position: absolute !important;
@@ -46,41 +73,34 @@ body {
 	height: 16px;
 	font-size: 16px;
 	text-align: center;
-	top: 9px;
-	left: 12px;
+	top: 15px;
+	left: 8px;
 }
 
-input[type="text"],input[type="password"] {
-	color: #333333;
-	outline: 0;
-	height: 20px;
-	padding: 6px 6px !important;
-	line-height: 20px;
-	font-size: 14px;
-	background-color: #ffffff;
+.logininput-icon input {
+	width: 100%;
+	text-indent: 25px;
+	overflow: hidden;
+	color: #000;
+	padding: 10px 0;
+	outline: none;
 	border: 1px solid #ccc;
-}
-
-.input-icon .left-icon {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	padding-left: 33px !important;
 	border-left: 2px solid #35aa47 !important;
+	font-size: 15px;
 }
 
-.verifycode {
+.clear {
+	clear: both;
+}
+
+.logininput input {
 	width: 80px;
-}
-
-.pull-left {
-	float: left;
-}
-
-.pull-right {
-	float: right;
+	overflow: hidden;
+	color: #000;
+	padding: 8px 10px;
+	outline: none;
+	border: 1px solid #ccc;
+	font-size: 15px;
 }
 
 #error {
