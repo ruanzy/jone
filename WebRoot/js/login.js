@@ -13,19 +13,12 @@ $(function() {
 	document.oncontextmenu = function() {
 		return false;
 	};
-	var changeVC = function() {
-		$('#vc').attr('src', "captcha?_=" + new Date().getTime());
-	};
 	$(document).keydown(function(e) {
 		if (e.keyCode == 13) {
 			$('#submit').click();
 		}
 	});
 	var loginfrm = $('#loginfrm');
-	$("#username", loginfrm).focus();
-	$('#vc').css('border', '1px solid #999');
-	changeVC();
-	$('#vc').click(changeVC);
 	$('#submit', loginfrm).click(function() {
 		var un = $("#username", loginfrm).val();
 		var ps = $("#password", loginfrm).val();

@@ -1,34 +1,88 @@
-body {background:#e6e5ea;font-size: 13px; padding: 0px; margin: 0px; font-family: "寰蒋闆呴粦", "Microsoft Yahei", "STXihei", arial, sans-serif;color:#666;}
-input,button { font-family: "寰蒋闆呴粦", "Microsoft Yahei", "STXihei", arial, sans-serif;}
-.loginbox{box-shadow: 0px 10px 150px #666;width:400px;border-radius:3px;padding-bottom: 30px;
-    background: #fff;position:absolute;top:50%;left:50%;margin-top:-135px;margin-left:-200px;}
-
-
-.title{width:100%;background:#6699cc;color:#fff;height: 60px;
-	border-top-left-radius: 3px;border-top-right-radius: 3px;padding-top: 20px;}
-.title .logo{text-align: center;font-size: 25px;width: 100%;
-	-webkit-box-reflect: below -10px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, 0.3)));
+body {
+	background: #444;
+	font-size: 13px;
+	padding: 0px;
+	margin: 0px;
+	font-family: "Microsoft Yahei", "微软雅黑", "宋体", "Simsun", "Open Sans";
+	color: #666;
 }
-.title .logo b{color:#99ccff;font-weight: 400;}
-.title .info{text-align: right;font-size: 12px;color:#99ccff;padding-right: 13px;padding-top: 5px;}	
 
-.w80{width: 80px;}
-.inputs{padding:30px 0 0 50px;}
-.inputs div{margin-bottom: 10px;}
-.inputs div span{display: inline;width:80px;line-height:30px;height:30px;}
-.inputs div input{height: 25px;width: 190px;}
-.inputs img{display: inline;width: 60px;height: 20px;}	
+.loginbox {
+	background-color: #fff;
+	width: 25%;
+	min-width: 25%;
+	margin: 120px auto;
+	margin-bottom: 50px;
+	padding: 30px;
+}
 
-input,input:focus {outline: none; box-shadow: none; border: 1px solid #bbb;padding:2px 5px;}
-input:focus {border-color: #75A1F0; outline: none; box-shadow: 0 0 12px #75A1F0; 
-	-webkit-transition: all 0.218s; -moz-transition: all 0.218s; -o-transition: all 0.218s; -ms-transition: all 0.218s; transition: all 0.218s;}
+.loginbox .form-title {
+	font-size: 18px;
+	font-weight: 100;
+	color: #000;
+}
 
-#submit{border:none;outline: none;background: #6699cc;color:#fff;width:50%;padding: 8px 15px;text-align: center;font-size: 15px; font-weight: bold;}
-#submit:hover{background: #369;}
-#submit:active{background: #444;}
-#error{color: #f96;text-align: center;margin-bottom: -10px;padding-top: 10px;}
-.footer{color: #999;text-align: center;width: 100%;font-size: 11px;}
+#loginfrm table {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
 
-#vcinput{
-    width: 110px;
+#loginfrm table td {
+	padding: 10px 0;
+	height: 30px;
+}
+
+.input-icon {
+	position: relative;
+}
+
+.input-icon i {
+	color: #ccc;
+	display: block !important;
+	position: absolute !important;
+	z-index: 1;
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+	text-align: center;
+	top: 9px;
+	left: 12px;
+}
+
+input[type="text"],input[type="password"] {
+	color: #333333;
+	outline: 0;
+	height: 20px;
+	padding: 6px 6px !important;
+	line-height: 20px;
+	font-size: 14px;
+	background-color: #ffffff;
+	border: 1px solid #ccc;
+}
+
+.input-icon .left-icon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding-left: 33px !important;
+	border-left: 2px solid #35aa47 !important;
+}
+
+.verifycode {
+	width: 80px;
+}
+
+.pull-left {
+	float: left;
+}
+
+.pull-right {
+	float: right;
+}
+
+#error {
+	color: red;
 }
