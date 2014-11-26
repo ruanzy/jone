@@ -9,8 +9,11 @@ CREATE TABLE users (
 	id int(11) NOT NULL,
 	username varchar(40) NOT NULL,
 	pwd varchar(200) NOT NULL,
+	email varchar(255),
+	phone varchar(20),
 	state char(1) default '1' NOT NULL,
-	regtime varchar(20) NOT NULL
+	regtime varchar(20) NOT NULL,
+	memo varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS resources;

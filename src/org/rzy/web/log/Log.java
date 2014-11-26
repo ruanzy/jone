@@ -1,7 +1,8 @@
-package org.rzy.web;
+package org.rzy.web.log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.rzy.web.WebUtil;
 
 public class Log
 {

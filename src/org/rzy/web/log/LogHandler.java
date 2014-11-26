@@ -1,4 +1,4 @@
-package org.rzy.web;
+package org.rzy.web.log;
 
 public interface LogHandler
 {

@@ -12,15 +12,15 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.proxy.NoOp;
 import org.rzy.dao.Dao;
+import org.rzy.web.log.Log;
+import org.rzy.web.log.LogHandler;
 
 class ServiceProxy
 {
-	static String express = null;
-	static LogHandler logHandler = null;
+	static Properties config = new Properties();
 	static
 	{
 		InputStream is = null;
-		Properties prop = new Properties();
 		try
 		{
 			is = ServiceProxy.class.getClassLoader().getResourceAsStream("service.properties");
@@ -28,10 +28,7 @@ class ServiceProxy
 			{
 				is = new FileInputStream("service.properties");
 			}
-			prop.load(is);
-			express = prop.getProperty("express", "^(add|delete|update)");
-			String logHandlerName = prop.getProperty("logHandler");
-			logHandler = (LogHandler) Class.forName(logHandlerName).newInstance();
+			config.load(is);
 		}
 		catch (Exception e)
 		{
@@ -52,8 +49,10 @@ class ServiceProxy
 				String pcls = obj.getClass().getSimpleName();
 				String sid = pcls.split("\\$\\$")[0] + "." + method.getName();
 				Log log = new Log(sid, args);
-				if (logHandler != null)
+				String logHandlerName = config.getProperty("logHandler");
+				if (logHandlerName != null)
 				{
+					LogHandler logHandler = (LogHandler) Class.forName(logHandlerName).newInstance();
 					logHandler.handler(log);
 				}
 			}
@@ -70,6 +69,7 @@ class ServiceProxy
 	{
 		public int accept(Method arg0)
 		{
+			String express = config.getProperty("express", "^(add|delete|update)");
 			return Pattern.compile(express).matcher(arg0.getName()).find() ? 0 : 1;
 		}
 	};
