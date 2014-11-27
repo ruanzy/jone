@@ -89,6 +89,11 @@ h3 {
 	font-size: 15px;
 }
 
+#VerifyImage{
+	cursor: pointer; 
+	vertical-align:middle;
+}
+
 .fl {
 	float: left;
 }
@@ -109,6 +114,7 @@ h3 {
 	outline: none;
 	border: 1px solid #ccc;
 	font-size: 15px;
+	vertical-align:middle;
 }
 
 #error {

@@ -14,15 +14,15 @@ public class Captcha
 
 	public void execute()
 	{
-		int width = 60;
-		int height = 20;
+		int width = 75;
+		int height = 35;
 		String rchars = "1234567890ABCDEFGHJKLMNPQRSTUVWXYZ";
 		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics g = img.getGraphics();
 		g.setColor(getRandomColor(210, 250));
 		g.fillRect(0, 0, width, height);
-		g.setFont(new Font("Courier New", Font.BOLD, 18));
-		g.drawRect(0, 0, width - 1, height - 1);
+		g.setFont(new Font("Courier New", Font.BOLD, 20));
+		g.drawRect(0, 0, width, height);
 
 		g.setColor(getRandomColor(150, 250));
 		Random random = new Random();
@@ -42,7 +42,7 @@ public class Captcha
 			String rand = rchars.substring(randomNum, randomNum + 1);
 			randomStr += rand;
 			g.setColor(new Color(25 + random.nextInt(110), 25 + random.nextInt(110), 25 + random.nextInt(110)));
-			g.drawString(rand, 13 * i + 5, 16);
+			g.drawString(rand, 13 * i + 12, height*2/3);
 		}
 		g.dispose();
 		WebUtil.getSession().setAttribute("vc", randomStr.toLowerCase());
