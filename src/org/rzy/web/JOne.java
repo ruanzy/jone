@@ -67,18 +67,15 @@ public class JOne implements Filter
 		}
 		catch (Exception e)
 		{
-			if (e instanceof ClassNotFoundException)
+			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
 			{
 				e.printStackTrace();
 				if (Context.isAjax())
 				{
-					response.setStatus(9999);
-					response.getWriter().print(e);
+					response.setStatus(500);
+					response.setCharacterEncoding("UTF-8");
+					response.getWriter().print("请求路径" + url + "错误!");
 				}
-			}
-			else if (e instanceof NoSuchMethodException)
-			{
-				e.printStackTrace();
 			}
 			else if (e instanceof InvocationTargetException)
 			{
