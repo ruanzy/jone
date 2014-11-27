@@ -28,6 +28,13 @@
 <span class='label label-warning'><i class='icon-plus'></i> Warning</span>
 <span class='label label-danger'><i class='icon-plus'></i> Danger</span>
 </p>
-
 <h3>progress</h3>
-<div class='progress'><div class='progress-bar'></div></div>
+<div id='progress'>
+<div class='progress'><div class='progress-bar' style='width:50%'>50%</div></div>
+</div>
+<p id='progress_code'></p>
+<script type="text/javascript">
+	var code = $('#progress').html().trim();
+	var highLightCode = HighLighter.highLight('html', 'rDark', code);
+    $('#progress_code').html(highLightCode);
+</script>

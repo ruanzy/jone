@@ -1,3 +1,4 @@
+<div id='Buttons'>
 <h3>Buttons</h3>
 <p>
 <a class='btn btn-link'>Link</a>
@@ -8,7 +9,14 @@
 <a class='btn btn-warning'>Warning</a>
 <a class='btn btn-danger'>Danger</a>
 </p>
-
+</div>
+<div id='code1'></div>
+<script type="text/javascript">
+	var code = $('#Buttons').html().trim();
+	var highLightCode = HighLighter.highLight('html', 'rDark', code);
+    $('#code1').html(highLightCode);
+</script>
+<div id='Buttonswithicon'>
 <h3>Buttons with icon</h3>
 <p>
 <a class='btn btn-default'><i class='icon-plus'></i> Default</a>
@@ -20,7 +28,10 @@
 <a class='btn btn-warning'><i class='icon-plus'></i> Warning</a>
 <a class='btn btn-danger'><i class='icon-plus'></i> Danger</a>
 </p>
-
+</div>
+<div id='code2'></div>
 <script type="text/javascript">
-
+	var code = $('#Buttonswithicon').html().trim();
+	var highLightCode = HighLighter.highLight('html', 'rDark', code);
+    $('#code2').html(highLightCode);
 </script>

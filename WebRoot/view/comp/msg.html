@@ -11,7 +11,7 @@
 <div>
 	<a class='btn btn-danger' id='bbb2'>Dialog</a>
 </div>
-<div id='mk'></div>
+<p id='code'></p>
 <script type="text/javascript">
 	$('p a:nth(0)').click(function(e) {
 		$.alert('success', "Are you sure delete it!", function() {
@@ -49,4 +49,20 @@
 			}
 		});
 	});
+</script>
+<pre id='Dialog_code' style='display:none;'>
+<div>
+	<a class='btn btn-danger' id='bbb2'>Dialog</a>
+</div>
+$('#bbb2').click(function(e) {
+	var dialog = $.dialog({
+		url : 'view/income/list.html',
+		width : 'auto'
+	});
+});
+</pre>
+<script type="text/javascript">
+	var code = $('#Dialog_code').html().trim();
+	var highLightCode = HighLighter.highLight('html', 'rDark', code);
+    $('#code').html(highLightCode);
 </script>
