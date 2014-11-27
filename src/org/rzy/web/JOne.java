@@ -69,7 +69,7 @@ public class JOne implements Filter
 		{
 			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
 			{
-				e.printStackTrace();
+				log.error(e.getMessage());
 				if (Context.isAjax())
 				{
 					response.setStatus(500);
