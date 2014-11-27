@@ -9,57 +9,57 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/i18n.js"></script>
 <script type="text/javascript">
-$(function() {
-	$.i18n.properties({
-		name : 'message',
-		path : 'i18n/',
-		mode : 'map',
-		callback : function() {
-			$('[id^=i18n]').each(function() {
-				var key = $(this).attr('id').substr(5);
-				$(this).html($.i18n.prop(key));
-			});
-		}
-	});
-	document.oncontextmenu = function() {
-		return false;
-	};
-	$(document).keydown(function(e) {
-		if (e.keyCode == 13) {
-			$('#submit').click();
-		}
-	});
-	var loginfrm = $('#loginfrm');
-	$('#submit', loginfrm).click(function() {
-		var submiting = $('.loginsubmiting').show();
-		var un = $("#username", loginfrm).val();
-		var ps = $("#password", loginfrm).val();
-		var vc = $("#vcinput", loginfrm).val();
-		var data = {
-			username : un,
-			password : ps,
-			vc : vc
-		};
-		$.ajax({
-			url : 'login1',
-			type : 'post',
-			data : data,
-			dataType : 'json',
-			success : function(result) {
-				if (result.result) {
-					document.location = 'index.jsp';
-				} else {
-					$('#error').html(result.msg);
-					submiting.hide();
-				}
-			},
-			error : function(response, b, c){
-				$('#error').html(response.responseText);
-				submiting.hide();
+	$(function() {
+		$.i18n.properties({
+			name : 'message',
+			path : 'i18n/',
+			mode : 'map',
+			callback : function() {
+				$('[id^=i18n]').each(function() {
+					var key = $(this).attr('id').substr(5);
+					$(this).html($.i18n.prop(key));
+				});
 			}
 		});
+		document.oncontextmenu = function() {
+			return false;
+		};
+		$(document).keydown(function(e) {
+			if (e.keyCode == 13) {
+				$('#submit').click();
+			}
+		});
+		var loginfrm = $('#loginfrm');
+		$('#submit', loginfrm).click(function() {
+			var submiting = $('.loginsubmiting').show();
+			var un = $("#username", loginfrm).val();
+			var ps = $("#password", loginfrm).val();
+			var vc = $("#vcinput", loginfrm).val();
+			var data = {
+				username : un,
+				password : ps,
+				vc : vc
+			};
+			$.ajax({
+				url : 'login',
+				type : 'post',
+				data : data,
+				dataType : 'json',
+				success : function(result) {
+					if (result.result) {
+						document.location = 'index.jsp';
+					} else {
+						$('#error').html(result.msg);
+						submiting.hide();
+					}
+				},
+				error : function(response, b, c) {
+					$('#error').html(response.responseText);
+					submiting.hide();
+				}
+			});
+		});
 	});
-});
 </script>
 </head>
 <body>
@@ -67,7 +67,6 @@ $(function() {
 		<h3
 			style='height: 42px; background: #1da0d0 url(css/logo.png) no-repeat center;'></h3>
 		<h3 class='form-title'>请输入你的帐号和密码</h3>
-
 		<form id='loginfrm'>
 			<div class="logininput-icon">
 				<i class='icon-user'></i> <input type="text" id="username"
@@ -80,12 +79,10 @@ $(function() {
 			</div>
 			<div class="logininput">
 				<div class="loginsubmit fr">
-					<a  id="submit">登&nbsp;&nbsp;&nbsp;&nbsp;录
-						<i class='icon-circle-arrow-right'></i>
+					<a id="submit">登&nbsp;&nbsp;&nbsp;&nbsp;录 <i
+						class='icon-circle-arrow-right'></i>
 					</a>
-					<div class="loginsubmiting">
-						登录中...
-					</div>
+					<div class="loginsubmiting">登录中...</div>
 				</div>
 				<div class="fl">
 					<input id="vcinput" name='vc' type="text" placeholder="验证码" /> <img

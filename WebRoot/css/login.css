@@ -46,6 +46,7 @@ h3 {
 	text-align: center;
 	background: #70CA10;
 	color: #fff;
+	cursor:not-allowed; 
 	border-color: transparent;
 	position: absolute;
 	top: 0;
