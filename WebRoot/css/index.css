@@ -19,7 +19,7 @@ body,button,input,table {
 #header {
 	min-height: 45px;
 	position: relative;
-	background: #1da0d0;
+	background:#33B5E5;
 }
 
 #center {
@@ -119,15 +119,18 @@ body,button,input,table {
 }
 
 #head-right ul {
-	height: 100%;
+	height: 45px;
 	margin: 0;
 	padding: 0;
+	border-left: 1px solid #1da0d0;
+	border-right: 1px solid #4dc4f0;
 }
 
 #head-right .headitem {
 	line-height: 45px;
 	height: 45px;
-	border-left: 1px solid #DDD;
+	border-left: 1px solid #4dc4f0;
+	border-right: 1px solid #1da0d0;
 	padding: 0 8px;
 	position: relative;
 	float: left !important;
