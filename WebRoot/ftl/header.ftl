@@ -1,9 +1,9 @@
 <div id="head-left">
-	<i class="icon-desktop"></i> RDP后台管理系统		<span id='dd1'><i class="icon-reorder"></i></span>
+	<div id='logo'></div><span id='dd1'><i class="icon-reorder"></i></span>
 </div>
 <div id="head-right">
 	<ul>
-		<li class='headitem light-blue'>
+		<li class='headitem'>
 		<dl id='asd' class='rzy-sidedown'><dt><i class="icon-user"></i>欢迎您,${user} <i class="icon-angle-down"></i></dt><dd></dd></dl>
 		</li>
 		<li class='headitem purple'><a><i class="icon-envelope"></i> 信息</a>

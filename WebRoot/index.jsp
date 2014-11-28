@@ -53,6 +53,7 @@
 <script type="text/javascript" src="js/drag.js"></script>
 <script type="text/javascript" src="js/multiradio.js"></script>
 <script type="text/javascript" src="js/highlight.js"></script>
+<script type="text/javascript" src="laydate/laydate.js"></script>
 <!--[if lt IE 9]>
 		<script language="javascript" type="text/javascript" src="js/excanvas.js"></script>
 	<![endif]-->
