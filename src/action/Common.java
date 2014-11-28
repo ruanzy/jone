@@ -139,9 +139,36 @@ public class Common
 	
 	public Result header()
 	{
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", WebUtil.getUser());
-		return new Ftl("header.ftl", map);
+		Map<String, Object> data = new HashMap<String, Object>();
+		String user = WebUtil.getUser();
+		Object o = null;
+		List<Map<String, Object>> res = null;
+		List<Map<String, Object>> modules = null;
+		if ("admin".equals(user))
+		{
+			o = WebUtil.attr("allres", "application");
+		}
+		else
+		{
+			o = WebUtil.attr("res", "session");
+		}
+
+		if (o != null)
+		{
+			res = (List<Map<String, Object>>) o;
+			modules = new ArrayList<Map<String, Object>>();
+			for (Map<String, Object> map : res)
+			{
+				String type = String.valueOf(map.get("type"));
+				if ("1".equals(type))
+				{
+					modules.add(map);
+				}
+			}
+		}
+		data.put("user", user);
+		data.put("modules", modules);
+		return new Ftl("header.ftl", data);
 	}
 	
 	public Result center()

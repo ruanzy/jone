@@ -93,12 +93,34 @@ body,button,input,table {
 	width:180px;
 	height: 45px;
 	background: url(logo_rz.png) no-repeat 0 0;
-	border-right:1px solid #1da0d0;
 }
 
 #dd1{
 	float: left;
 	margin-top: 15px;
+}
+
+ul.nav{
+	float: left;
+	height: 45px;
+	margin: 0;
+	padding: 0;
+	border-left: 1px solid #1da0d0;
+	border-right: 1px solid #4dc4f0;
+}
+
+ul.nav li{
+	float: left;
+	line-height: 45px;
+	height: 45px;
+	border-left: 1px solid #4dc4f0;
+	border-right: 1px solid #1da0d0;
+	padding: 0 15px;
+	position: relative;
+	float: left !important;
+	list-style: none;
+	cursor: pointer;
+	font-size:15px;
 }
 
 #head-collapse {

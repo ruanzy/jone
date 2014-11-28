@@ -1,5 +1,10 @@
 <div id="head-left">
-	<div id='logo'></div><span id='dd1'><i class="icon-reorder"></i></span>
+	<div id='logo'></div>
+	<ul class='nav'>
+		<#list modules as module>
+			<li id='m${module.id?c}'><i class="icon-user"></i> ${module.name}</li>
+		</#list>
+	</ul>
 </div>
 <div id="head-right">
 	<ul>
