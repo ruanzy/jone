@@ -2,7 +2,7 @@
 	<div id='logo'></div>
 	<ul class='nav'>
 		<#list modules as module>
-			<li id='m${module.id?c}'><i class="icon-user"></i> ${module.name}</li>
+			<li id='m${module.id?c}' name='${module.name}'><i class="icon-user"></i> ${module.name}</li>
 		</#list>
 	</ul>
 </div>

@@ -326,9 +326,8 @@ dl.accordion dt {
 }
 
 dl.accordion dd {
-	display: none;
-	padding: 20px 0;
-	margin: 0;
+	display: block;
+	margin: 10px 0;
 	overflow: auto;
 }
 

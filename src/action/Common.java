@@ -171,6 +171,44 @@ public class Common
 		return new Ftl("header.ftl", data);
 	}
 	
+	public Result sidebar()
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		String mid = WebUtil.getParameter("mid");
+		String mname = WebUtil.getParameter("mname");
+		String user = WebUtil.getUser();
+		Object o = null;
+		List<Map<String, Object>> res = null;
+		List<Map<String, Object>> menus = null;
+		if ("admin".equals(user))
+		{
+			o = WebUtil.attr("allres", "application");
+		}
+		else
+		{
+			o = WebUtil.attr("res", "session");
+		}
+
+		if (o != null)
+		{
+			res = (List<Map<String, Object>>) o;
+			menus = new ArrayList<Map<String, Object>>();
+			for (Map<String, Object> map : res)
+			{
+				String type = String.valueOf(map.get("type"));
+				String pid = String.valueOf(map.get("pid"));
+				if ("2".equals(type) && mid.equals(pid))
+				{
+					menus.add(map);
+				}
+			}
+		}
+		data.put("mid", mid);
+		data.put("mname", mname);
+		data.put("menus", menus);
+		return new Ftl("sidebar.ftl", data);
+	}
+	
 	public Result center()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
