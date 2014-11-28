@@ -54,6 +54,13 @@ $(function() {
 					$('#pill', body).css('left', sw);
 				}
 		);
+		$('ul.nav').delegate('li', 'click', function(){
+			$(this).siblings().removeClass('selected');
+			$(this).addClass('selected');
+			var moudle = $(this).attr('id').substring(1);
+			$('ul.sidebar1').find('#' + moudle).show();
+		});
+		$('ul.nav li:first').click();
 	});
 	$('#sidebar').height(WH - 45);
 	$('#sidebar').Accordion({

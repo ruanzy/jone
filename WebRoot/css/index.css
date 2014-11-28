@@ -121,6 +121,11 @@ ul.nav li{
 	list-style: none;
 	cursor: pointer;
 	font-size:15px;
+	color: #fff;
+}
+
+ul.nav li.selected{
+	background: #16a0d3;
 }
 
 #head-collapse {
