@@ -11,7 +11,7 @@ body,button {
 	margin: 0;
 }
 
-body,button,input,table {
+body,button,table {
 	font: 13px/20px "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
 	line-height: 1.5;
 }
@@ -258,38 +258,6 @@ ul {
 	cursor: pointer;
 }
 
-.txt2 {
-	border: #abadb3 1px solid;
-	height: 32px;
-	line-height: 18px;
-	padding-left: 2px;
-	font-family: "微软雅黑", Arial, sans-serif;
-	color: #555;
-	margin: 0;
-	width: 158px;
-	font-size: 16px;
-	vertical-align: middle;
-	background: url('../images/text-bg1.gif');
-	padding: 0 30px 0 10px;
-	border: 1px solid #ccc;
-}
-
-.txt {
-	outline: none;
-	box-shadow: none;
-	border: 1px solid #bbb;
-	padding: 3px;
-	width: 190px;
-}
-
-.textarea {
-	outline: none;
-	box-shadow: none;
-	border: 1px solid #bbb;
-	padding: 3px;
-	width: 190px;
-}
-
 td.form-label {
 	font-weight: bold;
 	width: 60px;
@@ -379,4 +347,17 @@ div.multi-radio:after {
 	display: block;
 	height: 0;
 	visibility: hidden;
+}
+
+input[type=text],input[type=password],textarea{
+	outline: none;
+	line-height: 14px;
+	padding: 5px 0 5px 10px;
+	font-family: "微软雅黑", Arial, sans-serif;
+	color: #555;
+	width: 190px;
+	font-size: 14px;
+	vertical-align: middle;
+	border: 1px solid #ccc;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
