@@ -69,6 +69,7 @@ $(function() {
 						//permit('#main');
 					});
 				});
+				$('#sidebar dd:first a').click();
 			});
 		});
 		$('ul.nav li:first').click();
