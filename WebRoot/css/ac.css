@@ -48,14 +48,14 @@
 	text-align: left;
 }
 
-li.hover {
+.combox-dl li.hover {
 	background: #dfe8f6;
 	border: 1px dotted #a3bae9;
 	outline: none;
 	color: #000;
 }
 
-li.selected {
+.combox-dl li.selected {
 	background: #dfe8f6;
 	border: 1px dotted #a3bae9;
 	outline: none;

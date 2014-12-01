@@ -2,6 +2,16 @@ $(function() {
 	var body = $('body');
 	var WW = $(window).width();
 	var WH = $(window).height();
+	var h = $('#content').outerHeight();
+	var padding = $('#main').css('padding-top');
+	var H = h - 2*parseInt(padding) - 40;
+	$('#main').height(H);
+	$(window).resize(function(){
+		var h = $('#content').outerHeight();
+		var padding = $('#main').css('padding-top');
+		var H = h - 2*parseInt(padding) - 40;
+		$('#main').height(H);
+	});
 	$('#header').load('common/header', function(){
 		var items = [ {
 			icon : 'icon-cog',
@@ -74,7 +84,7 @@ $(function() {
 		});
 		$('ul.nav li:first').click();
 	});
-	$('#sidebar').height(WH - 45);
+	//$('#sidebar').height(WH - 45);
 	/**$('#sidebar').Accordion({
 		title : '导航菜单',
 		url : 'common/menu',
@@ -87,7 +97,7 @@ $(function() {
 			});
 		}
 	});**/
-	$('#main').load('common/welcome');
+	//$('#main').load('common/welcome');
 	/**$('#content').load('common/center',function(){
 	});**/
 });
