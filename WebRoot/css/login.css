@@ -87,6 +87,7 @@ h3 {
 	border: 1px solid #ccc;
 	border-left: 2px solid #35aa47 !important;
 	font-size: 15px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
 #VerifyImage{
@@ -115,6 +116,7 @@ h3 {
 	border: 1px solid #ccc;
 	font-size: 15px;
 	vertical-align:middle;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
 #error {
