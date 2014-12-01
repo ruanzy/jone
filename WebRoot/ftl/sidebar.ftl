@@ -1,5 +1,5 @@
 <dl class='accordion'>
-<dt class=header><i class='icon-list-alt' style='font-size:18px;'></i>${mname}</dt>
+<dt class=header>${mname}</dt>
 <#list menus as menu>
-	<dd id='${menu.id?c}'><a url='${menu.url}'><i class="icon-user"></i> ${menu.name}</a></dd>
+	<dd id='${menu.id?c}'><a url='${menu.url}'><i class="icon-folder-close"></i> ${menu.name}</a></dd>
 </#list>
