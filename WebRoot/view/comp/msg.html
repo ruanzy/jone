@@ -11,6 +11,7 @@
 <div>
 	<a class='btn btn-danger' id='bbb2'>Dialog</a>
 </div>
+<p id='code2'></p>
 <p id='code'></p>
 <script type="text/javascript">
 	$('p a:nth(0)').click(function(e) {
@@ -50,10 +51,12 @@
 		});
 	});
 </script>
-<pre id='Dialog_code' style='display:none;'>
+<pre id='Dialog_code2' style='display:none;'>
 <div>
 	<a class='btn btn-danger' id='bbb2'>Dialog</a>
 </div>
+</pre>
+<pre id='Dialog_code' style='display:none;'>
 $('#bbb2').click(function(e) {
 	var dialog = $.dialog({
 		url : 'view/income/list.html',
@@ -62,7 +65,10 @@ $('#bbb2').click(function(e) {
 });
 </pre>
 <script type="text/javascript">
+	var code2 = $('#Dialog_code2').html().trim();
+	var highLightCode2 = HighLighter.highLight('html', 'rDark', code2);
+    $('#code2').html(highLightCode2);
 	var code = $('#Dialog_code').html().trim();
-	var highLightCode = HighLighter.highLight('html', 'rDark', code);
+	var highLightCode = HighLighter.highLight('javascript', 'rDark', code);
     $('#code').html(highLightCode);
 </script>
