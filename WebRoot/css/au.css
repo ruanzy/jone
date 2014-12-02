@@ -20,8 +20,7 @@
 }
 
 .rzy-select dt i {
-	width: 28px;
-	line-height:100%;
+	padding:8px;
 	display: block;
 	border-left:1px solid #CFCFCF;
 	background-color: #fafafa;
