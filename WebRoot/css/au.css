@@ -1,40 +1,36 @@
 .rzy-select {
 	float: left;
+	margin:0;
+	padding: 0;
 	margin-right: 10px;
-	border: 1px solid #CFCFCF;
 	position: relative;
 }
 
 .rzy-select dt {
+	position: relative;
 	text-align: center;
-	vertical-align: middle;
 	background-color: white;
-	padding: 0 26px 0 0;
+	padding: 0;
+	margin:0;
 }
 
 .rzy-select dt input {
-	outline: none;
-	padding: 5px;
-	float: left;
-	border: 0;
-	color: #343434;
-	background-color: transparent;
-	text-align: left;
+	display: inline-block;
+	padding-right:32px;
 }
 
-.rzy-select dt span {
-	width: 29px;
-	padding: 8px 0 7px 0;
-	position: absolute;
-	right: 0;
-	top: 0;
+.rzy-select dt i {
+	width: 28px;
+	height:29px;
+	line-height:29px;
 	display: block;
-	border-left: 1px solid #E6E6E6;
-	font-size: 18px;
-	background-color: #F6F6F6;
-	text-align: center;
+	border-left:1px solid #CFCFCF;
+	background-color: #fafafa;
 	cursor: pointer;
 	zoom: 1;
+	position: absolute;
+	top:3px;
+	right:1px;
 }
 
 .rzy-select dd {
