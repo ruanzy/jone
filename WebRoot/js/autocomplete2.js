@@ -39,7 +39,7 @@
 				$(this).data('options', settings);
 				var hideName = me.attr('');
 				var rdm = new Date().getTime() + '_' + Math.floor(Math.random()*(100 - 1 + 1) + 1);
-				var dl = $("<dl class='rzy-select'><dt id='dt_" + rdm + "'></dt></dl>");
+				var dl = $("<dl class='rzy-select'><dt id='dt_" + rdm + "'></dt><dd></dd></dl>");
 				var p1 = [];
 				p1.push("<input type='text' autocomplete='off'/>");
 				p1.push("<i class='icon-angle-down'></i>");
