@@ -32,20 +32,20 @@
 		init: function(options) {
 			var settings = $.extend({}, $.fn.AutoComplete2.defaults, options);
 			return this.each(function(){
-				var me = $(this);
+				var me = $(this).hide();
+				if(this.tagName != 'INPUT'){
+					return;
+				}
 				$(this).data('options', settings);
-				var hideName = settings.hideName;
+				var hideName = me.attr('');
 				var rdm = new Date().getTime() + '_' + Math.floor(Math.random()*(100 - 1 + 1) + 1);
-				var html = [];
-				html.push("<dl class='rzy-select'><dt id='dt_");
-				html.push(rdm);
-				html.push("'><input type='text' name='");
-				html.push(hideName);
-				html.push("_text' autocomplete='off'/>");
-				html.push("<input type='hidden' name='");
-				html.push(hideName);
-				html.push("'/><i class='icon-angle-down'></i></dt><dd></dd></dl>");
-				$(this).append(html.join(''));
+				var dl = $("<dl class='rzy-select'><dt id='dt_" + rdm + "'></dt></dl>");
+				var p1 = [];
+				p1.push("<input type='text' autocomplete='off'/>");
+				p1.push("<i class='icon-angle-down'></i>");
+				me.wrap(dl).after(p1.join(''));
+				var dt = $("dt", dl);
+				var dd = $("dd", dl);
 				var url = settings.url;
 				var data = settings.data;
 				if(url){
@@ -69,9 +69,7 @@
 					dh.push(a);
 				});
 				span.remove();
-				var dd = $('dd', this);
 				dd.append(dh.join(''));
-				var dt = $('dt', this);
 				var txt = $('input[type=text]', dt);
 				var val = $('input[type=hidden]', dt);
 				dd.click(function(e){
