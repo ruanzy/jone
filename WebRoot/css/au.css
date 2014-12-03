@@ -1,12 +1,12 @@
-.rzy-select {
-	float: left;
+dl.select {
+	display: inline-block;
 	margin:0;
 	padding: 0;
-	margin-right: 10px;
 	position: relative;
+	border:1px solid #fff;
 }
 
-.rzy-select dt {
+dl.select dt {
 	position: relative;
 	text-align: center;
 	background-color: white;
@@ -14,12 +14,12 @@
 	margin:0;
 }
 
-.rzy-select dt input {
-	display: inline-block;
+dl.select dt input {
+	margin:0;
 	padding-right:32px;
 }
 
-.rzy-select dt i {
+dl.select dt i {
 	padding:8px;
 	display: block;
 	border-left:1px solid #CFCFCF;
@@ -32,34 +32,39 @@
 	bottom: 1px;
 }
 
-.rzy-select dd {
+dl.select dd {
 	position: absolute;
-	z-index: 100;
+	z-index: 10000;
 	max-height: 300px;
 	overflow: auto;
 	-webkit-box-shadow: 0 2px 6px #CCC;
 	-moz-box-shadow: 0 2px 6px #ccc;
 	-ms-box-shadow: 0 2px 6px #ccc;
 	box-shadow: 0 2px 6px #CCC;
-	left: -1px;
-	top: 34px;
+	left: 0;
+	top: 33px;
 	border: 1px solid #CFCFCF;
-	border-top: 0;
 	background-color: white;
-	width: 100%;
 	display: none;
 	margin: 0;
+	padding: 0;
 }
 
-.rzy-select dd LI {
-	list-style: none; 
+dl.select dd a {
+	display: block;
 	line-height: 30px;
 	padding-left: 6px;
 	font-size: 12px;
-	height: 30px;
+	text-decoration: none;
+	color: #000;
 }
 
-.hovers {
+dl.select dd a:hover {
+	background-color: #488FCD;
+	color: #fff;
+}
+
+dl.select dd a.selected {
 	background-color: #007EAD;
-	color: white;
+	color: #fff;
 }

@@ -39,13 +39,15 @@
 				$(this).data('options', settings);
 				var hideName = me.attr('');
 				var rdm = new Date().getTime() + '_' + Math.floor(Math.random()*(100 - 1 + 1) + 1);
-				var dl = $("<dl class='rzy-select'><dt id='dt_" + rdm + "'></dt><dd></dd></dl>");
+				var dl = $("<dl class='select'><dt id='dt_" + rdm + "'></dt><dd></dd></dl>");
 				var p1 = [];
 				p1.push("<input type='text' autocomplete='off'/>");
 				p1.push("<i class='icon-angle-down'></i>");
 				me.wrap(dl).after(p1.join(''));
-				var dt = $("dt", dl);
-				var dd = $("dd", dl);
+				var dt = me.parent("dt");
+				var H = dt.outerWidth();
+				var dd = dt.siblings("dd").width(H - 2);
+				var txt = me.siblings("input");
 				var url = settings.url;
 				var data = settings.data;
 				if(url){
@@ -65,43 +67,30 @@
 				$(data).each(function(i){
 					var txt = this[settings.textField];
 					txt = span.text(txt).html();
-					var a = "<li v='" + this[settings.valueField] + "' _idx=" + i + ">" + txt + "</li>" ;						
+					var a = "<a href='javascript:;' v='" + this[settings.valueField] + "' _idx=" + i + ">" + txt + "</a>" ;						
 					dh.push(a);
 				});
 				span.remove();
 				dd.append(dh.join(''));
-				var txt = $('input[type=text]', dt);
-				var val = $('input[type=hidden]', dt);
 				dd.click(function(e){
 					var t = e.target;
-					if(t.tagName == 'LI'){
+					if(t.tagName == 'A'){
 						txt.val($(t).text());
-						val.val($(t).attr('v'));
+						me.val($(t).attr('v'));
 						$(this).hide();
 						settings.select({text:$(t).text(), value:$(t).attr('v')});
 					}
 				});
-				var lis = $("li", dd);
-				lis.live('mouseenter',function(){
-				   $(this).addClass("hovers");
-				});
-				lis.live('mouseleave',function(){
-				   $(this).removeClass("hovers");    
+				dt.bind("click",function(e){  
+					dd.show(); 
 				});
 				$(document).bind("click",function(e){ 
 					var target = $(e.target); 
 					if(target.closest('#dt_' + rdm).length == 0){ 
 						dd.hide(); 
-					} else{
-						lis.each(function(){
-							if(txt.val() && (txt.val()== $(this).text())){
-								$('li.hovers',dd).removeClass("hovers");  
-								$(this).addClass("hovers");
-							}							
-						});
-						dd.show(); 
 					}
 				});
+				var lis = $('a', dd);
 				var num = lis.size();
 				var H = lis.eq(0).outerHeight();
 				var _idx = 0;

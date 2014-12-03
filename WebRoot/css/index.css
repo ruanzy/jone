@@ -345,11 +345,13 @@ div.multi-radio:after {
 
 input[type=text],input[type=password],textarea {
 	outline: none;
-	line-height: 14px;
-	padding: 5px 0 5px 5px;
+	margin: 0;
+	padding: 5px;
 	font-family: "微软雅黑", Arial, sans-serif;
 	color: #555;
 	width: 190px;
+	height: 20px;
+	line-height: 14px;
 	font-size: 13px;
 	vertical-align: middle;
 	border: 1px solid #ccc;
