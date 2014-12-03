@@ -37,9 +37,9 @@
 					return;
 				}
 				$(this).data('options', settings);
-				var hideName = me.attr('');
+				var disabled = me.attr('disabled');
 				var rdm = new Date().getTime() + '_' + Math.floor(Math.random()*(100 - 1 + 1) + 1);
-				var dl = $("<dl class='select'><dt id='dt_" + rdm + "'></dt><dd></dd></dl>");
+				var dl = $("<dl class='select'><dt id='dt_" + rdm + "'></dt><dd></dd><div class='disabled'></div></dl>");
 				var p1 = [];
 				p1.push("<input type='text' autocomplete='off'/>");
 				p1.push("<i class='icon-angle-down'></i>");
@@ -47,6 +47,10 @@
 				var dt = me.parent("dt");
 				var H = dt.outerWidth();
 				var dd = dt.siblings("dd").width(H - 2);
+				var mask = dt.siblings("div.disabled");
+				if(disabled){
+					mask.show();
+				}
 				var txt = me.siblings("input");
 				var url = settings.url;
 				var data = settings.data;
@@ -204,8 +208,22 @@
         		}
         	});
         },
-		val: function(){
-    		return $('dt', this).find('input[type=hidden]').val();
+		val: function(val){
+			if(val){				
+				var data = this.data('list');
+				this.val(val);
+				var txt = this.siblings("input");
+				$(data).each(function(i){
+					var t = this.text;
+					var v = this.value;
+					if(v == val){
+						txt.val(t);
+						return;
+					}
+				});
+			}else{	
+				return this.val();
+			}
         }
 	};  
 })(jQuery);

@@ -11,7 +11,7 @@
 <div>
 	<a class='btn btn-danger' id='bbb2'>Dialog</a>
 </div>
-<input type='text' id='ddddd' name='operator'/>
+<input type='text' id='ddddd' name='operator' disabled="disabled"/>
 <p id='code2'></p>
 <p id='code'></p>
 <script type="text/javascript">
@@ -55,7 +55,7 @@
 	$('#ddddd').AutoComplete2({
 	 	url:'log/users',
 	 	emptyText:''
-	 }); 
+	 }).AutoComplete2('val', 102); 
 </script>
 <pre id='Dialog_code2' style='display:none;'>
 <div>
