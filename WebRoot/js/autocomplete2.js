@@ -62,16 +62,6 @@
 					});
 				}
 				$(this).data('list', data);				
-				var dh = [];
-				var span = $('<span>');
-				$(data).each(function(i){
-					var txt = this[settings.textField];
-					txt = span.text(txt).html();
-					var a = "<a href='javascript:;' v='" + this[settings.valueField] + "' _idx=" + i + ">" + txt + "</a>" ;						
-					dh.push(a);
-				});
-				span.remove();
-				dd.append(dh.join(''));
 				dd.click(function(e){
 					var t = e.target;
 					if(t.tagName == 'A'){
@@ -82,6 +72,7 @@
 					}
 				});
 				dt.bind("click",function(e){  
+					loadItems();
 					dd.show(); 
 				});
 				$(document).bind("click",function(e){ 
@@ -100,24 +91,27 @@
 						return false;
 					}
 					setTimeout(function(){
-						var data = me.data('list');
-						var k = $.trim(txt.val());
-						if(k.length>0){
-							var arr = grep(k, data, settings.filter);
-							loadItems(arr);
-						}else{
-							//loadItems(data);
-						}
+						loadItems();
 					}, 10);
 				});
 				
 				
-				function loadItems(data){
+				function loadItems(){
+					var all = me.data('list');
+					var data = all;
+					var k = $.trim(txt.val());
+					if(k.length>0){
+						data = grep(k, all, settings.filter);
+					}
 					var dh = [];
+					var span = $('<span>');
 					$(data).each(function(i){
-						var a = "<li v='" + this[settings.valueField] + "' _idx=" + i + ">" + this[settings.textField] + "</li>" ;						
+						var txt = this[settings.textField];
+						txt = span.text(txt).html();
+						var a = "<a href='javascript:;' v='" + this[settings.valueField] + "' _idx=" + i + ">" + txt + "</a>" ;						
 						dh.push(a);
 					});
+					span.remove();
 					dd.empty().append(dh.join(''));
 				}
 				

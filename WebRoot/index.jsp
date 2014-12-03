@@ -31,10 +31,8 @@
 <link rel="stylesheet" type="text/css" href="css/well.css" />
 <link rel="stylesheet" type="text/css" href="css/contextmenu.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/cache.js"></script>
 <script type="text/javascript" src="js/ajax-pushlet-client.js"></script>
 <script type="text/javascript" src="js/Chart.min.js"></script>
-<script type="text/javascript" src="js/box.js"></script>
 <script type="text/javascript" src="js/tip.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
