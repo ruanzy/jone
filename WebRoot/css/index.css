@@ -280,7 +280,7 @@ div.multi-radio {
 div.multi-radio a {
 	float: left;
 	border: 1px solid #d4d4d4;
-	padding: 5px 15px;
+	padding: 4px 15px;
 	height: 20px;
 	margin-left: -1px;
 	line-height: 20px;
@@ -293,8 +293,8 @@ div.multi-radio a:hover {
 }
 
 div.multi-radio a.active {
-	background: #16a0d3;
-	border-color: #1096c7;
+	background: #33B5E5;
+	border-color: #33B5E5;
 	color: #fff;
 }
 

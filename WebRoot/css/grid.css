@@ -59,8 +59,8 @@ border-color: #ddd;
 }
 
 .pagination a.active {
-background-color: #488FCD;
-border-color: #488FCD;
+background-color: #33B5E5;
+border-color: #33B5E5;
 color: #fff;
 -webkit-text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 text-shadow: 0 -1px 0 rgba(0,0,0,.25);
