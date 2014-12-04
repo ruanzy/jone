@@ -68,9 +68,9 @@ dl.select dd a.selected {
 	color: #fff;
 }
 
-dl.select div.disabled {
+.mask {
 	position: absolute;
-	z-index: 10001;
+	z-index: 1040;
 	top: 0;
 	right: 0;
 	bottom: 0;
