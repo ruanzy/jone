@@ -1,19 +1,15 @@
-html,body {
+body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif; 
+	font-size: 13px; 
 	overflow: hidden;
 }
 
-body,button {
+button {
 	padding: 0;
 	margin: 0;
-}
-
-body,button,table {
-	font: 13px/20px "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
-	line-height: 1.5;
 }
 
 #header {
@@ -72,17 +68,9 @@ body,button,table {
 	overflow: auto;
 }
 
-#head-left {
-	color: #fff;
-	float: left;
-	line-height: 45px;
-	padding-left: 10px;
-	position: absolute;
-	vertical-align: middle;
-}
-
 #logo {
 	float: left;
+	padding-left: 10px;
 	width: 180px;
 	height: 45px;
 	background: url(logo_rz.png) no-repeat 0 0;
@@ -96,8 +84,6 @@ body,button,table {
 ul.nav {
 	float: left;
 	height: 45px;
-	margin: 0;
-	padding: 0;
 	border-left: 1px solid #1da0d0;
 	border-right: 1px solid #4dc4f0;
 }
@@ -109,9 +95,6 @@ ul.nav li {
 	border-left: 1px solid #4dc4f0;
 	border-right: 1px solid #1da0d0;
 	padding: 0 15px;
-	position: relative;
-	float: left !important;
-	list-style: none;
 	cursor: pointer;
 	font-size: 15px;
 	color: #fff;
@@ -121,40 +104,23 @@ ul.nav li.selected {
 	background: #16a0d3;
 }
 
-#head-collapse {
-	color: #fff;
-	float: left;
-	height: 45px;
-	line-height: 45px;
-	font-size: 20px;
-	padding-left: 15px;
-	left: 200px;
-	position: absolute;
-}
-
-#head-right {
-	color: #fff;
+ul.info {
 	float: right;
 	padding-right: 20px;
-}
-
-#head-right ul {
 	height: 45px;
-	margin: 0;
-	padding: 0;
+	color: #fff;
 	border-left: 1px solid #1da0d0;
 	border-right: 1px solid #4dc4f0;
 }
 
-#head-right .headitem {
+ul.info li {
 	line-height: 45px;
 	height: 45px;
 	border-left: 1px solid #4dc4f0;
 	border-right: 1px solid #1da0d0;
-	padding: 0 8px;
+	padding: 0 10px;
 	position: relative;
 	float: left !important;
-	list-style: none;
 	cursor: pointer;
 }
 
@@ -177,11 +143,6 @@ ul.nav li.selected {
 	white-space: nowrap;
 }
 
-ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
 
 .nav-list li {
 	display: block;
@@ -289,12 +250,14 @@ dl.accordion dt {
 
 dl.accordion dd {
 	margin: 0; 
+	padding: 0;
 	border-bottom: 1px solid #dbdbdb;
 	background: #f6f7f7;
 }
 
 dl.accordion dd.active {
 	display: block;
+	border-left: 3px solid #488FCD;
 	background: #16a0d3;
 }
 
@@ -356,4 +319,30 @@ input[type=text],input[type=password],textarea {
 	vertical-align: middle;
 	border: 1px solid #ccc;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+dl, dt, dd{
+	margin: 0;
+	padding: 0;	
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.clear {
+	clear: both;
 }

@@ -19,7 +19,7 @@
 			return this.each(function() {
 				var me = $(this);
 				var dt = $('dt', this);
-				var dd = $('dd', this).width(opts.width).hide();
+				var dd = $('dd', this).width(opts.width);
 				var rdm = new Date().getTime() + '_'
 						+ Math.floor(Math.random() * (100 - 1 + 1) + 1);
 				dt.attr('id', 'dt_' + rdm);
@@ -28,23 +28,22 @@
 				if (items) {
 					var html = [];
 					for ( var k in items) {
+						html.push("<a href='javascript:'");
 						if (items[k] === '-') {
-							html.push("<div class='item' idx='" + k
-									+ "'><div class='divider'></div></div>");
+							html.push(" class='divider'>");
 						} else {
+							html.push(">");
 							var icon = items[k].icon || '';
 							var text = items[k].text || '';
-							var str = "<div class='item' idx='" + k
-									+ "'><a href='javascript:'><i class='"
-									+ icon
-									+ "'></i><span style='padding-left:8px;'>"
-									+ text + "</span></a></div>";
-							html.push(str);
+							html.push("<i class='", icon, "'></i>");
+							html.push("<span style='padding-left:8px;'>", text, "</span>");
 						}
+						html.push("</a>");
 					}
 					dd.html(html.join(''));
-					$('div.item', dd).click(function(e) {
-						var idx = $(this).attr('idx');
+					var as = $('a', dd);
+					dd.delegate('a', 'click', function(e) {
+						var idx = as.index(this);
 						var action = items[idx].action;
 						if (action) {
 							action.call();

@@ -1,15 +1,7 @@
-.rzy-sidedown {
+dl.rzy-sidedown {
 	float: left;
-	margin: 0;
-	padding: 0;
 	position: relative;
 	border: 0px solid #CFCFCF;
-}
-
-.rzy-sidedown dt {
-	text-align: center;
-	vertical-align: middle;
-	padding: 0 26px 0 0;
 }
 
 .rzy-sidedown dd {
@@ -23,24 +15,18 @@
 	border: 1px solid #CFCFCF;
 	background-color: white;
 	display: none;
-	margin: 0;
 }
 
-.rzy-sidedown .item {
-
-}
-
-.rzy-sidedown .item a {
+.rzy-sidedown dd a {
 	display: block;
 	padding-left: 6px;
 	line-height: 30px;
 	font-size: 12px;
-	height: 30px;
 	text-decoration: none;
 	color: #000;
 }
 
-.rzy-sidedown .item a:hover {
+.rzy-sidedown dd a:hover {
 	background-color: #33B5E5;
 	color: white;
 }
