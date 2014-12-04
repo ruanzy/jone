@@ -20,7 +20,6 @@
     $.fn.AutoComplete2.defaults = {
 		data: [],
 		url: null,
-		hideName: 'rzy',
 		textField: 'text',
 		valueField: 'value',
 		filter: function(q, item, idx){
@@ -39,7 +38,7 @@
 				$(this).data('options', settings);
 				var disabled = me.attr('disabled');
 				var rdm = new Date().getTime() + '_' + Math.floor(Math.random()*(100 - 1 + 1) + 1);
-				var dl = $("<dl class='select'><dt id='dt_" + rdm + "'></dt><dd></dd><div class='disabled'></div></dl>");
+				var dl = $("<dl class='select'><dt id='dt_" + rdm + "'></dt><dd></dd><div class='mask'></div></dl>");
 				var p1 = [];
 				p1.push("<input type='text' autocomplete='off'/>");
 				p1.push("<i class='icon-angle-down'></i>");
@@ -47,7 +46,7 @@
 				var dt = me.parent("dt");
 				var H = dt.outerWidth();
 				var dd = dt.siblings("dd").width(H - 2);
-				var mask = dt.siblings("div.disabled");
+				var mask = dt.siblings("div.mask");
 				if(disabled){
 					mask.show();
 				}
@@ -76,7 +75,8 @@
 					}
 				});
 				dt.bind("click",function(e){  
-					loadItems();
+					var all = me.data('list');
+					loadItems(all);
 					dd.show(); 
 				});
 				$(document).bind("click",function(e){ 
@@ -95,18 +95,18 @@
 						return false;
 					}
 					setTimeout(function(){
-						loadItems();
+						var all = me.data('list');
+						var data = all;
+						var k = $.trim(txt.val());
+						if(k.length>0){
+							data = grep(k, all, settings.filter);
+						}
+						loadItems(data);
 					}, 10);
 				});
 				
 				
-				function loadItems(){
-					var all = me.data('list');
-					var data = all;
-					var k = $.trim(txt.val());
-					if(k.length>0){
-						data = grep(k, all, settings.filter);
-					}
+				function loadItems(data){
 					var dh = [];
 					var span = $('<span>');
 					$(data).each(function(i){
