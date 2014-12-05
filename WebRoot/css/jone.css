@@ -826,6 +826,30 @@ button.css
 	background-clip: padding-box;
 }
 
+/**
+search-form.css
+**/
+.search-form {
+	width: 100px;
+	position: relative;
+	display: inline;
+}
+
+.search-form input {
+	padding: 5px 25px 5px 10px;
+	display: inline;
+	outline: none;
+	border: 1px solid #ddd;
+}
+
+.search-form button {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	background: none;
+	border: none;
+	outline: none;
+}
 
 /**
 sidedown.css
