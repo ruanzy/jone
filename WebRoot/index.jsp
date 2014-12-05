@@ -10,36 +10,16 @@
 <base href="<%=basePath%>">
 <title>RDP</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" type="text/css" href="css/jone.css" />
 <link rel="stylesheet" type="text/css"
 	href="awesome/css/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
-<link rel="stylesheet" type="text/css" href="css/datepicker.css" />
-<link rel="stylesheet" type="text/css" href="css/dt.css" />
-<link rel="stylesheet" type="text/css" href="css/dropdown.css" />
-<link rel="stylesheet" type="text/css" href="css/box.css" />
 <link rel="stylesheet" type="text/css" href="css/tree.css" />
-<link rel="stylesheet" type="text/css" href="css/grid.css" />
-<link rel="stylesheet" type="text/css" href="css/res.css" />
-<link rel="stylesheet" type="text/css" href="css/ac.css" />
-<link rel="stylesheet" type="text/css" href="css/au.css" />
-<link rel="stylesheet" type="text/css" href="css/tip.css" />
-<link rel="stylesheet" type="text/css" href="css/down.css" />
-<link rel="stylesheet" type="text/css" href="css/button.css" />
-<link rel="stylesheet" type="text/css" href="css/label.css" />
-<link rel="stylesheet" type="text/css" href="css/msg.css" />
-<link rel="stylesheet" type="text/css" href="css/well.css" />
-<link rel="stylesheet" type="text/css" href="css/contextmenu.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/ajax-pushlet-client.js"></script>
-<script type="text/javascript" src="js/Chart.min.js"></script>
 <script type="text/javascript" src="js/tip.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/autocomplete.js"></script>
 <script type="text/javascript" src="js/autocomplete2.js"></script>
-<script type="text/javascript" src="js/datepicker.js"></script>
-<script type="text/javascript" src="js/datepicker2.js"></script>
 <script type="text/javascript" src="js/tabs2.js"></script>
 <script type="text/javascript" src="js/dropdown.js"></script>
 <script type="text/javascript" src="js/tree.js"></script>
