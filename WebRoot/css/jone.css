@@ -577,13 +577,17 @@ grid.css
 	vertical-align: bottom;
 	border: 1px solid #e1e1e1;
 	border-bottom: 2px solid #a0d468;
-	height: 30px;
-	line-height: 30px;
+	height: 32px;
+	line-height: 32px;
 	padding-left: 6px;
 	background-color: #f9f9f9;
 	color: #333;
 	font-size: 14px;
 	text-shadow: 1px 2px 1px #FFFFFF;
+	background: #EFEFEF;
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#f7f7f7),to(#EFEFEF));
+	background: -moz-linear-gradient(top,#f7f7f7,#EFEFEF 100%);
+	border: .1em solid #c8cccd;
 }
 
 .table tbody tr td {
