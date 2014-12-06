@@ -251,7 +251,7 @@ dl.accordion dt {
 dl.accordion dd {
 	margin: 0; 
 	padding: 0;
-	border-bottom: 1px solid #dbdbdb;
+	border-bottom: 1px solid #e5e5e5;
 	background: #f6f7f7;
 }
 
@@ -268,6 +268,11 @@ dl.accordion dd a {
 	cursor: pointer;
 	line-height: 20px;
 	height: 20px;
+	color: #585858;
+}
+
+dl.accordion dd a:hover {
+	background: #fff;
 	color: #585858;
 }
 
@@ -837,6 +842,7 @@ search-form.css
 
 .search-form input {
 	padding: 5px 25px 5px 10px;
+	margin: 0 0 5px 0;
 	display: inline;
 	outline: none;
 	border: 1px solid #ddd;
