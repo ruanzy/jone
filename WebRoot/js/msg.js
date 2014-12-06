@@ -320,7 +320,7 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 	};
 	$.fn.SideDown.defaults = {
 		width : 100,
-		trigger : 'hover'
+		trigger : 'click'
 	};
 	$.fn.SideDown.methods = {
 		init : function(options) {

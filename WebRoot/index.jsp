@@ -20,7 +20,7 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/tree.js"></script>
 <script type="text/javascript" src="js/grid2.js"></script>
-<script type="text/javascript" src="js/msg.min.js"></script>
+<script type="text/javascript" src="js/msg.js"></script>
 <script type="text/javascript" src="js/highlight.js"></script>
 <script type="text/javascript" src="laydate/laydate.js"></script>
 </head>
