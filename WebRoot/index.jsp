@@ -23,6 +23,7 @@
 <script type="text/javascript" src="js/msg.js"></script>
 <script type="text/javascript" src="js/highlight.js"></script>
 <script type="text/javascript" src="laydate/laydate.js"></script>
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/4.0.3/highcharts-all.js"></script>
 </head>
 <BODY>
 	<div id="header"></div>
