@@ -53,27 +53,10 @@ JAVA版本: ${version}
 	</div>
 </div>
 <script type="text/javascript">
-$('#box').DDR();
+
 	$('.well-header-buttons').click(function(){
 		$(this).parent().siblings('.well-body').toggle();
 	});
-	var ctx = document.getElementById("chart-area").getContext("2d");
-	var data = [
-		{
-			value: 90,
-			color: "#f4b400"
-		},
-		{
-			value : 20,
-			color : "#d73d32"
-		}		
-	];
-	var chart = new Chart(ctx).Pie(data, {animation : false});
-	$('#total').html(110.5);
-	$('#free').html(90);
-	$('#use').html(20);
-	//PL._init();
-	//PL.joinListen('/serverinfo');
 	function onData() {
  		$.ajax({
 			url : 'svr/mem',
@@ -97,20 +80,4 @@ $('#box').DDR();
 		//setTimeout(onData, 2000);
 	}
 	onData();
-	$('div.well').contextmenu({
-	  items:[
-	   {icon:'icon-home',text:'aaa', url:'www.baidu.com'},
-	   {icon:'icon-home',text:'aaakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', subitems:[
-	   	{icon:'icon-home',text:'aaa', url:'www.baidu.com'},
-	   	{icon:'icon-home',text:'aaa', subitems:[
-	   		{icon:'icon-home',text:'aaa', url:'www.baidu.com'},
-	   		{icon:'icon-home',text:'aaa'}
-	   	]}
-	   ]},
-	   '-',
-	   {icon:'icon-home',text:'aaa',url:'www.baidu.com', action:function(item){alert('kkk,,,');}}
-	  ]
-    });
-    
-    function kkk(){}
 </script>

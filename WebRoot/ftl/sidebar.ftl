@@ -1,5 +1,13 @@
-<dl class='accordion'>
-<dt>${mname}</dt>
-<#list menus as menu>
-	<dd id='${menu.id?c}'><a url='${menu.url}'><i class="${menu.icon}"></i> ${menu.name}<b class="icon-angle-right"></b></a></dd>
+<dl class='accordion' id='accordion1'>
+<#list all as res> 
+<#if res.type=='1'>
+<dt><i class="${res.icon}"></i> ${res.name}</dt>
+<dd>
+<#list all as res2>
+<#if res2.type=='2' && res2.pid == res.id>
+<a id='${res2.id?c}' url='${res2.url}'><i class="${res2.icon}"></i> ${res2.name}<b class="icon-angle-right"></b></a>
+</#if>
+</#list>
+</dd>
+</#if>
 </#list>

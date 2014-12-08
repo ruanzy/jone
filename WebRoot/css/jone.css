@@ -74,34 +74,19 @@ button {
 	width: 180px;
 	height: 45px;
 	background: url(logo_rz.png) no-repeat 0 0;
+	border-right: 1px solid #1da0d0;
 }
 
-#dd1 {
-	float: left;
-	margin-top: 15px;
-}
-
-ul.nav {
-	float: left;
-	height: 45px;
-	border-left: 1px solid #1da0d0;
-	border-right: 1px solid #4dc4f0;
-}
-
-ul.nav li {
+#toggle {
+	display: block;
 	float: left;
 	line-height: 45px;
 	height: 45px;
 	border-left: 1px solid #4dc4f0;
-	border-right: 1px solid #1da0d0;
-	padding: 0 15px;
+	padding: 15px 15px;
 	cursor: pointer;
 	font-size: 15px;
 	color: #fff;
-}
-
-ul.nav li.selected {
-	background: #16a0d3;
 }
 
 ul.info {
@@ -205,13 +190,6 @@ ul.info li {
 	padding: 8px 20px 24px;
 }
 
-#toggle {
-	position: absolute;
-	top: 50%;
-	left: 181px;
-	cursor: pointer;
-}
-
 td.form-label {
 	font-weight: bold;
 	width: 60px;
@@ -227,17 +205,16 @@ dl.accordion {
 }
 
 dl.accordion dt {
-	height: 38px;
-	line-height: 38px;
+	height: 39px;
+	line-height: 39px;
 	margin: 0;
 	padding: 0 16px 0 7px;
 	cursor: pointer;
 	display: block;
 	position: relative;
-	border-top: 1px solid #e5e5e5;
-	box-shadow: 0px 1px 1px #ccc;
-	color: #585858;
-	text-shadow: none !important;
+	border-bottom: 1px solid #e5e5e5;
+	box-shadow: 0px 1px 1px #e5e5e5;
+	color: #333;
 	text-decoration: none;
 	font-weight: normal;
 	white-space: nowrap;
@@ -247,30 +224,27 @@ dl.accordion dt {
 dl.accordion dd {
 	margin: 0; 
 	padding: 0;
-	border-top: 1px solid #fcfcfc;
-	border-bottom: 1px solid #e5e5e5;
-	background: #f6f7f7;
-}
-
-dl.accordion dd.active {
-	display: block;
-	border-left: 3px solid #488FCD;
-	background: #16a0d3;
+	background: #fff;
+	display: none;
 }
 
 dl.accordion dd a {
 	position: relative;
 	display: block;
+	border-bottom: 1px solid #e5e5e5;
 	padding: 10px 0 10px 20px;
 	text-align: left;
 	cursor: pointer;
-	line-height: 20px;
-	height: 20px;
-	color: #585858;
+	line-height: 15px;
+	height: 15px;
+	color: #737373;
 }
 
 dl.accordion dd a:hover {
-	background: #fff;
+	color: #1dd2af;
+}
+
+dl.accordion dd a.active {
 	color: #1dd2af;
 }
 

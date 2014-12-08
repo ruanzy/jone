@@ -1,9 +1,5 @@
 <div id='logo'></div>
-<ul class='nav'>
-	<#list modules as module>
-		<li id='m${module.id?c}' name='${module.name}'><i class="icon-user"></i> ${module.name}</li>
-	</#list>
-</ul>
+<span id='toggle'><i class="icon-th"></i></span>
 <ul class='info'>
 	<li>
 	<dl id='asd' class='rzy-sidedown'><dt><i class="icon-user"></i> 欢迎您,${user} <i class="icon-angle-down"></i></dt><dd></dd></dl>
