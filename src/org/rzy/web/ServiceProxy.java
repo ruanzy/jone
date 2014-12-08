@@ -41,25 +41,30 @@ class ServiceProxy
 		{
 			Object result = null;
 			Dao dao = Dao.getInstance();
+			String pcls = obj.getClass().getSimpleName();
+			String sid = pcls.split("\\$\\$")[0] + "." + method.getName();
+			Log log = new Log(sid, args);
 			try
 			{
 				dao.begin();
 				result = methodProxy.invokeSuper(obj, args);
 				dao.commit();
-				String pcls = obj.getClass().getSimpleName();
-				String sid = pcls.split("\\$\\$")[0] + "." + method.getName();
-				Log log = new Log(sid, args);
+				log.setResult(true);
+			}
+			catch (Exception e)
+			{
+				dao.rollback();
+				log.setResult(false);
+				throw e;
+			}
+			finally
+			{
 				String logHandlerName = config.getProperty("logHandler");
 				if (logHandlerName != null)
 				{
 					LogHandler logHandler = (LogHandler) Class.forName(logHandlerName).newInstance();
 					logHandler.handler(log);
 				}
-			}
-			catch (Exception e)
-			{
-				dao.rollback();
-				throw e;
 			}
 			return result;
 		}

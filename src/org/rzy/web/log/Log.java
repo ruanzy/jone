@@ -10,6 +10,7 @@ public class Log
 	String ip;
 	String time;
 	String sid;
+	boolean result;
 	Object[] args;
 
 	public Log(String sid, Object[] args)
@@ -45,5 +46,15 @@ public class Log
 	public Object[] getArgs()
 	{
 		return args;
+	}
+	
+	public boolean getResult()
+	{
+		return result;
+	}
+	
+	public void setResult(boolean result)
+	{
+		this.result = result;
 	}
 }
