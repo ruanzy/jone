@@ -3,6 +3,7 @@ package log;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.charset.Charset;
 import org.rzy.web.WebUtil;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -46,6 +47,7 @@ public class TxtAppender extends AppenderBase<ILoggingEvent>
 			addError("no layout of udp appender");
 			return;
 		}
+		encoder.setCharset(Charset.forName("UTF-8"));
 		super.start();
 	}
 
@@ -60,6 +62,7 @@ public class TxtAppender extends AppenderBase<ILoggingEvent>
 			long fileLength = rf.length();
 			rf.seek(fileLength);
 			rf.write(buf);
+			rf.write(System.getProperty("line.separator").getBytes("UTF-8"));
 			rf.close();
 		}
 		catch (IOException e)
