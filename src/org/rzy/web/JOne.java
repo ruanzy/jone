@@ -51,8 +51,8 @@ public class JOne implements Filter
 				pck_name = "org.rzy.web.action";
 			}
 			Class<?> cls = Class.forName(pck_name + "." + action_name);
-			Object[] ps = new Object[] { url, pck_name + "." + action_name, action_method_name };
-			log.debug("url={}, action={}, method={}", ps);
+			Object[] ps = new Object[] { url, pck_name + "." + action_name + "." + action_method_name };
+			log.debug("{} {}", ps);
 			// Object result = MethodUtils.invokeMethod(cls.newInstance(),
 			// action_method_name, null);
 			Method method = cls.getMethod(action_method_name);
