@@ -62,7 +62,6 @@ public class TxtAppender extends AppenderBase<ILoggingEvent>
 			long fileLength = rf.length();
 			rf.seek(fileLength);
 			rf.write(buf);
-			rf.write(System.getProperty("line.separator").getBytes("UTF-8"));
 			rf.close();
 		}
 		catch (IOException e)
