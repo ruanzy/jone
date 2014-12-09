@@ -51,8 +51,6 @@ public class JOne implements Filter
 				pck_name = "org.rzy.web.action";
 			}
 			Class<?> cls = Class.forName(pck_name + "." + action_name);
-			Object[] ps = new Object[] { url, pck_name + "." + action_name + "." + action_method_name };
-			log.debug("{} {}", ps);
 			// Object result = MethodUtils.invokeMethod(cls.newInstance(),
 			// action_method_name, null);
 			Method method = cls.getMethod(action_method_name);
@@ -62,8 +60,11 @@ public class JOne implements Filter
 				((Result) result).render();
 			}
 			long t2 = System.currentTimeMillis();
-			log.debug("time=" + (t2 - t1) + "ms");
-			log.debug("----------");
+			String action = pck_name + "." + action_name + "." + action_method_name;
+			String t = (t2 - t1) + "ms";
+			String ip = request.getRemoteAddr();
+			Object[] ps = new Object[] { ip, url, action, t };
+			log.debug("{} {} {} {}", ps);
 		}
 		catch (Exception e)
 		{

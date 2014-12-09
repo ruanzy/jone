@@ -90,7 +90,7 @@ public class NettyAppender extends AppenderBase<ILoggingEvent>
 	@Override
 	protected void append(ILoggingEvent event)
 	{
-		byte[] buf = encoder.getLayout().doLayout(event).trim().getBytes();
+		byte[] buf = encoder.getLayout().doLayout(event).getBytes();
 		try
 		{
 			ChannelBuffer buffer = ChannelBuffers.buffer(buf.length);

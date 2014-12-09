@@ -17,16 +17,20 @@
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %msg%n</pattern>
 		</encoder>
 	</appender>
-	<appender name="netty" class="log.NettyAppender">
-		<ip>127.0.0.1</ip>
-		<port>9000</port>
+	
+	<appender name="txt" class="log.TxtAppender">
+		<file>logs/JOne.txt</file>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %msg%n</pattern>
+			<pattern>%msg%n</pattern>
 		</encoder>
 	</appender>
+	
+	<logger name="org.rzy.web.ServiceProxy" level="DEBUG" additivity="false">  
+        <appender-ref ref="txt"/>  
+    </logger>  
+	
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
-		<appender-ref ref="netty" />
 	</root>
 </configuration>
