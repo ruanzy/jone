@@ -25,8 +25,15 @@
 		</encoder>
 	</appender>
 	
+	<appender name="MONGO" class="org.rzy.web.log.MongoAppender">
+	    <host>127.0.0.1</host>
+	    <db>JOne</db>
+	    <collection>logs</collection> 
+	</appender>
+	
 	<logger name="org.rzy.web.ServiceProxy" level="DEBUG" additivity="false">  
         <appender-ref ref="txt"/>  
+        <appender-ref ref="MONGO"/>  
     </logger>  
 	
 	<root level="DEBUG">
