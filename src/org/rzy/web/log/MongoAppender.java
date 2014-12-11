@@ -1,8 +1,6 @@
 package org.rzy.web.log;
 
-import java.lang.management.ManagementFactory;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -23,14 +21,27 @@ public class MongoAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
 	protected void append(ILoggingEvent eventObject)
 	{
 		DBCollection dbCollection = mongo.getDB(db).getCollection(collection);
+		String msg = eventObject.getFormattedMessage();
+		String[] arr = msg.split("\\|");
+		String user = arr[0];
+		String ip = arr[1];
+		String sid = arr[2];
+		String memo = arr[3];
+		String result = arr[4];
 		BasicDBObject logEntry = new BasicDBObject();
-		logEntry.append("message", eventObject.getFormattedMessage());
-		logEntry.append("logger", eventObject.getLoggerName());
+		logEntry.append("user", user);
+		logEntry.append("ip", ip);
+		logEntry.append("sid", sid);
+		logEntry.append("result", result);
+		logEntry.append("memo", memo);
+		//logEntry.append("logger", eventObject.getLoggerName());
 		logEntry.append("thread", eventObject.getThreadName());
-		logEntry.append("timestamp", new Date(eventObject.getTimeStamp()));
-		logEntry.append("level", eventObject.getLevel().toString());
-		logEntry.append("pid", getPid());
-		logEntry.append("ip", getIp());
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		String time = df.format(new Date(eventObject.getTimeStamp()));
+		logEntry.append("time", time);
+		//logEntry.append("level", eventObject.getLevel().toString());
+		//logEntry.append("pid", getPid());
+		//logEntry.append("ip", getIp());
 		Map<String, String> data = eventObject.getMDCPropertyMap();
 		for (String key : data.keySet())
 		{
@@ -41,24 +52,6 @@ public class MongoAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
 		{
 			System.out.println(eventObject.getFormattedMessage());
 		}
-	}
-
-	private String getIp()
-	{
-		try
-		{
-			return InetAddress.getLocalHost().getHostAddress();
-		}
-		catch (UnknownHostException e)
-		{
-			e.printStackTrace();
-			return "UNKNOW_HOST";
-		}
-	}
-
-	private String getPid()
-	{
-		return ManagementFactory.getRuntimeMXBean().getName();
 	}
 
 	@Override

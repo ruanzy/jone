@@ -31,8 +31,7 @@
 	    <collection>logs</collection> 
 	</appender>
 	
-	<logger name="org.rzy.web.ServiceProxy" level="DEBUG" additivity="false">  
-        <appender-ref ref="txt"/>  
+	<logger name="org.rzy.web.WebUtil" level="DEBUG" additivity="false">  
         <appender-ref ref="MONGO"/>  
     </logger>  
 	

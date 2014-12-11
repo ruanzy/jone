@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.alibaba.fastjson.JSON;
 
 public class WebUtil
 {
@@ -35,34 +34,52 @@ public class WebUtil
 			}
 		}
 		sb.append(")");
-		log.debug(sb.toString());
+		//log.debug(sb.toString());
 		for (int i = 0, len = args.length; i < len; i++)
 		{
-			log.debug("arg" + i + "=" + JSON.toJSONString(args[i]));
+			//log.debug("arg" + i + "=" + JSON.toJSONString(args[i]));
 		}
 		Object result = null;
+		StringBuffer logs = new StringBuffer();
 		try
 		{
 			Object proxy = ServiceProxy.get(fullName);
 			result = MethodUtils.invokeMethod(proxy, methodName, args);
+			String user = WebUtil.getUser();
+			String ip = WebUtil.getIP();
+			//String op = "";//Util.getOP(sid);
+			//String requestBody = JSON.toJSONString(args);
+			logs.append(user).append("|");
+			logs.append(ip).append("|");
+			//logs.append(op).append("|");
+			logs.append(sid).append("|");
+			//logs.append(requestBody).append("|");
+			logs.append("").append("|");
+			logs.append(1);
 		}
 		catch (Exception e)
 		{
+			String error = "";
 			if (e instanceof ClassNotFoundException)
 			{
-				log.debug(e.getMessage() + " Not Found.");
+				error = e.getMessage() + " Not Found.";
 			}
 			else if (e instanceof NoSuchMethodException)
 			{
-				log.debug(e.getMessage());
+				error = e.getMessage();
 			}
 			else if (e instanceof InvocationTargetException)
 			{
 				Throwable t = e.getCause();
-				log.debug(t.getMessage());
+				error = t.getMessage();
 			}
+			logs.append(error).append("|");
+			logs.append(0);
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage(), e);
+		}finally
+		{
+			log.debug(logs.toString());
 		}
 		return result;
 	}
