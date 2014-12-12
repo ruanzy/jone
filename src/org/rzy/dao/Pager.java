@@ -1,7 +1,5 @@
 package org.rzy.dao;
 
-import java.util.List;
-import java.util.Map;
 
 public class Pager
 {
@@ -31,28 +29,28 @@ public class Pager
 		this.pagesize = pagesize;
 	}
 
-	public int getTotal()
+	public long getTotal()
 	{
 		return total;
 	}
 
-	public void setTotal(int total)
+	public void setTotal(long total)
 	{
 		this.total = total;
 	}
 
-	public List<Map<String, Object>> getData()
+	public  Object getData()
 	{
 		return data;
 	}
 
-	public void setData(List<Map<String, Object>> data)
+	public void setData(Object data)
 	{
 		this.data = data;
 	}
 
 	private int page = 1;
 	private int pagesize = 10;
-	private int total = 0;
-	private List<Map<String, Object>> data;
+	private long total = 0;
+	private Object data;
 }

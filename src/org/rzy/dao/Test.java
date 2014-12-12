@@ -19,7 +19,7 @@ public class Test
 		params.put("pagesize", 10);
 		Pager p = SQLMapper.pager(countsqlid, pagersqlid, params);
 		System.out.println(p.getTotal());
-		List<Map<String, Object>> list = p.getData();
+		List<Map<String, Object>> list = (List<Map<String, Object>>)p.getData();
 		for (Map<String, Object> map : list)
 		{
 			System.out.println(map.get("method"));
