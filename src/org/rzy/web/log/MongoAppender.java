@@ -22,23 +22,14 @@ public class MongoAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
 	{
 		DBCollection dbCollection = mongo.getDB(db).getCollection(collection);
 		String msg = eventObject.getFormattedMessage();
-		String[] arr = msg.split("\\|");
-		String user = arr[0];
-		String ip = arr[1];
-		String sid = arr[2];
-		String memo = arr[3];
-		String result = arr[4];
+		String thread = eventObject.getThreadName();
 		BasicDBObject logEntry = new BasicDBObject();
-		logEntry.append("user", user);
-		logEntry.append("ip", ip);
-		logEntry.append("sid", sid);
-		logEntry.append("result", result);
-		logEntry.append("memo", memo);
 		//logEntry.append("logger", eventObject.getLoggerName());
-		logEntry.append("thread", eventObject.getThreadName());
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		String time = df.format(new Date(eventObject.getTimeStamp()));
 		logEntry.append("time", time);
+		logEntry.append("thread", thread);
+		logEntry.append("msg", msg);
 		//logEntry.append("level", eventObject.getLevel().toString());
 		//logEntry.append("pid", getPid());
 		//logEntry.append("ip", getIp());

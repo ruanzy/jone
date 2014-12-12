@@ -24,5 +24,13 @@ public class Test
 		{
 			System.out.println(map.get("method"));
 		}
+		
+        String map = "function() { emit(this.name, {count:1});}";
+        String reduce = "function(key, values) {";  
+        reduce=reduce+"var total = 0;";  
+        reduce=reduce+"for(var i=0;i<values.length;i++){total += values[i].count;}";  
+        reduce=reduce+"return {count:total};}";  
+        
+        
 	}
 }

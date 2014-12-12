@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Properties;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.MapReduceOutput;
 import com.mongodb.Mongo;
 
 public final class MongoDao
@@ -73,5 +75,13 @@ public final class MongoDao
 	public static long count(String collection, DBObject query)
 	{
 		return getColl(collection).count(query);
+	}
+
+	public DBCursor MapReduce(String collection, DBObject query, String map, String reduce, String resultCollection)
+	{
+		MapReduceOutput mapReduceOutput = getColl(collection).mapReduce(map, reduce, resultCollection, query);
+		DBCollection resultColl = mapReduceOutput.getOutputCollection();
+		DBCursor cursor = resultColl.find();
+		return cursor;
 	}
 }
