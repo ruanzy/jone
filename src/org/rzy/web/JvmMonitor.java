@@ -50,8 +50,7 @@ public class JvmMonitor
 
 	public void record()
 	{
-		String message = "memoryUsed=" + getMemoryUsed() + "k " + " cpuUsed=" + getCpu() + " threadCount="
-				+ getThreadCount();
+		String message = getMemoryUsed() + "k " + getCpu() + " " + getThreadCount();
 		logger.info(message);
 
 	}
