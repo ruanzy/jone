@@ -50,9 +50,8 @@ public class JvmMonitor
 
 	public void record()
 	{
-		String message = getMemoryUsed() + "k " + getCpu() + " " + getThreadCount();
+		String message = getMemoryUsed() + " " + getCpu() + " " + getThreadCount();
 		logger.info(message);
-
 	}
 
 	protected int getThreadCount()
@@ -71,13 +70,11 @@ public class JvmMonitor
 		RuntimeMXBean runbean = java.lang.management.ManagementFactory.getRuntimeMXBean();
 		long uptime = runbean.getUptime();
 		long processCpuTime = osbean.getProcessCpuTime();
-		// cpu count
 		int processors = osbean.getAvailableProcessors();
-		// uptime in milliseconds ,and processCpuTime in nao seconds
 		double cpu = (processCpuTime - lastProcessCpuTime) / ((uptime - lastUptime) * 10000f * processors);
 		lastProcessCpuTime = processCpuTime;
 		lastUptime = uptime;
-		return (int) cpu; //
+		return (int) cpu;
 	}
 
 }
