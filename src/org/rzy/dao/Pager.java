@@ -1,5 +1,6 @@
 package org.rzy.dao;
 
+import java.util.List;
 
 public class Pager
 {
@@ -39,12 +40,12 @@ public class Pager
 		this.total = total;
 	}
 
-	public  Object getData()
+	public List<?> getData()
 	{
 		return data;
 	}
 
-	public void setData(Object data)
+	public void setData(List<?> data)
 	{
 		this.data = data;
 	}
@@ -52,5 +53,5 @@ public class Pager
 	private int page = 1;
 	private int pagesize = 10;
 	private long total = 0;
-	private Object data;
+	private List<?> data;
 }
