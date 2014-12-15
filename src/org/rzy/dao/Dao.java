@@ -47,10 +47,10 @@ public final class Dao
 		Properties prop = new Properties();
 		try
 		{
-			is = Dao.class.getClassLoader().getResourceAsStream("db.properties");
+			is = Dao.class.getClassLoader().getResourceAsStream("dao.properties");
 			if (is == null)
 			{
-				is = new FileInputStream("db.properties");
+				is = new FileInputStream("dao.properties");
 			}
 			prop.load(is);
 			ds = BasicDataSourceFactory.createDataSource(prop);

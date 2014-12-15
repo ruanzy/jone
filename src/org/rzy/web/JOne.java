@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class JOne implements Filter
 {
 	private ServletContext context;
-	static Logger log = LoggerFactory.getLogger(Filter.class);
+	Logger log = LoggerFactory.getLogger(Filter.class);
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -112,5 +112,11 @@ public class JOne implements Filter
 	{
 		this.context = cfg.getServletContext();
 		JvmMonitor.getInstance();
+		StringBuffer sb = new StringBuffer();
+		sb.append("\r\n");
+		sb.append("*************************************").append("\r\n");
+		sb.append("*          JOne satrting...         *").append("\r\n");
+		sb.append("*************************************");
+        log.debug(sb.toString());
 	}
 }

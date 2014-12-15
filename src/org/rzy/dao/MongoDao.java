@@ -20,15 +20,15 @@ public final class MongoDao
 		Properties prop = new Properties();
 		try
 		{
-			is = MongoDao.class.getClassLoader().getResourceAsStream("mongo.properties");
+			is = MongoDao.class.getClassLoader().getResourceAsStream("dao.properties");
 			if (is == null)
 			{
-				is = new FileInputStream("mongo.properties");
+				is = new FileInputStream("dao.properties");
 			}
 			prop.load(is);
-			String ip = prop.getProperty("ip", "127.0.0.1");
+			String ip = prop.getProperty("mongo.ip", "127.0.0.1");
 			Mongo mongo = new Mongo(ip);
-			String dbname = prop.getProperty("db");
+			String dbname = prop.getProperty("mongo.db");
 			db = mongo.getDB(dbname);
 		}
 		catch (Exception e)
