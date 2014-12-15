@@ -109,11 +109,14 @@ public class JOne implements Filter
 		String pck_name = "plugin";
 		try
 		{
-			for (String plugin : plugins)
+			if (plugins != null)
 			{
-				Class<?> cls = Class.forName(pck_name + "." + plugin);
-				Method method = cls.getMethod("destroy");
-				method.invoke(cls.newInstance());
+				for (String plugin : plugins)
+				{
+					Class<?> cls = Class.forName(pck_name + "." + plugin);
+					Method method = cls.getMethod("destroy");
+					method.invoke(cls.newInstance());
+				}
 			}
 		}
 		catch (Exception e)
@@ -124,23 +127,26 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		this.context = cfg.getServletContext();
-		String p = cfg.getInitParameter("plugins");
-		plugins = p.split(",");
 		StringBuffer sb = new StringBuffer();
 		sb.append("\r\n");
 		sb.append("*************************************").append("\r\n");
 		sb.append("*          JOne satrting...         *").append("\r\n");
 		sb.append("*************************************").append("\r\n");
-		String pck_name = "plugin";
 		try
 		{
-			for (String plugin : plugins)
+			this.context = cfg.getServletContext();
+			String p = cfg.getInitParameter("plugins");
+			if (p != null)
 			{
-				sb.append(plugin + " init...").append("\r\n");
-				Class<?> cls = Class.forName(pck_name + "." + plugin);
-				Method method = cls.getMethod("init");
-				method.invoke(cls.newInstance(), this.context);
+				plugins = p.split(",");
+				String pck_name = "plugin";
+				for (String plugin : plugins)
+				{
+					sb.append(plugin + " init...").append("\r\n");
+					Class<?> cls = Class.forName(pck_name + "." + plugin);
+					Method method = cls.getMethod("init");
+					method.invoke(cls.newInstance(), this.context);
+				}
 			}
 			log.debug(sb.toString());
 		}
