@@ -12,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -114,8 +115,7 @@ public class JOne implements Filter
 				for (String plugin : plugins)
 				{
 					Class<?> cls = Class.forName(pck_name + "." + plugin);
-					Method method = cls.getMethod("destroy");
-					method.invoke(cls.newInstance());
+					MethodUtils.invokeMethod(cls.newInstance(), "destroy", null);
 				}
 			}
 		}
@@ -144,8 +144,7 @@ public class JOne implements Filter
 				{
 					sb.append(plugin + " init...").append("\r\n");
 					Class<?> cls = Class.forName(pck_name + "." + plugin);
-					Method method = cls.getMethod("init");
-					method.invoke(cls.newInstance(), this.context);
+					MethodUtils.invokeMethod(cls.newInstance(), "init", this.context);
 				}
 			}
 			log.debug(sb.toString());
