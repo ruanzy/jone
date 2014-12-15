@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 public class JOne implements Filter
 {
 	private ServletContext context;
+	private String[] plugins;
 	Logger log = LoggerFactory.getLogger(Filter.class);
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
@@ -105,18 +106,47 @@ public class JOne implements Filter
 
 	public void destroy()
 	{
-
+		String pck_name = "plugin";
+		try
+		{
+			for (String plugin : plugins)
+			{
+				Class<?> cls = Class.forName(pck_name + "." + plugin);
+				Method method = cls.getMethod("destroy");
+				method.invoke(cls.newInstance());
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		this.context = cfg.getServletContext();
-		JvmMonitor.getInstance();
+		String p = cfg.getInitParameter("plugins");
+		plugins = p.split(",");
 		StringBuffer sb = new StringBuffer();
 		sb.append("\r\n");
 		sb.append("*************************************").append("\r\n");
 		sb.append("*          JOne satrting...         *").append("\r\n");
-		sb.append("*************************************");
-        log.debug(sb.toString());
+		sb.append("*************************************").append("\r\n");
+		String pck_name = "plugin";
+		try
+		{
+			for (String plugin : plugins)
+			{
+				sb.append(plugin + " init...").append("\r\n");
+				Class<?> cls = Class.forName(pck_name + "." + plugin);
+				Method method = cls.getMethod("init");
+				method.invoke(cls.newInstance(), this.context);
+			}
+			log.debug(sb.toString());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
