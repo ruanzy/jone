@@ -1,5 +1,6 @@
 package org.rzy.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,5 +10,19 @@ public class TimeUtil
 	{
 		SimpleDateFormat df = new SimpleDateFormat(formatter);
 		return df.format(new Date());
+	}
+
+	public static Date parse(String time, String formatter)
+	{
+		try
+		{
+			SimpleDateFormat sdf = new SimpleDateFormat(formatter);
+			return sdf.parse(time);
+		}
+		catch (ParseException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

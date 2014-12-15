@@ -25,7 +25,7 @@
 		</encoder>
 	</appender>
 	
-	<!-- <appender name="MONGO" class="org.rzy.web.log.MongoAppender">
+	<appender name="MONGO" class="org.rzy.web.log.MongoAppender">
 	    <host>127.0.0.1</host>
 	    <db>JOne</db>
 	    <collection>logs</collection> 
@@ -41,9 +41,9 @@
         <appender-ref ref="MONGO"/>  
     </logger>  
     
-    <logger name="org.rzy.web.JvmMonitor" level="DEBUG" additivity="false">  
+    <logger name="plugin.JvmMonitor" level="DEBUG" additivity="false">  
         <appender-ref ref="MONGO2"/>  
-    </logger>-->  
+    </logger>
 	
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />
