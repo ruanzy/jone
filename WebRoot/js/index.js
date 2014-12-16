@@ -30,12 +30,26 @@ $(function() {
 			var dialog = $.dialog({
 				title:'设置',
 				url:'view/user/set.html',
+				buttons:[
+				    {
+				    	text : 'OK',
+				    	cls : 'btn-success',
+				    	action : function(d) {
+				    		
+				    	}
+				    },
+				    {
+				    	text : 'Close',
+				    	cls : 'btn-default',
+				    	action : function(d) {
+				    		dialog.close();
+				    	}
+				    	
+				    }
+				],
 				onShow : function(){
 					
-				},
-	   		 	ok:function(){
-	   		 		dialog.close();
-	   		 	}
+				}
 			});
 		}
 		function info(){
