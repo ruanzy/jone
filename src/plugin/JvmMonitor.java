@@ -49,7 +49,7 @@ public class JvmMonitor implements Plugin
 
 	public void init(ServletContext context)
 	{
-		long periodSeconds = 2;
+		long periodSeconds = 60;
 		ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 		executorService.scheduleAtFixedRate(new Runnable()
 		{

@@ -41,20 +41,20 @@ public class WebUtil
 		}
 		Object result = null;
 		StringBuffer logs = new StringBuffer();
+		String user = WebUtil.getUser();
+		String ip = WebUtil.getIP();
+		//String op = "";//Util.getOP(sid);
+		//String requestBody = JSON.toJSONString(args);
+		logs.append(user).append("|");
+		logs.append(ip).append("|");
+		//logs.append(op).append("|");
+		logs.append(sid).append("|");
+		//logs.append(requestBody).append("|");
+		logs.append("").append("|");
 		try
 		{
 			Object proxy = ServiceProxy.get(fullName);
 			result = MethodUtils.invokeMethod(proxy, methodName, args);
-			String user = WebUtil.getUser();
-			String ip = WebUtil.getIP();
-			//String op = "";//Util.getOP(sid);
-			//String requestBody = JSON.toJSONString(args);
-			logs.append(user).append("|");
-			logs.append(ip).append("|");
-			//logs.append(op).append("|");
-			logs.append(sid).append("|");
-			//logs.append(requestBody).append("|");
-			logs.append("").append("|");
 			logs.append(1);
 		}
 		catch (Exception e)
@@ -76,7 +76,7 @@ public class WebUtil
 			logs.append(error).append("|");
 			logs.append(0);
 			e.printStackTrace();
-			throw new RuntimeException(e.getMessage(), e);
+			throw new RuntimeException(error, e);
 		}finally
 		{
 			log.debug(logs.toString());

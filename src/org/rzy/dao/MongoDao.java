@@ -39,7 +39,14 @@ public final class MongoDao
 
 	private static DBCollection getColl(String collname)
 	{
-		return db.getCollection(collname);
+		try
+		{
+			return db.getCollection(collname);
+		}
+		catch (Exception e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
 	}
 
 	public static int insert(String collection, DBObject... arr)
@@ -74,7 +81,16 @@ public final class MongoDao
 
 	public static long count(String collection, DBObject query)
 	{
-		return getColl(collection).count(query);
+		long result = 0;
+		try
+		{
+			result = getColl(collection).count(query);
+		}
+		catch (Exception e)
+		{
+			throw new DataAccessException(e.getCause().getMessage(), e);
+		}
+		return result;
 	}
 
 	public DBCursor MapReduce(String collection, DBObject query, String map, String reduce, String resultCollection)
