@@ -88,6 +88,7 @@ public class JOne implements Filter
 				if (Context.isAjax())
 				{
 					response.setStatus(9999);
+					response.setCharacterEncoding("UTF-8");
 					response.getWriter().print(t.getMessage());
 				}
 			}

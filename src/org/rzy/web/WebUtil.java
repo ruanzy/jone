@@ -75,8 +75,8 @@ public class WebUtil
 			}
 			logs.append(error).append("|");
 			logs.append(0);
-			e.printStackTrace();
-			throw new RuntimeException(error, e);
+			//e.printStackTrace();
+			throw new RuntimeException("业务处理异常", e);
 		}finally
 		{
 			log.debug(logs.toString());
