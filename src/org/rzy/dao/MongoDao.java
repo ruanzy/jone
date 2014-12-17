@@ -73,6 +73,11 @@ public final class MongoDao
 	{
 		return getColl(collection).find(query).skip(skip).limit(limit).toArray();
 	}
+	
+	public static List<DBObject> find(String collection, DBObject query, DBObject orderBy, int skip, int limit)
+	{
+		return getColl(collection).find(query).sort(orderBy).skip(skip).limit(limit).toArray();
+	}
 
 	public static List<DBObject> find(String collection, DBObject query)
 	{
