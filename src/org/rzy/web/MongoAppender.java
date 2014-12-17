@@ -1,4 +1,4 @@
-package org.rzy.web.log;
+package org.rzy.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +9,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 
-public class MongoAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
+public abstract class MongoAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
 {
 	Mongo mongo = null;
 	private String host = null;
@@ -29,7 +29,8 @@ public class MongoAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
 		String time = df.format(new Date(eventObject.getTimeStamp()));
 		logEntry.append("time", time);
 		logEntry.append("thread", thread);
-		logEntry.append("msg", msg);
+		Map<String, String> msgmap = MsgParse(msg);
+		logEntry.putAll(msgmap);
 		//logEntry.append("level", eventObject.getLevel().toString());
 		//logEntry.append("pid", getPid());
 		//logEntry.append("ip", getIp());
@@ -87,4 +88,6 @@ public class MongoAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
 	{
 		this.logToLocal = logToLocal;
 	}
+	
+	public abstract Map<String, String> MsgParse(String msg);
 }

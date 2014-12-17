@@ -162,6 +162,11 @@ public class WebUtil
 		Object user = getSession().getAttribute(USERKEY);
 		return (String) user;
 	}
+	
+	public static String getUserAgent()
+	{
+		return getRequest().getHeader("User-Agent");
+	}
 
 	public static boolean isAdmin(String username, String password)
 	{

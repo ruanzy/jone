@@ -25,16 +25,22 @@
 		</encoder>
 	</appender>
 	
-	<appender name="MONGO" class="org.rzy.web.log.MongoAppender">
+	<appender name="MONGO" class="log.LogMongoAppender">
 	    <host>127.0.0.1</host>
 	    <db>JOne</db>
 	    <collection>logs</collection> 
 	</appender>
 	
-	<appender name="MONGO2" class="org.rzy.web.log.MongoAppender">
+	<appender name="MONGO2" class="log.JvmMongoAppender">
 	    <host>127.0.0.1</host>
 	    <db>JOne</db>
 	    <collection>jvm</collection> 
+	</appender>
+	
+	<appender name="MONGO3" class="log.LoginMongoAppender">
+	    <host>127.0.0.1</host>
+	    <db>JOne</db>
+	    <collection>login</collection> 
 	</appender>
 	
 	<logger name="org.rzy.web.WebUtil" level="DEBUG" additivity="false">  
@@ -43,6 +49,10 @@
     
     <logger name="plugin.JvmMonitor" level="DEBUG" additivity="false">  
         <appender-ref ref="MONGO2"/>  
+    </logger>
+    
+    <logger name="action.Login" level="DEBUG" additivity="false">  
+        <appender-ref ref="MONGO3"/>  
     </logger>
 	
 	<root level="DEBUG">

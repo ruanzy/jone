@@ -3,9 +3,12 @@ package action;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Msg;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Login
 {
+	static Logger log = LoggerFactory.getLogger(Login.class);
 	public Result execute()
 	{
 		String svc = WebUtil.getVC();
@@ -31,6 +34,14 @@ public class Login
 		{
 			WebUtil.attr("allres", WebUtil.call("PmsService.res"), "application");
 		}
+		StringBuffer logs = new StringBuffer();
+		String user = WebUtil.getUser();
+		String ip = WebUtil.getIP();
+		String ua = WebUtil.getUserAgent();
+		logs.append(user).append("|");
+		logs.append(ip).append("|");
+		logs.append(ua);
+		log.debug(logs.toString());
 		return new Msg(true, "login success");
 	}
 }
