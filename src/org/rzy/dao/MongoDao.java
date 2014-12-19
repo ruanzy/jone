@@ -98,9 +98,9 @@ public final class MongoDao
 		return result;
 	}
 
-	public DBCursor MapReduce(String collection, DBObject query, String map, String reduce, String resultCollection)
+	public static DBCursor MR(String collection, DBObject query, String M, String R, String resultCollection)
 	{
-		MapReduceOutput mapReduceOutput = getColl(collection).mapReduce(map, reduce, resultCollection, query);
+		MapReduceOutput mapReduceOutput = getColl(collection).mapReduce(M, R, resultCollection, query);
 		DBCollection resultColl = mapReduceOutput.getOutputCollection();
 		DBCursor cursor = resultColl.find();
 		return cursor;
