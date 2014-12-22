@@ -12,15 +12,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JOne implements Filter
 {
 	private ServletContext context;
-	private String[] plugins;
-	Logger log = LoggerFactory.getLogger(Filter.class);
+	Logger log = LoggerFactory.getLogger(JOne.class);
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -108,51 +106,16 @@ public class JOne implements Filter
 
 	public void destroy()
 	{
-		String pck_name = "plugin";
-		try
-		{
-			if (plugins != null)
-			{
-				for (String plugin : plugins)
-				{
-					Class<?> cls = Class.forName(pck_name + "." + plugin);
-					MethodUtils.invokeMethod(cls.newInstance(), "destroy", null);
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		TaskManager.stop();
 	}
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("\r\n");
 		sb.append("*************************************").append("\r\n");
 		sb.append("*          JOne satrting...         *").append("\r\n");
 		sb.append("*************************************").append("\r\n");
-		try
-		{
-			this.context = cfg.getServletContext();
-			String p = cfg.getInitParameter("plugins");
-			if (p != null)
-			{
-				plugins = p.split(",");
-				String pck_name = "plugin";
-				for (String plugin : plugins)
-				{
-					sb.append(plugin + " init...").append("\r\n");
-					Class<?> cls = Class.forName(pck_name + "." + plugin);
-					MethodUtils.invokeMethod(cls.newInstance(), "init", this.context);
-				}
-			}
-			log.debug(sb.toString());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		System.out.println(sb);
+		TaskManager.start();
 	}
 }
