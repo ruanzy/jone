@@ -3,6 +3,7 @@ package org.rzy.task;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -14,50 +15,70 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("unchecked")
 public class TaskManager
 {
 	private static Logger log = LoggerFactory.getLogger(TaskManager.class);
-
 	private static ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(5);
-
 	private static boolean started = false;
+	private static List<Task> tasks = new ArrayList<Task>();
 
-	@SuppressWarnings("unchecked")
+	static
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("*************************************").append("\r\n");
+		sb.append("*          TaskManager satrting...  *").append("\r\n");
+		sb.append("*************************************").append("\r\n");
+		System.out.println(sb);
+		try
+		{
+			URL url = TaskManager.class.getClassLoader().getResource("task.xml");
+			File f = new File(url.toURI());
+			if (f.exists() && !f.isDirectory())
+			{
+				SAXReader reader = new SAXReader();
+				reader.setEncoding("UTF-8");
+				Document doc = reader.read(f);
+				List<Element> list = doc.selectNodes("/tasks/task");
+				for (Element e : list)
+				{
+					String className = e.elementTextTrim("class");
+					String methodName = e.elementTextTrim("method");
+					String cron = e.elementTextTrim("cron");
+					String period = e.elementTextTrim("period");
+					tasks.add(new Task(className, methodName, cron, period));
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			log.debug("TaskManager Satrt Exception!");
+			e.printStackTrace();
+		}
+	}
+
 	public static void start()
 	{
 		if (!started)
 		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("*************************************").append("\r\n");
-			sb.append("*          TaskManager satrting...  *").append("\r\n");
-			sb.append("*************************************").append("\r\n");
-			System.out.println(sb);
 			try
 			{
-				URL url = TaskManager.class.getClassLoader().getResource("task.xml");
-				File f = new File(url.toURI());
-				if (f.exists() && !f.isDirectory())
+
+				for (Task task : tasks)
 				{
-					SAXReader reader = new SAXReader();
-					reader.setEncoding("UTF-8");
-					Document doc = reader.read(f);
-					List<Element> tasks = doc.selectNodes("/tasks/task");
-					for (Element task : tasks)
+					String className = task.getClassName();
+					String methodName = task.getMethodName();
+					String cron = task.getCron();
+					String period = task.getPeriod();
+					if (cron != null)
 					{
-						String className = task.elementTextTrim("class");
-						String methodName = task.elementTextTrim("method");
-						String cron = task.elementTextTrim("cron");
-						String period = task.elementTextTrim("period");
-						if (cron != null)
-						{
-							CronExpression cronExpression = new CronExpression(cron);
-							schedule(className, methodName, cronExpression);
-						}
-						else if (period != null)
-						{
-							long periodL = Long.valueOf(task.elementTextTrim("period"));
-							schedule(className, methodName, periodL);
-						}
+						CronExpression cronExpression = new CronExpression(cron);
+						schedule(className, methodName, cronExpression);
+					}
+					else if (period != null)
+					{
+						long periodL = Long.valueOf(period);
+						schedule(className, methodName, periodL);
 					}
 				}
 				started = false;
@@ -72,13 +93,13 @@ public class TaskManager
 
 	public static void schedule(final String className, final String methodName, long period)
 	{
-		Task task = new Task(className, methodName);
-		scheduled.scheduleAtFixedRate(task, 0L, period, TimeUnit.SECONDS);
+		Job job = new Job(className, methodName);
+		scheduled.scheduleAtFixedRate(job, 0L, period, TimeUnit.SECONDS);
 	}
 
 	public static void schedule(final String className, final String methodName, final CronExpression expression)
 	{
-		final Task task = new Task(className, methodName);
+		final Job job = new Job(className, methodName);
 		Runnable scheduleTask = new Runnable()
 		{
 			public void run()
@@ -89,7 +110,7 @@ public class TaskManager
 				{
 					while (time != null)
 					{
-						scheduled.schedule(task, time.getTime() - now.getTime(), TimeUnit.MILLISECONDS);
+						scheduled.schedule(job, time.getTime() - now.getTime(), TimeUnit.MILLISECONDS);
 						while (now.before(time))
 						{
 							Thread.sleep(time.getTime() - now.getTime());
@@ -118,14 +139,14 @@ public class TaskManager
 	}
 }
 
-class Task implements Runnable
+class Job implements Runnable
 {
 
 	private String className;
 
 	private String methodName;
 
-	public Task(String className, String methodName)
+	public Job(String className, String methodName)
 	{
 		this.className = className;
 		this.methodName = methodName;
@@ -144,5 +165,41 @@ class Task implements Runnable
 		{
 			e.printStackTrace();
 		}
+	}
+}
+
+class Task
+{
+	private String className;
+	private String methodName;
+	private String cron;
+	private String period;
+
+	public Task(String className, String methodName, String cron, String period)
+	{
+		this.className = className;
+		this.methodName = methodName;
+		this.cron = cron;
+		this.period = period;
+	}
+
+	public String getClassName()
+	{
+		return className;
+	}
+
+	public String getMethodName()
+	{
+		return methodName;
+	}
+
+	public String getCron()
+	{
+		return cron;
+	}
+
+	public String getPeriod()
+	{
+		return period;
 	}
 }
