@@ -1,2 +1,0 @@
-2014-12-12 11:10:05.164 SQL==>select count(*) from log where operator='admin' and time>='2014-05-28' and time<='2014-08-29'
-2014-12-12 11:10:05.272 SQL==>select * from log where operator='admin' and time>='2014-05-28' and time<='2014-08-29' order by id desc limit 0,10
