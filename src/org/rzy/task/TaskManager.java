@@ -25,11 +25,7 @@ public class TaskManager
 
 	static
 	{
-		StringBuffer sb = new StringBuffer();
-		sb.append("*************************************").append("\r\n");
-		sb.append("*          TaskManager satrting...  *").append("\r\n");
-		sb.append("*************************************").append("\r\n");
-		System.out.println(sb);
+		log.debug("TaskManager satrting...  *");
 		try
 		{
 			URL url = TaskManager.class.getClassLoader().getResource("task.xml");

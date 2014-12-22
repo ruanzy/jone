@@ -12,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.rzy.task.TaskManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,7 +114,9 @@ public class JOne implements Filter
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("*************************************").append("\r\n");
-		sb.append("*          JOne satrting...         *").append("\r\n");
+		sb.append("**                                 **").append("\r\n");
+		sb.append("**          JOne satrting...       **").append("\r\n");
+		sb.append("**                                 **").append("\r\n");
 		sb.append("*************************************").append("\r\n");
 		System.out.println(sb);
 		TaskManager.start();
