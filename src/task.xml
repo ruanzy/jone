@@ -20,4 +20,9 @@
 		<method>day</method>
 		<period>300</period>
 	</task>
+	<task>
+		<class>service.JvmMonitor</class>
+		<method>record</method>
+		<period>300</period>
+	</task>
 </tasks>
