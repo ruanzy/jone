@@ -25,7 +25,7 @@ public class TaskManager
 
 	static
 	{
-		log.debug("TaskManager satrting...  *");
+		log.debug("TaskManager Satrting...  ");
 		try
 		{
 			URL url = TaskManager.class.getClassLoader().getResource("task.xml");

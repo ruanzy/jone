@@ -116,9 +116,9 @@ public class JOne implements Filter
 		StringBuffer sb = new StringBuffer();
 		sb.append("*************************************").append("\r\n");
 		sb.append("**                                 **").append("\r\n");
-		sb.append("**          JOne satrting...       **").append("\r\n");
+		sb.append("**          JOne Satrting...       **").append("\r\n");
 		sb.append("**                                 **").append("\r\n");
-		sb.append("*************************************").append("\r\n");
+		sb.append("*************************************");
 		System.out.println(sb);
 		TaskManager.start();
 	}
