@@ -1,7 +1,6 @@
 package org.rzy.task;
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,13 +8,16 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.rzy.web.Scheduled;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TaskManager
+@SuppressWarnings("unchecked")
+public class TaskManager2
 {
-	private static Logger log = LoggerFactory.getLogger(TaskManager.class);
+	private static Logger log = LoggerFactory.getLogger(TaskManager2.class);
 	private static ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(5);
 	private static boolean started = false;
 	private static List<Task> tasks = new ArrayList<Task>();
@@ -25,24 +27,20 @@ public class TaskManager
 		log.debug("TaskManager Satrting...  ");
 		try
 		{
-			String pck = "task";
-			URL url = Thread.currentThread().getContextClassLoader().getResource(pck);
-			File dir = new File(url.toURI());
-			File[] files = dir.listFiles();
-			for (File f : files)
+			URL url = Thread.currentThread().getContextClassLoader().getResource("task.xml");
+			File f = new File(url.toURI());
+			if (f.exists() && !f.isDirectory())
 			{
-				String name = f.getName().substring(0, f.getName().indexOf(".class"));
-				String className = pck + "." + name;
-				Class<?> cls = Class.forName(className);
-				for (Method m : cls.getDeclaredMethods())
+				SAXReader reader = new SAXReader();
+				reader.setEncoding("UTF-8");
+				Document doc = reader.read(f);
+				List<Element> list = doc.selectNodes("/tasks/task");
+				for (Element e : list)
 				{
-					Scheduled scheduled = m.getAnnotation(Scheduled.class);
-					if (scheduled != null)
-					{
-						String methodName = m.getName();
-						String cron = scheduled.cron();
-						tasks.add(new Task(className, methodName, cron));
-					}
+					String className = e.elementTextTrim("class");
+					String methodName = e.elementTextTrim("method");
+					String cron = e.elementTextTrim("cron");
+					tasks.add(new Task(className, methodName, cron));
 				}
 			}
 		}
