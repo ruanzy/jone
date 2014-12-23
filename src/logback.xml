@@ -18,13 +18,6 @@
 		</encoder>
 	</appender>
 	
-	<appender name="txt" class="log.TxtAppender">
-		<file>logs/JOne.txt</file>
-		<encoder>
-			<pattern>%msg%n</pattern>
-		</encoder>
-	</appender>
-	
 	<appender name="MONGO" class="log.LogMongoAppender">
 	    <host>127.0.0.1</host>
 	    <db>JOne</db>
