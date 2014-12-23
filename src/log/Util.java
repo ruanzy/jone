@@ -2,14 +2,14 @@ package log;
 
 import java.util.List;
 import java.util.Map;
-import org.rzy.web.WebUtil;
+import org.rzy.web.ApplicationUtil;
 
 public class Util
 {
 	@SuppressWarnings("unchecked")
 	public static String getOP(String method)
 	{
-		List<Map<String, Object>> allres = (List<Map<String, Object>>) WebUtil.attr("allres", "application");
+		List<Map<String, Object>> allres = (List<Map<String, Object>>) ApplicationUtil.attr("allres");
 		for (Map<String, Object> map : allres)
 		{
 			String m = String.valueOf(map.get("method"));

@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.util.ServerInfo;
+import org.rzy.web.ApplicationUtil;
+import org.rzy.web.RequestUtil;
 import org.rzy.web.Result;
+import org.rzy.web.SessionUtil;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
@@ -16,17 +19,17 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result menu()
 	{
-		String user = WebUtil.getUser();
+		String user = SessionUtil.getUser();
 		Object o = null;
 		List<Map<String, Object>> res = null;
 		List<Map<String, Object>> menus = null;
 		if ("admin".equals(user))
 		{
-			o = WebUtil.attr("allres", "application");
+			o = ApplicationUtil.attr("allres");
 		}
 		else
 		{
-			o = WebUtil.attr("res", "session");
+			o = SessionUtil.attr("res");
 		}
 
 		if (o != null)
@@ -48,17 +51,17 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result op()
 	{
-		String user = WebUtil.getUser();
+		String user = SessionUtil.getUser();
 		Object o = null;
 		List<Map<String, Object>> res = null;
 		List<Map<String, Object>> ops = null;
 		if ("admin".equals(user))
 		{
-			o = WebUtil.attr("allres", "application");
+			o = ApplicationUtil.attr("allres");
 		}
 		else
 		{
-			o = WebUtil.attr("res", "session");
+			o = SessionUtil.attr("res");
 		}
 
 		if (o != null)
@@ -79,31 +82,31 @@ public class Common
 
 	public Result dic()
 	{
-		Object o = WebUtil.attr("dic", "application");
+		Object o = ApplicationUtil.attr("dic");
 		return new Json(o);
 	}
 
 	public Result res()
 	{
-		Object o = WebUtil.attr("allres", "application");
+		Object o = ApplicationUtil.attr("allres");
 		return new Json(o);
 	}
 
 	public Result lineusers()
 	{
-		Integer numSessions = (Integer) WebUtil.attr("numSessions", "application");
+		Integer numSessions = (Integer) ApplicationUtil.attr("numSessions");
 		return new Json(numSessions);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static void loadResandDic()
 	{
-		Object allres = WebUtil.attr("allres", "application");
+		Object allres = ApplicationUtil.attr("allres");
 		if (allres == null)
 		{
-			WebUtil.attr("allres", WebUtil.call("PmsService.res"), "application");
+			ApplicationUtil.attr("allres", WebUtil.call("PmsService.res"));
 		}
-		Object o = WebUtil.attr("dic", "application");
+		Object o = ApplicationUtil.attr("dic");
 		if (o == null)
 		{
 			Map<String, Map<String, Object>> dic = new HashMap<String, Map<String, Object>>();
@@ -119,20 +122,20 @@ public class Common
 				}
 				dic.get(key).put(val, name);
 			}
-			WebUtil.attr("dic", dic, "application");
+			ApplicationUtil.attr("dic", dic);
 		}
 	}
 
 	public Result logout()
 	{
-		WebUtil.clearSession();
+		SessionUtil.clear();
 		return new Page("login.html", true);
 	}
 
 	public Result welcome()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", WebUtil.getParameter("id"));
+		map.put("user", RequestUtil.getParameter("id"));
 		map = ServerInfo.base();
 		return new Ftl("welcome.ftl", map);
 	}
@@ -140,7 +143,7 @@ public class Common
 	public Result header()
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
-		String user = WebUtil.getUser();
+		String user = SessionUtil.getUser();
 		data.put("user", user);
 		return new Ftl("header.ftl", data);
 	}
@@ -148,15 +151,15 @@ public class Common
 	public Result sidebar()
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
-		String user = WebUtil.getUser();
+		String user = SessionUtil.getUser();
 		Object o = null;
 		if ("admin".equals(user))
 		{
-			o = WebUtil.attr("allres", "application");
+			o = ApplicationUtil.attr("allres");
 		}
 		else
 		{
-			o = WebUtil.attr("res", "session");
+			o = SessionUtil.attr("res");
 		}
 		data.put("all", o);
 		return new Ftl("sidebar.ftl", data);

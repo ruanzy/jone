@@ -72,7 +72,7 @@ public class JOne implements Filter
 			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
 			{
 				log.error("请求路径" + url + "错误!");
-				if (Context.isAjax())
+				if (RequestUtil.isAjax())
 				{
 					response.setStatus(500);
 					response.setCharacterEncoding("UTF-8");
@@ -84,7 +84,7 @@ public class JOne implements Filter
 				Throwable t = e.getCause();
 				log.debug(t.getMessage());
 				t.printStackTrace();
-				if (Context.isAjax())
+				if (RequestUtil.isAjax())
 				{
 					response.setStatus(9999);
 					response.setCharacterEncoding("UTF-8");

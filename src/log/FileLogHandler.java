@@ -3,7 +3,7 @@ package log;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import org.rzy.web.WebUtil;
+import org.rzy.web.ApplicationUtil;
 import org.rzy.web.log.Log;
 import org.rzy.web.log.LogHandler;
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class FileLogHandler implements LogHandler
 		logs.append(sid).append("|");
 		logs.append(1).append("|");
 		logs.append(requestBody);
-		File f = new File(WebUtil.getWebRoot(), "log/log.txt");
+		File f = new File(ApplicationUtil.getWebRoot(), "log/log.txt");
 		try
 		{
 			RandomAccessFile rf = new RandomAccessFile(f, "rw");

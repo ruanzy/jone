@@ -1,8 +1,7 @@
 package org.rzy.web.result;
 
-import java.io.IOException;
+import org.rzy.web.ResponseUtil;
 import org.rzy.web.Result;
-import org.rzy.web.WebUtil;
 
 public class Text implements Result
 {
@@ -15,15 +14,8 @@ public class Text implements Result
 
 	public void render()
 	{
-		try
-		{
-			WebUtil.getResponse().setContentType("text/plain;charset=UTF-8");
-			WebUtil.getResponse().getWriter().write(txt);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		ResponseUtil.setContentType("text/plain;charset=UTF-8");
+		ResponseUtil.write(txt);
 	}
 
 }

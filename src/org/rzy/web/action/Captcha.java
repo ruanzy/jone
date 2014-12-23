@@ -7,7 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import org.rzy.web.WebUtil;
+import org.rzy.web.ResponseUtil;
+import org.rzy.web.SessionUtil;
 
 public class Captcha
 {
@@ -45,10 +46,10 @@ public class Captcha
 			g.drawString(rand, 13 * i + 12, height*2/3);
 		}
 		g.dispose();
-		WebUtil.getSession().setAttribute("vc", randomStr.toLowerCase());
+		SessionUtil.setCaptcha(randomStr.toLowerCase());
 		try
 		{
-			ImageIO.write(img, "JPEG", WebUtil.getResponse().getOutputStream());
+			ImageIO.write(img, "JPEG", ResponseUtil.getOutputStream());
 		}
 		catch (IOException e)
 		{

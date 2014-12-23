@@ -1,7 +1,7 @@
 package org.rzy.web.result;
 
+import org.rzy.web.ResponseUtil;
 import org.rzy.web.Result;
-import org.rzy.web.WebUtil;
 
 public class Page implements Result
 {
@@ -13,7 +13,7 @@ public class Page implements Result
 	{
 		this.page = page;
 	}
-	
+
 	public Page(String page, boolean redirect)
 	{
 		this.page = page;
@@ -24,15 +24,14 @@ public class Page implements Result
 	{
 		try
 		{
+
 			if (redirect)
 			{
-				String basePath = WebUtil.getRequest().getScheme() + "://" + WebUtil.getRequest().getServerName() + ":"
-						+ WebUtil.getRequest().getServerPort() + WebUtil.getRequest().getContextPath() + "/";
-				WebUtil.getResponse().sendRedirect(basePath + page);
+				ResponseUtil.redirect(page);
 			}
 			else
 			{
-				WebUtil.getRequest().getRequestDispatcher(page).forward(WebUtil.getRequest(), WebUtil.getResponse());
+				ResponseUtil.forward(page);
 			}
 		}
 		catch (Exception e)

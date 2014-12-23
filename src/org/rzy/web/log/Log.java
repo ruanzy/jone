@@ -2,7 +2,8 @@ package org.rzy.web.log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.rzy.web.WebUtil;
+import org.rzy.web.RequestUtil;
+import org.rzy.web.SessionUtil;
 
 public class Log
 {
@@ -15,8 +16,8 @@ public class Log
 
 	public Log(String sid, Object[] args)
 	{
-		this.user = WebUtil.getUser();
-		this.ip = WebUtil.getIP();
+		this.user = SessionUtil.getUser();
+		this.ip = RequestUtil.getIP();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.time = df.format(new Date());
 		this.sid = sid;

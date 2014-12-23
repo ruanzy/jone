@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.util.JSONUtil;
+import org.rzy.web.RequestUtil;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
@@ -14,20 +15,20 @@ public class Depart
 {
 	public Result list()
 	{
-		Map<String, String> map = WebUtil.getParameters();
+		Map<String, String> map = RequestUtil.getParameters();
 		return new Json(WebUtil.call("DepartService.find", map));
 	}
 
 	public Result add()
 	{
-		Map<String, String> map = WebUtil.getParameters();
+		Map<String, String> map = RequestUtil.getParameters();
 		WebUtil.call("DepartService.add", map);
 		return new Msg("add success");
 	}
 
 	public Result save()
 	{
-		String data = WebUtil.getParameter("data");
+		String data = RequestUtil.getParameter("data");
 		List<Map<String, Object>> list = JSONUtil.toList(data);
 		for (Map<String, Object> map : list)
 		{
@@ -38,28 +39,28 @@ public class Depart
 
 	public Result del()
 	{
-		String ids = WebUtil.getParameter("ids");
+		String ids = RequestUtil.getParameter("ids");
 		WebUtil.call("DepartService.del", ids);
 		return new Msg("del success");
 	}
 
 	public String active()
 	{
-		String ids = WebUtil.getParameter("ids");
+		String ids = RequestUtil.getParameter("ids");
 		WebUtil.call("PmsService.activeuser", ids);
 		return null;
 	}
 
 	public String cancel()
 	{
-		String ids = WebUtil.getParameter("ids");
+		String ids = RequestUtil.getParameter("ids");
 		WebUtil.call("PmsService.canceluser", ids);
 		return null;
 	}
 
 	public Result toaddemp()
 	{
-		String departname = WebUtil.getParameter("departname");
+		String departname = RequestUtil.getParameter("departname");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("departname", departname);
 		return new Ftl("setrole.ftl", map);
@@ -72,14 +73,14 @@ public class Depart
 
 	public Result assignedroles()
 	{
-		String user = WebUtil.getParameter("user");
+		String user = RequestUtil.getParameter("user");
 		return new Json(WebUtil.call("PmsService.assignedroles", user));
 	}
 
 	public Result setrole()
 	{
-		String user = WebUtil.getParameter("user");
-		String roles = WebUtil.getParameter("roles");
+		String user = RequestUtil.getParameter("user");
+		String roles = RequestUtil.getParameter("roles");
 		WebUtil.call("PmsService.setrole", user, roles);
 		return new Msg("设置角色ok...");
 	}

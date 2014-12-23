@@ -8,7 +8,7 @@ import java.util.Map;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.rzy.web.WebUtil;
+import org.rzy.web.Context;
 
 public class Uploader
 {
@@ -42,7 +42,7 @@ public class Uploader
 			factory.setSizeThreshold(1024 * 1024 * 10);
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setHeaderEncoding("utf-8");
-			List<FileItem> list = upload.parseRequest(WebUtil.getRequest());
+			List<FileItem> list = upload.parseRequest(Context.getRequest());
 			for (FileItem item : list)
 			{
 				if (item.isFormField())
