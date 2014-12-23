@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tasks>
 	<task>
-		<class>service.Stat</class>
-		<method>browser</method>
-		<period>300</period>
-	</task>
-	<task>
-		<class>service.Stat</class>
-		<method>os</method>
-		<period>300</period>
-	</task>
-	<task>
-		<class>service.Stat</class>
-		<method>user</method>
-		<period>300</period>
-	</task>
-	<task>
-		<class>service.Stat</class>
-		<method>day</method>
-		<period>300</period>
-	</task>
-	<task>
 		<class>service.JvmMonitor</class>
 		<method>record</method>
 		<period>300</period>

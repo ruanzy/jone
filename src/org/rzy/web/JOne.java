@@ -113,6 +113,7 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
+		this.context = cfg.getServletContext();
 		StringBuffer sb = new StringBuffer();
 		sb.append("*************************************").append("\r\n");
 		sb.append("**                                 **").append("\r\n");
