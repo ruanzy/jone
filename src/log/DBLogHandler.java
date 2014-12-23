@@ -1,8 +1,6 @@
 package log;
 
 import org.rzy.dao.Dao;
-import org.rzy.web.log.Log;
-import org.rzy.web.log.LogHandler;
 import com.alibaba.fastjson.JSON;
 
 public class DBLogHandler implements LogHandler

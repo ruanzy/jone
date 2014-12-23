@@ -1,4 +1,4 @@
-package org.rzy.web.log;
+package org.rzy.web;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

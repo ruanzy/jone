@@ -1,4 +1,4 @@
-package org.rzy.web.action;
+package action;
 
 import org.rzy.web.Result;
 import org.rzy.web.SessionUtil;

@@ -1,4 +1,4 @@
-package org.rzy.web.log;
+package log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

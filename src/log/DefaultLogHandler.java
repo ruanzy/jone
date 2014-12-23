@@ -3,8 +3,6 @@ package log;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.apache.commons.io.IOUtils;
-import org.rzy.web.log.Log;
-import org.rzy.web.log.LogHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;

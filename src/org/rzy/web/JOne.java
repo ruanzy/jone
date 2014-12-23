@@ -49,7 +49,7 @@ public class JOne implements Filter
 			String action_method_name = (parts.length > 1) ? parts[1] : "execute";
 			if ("Captcha".equals(action_name) || "Logout".equals(action_name))
 			{
-				pck_name = "org.rzy.web.action";
+				pck_name = "org.rzy.web";
 			}
 			Class<?> cls = Class.forName(pck_name + "." + action_name);
 			// Object result = MethodUtils.invokeMethod(cls.newInstance(),

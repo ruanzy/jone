@@ -1,4 +1,4 @@
-package org.rzy.web.action;
+package org.rzy.web;
 
 import java.awt.Color;
 import java.awt.Font;
