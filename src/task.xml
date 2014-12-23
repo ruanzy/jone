@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<tasks>
-	<task>
-		<class>service.JvmMonitor</class>
-		<method>record</method>
-		<period>300</period>
-	</task>
-</tasks>
