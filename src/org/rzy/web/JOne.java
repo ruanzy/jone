@@ -47,6 +47,10 @@ public class JOne implements Filter
 			String _action_name = parts[0];
 			String action_name = Character.toTitleCase(_action_name.charAt(0)) + _action_name.substring(1);
 			String action_method_name = (parts.length > 1) ? parts[1] : "execute";
+			String action = pck_name + "." + action_name + "." + action_method_name;
+			String ip = request.getRemoteAddr();
+			Object[] ps = new Object[] { ip, url, action };
+			log.debug("{} {} {}", ps);
 			if ("Captcha".equals(action_name) || "Logout".equals(action_name))
 			{
 				pck_name = "org.rzy.web";
@@ -61,11 +65,8 @@ public class JOne implements Filter
 				((Result) result).render();
 			}
 			long t2 = System.currentTimeMillis();
-			String action = pck_name + "." + action_name + "." + action_method_name;
 			String t = (t2 - t1) + "ms";
-			String ip = request.getRemoteAddr();
-			Object[] ps = new Object[] { ip, url, action, t };
-			log.debug("{} {} {} {}", ps);
+			log.debug(t);
 		}
 		catch (Exception e)
 		{
