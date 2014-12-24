@@ -156,7 +156,13 @@
 			options.onShow();
 		}
 		if (options.url) {
-			bd.load(options.url, options.params, options.onShow);
+			bd.load(options.url, options.params, function(response,status,xhr){
+				if(status == 'error'){
+					dialog.close();
+				}else{
+					dialog.show();
+				}
+			});
 		}
 		$(".dialog-close", dialog).click(function(e) {
 			dialog.close();
@@ -293,7 +299,7 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 	} else if (xhr.status == 2222) {
 		alert('您没有权限！');
 	} else if (xhr.status == 404) {
-		$.alert('success', '您访问的资源不存在！');
+		$.alert('warning', '您访问的资源' + options.url + '不存在！');
 	} else if (xhr.status == 3333) {
 		R.alert({
 			msg : '业务接口请求异常！'
