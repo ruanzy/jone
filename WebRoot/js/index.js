@@ -65,6 +65,10 @@ $(function() {
 		$('#asd').SideDown({
 			items:items
 		});
+		$('#theme').SideDown({
+			width: 'auto',
+			url:'theme.html'
+		});
 		$('#toggle').toggle(
 				function(e) {
 					$('#sidebar').hide();
