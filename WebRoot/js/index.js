@@ -1,4 +1,7 @@
 $(function() {	
+	$.goPage = function(url, params){
+		$('#main').load(url, params);	
+	};
 	var body = $('body');
 	var WW = $(window).width();
 	var WH = $(window).height();
@@ -136,7 +139,7 @@ $(function() {
 			});
 		}
 	});**/
-	$('#main').load('common/welcome');
+	$.goPage('common/welcome');
 	/**$('#content').load('common/center',function(){
 	});**/
 });
