@@ -19,20 +19,14 @@
 	</appender>
 	
 	<appender name="MONGO" class="log.LogMongoAppender">
-	    <host>127.0.0.1</host>
-	    <db>JOne</db>
 	    <collection>logs</collection> 
 	</appender>
 	
 	<appender name="MONGO2" class="log.JvmMongoAppender">
-	    <host>127.0.0.1</host>
-	    <db>JOne</db>
 	    <collection>jvm</collection> 
 	</appender>
 	
 	<appender name="MONGO3" class="log.LoginMongoAppender">
-	    <host>127.0.0.1</host>
-	    <db>JOne</db>
 	    <collection>login</collection> 
 	</appender>
 	
@@ -40,7 +34,7 @@
         <appender-ref ref="MONGO"/>  
     </logger>  
     
-    <logger name="plugin.JvmMonitor" level="DEBUG" additivity="false">  
+    <logger name="task.JvmMonitor" level="DEBUG" additivity="false">  
         <appender-ref ref="MONGO2"/>  
     </logger>
     
