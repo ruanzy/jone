@@ -27,9 +27,16 @@ public final class MongoDao
 			}
 			prop.load(is);
 			String ip = prop.getProperty("mongo.ip", "127.0.0.1");
-			Mongo mongo = new Mongo(ip);
+			int port = Integer.valueOf(prop.getProperty("mongo.port", "27017"));
+			String username = prop.getProperty("mongo.username");
+			String password = prop.getProperty("mongo.password");
 			String dbname = prop.getProperty("mongo.db");
+			Mongo mongo = new Mongo(ip, port);
 			db = mongo.getDB(dbname);
+			if (username != null && !"".equals(username))
+			{
+				db.authenticate(username, password.toCharArray());
+			}
 		}
 		catch (Exception e)
 		{
@@ -73,7 +80,7 @@ public final class MongoDao
 	{
 		return getColl(collection).find(query).skip(skip).limit(limit).toArray();
 	}
-	
+
 	public static List<DBObject> find(String collection, DBObject query, DBObject orderBy, int skip, int limit)
 	{
 		return getColl(collection).find(query).sort(orderBy).skip(skip).limit(limit).toArray();
