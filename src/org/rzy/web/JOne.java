@@ -72,13 +72,8 @@ public class JOne implements Filter
 		{
 			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
 			{
-				log.error("请求路径" + url + "错误!");
-				if (RequestUtil.isAjax())
-				{
-					response.setStatus(500);
-					response.setCharacterEncoding("UTF-8");
-					response.getWriter().print("请求路径" + url + "错误!");
-				}
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return;
 			}
 			else if (e instanceof InvocationTargetException)
 			{
