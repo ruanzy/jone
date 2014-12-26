@@ -15,6 +15,7 @@
 	href="awesome/css/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
 <link rel="stylesheet" type="text/css" href="css/tree.css" />
+<link rel="stylesheet" type="text/css" href="css/userinfo.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
 <script type="text/javascript" src="js/index.js"></script>

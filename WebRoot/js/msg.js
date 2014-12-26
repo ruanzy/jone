@@ -160,6 +160,7 @@
 				if(status == 'error'){
 					dialog.close();
 				}else{
+					options.onShow();
 					dialog.show();
 				}
 			});

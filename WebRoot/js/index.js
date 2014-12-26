@@ -56,11 +56,32 @@ $(function() {
 			});
 		}
 		function info(){
-			$.dialog({
-				title:'asd',
-				width: 'auto',
-				url:'view/income/list.html'
-			});
+			var dialog = $.dialog({
+					title:'asd',
+					width: 350,
+					//url:'view/income/list.html'
+					url:'common/userinfo',
+					buttons:[
+					    {
+					    	text : 'OK',
+					    	cls : 'btn-success',
+					    	action : function(d) {
+					    		
+					    	}
+					    },
+					    {
+					    	text : 'Close',
+					    	cls : 'btn-default',
+					    	action : function(d) {
+					    		dialog.close();
+					    	}
+					    	
+					    }
+					],
+					onShow:function(){
+						$('#sex').MultiRadio();
+					}
+				});
 		}
 		function logout(){
 			document.location = 'logout';

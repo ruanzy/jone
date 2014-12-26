@@ -253,14 +253,14 @@ dl.accordion dd a b{
 	right: 15px;
 }
 
-div.multi-radio {
+.multi-radio {
 	margin: 0;
 	padding: 0;
 	display: inline-block;
 }
 
-div.multi-radio a {
-	float: left;
+.multi-radio a {
+	display: inline-block;
 	border: 1px solid #d4d4d4;
 	padding: 4px 15px;
 	height: 20px;
@@ -270,22 +270,14 @@ div.multi-radio a {
 	color: #333;
 }
 
-div.multi-radio a:hover {
+.multi-radio a:hover {
 	background: lightblue;
 }
 
-div.multi-radio a.active {
+.multi-radio a.active {
 	background: #33B5E5;
 	border-color: #33B5E5;
 	color: #fff;
-}
-
-div.multi-radio:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
 }
 
 input[type=text],input[type=password],textarea {

@@ -186,4 +186,12 @@ public class Common
 		Map<String, Object> map = ServerInfo.base();
 		return new Json(map);
 	}
+	
+	public Result userinfo()
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		String user = SessionUtil.getUser();
+		data.put("user", user);
+		return new Ftl("userinfo.ftl", data);
+	}
 }
