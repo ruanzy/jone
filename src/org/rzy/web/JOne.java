@@ -51,7 +51,7 @@ public class JOne implements Filter
 			String ip = request.getRemoteAddr();
 			Object[] ps = new Object[] { ip, url, action };
 			log.debug("{} {} {}", ps);
-			if ("Captcha".equals(action_name) || "Logout".equals(action_name))
+			if ("Captcha".equals(action_name))
 			{
 				pck_name = "org.rzy.web";
 			}
