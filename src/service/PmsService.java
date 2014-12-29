@@ -9,6 +9,7 @@ import org.rzy.dao.SQLMapper;
 import org.rzy.util.CryptUtil;
 import org.rzy.util.StringUtils;
 import org.rzy.util.TimeUtil;
+import org.rzy.web.Transaction;
 
 public class PmsService
 {
@@ -354,6 +355,7 @@ public class PmsService
 		dao.update(sql, params);
 	}
 
+	@Transaction
 	public void setres(String role, String res)
 	{
 		String sql1 = "delete from roleres where roleid=?";
@@ -383,6 +385,7 @@ public class PmsService
 		return dao.find(sql, params);
 	}
 
+	@Transaction
 	public void setrole(String user, String roles)
 	{
 		String sql1 = "delete from userrole where userid=?";
@@ -425,6 +428,7 @@ public class PmsService
 		return ret;
 	}
 
+	@Transaction
 	public void delres(String id)
 	{
 		String sql1 = "delete from roleres where resid in(select id from resources where path like '%" + id + "%')";
@@ -433,6 +437,7 @@ public class PmsService
 		dao.update(sql);
 	}
 
+	@Transaction
 	public void delroles(String id)
 	{
 		String sql1 = "delete from roleres where roleid=" + id;

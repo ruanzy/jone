@@ -1,10 +1,6 @@
 package org.rzy.web;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.lang.reflect.Method;
-import java.util.Properties;
-import java.util.regex.Pattern;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
@@ -15,24 +11,24 @@ import org.rzy.dao.Dao;
 
 class ServiceProxy
 {
-	static Properties config = new Properties();
-	static
-	{
-		InputStream is = null;
-		try
-		{
-			is = ServiceProxy.class.getClassLoader().getResourceAsStream("service.properties");
-			if (is == null)
-			{
-				is = new FileInputStream("service.properties");
-			}
-			config.load(is);
-		}
-		catch (Exception e)
-		{
-
-		}
-	}
+//	static Properties config = new Properties();
+//	static
+//	{
+//		InputStream is = null;
+//		try
+//		{
+//			is = ServiceProxy.class.getClassLoader().getResourceAsStream("service.properties");
+//			if (is == null)
+//			{
+//				is = new FileInputStream("service.properties");
+//			}
+//			config.load(is);
+//		}
+//		catch (Exception e)
+//		{
+//
+//		}
+//	}
 	static MethodInterceptor interceptor = new MethodInterceptor()
 	{
 		public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
@@ -56,10 +52,15 @@ class ServiceProxy
 
 	static CallbackFilter filter = new CallbackFilter()
 	{
-		public int accept(Method arg0)
+		public int accept(Method method)
 		{
-			String express = config.getProperty("express", "^(add|delete|update)");
-			return Pattern.compile(express).matcher(arg0.getName()).find() ? 0 : 1;
+//			String express = config.getProperty("express", "^(add|delete|update)");
+//			return Pattern.compile(express).matcher(arg0.getName()).find() ? 0 : 1;		
+			if(method.isAnnotationPresent(Transaction.class)){
+				return 0;
+			}else{
+				return 1;
+			}
 		}
 	};
 
