@@ -6,7 +6,7 @@ public class ApplicationUtil
 
 	public static String getWebRoot()
 	{
-		return Context.getServletContext().getRealPath("/");
+		return WebContext.getServletContext().getRealPath("/");
 	}
 
 	public static void setUserres(String user)
@@ -22,11 +22,11 @@ public class ApplicationUtil
 
 	public static void attr(String key, Object value)
 	{
-		Context.getServletContext().setAttribute(key, value);
+		WebContext.getServletContext().setAttribute(key, value);
 	}
 
 	public static Object attr(String key)
 	{
-		return Context.getServletContext().getAttribute(key);
+		return WebContext.getServletContext().getAttribute(key);
 	}
 }

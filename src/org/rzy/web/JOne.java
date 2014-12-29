@@ -26,7 +26,7 @@ public class JOne implements Filter
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		Context rc = Context.begin(this.context, request, response);
+		WebContext wc = WebContext.create(this.context, request, response);
 		String url = request.getServletPath();
 		try
 		{
@@ -34,7 +34,7 @@ public class JOne implements Filter
 			boolean extension = url.lastIndexOf(".") != -1;
 			if (extension)
 			{
-				chain.doFilter(Context.getRequest(), Context.getResponse());
+				chain.doFilter(request, response);
 				return;
 			}
 			String[] parts = url.substring(1).split("/");
@@ -94,9 +94,9 @@ public class JOne implements Filter
 		}
 		finally
 		{
-			if (rc != null)
+			if (wc != null)
 			{
-				rc.end();
+				wc.destroy();
 			}
 		}
 	}

@@ -29,16 +29,16 @@ public class SessionUtil
 
 	public static void clear()
 	{
-		Context.getSession().invalidate();
+		WebContext.getSession().invalidate();
 	}
 
 	public static void attr(String key, Object value)
 	{
-		Context.getSession().setAttribute(key, value);
+		WebContext.getSession().setAttribute(key, value);
 	}
 
 	public static Object attr(String key)
 	{
-		return Context.getSession().getAttribute(key);
+		return WebContext.getSession().getAttribute(key);
 	}
 }

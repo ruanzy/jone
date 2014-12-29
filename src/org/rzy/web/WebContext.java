@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Context
+public class WebContext
 {
 	private ServletContext servletContext;
 
@@ -16,46 +16,46 @@ public class Context
 
 	private HttpServletResponse response;
 
-	private final static ThreadLocal<Context> context = new ThreadLocal<Context>();
+	private final static ThreadLocal<WebContext> webContext = new ThreadLocal<WebContext>();
 
-	protected static Context begin(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res)
+	protected static WebContext create(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res)
 			throws UnsupportedEncodingException
 	{
-		Context ac = new Context();
-		ac.servletContext = servletContext;
-		ac.request = req;
-		ac.response = res;
-		ac.session = req.getSession();
-		context.set(ac);
-		return ac;
+		WebContext wc = new WebContext();
+		wc.servletContext = servletContext;
+		wc.request = req;
+		wc.response = res;
+		wc.session = req.getSession();
+		webContext.set(wc);
+		return wc;
 	}
 
-	protected void end()
+	protected void destroy()
 	{
 		this.servletContext = null;
 		this.request = null;
 		this.response = null;
 		this.session = null;
-		context.remove();
+		webContext.remove();
 	}
 
 	public static ServletContext getServletContext()
 	{
-		return context.get().servletContext;
+		return webContext.get().servletContext;
 	}
 
 	public static HttpSession getSession()
 	{
-		return context.get().session;
+		return webContext.get().session;
 	}
 
 	public static HttpServletRequest getRequest()
 	{
-		return context.get().request;
+		return webContext.get().request;
 	}
 
 	public static HttpServletResponse getResponse()
 	{
-		return context.get().response;
+		return webContext.get().response;
 	}
 }

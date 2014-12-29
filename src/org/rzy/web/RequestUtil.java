@@ -11,7 +11,7 @@ public class RequestUtil
 	{
 		try
 		{
-			Context.getRequest().setCharacterEncoding(encoding);
+			WebContext.getRequest().setCharacterEncoding(encoding);
 		}
 		catch (UnsupportedEncodingException e)
 		{
@@ -21,7 +21,7 @@ public class RequestUtil
 
 	public static boolean isAjax()
 	{
-		String xhr = Context.getRequest().getHeader("x-requested-with");
+		String xhr = WebContext.getRequest().getHeader("x-requested-with");
 		if (xhr != null && xhr.trim().length() > 0)
 		{
 			return true;
@@ -37,7 +37,7 @@ public class RequestUtil
 	public static Map<String, String> getParameters()
 	{
 		Map<String, String> ps = null;
-		Enumeration<?> em = Context.getRequest().getParameterNames();
+		Enumeration<?> em = WebContext.getRequest().getParameterNames();
 		if (em.hasMoreElements())
 		{
 			ps = new HashMap<String, String>();
@@ -53,7 +53,7 @@ public class RequestUtil
 
 	public static String getParameter(String name)
 	{
-		return Context.getRequest().getParameter(name);
+		return WebContext.getRequest().getParameter(name);
 	}
 
 	public static String getUserAgent()
@@ -63,21 +63,21 @@ public class RequestUtil
 
 	public static String getIP()
 	{
-		return Context.getRequest().getRemoteAddr();
+		return WebContext.getRequest().getRemoteAddr();
 	}
 
 	public static String getHeader(String key)
 	{
-		return Context.getRequest().getHeader(key);
+		return WebContext.getRequest().getHeader(key);
 	}
 
 	public static void attr(String key, Object value)
 	{
-		Context.getRequest().setAttribute(key, value);
+		WebContext.getRequest().setAttribute(key, value);
 	}
 
 	public static Object attr(String key)
 	{
-		return Context.getRequest().getAttribute(key);
+		return WebContext.getRequest().getAttribute(key);
 	}
 }

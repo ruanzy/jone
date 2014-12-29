@@ -9,22 +9,22 @@ public class ResponseUtil
 {
 	public static void setContentType(String type)
 	{
-		Context.getResponse().setContentType(type);
+		WebContext.getResponse().setContentType(type);
 	}
 
 	public static void setCharacterEncoding(String encoding)
 	{
-		Context.getResponse().setCharacterEncoding(encoding);
+		WebContext.getResponse().setCharacterEncoding(encoding);
 	}
 
 	public static void redirect(String url)
 	{
 		try
 		{
-			HttpServletRequest request = Context.getRequest();
+			HttpServletRequest request = WebContext.getRequest();
 			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 					+ request.getContextPath() + "/";
-			Context.getResponse().sendRedirect(basePath + url);
+			WebContext.getResponse().sendRedirect(basePath + url);
 		}
 		catch (IOException e)
 		{
@@ -34,10 +34,10 @@ public class ResponseUtil
 
 	public static void forward(String url)
 	{
-		RequestDispatcher rd = Context.getRequest().getRequestDispatcher(url);
+		RequestDispatcher rd = WebContext.getRequest().getRequestDispatcher(url);
 		try
 		{
-			rd.forward(Context.getRequest(), Context.getResponse());
+			rd.forward(WebContext.getRequest(), WebContext.getResponse());
 		}
 		catch (Exception e)
 		{
@@ -49,7 +49,7 @@ public class ResponseUtil
 	{
 		try
 		{
-			return Context.getResponse().getOutputStream();
+			return WebContext.getResponse().getOutputStream();
 		}
 		catch (IOException e)
 		{
@@ -62,7 +62,7 @@ public class ResponseUtil
 	{
 		try
 		{
-			Context.getResponse().getWriter().print(txt);
+			WebContext.getResponse().getWriter().print(txt);
 		}
 		catch (IOException e)
 		{
