@@ -2,7 +2,6 @@ package org.rzy.task;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -19,8 +18,6 @@ public class TaskManager2
 {
 	private static Logger log = LoggerFactory.getLogger(TaskManager2.class);
 	private static ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(5);
-	private static boolean started = false;
-	private static List<Task> tasks = new ArrayList<Task>();
 
 	static
 	{
@@ -40,7 +37,8 @@ public class TaskManager2
 					String className = e.elementTextTrim("class");
 					String methodName = e.elementTextTrim("method");
 					String cron = e.elementTextTrim("cron");
-					tasks.add(new Task(className, methodName, cron));
+					CronExpression cronExpression = new CronExpression(cron);
+					schedule(className, methodName, cronExpression);
 				}
 			}
 		}
@@ -51,43 +49,9 @@ public class TaskManager2
 		}
 	}
 
-	public static void start()
-	{
-		if (!started)
-		{
-			try
-			{
-
-				for (Task task : tasks)
-				{
-					String className = task.getClassName();
-					String methodName = task.getMethodName();
-					String cron = task.getCron();
-					if (cron != null)
-					{
-						CronExpression cronExpression = new CronExpression(cron);
-						schedule(className, methodName, cronExpression);
-					}
-				}
-				started = false;
-			}
-			catch (Exception e)
-			{
-				log.debug("TaskManager Satrt Exception!");
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public static void schedule(final String className, final String methodName, long period)
-	{
-		Job job = new Job(className, methodName);
-		scheduled.scheduleAtFixedRate(job, 0L, period, TimeUnit.SECONDS);
-	}
-
 	public static void schedule(final String className, final String methodName, final CronExpression expression)
 	{
-		final Job job = new Job(className, methodName);
+		final Task job = new Task(className, methodName);
 		Runnable scheduleTask = new Runnable()
 		{
 			public void run()

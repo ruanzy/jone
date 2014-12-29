@@ -1,30 +1,31 @@
 package org.rzy.task;
 
-public class Task
-{
-	private String className;
-	private String methodName;
-	private String cron;
+import java.lang.reflect.Method;
 
-	public Task(String className, String methodName, String cron)
+public class Task implements Runnable
+{
+
+	private String className;
+
+	private String methodName;
+
+	public Task(String className, String methodName)
 	{
 		this.className = className;
 		this.methodName = methodName;
-		this.cron = cron;
 	}
 
-	public String getClassName()
+	public void run()
 	{
-		return className;
-	}
-
-	public String getMethodName()
-	{
-		return methodName;
-	}
-
-	public String getCron()
-	{
-		return cron;
+		try
+		{
+			Class<?> cls = Class.forName(className);
+			Method m = cls.getMethod(methodName);
+			m.invoke(cls.newInstance());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

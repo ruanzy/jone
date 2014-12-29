@@ -7,15 +7,14 @@ import org.slf4j.LoggerFactory;
 import sun.management.ManagementFactory;
 import com.sun.management.OperatingSystemMXBean;
 
-public class JvmMonitor
+public class Task
 {
-
-	private static Logger logger = LoggerFactory.getLogger(JvmMonitor.class);
+	private static Logger logger = LoggerFactory.getLogger(Task.class);
 
 	private long lastProcessCpuTime = 0;
 	private long lastUptime = 0;
 
-	@Scheduled(cron="0 0/3 * * * ?")
+	@Scheduled("0 0/3 * * * ?")
 	public void record()
 	{
 		String message = getMemoryUsed() + " " + getCpu() + " " + getThreadCount();
