@@ -8,21 +8,21 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.rzy.web.Scheduled;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TaskManager
 {
-	private static Logger log = LoggerFactory.getLogger(TaskManager.class);
 	private static ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(5);
 
 	static
 	{
-		log.debug("TaskManager Satrting...  ");
 		try
 		{
 			String pck = "task";
 			URL url = Thread.currentThread().getContextClassLoader().getResource(pck);
+			if (url == null)
+			{
+				throw new RuntimeException("task package not found!");
+			}
 			File dir = new File(url.toURI());
 			File[] files = dir.listFiles();
 			for (File f : files)
@@ -45,7 +45,6 @@ public class TaskManager
 		}
 		catch (Exception e)
 		{
-			log.debug("TaskManager Satrt Exception!");
 			e.printStackTrace();
 		}
 	}

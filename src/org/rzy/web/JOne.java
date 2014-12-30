@@ -12,7 +12,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.rzy.task.TaskManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,7 +102,7 @@ public class JOne implements Filter
 
 	public void destroy()
 	{
-		TaskManager.stop();
+		Plugins.destroy();
 	}
 
 	public void init(FilterConfig cfg) throws ServletException
@@ -116,6 +115,6 @@ public class JOne implements Filter
 		sb.append("**                                 **").append("\r\n");
 		sb.append("*************************************");
 		System.out.println(sb);
-		TaskManager.start();
+		Plugins.init(context);
 	}
 }
