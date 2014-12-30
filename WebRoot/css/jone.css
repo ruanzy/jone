@@ -2,8 +2,8 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif; 
-	font-size: 13px; 
+	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+	font-size: 13px;
 	overflow: hidden;
 }
 
@@ -128,7 +128,6 @@ ul.info li {
 	white-space: nowrap;
 }
 
-
 .nav-list li {
 	display: block;
 	padding-left: 10px;
@@ -201,7 +200,7 @@ dl.accordion {
 	height: 100%;
 	overflow: hidden;
 	background-color: #f6f7f7;
-	font-size: 14px; 
+	font-size: 14px;
 }
 
 dl.accordion dt {
@@ -222,7 +221,7 @@ dl.accordion dt {
 }
 
 dl.accordion dd {
-	margin: 0; 
+	margin: 0;
 	padding: 0;
 	background: #fff;
 	display: none;
@@ -248,7 +247,7 @@ dl.accordion dd a.active {
 	color: #1dd2af;
 }
 
-dl.accordion dd a b{
+dl.accordion dd a b {
 	position: absolute;
 	right: 15px;
 }
@@ -304,9 +303,9 @@ li {
 	list-style: none;
 }
 
-dl, dt, dd{
+dl,dt,dd {
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 }
 
 .fl {
@@ -317,8 +316,11 @@ dl, dt, dd{
 	float: right;
 }
 
-.clear {
+.clear:after {
+	display: block;
+	content: '.';
 	clear: both;
+	visibility: hidden;
 }
 
 /**
@@ -383,7 +385,7 @@ msg.css
 	margin: 0;
 	max-width: 1000px;
 	max-height: 800px;
-	word-break : break-all;
+	word-break: break-all;
 }
 
 .message-footer {
@@ -426,7 +428,7 @@ msg.css
 	left: 0;
 	overflow: hidden;
 	opacity: 1;
-	display: none;	
+	display: none;
 }
 
 .dialog {
@@ -464,30 +466,32 @@ msg.css
 
 .dialog-header {
 	color: #53a93f;
-	border-bottom: 3px solid #53a93f;
+	border-style: solid;
+	border-width: 0;
 	padding: 10px;
 	font-size: 15px;
 	font-weight: bold;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 }
 
 .dialog-header-success {
 	color: #53a93f;
-	border-bottom: 3px solid #53a93f;
+	border-color: #53a93f;
 }
 
 .dialog-header-info {
 	color: #57b5e3;
-	border-bottom: 3px solid #57b5e3;
+	border-color: #57b5e3;
 }
 
 .dialog-header-warning {
 	color: #f4b400;
-	border-bottom: 3px solid #f4b400;
+	border-color: #f4b400;
 }
 
 .dialog-header-danger {
 	color: #d73d32;
-	border-bottom: 3px solid #d73d32;
+	border-color: #d73d32;
 }
 
 .dialog-body {
@@ -498,7 +502,7 @@ msg.css
 
 .dialog-footer {
 	margin: 0 0 20px 0;
-	padding: 15px 15px 15px 0;
+	padding: 5px 15px 5px 0;
 	border-top: 0px solid #ccc;
 	background-color: #f8f8f8;
 }
@@ -509,8 +513,8 @@ msg.css
 	font-weight: 700;
 	color: #000;
 	text-shadow: 0 1px 0 #fff;
-	filter: alpha(opacity = 20);
-	opacity: .2;
+	filter: alpha(opacity = 50);
+	opacity: .5;
 	cursor: pointer;
 }
 
@@ -527,7 +531,7 @@ msg.css
 	display: none;
 }
 
-.bg-red{
+.bg-red {
 	background-color: #e33;
 }
 
@@ -559,8 +563,9 @@ grid.css
 	font-size: 14px;
 	text-shadow: 1px 2px 1px #FFFFFF;
 	background: #EFEFEF;
-	background: -webkit-gradient(linear,0% 0,0% 100%,from(#f7f7f7),to(#EFEFEF));
-	background: -moz-linear-gradient(top,#f7f7f7,#EFEFEF 100%);
+	background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#f7f7f7),
+		to(#EFEFEF));
+	background: -moz-linear-gradient(top, #f7f7f7, #EFEFEF 100%);
 	border: .1em solid #c8cccd;
 }
 
@@ -709,22 +714,22 @@ progress.css
 }
 
 .block {
-	display:inline-block;
-	width:10px;
-	height:10px;
-	margin-right:10px;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-right: 10px;
 }
 
 .block-success {
-	background-color:#53a93f;
+	background-color: #53a93f;
 }
 
 .block-warning {
-	background-color:#f4b400;
+	background-color: #f4b400;
 }
 
 .block-danger {
-	background-color:#d73d32;
+	background-color: #d73d32;
 }
 
 /**
@@ -737,6 +742,7 @@ button.css
 	padding: 5px 10px;
 	white-space: nowrap;
 	position: relative;
+	display: inline-block;
 	margin: 5px 5px 5px 0;
 }
 
@@ -858,7 +864,7 @@ dl.rzy-sidedown {
 	border-right: 7px solid transparent;
 	border-bottom: 7px solid #ccc;
 	border-left: 7px solid transparent;
-	border-bottom-color: rgba(0,0,0,0.2);
+	border-bottom-color: rgba(0, 0, 0, 0.2);
 	content: '';
 }
 
@@ -893,7 +899,6 @@ dl.rzy-sidedown {
 	overflow: hidden;
 	background-color: #e5e5e5;
 }
-
 
 /**
 well.css
@@ -977,7 +982,6 @@ well.css
 /**
 tabs.css
 **/
-
 dl.tabs {
 	width: 100%;
 	margin: 0;
@@ -987,7 +991,7 @@ dl.tabs {
 
 dl.tabs dt {
 	background-color: #fbfbfb;
-	padding-top:2px;
+	padding-top: 2px;
 }
 
 dl.tabs dt a {
@@ -1028,10 +1032,9 @@ dl.tabs dd.active {
 /**
 autocomplete.css
 **/
-
 dl.select {
 	display: inline-block;
-	margin:0;
+	margin: 0;
 	padding: 0;
 	position: relative;
 }
@@ -1041,24 +1044,24 @@ dl.select dt {
 	text-align: center;
 	background-color: white;
 	padding: 0;
-	margin:0;
+	margin: 0;
 }
 
 dl.select dt input {
-	margin:0;
-	padding-right:32px;
+	margin: 0;
+	padding-right: 32px;
 }
 
 dl.select dt i {
-	padding:8px;
+	padding: 8px;
 	display: block;
-	border-left:1px solid #CFCFCF;
+	border-left: 1px solid #CFCFCF;
 	background-color: #fafafa;
 	cursor: pointer;
 	zoom: 1;
 	position: absolute;
-	top:1px;
-	right:1px;
+	top: 1px;
+	right: 1px;
 	bottom: 1px;
 }
 

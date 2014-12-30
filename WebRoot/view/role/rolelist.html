@@ -1,150 +1,167 @@
 
-<div style="float: left;">
-<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</a>
-<a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
-<a id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配资源</a>
+<div>
+	<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</a>
+	<a id='delbtn' class='btn btn-default'><i class="icon-remove"></i>
+		删除</a> <a id='assignbtn' class='btn btn-default'><i
+		class="icon-pencil"></i> 分配资源</a>
+
+	<div style="float: right;">
+		<form id='search-form' class='search-form'>
+			<input type="text" id='searchtxt' class='txt' name="name"
+				autocomplete="off" placeholder="请输入角色名" />
+			<button type="button">
+				<i class="icon-search"></i>
+			</button>
+		</form>
+	</div>
 </div>
-<div style="float: right;">
-	<form id='search-form' class='search-form'>
-		<input type="text" id='searchtxt' class='txt' name="name" autocomplete="off" placeholder="请输入角色名"/>
-		<button type="button"><i class="icon-search"></i></button>
-	</form>
-</div>	
+
 <div id='kkk'></div>
 
 <script type="text/javascript">
-  
-     $('#kkk').table({
-		title:'角色列表',
-		columns:[
-			{header:"ID",field:"id",width:50,align:'center'},
-			{header:"角色名",field:"name"}
-		],
-		selector:'m',
-		condition:condition,
-		url:'role/list'
+	$('#kkk').table({
+		title : '角色列表',
+		columns : [ {
+			header : "ID",
+			field : "id",
+			width : 50,
+			align : 'center'
+		}, {
+			header : "角色名",
+			field : "name"
+		} ],
+		selector : 'm',
+		condition : condition,
+		url : 'role/list'
 	});
-     $('#search-form button').click(function(){
-    	 $('#kkk').table('reload');
-     });
-     $('#addbtn').click(add);
-     $('#delbtn').click(del);
-     $('#assignbtn').click(mk);
-     function condition(){
-    	 var name = $('input[name=name]').val();
-    	 var params = {name: name};
-    	 return params;
-     }
-     
-     function add(){
-    	 $.dialog({
-    		 title:'角色新增',
-    		 width:350,
-    		 url:'view/role/addrole.html',
-			buttons:[
-			    {
-			    	text : 'OK',
-			    	cls : 'btn-success',
-			    	action : function(d) {
-			    		ok(d);
-			    	}
-			    },
-			    {
-			    	text : 'Close',
-			    	cls : 'btn-default',
-			    	action : function(d) {
-			    		d.close();
-			    	}
-			    	
-			    }
-			]
-    	 });
-     }
-         		function ok(win){
-	   		     	var name = win.find('input[name=name]').val();
-			    	var params = {name:name};
-			    	$.ajax({
-						url:'role/add',
-						type: 'post',
-						data: params,
-						dataType:'json',
-				        success:function(result){
-				        	if(result.result){
-				        		win.close();
-								$.alert('success', result.msg, function(){
-									$('#kkk').table('reload');
-								});
-							}
-						}
-					});	
-    		 }
-          
-     function del(){
-    	 var selected = $('#kkk').table('getSelected');
-    	 debugger;
-    	 if(selected.length != 1){
-    		 $.tip({content:'请选择一条记录'});
-    		 return false;
-    	 }
-    	 $.confirm('确定要干掉吗', function(btn){
-	    	if(btn == 'YES'){
-		   		$.ajax({
-		   			url:'role/del',
-		   			type: 'post',
-		   			data: {id:selected[0].id},
-		   			dataType: 'json',
-		   	        success: function(result){
-		   	        	$('#kkk').table('refresh');
-		   			}
-		   		});
-		   	}
-    	 });
-     }
-     
-     function mk(){
-    	 var selected = $('#kkk').table('getSelected');
-    	 if(selected.length != 1){
-    		 $.tip({content:'请选择一条记录'});
-    		 return false;
-    	 }
-    	 $.dialog({
-			title:'分配资源',
-			width:230,
-			height:300,
-			url:'setres.jsp?id=' + selected[0].id,
-			buttons:[
-			    {
-			    	text : 'OK',
-			    	cls : 'btn-success',
-			    	action : function(d) {
-			    		ok1(d);
-			    	}
-			    },
-			    {
-			    	text : 'Close',
-			    	cls : 'btn-default',
-			    	action : function(d) {
-			    		d.close();
-			    	}
-			    	
-			    }
-			]
-    	 });
-     }
-     
-     function ok1(win){
-			var roleid = win.find('input[name=roleid]').val();
-			var ids = win.find("#tree").Tree('checkedNodes');
-			var data = {role:roleid,res:ids.join()};
-			$.ajax({ 
-				url: "role/setres", 
-				type: 'post',
-				data: data,
-				dataType: 'json',
-				success: function(r){
+	$('#search-form button').click(function() {
+		$('#kkk').table('reload');
+	});
+	$('#addbtn').click(add);
+	$('#delbtn').click(del);
+	$('#assignbtn').click(mk);
+	function condition() {
+		var name = $('input[name=name]').val();
+		var params = {
+			name : name
+		};
+		return params;
+	}
+
+	function add() {
+		$.dialog({
+			title : '角色新增',
+			width : 350,
+			url : 'view/role/addrole.html',
+			buttons : [ {
+				text : 'OK',
+				cls : 'btn-success',
+				action : function(d) {
+					ok(d);
+				}
+			}, {
+				text : 'Close',
+				cls : 'btn-default',
+				action : function(d) {
+					d.close();
+				}
+
+			} ]
+		});
+	}
+	function ok(win) {
+		var name = win.find('input[name=name]').val();
+		var params = {
+			name : name
+		};
+		$.ajax({
+			url : 'role/add',
+			type : 'post',
+			data : params,
+			dataType : 'json',
+			success : function(result) {
+				if (result.result) {
 					win.close();
-					$('#kkk').table('reload');
-		  		}
-		  	});
-     }
+					$.alert('success', result.msg, function() {
+						$('#kkk').table('reload');
+					});
+				}
+			}
+		});
+	}
+
+	function del() {
+		var selected = $('#kkk').table('getSelected');
+		debugger;
+		if (selected.length != 1) {
+			$.tip({
+				content : '请选择一条记录'
+			});
+			return false;
+		}
+		$.confirm('确定要干掉吗', function(btn) {
+			if (btn == 'YES') {
+				$.ajax({
+					url : 'role/del',
+					type : 'post',
+					data : {
+						id : selected[0].id
+					},
+					dataType : 'json',
+					success : function(result) {
+						$('#kkk').table('refresh');
+					}
+				});
+			}
+		});
+	}
+
+	function mk() {
+		var selected = $('#kkk').table('getSelected');
+		if (selected.length != 1) {
+			$.tip({
+				content : '请选择一条记录'
+			});
+			return false;
+		}
+		$.dialog({
+			title : '分配资源',
+			width : 230,
+			height : 300,
+			url : 'setres.jsp?id=' + selected[0].id,
+			buttons : [ {
+				text : 'OK',
+				cls : 'btn-success',
+				action : function(d) {
+					ok1(d);
+				}
+			}, {
+				text : 'Close',
+				cls : 'btn-default',
+				action : function(d) {
+					d.close();
+				}
+
+			} ]
+		});
+	}
+
+	function ok1(win) {
+		var roleid = win.find('input[name=roleid]').val();
+		var ids = win.find("#tree").Tree('checkedNodes');
+		var data = {
+			role : roleid,
+			res : ids.join()
+		};
+		$.ajax({
+			url : "role/setres",
+			type : 'post',
+			data : data,
+			dataType : 'json',
+			success : function(r) {
+				win.close();
+				$('#kkk').table('reload');
+			}
+		});
+	}
 </script>

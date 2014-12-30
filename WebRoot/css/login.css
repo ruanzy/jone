@@ -103,8 +103,11 @@ h3 {
 	float: right;
 }
 
-.clear {
+.clear:after {
+	display: block;
+	content: '.';
 	clear: both;
+	visibility: hidden;
 }
 
 .logininput input {
