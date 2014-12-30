@@ -69,17 +69,17 @@ h3 {
 	display: block !important;
 	position: absolute !important;
 	z-index: 1;
-	width: 16px;
-	height: 16px;
-	font-size: 16px;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
 	text-align: center;
-	top: 15px;
+	top: 10px;
 	left: 8px;
 }
 
 .logininput-icon input {
 	width: 100%;
-	text-indent: 25px;
+	text-indent: 28px;
 	overflow: hidden;
 	color: #000;
 	padding: 10px 0;
