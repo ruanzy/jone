@@ -1,144 +1,128 @@
-<div class="well" style='width:auto;height:auto;'>
-	<div class="well-header well-header-success">
-		<span class='well-header-title'> <i class="icon-desktop"></i>
-			资源树
-		</span>
-		<div class='well-header-buttons'>
-			<i class='icon-plus'></i>
-		</div>
-	</div>
-	<div class="well-body">
-		<table>
-			<tr>
-				<td valign="top" width='30%'><ul id="tree"></ul></td>
-				<td>
-					<dl id='mktabs' class="tabs">
-						<dt>
-							<a class='active'><i class='icon-th'></i> 增加模块</a><a><i class='icon-envelope'></i> 增加菜单</a><a><i class='icon-cog'></i> 增加操作</a>
-						</dt>
-						<dd class='active'>
-							<form id='moudlefrm' method='post' action='resadd'>
-								<table>
-									<tr>
-										<td align='right' width='30%'>模块名称</td>
-										<td><input type="hidden" name="type" value="1" /> <input
-											type="hidden" name="pid" value="0" /> <input type="text"
-											name="name" class='txt' autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'>图标</td>
-										<td><input type="text" name="icon" class='txt'
-											autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'></td>
-										<td>
-											<p>
-												<a id='addmoudle' class='btn btn-default'> <i
-													class="icon-plus"></i> 增加
-												</a> <a class='btn btn-default'> <i class="icon-remove"></i>
-													清空
-												</a>
-											</p>
-										</td>
-									</tr>
-								</table>
-							</form>
-						</dd>
-						<dd>
-							<form id='menufrm' method='post' action='resadd'>
-								<table>
-									<tr>
-										<td align='right' width='30%'>模块</td>
-										<td><select name="pid" id='moudle'>
-												<option value='-100'>请选择模块</option>
-										</select></td>
-									</tr>
-									<tr>
-										<td align='right'>菜单名称</td>
-										<td><input type="hidden" name="type" value="2" /> <input
-											type="text" name="name" class='txt' autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'>图标</td>
-										<td><input type="text" name="icon" class='txt'
-											autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'>URL</td>
-										<td><input type="text" name="url" class='txt'
-											autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'></td>
-										<td>
-											<p>
-												<a id='addmenu' class='btn btn-default'> <i
-													class="icon-plus"></i> 增加
-												</a> <a class='btn btn-default'> <i class="icon-remove"></i>
-													清空
-												</a>
-											</p>
-										</td>
-									</tr>
-								</table>
-							</form>
-						</dd>
-						<dd>
-							<form id='opfrm' method='post' action='resadd'>
-								<table>
-									<tr>
-										<td align='right' width='30%'>模块</td>
-										<td><select id='moudle2'>
-												<option value='-100'>请选择模块</option>
-										</select></td>
-									</tr>
-									<tr>
-										<td align='right' width='30%'>菜单</td>
-										<td><select name="pid" id='menu'>
-												<option value='-1'>请选择菜单</option>
-										</select></td>
-									</tr>
-									<tr>
-										<td align='right'>操作名称</td>
-										<td><input type="hidden" name="type" value="3" /> <input
-											type="text" name="name" class='txt' autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'>图标</td>
-										<td><input type="text" name="icon" class='txt'
-											autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'>URL</td>
-										<td><input type="text" name="url" class='txt'
-											autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'>Method</td>
-										<td><input type="text" name="method" class='txt'
-											autocomplete="off" /></td>
-									</tr>
-									<tr>
-										<td align='right'></td>
-										<td>
-											<p>
-												<a id='addop' class='btn btn-default'> <i
-													class="icon-plus"></i> 增加
-												</a> <a class='btn btn-default'> <i class="icon-remove"></i>
-													清空
-												</a>
-											</p>
-										</td>
-									</tr>
-								</table>
-							</form>
-						</dd>
-					</dl>
-				</td>
-			</tr>
-		</table>
-	</div>
+<div style="float: left;width:200px;">
+	<ul id="tree"></ul>
+</div>
+<div style="float: left;">
+	<dl id='mktabs' class="tabs">
+		<dt>
+			<a class='active'><i class='icon-th'></i> 增加模块</a><a><i
+				class='icon-envelope'></i> 增加菜单</a><a><i class='icon-cog'></i> 增加操作</a>
+		</dt>
+		<dd class='active'>
+			<form id='moudlefrm' method='post' action='resadd'>
+				<table>
+					<tr>
+						<td align='right' width='30%'>模块名称</td>
+						<td><input type="hidden" name="type" value="1" /> <input
+							type="hidden" name="pid" value="0" /> <input type="text"
+							name="name" class='txt' autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'>图标</td>
+						<td><input type="text" name="icon" class='txt'
+							autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'></td>
+						<td>
+							<p>
+								<a id='addmoudle' class='btn btn-default'> <i
+									class="icon-plus"></i> 增加
+								</a> <a class='btn btn-default'> <i class="icon-remove"></i> 清空
+								</a>
+							</p>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</dd>
+		<dd>
+			<form id='menufrm' method='post' action='resadd'>
+				<table>
+					<tr>
+						<td align='right' width='30%'>模块</td>
+						<td><select name="pid" id='moudle'>
+								<option value='-100'>请选择模块</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td align='right'>菜单名称</td>
+						<td><input type="hidden" name="type" value="2" /> <input
+							type="text" name="name" class='txt' autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'>图标</td>
+						<td><input type="text" name="icon" class='txt'
+							autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'>URL</td>
+						<td><input type="text" name="url" class='txt'
+							autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'></td>
+						<td>
+							<p>
+								<a id='addmenu' class='btn btn-default'> <i
+									class="icon-plus"></i> 增加
+								</a> <a class='btn btn-default'> <i class="icon-remove"></i> 清空
+								</a>
+							</p>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</dd>
+		<dd>
+			<form id='opfrm' method='post' action='resadd'>
+				<table>
+					<tr>
+						<td align='right' width='30%'>模块</td>
+						<td><select id='moudle2'>
+								<option value='-100'>请选择模块</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td align='right' width='30%'>菜单</td>
+						<td><select name="pid" id='menu'>
+								<option value='-1'>请选择菜单</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td align='right'>操作名称</td>
+						<td><input type="hidden" name="type" value="3" /> <input
+							type="text" name="name" class='txt' autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'>图标</td>
+						<td><input type="text" name="icon" class='txt'
+							autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'>URL</td>
+						<td><input type="text" name="url" class='txt'
+							autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'>Method</td>
+						<td><input type="text" name="method" class='txt'
+							autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td align='right'></td>
+						<td>
+							<p>
+								<a id='addop' class='btn btn-default'> <i class="icon-plus"></i>
+									增加
+								</a> <a class='btn btn-default'> <i class="icon-remove"></i> 清空
+								</a>
+							</p>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</dd>
+	</dl>
 </div>
 
 <script language="javascript">
@@ -147,7 +131,6 @@
 			bbb(index);
 		}
 	});
-	
 
 	function bbb(index) {
 		if (index == 1) {
