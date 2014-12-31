@@ -30,7 +30,7 @@ public class LoginFilter implements Filter
 			return;
 		}
 		HttpSession session = request.getSession(true);
-		if (session.getAttribute("USER") == null)
+		if (session.getAttribute("RZY_USER") == null)
 		{
 			String xhr = request.getHeader("x-requested-with");
 			if (isNotBlank(xhr))
