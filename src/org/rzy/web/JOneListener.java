@@ -3,7 +3,7 @@ package org.rzy.web;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class LogListener implements ServletContextListener
+public class JOneListener implements ServletContextListener
 {
 
 	public void contextDestroyed(ServletContextEvent arg0)

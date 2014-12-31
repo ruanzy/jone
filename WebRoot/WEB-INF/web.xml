@@ -3,6 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<listener>
+		<listener-class>org.rzy.web.JOneListener</listener-class>
+	</listener>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>org.rzy.web.LoginFilter</filter-class>
@@ -14,10 +17,6 @@
 	<filter>
 		<filter-name>JOne</filter-name>
 		<filter-class>org.rzy.web.JOne</filter-class>
-		<init-param>
-			<param-name>plugins</param-name>
-			<param-value>JvmMonitor</param-value>
-		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>JOne</filter-name>
