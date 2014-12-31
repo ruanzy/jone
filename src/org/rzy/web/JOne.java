@@ -98,7 +98,6 @@ public class JOne implements Filter
 
 	public void destroy()
 	{
-		Plugins.destroy();
 	}
 
 	public void init(FilterConfig cfg) throws ServletException
@@ -111,6 +110,5 @@ public class JOne implements Filter
 		sb.append("**                                 **").append("\r\n");
 		sb.append("*************************************");
 		System.out.println(sb);
-		Plugins.init(context);
 	}
 }

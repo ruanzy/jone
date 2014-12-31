@@ -4,7 +4,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,11 +41,11 @@ public class Plugins
 		}
 	}
 
-	public static void init(ServletContext context)
+	public static void init()
 	{
 		for (Plugin plugin : plugins)
 		{
-			plugin.init(context);
+			plugin.init();
 			log.debug("{} init...", plugin.getClass().getName());
 		}
 	}
