@@ -4,12 +4,9 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Plugins
 {
-	private static Logger log = LoggerFactory.getLogger(Plugins.class);
 	private static List<Plugin> plugins;
 
 	static
@@ -51,7 +48,7 @@ public class Plugins
 			for (Plugin plugin : plugins)
 			{
 				plugin.init();
-				log.debug("{} init...", plugin.getClass().getName());
+				System.out.println(plugin.getClass().getName() + " init...");
 			}
 		}
 	}
@@ -63,7 +60,6 @@ public class Plugins
 			for (Plugin plugin : plugins)
 			{
 				plugin.destroy();
-				log.debug("{} destroy...", plugin.getClass().getName());
 			}
 		}
 	}

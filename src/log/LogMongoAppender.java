@@ -15,8 +15,9 @@ public class LogMongoAppender extends MongoAppender
 		map.put("user", arr[0]);
 		map.put("ip", arr[1]);
 		map.put("sid", arr[2]);
-		map.put("memo", arr[3]);
-		map.put("result", arr[4]);
+		//map.put("args", "");
+		map.put("memo", arr[4]);
+		map.put("result", arr[5]);
 		return map;
 	}
 

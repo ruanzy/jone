@@ -7,7 +7,7 @@ public class LogDir implements Plugin
 
 	public void init()
 	{
-		String logDir = "D:/Jone/logs";
+		String logDir = "D:/Jonelogs";
 		System.setProperty("logDir", logDir);
 	}
 
