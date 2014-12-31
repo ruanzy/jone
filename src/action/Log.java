@@ -3,8 +3,6 @@ package action;
 import java.io.File;
 import java.util.Map;
 import org.rzy.util.IOUtil;
-import org.rzy.web.ApplicationUtil;
-import org.rzy.web.RequestUtil;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Json;
@@ -14,7 +12,7 @@ public class Log
 {
 	public Result list()
 	{
-		Map<String, String> map = RequestUtil.getParameters();
+		Map<String, String> map = WebUtil.getParameters();
 		return new Json(WebUtil.call("PmsService.findlog", map));
 	}
 
@@ -22,10 +20,10 @@ public class Log
 	{
 		return new Json(WebUtil.call("PmsService.alluser"));
 	}
-	
+
 	public Result view()
 	{
-		File f = new File(ApplicationUtil.getWebRoot(), "logs/Jone.txt");
+		File f = new File(WebUtil.getWebRoot(), "logs/Jone.txt");
 		String content = IOUtil.tail(f, 50L);
 		return new Text("<pre>" + content + "</pre>");
 	}

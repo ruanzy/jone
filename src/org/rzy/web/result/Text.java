@@ -1,7 +1,7 @@
 package org.rzy.web.result;
 
-import org.rzy.web.ResponseUtil;
 import org.rzy.web.Result;
+import org.rzy.web.WebUtil;
 
 public class Text implements Result
 {
@@ -14,8 +14,8 @@ public class Text implements Result
 
 	public void render()
 	{
-		ResponseUtil.setContentType("text/plain;charset=UTF-8");
-		ResponseUtil.write(txt);
+		WebUtil.Response.setContentType("text/plain;charset=UTF-8");
+		WebUtil.Response.write(txt);
 	}
 
 }

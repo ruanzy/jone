@@ -1,7 +1,7 @@
 package org.rzy.web.result;
 
-import org.rzy.web.ResponseUtil;
 import org.rzy.web.Result;
+import org.rzy.web.WebUtil;
 
 public class Page implements Result
 {
@@ -27,11 +27,11 @@ public class Page implements Result
 
 			if (redirect)
 			{
-				ResponseUtil.redirect(page);
+				WebUtil.redirect(page);
 			}
 			else
 			{
-				ResponseUtil.forward(page);
+				WebUtil.forward(page);
 			}
 		}
 		catch (Exception e)

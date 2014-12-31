@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.util.ServerInfo;
-import org.rzy.web.ApplicationUtil;
-import org.rzy.web.RequestUtil;
 import org.rzy.web.Result;
-import org.rzy.web.SessionUtil;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
@@ -19,17 +16,17 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result menu()
 	{
-		String user = SessionUtil.getUser();
+		String user = WebUtil.getUser();
 		Object o = null;
 		List<Map<String, Object>> res = null;
 		List<Map<String, Object>> menus = null;
 		if ("admin".equals(user))
 		{
-			o = ApplicationUtil.attr("allres");
+			o = WebUtil.Application.attr("allres");
 		}
 		else
 		{
-			o = SessionUtil.attr("res");
+			o = WebUtil.Session.attr("res");
 		}
 
 		if (o != null)
@@ -51,17 +48,17 @@ public class Common
 	@SuppressWarnings("unchecked")
 	public Result op()
 	{
-		String user = SessionUtil.getUser();
+		String user = WebUtil.getUser();
 		Object o = null;
 		List<Map<String, Object>> res = null;
 		List<Map<String, Object>> ops = null;
 		if ("admin".equals(user))
 		{
-			o = ApplicationUtil.attr("allres");
+			o = WebUtil.Application.attr("allres");
 		}
 		else
 		{
-			o = SessionUtil.attr("res");
+			o = WebUtil.Session.attr("res");
 		}
 
 		if (o != null)
@@ -82,31 +79,31 @@ public class Common
 
 	public Result dic()
 	{
-		Object o = ApplicationUtil.attr("dic");
+		Object o = WebUtil.Application.attr("dic");
 		return new Json(o);
 	}
 
 	public Result res()
 	{
-		Object o = ApplicationUtil.attr("allres");
+		Object o = WebUtil.Application.attr("allres");
 		return new Json(o);
 	}
 
 	public Result lineusers()
 	{
-		Integer numSessions = (Integer) ApplicationUtil.attr("numSessions");
+		Integer numSessions = (Integer) WebUtil.Application.attr("numSessions");
 		return new Json(numSessions);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static void loadResandDic()
 	{
-		Object allres = ApplicationUtil.attr("allres");
+		Object allres = WebUtil.Application.attr("allres");
 		if (allres == null)
 		{
-			ApplicationUtil.attr("allres", WebUtil.call("PmsService.res"));
+			WebUtil.Application.attr("allres", WebUtil.call("PmsService.res"));
 		}
-		Object o = ApplicationUtil.attr("dic");
+		Object o = WebUtil.Application.attr("dic");
 		if (o == null)
 		{
 			Map<String, Map<String, Object>> dic = new HashMap<String, Map<String, Object>>();
@@ -122,49 +119,49 @@ public class Common
 				}
 				dic.get(key).put(val, name);
 			}
-			ApplicationUtil.attr("dic", dic);
+			WebUtil.Application.attr("dic", dic);
 		}
 	}
 
 	public Result logout()
 	{
-		SessionUtil.clear();
+		WebUtil.Session.clear();
 		return new Page("login.html", true);
 	}
 
 	public Result welcome()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", RequestUtil.getParameter("id"));
+		map.put("user", WebUtil.getParameter("id"));
 		map = ServerInfo.base();
 		return new Ftl("welcome.ftl", map);
 	}
-	
+
 	public Result header()
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
-		String user = SessionUtil.getUser();
+		String user = WebUtil.getUser();
 		data.put("user", user);
 		return new Ftl("header.ftl", data);
 	}
-	
+
 	public Result sidebar()
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
-		String user = SessionUtil.getUser();
+		String user = WebUtil.getUser();
 		Object o = null;
 		if ("admin".equals(user))
 		{
-			o = ApplicationUtil.attr("allres");
+			o = WebUtil.Application.attr("allres");
 		}
 		else
 		{
-			o = SessionUtil.attr("res");
+			o = WebUtil.Session.attr("res");
 		}
 		data.put("all", o);
 		return new Ftl("sidebar.ftl", data);
 	}
-	
+
 	public Result center()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -186,11 +183,11 @@ public class Common
 		Map<String, Object> map = ServerInfo.base();
 		return new Json(map);
 	}
-	
+
 	public Result userinfo()
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
-		String user = SessionUtil.getUser();
+		String user = WebUtil.getUser();
 		data.put("user", user);
 		return new Ftl("userinfo.ftl", data);
 	}

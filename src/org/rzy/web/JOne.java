@@ -25,7 +25,7 @@ public class JOne implements Filter
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		WebContext wc = WebContext.create(this.context, request, response);
+		WebUtil wu = WebUtil.init(this.context, request, response);
 		String url = request.getServletPath();
 		try
 		{
@@ -50,10 +50,6 @@ public class JOne implements Filter
 			String ip = request.getRemoteAddr();
 			Object[] ps = new Object[] { ip, url, action };
 			log.debug("{} {} {}", ps);
-			if ("Captcha".equals(action_name))
-			{
-				pck_name = "org.rzy.web";
-			}
 			Class<?> cls = Class.forName(pck_name + "." + action_name);
 			// Object result = MethodUtils.invokeMethod(cls.newInstance(),
 			// action_method_name, null);
@@ -79,7 +75,7 @@ public class JOne implements Filter
 				Throwable t = e.getCause();
 				log.debug(t.getMessage());
 				t.printStackTrace();
-				if (RequestUtil.isAjax())
+				if (WebUtil.isAjax())
 				{
 					response.setStatus(9999);
 					response.setCharacterEncoding("UTF-8");
@@ -93,9 +89,9 @@ public class JOne implements Filter
 		}
 		finally
 		{
-			if (wc != null)
+			if (wu != null)
 			{
-				wc.destroy();
+				wu.destroy();
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 package org.rzy.web.result;
 
 import org.rzy.web.Result;
-import org.rzy.web.WebContext;
+import org.rzy.web.WebUtil;
 import com.alibaba.fastjson.JSON;
 
 public class Msg implements Result
@@ -43,10 +43,10 @@ public class Msg implements Result
 
 	public void render()
 	{
-		WebContext.getResponse().setContentType("text/javascript;charset=UTF-8");
+		WebUtil.Response.setContentType("text/javascript;charset=UTF-8");
 		try
 		{
-			WebContext.getResponse().getWriter().print(JSON.toJSONString(this));
+			WebUtil.Response.write(JSON.toJSONString(this));
 		}
 		catch (Exception e)
 		{
