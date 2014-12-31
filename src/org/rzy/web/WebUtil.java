@@ -104,23 +104,19 @@ public class WebUtil
 		catch (Exception e)
 		{
 			String error = "";
-			if (e instanceof ClassNotFoundException)
+			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
 			{
-				error = e.getMessage() + " Not Found.";
-			}
-			else if (e instanceof NoSuchMethodException)
-			{
-				error = e.getMessage();
+				error = "业务处理接口未找到";
 			}
 			else if (e instanceof InvocationTargetException)
 			{
-				Throwable t = e.getCause();
+				Throwable t = ((InvocationTargetException) e).getTargetException();
 				error = t.getMessage();
 			}
 			logs.append(error).append("|");
 			logs.append(0);
 			// e.printStackTrace();
-			throw new RuntimeException("业务处理异常", e);
+			throw new ServiceException(error);
 		}
 		finally
 		{

@@ -46,13 +46,12 @@ public class JOne implements Filter
 			String _action_name = parts[0];
 			String action_name = Character.toTitleCase(_action_name.charAt(0)) + _action_name.substring(1);
 			String action_method_name = (parts.length > 1) ? parts[1] : "execute";
-			String action = pck_name + "." + action_name + "." + action_method_name;
 			String ip = request.getRemoteAddr();
-			Object[] ps = new Object[] { ip, url, action };
-			log.debug("{} {} {}", ps);
+			String m = request.getMethod();
+			String user = WebUtil.getUser();
+			Object[] ps = new Object[] { user, ip, m, url };
+			log.debug("{} {} {} {}", ps);
 			Class<?> cls = Class.forName(pck_name + "." + action_name);
-			// Object result = MethodUtils.invokeMethod(cls.newInstance(),
-			// action_method_name, null);
 			Method method = cls.getMethod(action_method_name);
 			Object result = method.invoke(cls.newInstance());
 			if (result instanceof Result)
@@ -73,7 +72,6 @@ public class JOne implements Filter
 			else if (e instanceof InvocationTargetException)
 			{
 				Throwable t = e.getCause();
-				log.debug(t.getMessage());
 				t.printStackTrace();
 				if (WebUtil.isAjax())
 				{

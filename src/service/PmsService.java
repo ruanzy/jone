@@ -36,6 +36,7 @@ public class PmsService
 		dao.update(sql, params);
 	}
 
+	@Transaction
 	public void deluser(String ids)
 	{
 		String[] arr = ids.split(",");
