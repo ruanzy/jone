@@ -19,26 +19,25 @@ public class TaskManager
 		{
 			String pck = "task";
 			URL url = Thread.currentThread().getContextClassLoader().getResource(pck);
-			if (url == null)
+			if (url != null)
 			{
-				throw new RuntimeException("task package not found!");
-			}
-			File dir = new File(url.toURI());
-			File[] files = dir.listFiles();
-			for (File f : files)
-			{
-				String name = f.getName().substring(0, f.getName().indexOf(".class"));
-				String className = pck + "." + name;
-				Class<?> cls = Class.forName(className);
-				for (Method m : cls.getDeclaredMethods())
+				File dir = new File(url.toURI());
+				File[] files = dir.listFiles();
+				for (File f : files)
 				{
-					Scheduled scheduled = m.getAnnotation(Scheduled.class);
-					if (scheduled != null)
+					String name = f.getName().substring(0, f.getName().indexOf(".class"));
+					String className = pck + "." + name;
+					Class<?> cls = Class.forName(className);
+					for (Method m : cls.getDeclaredMethods())
 					{
-						String methodName = m.getName();
-						String cron = scheduled.value();
-						CronExpression cronExpression = new CronExpression(cron);
-						schedule(className, methodName, cronExpression);
+						Scheduled scheduled = m.getAnnotation(Scheduled.class);
+						if (scheduled != null)
+						{
+							String methodName = m.getName();
+							String cron = scheduled.value();
+							CronExpression cronExpression = new CronExpression(cron);
+							schedule(className, methodName, cronExpression);
+						}
 					}
 				}
 			}

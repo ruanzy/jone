@@ -18,19 +18,22 @@ public class Plugins
 		{
 			String pck = "plugin";
 			URL url = Thread.currentThread().getContextClassLoader().getResource(pck);
-			File dir = new File(url.toURI());
-			File[] files = dir.listFiles();
-			if (files != null && files.length > 0)
+			if (url != null)
 			{
-				plugins = new ArrayList<Plugin>();
-				for (File f : files)
+				File dir = new File(url.toURI());
+				File[] files = dir.listFiles();
+				if (files != null && files.length > 0)
 				{
-					String name = f.getName().substring(0, f.getName().indexOf(".class"));
-					String className = pck + "." + name;
-					Class<?> cls = Class.forName(className);
-					if (Plugin.class.isAssignableFrom(cls))
+					plugins = new ArrayList<Plugin>();
+					for (File f : files)
 					{
-						plugins.add((Plugin) cls.newInstance());
+						String name = f.getName().substring(0, f.getName().indexOf(".class"));
+						String className = pck + "." + name;
+						Class<?> cls = Class.forName(className);
+						if (Plugin.class.isAssignableFrom(cls))
+						{
+							plugins.add((Plugin) cls.newInstance());
+						}
 					}
 				}
 			}
@@ -43,19 +46,25 @@ public class Plugins
 
 	public static void init()
 	{
-		for (Plugin plugin : plugins)
+		if (plugins != null)
 		{
-			plugin.init();
-			log.debug("{} init...", plugin.getClass().getName());
+			for (Plugin plugin : plugins)
+			{
+				plugin.init();
+				log.debug("{} init...", plugin.getClass().getName());
+			}
 		}
 	}
 
 	public static void destroy()
 	{
-		for (Plugin plugin : plugins)
+		if (plugins != null)
 		{
-			plugin.destroy();
-			log.debug("{} destroy...", plugin.getClass().getName());
+			for (Plugin plugin : plugins)
+			{
+				plugin.destroy();
+				log.debug("{} destroy...", plugin.getClass().getName());
+			}
 		}
 	}
 }
