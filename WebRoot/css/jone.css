@@ -979,7 +979,7 @@ well.css
 tabs.css
 **/
 dl.tabs {
-	width: 100%;
+	width: auto;
 	margin: 0;
 	border: 1px solid #CCCCD1;
 	box-shadow: 1px 0 10px 1px rgba(0, 0, 0, .3);
@@ -987,14 +987,11 @@ dl.tabs {
 
 dl.tabs dt {
 	background-color: #f7f7f7;
-	padding-top: 0;
 }
 
 dl.tabs dt a {
 	display: inline-block;
 	height: 40px;
-	border: 0px solid #CCCCD1;
-	border-bottom: none;
 	cursor: pointer;
 	padding: 8px 20px 0 20px;
 	font-size: 14px;
@@ -1012,11 +1009,8 @@ dl.tabs dd {
 
 dl.tabs dt a.active {
 	background: #fff;
-	border: 1px solid #efefef;
-	border-top: 0 solid #f4b400;
 	color: #000;
 	margin-bottom: -1px;
-	border-bottom: none;
 	height: 40px;
 	padding-bottom: 2px;
 }
