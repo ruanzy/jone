@@ -1,5 +1,6 @@
 package plugin;
 
+import org.rzy.web.Env;
 import org.rzy.web.Plugin;
 
 public class LogDir implements Plugin
@@ -7,13 +8,12 @@ public class LogDir implements Plugin
 
 	public void init()
 	{
-		String logDir = "D:/Jonelogs";
-		System.setProperty("logDir", logDir);
+		Env.set("logDir", "D:/Jonelogs");
 	}
 
 	public void destroy()
 	{
-		System.getProperties().remove("logDir");
+		Env.remove("logDir");
 	}
 
 }
