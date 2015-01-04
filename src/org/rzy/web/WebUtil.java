@@ -261,6 +261,11 @@ public class WebUtil
 		return WebUtil.Application.get().getRealPath("/");
 	}
 
+	public static String getMethod()
+	{
+		return WebUtil.Request.get().getMethod();
+	}
+
 	public static Map<String, String> getParameters()
 	{
 		Map<String, String> ps = null;
