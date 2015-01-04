@@ -986,7 +986,7 @@ dl.tabs {
 }
 
 dl.tabs dt {
-	background-color: #f7f7f7;
+	background-color: #33B5E5;
 }
 
 dl.tabs dt a {
@@ -996,23 +996,21 @@ dl.tabs dt a {
 	padding: 8px 20px 0 20px;
 	font-size: 14px;
 	line-height: 40px;
-	color: #868686;
+	color: #fff;
 }
 
 dl.tabs dd {
-	border-top: 1px solid #CCCCD1;
-	padding: 10px;
+	border-top: 0px solid #CCCCD1;
+	padding: 20px 10px;
 	margin: 0;
 	display: none;
-	height: 300px;
+	height: auto;
 }
 
 dl.tabs dt a.active {
 	background: #fff;
 	color: #000;
-	margin-bottom: -1px;
 	height: 40px;
-	padding-bottom: 2px;
 }
 
 dl.tabs dd.active {
