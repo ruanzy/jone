@@ -8,19 +8,21 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LoginFilter implements Filter
+public class AuthFilter implements Filter
 {
+	private String loginPage = "http://localhost:8088/UMS/login.jsp";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		String url = request.getServletPath();
+		String url = request.getRequestURL().toString();
 		boolean extension = url.lastIndexOf(".") != -1;
 		boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(url).find();
 		boolean nologin = Pattern.compile("(captcha|login.*|logout)$").matcher(url).find();
@@ -29,18 +31,33 @@ public class LoginFilter implements Filter
 			chain.doFilter(request, response);
 			return;
 		}
-		HttpSession session = request.getSession(true);
-		if (session.getAttribute("RZY_USER") == null)
+		Cookie[] diskCookies = request.getCookies();
+		boolean isLogin = false;
+		if (diskCookies != null)
 		{
-			String xhr = request.getHeader("x-requested-with");
-			if (isNotBlank(xhr))
+			for (int i = 0; i < diskCookies.length; i++)
 			{
-				response.sendError(1111);
+				if (diskCookies[i].getName().equals("ticket"))
+				{
+					String cookieValue = diskCookies[i].getValue();
+					System.out.println(cookieValue);
+					isLogin = true;
+					break;
+				}
 			}
-			else
-			{
-				response.sendRedirect(request.getContextPath() + "/login.html");
-			}
+		}
+		if (!isLogin)
+		{
+			// String xhr = request.getHeader("x-requested-with");
+			// if (isNotBlank(xhr))
+			// {
+			// response.sendError(1111);
+			// }
+			// else
+			// {
+			// response.sendRedirect(request.getContextPath() + "/login.html");
+			// }
+			response.sendRedirect(loginPage + "?go=" + url);
 		}
 		else
 		{
@@ -51,33 +68,15 @@ public class LoginFilter implements Filter
 
 	public void init(FilterConfig config) throws ServletException
 	{
-
+		String _loginPage = config.getInitParameter("loginPage");
+		if (_loginPage != null)
+		{
+			loginPage = _loginPage;
+		}
 	}
 
 	public void destroy()
 	{
 
-	}
-
-	private static boolean isBlank(String str)
-	{
-		int strLen;
-		if ((str == null) || ((strLen = str.length()) == 0))
-		{
-			return true;
-		}
-		for (int i = 0; i < strLen; i++)
-		{
-			if (!Character.isWhitespace(str.charAt(i)))
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private static boolean isNotBlank(String str)
-	{
-		return !isBlank(str);
 	}
 }
