@@ -52,6 +52,6 @@ public class JOne implements Filter
 		sb.append("**                                 **").append("\r\n");
 		sb.append("*************************************");
 		System.out.println(sb);
-		Plugins.init();
+		Plugins.init(this.context);
 	}
 }

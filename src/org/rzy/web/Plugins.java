@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.ServletContext;
 
 public class Plugins
 {
@@ -41,13 +42,13 @@ public class Plugins
 		}
 	}
 
-	public static void init()
+	public static void init(ServletContext context)
 	{
 		if (plugins != null)
 		{
 			for (Plugin plugin : plugins)
 			{
-				plugin.init();
+				plugin.init(context);
 				System.out.println(plugin.getClass().getName() + " init...");
 			}
 		}

@@ -11,7 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class AuthFilter implements Filter
 {
@@ -25,10 +24,22 @@ public class AuthFilter implements Filter
 		String url = request.getRequestURL().toString();
 		boolean extension = url.lastIndexOf(".") != -1;
 		boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(url).find();
-		boolean nologin = Pattern.compile("(captcha|login.*|logout)$").matcher(url).find();
-		if (nologin || extension && !page)
+		boolean logout = Pattern.compile("logout$").matcher(url).find();
+		if (extension && !page)
 		{
 			chain.doFilter(request, response);
+			return;
+		}
+		if (logout)
+		{
+			Cookie token = new Cookie("SSOTOKEN", null);
+			token.setMaxAge(0);
+			token.setPath("/");
+			response.addCookie(token);
+			String path = request.getContextPath();
+			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+					+ path + "/";
+			response.sendRedirect(loginPage + "?go=" + basePath);
 			return;
 		}
 		Cookie[] diskCookies = request.getCookies();
@@ -37,7 +48,7 @@ public class AuthFilter implements Filter
 		{
 			for (int i = 0; i < diskCookies.length; i++)
 			{
-				if (diskCookies[i].getName().equals("ticket"))
+				if (diskCookies[i].getName().equals("SSOTOKEN"))
 				{
 					String cookieValue = diskCookies[i].getValue();
 					System.out.println(cookieValue);
@@ -58,6 +69,7 @@ public class AuthFilter implements Filter
 			// response.sendRedirect(request.getContextPath() + "/login.html");
 			// }
 			response.sendRedirect(loginPage + "?go=" + url);
+			return;
 		}
 		else
 		{

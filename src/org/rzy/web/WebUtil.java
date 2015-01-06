@@ -16,6 +16,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -349,6 +350,23 @@ public class WebUtil
 	public static String getUser()
 	{
 		Object user = WebUtil.Session.attr("RZY_USER");
+		String SSOTOKEN = null;
+		Cookie[] cookies = WebUtil.Request.get().getCookies();
+		if (cookies != null)
+		{
+			for (int i = 0; i < cookies.length; i++)
+			{
+				if (cookies[i].getName().equals("SSOTOKEN"))
+				{
+					SSOTOKEN = cookies[i].getValue();
+					break;
+				}
+			}
+		}
+		if(SSOTOKEN != null){
+			String[] arr = SSOTOKEN.split("_");
+			return arr[1];
+		}
 		return (String) user;
 	}
 

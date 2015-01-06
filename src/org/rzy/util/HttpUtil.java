@@ -32,9 +32,12 @@ public class HttpUtil
 			client = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
 			url = (null == params ? url : url + "?" + parseParam(params));
 			HttpGet get = new HttpGet(url);
-			for (Map.Entry<String, String> header : headers.entrySet())
+			if (headers != null)
 			{
-				get.setHeader(header.getKey(), header.getValue());
+				for (Map.Entry<String, String> header : headers.entrySet())
+				{
+					get.setHeader(header.getKey(), header.getValue());
+				}
 			}
 			HttpResponse response = client.execute(get);
 			HttpEntity entity = response.getEntity();
@@ -82,9 +85,12 @@ public class HttpUtil
 				list.add(new BasicNameValuePair(temp, params.get(temp)));
 			}
 			post.setEntity(new UrlEncodedFormEntity(list, "UTF-8"));
-			for (Map.Entry<String, String> header : headers.entrySet())
+			if (headers != null)
 			{
-				post.setHeader(header.getKey(), header.getValue());
+				for (Map.Entry<String, String> header : headers.entrySet())
+				{
+					post.setHeader(header.getKey(), header.getValue());
+				}
 			}
 			HttpResponse response = client.execute(post);
 			HttpEntity entity = response.getEntity();
