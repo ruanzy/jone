@@ -43,8 +43,16 @@ public class WebUtil
 		WebUtil wu = new WebUtil();
 		wu.servletContext = servletContext;
 		wu.request = req;
+		Cookie[] cks = req.getCookies();
+		if (cks != null)
+		{
+			for (Cookie cookie : cks)
+			{
+				CookieManager.add(cookie);
+			}
+		}
 		wu.response = res;
-		wu.session = req.getSession();
+		wu.session = req.getSession(true);
 		webUtil.set(wu);
 		return wu;
 	}
@@ -205,6 +213,34 @@ public class WebUtil
 		}
 	}
 
+	public static class Cookies
+	{
+		public static void put(String key, String value)
+		{
+			Cookie cookie = new Cookie(key, value);
+			CookieManager.add(cookie);
+			WebUtil.Response.get().addCookie(cookie);
+			for (Cookie c : CookieManager.getAll())
+			{
+				System.out.println(c.getName());
+			}
+		}
+		
+		public static void clear()
+		{
+			Cookie[] cks = WebUtil.Request.get().getCookies();
+			if (cks != null)
+			{
+				for (Cookie cookie : cks)
+				{
+					cookie.setMaxAge(0);
+					WebUtil.Response.get().addCookie(cookie);
+				}
+			}
+			CookieManager.clear();
+		}
+	}
+
 	public static class Session
 	{
 		public static HttpSession get()
@@ -342,32 +378,31 @@ public class WebUtil
 		}
 	}
 
-	public static void setUser(String user)
+	public static void setUserinfo(String userinfo)
 	{
-		WebUtil.Session.attr("RZY_USER", user);
+		WebUtil.Session.attr("RZY_USER", userinfo);
+		WebUtil.Cookies.put("SSOTOKEN", userinfo);
+	}
+
+	public static String getUserinfo()
+	{
+		Object userinfo = (String) WebUtil.Session.attr("RZY_USER");
+		if (userinfo != null)
+		{
+			return (String) userinfo;
+		}
+		return null;
 	}
 
 	public static String getUser()
 	{
-		Object user = WebUtil.Session.attr("RZY_USER");
-		String SSOTOKEN = null;
-		Cookie[] cookies = WebUtil.Request.get().getCookies();
-		if (cookies != null)
+		String userinfo = getUserinfo();
+		if (userinfo != null)
 		{
-			for (int i = 0; i < cookies.length; i++)
-			{
-				if (cookies[i].getName().equals("SSOTOKEN"))
-				{
-					SSOTOKEN = cookies[i].getValue();
-					break;
-				}
-			}
+			String[] arr = userinfo.split("_");
+			return arr[0];
 		}
-		if(SSOTOKEN != null){
-			String[] arr = SSOTOKEN.split("_");
-			return arr[1];
-		}
-		return (String) user;
+		return null;
 	}
 
 	public static void setCaptcha(String captcha)

@@ -29,7 +29,7 @@ public class Login
 			}
 			WebUtil.Session.attr("res", WebUtil.call("PmsService.userres", username));
 		}
-		WebUtil.setUser(username);
+		WebUtil.setUserinfo(username + "_" + password);
 		Object allres = WebUtil.Application.attr("allres");
 		if (allres == null)
 		{

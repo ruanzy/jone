@@ -12,7 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AuthFilter implements Filter
+public class SSOFilter implements Filter
 {
 	private String loginPage = "http://localhost:8088/UMS/login.jsp";
 
@@ -21,7 +21,10 @@ public class AuthFilter implements Filter
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		String url = request.getRequestURL().toString();
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path;
+		String url = request.getServletPath();
 		boolean extension = url.lastIndexOf(".") != -1;
 		boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(url).find();
 		boolean logout = Pattern.compile("logout$").matcher(url).find();
@@ -33,12 +36,10 @@ public class AuthFilter implements Filter
 		if (logout)
 		{
 			Cookie token = new Cookie("SSOTOKEN", null);
+			token.setDomain("11.0.0.106:8088");
 			token.setMaxAge(0);
 			token.setPath("/");
 			response.addCookie(token);
-			String path = request.getContextPath();
-			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-					+ path + "/";
 			response.sendRedirect(loginPage + "?go=" + basePath);
 			return;
 		}
@@ -48,6 +49,8 @@ public class AuthFilter implements Filter
 		{
 			for (int i = 0; i < diskCookies.length; i++)
 			{
+				String domain = diskCookies[i].getDomain();
+				System.out.println(domain);
 				if (diskCookies[i].getName().equals("SSOTOKEN"))
 				{
 					String cookieValue = diskCookies[i].getValue();
@@ -68,7 +71,7 @@ public class AuthFilter implements Filter
 			// {
 			// response.sendRedirect(request.getContextPath() + "/login.html");
 			// }
-			response.sendRedirect(loginPage + "?go=" + url);
+			response.sendRedirect(loginPage + "?go=" + basePath + url);
 			return;
 		}
 		else

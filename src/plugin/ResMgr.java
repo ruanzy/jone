@@ -1,7 +1,6 @@
 package plugin;
 
 import javax.servlet.ServletContext;
-import org.rzy.task.TaskManager;
 import org.rzy.web.Plugin;
 import service.PmsService;
 
@@ -14,6 +13,6 @@ public class ResMgr implements Plugin
 
 	public void destroy()
 	{
-		TaskManager.stop();
+		
 	}
 }

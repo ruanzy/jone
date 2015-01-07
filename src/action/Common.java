@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.util.ServerInfo;
+import org.rzy.web.CookieManager;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
+import org.rzy.web.result.Jsonp;
 import org.rzy.web.result.Page;
 
 public class Common
@@ -190,5 +192,12 @@ public class Common
 		String user = WebUtil.getUser();
 		data.put("user", user);
 		return new Ftl("userinfo.ftl", data);
+	}
+
+	public Result cookies()
+	{
+		String callback = WebUtil.getParameter("callback");
+		String key ="SSOTOKEN";
+		return new Jsonp(callback, CookieManager.get(key));
 	}
 }

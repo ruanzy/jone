@@ -9,6 +9,7 @@ public class Logout
 	public Result execute()
 	{
 		WebUtil.Session.clear();
+		WebUtil.Cookies.clear();
 		return new Page("login.html", true);
 	}
 }
