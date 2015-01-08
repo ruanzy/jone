@@ -10,6 +10,6 @@ public class Logout
 	{
 		WebUtil.Session.clear();
 		WebUtil.Cookies.clear("SSOTOKEN");
-		return new Page("login.html", true);
+		return new Page("login.jsp", true);
 	}
 }

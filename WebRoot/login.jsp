@@ -1,7 +1,13 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<title></title>
 <head>
+<base href="<%=basePath%>">
+<title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet"
 	href="awesome/css/font-awesome.css" />
@@ -46,7 +52,7 @@
 				dataType : 'json',
 				success : function(result) {
 					if (result.result) {
-						document.location = 'index.jsp';
+						document.location = result.msg;
 					} else {
 						$('#error').html(result.msg);
 						submiting.hide();
@@ -70,7 +76,8 @@
 			<div class="logininput-icon">
 				<i class='icon-user'></i> <input type="text" id="username"
 					name='name' type="text" placeholder="用户名" value="admin"
-					autocomplete="off" />
+					autocomplete="off" /><input type="text" id="go"
+					name='go' value="${param.go}" />
 			</div>
 			<div class="logininput-icon">
 				<i class='icon-lock'></i> <input type="password" id="password"
