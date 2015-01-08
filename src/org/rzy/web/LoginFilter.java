@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 public class LoginFilter implements Filter
 {
+	private String _exclude;
+	
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
 	{
@@ -22,8 +24,8 @@ public class LoginFilter implements Filter
 		String url = request.getServletPath();
 		boolean extension = url.lastIndexOf(".") != -1;
 		boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(url).find();
-		boolean nologin = Pattern.compile("(captcha|login.*|logout|cookies)$").matcher(url).find();
-		if (nologin || extension && !page)
+		boolean exclude = Pattern.compile(_exclude).matcher(url).find();
+		if (exclude || extension && !page)
 		{
 			chain.doFilter(request, response);
 			return;
@@ -50,6 +52,7 @@ public class LoginFilter implements Filter
 
 	public void init(FilterConfig config) throws ServletException
 	{
+		_exclude = config.getInitParameter("exclude");
 	}
 
 	public void destroy()
