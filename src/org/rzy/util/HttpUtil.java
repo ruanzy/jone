@@ -12,7 +12,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -22,9 +21,9 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpUtil
 {
-	public static Response get(String url, Map<String, String> headers, Map<String, String> params)
+	public static HttpResult get(String url, Map<String, String> headers, Map<String, String> params)
 	{
-		Response res = null;
+		HttpResult res = null;
 		CloseableHttpClient client = null;
 		try
 		{
@@ -41,7 +40,7 @@ public class HttpUtil
 			}
 			HttpResponse response = client.execute(get);
 			HttpEntity entity = response.getEntity();
-			res = new Response();
+			res = new HttpResult();
 			res.setCookies(cookieStore.getCookies());
 			res.setStatusCode(response.getStatusLine().getStatusCode());
 			res.setHeaders(response.getAllHeaders());
@@ -70,10 +69,10 @@ public class HttpUtil
 		}
 	}
 
-	public static Response post(String url, Map<String, String> headers, Map<String, String> params)
+	public static HttpResult post(String url, Map<String, String> headers, Map<String, String> params)
 	{
 		CloseableHttpClient client = null;
-		Response res = null;
+		HttpResult res = null;
 		try
 		{
 			BasicCookieStore cookieStore = new BasicCookieStore();
@@ -94,7 +93,7 @@ public class HttpUtil
 			}
 			HttpResponse response = client.execute(post);
 			HttpEntity entity = response.getEntity();
-			res = new Response();
+			res = new HttpResult();
 			res.setCookies(cookieStore.getCookies());
 			res.setStatusCode(response.getStatusLine().getStatusCode());
 			res.setHeaders(response.getAllHeaders());
@@ -153,73 +152,10 @@ public class HttpUtil
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("username", "ruanzy");
 		params.put("password", "111111");
-		Response res = HttpUtil.post(url, null, params);
+		HttpResult res = HttpUtil.post(url, null, params);
 		int state = res.getStatusCode();
 		String body = res.getBody();
 		System.out.println(state);
 		System.out.println(body);
-	}
-}
-
-class Response
-{
-	private List<Cookie> cookies;
-	private HttpEntity httpEntity;
-	private Map<String, String> allHeader;
-	private int statusCode;
-	private String body;
-
-	public List<Cookie> getCookies()
-	{
-		return cookies;
-	}
-
-	public void setCookies(List<Cookie> cookies)
-	{
-		this.cookies = cookies;
-	}
-
-	public int getStatusCode()
-	{
-		return statusCode;
-	}
-
-	public void setStatusCode(int statusCode)
-	{
-		this.statusCode = statusCode;
-	}
-
-	public void setHeaders(Header[] headers)
-	{
-		allHeader = new HashMap<String, String>();
-		for (Header header : headers)
-		{
-			allHeader.put(header.getName(), header.getValue());
-		}
-	}
-
-	public Map<String, String> getHeaders()
-	{
-		return allHeader;
-	}
-
-	public void setHttpEntity(HttpEntity entity)
-	{
-		this.httpEntity = entity;
-	}
-
-	public HttpEntity getHttpEntity()
-	{
-		return httpEntity;
-	}
-
-	public String getBody()
-	{
-		return body;
-	}
-
-	public void setBody(String body)
-	{
-		this.body = body;
 	}
 }
