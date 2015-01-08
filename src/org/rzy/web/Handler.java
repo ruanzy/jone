@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -35,10 +34,6 @@ public class Handler
 		String user = WebUtil.getUser();
 		Object[] ps = new Object[] { user, ip, m, url };
 		log.debug("{} {} {} {}", ps);
-		for (Cookie c : CookieManager.getAll())
-		{
-			System.out.println(c.getName());
-		}
 		try
 		{
 			Class<?> cls = Class.forName(pck_name + "." + action_name);

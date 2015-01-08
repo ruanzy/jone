@@ -9,7 +9,7 @@ public class Logout
 	public Result execute()
 	{
 		WebUtil.Session.clear();
-		WebUtil.Cookies.clear();
+		WebUtil.Cookies.clear("SSOTOKEN");
 		return new Page("login.html", true);
 	}
 }

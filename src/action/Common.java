@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.util.ServerInfo;
-import org.rzy.web.CookieManager;
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
@@ -197,7 +196,6 @@ public class Common
 	public Result cookies()
 	{
 		String callback = WebUtil.getParameter("callback");
-		String key ="SSOTOKEN";
-		return new Jsonp(callback, CookieManager.get(key));
+		return new Jsonp(callback, WebUtil.Cookies.getAll());
 	}
 }

@@ -9,8 +9,10 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javax.imageio.ImageIO;
@@ -43,16 +45,8 @@ public class WebUtil
 		WebUtil wu = new WebUtil();
 		wu.servletContext = servletContext;
 		wu.request = req;
-		Cookie[] cks = req.getCookies();
-		if (cks != null)
-		{
-			for (Cookie cookie : cks)
-			{
-				CookieManager.add(cookie);
-			}
-		}
 		wu.response = res;
-		wu.session = req.getSession(true);
+		wu.session = req.getSession();
 		webUtil.set(wu);
 		return wu;
 	}
@@ -215,29 +209,37 @@ public class WebUtil
 
 	public static class Cookies
 	{
-		public static void put(String key, String value)
+		public static void add(Cookie cookie)
 		{
-			Cookie cookie = new Cookie(key, value);
-			CookieManager.add(cookie);
 			WebUtil.Response.get().addCookie(cookie);
-			for (Cookie c : CookieManager.getAll())
-			{
-				System.out.println(c.getName());
-			}
 		}
-		
-		public static void clear()
+
+		public static List<Cookie> getAll()
+		{
+			List<Cookie> all = null;
+			Cookie[] cks = WebUtil.Request.get().getCookies();
+			if (cks != null)
+			{
+				all = Arrays.asList(cks);
+			}
+			return all;
+		}
+
+		public static void clear(String cookieName)
 		{
 			Cookie[] cks = WebUtil.Request.get().getCookies();
 			if (cks != null)
 			{
 				for (Cookie cookie : cks)
 				{
-					cookie.setMaxAge(0);
-					WebUtil.Response.get().addCookie(cookie);
+					if (cookieName.equals(cookie.getName()))
+					{
+						cookie.setMaxAge(0);
+						WebUtil.Response.get().addCookie(cookie);
+						break;
+					}
 				}
 			}
-			CookieManager.clear();
 		}
 	}
 
@@ -381,7 +383,8 @@ public class WebUtil
 	public static void setUserinfo(String userinfo)
 	{
 		WebUtil.Session.attr("RZY_USER", userinfo);
-		WebUtil.Cookies.put("SSOTOKEN", userinfo);
+		Cookie token = new Cookie("SSOTOKEN", userinfo);
+		WebUtil.Cookies.add(token);
 	}
 
 	public static String getUserinfo()
