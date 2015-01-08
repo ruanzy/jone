@@ -234,6 +234,7 @@ public class WebUtil
 				{
 					if (cookieName.equals(cookie.getName()))
 					{
+						cookie.setPath("/");
 						cookie.setMaxAge(0);
 						WebUtil.Response.get().addCookie(cookie);
 						break;
@@ -384,6 +385,7 @@ public class WebUtil
 	{
 		WebUtil.Session.attr("RZY_USER", userinfo);
 		Cookie token = new Cookie("SSOTOKEN", userinfo);
+		token.setPath("/");
 		WebUtil.Cookies.add(token);
 	}
 
