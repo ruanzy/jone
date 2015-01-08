@@ -40,7 +40,7 @@ public class LoginFilter implements Filter
 			}
 			else
 			{
-				response.sendRedirect(request.getContextPath() + "/login.html");
+				response.sendRedirect(request.getContextPath() + "/login.jsp");
 			}
 		}
 		else

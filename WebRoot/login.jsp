@@ -40,10 +40,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var un = $("#username", loginfrm).val();
 			var ps = $("#password", loginfrm).val();
 			var vc = $("#vcinput", loginfrm).val();
+			var go = $("#go", loginfrm).val();
 			var data = {
 				username : un,
 				password : ps,
-				vc : vc
+				vc : vc,
+				go : go
 			};
 			$.ajax({
 				url : 'login',
@@ -76,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="logininput-icon">
 				<i class='icon-user'></i> <input type="text" id="username"
 					name='name' type="text" placeholder="用户名" value="admin"
-					autocomplete="off" /><input type="text" id="go"
+					autocomplete="off" /><input type="hidden" id="go"
 					name='go' value="${param.go}" />
 			</div>
 			<div class="logininput-icon">

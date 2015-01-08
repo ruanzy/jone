@@ -195,7 +195,7 @@ public class Common
 
 	public Result cookies()
 	{
-		String callback = WebUtil.getParameter("callback");
-		return new Jsonp(callback, WebUtil.Cookies.getAll());
+		//String callback = WebUtil.getParameter("callback");
+		return new Jsonp("callback", WebUtil.Cookies.getAll());
 	}
 }
