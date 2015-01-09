@@ -211,7 +211,9 @@ public class WebUtil
 	{
 		public static void add(Cookie cookie)
 		{
-			WebUtil.Response.get().addCookie(cookie);
+			HttpServletResponse response = WebUtil.Response.get();
+			response.addHeader("P3P", "CP=CAO PSA OUR"); 
+			response.addCookie(cookie);
 		}
 
 		public static List<Cookie> getAll()
