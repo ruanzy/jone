@@ -109,7 +109,7 @@ public class WebUtil
 			String error = "";
 			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
 			{
-				error = "业务处理接口未找到";
+				error = "业务处理接口" + e.getMessage() + " Not Found!";
 			}
 			else if (e instanceof InvocationTargetException)
 			{
@@ -403,10 +403,22 @@ public class WebUtil
 
 	public static String getUser()
 	{
-		String userinfo = getUserinfo();
-		if (userinfo != null)
+		String ssotoken = null;
+		Cookie[] cks = WebUtil.Request.get().getCookies();
+		if (cks != null)
 		{
-			String[] arr = userinfo.split("_");
+			for (Cookie cookie : cks)
+			{
+				if ("SSOTOKEN".equals(cookie.getName()))
+				{
+					ssotoken = cookie.getValue();
+					break;
+				}
+			}
+		}
+		if (ssotoken != null)
+		{
+			String[] arr = ssotoken.split("_");
 			return arr[0];
 		}
 		return null;

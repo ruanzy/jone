@@ -35,16 +35,19 @@ class ServiceProxy
 	static CallbackFilter filter = new CallbackFilter()
 	{
 		public int accept(Method method)
-		{	
-			if(method.isAnnotationPresent(Transaction.class)){
+		{
+			if (method.isAnnotationPresent(Transaction.class))
+			{
 				return 0;
-			}else{
+			}
+			else
+			{
 				return 1;
 			}
 		}
 	};
 
-	public static Object get(String className)
+	public static Object get(String className) throws Exception
 	{
 		try
 		{
@@ -58,7 +61,7 @@ class ServiceProxy
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			return null;
+			throw e;
 		}
 	}
 }
