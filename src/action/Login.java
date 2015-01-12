@@ -16,6 +16,7 @@ public class Login
 		String vc = WebUtil.getParameter("vc");
 		String username = WebUtil.getParameter("username");
 		String password = WebUtil.getParameter("password");
+		String go = WebUtil.getParameter("go");
 		if (!svc.equalsIgnoreCase(vc))
 		{
 			return new Msg(false, "验证码不正确!");
@@ -43,6 +44,6 @@ public class Login
 		logs.append(ip).append("|");
 		logs.append(ua);
 		log.debug(logs.toString());
-		return new Msg("login success");
+		return new Msg(go);
 	}
 }
