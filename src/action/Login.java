@@ -17,6 +17,9 @@ public class Login
 		String username = WebUtil.getParameter("username");
 		String password = WebUtil.getParameter("password");
 		String go = WebUtil.getParameter("go");
+		if(go == null || go.length() == 0){
+			go = "http://localhost:8088/JOne/";
+		}
 		if (!svc.equalsIgnoreCase(vc))
 		{
 			return new Msg(false, "验证码不正确!");

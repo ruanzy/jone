@@ -42,7 +42,11 @@ public class SSOSFilter implements Filter
 			}
 			else
 			{
-				response.sendRedirect(request.getContextPath() + "/" + LOGINPAGE + "?go=" + go);
+				String redirectpath = request.getContextPath() + "/" + LOGINPAGE;
+				if(go != null){
+					redirectpath += "?go=" + go;
+				}
+				response.sendRedirect(redirectpath);
 			}
 			return;
 		}
