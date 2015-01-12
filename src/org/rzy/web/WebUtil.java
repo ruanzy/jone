@@ -212,8 +212,26 @@ public class WebUtil
 		public static void add(Cookie cookie)
 		{
 			HttpServletResponse response = WebUtil.Response.get();
-			response.addHeader("P3P", "CP=CAO PSA OUR"); 
+			response.addHeader("P3P", "CP=CAO PSA OUR");
 			response.addCookie(cookie);
+		}
+
+		public static String get(String cookieName)
+		{
+			String cookieValue = null;
+			Cookie[] cks = WebUtil.Request.get().getCookies();
+			if (cks != null)
+			{
+				for (Cookie cookie : cks)
+				{
+					if (cookieName.equals(cookie.getName()))
+					{
+						cookieValue = cookie.getValue();
+						break;
+					}
+				}
+			}
+			return cookieValue;
 		}
 
 		public static List<Cookie> getAll()
@@ -372,10 +390,7 @@ public class WebUtil
 	{
 		try
 		{
-			HttpServletRequest request = WebUtil.Request.get();
-			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-					+ request.getContextPath() + "/";
-			WebUtil.Response.get().sendRedirect(basePath + url);
+			WebUtil.Response.get().sendRedirect(url);
 		}
 		catch (IOException e)
 		{

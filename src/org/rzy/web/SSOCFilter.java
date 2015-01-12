@@ -12,40 +12,35 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LoginFilter implements Filter
+public class SSOCFilter implements Filter
 {
-	private static final String LOGINPAGE = "login.jsp";
-	private static final String NOCHECK = "(captcha|login.*|logout|cookies)$";
+	private static final String SSOURL = "http://localhost:8088/JOne/SSO";
+	private static final String NOCHECK = "(captcha|login.*|logout|setCookie)$";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		String url = request.getServletPath();
-		boolean extension = url.lastIndexOf(".") != -1;
-		boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(url).find();
-		boolean nocheck = Pattern.compile(NOCHECK).matcher(url).find();
+		String path = request.getServletPath();
+		String url = request.getRequestURL().toString();
+		boolean extension = path.lastIndexOf(".") != -1;
+		boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(path).find();
+		boolean nocheck = Pattern.compile(NOCHECK).matcher(path).find();
 		if (nocheck || extension && !page)
 		{
 			chain.doFilter(request, response);
 			return;
 		}
-		String token = getToken(request);
+		String token = getToken(request, "SSOTOKEN");
 		if (token == null)
 		{
-			String xhr = request.getHeader("x-requested-with");
-			if (xhr != null && xhr.length() > 0)
-			{
-				response.sendError(1111);
-			}
-			else
-			{
-				response.sendRedirect(request.getContextPath() + "/" + LOGINPAGE);
-			}
+			response.sendRedirect(SSOURL + "?go=" + url);
 			return;
-		}else{
-		chain.doFilter(request, response);
+		}
+		else
+		{
+			chain.doFilter(request, response);
 		}
 	}
 
@@ -58,7 +53,7 @@ public class LoginFilter implements Filter
 	{
 	}
 
-	private String getToken(HttpServletRequest request)
+	private String getToken(HttpServletRequest request, String cookieName)
 	{
 		Cookie[] cookies = request.getCookies();
 		String token = null;
@@ -66,7 +61,7 @@ public class LoginFilter implements Filter
 		{
 			for (Cookie cookie : cookies)
 			{
-				if (cookie.getName().equals("SSOTOKEN"))
+				if (cookie.getName().equals(cookieName))
 				{
 					token = cookie.getValue();
 					break;
