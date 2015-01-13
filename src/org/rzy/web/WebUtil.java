@@ -212,7 +212,6 @@ public class WebUtil
 		public static void add(Cookie cookie)
 		{
 			HttpServletResponse response = WebUtil.Response.get();
-			response.addHeader("P3P", "CP=CAO PSA OUR");
 			response.addCookie(cookie);
 		}
 
@@ -247,7 +246,6 @@ public class WebUtil
 
 		public static void clear(String cookieName)
 		{
-			String domain = WebUtil.Request.get().getServerName();
 			Cookie[] cks = WebUtil.Request.get().getCookies();
 			if (cks != null)
 			{
@@ -255,7 +253,6 @@ public class WebUtil
 				{
 					if (cookieName.equals(cookie.getName()))
 					{
-						cookie.setDomain(domain);
 						cookie.setPath("/");
 						cookie.setMaxAge(0);
 						WebUtil.Response.get().addCookie(cookie);
@@ -403,9 +400,9 @@ public class WebUtil
 	public static void setUserinfo(String userinfo)
 	{
 		WebUtil.Session.attr("RZY_USER", userinfo);
-		String domain = WebUtil.Request.get().getServerName();
+		//String domain = WebUtil.Request.get().getServerName();
 		Cookie token = new Cookie("SSOTOKEN", userinfo);
-		token.setDomain(domain);
+		token.setMaxAge(30 * 60);
 		token.setPath("/");
 		WebUtil.Cookies.add(token);
 	}
