@@ -55,6 +55,7 @@ public final class Dao
 			}
 			prop.load(is);
 			ds = BasicDataSourceFactory.createDataSource(prop);
+			begintx.set(false);
 		}
 		catch (Exception e)
 		{
@@ -849,5 +850,6 @@ public final class Dao
 	{
 		Dao dao = Dao.getInstance();
 		dao.find("select * from log");
+		dao.update("insert users values(280, '123', '123', 2, '2015-01-15 14:44:50', 'aa@123.com','123456','memo')");
 	}
 }
