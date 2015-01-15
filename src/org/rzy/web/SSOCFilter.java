@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SSOCFilter implements Filter
 {
-	private static final String SSOURL = "http://localhost:8088/JOne/SSO";
+	private static final String SSO = "http://localhost:8088/JOne/SSO";
 	private static final String NOCHECK = "(captcha|login.*|logout|setCookie)$";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
@@ -35,8 +35,16 @@ public class SSOCFilter implements Filter
 		String token = getToken(request, "SSOTOKEN");
 		if (token == null)
 		{
-			response.sendRedirect(SSOURL + "?go=" + url);
-			return;
+			String sso = SSO + "?go=" + url;
+			String xhr = request.getHeader("x-requested-with");
+			if (xhr != null && xhr.length() > 0)
+			{
+				response.sendError(1111, sso);
+			}
+			else
+			{
+				response.sendRedirect(sso);
+			}
 		}
 		else
 		{

@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SSOSFilter implements Filter
 {
-	private static final String LOGINPAGE = "login.jsp";
-	private static final String NOCHECK = "(captcha|login.*|logout|cookies)$";
+	private static final String SSOlOGIN = "http://localhost:8088/JOne/login.jsp";
+	private static final String NOCHECK = "(captcha|login.*|logout)$";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -35,18 +35,19 @@ public class SSOSFilter implements Filter
 		String token = getToken(request, "SSOTOKEN");
 		if (token == null)
 		{
+			String login = SSOlOGIN;
+			if (go != null && go.length() > 0)
+			{
+				login = SSOlOGIN + "?go=" + go;
+			}
 			String xhr = request.getHeader("x-requested-with");
 			if (xhr != null && xhr.length() > 0)
 			{
-				response.sendError(1111);
+				response.sendError(1111, login);
 			}
 			else
 			{
-				String redirectpath = LOGINPAGE;
-				if(go != null){
-					redirectpath += "?go=" + go;
-				}
-				response.sendRedirect(redirectpath);
+				response.sendRedirect(login);
 			}
 		}
 		else

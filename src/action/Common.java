@@ -10,7 +10,7 @@ import org.rzy.web.WebUtil;
 import org.rzy.web.result.Ftl;
 import org.rzy.web.result.Json;
 import org.rzy.web.result.Jsonp;
-import org.rzy.web.result.Page;
+import org.rzy.web.result.Redirect;
 
 public class Common
 {
@@ -127,7 +127,7 @@ public class Common
 	public Result logout()
 	{
 		WebUtil.Session.clear();
-		return new Page("login.html", true);
+		return new Redirect("login.html");
 	}
 
 	public Result welcome()
@@ -195,7 +195,7 @@ public class Common
 
 	public Result cookies()
 	{
-		//String callback = WebUtil.getParameter("callback");
+		// String callback = WebUtil.getParameter("callback");
 		return new Jsonp("callback", WebUtil.Cookies.getAll());
 	}
 }

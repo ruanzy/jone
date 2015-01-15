@@ -2,7 +2,7 @@ package action;
 
 import org.rzy.web.Result;
 import org.rzy.web.WebUtil;
-import org.rzy.web.result.Page;
+import org.rzy.web.result.Redirect;
 
 public class Logout
 {
@@ -10,6 +10,6 @@ public class Logout
 	{
 		WebUtil.Session.clear();
 		WebUtil.Cookies.clear("SSOTOKEN");
-		return new Page("login.jsp", true);
+		return new Redirect("login.jsp");
 	}
 }

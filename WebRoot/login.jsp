@@ -80,7 +80,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<i class='icon-user'></i> <input type="text" id="username"
 					name='name' type="text" placeholder="用户名" value="admin"
 					autocomplete="off" /><input type="hidden" id="go"
-					name='go' value="${param.go}" />
+					name='go' value="${param.go}" /><input type="hidden" id="domain"
+					name='domain' value="${param.domain}" />
 			</div>
 			<div class="logininput-icon">
 				<i class='icon-lock'></i> <input type="password" id="password"

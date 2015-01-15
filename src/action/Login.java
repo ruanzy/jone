@@ -17,9 +17,6 @@ public class Login
 		String username = WebUtil.getParameter("username");
 		String password = WebUtil.getParameter("password");
 		String go = WebUtil.getParameter("go");
-		if(go == null || go.length() == 0){
-			go = "http://localhost:8088/JOne/";
-		}
 		if (!svc.equalsIgnoreCase(vc))
 		{
 			return new Msg(false, "验证码不正确!");
@@ -47,6 +44,9 @@ public class Login
 		logs.append(ip).append("|");
 		logs.append(ua);
 		log.debug(logs.toString());
-		return new Msg(go);
+		if(go != null && go.length() > 0){
+			return new Msg(true, "SSO?go=" + go);
+		}
+		return new Msg(true, "index.jsp");
 	}
 }

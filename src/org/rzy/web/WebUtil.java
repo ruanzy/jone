@@ -46,7 +46,7 @@ public class WebUtil
 		wu.servletContext = servletContext;
 		wu.request = req;
 		wu.response = res;
-		wu.session = req.getSession();
+		wu.session = req.getSession(true);
 		webUtil.set(wu);
 		return wu;
 	}
