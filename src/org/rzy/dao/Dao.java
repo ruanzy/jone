@@ -28,6 +28,7 @@ public final class Dao
 	private DataSource ds = null;
 	private ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
 	private ThreadLocal<Statement> sl = new ThreadLocal<Statement>();
+	private ThreadLocal<Boolean> begintx = new ThreadLocal<Boolean>();
 	boolean showsql = false;
 	Logger log = LoggerFactory.getLogger(Dao.class);
 
@@ -117,17 +118,38 @@ public final class Dao
 	public int update(String sql)
 	{
 		int result = 0;
-		PreparedStatement ps = null;
-		try
+		if (begintx.get())
 		{
-			Connection conn = tl.get();
-			ps = conn.prepareStatement(sql);
-			result = ps.executeUpdate();
-			showSQL(sql);
+			try
+			{
+				Connection conn = tl.get();
+				PreparedStatement ps = conn.prepareStatement(sql);
+				result = ps.executeUpdate();
+				showSQL(sql);
+			}
+			catch (SQLException e)
+			{
+				throw new DataAccessException(e.getMessage(), e);
+			}
 		}
-		catch (SQLException e)
+		else
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			Connection conn = null;
+			PreparedStatement ps = null;
+			try
+			{
+				conn = getConnection();
+				ps = conn.prepareStatement(sql);
+				result = ps.executeUpdate();
+			}
+			catch (SQLException e)
+			{
+				throw new DataAccessException(e.getMessage(), e);
+			}
+			finally
+			{
+				close(ps, conn);
+			}
 		}
 		return result;
 	}
@@ -135,24 +157,53 @@ public final class Dao
 	public int update(String sql, Object[] params)
 	{
 		int result = 0;
-		PreparedStatement ps = null;
-		try
+		if (begintx.get())
 		{
-			Connection conn = tl.get();
-			ps = conn.prepareStatement(sql);
-			if (params != null)
+			try
 			{
-				for (int i = 0; i < params.length; i++)
+				Connection conn = tl.get();
+				PreparedStatement ps = conn.prepareStatement(sql);
+				if (params != null)
 				{
-					ps.setObject(i + 1, params[i]);
+					for (int i = 0; i < params.length; i++)
+					{
+						ps.setObject(i + 1, params[i]);
+					}
+					showSQL(sql, params);
 				}
-				showSQL(sql, params);
+				result = ps.executeUpdate();
 			}
-			result = ps.executeUpdate();
+			catch (SQLException e)
+			{
+				throw new DataAccessException(e.getMessage(), e);
+			}
 		}
-		catch (SQLException e)
+		else
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			Connection conn = null;
+			PreparedStatement ps = null;
+			try
+			{
+				conn = getConnection();
+				ps = conn.prepareStatement(sql);
+				if (params != null)
+				{
+					for (int i = 0; i < params.length; i++)
+					{
+						ps.setObject(i + 1, params[i]);
+					}
+					showSQL(sql, params);
+				}
+				result = ps.executeUpdate();
+			}
+			catch (SQLException e)
+			{
+				throw new DataAccessException(e.getMessage(), e);
+			}
+			finally
+			{
+				close(ps, conn);
+			}
 		}
 		return result;
 	}
@@ -681,6 +732,7 @@ public final class Dao
 				conn = getConnection();
 				conn.setAutoCommit(false);
 				tl.set(conn);
+				begintx.set(true);
 			}
 		}
 		catch (SQLException e)
@@ -699,6 +751,7 @@ public final class Dao
 			conn.setAutoCommit(true);
 			close(null, null, conn);
 			tl.remove();
+			begintx.set(false);
 		}
 		catch (SQLException e)
 		{
@@ -716,6 +769,7 @@ public final class Dao
 			conn.setAutoCommit(true);
 			close(null, null, conn);
 			tl.remove();
+			begintx.set(false);
 		}
 		catch (SQLException e)
 		{
