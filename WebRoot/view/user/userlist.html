@@ -26,7 +26,7 @@
 			field : "username",
 			align : 'left',
 			tip : true,
-			editor : 'text'
+			editor : {type : 'text'}
 		}, {
 			header : "注册时间",
 			field : "regtime",
@@ -37,6 +37,7 @@
 			field : "state",
 			align : 'center',
 			width : 100,
+			editor : {type : 'combox', opts : {width:50}},
 			render : stateRender
 		}, {
 			header : "操作",

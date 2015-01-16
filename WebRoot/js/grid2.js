@@ -8,6 +8,35 @@
             $.error('Method ' + method + ' does not exist');
         }
     };
+    $.fn.table.editors = {
+	    text: {    
+	    	init : function(cell, options) {
+				var v0 = cell.html();
+				cell.html("");
+	    		var input = $('<input type="text" class="datagrid-editable-input"/>');
+	    		input.width(cell.width() - 14).val(v0).appendTo(cell);
+	    		input.focus();
+	    		input.click(function() {
+					return false;
+				});
+	    		input.blur(function() {
+					var v = $(this).val();
+					cell.html(v);
+				});
+			}
+		},
+	    combox: {    
+	    	init : function(cell, options) {
+				var v0 = cell.html();
+				cell.html("");
+	    		var combox = $('<input type="text" class="datagrid-editable-combox" style="width:50px;"/>').appendTo(cell);
+	    		combox.AutoComplete2({
+	    			width: 50,
+	    		 	data:[{text : '正常', value : 1},{text : '锁定', value : 0},{text : '离职', value : 2}]
+	    		});
+			}
+		}
+    };
 	$.fn.table.methods = {
 		init: function(options) {
 			var defaults = {
@@ -158,20 +187,11 @@
 					if(this.editor){					
 						var selector = "tbody td:nth-child(" + len  + 'n + ' + (idx + 1) + ")";
 						var cols = $(selector, el);
+						var type = this.editor.type || 'text';
+						var opts = this.editor.opts || {};
 						cols.click(function() {
 							var cell = $(this);
-							var text = cell.html();
-							cell.html("");
-							var editor = $("<input type='text' class='txt'/>").width(cell.width() - 14).val(text).appendTo(cell);
-							// 是文本框插入之后被选中
-							editor.get(0).select();
-							editor.click(function() {
-								return false;
-							});
-							editor.blur(function() {
-								var v = $(this).val();
-								cell.html(v);
-							});
+							$.fn.table.editors[type].init(cell, opts);
 						});
 					}
 				});

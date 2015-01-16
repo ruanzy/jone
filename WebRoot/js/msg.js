@@ -589,7 +589,11 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 				var dl = $("<dl class='select'><dt id='dt_" + rdm
 						+ "'></dt><dd></dd><div class='mask'></div></dl>");
 				var p1 = [];
-				p1.push("<input type='text' autocomplete='off'/>");
+				p1.push("<input type='text' autocomplete='off'");
+				if(settings.width){
+					p1.push(" style='width:50px;'");
+				}
+				p1.push("/>");
 				p1.push("<i class='icon-angle-down'></i>");
 				me.wrap(dl).after(p1.join(''));
 				var dt = me.parent("dt");
@@ -625,11 +629,13 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 							value : $(t).attr('v')
 						});
 					}
+					return false;
 				});
 				dt.bind("click", function(e) {
 					var all = me.data('list');
 					loadItems(all);
 					dd.show();
+					return false;
 				});
 				$(document).bind("click", function(e) {
 					var target = $(e.target);

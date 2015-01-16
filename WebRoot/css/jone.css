@@ -1077,6 +1077,7 @@ dl.select dd a {
 	padding-left: 6px;
 	font-size: 12px;
 	text-decoration: none;
+	text-align: left;
 	color: #000;
 }
 
