@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
 <link rel="stylesheet" type="text/css" href="css/tree.css" />
 <link rel="stylesheet" type="text/css" href="css/userinfo.css" />
+<link rel="stylesheet" type="text/css" href="css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
@@ -24,6 +25,7 @@
 <script type="text/javascript" src="js/msg.js"></script>
 <script type="text/javascript" src="js/highlight.js"></script>
 <script type="text/javascript" src="laydate/laydate.js"></script>
+<script type="text/javascript" src="js/ztree.js"></script>
 </head>
 <BODY>
 	<div id="header"></div>

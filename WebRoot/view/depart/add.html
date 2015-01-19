@@ -1,12 +1,15 @@
 <table cellpadding="2" cellspacing="0" width="100%">
 	<tr>
 		<td align="right">部门名</td>
-		<td><input type="text" name="name" class='txt' autocomplete="off" />
-		</td>
+		<td><input type="text" name="name" class='txt' autocomplete="off" /></td>
+	</tr>
+	<tr>
+		<td align="right">上级部门</td>
+		<td><input type="text" name="pname" class='txt'
+			disabled="disabled" /> <input type="hidden" name="pid" class='txt' /></td>
 	</tr>
 	<tr>
 		<td align="right">备注</td>
-		<td><textarea name="memo"></textarea>
-		</td>
+		<td><textarea name="memo"></textarea></td>
 	</tr>
 </table>

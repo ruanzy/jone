@@ -12,6 +12,11 @@ import org.rzy.web.result.Msg;
 
 public class Depart
 {
+	public Result tree()
+	{
+		return new Json(WebUtil.call("DepartService.tree"));
+	}
+	
 	public Result list()
 	{
 		Map<String, String> map = WebUtil.getParameters();

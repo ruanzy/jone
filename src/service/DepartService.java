@@ -1,5 +1,6 @@
 package service;
 
+import java.util.List;
 import java.util.Map;
 import org.rzy.dao.Dao;
 import org.rzy.dao.Pager;
@@ -9,6 +10,12 @@ public class DepartService
 {
 	private Dao dao = Dao.getInstance();
 
+	public List<Map<String,Object>> tree()
+	{
+		String sql = "select * from depart";
+		return dao.find(sql);
+	}
+	
 	public Pager find(Map<String, Object> map)
 	{
 		String sqlid1 = "depart.count";
@@ -19,11 +26,12 @@ public class DepartService
 	
 	public void add(Map<String, Object> map)
 	{
-		String sql = "insert into depart(id,name,memo) values(?,?,?)";
+		String sql = "insert into depart(id,name,pid,memo) values(?,?,?,?)";
 		int id = dao.getID("depart");
 		Object name = map.get("name");
+		Object pid = map.get("pid");
 		Object memo = map.get("memo");
-		Object[] params = new Object[] { id, name, memo };
+		Object[] params = new Object[] { id, name, pid, memo };
 		dao.update(sql, params);
 	}
 	

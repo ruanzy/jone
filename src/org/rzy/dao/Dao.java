@@ -39,6 +39,7 @@ public final class Dao
 
 	public static Dao getInstance()
 	{
+		SingletonHolder.INSTANCE.begintx.set(false);
 		return SingletonHolder.INSTANCE;
 	}
 
