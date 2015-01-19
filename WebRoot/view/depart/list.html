@@ -37,6 +37,11 @@
 				rootPId : 0
 			}
 		},
+        async: {  
+            enable: true,  
+            url:"depart/tree",
+            autoParam:["id"]  
+        },  
 		callback : {
 			onClick : onClick
 		}
@@ -48,13 +53,15 @@
 		type : 'POST',
 		dataType : "json",
 		url : "depart/tree",
+		data : {id : 0},
 		success : function(data) {
 			treeNodes = data;
 		}
 	});
+	for(var k in treeNodes){
+		treeNodes[k].isParent = true;
+	}
 	$.fn.zTree.init($("#departtree"), setting, treeNodes);  
-	var t = $.fn.zTree.getZTreeObj("departtree");  
-	t.expandAll(true); 
 	function onClick(event, treeId, treeNode, clickFlag) {
 		if (treeNode.level >= 1) {
 			var name = treeNode.name;
@@ -70,8 +77,6 @@
 	function filter(node) {
 		return (node.name.indexOf("k") > -1);
 	}
-
-	var nodes = t.getNodesByFilter(filter); // 查找节点集合
 
 	$('#addbtn').click(add);
 	function add() {
@@ -108,10 +113,12 @@
 	function ok(win) {
 		var name = win.find('input[name=name]').val();
 		var pid = win.find('input[name=pid]').val();
+		var isParent = win.find('input[name=isParent]').val();
 		var memo = win.find('textarea[name=memo]').val();
 		var params = {
 			name : name,
 			pid : pid,
+			isParent : isParent,
 			memo : memo
 		};
 		$.ajax({
@@ -126,6 +133,7 @@
 	           		var nodes = treeObj.getSelectedNodes();  
 		            if (nodes.length>0)   
 		            {  
+	           			treeObj.updateNode(nodes[0]);
 	                    treeObj.reAsyncChildNodes(nodes[0], "refresh"); 
 					}
 				}

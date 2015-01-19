@@ -360,7 +360,7 @@ public final class Dao
 					Map<String, Object> map = new HashMap<String, Object>();
 					for (int i = 0; i < colCount; i++)
 					{
-						String key = rsmd.getColumnLabel(i + 1).toLowerCase();
+						String key = rsmd.getColumnLabel(i + 1);//.toLowerCase();
 						Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
 						map.put(key, val);
 					}
@@ -415,7 +415,7 @@ public final class Dao
 					Map<String, Object> map = new HashMap<String, Object>();
 					for (int i = 0; i < colCount; i++)
 					{
-						String key = rsmd.getColumnLabel(i + 1).toLowerCase();
+						String key = rsmd.getColumnLabel(i + 1);//.toLowerCase();
 						Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
 						map.put(key, val);
 					}

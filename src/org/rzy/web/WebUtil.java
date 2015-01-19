@@ -44,6 +44,7 @@ public class WebUtil
 	{
 		WebUtil wu = new WebUtil();
 		wu.servletContext = servletContext;
+		req.setCharacterEncoding("UTF-8");
 		wu.request = req;
 		wu.response = res;
 		wu.session = req.getSession(true);

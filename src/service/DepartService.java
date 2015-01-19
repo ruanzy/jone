@@ -10,10 +10,12 @@ public class DepartService
 {
 	private Dao dao = Dao.getInstance();
 
-	public List<Map<String,Object>> tree()
+	public List<Map<String,Object>> tree(Map<String, Object> map)
 	{
-		String sql = "select * from depart";
-		return dao.find(sql);
+		String sql = "select * from depart where pid=?";
+		Object id = map.get("id");
+		Object[] params = new Object[] { id };
+		return dao.find(sql, params);
 	}
 	
 	public Pager find(Map<String, Object> map)
@@ -26,12 +28,13 @@ public class DepartService
 	
 	public void add(Map<String, Object> map)
 	{
-		String sql = "insert into depart(id,name,pid,memo) values(?,?,?,?)";
+		String sql = "insert into depart(id,name,pid,isParent,memo) values(?,?,?,?,?)";
 		int id = dao.getID("depart");
 		Object name = map.get("name");
 		Object pid = map.get("pid");
+		Object isParent = map.get("isParent");
 		Object memo = map.get("memo");
-		Object[] params = new Object[] { id, name, pid, memo };
+		Object[] params = new Object[] { id, name, pid, isParent, memo };
 		dao.update(sql, params);
 	}
 	
