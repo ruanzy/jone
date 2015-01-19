@@ -113,7 +113,7 @@
 	function ok(win) {
 		var name = win.find('input[name=name]').val();
 		var pid = win.find('input[name=pid]').val();
-		var isParent = win.find('input[name=isParent]').val();
+		var isParent = win.find('input[name=isParent]:checked').val();
 		var memo = win.find('textarea[name=memo]').val();
 		var params = {
 			name : name,
@@ -126,6 +126,7 @@
 			type : 'post',
 			data : params,
 			dataType : 'json',
+			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
 			success : function(result) {
 				if (result.result) {
 					win.close();
