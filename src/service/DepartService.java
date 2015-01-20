@@ -10,12 +10,10 @@ public class DepartService
 {
 	private Dao dao = Dao.getInstance();
 
-	public List<Map<String,Object>> tree(Map<String, Object> map)
+	public List<Map<String,Object>> tree()
 	{
-		String sql = "select * from depart where pid=?";
-		Object id = map.get("id");
-		Object[] params = new Object[] { id };
-		return dao.find(sql, params);
+		String sql = "select * from depart";
+		return dao.find(sql);
 	}
 	
 	public Pager find(Map<String, Object> map)

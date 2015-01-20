@@ -1,28 +1,17 @@
-<table>
-	<tr>
-		<td<ul id="departtree" class="ztree"
-				style="width:260px; overflow:auto;float:left;"></ul></td>
-		<td><from id='departdetail' class='form' style="float:left;">
-			<table>
-				<tr>
-					<td class='form-label'>部门名称</td>
-					<td><input type="text" id='name' name="name" class='txt'
-						autocomplete="off" /></td>
-				</tr>
-				<tr>
-					<td class='form-label'>上级部门</td>
-					<td><input type="text" id='pNode' name="pNode" class='txt' /></td>
-				</tr>
-				<tr>
-					<td class='form-label'>备注</td>
-					<td><textarea id='memo' name="memo" class='textarea'></textarea></td>
-				</tr>
-			</table>
-			</from></td>
-	</tr>
-</table>
-<div>
-	<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加子部门</a>
+<div class='depart-tree'>
+	<div class='depart-tree-title'>
+		<i class="icon-sitemap"></i> 组织机构
+	</div>
+	<div class='depart-tree-body'>
+		<ul id="departtree" class="ztree"
+			style="width:260px; overflow:auto;float:left;"></ul>
+	</div>
+</div>
+
+<div id='departdetail' style="float:left;width:500px;">
+	<a id='addbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加子部门</a> 
+	<a id='modbtn' class='btn btn-primary'><i class="icon-pencil"></i> 修改部门</a>
+	<a id='delbtn' class='btn btn-primary'><i class="icon-minus"></i> 删除选中部门</a>
 </div>
 <script type="text/javascript">
 	var setting = {
@@ -37,40 +26,40 @@
 				rootPId : 0
 			}
 		},
-        async: {  
-            enable: true,  
-            url:"depart/tree",
-            autoParam:["id"]  
-        },  
 		callback : {
 			onClick : onClick
 		}
 	};
-	var treeNodes;
-	$.ajax({
-		async : false,
-		cache : false,
-		type : 'POST',
-		dataType : "json",
-		url : "depart/tree",
-		data : {id : 0},
-		success : function(data) {
-			treeNodes = data;
-		}
-	});
-	for(var k in treeNodes){
-		treeNodes[k].isParent = true;
+
+	function initTree(selectNodeId) {
+		var treeNodes;
+		$.ajax({
+			async : false,
+			cache : false,
+			type : 'POST',
+			dataType : "json",
+			url : "depart/tree",
+			success : function(data) {
+				treeNodes = data;
+			}
+		});
+		$.fn.zTree.init($("#departtree"), setting, treeNodes);
+		var treeObj = $.fn.zTree.getZTreeObj("departtree");
+		treeObj.expandAll(true);
+		var node = treeObj.getNodeByParam("id", selectNodeId);
+		treeObj.selectNode(node, false);
 	}
-	$.fn.zTree.init($("#departtree"), setting, treeNodes);  
+
+	initTree(1);
 	function onClick(event, treeId, treeNode, clickFlag) {
 		if (treeNode.level >= 1) {
 			var name = treeNode.name;
 			var pNode = treeNode.getParentNode();
 			var memo = treeNode.memo;
 			var detail = $('#departdetail');
-			$('#name', detail).val(name);
-			$('#pNode', detail).val(pNode.name);
-			$('#memo', detail).val(memo);
+			$('#name', detail).html(name);
+			$('#pNode', detail).html(pNode.name);
+			$('#memo', detail).html(memo);
 		}
 	}
 
@@ -97,14 +86,13 @@
 				}
 
 			} ],
-			onShow : function(){
-				var treeObj = $.fn.zTree.getZTreeObj("departtree");  
-           		var nodes = treeObj.getSelectedNodes();  
-	            if (nodes.length>0)   
-	            {  
-	                $('input[name=pname]').val(nodes[0].name);
-	                $('input[name=pid]').val(nodes[0].id);
-	            }  
+			onShow : function() {
+				var treeObj = $.fn.zTree.getZTreeObj("departtree");
+				var nodes = treeObj.getSelectedNodes();
+				if (nodes.length > 0) {
+					$('input[name=pname]').val(nodes[0].name);
+					$('input[name=pid]').val(nodes[0].id);
+				}
 			}
 		});
 		//$('#kkk').Grid('addRow', {username:'asd'});
@@ -126,17 +114,11 @@
 			type : 'post',
 			data : params,
 			dataType : 'json',
-			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
 			success : function(result) {
 				if (result.result) {
 					win.close();
-					var treeObj = $.fn.zTree.getZTreeObj("departtree");  
-	           		var nodes = treeObj.getSelectedNodes();  
-		            if (nodes.length>0)   
-		            {  
-	           			treeObj.updateNode(nodes[0]);
-	                    treeObj.reAsyncChildNodes(nodes[0], "refresh"); 
-					}
+					initTree(pid);
 				}
 			}
 		});

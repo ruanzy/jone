@@ -14,8 +14,7 @@ public class Depart
 {
 	public Result tree()
 	{
-		Map<String, String> map = WebUtil.getParameters();
-		return new Json(WebUtil.call("DepartService.tree", map));
+		return new Json(WebUtil.call("DepartService.tree"));
 	}
 	
 	public Result list()

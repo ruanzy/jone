@@ -1,0 +1,23 @@
+.depart-tree {
+	width: 200px;
+	border: 1px solid #D2D2D2;
+	background-color: #FFF;
+	float:left;
+	margin-right:100px;
+}
+
+.depart-tree-title {
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	color: #626262;
+	padding-left: 10px;
+	background-color: #FBFBFB;
+	border-bottom: 1px solid #D2D2D2;
+}
+
+.depart-tree-body {
+	min-height: 300px;
+}
+
+.ztree li a:hover {text-decoration:none;}
