@@ -189,11 +189,6 @@ ul.info li {
 	padding: 8px 20px 24px;
 }
 
-td.form-label {
-	font-weight: bold;
-	width: 60px;
-}
-
 dl.accordion {
 	margin: 0;
 	padding: 0;
@@ -513,7 +508,7 @@ msg.css
 }
 
 .dialog-footer {
-	padding: 5px 15px 5px 0;
+	padding: 10px 15px 10px 0;
 	background-color: #f7f7f7;
 }
 
@@ -1116,4 +1111,21 @@ dl.select dd a.selected {
 	opacity: 0.5;
 	background-color: #fff;
 	display: none;
+}
+
+
+.form table{
+	border: 1px solid #f7f7f7;
+	border-collapse: collapse;
+}
+
+.form table td{
+	padding: 5px 3px;
+	border: 1px solid #ccc;
+}
+
+.form .form-label{
+	font-weight: bold;
+	padding: 5px 10px;
+	background-color: #f7f7f7;
 }
