@@ -1,4 +1,4 @@
-.depart-tree {
+.rzy-box {
 	width: 200px;
 	border: 1px solid #D2D2D2;
 	background-color: #FFF;
@@ -6,7 +6,7 @@
 	margin-right:100px;
 }
 
-.depart-tree-title {
+.rzy-box-title {
 	height: 40px;
 	line-height: 40px;
 	font-size: 14px;
@@ -16,7 +16,7 @@
 	border-bottom: 1px solid #D2D2D2;
 }
 
-.depart-tree-body {
+.rzy-box-body {
 	min-height: 300px;
 }
 

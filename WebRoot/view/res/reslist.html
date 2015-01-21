@@ -1,5 +1,11 @@
-<div style="float: left;width:200px;">
-	<ul id="tree"></ul>
+<div class='rzy-box'>
+	<div class='rzy-box-title'>
+		<i class="icon-sitemap"></i> 资源树
+	</div>
+	<div class='rzy-box-body'>
+		<ul id="restree" class="ztree"
+			style="width:260px; overflow:auto;float:left;"></ul>
+	</div>
 </div>
 <dl id='mktabs' class="tabs" style="float: left;">
 	<dt>
@@ -166,12 +172,40 @@
 			});
 		}
 	}
-	$("#tree").Tree({
-		url : "res/list?_=" + new Date().getTime(),
-		//remove : remove,
-		showIcon : true
-	});
-	$("#tree").Tree('expandAll');
+	
+	
+	var setting = {
+		view : {
+			dblClickExpand : false,
+			showLine : true
+		},
+		data : {
+			simpleData : {
+				enable : true,
+				pIdKey : "pid",
+				rootPId : 0
+			}
+		}
+	};
+
+	function initTree() {
+		var treeNodes;
+		$.ajax({
+			async : false,
+			cache : false,
+			type : 'POST',
+			dataType : "json",
+			url : "res/list?_=" + new Date().getTime(),
+			success : function(data) {
+				treeNodes = data;
+			}
+		});
+		$.fn.zTree.init($("#restree"), setting, treeNodes);
+		var treeObj = $.fn.zTree.getZTreeObj("restree");
+		treeObj.expandAll(true);
+	}
+
+	initTree();
 	function remove(nodeid) {
 		$.ajax({
 			url : "res/del",

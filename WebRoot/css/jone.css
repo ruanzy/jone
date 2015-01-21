@@ -7,7 +7,7 @@ body {
 	overflow: hidden;
 }
 
-button {
+form,button {
 	padding: 0;
 	margin: 0;
 }
@@ -279,6 +279,21 @@ dl.accordion dd a b {
 	color: #fff;
 }
 
+.txt333 {
+	outline: none;
+	margin: 0;
+	padding: 5px;
+	font-family: "微软雅黑", Arial, sans-serif;
+	color: #555;
+	width: 190px;
+	height: 40px;
+	line-height: 14px;
+	font-size: 13px;
+	vertical-align: middle;
+	border: 1px solid #ccc;
+	/*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);*/
+}
+
 input[type=text],input[type=password],textarea {
 	outline: none;
 	margin: 0;
@@ -286,12 +301,7 @@ input[type=text],input[type=password],textarea {
 	font-family: "微软雅黑", Arial, sans-serif;
 	color: #555;
 	width: 190px;
-	height: 20px;
-	line-height: 14px;
-	font-size: 13px;
-	vertical-align: middle;
 	border: 1px solid #ccc;
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
 ul {
@@ -553,19 +563,20 @@ grid.css
 .table thead tr th {
 	vertical-align: bottom;
 	border: 1px solid #ddd;
-	height: 32px;
-	line-height: 32px;
+	height: 35px;
+	line-height: 35px;
 	padding-left: 6px;
 	color: #333;
 	font-size: 14px;
 	text-shadow: 1px 2px 1px #FFFFFF;
 	background: #fcfcfc;
+	background-image: linear-gradient(to bottom,#fff 0,#eee 100%);
 	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
 }
 
 .table tbody tr td {
-	height: 32px;
-	line-height: 32px;
+	height: 35px;
+	line-height: 35px;
 	padding-left: 6px;
 	border: 1px solid #ddd;
 	color: #333;
@@ -733,11 +744,11 @@ button.css
 	text-align: center;
 	border: 1px solid transparent;
 	cursor: pointer;
-	padding: 5px 10px;
+	padding: 6px 10px;
 	white-space: nowrap;
 	position: relative;
 	display: inline-block;
-	margin: 5px 5px 5px 0;
+	margin: 0 5px 0 0;
 }
 
 .btn-link {
@@ -807,28 +818,27 @@ button.css
 }
 
 /**
-search-form.css
+search-box.css
 **/
-.search-form {
-	width: 100px;
-	position: relative;
-	display: inline;
+.search-box {
+
 }
 
-.search-form input {
-	padding: 5px 25px 5px 10px;
-	margin: 0 0 5px 0;
-	display: inline;
+.search-box table{
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.search-box table td{
+	padding:0;
+}
+
+.search-box table input {
 	outline: none;
 	border: 1px solid #ddd;
 }
 
-.search-form button {
-	position: absolute;
-	right: 5px;
-	top: 5px;
-	background: none;
-	border: none;
+.search-box table button {
 	outline: none;
 }
 
@@ -1067,8 +1077,8 @@ dl.select dd {
 	-ms-box-shadow: 0 2px 6px #ccc;
 	box-shadow: 0 2px 6px #CCC;
 	left: 0;
-	top: 33px;
 	border: 1px solid #CFCFCF;
+	border-top: none;
 	background-color: white;
 	display: none;
 	margin: 0;

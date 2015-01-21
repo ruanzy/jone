@@ -1,16 +1,18 @@
-<div>
+<div style='position: relative;margin-bottom:5px;'>
 	<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</a>
 	<!-- 
 <a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
 <a id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配角色</a>
  -->
-	<div style="float: right;">
-		<form id='search-form' class='search-form'>
-			<input type="text" id='searchtxt' class='txt' name="name"
-				autocomplete="off" placeholder="请输入用户名" />
-			<button type="button">
-				<i class="icon-search"></i>
-			</button>
+	<div style="position: absolute;bottom : 0; right:10px;">
+		<form id='search-form' class='search-box'>
+			<table>
+				<tr>
+					<td><input type="text" id='searchtxt' name="name"
+						autocomplete="off" placeholder="请输入用户名" /></td>
+					<td><button type="button" class="btn btn-primary">查询</button></td>
+				</tr>
+			</table>
 		</form>
 	</div>
 </div>
@@ -26,7 +28,9 @@
 			field : "username",
 			align : 'left',
 			tip : true,
-			editor : {type : 'text'}
+			editor : {
+				type : 'text'
+			}
 		}, {
 			header : "E-mail",
 			field : "email",
@@ -47,7 +51,12 @@
 			field : "state",
 			align : 'center',
 			width : 100,
-			editor : {type : 'combox', opts : {width:50}},
+			editor : {
+				type : 'combox',
+				opts : {
+					width : 50
+				}
+			},
 			render : stateRender
 		}, {
 			header : "操作",

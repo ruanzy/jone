@@ -1,16 +1,18 @@
-<div>
+<div style='position: relative;margin-bottom:5px;'>
 	<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</a>
 	<a id='delbtn' class='btn btn-default'><i class="icon-remove"></i>
 		删除</a>
-	<div style="float: right;">
-		<form id='search-form' class='search-form'>
-			<input type="text" id='searchtxt' class='txt' name="type"
-				autocomplete="off" placeholder="请输入字典类型" />
-			<button type="button">
-				<i class="icon-search"></i>
-			</button>
+	<div style="position: absolute;bottom : 0; right:10px;">
+		<form id='search-form' class='search-box'>
+			<table>
+				<tr>
+					<td><input type="text" id='searchtxt' name="name"
+						autocomplete="off" placeholder="请输入字典类型" /></td>
+					<td><button type="button" class="btn btn-primary">查询</button></td>
+				</tr>
+			</table>
 		</form>
-	</div>
+	</div>			
 </div>
 <div id='kkk'></div>
 <script type="text/javascript">
