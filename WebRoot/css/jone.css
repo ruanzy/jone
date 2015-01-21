@@ -441,9 +441,11 @@ msg.css
 	display: none;
 }
 
+
 .dialog {
 	max-width: 1000px;
 	max-height: 800px;
+	float: left;
 	margin: 0 auto;
 	position: relative;
 	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
@@ -451,6 +453,7 @@ msg.css
 	background-color: #fff;
 	border: rgba(0, 0, 0, 0);
 	z-index: 1050;
+	visibility: hidden;
 }
 
 .dialog-mask {
@@ -510,10 +513,8 @@ msg.css
 }
 
 .dialog-footer {
-	margin: 0 0 20px 0;
 	padding: 5px 15px 5px 0;
-	border-top: 1px solid #ccc;
-	background-color: #f8f8f8;
+	background-color: #f7f7f7;
 }
 
 .dialog-close {

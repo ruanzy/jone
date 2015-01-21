@@ -118,7 +118,7 @@
 			dialog = $("<div class='dialog-wrap'></div>").appendTo($('body'));
 		}
 		var html = [];
-		html.push("<div class='dialog' style='width:" + options.width + "px'>");
+		html.push("<div class='dialog'>");
 		html.push("<div class='dialog-header dialog-header-success'>");
 		html.push("<a class='dialog-close'><i class='icon-remove'></i></a>");
 		html.push("<i class='icon-desktop'></i> ");
@@ -145,11 +145,10 @@
 		mask.click(function() {
 			dialog.close();
 		});
-		$(".dialog", dialog).css({
-			"margin-top" : 45
-		});
 		var bd = $(".dialog-body", dialog).css({
-			padding : options.padding
+			padding : options.padding,
+			minWidth : options.minWidth,
+			width : options.width
 		});
 		if (options.content) {
 			bd.html(options.content);
@@ -160,8 +159,16 @@
 				if(status == 'error'){
 					dialog.close();
 				}else{
+					var d = $(".dialog", dialog);
+					var ww = $(window).width();
+					var wh = $(window).height();
+					var w = d.outerWidth();
+					var h = d.outerHeight();
+					var l = (ww - w) / 2 + $(window).scrollLeft();
+					var t = (wh - h) / 2;
+					d.css("top", t).css("left", l);
 					options.onShow();
-					dialog.show();
+					d.css("visibility","visible");
 				}
 			});
 		}
@@ -186,9 +193,9 @@
 	};
 	$.dialog.defaults = {
 		title : 'Window',
-		width : 350,
+		minWidth : 300,
 		height : 100,
-		padding : 20,
+		padding : 30,
 		content : '',
 		params : null,
 		onShow : function() {
