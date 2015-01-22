@@ -257,9 +257,9 @@
 
 	function opRender(v, r) {
 		var h = [];
-		h.push("<a class='btn btn-sm' onclick=del2('" + r.id
-				+ "') title='删除'><i class='icon-remove'></i></a>");
-		h.push("<a class='btn btn-sm' onclick=assignrole('" + r.username
+		h.push("<a class='btn btn-danger btn-sm' onclick=del2('" + r.id
+				+ "') title='删除'><i class='icon-trash'></i></a>");
+		h.push("<a class='btn btn-primary btn-sm' onclick=assignrole('" + r.username
 				+ "') title='分配角色'><i class='icon-pencil'></i></a>");
 		return h.join('');
 	}
