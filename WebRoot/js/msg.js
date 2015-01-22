@@ -184,6 +184,30 @@
 			dialog.hide().empty().remove();
 			$.dialog.opened = false;
 		};
+		
+		
+		if(options.drag == true) {
+		   var titbar = $('.dialog-header', dialog);
+		   titbar.css({"cursor":"move"}); 
+		   var _move = false;
+		   titbar.mousedown(function(e) {
+			   _move = true;
+			   _x = e.pageX-parseInt(dialog.css("left"));
+			   _y = e.pageY-parseInt(dialog.css("top"));     
+			   //dialog.fadeTo(36,.5); 
+		   });
+		   titbar.mousemove(function(e){
+			   if(_move){
+				   var x = e.pageX - _x;
+				   var y = e.pageY - _y;
+				   dialog.css({top:y,left:x});
+			   }
+		   }).mouseup(function(){
+			   _move = false;
+			   //dialog.fadeTo("fast", 1);
+		   });
+		} 
+		
 		dialog.text = function(content) {
 			$(".dialog-body", dialog).html(content);
 		};
@@ -196,6 +220,7 @@
 		minWidth : 300,
 		height : 100,
 		padding : 30,
+		drag : true,
 		content : '',
 		params : null,
 		onShow : function() {
