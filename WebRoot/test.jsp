@@ -1,54 +1,179 @@
 <%@ page language="java" pageEncoding="UTF-8" isELIgnored="false"%>
-<div style="float: left;">
-<button id='addbtn' class='btn btn-success' funcid='102'><i class="icon-plus-sign"></i> 增加</button>
-<button id='delbtn' class='btn btn-success' funcid='103'><i class="icon-pencil"></i> 修改</button>
-<button id='assignbtn' class='btn btn-success' funcid='104'><i class="icon-remove-sign"></i> 删除</button>
+<style>
+.price-choice-box {
+    position: relative;
+    z-index: 100;
+    width: 270px;
+    font-family: arial,helvetica,clean,"microsoft yahei","宋体",sans-serif;
+}
+.price-choice-box-expand .price-active {
+    border-color: #A1A1A1;
+}
+.price-active {
+    width: 228px;
+    height: 24px;
+    line-height: normal;
+    padding: 8px 30px 0px 10px;
+    font-size: 14px;
+    font-weight: normal;
+    cursor: pointer;
+    color: #333;
+}
+
+.price-active-focus {
+border: 1px solid #A1A1A1;
+}
+.mobile-number, .price-active {
+    width: 248px;
+    color: #333;
+    font-weight: bold;
+    height: 32px;
+    outline: medium none;
+    padding: 0px 10px;
+    line-height: 32px;
+    vertical-align: middle;
+    border: 1px solid #DDD;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix:after {
+    content: "";
+    visibility: hidden;
+    display: block;
+    height: 0px;
+    clear: both;
+}
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.price-choice-box .arrow {
+    position: absolute;
+    width: 11px;
+    height: 7px;
+    background: url("css/mobile-recharge-price-arrow-up.png") no-repeat scroll 0% 0% transparent;
+    top: 14px;
+    right: 10px;
+    cursor: pointer;
+}
+.price-choice-box .price-tab {
+    position: absolute;
+    left: 0px;
+    top: 33px;
+    border: 1px solid #A1A1A1;
+    background: none repeat scroll 0% 0% #FFF;
+    display: none;
+    z-index: 100;
+}
+.price-choice-box .price-tab a .rebate {
+    display: none;
+}
+.price-choice-box .rebate {
+    float: right;
+    color: #666;
+    font-size: 12px;
+}
+.price-choice-box .price-tab .rebate em {
+    color: #666;
+}
+.price-choice-box .rebate em {
+    color: #FF6500;
+    margin-left: 5px;
+}
+#price-list{
+    display: none;
+    width: 268px;
+ border: 1px solid #A1A1A1;
+  border-top: 0;
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    color: #333;
+    text-decoration: none;
+}
+/**a {
+    color: #16387C;
+    text-decoration: none;
+}
+
+.price-tab a:hover{
+background: #ddd;
+}**/
+
+ul{padding:0;}
+</style>
+<div style="">
+	<button id='addbtn' class='btn btn-success' funcid='102'>
+		<i class="icon-plus-sign"></i> 增加
+	</button>
+	<button id='delbtn' class='btn btn-success' funcid='103'>
+		<i class="icon-pencil"></i> 修改
+	</button>
+	<button id='assignbtn' class='btn btn-success' funcid='104'>
+		<i class="icon-remove-sign"></i> 删除
+	</button>
 </div>
-<div id="container"></div>
+<div class="form-content form-content-product price-choice-box"
+	id="price-choice-box">
+	<div data-flag="30" data-price="3000" class="form-input price-active"
+		id="price-active"><span class="price">30元</span>
+	</div>
+	<div id="price-list">
+		<ul id="departtree" class="ztree"
+			style="overflow:auto;"></ul>
+	</div>
+	<i class="arrow">&nbsp;</i>
+</div>
 <script type="text/javascript">
-var data = [{"name":"\u767e\u5ea6","y":1239,"sliced":true,"selected":true},["google",998], 
-["\u641c\u641c",342],["\u5fc5\u5e94",421],["\u641c\u72d7",259],["\u5176\u4ed6",83]] ;
-var chart = new Highcharts.Chart({ 
-        chart: { 
-            renderTo: 'container',  //饼状图关联html元素id值 
-            defaultSeriesType: 'pie', //默认图表类型为饼状图 
-            plotBackgroundColor: '#ffc',  //设置图表区背景色 
-            plotShadow: true   //设置阴影 
-        }, 
-        title: { 
-            text: '搜索引擎统计分析'  //图表标题 
-        },
-        credits: {
-		     enabled: false
+	var setting = {
+		view : {
+			dblClickExpand : false,
+			showLine : true
 		},
-        tooltip: { 
-            formatter: function() { //鼠标滑向图像提示框的格式化提示信息 
-                return '<b>' + this.point.name + '</b>: ' +  
-                (this.percentage).toFixed(2) + ' %'; 
-            } 
-        }, 
-        plotOptions: { 
-            pie: { 
-                allowPointSelect: true, //允许选中，点击选中的扇形区可以分离出来显示 
-                cursor: 'pointer',  //当鼠标指向扇形区时变为手型（可点击） 
-                //showInLegend: true,  //如果要显示图例，可将该项设置为true 
-                dataLabels: { 
-                    enabled: true,  //设置数据标签可见，即显示每个扇形区对应的数据 
-                    color: '#000000',  //数据显示颜色 
-                    connectorColor: '#999',  //设置数据域扇形区的连接线的颜色 
-                    style:{ 
-                        fontSize: '12px'  //数据显示的大小 
-                    }, 
-                    formatter: function() { //格式化数据 
-                        return '<b>' + this.point.name + '</b>: ' +  
-                        (this.percentage).toFixed(2) + ' %'; 
-                    } 
-                } 
-            } 
-        }, 
-        series: [{ //数据列 
-            name: 'search engine', 
-            data: data //核心数据列来源于php读取的数据并解析成JSON 
-        }] 
-    }); 
+		data : {
+			simpleData : {
+				enable : true,
+				pIdKey : "pid",
+				rootPId : 0
+			}
+		}
+	};
+
+	function initTree(selectNodeId) {
+		var treeNodes;
+		$.ajax({
+			async : false,
+			cache : false,
+			type : 'POST',
+			dataType : "json",
+			url : "depart/tree",
+			success : function(data) {
+				treeNodes = data;
+			}
+		});
+		$.fn.zTree.init($("#departtree"), setting, treeNodes);
+		var treeObj = $.fn.zTree.getZTreeObj("departtree");
+		treeObj.expandAll(true);
+		var node = treeObj.getNodeByParam("id", selectNodeId);
+		treeObj.selectNode(node, false);
+	}
+
+	initTree(1);
+	
+	$('.price-choice-box').click(function(e){
+		$(this).addClass('price-choice-box-expand');
+		$('#price-list').show();
+		e.stopPropagation();
+	});
+	$(document).click(function(){
+		$('#price-list').hide();
+		$('.price-choice-box').removeClass('price-choice-box-expand');
+	});
+	$('#price-list').delegate('a', 'click', function(e){
+		$('#price-active').html($(this).html());
+		$('#price-list').hide();
+		$('.price-choice-box').removeClass('price-choice-box-expand');
+		e.stopPropagation();
+	});
 </script>

@@ -299,6 +299,10 @@ input[type=text],input[type=password],textarea {
 	border: 1px solid #ccc;
 }
 
+input[type=text]:focus,input[type=password]:focus {
+	border: 1px solid #F59942;
+}
+
 ul {
 	margin: 0;
 	padding: 0;
@@ -1127,5 +1131,6 @@ dl.select dd a.selected {
 .form .form-label{
 	font-weight: bold;
 	padding: 5px 10px;
-	background-color: #f7f7f7;
+	background-color: #EDF3F4;
+	color: #336199;
 }
