@@ -1,0 +1,42 @@
+.selecttree {
+	display: inline-block;
+}
+
+.selecttree dt {
+	padding: 0;
+	font-size: 14px;
+	font-weight: normal;
+	cursor: pointer;
+	color: #333;
+	border: 1px solid #ccc;
+}
+
+.selecttree dt .text{
+	padding: 5px;
+	color: #555;
+}
+
+.selecttree dt.expand {
+	border-color: #ccc;
+}
+
+.selecttree i {
+	position: absolute;
+	width: 11px;
+	height: 7px;
+	top: 12px;
+	right: 10px;
+	cursor: pointer;
+}
+
+.selecttree dd {
+	position: absolute;
+	border: 1px solid #ccc;
+	border-top: none;
+	background: #FFF;
+	display: none;
+}
+
+ul {
+	padding: 0;
+}

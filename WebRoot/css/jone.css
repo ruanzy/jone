@@ -300,7 +300,7 @@ input[type=text],input[type=password],textarea {
 }
 
 input[type=text]:focus,input[type=password]:focus {
-	border: 1px solid #F59942;
+	/**border: 1px solid #F59942;**/
 }
 
 ul {

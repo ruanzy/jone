@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css" href="css/userinfo.css" />
 <link rel="stylesheet" type="text/css" href="css/zTreeStyle/zTreeStyle.css" />
 <link rel="stylesheet" type="text/css" href="css/depart.css" />
+<link rel="stylesheet" type="text/css" href="css/selecttree.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
@@ -27,6 +28,7 @@
 <script type="text/javascript" src="js/highlight.js"></script>
 <script type="text/javascript" src="laydate/laydate.js"></script>
 <script type="text/javascript" src="js/ztree.js"></script>
+<script type="text/javascript" src="js/selecttree.js"></script>
 </head>
 <BODY>
 	<div id="header"></div>
