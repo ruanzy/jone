@@ -32,6 +32,11 @@
 				type : 'text'
 			}
 		}, {
+			header : "部门",
+			field : "departname",
+			align : 'center',
+			width : 100
+		}, {
 			header : "E-mail",
 			field : "email",
 			align : 'center',
@@ -102,6 +107,7 @@
 		var password = win.find('input[name=password]').val();
 		var email = win.find('input[name=email]').val();
 		var phone = win.find('input[name=phone]').val();
+		var depart = win.find('input[name=depart]').val();
 		var memo = win.find('textarea[name=memo]').val();
 		var state = win.find('input[name=state]').val();
 		var params = {
@@ -109,6 +115,7 @@
 			password : password,
 			email : email,
 			phone : phone,
+			depart : depart,
 			memo : memo,
 			state : state
 		};

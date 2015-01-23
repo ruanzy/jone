@@ -153,7 +153,7 @@ public class PmsService
 
 	public void reg(Map<String, Object> map)
 	{
-		String sql = "insert into users(id,username,pwd,regtime,email,phone,memo,state) values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into users(id,username,pwd,depart,birth,regtime,email,phone,memo,state) values(?,?,?,?,?,?,?,?,?,?)";
 		int id = dao.getID("users");
 		String username = (String) map.get("username");
 		String pwd = "111111";
@@ -163,7 +163,9 @@ public class PmsService
 		String phone = (String) map.get("phone");
 		String memo = (String) map.get("memo");
 		String state = (String) map.get("state");
-		Object[] params = new Object[] { id, username, pwd, regtime, email, phone, memo, state };
+		String birth = (String) map.get("birth");
+		String depart = (String) map.get("depart");
+		Object[] params = new Object[] { id, username, pwd, depart, birth, regtime, email, phone, memo, state };
 		dao.update(sql, params);
 	}
 

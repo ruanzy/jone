@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sqls>
 	<sql id='count'>
-		select count(*) from users
+		select count(*) from users left join depart
+		on users.depart = depart.id
 		<where>
 			<if test="username != null and username != ''">
 				and username like CONCAT('%',#{username},'%')
@@ -12,7 +13,8 @@
 		</where>
 	</sql>
 	<sql id='selectAll'>
-		select * from users
+		select users.*, depart.name as departname from users left join depart
+		on users.depart = depart.id
 		<where>
 			<if test="username != null and username != ''">
 				and username like CONCAT('%',#{username},'%')
@@ -21,7 +23,7 @@
 				and state=#{state}
 			</if>
 		</where>
-		order by id desc
+		order by users.id desc
 	</sql>
 	<sql id='add'>
 		insert into users(id,username,pwd,regtime) values(#{id},#{username},#{pwd},#{regtime})

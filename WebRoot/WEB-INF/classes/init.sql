@@ -9,6 +9,8 @@ CREATE TABLE users (
 	id int(11) NOT NULL,
 	username varchar(40) NOT NULL,
 	pwd varchar(200) NOT NULL,
+	depart int(11),
+	birth varchar(40),
 	email varchar(255),
 	phone varchar(20),
 	state char(1) default '1' NOT NULL,
