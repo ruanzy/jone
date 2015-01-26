@@ -11,6 +11,7 @@ CREATE TABLE users (
 	pwd varchar(200) NOT NULL,
 	depart int(11),
 	birth varchar(40),
+	gender int(1),
 	email varchar(255),
 	phone varchar(20),
 	state char(1) default '1' NOT NULL,
@@ -76,6 +77,7 @@ CREATE TABLE depart (
 	name varchar(100) NOT NULL,
 	pid int(11) NOT NULL,
 	path varchar(100) NOT NULL,
+	isparent int(1) NOT NULL,
 	memo varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
