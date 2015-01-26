@@ -45,7 +45,18 @@
 			header : "电话",
 			field : "phone",
 			align : 'center',
-			width : 180
+			width : 100
+		}, {
+			header : "出生日期",
+			field : "birth",
+			align : 'center',
+			width : 100
+		}, {
+			header : "性别",
+			field : "gender",
+			align : 'center',
+			render : genderRender,
+			width : 50
 		}, {
 			header : "注册时间",
 			field : "regtime",
@@ -55,7 +66,7 @@
 			header : "状态",
 			field : "state",
 			align : 'center',
-			width : 100,
+			width : 50,
 			editor : {
 				type : 'combox',
 				opts : {
@@ -97,6 +108,7 @@
 			} ],
 			onShow : function() {
 				$('#state').MultiRadio();
+				$('#gender').MultiRadio();
 			}
 		});
 		//$('#kkk').Grid('addRow', {username:'asd'});
@@ -110,12 +122,16 @@
 		var depart = win.find('input[name=depart]').val();
 		var memo = win.find('textarea[name=memo]').val();
 		var state = win.find('input[name=state]').val();
+		var birth = win.find('input[name=birth]').val();
+		var gender = win.find('input[name=gender]').val();
 		var params = {
 			username : username,
 			password : password,
 			email : email,
 			phone : phone,
 			depart : depart,
+			birth : birth,
+			gender : gender,
 			memo : memo,
 			state : state
 		};
@@ -259,6 +275,14 @@
 			return "<label class='label label-danger'>锁定</label>";
 		} else {
 			return "<label class='label label-warning'>离职</label>";
+		}
+	}
+	
+	function genderRender(s) {
+		if (s == 2) {
+			return "<label class='label label-success'>男</label>";
+		} else if (s == 1) {
+			return "<label class='label label-danger'>女</label>";
 		}
 	}
 

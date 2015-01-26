@@ -26,7 +26,7 @@
 <script type="text/javascript" src="js/grid2.js"></script>
 <script type="text/javascript" src="js/msg.js"></script>
 <script type="text/javascript" src="js/highlight.js"></script>
-<script type="text/javascript" src="laydate/laydate.js"></script>
+<script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="js/ztree.js"></script>
 <script type="text/javascript" src="js/selecttree.js"></script>
 </head>
