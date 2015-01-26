@@ -220,7 +220,7 @@
 		minWidth : 300,
 		height : 100,
 		padding : 30,
-		drag : true,
+		drag : false,
 		content : '',
 		params : null,
 		onShow : function() {
