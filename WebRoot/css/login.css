@@ -1,5 +1,5 @@
 body {
-	background: #444;
+	background: #f2f2f2;
 	font-size: 13px;
 	padding: 0px;
 	margin: 0px;
@@ -14,9 +14,10 @@ h3 {
 
 .loginwrap {
 	width: 340px;
-	margin: 100px auto;
+	margin: 130px auto;
 	background: #fff;
 	padding: 30px;
+	border:5px solid #f8f8f8;
 }
 
 .loginsubmit {
@@ -31,6 +32,7 @@ h3 {
 	height: 40px;
 	line-height: 40px; 
 	background: #70CA10;
+	background: #1da0d0;
 	text-align: center;
 	border-color: transparent;
 	cursor: pointer;
@@ -45,6 +47,7 @@ h3 {
 	line-height: 40px; 
 	text-align: center;
 	background: #70CA10;
+	background: #1da0d0;
 	color: #fff;
 	cursor:not-allowed; 
 	border-color: transparent;

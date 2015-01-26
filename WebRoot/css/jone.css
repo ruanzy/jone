@@ -450,10 +450,9 @@ msg.css
 	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
 	color: #000;
 	background-color: #fff;
-	border: rgba(0, 0, 0, 0);
 	z-index: 1050;
 	visibility: hidden;
-	border: 5px solid #33B5E5;
+	border: 5px solid #f8f8f8;
 }
 
 .dialog-mask {
@@ -479,20 +478,20 @@ msg.css
 
 .dialog-header {
 	border-style: solid;
-	border-width: 0 0 1px 0;
+	border-width: 1px 1px 0 1px;
 	border-color: #ccc;
 	position: relative;
 	height: 44px;
 	line-height: 44px;
 	background: none repeat scroll 0% 0% #F5F5F5;
 	padding-left: 10px;
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: bold;
 }
 
 .dialog-header-success {
-	color: #53a93f;
-	border-color: #53a93f;
+	color: #336199;
+	border-color:#336199
 	border-color: #ccc;
 }
 
@@ -515,6 +514,7 @@ msg.css
 	position: relative;
 	color: #737373;
 	overflow: auto;
+	border: 1px solid #ddd;
 }
 
 .dialog-footer {
