@@ -3,9 +3,9 @@
 		<td>操作员</td>
 		<td><input type='text' id='ddddd' name='operator'/></td>
 		<td>操作时间</td>
-		<td><input type='text' class="laydate-icon" id="time1" name="time1" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"/></td>
+		<td><input class="Wdate" type="text" id="time1" name='time1' onFocus="WdatePicker({readOnly:true})"/></td>
 		<td>~</td>
-		<td><input type='text' class="laydate-icon" id="time2" name="time2" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"/></td>
+		<td><input class="Wdate" type="text" id="time2" name='time2' onFocus="WdatePicker({readOnly:true})"/></td>
 		<td>
 			<a class='btn btn-primary'>查询</a>
 		</td>
@@ -14,7 +14,6 @@
 <div id='kkk'></div>
 <script type="text/javascript">
   $(function(){
-	laydate.skin('molv');
 	 $('#ddddd').AutoComplete2({
 	 	url:'log/users',
 	 	emptyText:''
