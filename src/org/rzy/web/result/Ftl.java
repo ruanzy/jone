@@ -8,6 +8,15 @@ import freemarker.template.Template;
 
 public class Ftl implements Result
 {
+	static Configuration cfg = new Configuration();
+
+	static
+	{
+		WebUtil.Response.setContentType("text/html;charset=UTF-8");
+		cfg.setDefaultEncoding("UTF-8");
+		cfg.setServletContextForTemplateLoading(WebUtil.Application.get(), "ftl");
+	}
+
 	String ftl;
 
 	Map<String, Object> map;
@@ -20,13 +29,9 @@ public class Ftl implements Result
 
 	public void render()
 	{
-		WebUtil.Response.setContentType("text/html;charset=UTF-8");
-		Template t = null;
-		Configuration cfg = new Configuration();
-		cfg.setDefaultEncoding("UTF-8");
-		cfg.setServletContextForTemplateLoading(WebUtil.Application.get(), "ftl");
 		try
 		{
+			Template t = null;
 			t = cfg.getTemplate(ftl, "UTF-8");
 			t.process(map, WebUtil.Response.getWriter());
 		}
