@@ -341,6 +341,8 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 		$.alert({
 			msg : '业务接口连接异常！'
 		});
+	} else if (xhr.status == 0) {
+		$.alert('warning', '服务已停止');
 	} else {
 		$.alert('success', xhr.responseText);
 	}
