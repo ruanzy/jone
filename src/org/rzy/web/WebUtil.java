@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 public class WebUtil
 {
-	static ServiceHandler serviceHandler = ServiceHandlerFactory.create();
+	static ServiceCaller serviceCaller = ServiceCallerFactory.create();
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
 
 	private WebUtil()
@@ -35,7 +35,7 @@ public class WebUtil
 
 	public static Object call(String sid, Object... args)
 	{
-		return serviceHandler.handle(sid, args);
+		return serviceCaller.call(sid, args);
 	}
 
 	public static class Request

@@ -5,11 +5,11 @@ import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LocalServiceHandler implements ServiceHandler
+public class LocalServiceCaller implements ServiceCaller
 {
-	static Logger log = LoggerFactory.getLogger(LocalServiceHandler.class);
+	static Logger log = LoggerFactory.getLogger(LocalServiceCaller.class);
 
-	public Object handle(String sid, Object... args)
+	public Object call(String sid, Object... args)
 	{
 		String[] arr = sid.split("\\.");
 		if (arr.length != 2)
