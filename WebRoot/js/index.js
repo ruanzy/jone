@@ -143,7 +143,9 @@ $(function() {
 			var title = $(this).text();
 			$('#nav').text(title);
 			$(this).addClass('active').siblings('a').removeClass('active');
-			$('#main').load(url + '?_=' + new Date().getTime(), function(){
+			var page = url + '?_=' + new Date().getTime();
+			page = url;
+			$('#main').load(page, function(){
 				permit('#main');
 			});
 		});
