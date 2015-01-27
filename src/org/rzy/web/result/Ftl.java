@@ -12,7 +12,6 @@ public class Ftl implements Result
 
 	static
 	{
-		WebUtil.Response.setContentType("text/html;charset=UTF-8");
 		cfg.setDefaultEncoding("UTF-8");
 		cfg.setServletContextForTemplateLoading(WebUtil.Application.get(), "ftl");
 	}
@@ -31,8 +30,8 @@ public class Ftl implements Result
 	{
 		try
 		{
-			Template t = null;
-			t = cfg.getTemplate(ftl, "UTF-8");
+			WebUtil.Response.setContentType("text/html;charset=UTF-8");
+			Template t = cfg.getTemplate(ftl, "UTF-8");
 			t.process(map, WebUtil.Response.getWriter());
 		}
 		catch (Exception e)
