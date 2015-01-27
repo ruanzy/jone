@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -22,118 +21,28 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WebUtil
 {
-	private ServletContext servletContext;
-	private HttpSession session;
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private final static ThreadLocal<WebUtil> webUtil = new ThreadLocal<WebUtil>();
+	static ServiceHandler serviceHandler = ServiceHandlerFactory.create();
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
 
 	private WebUtil()
 	{
 	}
 
-	protected static WebUtil init(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res)
-			throws UnsupportedEncodingException
-	{
-		WebUtil wu = new WebUtil();
-		wu.servletContext = servletContext;
-		req.setCharacterEncoding("UTF-8");
-		wu.request = req;
-		wu.response = res;
-		wu.session = req.getSession(true);
-		webUtil.set(wu);
-		return wu;
-	}
-
-	protected void destroy()
-	{
-		this.servletContext = null;
-		this.request = null;
-		this.response = null;
-		this.session = null;
-		webUtil.remove();
-	}
-
 	public static Object call(String sid, Object... args)
 	{
-		String[] arr = sid.split("\\.");
-		if (arr.length != 2)
-		{
-			throw new RuntimeException("业务接口不存在");
-		}
-		String className = arr[0];
-		String methodName = arr[1];
-		String fullName = "service." + className;
-		StringBuffer sb = new StringBuffer();
-		sb.append("service=").append(sid).append("(");
-		for (int i = 0, len = args.length; i < len; i++)
-		{
-			sb.append("arg" + i);
-			if (i != len - 1)
-			{
-				sb.append(",");
-			}
-		}
-		sb.append(")");
-		// log.debug(sb.toString());
-		for (int i = 0, len = args.length; i < len; i++)
-		{
-			// log.debug("arg" + i + "=" + JSON.toJSONString(args[i]));
-		}
-		Object result = null;
-		StringBuffer logs = new StringBuffer();
-		String user = WebUtil.getUser();
-		String ip = WebUtil.getIP();
-		// String op = "";//Util.getOP(sid);
-		// String requestBody = JSON.toJSONString(args);
-		logs.append(user).append("|");
-		logs.append(ip).append("|");
-		// logs.append(op).append("|");
-		logs.append(sid).append("|");
-		// logs.append(requestBody).append("|");
-		logs.append("").append("|");
-		try
-		{
-			Object proxy = ServiceProxy.get(fullName);
-			result = MethodUtils.invokeMethod(proxy, methodName, args);
-			logs.append(1);
-		}
-		catch (Exception e)
-		{
-			String error = "";
-			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
-			{
-				error = "业务处理接口" + e.getMessage() + " Not Found!";
-			}
-			else if (e instanceof InvocationTargetException)
-			{
-				Throwable t = ((InvocationTargetException) e).getTargetException();
-				error = t.getMessage();
-			}
-			logs.append(error).append("|");
-			logs.append(0);
-			// e.printStackTrace();
-			throw new ServiceException(error);
-		}
-		finally
-		{
-			log.debug(logs.toString());
-		}
-		return result;
+		return serviceHandler.handle(sid, args);
 	}
 
 	public static class Request
 	{
 		public static HttpServletRequest get()
 		{
-			return webUtil.get().request;
+			return ActionContext.getActionContext().getHttpServletRequest();
 		}
 
 		public static void setCharacterEncoding(String encoding)
@@ -163,7 +72,7 @@ public class WebUtil
 	{
 		public static HttpServletResponse get()
 		{
-			return webUtil.get().response;
+			return ActionContext.getActionContext().getHttpServletResponse();
 		}
 
 		public static void setContentType(String type)
@@ -268,7 +177,7 @@ public class WebUtil
 	{
 		public static HttpSession get()
 		{
-			return webUtil.get().session;
+			return ActionContext.getActionContext().getHttpSession(false);
 		}
 
 		public static void clear()
@@ -291,7 +200,7 @@ public class WebUtil
 	{
 		public static ServletContext get()
 		{
-			return webUtil.get().servletContext;
+			return ActionContext.getActionContext().getServletContext();
 		}
 
 		public static void attr(String key, Object value)
@@ -401,7 +310,7 @@ public class WebUtil
 	public static void setUserinfo(String userinfo)
 	{
 		WebUtil.Session.attr("RZY_USER", userinfo);
-		//String domain = WebUtil.Request.get().getServerName();
+		// String domain = WebUtil.Request.get().getServerName();
 		Cookie token = new Cookie("SSOTOKEN", userinfo);
 		token.setMaxAge(30 * 60);
 		token.setPath("/");

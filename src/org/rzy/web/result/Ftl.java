@@ -1,8 +1,8 @@
 package org.rzy.web.result;
 
 import java.util.Map;
+import org.rzy.web.ActionContext;
 import org.rzy.web.Result;
-import org.rzy.web.WebUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -13,7 +13,7 @@ public class Ftl implements Result
 	static
 	{
 		cfg.setDefaultEncoding("UTF-8");
-		cfg.setServletContextForTemplateLoading(WebUtil.Application.get(), "ftl");
+		cfg.setServletContextForTemplateLoading(ActionContext.getActionContext().getServletContext(), "ftl");
 	}
 
 	String ftl;
@@ -30,9 +30,9 @@ public class Ftl implements Result
 	{
 		try
 		{
-			WebUtil.Response.setContentType("text/html;charset=UTF-8");
+			ActionContext.getActionContext().getHttpServletResponse().setContentType("text/html;charset=UTF-8");
 			Template t = cfg.getTemplate(ftl, "UTF-8");
-			t.process(map, WebUtil.Response.getWriter());
+			t.process(map, ActionContext.getActionContext().getHttpServletResponse().getWriter());
 		}
 		catch (Exception e)
 		{

@@ -1,7 +1,8 @@
 package org.rzy.web.result;
 
+import java.io.IOException;
+import org.rzy.web.ActionContext;
 import org.rzy.web.Result;
-import org.rzy.web.WebUtil;
 
 public class Redirect implements Result
 {
@@ -14,7 +15,14 @@ public class Redirect implements Result
 
 	public void render()
 	{
-		WebUtil.redirect(url);
+		try
+		{
+			ActionContext.getActionContext().getHttpServletResponse().sendRedirect(url);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }

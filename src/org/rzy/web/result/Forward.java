@@ -1,13 +1,13 @@
 package org.rzy.web.result;
 
+import java.io.IOException;
+import javax.servlet.ServletException;
+import org.rzy.web.ActionContext;
 import org.rzy.web.Result;
-import org.rzy.web.WebUtil;
 
 public class Forward implements Result
 {
 	String url;
-
-	boolean redirect;
 
 	public Forward(String url)
 	{
@@ -16,8 +16,18 @@ public class Forward implements Result
 
 	public void render()
 	{
-
-		WebUtil.forward(url);
+		try
+		{
+			ActionContext.getActionContext().getHttpServletRequest().getRequestDispatcher(url).forward(ActionContext.getActionContext().getHttpServletRequest(), ActionContext.getActionContext().getHttpServletResponse());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		catch (ServletException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }

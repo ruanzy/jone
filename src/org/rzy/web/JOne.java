@@ -20,22 +20,13 @@ public class JOne implements Filter
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		WebUtil wu = WebUtil.init(this.context, request, response);
-		try
-		{
-			Handler.handle(request, response, chain);
+		String url = request.getServletPath();
+		boolean isStatic = url.lastIndexOf(".") != -1;
+		if(isStatic){
+			chain.doFilter(request, response);
+			return;
 		}
-		catch (Exception e)
-		{
-			throw new ServletException(e);
-		}
-		finally
-		{
-			if (wu != null)
-			{
-				wu.destroy();
-			}
-		}
+		new ActionHandler(context).handle(request, response);
 	}
 
 	public void destroy()
