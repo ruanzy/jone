@@ -1,12 +1,12 @@
-package org.rzy.web.result;
+package org.rzy.web.view;
 
 import java.util.Map;
 import org.rzy.web.ActionContext;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-public class Ftl implements Result
+public class Ftl implements View
 {
 	static Configuration cfg = new Configuration();
 

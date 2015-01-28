@@ -1,11 +1,11 @@
-package org.rzy.web.result;
+package org.rzy.web.view;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
 import org.rzy.web.ActionContext;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 
-public class Forward implements Result
+public class Forward implements View
 {
 	String url;
 

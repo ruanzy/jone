@@ -1,8 +1,8 @@
 package action;
 
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import org.rzy.web.WebUtil;
-import org.rzy.web.result.Msg;
+import org.rzy.web.view.Msg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +10,7 @@ public class Login
 {
 	static Logger log = LoggerFactory.getLogger(Login.class);
 
-	public Result execute()
+	public View execute()
 	{
 		String svc = WebUtil.getCaptcha();
 		String vc = WebUtil.getParameter("vc");

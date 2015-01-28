@@ -1,10 +1,10 @@
-package org.rzy.web.result;
+package org.rzy.web.view;
 
 import java.io.IOException;
 import org.rzy.web.ActionContext;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 
-public class Redirect implements Result
+public class Redirect implements View
 {
 	String url;
 

@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.util.ServerInfo;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import org.rzy.web.WebUtil;
-import org.rzy.web.result.Ftl;
-import org.rzy.web.result.Json;
-import org.rzy.web.result.Jsonp;
-import org.rzy.web.result.Redirect;
+import org.rzy.web.view.Ftl;
+import org.rzy.web.view.Json;
+import org.rzy.web.view.Jsonp;
+import org.rzy.web.view.Redirect;
 
 public class Common
 {
 	@SuppressWarnings("unchecked")
-	public Result menu()
+	public View menu()
 	{
 		String user = WebUtil.getUser();
 		Object o = null;
@@ -47,7 +47,7 @@ public class Common
 	}
 
 	@SuppressWarnings("unchecked")
-	public Result op()
+	public View op()
 	{
 		String user = WebUtil.getUser();
 		Object o = null;
@@ -78,19 +78,19 @@ public class Common
 		return new Json(ops);
 	}
 
-	public Result dic()
+	public View dic()
 	{
 		Object o = WebUtil.Application.attr("dic");
 		return new Json(o);
 	}
 
-	public Result res()
+	public View res()
 	{
 		Object o = WebUtil.Application.attr("allres");
 		return new Json(o);
 	}
 
-	public Result lineusers()
+	public View lineusers()
 	{
 		Integer numSessions = (Integer) WebUtil.Application.attr("numSessions");
 		return new Json(numSessions);
@@ -124,13 +124,13 @@ public class Common
 		}
 	}
 
-	public Result logout()
+	public View logout()
 	{
 		WebUtil.Session.clear();
 		return new Redirect("login.html");
 	}
 
-	public Result welcome()
+	public View welcome()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", WebUtil.getParameter("id"));
@@ -138,7 +138,7 @@ public class Common
 		return new Ftl("welcome.ftl", map);
 	}
 
-	public Result header()
+	public View header()
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
 		String user = WebUtil.getUser();
@@ -146,7 +146,7 @@ public class Common
 		return new Ftl("header.ftl", data);
 	}
 
-	public Result sidebar()
+	public View sidebar()
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
 		String user = WebUtil.getUser();
@@ -163,7 +163,7 @@ public class Common
 		return new Ftl("sidebar.ftl", data);
 	}
 
-	public Result center()
+	public View center()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		return new Ftl("center.ftl", map);
@@ -179,13 +179,13 @@ public class Common
 		// String id = parameters.get("id");
 	}
 
-	public Result base()
+	public View base()
 	{
 		Map<String, Object> map = ServerInfo.base();
 		return new Json(map);
 	}
 
-	public Result userinfo()
+	public View userinfo()
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
 		String user = WebUtil.getUser();
@@ -193,7 +193,7 @@ public class Common
 		return new Ftl("userinfo.ftl", data);
 	}
 
-	public Result cookies()
+	public View cookies()
 	{
 		// String callback = WebUtil.getParameter("callback");
 		return new Jsonp("callback", WebUtil.Cookies.getAll());

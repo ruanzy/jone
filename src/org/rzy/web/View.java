@@ -1,6 +1,6 @@
 package org.rzy.web;
 
-public interface Result
+public interface View
 {
 	void render();
 }

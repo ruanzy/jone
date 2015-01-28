@@ -3,13 +3,13 @@ package action;
 import java.util.HashMap;
 import java.util.Map;
 import org.rzy.util.ServerInfo;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import org.rzy.web.WebUtil;
-import org.rzy.web.result.Ftl;
+import org.rzy.web.view.Ftl;
 
 public class Layout
 {
-	public Result welcome()
+	public View welcome()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", WebUtil.getParameter("id"));
@@ -17,14 +17,14 @@ public class Layout
 		return new Ftl("welcome.ftl", map);
 	}
 
-	public Result header()
+	public View header()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", WebUtil.getUser());
 		return new Ftl("header.ftl", map);
 	}
 
-	public Result center()
+	public View center()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		return new Ftl("center.ftl", map);

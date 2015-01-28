@@ -4,33 +4,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.rzy.util.JSONUtil;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import org.rzy.web.WebUtil;
-import org.rzy.web.result.Ftl;
-import org.rzy.web.result.Json;
-import org.rzy.web.result.Msg;
+import org.rzy.web.view.Ftl;
+import org.rzy.web.view.Json;
+import org.rzy.web.view.Msg;
 
 public class Depart
 {
-	public Result tree()
+	public View tree()
 	{
 		return new Json(WebUtil.call("DepartService.tree"));
 	}
 	
-	public Result list()
+	public View list()
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		return new Json(WebUtil.call("DepartService.find", map));
 	}
 
-	public Result add()
+	public View add()
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		WebUtil.call("DepartService.add", map);
 		return new Msg("add success");
 	}
 
-	public Result save()
+	public View save()
 	{
 		String data = WebUtil.getParameter("data");
 		List<Map<String, Object>> list = JSONUtil.toList(data);
@@ -41,7 +41,7 @@ public class Depart
 		return new Msg("add success");
 	}
 
-	public Result del()
+	public View del()
 	{
 		String ids = WebUtil.getParameter("ids");
 		WebUtil.call("DepartService.del", ids);
@@ -62,7 +62,7 @@ public class Depart
 		return null;
 	}
 
-	public Result toaddemp()
+	public View toaddemp()
 	{
 		String departname = WebUtil.getParameter("departname");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -70,18 +70,18 @@ public class Depart
 		return new Ftl("setrole.ftl", map);
 	}
 
-	public Result allrole()
+	public View allrole()
 	{
 		return new Json(WebUtil.call("PmsService.allrole"));
 	}
 
-	public Result assignedroles()
+	public View assignedroles()
 	{
 		String user = WebUtil.getParameter("user");
 		return new Json(WebUtil.call("PmsService.assignedroles", user));
 	}
 
-	public Result setrole()
+	public View setrole()
 	{
 		String user = WebUtil.getParameter("user");
 		String roles = WebUtil.getParameter("roles");

@@ -2,19 +2,19 @@ package action;
 
 import java.util.Map;
 import org.rzy.util.ServerInfo;
-import org.rzy.web.Result;
-import org.rzy.web.result.Ftl;
-import org.rzy.web.result.Json;
+import org.rzy.web.View;
+import org.rzy.web.view.Ftl;
+import org.rzy.web.view.Json;
 
 public class Svr
 {
-	public Result base()
+	public View base()
 	{
 		Map<String, Object> map = ServerInfo.base();
 		return new Ftl("welcome.ftl", map);
 	}
 	
-	public Result mem()
+	public View mem()
 	{
 		Map<String, Object> map = ServerInfo.mem();
 		return new Json(map);

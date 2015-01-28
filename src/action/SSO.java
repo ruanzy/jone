@@ -1,12 +1,12 @@
 package action;
 
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import org.rzy.web.WebUtil;
-import org.rzy.web.result.Redirect;
+import org.rzy.web.view.Redirect;
 
 public class SSO
 {
-	public Result execute()
+	public View execute()
 	{
 		String tk = WebUtil.Cookies.get("SSOTOKEN");
 		String go = WebUtil.getParameter("go");

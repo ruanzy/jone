@@ -14,7 +14,8 @@ public class ActionHandler
 {
 	private static Logger log = LoggerFactory.getLogger(ActionHandler.class);
 	private ServletContext servletContext;
-	//private Interceptor[] interceptors = null;
+
+	// private Interceptor[] interceptors = null;
 
 	public ActionHandler(ServletContext servletContext)
 	{
@@ -40,9 +41,9 @@ public class ActionHandler
 			Class<?> cls = Class.forName(pck_name + "." + action_name);
 			Method method = cls.getMethod(action_method_name);
 			Object result = method.invoke(cls.newInstance());
-			if (result instanceof Result)
+			if (result instanceof View)
 			{
-				((Result) result).render();
+				((View) result).render();
 			}
 		}
 		catch (Exception e)

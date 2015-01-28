@@ -3,25 +3,25 @@ package action;
 import java.io.File;
 import java.util.Map;
 import org.rzy.util.IOUtil;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import org.rzy.web.WebUtil;
-import org.rzy.web.result.Json;
-import org.rzy.web.result.Text;
+import org.rzy.web.view.Json;
+import org.rzy.web.view.Text;
 
 public class Log
 {
-	public Result list()
+	public View list()
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		return new Json(WebUtil.call("PmsService.findlog", map));
 	}
 
-	public Result users()
+	public View users()
 	{
 		return new Json(WebUtil.call("PmsService.alluser"));
 	}
 
-	public Result view()
+	public View view()
 	{
 		File f = new File(WebUtil.getWebRoot(), "logs/Jone.txt");
 		String content = IOUtil.tail(f, 50L);

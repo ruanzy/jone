@@ -2,20 +2,20 @@ package action;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import org.rzy.web.WebUtil;
-import org.rzy.web.result.Json;
-import org.rzy.web.result.Msg;
+import org.rzy.web.view.Json;
+import org.rzy.web.view.Msg;
 
 public class Role
 {
-	public Result list()
+	public View list()
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		return new Json(WebUtil.call("PmsService.findrole", map));
 	}
 
-	public Result add()
+	public View add()
 	{
 		String name = WebUtil.getParameter("name");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -31,18 +31,18 @@ public class Role
 		return null;
 	}
 
-	public Result allres()
+	public View allres()
 	{
 		return new Json(WebUtil.call("PmsService.getRes"));
 	}
 
-	public Result ownres()
+	public View ownres()
 	{
 		String role = WebUtil.getParameter("role");
 		return new Json(WebUtil.call("PmsService.roleres", role));
 	}
 
-	public Result setres()
+	public View setres()
 	{
 		String role = WebUtil.getParameter("role");
 		String res = WebUtil.getParameter("res");

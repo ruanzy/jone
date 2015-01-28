@@ -1,11 +1,11 @@
-package org.rzy.web.result;
+package org.rzy.web.view;
 
 import java.io.IOException;
 import org.rzy.web.ActionContext;
-import org.rzy.web.Result;
+import org.rzy.web.View;
 import com.alibaba.fastjson.JSON;
 
-public class Json implements Result
+public class Json implements View
 {
 	Object data;
 
