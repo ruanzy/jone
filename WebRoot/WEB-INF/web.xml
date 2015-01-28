@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-		<filter-class>org.rzy.web.SSOSFilter</filter-class>
+		<filter-class>com.rz.web.SSOSFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
@@ -13,7 +13,7 @@
 	</filter-mapping>
 	<filter>
 		<filter-name>JOne</filter-name>
-		<filter-class>org.rzy.web.JOne</filter-class>
+		<filter-class>com.rz.web.JOne</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>JOne</filter-name>
