@@ -2,9 +2,9 @@ package service;
 
 import java.util.List;
 import java.util.Map;
-import org.rzy.dao.Dao;
-import org.rzy.dao.Pager;
-import org.rzy.dao.SQLMapper;
+import com.rz.dao.Dao;
+import com.rz.dao.Pager;
+import com.rz.dao.SQLMapper;
 
 public class DepartService
 {

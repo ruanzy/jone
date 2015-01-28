@@ -1,7 +1,7 @@
 package plugin;
 
 import javax.servlet.ServletContext;
-import org.rzy.web.Plugin;
+import com.rz.web.Plugin;
 import service.PmsService;
 
 public class ResMgr implements Plugin

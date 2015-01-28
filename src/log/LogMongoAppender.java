@@ -2,7 +2,7 @@ package log;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.rzy.web.MongoAppender;
+import com.rz.web.MongoAppender;
 
 public class LogMongoAppender extends MongoAppender
 {

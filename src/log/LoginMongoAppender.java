@@ -3,7 +3,7 @@ package log;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-import org.rzy.web.MongoAppender;
+import com.rz.web.MongoAppender;
 
 public class LoginMongoAppender extends MongoAppender
 {

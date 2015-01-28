@@ -1,8 +1,8 @@
 package plugin;
 
 import javax.servlet.ServletContext;
-import org.rzy.web.Env;
-import org.rzy.web.Plugin;
+import com.rz.web.Env;
+import com.rz.web.Plugin;
 
 public class LogDir implements Plugin
 {

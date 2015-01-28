@@ -1,8 +1,8 @@
 package service;
 
-import org.rzy.dao.MongoDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.rz.dao.MongoDao;
 
 public class Stat
 {

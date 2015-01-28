@@ -1,10 +1,10 @@
 package action;
 
 import java.util.Map;
-import org.rzy.util.ServerInfo;
-import org.rzy.web.View;
-import org.rzy.web.view.Ftl;
-import org.rzy.web.view.Json;
+import com.rz.util.ServerInfo;
+import com.rz.web.View;
+import com.rz.web.view.Ftl;
+import com.rz.web.view.Json;
 
 public class Svr
 {

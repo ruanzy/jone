@@ -1,8 +1,8 @@
 package action;
 
-import org.rzy.util.WebUtil;
-import org.rzy.web.View;
-import org.rzy.web.view.Redirect;
+import com.rz.util.WebUtil;
+import com.rz.web.View;
+import com.rz.web.view.Redirect;
 
 public class SSO
 {

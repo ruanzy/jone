@@ -1,4 +1,11 @@
-/org
 /action
+/com
+/dao.properties
+/init.sql
+/log
+/logback.xml
+/mappers
+/plugin
+/resource.properties
 /service
 /task

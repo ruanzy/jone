@@ -2,10 +2,10 @@ package action;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.rzy.util.WebUtil;
-import org.rzy.web.View;
-import org.rzy.web.view.Json;
-import org.rzy.web.view.Msg;
+import com.rz.util.WebUtil;
+import com.rz.web.View;
+import com.rz.web.view.Json;
+import com.rz.web.view.Msg;
 
 public class Role
 {

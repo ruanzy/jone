@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.rzy.util.ServerInfo;
-import org.rzy.util.WebUtil;
-import org.rzy.web.View;
-import org.rzy.web.view.Ftl;
-import org.rzy.web.view.Json;
-import org.rzy.web.view.Jsonp;
-import org.rzy.web.view.Redirect;
+import com.rz.util.ServerInfo;
+import com.rz.util.WebUtil;
+import com.rz.web.View;
+import com.rz.web.view.Ftl;
+import com.rz.web.view.Json;
+import com.rz.web.view.Jsonp;
+import com.rz.web.view.Redirect;
 
 public class Common
 {
