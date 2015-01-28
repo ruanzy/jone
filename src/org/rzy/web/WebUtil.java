@@ -21,12 +21,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.rzy.service.Service;
+import org.rzy.service.ServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WebUtil
 {
-	static ServiceCaller serviceCaller = ServiceCallerFactory.create();
+	static Service service = ServiceFactory.create();
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
 
 	private WebUtil()
@@ -35,7 +37,7 @@ public class WebUtil
 
 	public static Object call(String sid, Object... args)
 	{
-		return serviceCaller.call(sid, args);
+		return service.call(sid, args);
 	}
 
 	public static class Request
@@ -308,7 +310,7 @@ public class WebUtil
 	}
 
 	public static void setUserinfo(String userinfo)
-	{	
+	{
 		WebUtil.Session.attr("RZY_USER", userinfo.split("_")[0]);
 		// String domain = WebUtil.Request.get().getServerName();
 		Cookie token = new Cookie("SSOTOKEN", userinfo);

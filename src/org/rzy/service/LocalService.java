@@ -1,13 +1,16 @@
-package org.rzy.web;
+package org.rzy.service;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.InetAddress;
 import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LocalServiceCaller implements ServiceCaller
+public class LocalService implements Service
 {
-	static Logger log = LoggerFactory.getLogger(LocalServiceCaller.class);
+	String user;
+
+	static Logger log = LoggerFactory.getLogger(LocalService.class);
 
 	public Object call(String sid, Object... args)
 	{
@@ -37,18 +40,17 @@ public class LocalServiceCaller implements ServiceCaller
 		}
 		Object result = null;
 		StringBuffer logs = new StringBuffer();
-		String user = WebUtil.getUser();
-		String ip = WebUtil.getIP();
-		// String op = "";//Util.getOP(sid);
-		// String requestBody = JSON.toJSONString(args);
-		logs.append(user).append("|");
-		logs.append(ip).append("|");
-		// logs.append(op).append("|");
-		logs.append(sid).append("|");
-		// logs.append(requestBody).append("|");
-		logs.append("").append("|");
 		try
 		{
+			String ip =  InetAddress.getLocalHost().getHostAddress(); 
+			// String op = "";//Util.getOP(sid);
+			// String requestBody = JSON.toJSONString(args);
+			logs.append(user).append("|");
+			logs.append(ip).append("|");
+			// logs.append(op).append("|");
+			logs.append(sid).append("|");
+			// logs.append(requestBody).append("|");
+			logs.append("").append("|");
 			Object proxy = ServiceProxy.get(fullName);
 			result = MethodUtils.invokeMethod(proxy, methodName, args);
 			logs.append(1);
@@ -75,6 +77,11 @@ public class LocalServiceCaller implements ServiceCaller
 			log.debug(logs.toString());
 		}
 		return result;
+	}
+
+	public void setUser(String user)
+	{
+		this.user = user;
 	}
 
 }

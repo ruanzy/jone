@@ -1,7 +1,7 @@
 package task;
 
 import java.lang.management.RuntimeMXBean;
-import org.rzy.web.Scheduled;
+import org.rzy.annotation.Scheduled;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.management.ManagementFactory;

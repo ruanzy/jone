@@ -1,4 +1,4 @@
-package org.rzy.web;
+package org.rzy.service;
 
 import java.lang.reflect.Method;
 import net.sf.cglib.proxy.Callback;
@@ -7,6 +7,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.proxy.NoOp;
+import org.rzy.annotation.Transaction;
 import org.rzy.dao.Dao;
 
 class ServiceProxy

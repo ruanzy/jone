@@ -1,4 +1,4 @@
-package org.rzy.web;
+package org.rzy.service;
 
 public class ServiceException extends RuntimeException
 {
