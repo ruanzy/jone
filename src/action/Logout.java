@@ -1,7 +1,7 @@
 package action;
 
+import org.rzy.util.WebUtil;
 import org.rzy.web.View;
-import org.rzy.web.WebUtil;
 import org.rzy.web.view.Redirect;
 
 public class Logout

@@ -1,6 +1,6 @@
 package action;
 
-import org.rzy.web.WebUtil;
+import org.rzy.util.WebUtil;
 
 public class Captcha
 {
