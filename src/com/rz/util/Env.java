@@ -1,4 +1,4 @@
-package com.rz.web;
+package com.rz.util;
 
 import java.util.Properties;
 
