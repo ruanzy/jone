@@ -27,6 +27,9 @@
 				<div class='rzy-box-body' style='padding: 10px;'>
 					<ul id="restree" class="ztree" style="width:100%;overflow:auto;"></ul>
 				</div>
+				<div class='rzy-box-footer' style='padding: 10px;'>
+					<a class='btn btn-primary' id='setRes'>保存</a>
+				</div>
 			</div>
 		</td>
 	</tr>
@@ -46,7 +49,24 @@
 		} ],
 		selector : 'm',
 		condition : condition,
-		url : 'role/list'
+		url : 'role/list',
+		onSelectRow : function(rowid){
+			var rowData = $('#kkk').table('getRowData', rowid);
+			var roleid = rowData['id'];
+			$.ajax({
+				url : 'role/ownres',
+				type : 'post',
+				data : {role : roleid},
+				dataType : 'json',
+				success : function(result) {
+					var treeObj = $.fn.zTree.getZTreeObj("restree");
+					treeObj.checkAllNodes(false);
+					$(result).each(function(){
+						treeObj.checkNode(treeObj.getNodeByParam("id", this, null), true, true);
+					});
+				}
+			});
+		}
 	});
 	$('#search-form button').click(function() {
 		$('#kkk').table('reload');
@@ -54,6 +74,7 @@
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);
 	$('#assignbtn').click(mk);
+	$('#setRes').click(setRes);
 	function condition() {
 		var name = $('input[name=name]').val();
 		var params = {
@@ -160,9 +181,14 @@
 		});
 	}
 
-	function ok1(win) {
-		var roleid = win.find('input[name=roleid]').val();
-		var ids = win.find("#tree").Tree('checkedNodes');
+	function setRes(win) {
+		var roleid = $('#kkk').table('getSelected')[0].id;
+		var treeObj = $.fn.zTree.getZTreeObj("restree");
+        var nodes = treeObj.getCheckedNodes(true);
+		var ids = [];
+		$(nodes).each(function(){
+			ids.push(this['id']);
+		});
 		var data = {
 			role : roleid,
 			res : ids.join()
@@ -173,7 +199,6 @@
 			data : data,
 			dataType : 'json',
 			success : function(r) {
-				win.close();
 				$('#kkk').table('reload');
 			}
 		});

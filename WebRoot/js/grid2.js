@@ -37,13 +37,14 @@
 			}
 		}
     };
+	$.fn.table.defaults = {
+		columns:[],
+		pager:true,
+		onSelectRow : function(rowid) {}
+	};
 	$.fn.table.methods = {
 		init: function(options) {
-			var defaults = {
-				columns:[],
-				pager:true
-			};
-			var settings = $.extend({}, defaults, options);
+			var settings = $.extend({}, $.fn.table.defaults, options);
 			return this.each(function(){
 				var el = $(this).addClass('grid');
 				el.data('pagesize', 10);
@@ -89,6 +90,16 @@
 					$(this).addClass('strips');
 				}).live('mouseleave', function(){
 					$(this).removeClass('strips');
+				});
+				
+				var rows = $('tbody tr', el);
+				$('tbody', el).delegate('tr', 'click', function(){
+					$(this).siblings('tr').removeClass('highlight');
+					$(this).siblings('tr').find(':checkbox').attr("checked",false);
+					$(this).addClass('highlight');
+					$(':checkbox', this).attr("checked",true);
+					var idx = rows.index(this);
+					settings.onSelectRow(idx);
 				});
 				
 				//$('tbody tr:odd', el).addClass('strips');
@@ -304,6 +315,10 @@
         getFieldValue: function(rowindex, field){
         	var rows = $(this).data('options').rows;
         	return rows[rowindex][field];
+        },
+        getRowData: function(rowindex){
+        	var rows = $(this).data('rows');
+        	return rows[rowindex];
         },
 		getEditor: function(field){
         	var editor = null;

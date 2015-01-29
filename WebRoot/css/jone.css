@@ -596,6 +596,10 @@ tr.strips {
 	background: #fafafa;
 }
 
+tr.highlight {
+	background: lightyellow;
+}
+
 div.pagination {
 	margin: 5px 5px 5px 0;
 }
