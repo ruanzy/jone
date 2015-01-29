@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,17 +15,28 @@ public class ActionHandler
 {
 	private static Logger log = LoggerFactory.getLogger(ActionHandler.class);
 	private ServletContext servletContext;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	private final static ThreadLocal<ActionHandler> actionHandler = new ThreadLocal<ActionHandler>();
 
 	// private Interceptor[] interceptors = null;
 
-	public ActionHandler(ServletContext servletContext)
+	private ActionHandler()
 	{
-		this.servletContext = servletContext;
 	}
 
-	public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+	static ActionHandler create(ServletContext servletContext, HttpServletRequest req, HttpServletResponse res)
 	{
-		ActionContext.create(this.servletContext, request, response);
+		ActionHandler ac = new ActionHandler();
+		ac.servletContext = servletContext;
+		ac.request = req;
+		ac.response = res;
+		actionHandler.set(ac);
+		return ac;
+	}
+
+	void handle() throws IOException, ServletException
+	{
 		String url = request.getServletPath();
 		String[] parts = url.substring(1).split("/");
 		String pck_name = "action";
@@ -33,7 +45,7 @@ public class ActionHandler
 		String action_method_name = (parts.length > 1) ? parts[1] : "execute";
 		String ip = request.getRemoteAddr();
 		String m = request.getMethod();
-		Object user = ActionContext.getActionContext().getHttpSession(false).getAttribute("RZY_USER");
+		Object user = request.getSession(false).getAttribute("RZY_USER");
 		Object[] ps = new Object[] { user, ip, m, url };
 		log.debug("{} {} {} {}", ps);
 		try
@@ -67,7 +79,27 @@ public class ActionHandler
 		}
 		finally
 		{
-			ActionContext.destroy();
+			actionHandler.remove();
 		}
+	}
+
+	public static ServletContext getServletContext()
+	{
+		return actionHandler.get().servletContext;
+	}
+
+	public static HttpServletRequest getRequest()
+	{
+		return actionHandler.get().request;
+	}
+
+	public static HttpServletResponse getResponse()
+	{
+		return actionHandler.get().response;
+	}
+
+	public static HttpSession getSession(boolean create)
+	{
+		return getRequest().getSession(create);
 	}
 }

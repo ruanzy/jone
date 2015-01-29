@@ -1,7 +1,7 @@
 package com.rz.web.view;
 
 import java.io.IOException;
-import com.rz.web.ActionContext;
+import com.rz.web.ActionHandler;
 import com.rz.web.View;
 
 public class Redirect implements View
@@ -17,7 +17,7 @@ public class Redirect implements View
 	{
 		try
 		{
-			ActionContext.getActionContext().getHttpServletResponse().sendRedirect(url);
+			ActionHandler.getResponse().sendRedirect(url);
 		}
 		catch (IOException e)
 		{

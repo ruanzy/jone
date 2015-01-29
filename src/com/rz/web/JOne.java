@@ -26,7 +26,7 @@ public class JOne implements Filter
 			chain.doFilter(request, response);
 			return;
 		}
-		new ActionHandler(context).handle(request, response);
+		ActionHandler.create(context, request, response).handle();
 	}
 
 	public void destroy()

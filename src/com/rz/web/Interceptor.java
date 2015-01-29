@@ -54,5 +54,5 @@ public abstract class Interceptor
 		return matcher.reset(url).matches();
 	}
 
-	public abstract void intercept(ActionContext ctx, InterceptorChain chain) throws Exception;
+	public abstract void intercept(ActionHandler ah, InterceptorChain chain) throws Exception;
 }

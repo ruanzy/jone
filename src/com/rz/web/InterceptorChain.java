@@ -25,7 +25,7 @@ public class InterceptorChain
 		}
 	}
 
-	public void doInterceptor(ActionContext ctx) throws Exception
+	public void doInterceptor(ActionHandler ah) throws Exception
 	{
 		if (index == interceptors.size())
 		{
@@ -34,7 +34,7 @@ public class InterceptorChain
 		else
 		{
 			index++;
-			interceptors.get(index - 1).intercept(ctx, this);
+			interceptors.get(index - 1).intercept(ah, this);
 		}
 	}
 }
