@@ -7,16 +7,18 @@
 }
 
 .rzy-box-title {
-	height: 40px;
-	line-height: 40px;
+	height: 35px;
+	line-height: 35px;
 	font-size: 14px;
 	color: #626262;
 	padding-left: 10px;
-	background-color: #FBFBFB;
+	background: #fcfcfc;
+	background-image: linear-gradient(to bottom,#fff 0,#eee 100%);
 	border-bottom: 1px solid #D2D2D2;
 }
 
 .rzy-box-body {
+	padding: 20px;
 	min-height: 300px;
 }
 

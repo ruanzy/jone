@@ -144,7 +144,7 @@ $(function() {
 			$('#nav').text(title);
 			$(this).addClass('active').siblings('a').removeClass('active');
 			var page = url + '?_=' + new Date().getTime();
-			page = url;
+			//page = url;
 			$('#main').load(page, function(){
 				permit('#main');
 			});

@@ -1,24 +1,36 @@
-
-<div style='position: relative;margin-bottom:5px;'>
-	<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</a>
-	<a id='delbtn' class='btn btn-default'><i class="icon-remove"></i>
-		删除</a> <a id='assignbtn' class='btn btn-default'><i
-		class="icon-pencil"></i> 分配资源</a>
-
-	<div style="position: absolute;bottom : 0; right:10px;">
-		<form id='search-form' class='search-box'>
-			<table>
-				<tr>
-					<td><input type="text" id='searchtxt' name="name"
-						autocomplete="off" placeholder="请输入角色名" /></td>
-					<td><button type="button" class="btn btn-primary">查询</button></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-</div>
-
-<div id='kkk'></div>
+<table width='100%'>
+	<tr>
+		<td><div style='position: relative;margin-bottom:5px;'>
+				<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i>
+					增加</a>
+				<div style="position: absolute;bottom : 0; right:10px;">
+					<form id='search-form' class='search-box'>
+						<table>
+							<tr>
+								<td><input type="text" id='searchtxt' name="name"
+									autocomplete="off" placeholder="请输入角色名" /></td>
+								<td><button type="button" class="btn btn-primary">查询</button></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td width='80%'><div id='kkk'></div></td>
+		<td valign='top' width='20%'>
+			<div class='rzy-box' style="width:100%;">
+				<div class='rzy-box-title'>
+					<i class="icon-sitemap"></i> 资源树
+				</div>
+				<div class='rzy-box-body' style='padding: 10px;'>
+					<ul id="restree" class="ztree" style="width:100%;overflow:auto;"></ul>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
 
 <script type="text/javascript">
 	$('#kkk').table({
@@ -166,4 +178,39 @@
 			}
 		});
 	}
+
+	function initTree() {
+		var setting = {
+			view : {
+				dblClickExpand : false,
+				showLine : true
+			},
+			check : {
+				enable : true
+			},
+			data : {
+				simpleData : {
+					enable : true,
+					pIdKey : "pid",
+					rootPId : 0
+				}
+			}
+		};
+		var treeNodes;
+		$.ajax({
+			async : false,
+			cache : false,
+			type : 'POST',
+			dataType : "json",
+			url : "res/list?_=" + new Date().getTime(),
+			success : function(data) {
+				treeNodes = data;
+			}
+		});
+		$.fn.zTree.init($("#restree"), setting, treeNodes);
+		var treeObj = $.fn.zTree.getZTreeObj("restree");
+		treeObj.expandAll(true);
+	}
+
+	initTree();
 </script>
