@@ -5,11 +5,10 @@ import java.net.InetAddress;
 import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.rz.util.WebUtil;
 
 public class LocalService implements Service
 {
-	String user;
-
 	static Logger log = LoggerFactory.getLogger(LocalService.class);
 
 	public Object call(String sid, Object... args)
@@ -42,7 +41,8 @@ public class LocalService implements Service
 		StringBuffer logs = new StringBuffer();
 		try
 		{
-			String ip =  InetAddress.getLocalHost().getHostAddress(); 
+			String ip = InetAddress.getLocalHost().getHostAddress();
+			String user = WebUtil.getUser();
 			// String op = "";//Util.getOP(sid);
 			// String requestBody = JSON.toJSONString(args);
 			logs.append(user).append("|");
@@ -78,10 +78,4 @@ public class LocalService implements Service
 		}
 		return result;
 	}
-
-	public void setUser(String user)
-	{
-		this.user = user;
-	}
-
 }
