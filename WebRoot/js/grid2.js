@@ -83,12 +83,6 @@
 					html.push("</div>");
 				}
 				el.append(html.join(''));
-				if(settings.linenum){
-					$('.linenum', el).show();
-				}
-				if(settings.multiselect){
-					$('.checkbox', el).show();
-				}
 				
 				
 				$('.grid-row').live('mouseenter', function(){
@@ -209,7 +203,11 @@
 				var len = settings.columns.length;
 				$(settings.columns).each(function(index){
 					var idx = index;
-					if(settings.selector){
+					if(settings.multiselect){
+						idx += 1;
+						len += 1;
+					}
+					if(settings.linenum){
 						idx += 1;
 						len += 1;
 					}
@@ -578,10 +576,10 @@
 		}
 		code.push(">");
 		if(opts.multiselect){
-			code.push("<td align=center width=20 class='checkbox checkall'><i class='icon-check-empty'></i></td>");
+			code.push("<td align=center width=20 class='checkbox'><i class='icon-check-empty'></i></td>");
 		}
 		if(opts.linenum){
-			code.push("<td align=center width=20 class='linenum'>#</td>");
+			code.push("<td align=center width=20 class='linenum'>", index + 1, "</td>");
 		}
 		$(opts.columns).each(function(){
 			var f = this.field;
