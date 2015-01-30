@@ -93,6 +93,7 @@
 				
 				var rows = $('tbody tr', el);
 				$('tbody', el).delegate('tr', 'click', function(){
+					var idx = rows.index(this);
 					if($(this).hasClass('highlight')){
 						$(this).removeClass('highlight');
 						$(this).find('td.checkbox').removeClass('selected').html("<i class='icon-check-empty'></i>");
@@ -103,8 +104,10 @@
 						}
 						$(this).addClass('highlight');
 						$('td.checkbox', this).addClass('selected').html("<i class='icon-check'></i>");
-						var idx = rows.index(this);
 						settings.onSelectRow(idx);
+					}
+					if($(this).attr('editable') == 0){
+						el.table('editRow', idx);
 					}
 				});
 				
@@ -296,14 +299,36 @@
 			$('table.dataview tbody',this).prepend(code.join(''));
 			rows.splice(index, 0, record); 
         },
-        editRow: function(index, field, value){
-        	var rows = $(this).data('rows');
-        	var record = rows[index];
-        	var _s = record['_s'];
-        	if(!_s){
-        		record['_s'] = 'modified';
-        	}
-        	record[field] = value;
+        editRow: function(rowindex){
+        	var opts = $(this).data('options');
+        	var tr = $("tbody tr", this).eq(rowindex);
+        	tr.find('td').each(function(){
+        		var cell = $(this);
+        		var field = $(this).attr('field');
+            	var editor = null;
+    			$(opts.columns).each(function(){
+            		var f = this.field;
+            		if(field == f){
+            			editor = this.editor;
+            			return false;
+            		}
+            	});
+    			if(editor){
+	    			tr.attr('editable', 1);
+    				var v0 = cell.html();
+					cell.html("");
+		    		var input = $('<input type="text" id="' + rowindex + '_' + field + '"/>');
+		    		input.width(cell.width() - 14).val(v0).appendTo(cell);
+		    		input.focus();
+		    		input.click(function() {
+						return false;
+					});
+		    		input.blur(function() {
+						var v = $(this).val();
+						cell.html(v);
+					});
+    			}
+        	});
         },
         save: function(data){
         	var grid = $(this);
@@ -574,7 +599,7 @@
 		if((index + 1) % 2 == 0){
 			code.push(" class='strips'");
 		}
-		code.push(">");
+		code.push(" editable=0>");
 		if(opts.multiselect){
 			code.push("<td align=center width=20 class='checkbox'><i class='icon-check-empty'></i></td>");
 		}
