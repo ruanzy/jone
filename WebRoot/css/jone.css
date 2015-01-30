@@ -639,7 +639,7 @@ label.css
 **/
 .label {
 	font-size: 12px;
-	padding: 4px 6px 4px 6px;
+	padding: 1px 5px;
 	line-height: 1;
 	color: #fff;
 	text-align: center;
