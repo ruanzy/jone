@@ -61,7 +61,7 @@
 			header : "注册时间",
 			field : "regtime",
 			align : 'center',
-			width : 180
+			width : 150
 		}, {
 			header : "状态",
 			field : "state",
@@ -82,7 +82,8 @@
 			render : opRender
 		} ],
 		url : 'user/list',
-		selector : 'm',
+		multiselect : true,
+		linenum : true,
 		condition : condition
 	});
 	$('#addbtn').click(add);

@@ -83,7 +83,12 @@
 					html.push("</div>");
 				}
 				el.append(html.join(''));
-				
+				if(settings.linenum){
+					$('.linenum', el).show();
+				}
+				if(settings.multiselect){
+					$('.checkbox', el).show();
+				}
 				
 				
 				$('.grid-row').live('mouseenter', function(){
@@ -94,12 +99,19 @@
 				
 				var rows = $('tbody tr', el);
 				$('tbody', el).delegate('tr', 'click', function(){
-					$(this).siblings('tr').removeClass('highlight');
-					$(this).siblings('tr').find(':checkbox').attr("checked",false);
-					$(this).addClass('highlight');
-					$(':checkbox', this).attr("checked",true);
-					var idx = rows.index(this);
-					settings.onSelectRow(idx);
+					if($(this).hasClass('highlight')){
+						$(this).removeClass('highlight');
+						$(this).find('td.checkbox').removeClass('selected').html("<i class='icon-check-empty'></i>");
+					}else{
+						if(!settings.multiselect){
+							$(this).siblings('tr').removeClass('highlight');
+							$(this).siblings('tr').find('td.checkbox').removeClass('selected').html("<i class='icon-check-empty'></i>");
+						}
+						$(this).addClass('highlight');
+						$('td.checkbox', this).addClass('selected').html("<i class='icon-check'></i>");
+						var idx = rows.index(this);
+						settings.onSelectRow(idx);
+					}
 				});
 				
 				//$('tbody tr:odd', el).addClass('strips');
@@ -138,12 +150,18 @@
 		        	return v;
 				}
 
-				$(':checkbox[name=checkall]', el).click(function(){
-					$('tbody tr :checkbox', el).attr("checked",this.checked);
+				$('.checkall', el).click(function(){
+					if($(this).hasClass('selected')){
+						$('.checkbox', el).removeClass('selected').html("<i class='icon-check-empty'></i>");
+						$('.checkbox', el).parents('tr').removeClass('highlight');
+					}else{				
+						$('.checkbox', el).addClass('selected').html("<i class='icon-check'></i>");
+						$('.checkbox', el).parents('tr').addClass('highlight');
+					}
 				});
 				
 				$('.pageNum', el).live('click',function(e){
-					$(':checkbox[name=checkall]', el).attr("checked",false);
+					$('.checkbox', el).removeClass('selected').html("<i class='icon-check-empty'></i>");
 					var p = parseInt($(this).attr('p'));
 					var pagesize = parseInt(el.data('pagesize'));
 					var url = el.data('url');
@@ -163,7 +181,7 @@
 				});
 				$('div.pagination a', el).live('click',function(e){
 					var p = 1;
-					$(':checkbox[name=checkall]', el).attr("checked",false);
+					$('.checkbox', el).removeClass('selected').html("<i class='icon-check-empty'></i>");
 					var curpage = parseInt($('div.pagination a.active', el).text());
 					if($(this).hasClass('prev')){
 						p = curpage - 1;
@@ -210,7 +228,7 @@
         },
         reload: function(params){
         	return this.each(function(){
-        		$(':checkbox[name=checkall]', this).attr("checked",false);
+        		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
         		var opts = $(this).data('options');
         		
         		var url = opts.url;
@@ -234,7 +252,7 @@
         },
         refresh: function(params){
         	return this.each(function(){
-        		$(':checkbox[name=checkall]', this).attr("checked",false);
+        		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
         		var opts = $(this).data('options');
         		var url = opts.url;
         		var page = parseInt($(this).data('page'));
@@ -259,12 +277,15 @@
         },
         getSelected: function(){
         	var ret = [];
-        	var checked = $('tbody :checkbox:checked', this);
         	var grid = this;
-        	checked.each(function() {   
-        		var idx = $(this).val();   
-        		ret.push(grid.data('ds').data[idx]);   
-        	});  
+        	var rows = $('tbody tr', grid);
+        	rows.each(function(){
+        		if($(this).hasClass('highlight')){
+        			var rowid = rows.index(this);
+        			var rowdata = grid.table('getRowData', rowid);
+        			ret.push(rowdata);   
+        		}
+        	});
         	return ret;
         },
         addRow: function(record, index){
@@ -556,11 +577,11 @@
 			code.push(" class='strips'");
 		}
 		code.push(">");
-		if(opts.selector&&(opts.selector == 'm')){
-			code.push("<td align=center width=30><input type=checkbox hideFocus value=" + index + "></td>");
+		if(opts.multiselect){
+			code.push("<td align=center width=20 class='checkbox checkall'><i class='icon-check-empty'></i></td>");
 		}
-		else if(opts.selector&&(opts.selector == 's')){
-			code.push("<td align=center width=30><input type=radio hideFocus name=ids value=" + index + "></td>");
+		if(opts.linenum){
+			code.push("<td align=center width=20 class='linenum'>#</td>");
 		}
 		$(opts.columns).each(function(){
 			var f = this.field;
@@ -603,11 +624,11 @@
 		var code = new Array();
 		
 		code.push("<thead><tr>");
-		if(opts.selector&&(opts.selector == 'm')){
-			code.push("<th align=center width=30><input type=checkbox name='checkall' hideFocus></th>");
+		if(opts.multiselect){
+			code.push("<th align=center width=20 class='checkbox checkall'><i class='icon-check-empty'></i></th>");
 		}
-		else if(opts.selector&&(opts.selector == 's')){
-			code.push("<th align=center width=30></th>");
+		if(opts.linenum){
+			code.push("<th align=center width=20 class='linenum'>#</th>");
 		}
 		$(opts.columns).each(function(){
 			var h = this.header;
