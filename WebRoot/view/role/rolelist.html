@@ -62,7 +62,7 @@
 					var treeObj = $.fn.zTree.getZTreeObj("restree");
 					treeObj.checkAllNodes(false);
 					$(result).each(function(){
-						treeObj.checkNode(treeObj.getNodeByParam("id", this, null), true, true);
+						treeObj.checkNode(treeObj.getNodeByParam("id", this, null), true, false);
 					});
 				}
 			});

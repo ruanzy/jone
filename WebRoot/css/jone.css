@@ -583,6 +583,7 @@ grid.css
 }
 
 .table tbody tr td {
+	padding: 0;
 	height: 35px;
 	line-height: 35px;
 	padding-left: 6px;
