@@ -106,6 +106,11 @@
 						$('td.checkbox', this).addClass('selected').html("<i class='icon-check'></i>");
 						settings.onSelectRow(idx);
 					}
+					var editing = $('tbody tr[editable=1]', el);
+					if(editing.length > 0){
+						var ridx = rows.index(editing);
+						el.table('saveRow', ridx);
+					}
 					if($(this).attr('editable') == 0){
 						el.table('editRow', idx);
 					}
@@ -203,7 +208,7 @@
 					$('div.pagination',el).empty().append(pager2(dd.total, p, pagesize));
 					$('tbody tr:odd', el).addClass('strips');
 				});
-				var len = settings.columns.length;
+				/**var len = settings.columns.length;
 				$(settings.columns).each(function(index){
 					var idx = index;
 					if(settings.multiselect){
@@ -224,7 +229,7 @@
 							$.fn.table.editors[type].init(cell, opts);
 						});
 					}
-				});
+				});**/
 			});
         },
         reload: function(params){
@@ -329,6 +334,31 @@
 					});
     			}
         	});
+        },
+        saveRow: function(rowindex){
+        	var opts = $(this).data('options');
+        	var tr = $("tbody tr", this).eq(rowindex);
+        	var editing = tr.attr('editable');
+        	if(editing == 1){
+        		tr.attr('editable', 0);
+	        	tr.find('td').each(function(){
+	        		var cell = $(this);
+	        		var field = $(this).attr('field');
+	            	var editor = null;
+	    			$(opts.columns).each(function(){
+	            		var f = this.field;
+	            		if(field == f){
+	            			editor = this.editor;
+	            			return false;
+	            		}
+	            	});
+	    			if(editor){
+		    			var ctrid = rowindex + '_' + field;
+	    				var v0 = $('#' + ctrid).val();
+						cell.html(v0);
+	    			}
+	        	});
+        	}
         },
         save: function(data){
         	var grid = $(this);
