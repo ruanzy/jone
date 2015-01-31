@@ -322,16 +322,25 @@
 	    			tr.attr('editable', 1);
     				var v0 = cell.html();
 					cell.html("");
-		    		var input = $('<input type="text" id="' + rowindex + '_' + field + '"/>');
-		    		input.width(cell.width() - 14).val(v0).appendTo(cell);
-		    		input.focus();
-		    		input.click(function() {
-						return false;
-					});
-		    		input.blur(function() {
-						var v = $(this).val();
-						cell.html(v);
-					});
+					var padding = parseInt(cell.css('padding-left'));
+					if(editor.type == 'text'){
+			    		var input = $('<input type="text" id="' + rowindex + '_' + field + '"/>');
+			    		input.width(cell.width() - 2*padding).val(v0).appendTo(cell);
+			    		//input.focus();
+			    		input.click(function() {
+							return false;
+						});
+			    		input.blur(function() {
+							var v = $(this).val();
+							//cell.html(v);
+						});
+					}else if(editor.type == 'datebox'){
+						var ctrhtml = [];
+						ctrhtml.push('<input type="text" id="', rowindex, '_', field, '"');
+						ctrhtml.push('class="Wdate" onFocus="WdatePicker({readOnly:true})"', '/>');
+			    		var ctr = $(ctrhtml.join(''));
+			    		ctr.width(cell.width() - 2*padding).val(v0).appendTo(cell);
+					}
     			}
         	});
         },
