@@ -340,6 +340,14 @@
 						ctrhtml.push('class="Wdate" onFocus="WdatePicker({readOnly:true})"', '/>');
 			    		var ctr = $(ctrhtml.join(''));
 			    		ctr.width(cell.width() - 2*padding).val(v0).appendTo(cell);
+					}else if(editor.type == 'selecttree'){
+						var ctrhtml = [];
+						ctrhtml.push('<input type="text" id="', rowindex, '_', field, '"/>');
+			    		var ctr = $(ctrhtml.join(''));
+			    		ctr.width(cell.width() - 2*padding).appendTo(cell);
+			    		ctr.selecttree({
+			    			url : 'depart/tree'
+			    		});
 					}
     			}
         	});
