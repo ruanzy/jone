@@ -35,10 +35,7 @@
 			header : "部门",
 			field : "departname",
 			align : 'left',
-			width : 100,
-			editor : {
-				type : 'selecttree'
-			}
+			width : 100
 		}, {
 			header : "E-mail",
 			field : "email",
@@ -67,8 +64,14 @@
 			header : "性别",
 			field : "gender",
 			align : 'center',
+			width : 80,
 			render : genderRender,
-			width : 50
+			editor : {
+				type : 'selectbox',
+				option : {
+					ds : [{text:'男', value:1}, {text:'女', value:2}]
+				}
+			}
 		}, {
 			header : "注册时间",
 			field : "regtime",
@@ -88,8 +91,6 @@
 			render : opRender
 		} ],
 		url : 'user/list',
-		multiselect : true,
-		linenum : true,
 		condition : condition
 	});
 	$('#addbtn').click(add);

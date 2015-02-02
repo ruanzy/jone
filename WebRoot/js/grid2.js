@@ -306,10 +306,12 @@
         },
         editRow: function(rowindex){
         	var opts = $(this).data('options');
+        	var rowData = this.table('getRowData', rowindex);
         	var tr = $("tbody tr", this).eq(rowindex);
         	tr.find('td').each(function(){
         		var cell = $(this);
         		var field = $(this).attr('field');
+        		var fieldValue = rowData[field];
             	var editor = null;
     			$(opts.columns).each(function(){
             		var f = this.field;
@@ -349,6 +351,13 @@
 			    			url : 'depart/tree'
 			    		});
 			    		ctr.selecttree('val', v0);
+					}else if(editor.type == 'selectbox'){
+						var ctrhtml = [];
+						ctrhtml.push('<select id="', rowindex, '_', field, '">');
+			    		var ctr = $(ctrhtml.join(''));
+			    		ctr.width(cell.width() - 2*padding).appendTo(cell);
+			    		ctr.selectbox(editor.option);
+			    		ctr.selectbox('setValue', fieldValue);
 					}
     			}
         	});
@@ -362,19 +371,38 @@
 	        	tr.find('td').each(function(){
 	        		var cell = $(this);
 	        		var field = $(this).attr('field');
-	            	var editor = null;
-	    			$(opts.columns).each(function(){
-	            		var f = this.field;
-	            		if(field == f){
-	            			editor = this.editor;
-	            			return false;
-	            		}
-	            	});
-	    			if(editor){
-		    			var ctrid = rowindex + '_' + field;
-	    				var v0 = $('#' + ctrid).val();
-						cell.html(v0);
-	    			}
+	        		if(field){
+		            	var cm = null;
+		    			$.each(opts.columns, function(){
+		            		var f = this.field;
+		            		if(field == f){
+		            			cm = this;
+		            			return false;
+		            		}
+		            	});
+		    			if(cm.editor){
+		    				var editor = cm.editor;
+		    				var render = cm.render;
+		    				var ctrid = rowindex + '_' + field;
+		    				var ctr = $('#' + ctrid);
+							if(editor.type == 'text'){
+								var v = ctr.val();
+								cell.html(v);
+							}else if(editor.type == 'datebox'){
+								var v = ctr.val();
+								cell.html(v);
+							}else if(editor.type == 'selecttree'){
+	
+							}else if(editor.type == 'selectbox'){
+					    		var v = ctr.selectbox('getValue');
+					    		if(render){
+					    			cell.html(render(v));
+					    		}else{				    			
+					    			cell.html(v);
+					    		}
+							}
+		    			}
+	        		}
 	        	});
         	}
         },
