@@ -353,7 +353,7 @@
 			    		ctr.selecttree('val', v0);
 					}else if(editor.type == 'selectbox'){
 						var ctrhtml = [];
-						ctrhtml.push('<select id="', rowindex, '_', field, '">');
+						ctrhtml.push('<input type="text" id="', rowindex, '_', field, '"/>');
 			    		var ctr = $(ctrhtml.join(''));
 			    		ctr.width(cell.width() - 2*padding).appendTo(cell);
 			    		ctr.selectbox(editor.option);

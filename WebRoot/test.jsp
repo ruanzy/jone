@@ -13,8 +13,7 @@
 		<i class="icon-remove-sign"></i> 删除
 	</button>
 </div>
-<select id='mbmb' style='width:200px;'>
-</select>
+<input id='mbmb' type="text"/>
 <script type="text/javascript">
 	$('#mbmb').selectbox({
 		ds : [{text:'男', value:1}, {text:'女', value:2}]

@@ -19,7 +19,7 @@
 		init : function(options) {
 			var opts = $.extend({}, $.fn.selectbox.defaults, options);
 			return this.each(function() {
-				if (this.tagName != 'SELECT') {
+				if (this.tagName != 'INPUT') {
 					return;
 				}
 				var me = $(this).hide();
@@ -33,7 +33,7 @@
 				p1.push("<div class='text'></div><i class='icon-angle-down'></i>");
 				me.wrap(dl).after(p1.join(''));
 				var txt = me.siblings("div.text");
-				var dt = me.parent("dt").width(me.outerWidth() - 2).height(26).css('line-height', (26) + 'px');
+				var dt = me.parent("dt").width(me.outerWidth() - 2).height(me.outerHeight() - 2).css('line-height', (me.outerHeight() - 2) + 'px');
 				var H = dt.outerWidth();
 				var dd = dt.siblings("dd").css('min-width', me.outerWidth() - 2);
 				var searchbox = dd.find('.searchbox').hide();
