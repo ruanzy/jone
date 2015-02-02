@@ -348,6 +348,7 @@
 			    		ctr.selecttree({
 			    			url : 'depart/tree'
 			    		});
+			    		ctr.selecttree('val', v0);
 					}
     			}
         	});

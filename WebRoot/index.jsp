@@ -30,6 +30,7 @@
 <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="js/ztree.js"></script>
 <script type="text/javascript" src="js/selecttree.js"></script>
+<script type="text/javascript" src="js/select.js"></script>
 <script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
 </head>
 <BODY>

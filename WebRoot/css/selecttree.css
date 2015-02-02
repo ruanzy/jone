@@ -5,6 +5,7 @@
 
 .selecttree dt {
 	padding: 0;
+	position: relative;
 	font-size: 14px;
 	font-weight: normal;
 	cursor: pointer;
@@ -13,7 +14,13 @@
 }
 
 .selecttree dt .text{
-	padding: 5px;
+	position: absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	font-size: 14px;
+	padding-left: 5px;
 	color: #555;
 }
 
@@ -24,20 +31,94 @@
 .selecttree i {
 	position: absolute;
 	width: 11px;
-	height: 7px;
-	top: 8px;
-	right: 8px;
+	height: 11px;
+	top: 7px;
+	right: 5px;
 	cursor: pointer;
 }
 
 .selecttree dd {
 	position: absolute;
 	border: 1px solid #ccc;
-	border-top: none;
+	margin-top: 1px;
+	float:left;
 	background: #FFF;
 	display: none;
+	z-index:300;
+	width:auto;
 }
 
 ul {
 	padding: 0;
+}
+
+
+
+.selectbox {
+	position: relative;
+	display: inline-block;
+}
+
+.selectbox dt {
+	padding: 0;
+	position: relative;
+	font-size: 14px;
+	font-weight: normal;
+	cursor: pointer;
+	color: #333;
+	border: 1px solid #ccc;
+}
+
+.selectbox dt .text{
+	position: absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	font-size: 14px;
+	padding-left: 5px;
+	color: #555;
+}
+
+.selectbox dt.expand {
+	border-color: #ccc;
+}
+
+.selectbox i {
+	position: absolute;
+	width: 11px;
+	height: 11px;
+	top: 8px;
+	right: 8px;
+	cursor: pointer;
+}
+
+.selectbox dd {
+	position: absolute;
+	border: 1px solid #ccc;
+	margin-top: 1px;
+	float:left;
+	background: #FFF;
+	display: none;
+	z-index:300;
+	width:auto;
+}
+
+.searchbox{
+	outline: none;
+	width: 90%;
+}
+
+.selectbox dd  li{
+	padding: 5px 0 5px 5px;
+}
+
+.selectbox dd  li:hover{
+	background: lightblue;
+	color:#fff;
+}
+
+.selectbox dd  li.selected{
+	background: #427fed;
+	color:#fff;
 }

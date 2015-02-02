@@ -26,14 +26,14 @@
 				var rdm = new Date().getTime() + '_'
 						+ Math.floor(Math.random() * (100 - 1 + 1) + 1);
 				var dl = $("<dl class='selecttree'><dt id='dt_" + rdm
-						+ "'></dt><dd><ul class='ztree' style='overflow:auto;'></ul></dd><i class='icon-angle-down'></i><div class='mask'></div></dl>");
+						+ "'></dt><dd><ul class='ztree' style='overflow:auto;'></ul></dd><div class='mask'></div></dl>");
 				var p1 = [];
-				p1.push("<div class='text'></div>");
+				p1.push("<div class='text'></div><i class='icon-angle-down'></i>");
 				me.wrap(dl).after(p1.join(''));
 				var txt = me.siblings("div.text");
-				var dt = me.parent("dt").width(me.outerWidth() - 2).height(me.outerHeight() - 2);
+				var dt = me.parent("dt").width(me.outerWidth() - 2).height(me.outerHeight() - 2).css('line-height', (me.outerHeight() - 2) + 'px');
 				var H = dt.outerWidth();
-				var dd = dt.siblings("dd").width(H - 2);
+				var dd = dt.siblings("dd").css('min-width', me.outerWidth() - 2);
 				var mask = dt.siblings("div.mask");
 				if (disabled) {
 					mask.show();
