@@ -35,6 +35,17 @@ public class User
 		}
 		return new Msg("add success");
 	}
+	
+	public View updated()
+	{
+		String data = WebUtil.getParameter("updated");
+		List<Map<String, Object>> list = JSONUtil.toList(data);
+		for (Map<String, Object> map : list)
+		{
+			WebUtil.call("PmsService.moduser", map);
+		}
+		return new Msg("update success");
+	}
 
 	public View del()
 	{

@@ -99,6 +99,21 @@
 	$('#assignbtn').click(mk);
 	$('#updatedbtn').click(function(){
 		var mm = $('#kkk').table('getUpdated');
+		var text = JSON.stringify(mm);
+		$.ajax({
+			url : 'user/updated',
+			type : 'post',
+			data : {updated: text},
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			dataType : 'json',
+			success : function(result) {
+				if (result.result) {
+					$.pop(result.msg, function() {
+						$('#kkk').table('refresh');
+					});
+				}
+			}
+		});
 	});
 	function add() {
 		$.dialog({

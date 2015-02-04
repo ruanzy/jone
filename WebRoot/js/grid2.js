@@ -254,6 +254,7 @@
 				var dd = ds(url, p);
 				$(this).data('ds', dd);
 				$(this).data('rows', dd.data);
+				$(this).data('updated', {});
 				$('tbody',this).empty().append(body(dd.data, opts));
 				$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
 				$('tbody tr:odd', this).addClass('strips');
@@ -264,9 +265,9 @@
         		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
         		var opts = $(this).data('options');
         		var url = opts.url;
-        		var page = parseInt($(this).data('page'));
+        		var page = parseInt($('div.pagination a.active', this).text());
         		var pagesize = parseInt($(this).data('pagesize'));
-        		var p = {page:1, pagesize:pagesize};
+        		var p = {page:page, pagesize:pagesize};
         		if(params){
         			p = $.extend(p, params);
         		}else{
@@ -280,8 +281,9 @@
  				var dd = ds(url, p);
 				$(this).data('ds', dd);
 				$(this).data('rows', dd.data);
+				$(this).data('updated', {});
 				$('tbody',this).empty().append(body(dd.data, opts));
-				$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
+				$('div.pagination',this).empty().append(pager2(dd.total, dd.page, pagesize));
 				$('tbody tr:odd', this).addClass('strips');
         	});
         },
@@ -374,10 +376,11 @@
         },
         saveRow: function(rowindex){
         	var opts = $(this).data('options');
-        	var updated = $(this).data('updated');
-        	updated[rowindex] = {};
+        	var rowData = this.table('getRowData', rowindex);
+        	var newData = jQuery.extend(true, {}, rowData);
         	var tr = $("tbody tr", this).eq(rowindex);
         	var editing = tr.attr('editable');
+        	var changed = false;
         	if(editing == 1){
         		tr.attr('editable', 0);
 	        	tr.find('td').each(function(){
@@ -400,11 +403,17 @@
 							if(editor.type == 'text'){
 								var v = ctr.val();
 								cell.html(v);
-								updated[rowindex][field] = v;
+								if(v != newData[field]){
+									changed = true;
+									newData[field] = v;
+								}
 							}else if(editor.type == 'datebox'){
 								var v = ctr.val();
 								cell.html(v);
-								updated[rowindex][field] = v;
+								if(v != newData[field]){
+									changed = true;
+									newData[field] = v;
+								}
 							}else if(editor.type == 'selecttree'){
 	
 							}else if(editor.type == 'selectbox'){
@@ -414,11 +423,18 @@
 					    		}else{				    			
 					    			cell.html(v);
 					    		}
-					    		updated[rowindex][field] = v;
+								if(v != newData[field]){
+									changed = true;
+									newData[field] = v;
+								}
 							}
 		    			}
 	        		}
 	        	});
+        	}
+        	if(changed){
+	        	var updated = $(this).data('updated');
+	        	updated[rowindex] = newData;
         	}
         },
         save: function(data){
@@ -455,10 +471,16 @@
         	var rows = $(this).data('rows');
         	return rows[rowindex];
         },
-        getUpdated: function(rowindex){
+        getUpdated: function(){
         	var rows = $(this).data('rows');
         	var updated = $(this).data('updated');
-        	return updated;
+        	var ret = [];
+        	for(rowindex in updated){
+        		if(rows[rowindex] != updated[rowindex]){
+        			ret.push(updated[rowindex]);
+        		}
+        	}
+        	return ret;
         },
 		getEditor: function(field){
         	var editor = null;

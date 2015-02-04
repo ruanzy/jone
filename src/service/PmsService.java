@@ -66,13 +66,14 @@ public class PmsService
 
 	public void moduser(Map<String, Object> map)
 	{
-		String sql = "update topic set title=?,memo=?,content=?,updatetime=? where id=?";
-		Object title = map.get("title");
+		String sql = "update users set username=?,memo=?,phone=?,email=?,gender=? where id=?";
+		Object username = map.get("username");
 		Object memo = map.get("memo");
-		Object content = map.get("content");
-		String updatetime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
+		Object phone = map.get("phone");
+		Object email = map.get("email");
+		Object gender = map.get("gender");
 		Object id = map.get("id");
-		Object[] params = new Object[] { title, memo, content, updatetime, id };
+		Object[] params = new Object[] { username, memo, phone, email, gender, id };
 		dao.update(sql, params);
 	}
 

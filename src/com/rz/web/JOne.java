@@ -21,6 +21,7 @@ public class JOne implements Filter
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		String url = request.getServletPath();
+		request.setCharacterEncoding("UTF-8");
 		boolean isStatic = url.lastIndexOf(".") != -1;
 		if(isStatic){
 			chain.doFilter(request, response);
