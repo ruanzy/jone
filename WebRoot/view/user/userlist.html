@@ -1,5 +1,6 @@
 <div style='position: relative;margin-bottom:5px;'>
 	<a id='addbtn' class='btn btn-default'><i class="icon-plus"></i> 增加</a>
+	<a id='updatedbtn' class='btn btn-default'><i class="icon-plus"></i> updated</a>
 	<!-- 
 <a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
 <a id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配角色</a>
@@ -96,6 +97,9 @@
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);
 	$('#assignbtn').click(mk);
+	$('#updatedbtn').click(function(){
+		var mm = $('#kkk').table('getUpdated');
+	});
 	function add() {
 		$.dialog({
 			title : '用户新增',

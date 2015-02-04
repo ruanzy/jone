@@ -48,6 +48,7 @@
 			return this.each(function(){
 				var el = $(this).addClass('grid');
 				el.data('pagesize', 10);
+				$(this).data('updated', {});
 				var data = new Array();
 				if(settings.url){
 					el.data('url', settings.url);
@@ -308,10 +309,17 @@
         	var opts = $(this).data('options');
         	var rowData = this.table('getRowData', rowindex);
         	var tr = $("tbody tr", this).eq(rowindex);
+        	var updated = $(this).data('updated');
+        	var updatedRowData = updated[rowindex] || {};
         	tr.find('td').each(function(){
         		var cell = $(this);
         		var field = $(this).attr('field');
         		var fieldValue = rowData[field];
+        		var updatedValue = updatedRowData[field];
+        		var v0 = fieldValue;
+        		if(updatedValue){
+        			v0 = updatedValue;
+        		}
             	var editor = null;
     			$(opts.columns).each(function(){
             		var f = this.field;
@@ -322,7 +330,6 @@
             	});
     			if(editor){
 	    			tr.attr('editable', 1);
-    				var v0 = cell.html();
 					cell.html("");
 					var padding = parseInt(cell.css('padding-left'));
 					if(editor.type == 'text'){
@@ -357,13 +364,15 @@
 			    		var ctr = $(ctrhtml.join(''));
 			    		ctr.width(cell.width() - 2*padding).appendTo(cell);
 			    		ctr.selectbox(editor.option);
-			    		ctr.selectbox('setValue', fieldValue);
+			    		ctr.selectbox('setValue', v0);
 					}
     			}
         	});
         },
         saveRow: function(rowindex){
         	var opts = $(this).data('options');
+        	var updated = $(this).data('updated');
+        	updated[rowindex] = {};
         	var tr = $("tbody tr", this).eq(rowindex);
         	var editing = tr.attr('editable');
         	if(editing == 1){
@@ -388,9 +397,11 @@
 							if(editor.type == 'text'){
 								var v = ctr.val();
 								cell.html(v);
+								updated[rowindex][field] = v;
 							}else if(editor.type == 'datebox'){
 								var v = ctr.val();
 								cell.html(v);
+								updated[rowindex][field] = v;
 							}else if(editor.type == 'selecttree'){
 	
 							}else if(editor.type == 'selectbox'){
@@ -400,6 +411,7 @@
 					    		}else{				    			
 					    			cell.html(v);
 					    		}
+					    		updated[rowindex][field] = v;
 							}
 		    			}
 	        		}
@@ -439,6 +451,11 @@
         getRowData: function(rowindex){
         	var rows = $(this).data('rows');
         	return rows[rowindex];
+        },
+        getUpdated: function(rowindex){
+        	var rows = $(this).data('rows');
+        	var updated = $(this).data('updated');
+        	return updated;
         },
 		getEditor: function(field){
         	var editor = null;
