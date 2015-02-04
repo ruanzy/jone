@@ -32,6 +32,7 @@
 <script type="text/javascript" src="js/selecttree.js"></script>
 <script type="text/javascript" src="js/select.js"></script>
 <script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
+<script type="text/javascript" src="js/accordion.js"></script>
 </head>
 <BODY>
 	<div id="header"></div>

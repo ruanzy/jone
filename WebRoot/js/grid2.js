@@ -92,8 +92,8 @@
 					$(this).removeClass('strips');
 				});
 				
-				var rows = $('tbody tr', el);
-				$('tbody', el).delegate('tr', 'click', function(){
+				$('tbody tr', el).live('click', function(){
+					var rows = $('tbody tr', el);
 					var idx = rows.index(this);
 					if($(this).hasClass('highlight')){
 						$(this).removeClass('highlight');
@@ -204,6 +204,7 @@
 					}
 					var dd = ds(url, baseparams);
 					el.data('ds', dd);
+					el.data('rows', dd.data);
 					var opts = el.data('options');
 					$('tbody',el).empty().append(body(dd.data, opts));
 					$('div.pagination',el).empty().append(pager2(dd.total, p, pagesize));
@@ -252,6 +253,7 @@
 				}
 				var dd = ds(url, p);
 				$(this).data('ds', dd);
+				$(this).data('rows', dd.data);
 				$('tbody',this).empty().append(body(dd.data, opts));
 				$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
 				$('tbody tr:odd', this).addClass('strips');
@@ -277,6 +279,7 @@
 
  				var dd = ds(url, p);
 				$(this).data('ds', dd);
+				$(this).data('rows', dd.data);
 				$('tbody',this).empty().append(body(dd.data, opts));
 				$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
 				$('tbody tr:odd', this).addClass('strips');
