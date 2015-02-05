@@ -304,11 +304,10 @@
         },
         addRow: function(record){
         	var len = $(this).data('allrow').length;
-        	index = index ? index : len;
         	var opts = $(this).data('options');
         	var rows = $(this).data('rows');
 			var code = new Array();
-			code.push(buildRow(record, index, opts));
+			code.push(buildRow(record, 0, opts));
 			$('tbody',this).prepend(code.join(''));
 			$(this).data('allrow').push(record);
 			this.table('editRow', 0);
