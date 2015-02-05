@@ -73,7 +73,7 @@
 							cache : false,
 							type : 'POST',
 							dataType : "json",
-							url : url,
+							url : opts.url,
 							success : function(data) {
 								treeNodes = data;
 							}
