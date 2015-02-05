@@ -1,6 +1,7 @@
 <div style='position: relative;margin-bottom:5px;'>
 	<a id='addbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
 	<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
+	<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> append</a>
 	<!-- 
 <a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
 <a id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配角色</a>
@@ -142,6 +143,9 @@
 				}
 			}
 		});
+	});
+	$('#appendbtn').click(function(){
+		$('#kkk').table('addRow', {username:'rzy'});
 	});
 	function add() {
 		$.dialog({

@@ -49,6 +49,7 @@
 				var el = $(this).addClass('grid');
 				el.data('pagesize', 10);
 				$(this).data('updated', {});
+				$(this).data('allrow', {});
 				var data = new Array();
 				if(settings.url){
 					el.data('url', settings.url);
@@ -68,6 +69,7 @@
 				var rows = data.data.slice(0); 
 				$(this).data('options', settings);
 				el.data('rows', rows);
+				$(this).data('allrow', rows);
 				el.data('ds', data);
 				el.data('total', data.total);
 				var html = new Array();
@@ -300,15 +302,16 @@
         	});
         	return ret;
         },
-        addRow: function(record, index){
-        	index = index ? index : 0;
-        	record['_s'] = 'added';
+        addRow: function(record){
+        	var len = $(this).data('allrow').length;
+        	index = index ? index : len;
         	var opts = $(this).data('options');
         	var rows = $(this).data('rows');
 			var code = new Array();
-			code.push(buildRow(record, opts));
-			$('table.dataview tbody',this).prepend(code.join(''));
-			rows.splice(index, 0, record); 
+			code.push(buildRow(record, index, opts));
+			$('tbody',this).prepend(code.join(''));
+			$(this).data('allrow').push(record);
+			this.table('editRow', 0);
         },
         editRow: function(rowindex){
         	var opts = $(this).data('options');
@@ -475,7 +478,7 @@
         	return rows[rowindex][field];
         },
         getRowData: function(rowindex){
-        	var rows = $(this).data('rows');
+        	var rows = $(this).data('allrow');
         	return rows[rowindex];
         },
         getUpdated: function(){
