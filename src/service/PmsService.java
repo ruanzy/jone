@@ -160,7 +160,7 @@ public class PmsService
 		String username = (String) map.get("username");
 		String pwd = "111111";
 		pwd = CryptUtil.encrypt(username + pwd);
-		String regtime = TimeUtil.now("yyyy-MM-dd HH:mm:ss");
+		String regtime = TimeUtil.now("yyyy-MM-dd");
 		String email = (String) map.get("email");
 		String phone = (String) map.get("phone");
 		String memo = (String) map.get("memo");
