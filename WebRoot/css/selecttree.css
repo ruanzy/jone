@@ -11,6 +11,7 @@
 	cursor: pointer;
 	color: #333;
 	border: 1px solid #ccc;
+	background: #fff;
 }
 
 .selecttree dt .text{
@@ -66,6 +67,7 @@ ul {
 	cursor: pointer;
 	color: #333;
 	border: 1px solid #ccc;
+	background: #fff;
 }
 
 .selectbox dt .text{

@@ -591,6 +591,10 @@ grid.css
 	word-wrap: break-word;
 }
 
+.table tbody tr:hover {
+	background: #fafac2;
+}
+
 tr.strips {
 	background: #fafafa;
 }
