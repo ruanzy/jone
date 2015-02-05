@@ -359,10 +359,8 @@
 						ctrhtml.push('<input type="text" id="', rowindex, '_', field, '"/>');
 			    		var ctr = $(ctrhtml.join(''));
 			    		ctr.width(cell.width() - 2*padding).appendTo(cell);
-			    		ctr.selecttree({
-			    			url : 'depart/tree'
-			    		});
-			    		ctr.selecttree('val', v0);
+			    		ctr.selecttree(editor.option);
+			    		ctr.selecttree('setValue', v0);
 					}else if(editor.type == 'selectbox'){
 						var ctrhtml = [];
 						ctrhtml.push('<input type="text" id="', rowindex, '_', field, '"/>');
@@ -415,7 +413,16 @@
 									newData[field] = v;
 								}
 							}else if(editor.type == 'selecttree'){
-	
+					    		var v = ctr.selecttree('getValue');
+					    		if(render){
+					    			cell.html(render(v));
+					    		}else{				    			
+					    			cell.html(v);
+					    		}
+								if(v != newData[field]){
+									changed = true;
+									newData[field] = v;
+								}
 							}else if(editor.type == 'selectbox'){
 					    		var v = ctr.selectbox('getValue');
 					    		if(render){

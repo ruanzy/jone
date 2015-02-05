@@ -10,6 +10,7 @@
 		}
 	};
 	$.fn.selecttree.defaults = {
+		ds : null,
 		url : null,
 		change : function(item) {
 		}
@@ -39,9 +40,7 @@
 					mask.show();
 				}
 				var treeDom = dt.siblings("dd").find('ul.ztree');
-				
-				
-				function initTree(url) {
+				function initTree() {
 					var setting = {
 						view : {
 							dblClickExpand : false,
@@ -66,23 +65,25 @@
 						}
 					};
 					var treeNodes;
-					$.ajax({
-						async : false,
-						cache : false,
-						type : 'POST',
-						dataType : "json",
-						url : url,
-						success : function(data) {
-							treeNodes = data;
-						}
-					});
+					if(opts.ds){
+						treeNodes = opts.ds;
+					}else{
+						$.ajax({
+							async : false,
+							cache : false,
+							type : 'POST',
+							dataType : "json",
+							url : url,
+							success : function(data) {
+								treeNodes = data;
+							}
+						});
+					}
+					me.data('list', treeNodes);
 					var treeObj = $.fn.zTree.init(treeDom, setting, treeNodes);
 					treeObj.expandAll(true);
 				}
-				var url = opts.url;
-				if (url) {
-					initTree(url);
-				}
+				initTree();
 				dt.bind("click", function(e) {
 					$(this).addClass('expand');
 					dd.show();
@@ -97,22 +98,23 @@
 				});
 			});
 		},
-		val : function(val) {
+		setValue : function(val) {
 			if (val) {
 				var data = this.data('list');
 				this.val(val);
-				var txt = this.siblings("input");
-				$(data).each(function(i) {
-					var t = this.text;
-					var v = this.value;
+				var txt = this.siblings("div.text");
+				$.each(data, function(i, el) {
+					var t = el.name;
+					var v = el.id;
 					if (v == val) {
-						txt.val(t);
+						txt.html(t);
 						return;
 					}
 				});
-			} else {
-				return this.val();
 			}
+		},
+		getValue : function() {
+			return this.val();
 		}
 	};
 })(jQuery);

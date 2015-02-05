@@ -21,6 +21,18 @@
 
 <script type="text/javascript">
 	//var state = dic('userstate');
+	var departs;
+	$.ajax({
+		url : "depart/tree",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				departs = data;
+			}
+		}
+	});
 	$('#kkk').table({
 		columns : [
 		//{header:"ID",field:"id",width:50,align:'center'},
@@ -34,9 +46,16 @@
 			}
 		}, {
 			header : "部门",
-			field : "departname",
+			field : "depart",
 			align : 'left',
-			width : 100
+			width : 100,
+			render : departRender,
+			editor : {
+				type : 'selecttree',
+				option : {
+					ds : departs
+				}
+			}
 		}, {
 			header : "E-mail",
 			field : "email",
@@ -65,7 +84,7 @@
 			header : "性别",
 			field : "gender",
 			align : 'center',
-			width : 80,
+			width : 60,
 			render : genderRender,
 			editor : {
 				type : 'selectbox',
@@ -77,12 +96,15 @@
 			header : "注册时间",
 			field : "regtime",
 			align : 'center',
-			width : 150
+			width : 100,
+			editor : {
+				type : 'datebox'
+			}
 		}, {
 			header : "状态",
 			field : "state",
 			align : 'center',
-			width : 50,
+			width : 60,
 			render : stateRender,
 			editor : {
 				type : 'selectbox',
@@ -316,6 +338,17 @@
 		} else if (s == 2) {
 			return "<label class='label label-danger'>女</label>";
 		}
+	}
+	
+	function departRender(v, r) {
+		var depart;
+		$.each(departs, function(){
+			if(this['id'] == v){
+				depart = this['name'];
+				return false;
+			}
+		});
+		return depart;
 	}
 
 	function opRender(v, r) {
