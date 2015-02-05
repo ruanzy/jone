@@ -83,7 +83,13 @@
 			field : "state",
 			align : 'center',
 			width : 50,
-			render : stateRender
+			render : stateRender,
+			editor : {
+				type : 'selectbox',
+				option : {
+					ds : [{text:'正常', value:1}, {text:'锁定', value:0}, {text:'离职', value:2}]
+				}
+			}
 		}, {
 			header : "操作",
 			field : "",
