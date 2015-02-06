@@ -14,7 +14,7 @@
 		ds : null,
 		textField : 'text',
 		valueField : 'value',
-		filter : function(q, item, idx) {
+		filter : function(q, item) {
 			return item['text'].indexOf(q) != -1;
 		},
 		searchbox : null,
@@ -33,15 +33,16 @@
 				var rdm = new Date().getTime() + '_'
 						+ Math.floor(Math.random() * (100 - 1 + 1) + 1);
 				var dl = $("<dl class='selectbox'><dt id='dt_" + rdm
-						+ "'></dt><dd><input text='text' class='searchbox'/><ul class='items'></ul></dd><div class='mask'></div></dl>");
+						+ "'></dt><dd><input type='text' class='searchbox'/><ul class='items'></ul></dd><div class='mask'></div></dl>");
 				var p1 = [];
 				p1.push("<div class='text'></div><i class='icon-angle-down'></i>");
 				me.wrap(dl).after(p1.join(''));
 				var txt = me.siblings("div.text");
 				var dt = me.parent("dt").width(me.outerWidth() - 2).height(me.outerHeight()).css('line-height', (me.outerHeight() - 2) + 'px');
+				var W = dt.width();
 				var H = dt.outerWidth();
 				var dd = dt.siblings("dd").css('min-width', me.outerWidth() - 2);
-				var searchbox = dd.find('.searchbox').hide();
+				var searchbox = dd.find('.searchbox').width(W - 22).hide();
 				if(opts.searchbox){
 					searchbox.show();
 					searchbox.bind("click", function(e) {
@@ -52,13 +53,21 @@
 								|| e.which == 13 || e.which == 40) {
 							return false;
 						}
-						var key = $.trim(searchbox.val());
+						var q = $.trim(searchbox.val());
 						setTimeout(function() {
-							//filter(key);
+							var data2 = [];
+							var data = me.data('data');
+							$.each(data, function(){
+								var item = this;
+								if(opts.filter(q, item)) {
+									data2.push(item);
+								}
+							});
+							me.selectbox('reload', data2);
 						}, 0);
 					});
 				}
-				var ul = dd.find('.items')
+				var ul = dd.find('.items');
 				var mask = dt.siblings("div.mask");
 				if (disabled) {
 					mask.show();
@@ -75,21 +84,11 @@
 						}
 					});
 				}
-				if(data){
-					$(this).data('ds', data);
-					var items = [];
-					$.each(data, function(){
-						var t = this[opts.textField];
-						var v = this[opts.valueField];
-						items.push("<li v='", v, "'>");
-						items.push(t);
-						items.push('</li>');
-					});
-					ul.empty().append(items.join(''));
-				}
+				$(this).data('data', data);
 				dt.bind("click", function(e) {
 					$(this).addClass('expand');
 					searchbox.val('');
+					me.selectbox('reload', data);
 					dd.show();
 					e.stopPropagation();
 				});
@@ -136,6 +135,27 @@
 		},
 		getValue : function() {
 			return this.val();
+		},
+		reload : function(data) {
+			var items = [];
+			if(data && data.length > 0){
+				var v0 = this.val();
+				var opts = this.selectbox('options');
+				$.each(data, function(){
+					var t = this[opts.textField];
+					var v = this[opts.valueField];
+					items.push("<li v='", v, "'");
+					if(v == v0){
+						items.push(" class='selected'");
+					}
+					items.push(">");
+					items.push(t);
+					items.push('</li>');
+				});
+			}else{
+				items.push("<li class='no-results'>没有找到 </li>");
+			}
+			this.parent("dt").siblings("dd").find('.items').empty().append(items.join(''));
 		}
 	};
 })(jQuery);

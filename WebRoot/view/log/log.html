@@ -1,22 +1,26 @@
 <table>
 	<tr>
 		<td>操作员</td>
-		<td><input type='text' id='ddddd' name='operator'/></td>
+		<td><input type='text' id='operator' name='operator'/></td>
 		<td>操作时间</td>
 		<td><input class="Wdate" type="text" id="time1" name='time1' onFocus="WdatePicker({readOnly:true})"/></td>
 		<td>~</td>
 		<td><input class="Wdate" type="text" id="time2" name='time2' onFocus="WdatePicker({readOnly:true})"/></td>
 		<td>
-			<a class='btn btn-primary'>查询</a>
+			<a id='searchlog' class='btn btn-primary'>查询</a>
 		</td>
 	</tr>
 </table>
 <div id='kkk'></div>
 <script type="text/javascript">
   $(function(){
-	 $('#ddddd').AutoComplete2({
+	 $('#ddddd1').AutoComplete2({
 	 	url:'log/users',
 	 	emptyText:''
+	 }); 
+	 $('#operator').selectbox({
+	 	url:'log/users',
+	 	searchbox: true
 	 }); 
 	 
      $('#kkk').table({
@@ -34,7 +38,7 @@
 		//selector:'m',
 		condition:condition
 	});
-     $('.btn-default').click(function(){
+     $('#searchlog').click(function(){
     	 $('#kkk').table('reload');
      });
      $('.btn-success').click(function(){

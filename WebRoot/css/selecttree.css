@@ -64,8 +64,14 @@ ul {
 	font-weight: normal;
 	cursor: pointer;
 	color: #333;
-	border: 1px solid #ccc;
+	border: 1px solid #aaa;
 	background: #fff;
+	background-color: #fff;
+background: -webkit-gradient(linear,50% 0,50% 100%,color-stop(20%,#fff),color-stop(50%,#f6f6f6),color-stop(52%,#eee),color-stop(100%,#f4f4f4));
+background: -webkit-linear-gradient(top,#fff 20%,#f6f6f6 50%,#eee 52%,#f4f4f4 100%);
+background: -moz-linear-gradient(top,#fff 20%,#f6f6f6 50%,#eee 52%,#f4f4f4 100%);
+background: -o-linear-gradient(top,#fff 20%,#f6f6f6 50%,#eee 52%,#f4f4f4 100%);
+background: linear-gradient(top,#fff 20%,#f6f6f6 50%,#eee 52%,#f4f4f4 100%);
 }
 
 .selectbox dt .text {
@@ -80,7 +86,8 @@ ul {
 }
 
 .selectbox dt.expand {
-	border-color: #ccc;
+	background-image: -webkit-linear-gradient(#eee 20%,#fff 80%);
+	border-bottom-color: #fff;
 }
 
 .selectbox i {
@@ -94,22 +101,25 @@ ul {
 
 .selectbox dd {
 	position: absolute;
-	border: 1px solid #ccc;
-	margin-top: 1px;
+	border: 1px solid #aaa;
+	border-top: none;
+	margin-top: -1px;
 	float: left;
 	background: #FFF;
 	display: none;
-	z-index: 300;
+	z-index: 200;
 	width: auto;
 }
 
-.searchbox {
+.selectbox dd input.searchbox {
 	outline: none;
-	width: 90%;
+	margin: 5px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
-.selectbox dd {
-	margin-top: -1px;
+.selectbox dd ul{
+	max-height: 260px;
+	overflow: auto;
 }
 
 .selectbox dd  li {
@@ -119,8 +129,18 @@ ul {
 	text-align: left;
 }
 
+.selectbox dd  li.no-results{
+	color: #999;
+}
+
 .selectbox dd  li:hover {
-	background: lightblue;
+	background-color: #3875d7;
+	background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(20%, #3875d7),
+		color-stop(90%, #2a62bc));
+	background-image: -webkit-linear-gradient(#3875d7 20%, #2a62bc 90%);
+	background-image: -moz-linear-gradient(#3875d7 20%, #2a62bc 90%);
+	background-image: -o-linear-gradient(#3875d7 20%, #2a62bc 90%);
+	background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
 	color: #fff;
 }
 
