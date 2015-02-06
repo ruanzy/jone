@@ -12,6 +12,11 @@
 	$.fn.selectbox.defaults = {
 		url : null,
 		ds : null,
+		textField : 'text',
+		valueField : 'value',
+		filter : function(q, item, idx) {
+			return item['text'].indexOf(q) != -1;
+		},
 		searchbox : null,
 		change : function(item) {}
 	};
@@ -49,7 +54,7 @@
 						}
 						var key = $.trim(searchbox.val());
 						setTimeout(function() {
-							filter(key);
+							//filter(key);
 						}, 0);
 					});
 				}
@@ -58,56 +63,29 @@
 				if (disabled) {
 					mask.show();
 				}
-				if(opts.ds){
-					var html = [];
-					$.each(opts.ds, function(){
-						var t = this['text'];
-						var v = this['value'];
-						html.push("<option value='", v, "'>");
-						html.push(t);
-						html.push("</option>");
+				var data = opts.ds;
+				if(!data){
+					$.ajax({
+						url : opts.url,
+						cache : false,
+						async : false,
+						dataType : 'json',
+						success : function(result) {
+							data = result;
+						}
 					});
-					me.html(html.join(''));
 				}
-				function filter(key) {
+				if(data){
+					$(this).data('ds', data);
 					var items = [];
-					if(opts.ds){
-						$(opts.ds).each(function(){
-							var t = this['text'];
-							var v = this['value'];
-							if(key && key.length > 0){
-								if(t.indexOf(key) != -1){
-									items.push("<li v='", v, "'>");
-									items.push(t);
-									items.push('</li>');
-								}
-							}else{
-								items.push("<li v='", v, "'>");
-								items.push(t);
-								items.push('</li>');
-							}
-						});
-					}else{
-						me.find('option').each(function(){
-							var t = $(this).text();
-							if(key && key.length > 0){
-								if(t.indexOf(key) != -1){
-									items.push("<li v='", $(this).val(), "'>");
-									items.push(t);
-									items.push('</li>');
-								}
-							}else{
-								items.push("<li v='", $(this).val(), "'>");
-								items.push(t);
-								items.push('</li>');
-							}
-						});
-					}
+					$.each(data, function(){
+						var t = this[opts.textField];
+						var v = this[opts.valueField];
+						items.push("<li v='", v, "'>");
+						items.push(t);
+						items.push('</li>');
+					});
 					ul.empty().append(items.join(''));
-				}
-				var url = opts.url;
-				if (true) {
-					filter();
 				}
 				dt.bind("click", function(e) {
 					$(this).addClass('expand');
@@ -139,28 +117,21 @@
 		setValue : function(val) {
 			if (val) {
 				this.val(val);
+				var data = $(this).data('data');
 				var opts = this.selectbox('options');
-				if(opts.ds){
-					var items = opts.ds;
-					var item;
-					$.each(items, function(){
-						if(this['value'] == val){
-							item = this;
-							return false;
-						}
-					});
-					this.siblings("div.text").html(item['text']);
-				}else{
-					var option;
-					this.find('option').each(function(){
-						if($(this).val() == val){
-							option = $(this);
-							return false;
-						}
-					});
-					this.siblings("div.text").html(option.text());
+				var textField = opts.textField;
+				var valueField = opts.valueField;
+				var item;
+				$.each(data, function(){
+					if(this[valueField] == val){
+						item = this;
+						return false;
+					}
+				});
+				if(item){
+					this.siblings("div.text").html(item[textField]);
+					this.parent("dt").siblings("dd").find("li[v='" + item[valueField] + "']").addClass("selected");
 				}
-				this.parent("dt").siblings("dd").find("li[v='" + val + "']").addClass("selected");
 			}
 		},
 		getValue : function() {
