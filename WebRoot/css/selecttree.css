@@ -108,9 +108,13 @@ ul {
 	width: 90%;
 }
 
+.selectbox dd {
+	margin-top: -1px;
+}
+
 .selectbox dd  li {
-	height: 25px;
-	line-height: 25px;
+	height: 26px;
+	line-height: 26px;
 	padding: 0 0 0 5px;
 	text-align: left;
 }
