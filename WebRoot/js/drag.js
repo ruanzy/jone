@@ -1,54 +1,53 @@
 (function($) {
-    $.fn.DDR = function(cfg) {
-    	$(document).mousemove(function(e) {
-    		if (this.move) {
-    			var posix = !document.move_target ? {'x': 0, 'y': 0} : document.move_target.posix;
-    				var callback = document.call_down || function() {
-    				$(this.move_target).css({
-    					'top': e.pageY - posix.y,
-    					'left': e.pageX - posix.x
-    				});
-    			};
-    			
-    			callback.call(this, e, posix);
-    		}
-    	}).mouseup(function(e) {
-    		if (!!this.move) {
-    			var callback = document.call_up || function(){};
-    			callback.call(this, e);
-    			$.extend(this, {
-    				'move': false,
-    				'move_target': null,
-    				'call_down': false,
-    				'call_up': false
-    			});
-    		}
+	var params = {
+		left: 0,
+		top: 0,
+		currentX: 0,
+		currentY: 0,
+		move: false
+	};
+	function Median(target,min,max) {
+		if (target > max) return max;
+		else if (target < min) return min;
+		else return target;
+	}
+	$.fn.drag = function(handler) {
+    	var target = $(this);
+    	var bar = $(handler, target) || target;
+		params.left = target.css("left");
+		params.top = target.css("top");
+		var tw = target.outerWidth();
+		var th = target.outerHeight();
+		var maxw = $(document).width() - target.outerWidth();
+	    var maxh = $(document).height() - target.outerHeight();
+		$(document).mousemove(function(e) {
+    		if (params.move) {
+				var nowX = e.clientX, nowY = e.clientY;
+				var disX = nowX - params.currentX, disY = nowY - params.currentY;
+				var tX = parseInt(params.left) + disX;
+				var tY = parseInt(params.top) + disY;
+				var maxw = $(document).width() - tw;
+				var maxh = $(document).height() - th;
+				target.css("left", Median(tX, 0, maxw) + "px");
+				target.css("top", Median(tY, 0, maxh) + "px");
+			}
     	});
-    	return this.each(function() {
-	    	var box = $(this);
-	    	var css = {'width':'10px', 'height':'10px', 'overflow': 'hidden', 'cursor':'se-resize', 'position': 'absolute','right': 0, 'bottom': 0,'background-color': '#09C'};
-	    	var coor = $("<div class='coor'></div>").css(css);
-	    	box.append(coor);
-	    	box.mousedown(function(e) {
-	    	    var offset = $(this).offset();	
-	    	    this.posix = {'x': e.pageX - offset.left, 'y': e.pageY - offset.top};
-	    	    $.extend(document, {'move': true, 'move_target': this});
-	    	});
-	    	coor.mousedown(function(e) {
-	    	    var posix = {
-	    	            'w': box.width(), 
-	    	            'h': box.height(), 
-	    	            'x': e.pageX, 
-	    	            'y': e.pageY
-	    	        };	    	    
-	    	    $.extend(document, {'move': true, 'call_down': function(e) {
-	    	        box.css({
-	    	            'width': Math.max(30, e.pageX - posix.x + posix.w),
-	    	            'height': Math.max(30, e.pageY - posix.y + posix.h)
-	    	        });
-	    	    }});
-	    	    return false;
-	    	});
+    	$(document).mouseup(function(e) {
+    		params.move = false;	
+			params.left = target.css("left");
+			params.top = target.css("top");
+    	});
+    	bar.mousedown(function(e) {
+    		params.move = true;
+    		if(!e){
+    			e = window.event;
+    			this.onselectstart = function(){
+    				return false;
+    			}  
+    		}
+    		params.currentX = e.clientX;
+    		params.currentY = e.clientY;
+			e.preventDefault();
     	});
     };
 })(jQuery);

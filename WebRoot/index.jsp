@@ -21,6 +21,7 @@
 <link rel="stylesheet" type="text/css" href="css/selecttree.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.Jcrop.min.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/drag.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/tree.js"></script>

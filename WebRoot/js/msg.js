@@ -187,25 +187,10 @@
 		
 		
 		if(options.drag == true) {
-		   var titbar = $('.dialog-header', dialog);
+			var d = $(".dialog", dialog);
+		   var titbar = $('.dialog-header', d);
 		   titbar.css({"cursor":"move"}); 
-		   var _move = false;
-		   titbar.mousedown(function(e) {
-			   _move = true;
-			   _x = e.pageX-parseInt(dialog.css("left"));
-			   _y = e.pageY-parseInt(dialog.css("top"));     
-			   //dialog.fadeTo(36,.5); 
-		   });
-		   titbar.mousemove(function(e){
-			   if(_move){
-				   var x = e.pageX - _x;
-				   var y = e.pageY - _y;
-				   dialog.css({top:y,left:x});
-			   }
-		   }).mouseup(function(){
-			   _move = false;
-			   //dialog.fadeTo("fast", 1);
-		   });
+		   d.drag('.dialog-header'); 
 		} 
 		
 		dialog.text = function(content) {
