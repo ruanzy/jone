@@ -45,6 +45,10 @@
 				var searchbox = dd.find('.searchbox').width(W - 22).hide();
 				if(opts.searchbox){
 					searchbox.show();
+					//解决点击searchbox 冒泡到$(document).bind("mouseup")的问题
+					searchbox.bind("mouseup", function(e) {
+						e.stopPropagation();
+					});
 					searchbox.bind("click", function(e) {
 						e.stopPropagation();
 					});
