@@ -108,6 +108,15 @@
 					dd.hide();
 					dt.removeClass('expand');
 				});
+				//解决点击其他下拉dd不隐藏的问题
+				$(document).bind("mouseup", function(e) {
+					var t = $(e.target);
+					var tp = t.parents('#dt_' + rdm);
+					if(tp.length == 0){
+						dd.hide();
+						dt.removeClass('expand');
+					}
+				});
 			});
 		},
 		options : function() {
