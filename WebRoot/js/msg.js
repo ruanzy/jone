@@ -169,6 +169,11 @@
 					d.css("top", t).css("left", l);
 					options.onShow();
 					d.css("visibility","visible");
+					if(options.drag == true) {
+					   var titbar = $('.dialog-header', d);
+					   titbar.css({"cursor":"move"}); 
+					   d.drag('.dialog-header'); 
+					} 
 				}
 			});
 		}
@@ -184,14 +189,6 @@
 			dialog.hide().empty().remove();
 			$.dialog.opened = false;
 		};
-		
-		
-		if(options.drag == true) {
-			var d = $(".dialog", dialog);
-		   var titbar = $('.dialog-header', d);
-		   titbar.css({"cursor":"move"}); 
-		   d.drag('.dialog-header'); 
-		} 
 		
 		dialog.text = function(content) {
 			$(".dialog-body", dialog).html(content);
