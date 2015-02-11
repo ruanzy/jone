@@ -47,6 +47,18 @@ ul.accordion span{float:right;}
     </li>
     <li><a href="#">关于</a></li>
 </ul>
+
+<table>
+  <tr>
+    <th>Column 1 Heading</th>
+    <th>Column 2 Heading</th>
+  </tr>
+  <tr>
+    <td>Row 1: Col 1</td>
+    <td>Row 1: Col 2</td>
+  </tr>
+</table>
+
 <script type="text/javascript">
 	$(".accordion").accordion({
         speed: 500,
@@ -74,4 +86,19 @@ ul.accordion span{float:right;}
 			}
 		});
 	});
+	var objDelete = {
+	    text: "删除",
+	    func: function() {
+			this.remove();
+	    }    
+	}, objRubbish = {
+	    text: "分配角色",
+	    func: function() {
+	        
+	    }    
+	};
+	var mailMenuData = [
+	    [objDelete, objRubbish]
+	];
+	$('tr').smartMenu(mailMenuData);
 </script>
