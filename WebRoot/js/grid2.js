@@ -207,6 +207,7 @@
 					var dd = ds(url, baseparams);
 					el.data('ds', dd);
 					el.data('rows', dd.data);
+					el.data('allrow', dd.data);
 					var opts = el.data('options');
 					$('tbody',el).empty().append(body(dd.data, opts));
 					$('div.pagination',el).empty().append(pager2(dd.total, p, pagesize));
@@ -237,57 +238,55 @@
 			});
         },
         reload: function(params){
-        	return this.each(function(){
-        		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
-        		var opts = $(this).data('options');
-        		
-        		var url = opts.url;
-				var pagesize = parseInt($(this).data('pagesize'));
-				var p = {page:1, pagesize:pagesize};
-				if(params){
-					p = $.extend(p, params);
-				}else{
-					if(opts.condition){
-						if($.isFunction(opts.condition)){
-							p = $.extend(p, opts.condition());
-						}
+    		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
+    		var opts = $(this).data('options');
+    		
+    		var url = opts.url;
+			var pagesize = parseInt($(this).data('pagesize'));
+			var p = {page:1, pagesize:pagesize};
+			if(params){
+				p = $.extend(p, params);
+			}else{
+				if(opts.condition){
+					if($.isFunction(opts.condition)){
+						p = $.extend(p, opts.condition());
 					}
 				}
-				var dd = ds(url, p);
-				$(this).data('ds', dd);
-				$(this).data('rows', dd.data);
-				$(this).data('updated', {});
-				$('tbody',this).empty().append(body(dd.data, opts));
-				$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
-				$('tbody tr:odd', this).addClass('strips');
-        	});
+			}
+			var dd = ds(url, p);
+			$(this).data('ds', dd);
+			$(this).data('rows', dd.data);
+			$(this).data('allrow', dd.data);
+			$(this).data('updated', {});
+			$('tbody',this).empty().append(body(dd.data, opts));
+			$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
+			$('tbody tr:odd', this).addClass('strips');
         },
         refresh: function(params){
-        	return this.each(function(){
-        		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
-        		var opts = $(this).data('options');
-        		var url = opts.url;
-        		var page = parseInt($('div.pagination a.active', this).text());
-        		var pagesize = parseInt($(this).data('pagesize'));
-        		var p = {page:page, pagesize:pagesize};
-        		if(params){
-        			p = $.extend(p, params);
-        		}else{
-        			if(opts.condition){
-        				if($.isFunction(opts.condition)){
-        					p = $.extend(p, opts.condition());
-        				}
-        			}
-        		}
+    		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
+    		var opts = $(this).data('options');
+    		var url = opts.url;
+    		var page = parseInt($('div.pagination a.active', this).text());
+    		var pagesize = parseInt($(this).data('pagesize'));
+    		var p = {page:page, pagesize:pagesize};
+    		if(params){
+    			p = $.extend(p, params);
+    		}else{
+    			if(opts.condition){
+    				if($.isFunction(opts.condition)){
+    					p = $.extend(p, opts.condition());
+    				}
+    			}
+    		}
 
- 				var dd = ds(url, p);
-				$(this).data('ds', dd);
-				$(this).data('rows', dd.data);
-				$(this).data('updated', {});
-				$('tbody',this).empty().append(body(dd.data, opts));
-				$('div.pagination',this).empty().append(pager2(dd.total, dd.page, pagesize));
+			var dd = ds(url, p);
+			$(this).data('ds', dd);
+			$(this).data('rows', dd.data);
+			$(this).data('allrow', dd.data);
+			$(this).data('updated', {});
+			$('tbody',this).empty().append(body(dd.data, opts));
+			$('div.pagination',this).empty().append(pager2(dd.total, dd.page, pagesize));
 				$('tbody tr:odd', this).addClass('strips');
-        	});
         },
         getSelected: function(){
         	var ret = [];
