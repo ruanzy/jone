@@ -39,19 +39,17 @@ public class ActionHandler
 	{
 		String url = request.getServletPath();
 		String[] parts = url.substring(1).split("/");
-		String pck_name = "action";
-		String _action_name = parts[0];
-		String action_name = Character.toTitleCase(_action_name.charAt(0)) + _action_name.substring(1);
-		String action_method_name = (parts.length > 1) ? parts[1] : "execute";
+		String _action = parts[0];
+		String action = Character.toTitleCase(_action.charAt(0)) + _action.substring(1);
+		String actionMethod = (parts.length > 1) ? parts[1] : "execute";
 		String ip = request.getRemoteAddr();
 		String m = request.getMethod();
-		Object user = request.getSession(false).getAttribute("RZY_USER");
-		Object[] ps = new Object[] { user, ip, m, url };
-		log.debug("{} {} {} {}", ps);
+		Object[] ps = new Object[] { ip, m, url };
+		log.debug("{} {} {}", ps);
 		try
 		{
-			Class<?> cls = Class.forName(pck_name + "." + action_name);
-			Method method = cls.getMethod(action_method_name);
+			Class<?> cls = Class.forName("action." + action);
+			Method method = cls.getMethod(actionMethod);
 			Object result = method.invoke(cls.newInstance());
 			if (result instanceof View)
 			{
