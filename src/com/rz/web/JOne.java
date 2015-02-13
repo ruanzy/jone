@@ -1,7 +1,6 @@
 package com.rz.web;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,12 +10,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.beanutils.MethodUtils;
 
 public class JOne implements Filter
 {
 	private ServletContext context;
-	private String ActionHandler = "com.rz.web.DefaultActionHandler";
+	private ActionHandler ah;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -34,27 +32,15 @@ public class JOne implements Filter
 		try
 		{
 			ActionContext ac = ActionContext.create(context, request, response);
-			Class<?> cls = Class.forName(ActionHandler);
-			MethodUtils.invokeMethod(cls.newInstance(), "handle", ac);
+			ah.handle(ac);
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
-			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
-			{
-				response.sendError(HttpServletResponse.SC_NOT_FOUND, ActionHandler + "not found");
-				return;
-			}
-			else if (e instanceof InvocationTargetException)
-			{
-				Throwable t = e.getCause();
-				t.printStackTrace();
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, t.getMessage());
-				return;
-			}
-			else
-			{
-				throw new ServletException(e);
-			}
+			throw new IOException(e);
+		}
+		catch (ServletException e)
+		{
+			throw new ServletException(e);
 		}
 		finally
 		{
@@ -69,19 +55,29 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		this.context = cfg.getServletContext();
-		String _ActionHandler = cfg.getInitParameter("ActionHandler");
-		if (_ActionHandler != null)
+		String _ah = "com.rz.web.DefaultActionHandler";
+		try
 		{
-			this.ActionHandler = _ActionHandler;
+			this.context = cfg.getServletContext();
+			String _ActionHandler = cfg.getInitParameter("ActionHandler");
+			if (_ActionHandler != null)
+			{
+				_ah = _ActionHandler;
+			}
+			Class<?> cls = Class.forName(_ah);
+			this.ah = (ActionHandler) (cls.newInstance());
+			StringBuffer sb = new StringBuffer();
+			sb.append("*************************************").append("\r\n");
+			sb.append("**                                 **").append("\r\n");
+			sb.append("**          JOne Satrting...       **").append("\r\n");
+			sb.append("**                                 **").append("\r\n");
+			sb.append("*************************************");
+			System.out.println(sb);
+			Plugins.init(this.context);
 		}
-		StringBuffer sb = new StringBuffer();
-		sb.append("*************************************").append("\r\n");
-		sb.append("**                                 **").append("\r\n");
-		sb.append("**          JOne Satrting...       **").append("\r\n");
-		sb.append("**                                 **").append("\r\n");
-		sb.append("*************************************");
-		System.out.println(sb);
-		Plugins.init(this.context);
+		catch (Exception e)
+		{
+			throw new ServletException(e);
+		}
 	}
 }
