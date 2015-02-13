@@ -3,7 +3,6 @@ package com.rz.web;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class ActionContext
 {
@@ -49,10 +48,5 @@ public class ActionContext
 	public HttpServletResponse getResponse()
 	{
 		return actionContext.get().response;
-	}
-
-	public HttpSession getSession(boolean create)
-	{
-		return getRequest().getSession(create);
 	}
 }

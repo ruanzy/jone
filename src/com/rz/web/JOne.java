@@ -46,7 +46,6 @@ public class JOne implements Filter
 		{
 			ActionContext.destroy();
 		}
-
 	}
 
 	public void destroy()

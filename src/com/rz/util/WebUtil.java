@@ -180,7 +180,12 @@ public class WebUtil
 	{
 		public static HttpSession get()
 		{
-			return WebUtil.Request.get().getSession(false);
+			return get(false);
+		}
+
+		public static HttpSession get(boolean create)
+		{
+			return WebUtil.Request.get().getSession(create);
 		}
 
 		public static void clear()
