@@ -2,7 +2,7 @@ package com.rz.web.view;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import com.rz.web.ActionHandler;
+import com.rz.web.ActionContext;
 import com.rz.web.View;
 
 public class Forward implements View
@@ -14,11 +14,11 @@ public class Forward implements View
 		this.url = url;
 	}
 
-	public void render()
+	public void render(ActionContext ac)
 	{
 		try
 		{
-			ActionHandler.getRequest().getRequestDispatcher(url).forward(ActionHandler.getRequest(), ActionHandler.getResponse());
+			ac.getRequest().getRequestDispatcher(url).forward(ac.getRequest(), ac.getResponse());
 		}
 		catch (IOException e)
 		{

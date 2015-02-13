@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.service.Service;
 import com.rz.service.ServiceFactory;
-import com.rz.web.ActionHandler;
+import com.rz.web.ActionContext;
 
 public class WebUtil
 {
@@ -45,7 +45,7 @@ public class WebUtil
 	{
 		public static HttpServletRequest get()
 		{
-			return ActionHandler.getRequest();
+			return ActionContext.getActionContext().getRequest();
 		}
 
 		public static void setCharacterEncoding(String encoding)
@@ -75,7 +75,7 @@ public class WebUtil
 	{
 		public static HttpServletResponse get()
 		{
-			return ActionHandler.getResponse();
+			return ActionContext.getActionContext().getResponse();
 		}
 
 		public static void setContentType(String type)
@@ -180,7 +180,7 @@ public class WebUtil
 	{
 		public static HttpSession get()
 		{
-			return ActionHandler.getSession(false);
+			return WebUtil.Request.get().getSession(false);
 		}
 
 		public static void clear()
@@ -203,7 +203,7 @@ public class WebUtil
 	{
 		public static ServletContext get()
 		{
-			return ActionHandler.getServletContext();
+			return ActionContext.getActionContext().getServletContext();
 		}
 
 		public static void attr(String key, Object value)

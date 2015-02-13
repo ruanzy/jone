@@ -23,11 +23,28 @@ public class JOne implements Filter
 		String url = request.getServletPath();
 		request.setCharacterEncoding("UTF-8");
 		boolean isStatic = url.lastIndexOf(".") != -1;
-		if(isStatic){
+		if (isStatic)
+		{
 			chain.doFilter(request, response);
 			return;
 		}
-		ActionHandler.create(context, request, response).handle();
+		try
+		{
+			ActionContext ac = ActionContext.create(context, request, response);
+			new DefaultActionHandler().handle(ac);
+		}
+		catch (IOException e)
+		{
+			throw e;
+		}
+		catch (ServletException e)
+		{
+			throw e;
+		}
+		finally
+		{
+			ActionContext.destroy();
+		}
 	}
 
 	public void destroy()

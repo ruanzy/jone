@@ -2,7 +2,7 @@ package com.rz.web.view;
 
 import java.io.IOException;
 import com.alibaba.fastjson.JSON;
-import com.rz.web.ActionHandler;
+import com.rz.web.ActionContext;
 import com.rz.web.View;
 
 public class Json implements View
@@ -14,12 +14,12 @@ public class Json implements View
 		this.data = data;
 	}
 
-	public void render()
+	public void render(ActionContext ac)
 	{
-		ActionHandler.getResponse().setContentType("text/javascript;charset=UTF-8");
+		ac.getResponse().setContentType("text/javascript;charset=UTF-8");
 		try
 		{
-			ActionHandler.getResponse().getWriter().print(JSON.toJSONString(data));
+			ac.getResponse().getWriter().print(JSON.toJSONString(data));
 		}
 		catch (IOException e)
 		{
