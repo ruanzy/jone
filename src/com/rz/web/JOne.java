@@ -1,6 +1,7 @@
 package com.rz.web;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -10,10 +11,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.MethodUtils;
 
 public class JOne implements Filter
 {
 	private ServletContext context;
+	private String ActionHandler = "com.rz.web.DefaultActionHandler";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -31,20 +34,33 @@ public class JOne implements Filter
 		try
 		{
 			ActionContext ac = ActionContext.create(context, request, response);
-			new DefaultActionHandler().handle(ac);
+			Class<?> cls = Class.forName(ActionHandler);
+			MethodUtils.invokeMethod(cls.newInstance(), "handle", ac);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
-			throw e;
-		}
-		catch (ServletException e)
-		{
-			throw e;
+			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
+			{
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, ActionHandler + "not found");
+				return;
+			}
+			else if (e instanceof InvocationTargetException)
+			{
+				Throwable t = e.getCause();
+				t.printStackTrace();
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, t.getMessage());
+				return;
+			}
+			else
+			{
+				throw new ServletException(e);
+			}
 		}
 		finally
 		{
 			ActionContext.destroy();
 		}
+
 	}
 
 	public void destroy()
@@ -54,6 +70,11 @@ public class JOne implements Filter
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		this.context = cfg.getServletContext();
+		String _ActionHandler = cfg.getInitParameter("ActionHandler");
+		if (_ActionHandler != null)
+		{
+			this.ActionHandler = _ActionHandler;
+		}
 		StringBuffer sb = new StringBuffer();
 		sb.append("*************************************").append("\r\n");
 		sb.append("**                                 **").append("\r\n");
