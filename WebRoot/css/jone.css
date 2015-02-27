@@ -452,7 +452,6 @@ msg.css
 	background-color: #fff;
 	z-index: 1050;
 	visibility: hidden;
-	border: 5px solid #f8f8f8;
 }
 
 .dialog-mask {
@@ -461,9 +460,9 @@ msg.css
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background: #ccc;
+	background: #000;
 	z-index: 1040;
-	opacity: .5;
+	opacity: .15;
 }
 
 .dialog-loading {
@@ -477,22 +476,21 @@ msg.css
 }
 
 .dialog-header {
-	border-style: solid;
-	border-width: 1px 1px 0 1px;
-	border-color: #ccc;
 	position: relative;
 	height: 44px;
 	line-height: 44px;
-	background: none repeat scroll 0% 0% #F5F5F5;
+	background-color: #f7f7f7;
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
 	padding-left: 10px;
 	font-size: 16px;
 	font-weight: bold;
 }
 
 .dialog-header-success {
-	color: #336199;
-	border-color:#336199
-	border-color: #ccc;
+	background-color: #33B5E5 !important;
+	border: 1px solid #33B5E5;
+	color: #fff;
 }
 
 .dialog-header-info {
@@ -514,21 +512,17 @@ msg.css
 	position: relative;
 	color: #737373;
 	overflow: auto;
-	border: 1px solid #ccc;
-	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
 .dialog-footer {
 	padding: 10px 15px 10px 0;
-	background-color: #f7f7f7;
+	border-top: 1px solid #eee;
 }
 
 .dialog-close {
 	font-size: 16px;
-	color: #000;
+	color: #fff;
 	text-shadow: 0 1px 0 #fff;
-	filter: alpha(opacity = 50);
-	opacity: .5;
 	cursor: pointer;
 	position: absolute;
 	top: 15px;
@@ -783,8 +777,8 @@ button.css
 }
 
 .btn-primary {
-	background-color: #427fed !important;
-	border: 1px solid #427fed;
+	background-color: #33B5E5 !important;
+	border: 1px solid #33B5E5;
 	color: #fff;
 }
 
