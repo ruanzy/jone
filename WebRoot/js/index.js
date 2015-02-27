@@ -36,7 +36,7 @@ $(function() {
 				buttons:[
 				    {
 				    	text : 'OK',
-				    	cls : 'btn-success',
+				    	cls : 'btn-primary',
 				    	action : function(d) {
 				    		
 				    	}
@@ -57,14 +57,14 @@ $(function() {
 		}
 		function info(){
 			var dialog = $.dialog({
-					title:'asd',
+					title:'个人资料',
 					width: 350,
 					//url:'view/income/list.html'
 					url:'common/userinfo',
 					buttons:[
 					    {
 					    	text : 'OK',
-					    	cls : 'btn-success',
+					    	cls : 'btn-primary',
 					    	action : function(d) {
 					    		
 					    	}
