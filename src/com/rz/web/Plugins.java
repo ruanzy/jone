@@ -42,6 +42,22 @@ public class Plugins
 		}
 	}
 
+	public static void regist(String plugin)
+	{
+		try
+		{
+			Class<?> cls = Class.forName(plugin);
+			if (Plugin.class.isAssignableFrom(cls))
+			{
+				plugins.add((Plugin) cls.newInstance());
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	public static void init(ServletContext context)
 	{
 		if (plugins != null)
