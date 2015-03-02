@@ -1,4 +1,4 @@
-package com.rz.annotation;
+package com.rz.schedule;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
