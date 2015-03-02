@@ -23,13 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.service.Service;
-import com.rz.service.ServiceFactory;
+import com.rz.service.ServiceUtil;
 import com.rz.web.ActionContext;
 
 public class WebUtil
 {
-	static Service service = ServiceFactory.create();
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
 
 	private WebUtil()
@@ -38,7 +36,7 @@ public class WebUtil
 
 	public static Object call(String sid, Object... args)
 	{
-		return service.call(sid, args);
+		return ServiceUtil.call(sid, args);
 	}
 
 	public static class Request

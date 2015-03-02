@@ -10,9 +10,9 @@ import com.rz.dao.Dao;
 import com.rz.transaction.Transaction;
 import com.rz.util.WebUtil;
 
-public class LocalService implements Service
+public class DefaultServiceCaller implements ServiceCaller
 {
-	static Logger log = LoggerFactory.getLogger(LocalService.class);
+	static Logger log = LoggerFactory.getLogger(DefaultServiceCaller.class);
 
 	public Object call(String sid, Object... args)
 	{

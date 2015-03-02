@@ -1,6 +1,2 @@
 /com
-/action
-/task
-/plugin
-/schedule
-/service
+/service.properties
