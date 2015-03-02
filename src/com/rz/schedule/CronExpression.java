@@ -1,4 +1,4 @@
-package com.rz.task;
+package com.rz.schedule;
 
 import java.io.Serializable;
 import java.text.ParseException;

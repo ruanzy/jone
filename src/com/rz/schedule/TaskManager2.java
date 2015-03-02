@@ -1,6 +1,7 @@
-package com.rz.task;
+package com.rz.schedule;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +52,6 @@ public class TaskManager2
 
 	public static void schedule(final String className, final String methodName, final CronExpression expression)
 	{
-		final Task job = new Task(className, methodName);
 		Runnable scheduleTask = new Runnable()
 		{
 			public void run()
@@ -62,7 +62,24 @@ public class TaskManager2
 				{
 					while (time != null)
 					{
-						scheduled.schedule(job, time.getTime() - now.getTime(), TimeUnit.MILLISECONDS);
+						scheduled.schedule(new Runnable()
+						{
+
+							public void run()
+							{
+								try
+								{
+									Class<?> cls = Class.forName(className);
+									Method m = cls.getMethod(methodName);
+									m.invoke(cls.newInstance());
+								}
+								catch (Exception e)
+								{
+									e.printStackTrace();
+								}
+							}
+
+						}, time.getTime() - now.getTime(), TimeUnit.MILLISECONDS);
 						while (now.before(time))
 						{
 							Thread.sleep(time.getTime() - now.getTime());

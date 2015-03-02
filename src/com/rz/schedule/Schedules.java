@@ -1,4 +1,4 @@
-package com.rz.task;
+package com.rz.schedule;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -9,16 +9,16 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import com.rz.annotation.Scheduled;
 
-public class TaskManager
+public class Schedules
 {
 	private static ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(5);
+	private static String schedulePackage = "schedule";
 
 	static
 	{
 		try
 		{
-			String pck = "task";
-			URL url = Thread.currentThread().getContextClassLoader().getResource(pck);
+			URL url = Thread.currentThread().getContextClassLoader().getResource(schedulePackage);
 			if (url != null)
 			{
 				File dir = new File(url.toURI());
@@ -26,7 +26,7 @@ public class TaskManager
 				for (File f : files)
 				{
 					String name = f.getName().substring(0, f.getName().indexOf(".class"));
-					String className = pck + "." + name;
+					String className = schedulePackage + "." + name;
 					Class<?> cls = Class.forName(className);
 					for (Method m : cls.getDeclaredMethods())
 					{
@@ -55,7 +55,6 @@ public class TaskManager
 
 	public static void schedule(final String className, final String methodName, final CronExpression expression)
 	{
-		final Task task = new Task(className, methodName);
 		Runnable scheduleTask = new Runnable()
 		{
 			public void run()
@@ -66,7 +65,24 @@ public class TaskManager
 				{
 					while (time != null)
 					{
-						scheduled.schedule(task, time.getTime() - now.getTime(), TimeUnit.MILLISECONDS);
+						scheduled.schedule(new Runnable()
+						{
+
+							public void run()
+							{
+								try
+								{
+									Class<?> cls = Class.forName(className);
+									Method m = cls.getMethod(methodName);
+									m.invoke(cls.newInstance());
+								}
+								catch (Exception e)
+								{
+									e.printStackTrace();
+								}
+							}
+
+						}, time.getTime() - now.getTime(), TimeUnit.MILLISECONDS);
 						while (now.before(time))
 						{
 							Thread.sleep(time.getTime() - now.getTime());
