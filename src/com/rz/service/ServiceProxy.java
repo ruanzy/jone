@@ -7,8 +7,8 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.proxy.NoOp;
-import com.rz.annotation.Transaction;
 import com.rz.dao.Dao;
+import com.rz.transaction.Transaction;
 
 class ServiceProxy
 {
