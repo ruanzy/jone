@@ -5,13 +5,13 @@ import com.rz.interceptor.Interceptor;
 import com.rz.interceptor.InterceptorPath;
 import com.rz.util.WebUtil;
 
-@InterceptorPath("login")
-public class LoginInterceptor implements Interceptor
+@InterceptorPath("logi")
+public class LoginInterceptor2 implements Interceptor
 {
 
 	public void intercept(ActionInvocation ai)
 	{
-		System.out.println("LoginInterceptor before");
+		System.out.println("LoginInterceptor2 before");
 		try
 		{
 			ai.invoke();
@@ -27,15 +27,7 @@ public class LoginInterceptor implements Interceptor
 		{
 			e.printStackTrace();
 		}
-		System.out.println("LoginInterceptor after");
-		StringBuffer logs = new StringBuffer();
-		String user = WebUtil.getUser();
-		String ip = WebUtil.getIP();
-		String ua = WebUtil.getHeader("User-Agent");
-		logs.append(user).append("|");
-		logs.append(ip).append("|");
-		logs.append(ua);
-		System.out.println(logs.toString());
+		System.out.println("LoginInterceptor2 after");
 	}
 
 }
