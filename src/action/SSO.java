@@ -10,7 +10,7 @@ public class SSO
 	{
 		String tk = WebUtil.Cookies.get("SSOTOKEN");
 		String go = WebUtil.getParameter("go");
-		String path = "http://11.0.0.106:8088/LogStat/setCookie?tk=" + tk + "&go=" + go;
+		String path = "http://localhost:8080/LogStat/setCookie?tk=" + tk + "&go=" + go;
 		return new Redirect(path);
 	}
 }

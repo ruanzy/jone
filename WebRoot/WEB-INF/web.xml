@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-		<filter-class>com.rz.web.SSOSFilter</filter-class>
+		<filter-class>com.rz.web.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>

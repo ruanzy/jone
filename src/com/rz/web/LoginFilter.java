@@ -12,10 +12,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SSOCFilter implements Filter
+public class LoginFilter implements Filter
 {
-	private static final String SSO = "http://localhost:8080/JOne/SSO";
-	private static final String NOCHECK = "(captcha|login.*|logout|setCookie)$";
+	private static final String lOGIN = "login.jsp";
+	private static final String NOCHECK = "(captcha|login.*|logout)$";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -23,7 +23,6 @@ public class SSOCFilter implements Filter
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		String path = request.getServletPath();
-		String url = request.getRequestURL().toString();
 		boolean extension = path.lastIndexOf(".") != -1;
 		boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(path).find();
 		boolean nocheck = Pattern.compile(NOCHECK).matcher(path).find();
@@ -35,15 +34,14 @@ public class SSOCFilter implements Filter
 		String token = getToken(request, "SSOTOKEN");
 		if (token == null)
 		{
-			String sso = SSO + "?go=" + url;
 			String xhr = request.getHeader("x-requested-with");
 			if (xhr != null && xhr.length() > 0)
 			{
-				response.sendError(1111, sso);
+				response.sendError(1111, lOGIN);
 			}
 			else
 			{
-				response.sendRedirect(sso);
+				response.sendRedirect(lOGIN);
 			}
 		}
 		else

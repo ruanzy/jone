@@ -3,7 +3,6 @@ package interceptor;
 import com.rz.interceptor.ActionInvocation;
 import com.rz.interceptor.Interceptor;
 import com.rz.interceptor.InterceptorPath;
-import com.rz.util.WebUtil;
 
 @InterceptorPath("logi")
 public class LoginInterceptor2 implements Interceptor

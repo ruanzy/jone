@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SSOSFilter implements Filter
 {
-	private static final String SSOlOGIN = "http://localhost:8088/JOne/login.jsp";
+	private static final String SSOlOGIN = "http://localhost:8080/JOne/login.jsp";
 	private static final String NOCHECK = "(captcha|login.*|logout)$";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
