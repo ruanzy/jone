@@ -2,8 +2,11 @@ package com.rz.interceptor;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Interceptors
 {
@@ -42,5 +45,19 @@ public class Interceptors
 	public static void init()
 	{
 
+	}
+
+	public static Interceptor[] match(String url)
+	{
+		List<Interceptor> list = new ArrayList<Interceptor>();
+		Set<String> keys = interceptors.keySet();
+		for (String key : keys)
+		{
+			if (url.startsWith("/" + key))
+			{
+				list.add(interceptors.get(key));
+			}
+		}
+		return list.toArray(new Interceptor[list.size()]);
 	}
 }

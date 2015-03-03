@@ -36,14 +36,6 @@ public class Login
 		{
 			WebUtil.Application.attr("allres", WebUtil.call("PmsService.res"));
 		}
-		StringBuffer logs = new StringBuffer();
-		String user = WebUtil.getUser();
-		String ip = WebUtil.getIP();
-		String ua = WebUtil.getHeader("User-Agent");
-		logs.append(user).append("|");
-		logs.append(ip).append("|");
-		logs.append(ua);
-		log.debug(logs.toString());
 		if(go != null && go.length() > 0){
 			return new Msg(true, "SSO?go=" + go);
 		}
