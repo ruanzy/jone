@@ -1,8 +1,8 @@
 package com.rz.dao;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -49,12 +49,14 @@ public final class Dao
 		Properties prop = new Properties();
 		try
 		{
-			is = Dao.class.getClassLoader().getResourceAsStream("dao.properties");
+			String fileName = "dao.properties";
+			is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 			if (is == null)
 			{
-				is = new FileInputStream("dao.properties");
+				throw new IllegalArgumentException("properties file not found in classpath: " + fileName);
 			}
-			prop.load(is);
+			prop = new Properties();
+			prop.load(new InputStreamReader(is, "UTF-8"));
 			ds = BasicDataSourceFactory.createDataSource(prop);
 			begintx.set(false);
 		}
