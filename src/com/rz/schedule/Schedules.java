@@ -47,7 +47,7 @@ public class Schedules
 		}
 	}
 
-	public static void start()
+	public static void init()
 	{
 
 	}
