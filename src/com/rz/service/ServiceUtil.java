@@ -10,7 +10,10 @@ public class ServiceUtil
 	{
 		try
 		{
-			String _serviceCaller = Config.get("ServiceCaller");
+			String _serviceCaller = "com.rz.service.DefaultServiceCaller";
+			if(_serviceCaller != null && _serviceCaller.length() > 0){
+				_serviceCaller = Config.get("ServiceCaller");
+			}
 			Class<?> cls = Class.forName(_serviceCaller);
 			caller = (ServiceCaller) (cls.newInstance());
 		}

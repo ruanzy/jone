@@ -13,7 +13,8 @@ public class Config
 		InputStream is = null;
 		try
 		{
-			is = Thread.currentThread().getContextClassLoader().getResourceAsStream("jone.properties");
+			String fileName = "jone.properties";
+			is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 			if (is != null)
 			{
 				props.load(is);
