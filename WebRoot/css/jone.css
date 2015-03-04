@@ -477,19 +477,26 @@ msg.css
 
 .dialog-header {
 	position: relative;
-	height: 44px;
-	line-height: 44px;
+	height: 40px;
+	line-height: 40px;
 	background-color: #f7f7f7;
 	background-color: #fff;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 0px solid #ccc;
 	padding-left: 10px;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: bold;
 }
 
 .dialog-header-success {
 	background-color: #33B5E5 !important;
-	border: 1px solid #33B5E5;
+	border: 0px solid #33B5E5;
+		background-color: #3875d7;
+	background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(20%, #3875d7),
+		color-stop(90%, #2a62bc));
+	background-image: -webkit-linear-gradient(#3875d7 20%, #2a62bc 90%);
+	background-image: -moz-linear-gradient(#3875d7 20%, #2a62bc 90%);
+	background-image: -o-linear-gradient(#3875d7 20%, #2a62bc 90%);
+	background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
 	color: #fff;
 }
 
@@ -525,7 +532,7 @@ msg.css
 	text-shadow: 0 1px 0 #fff;
 	cursor: pointer;
 	position: absolute;
-	top: 15px;
+	top: 13px;
 	right: 10px;
 }
 
@@ -779,6 +786,8 @@ button.css
 .btn-primary {
 	background-color: #33B5E5 !important;
 	border: 1px solid #33B5E5;
+	background-color: #3875d7 !important;
+	border: 1px solid #3875d7;
 	color: #fff;
 }
 
