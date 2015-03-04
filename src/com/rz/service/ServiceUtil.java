@@ -10,16 +10,17 @@ public class ServiceUtil
 	{
 		try
 		{
-			String _serviceCaller = "com.rz.service.DefaultServiceCaller";
+			String serviceCaller = "com.rz.service.DefaultServiceCaller";
+			String _serviceCaller = Config.get("ServiceCaller");
 			if(_serviceCaller != null && _serviceCaller.length() > 0){
-				_serviceCaller = Config.get("ServiceCaller");
+				serviceCaller = _serviceCaller;
 			}
-			Class<?> cls = Class.forName(_serviceCaller);
+			Class<?> cls = Class.forName(serviceCaller);
 			caller = (ServiceCaller) (cls.newInstance());
 		}
 		catch (Exception e)
 		{
-			
+			throw new RuntimeException("Get ServiceCaller Exception!");
 		}
 	}
 	
