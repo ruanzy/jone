@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.sql.DataSource;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -848,11 +849,21 @@ public final class Dao
 		}
 		return result;
 	}
+	
+	public void state()
+	{
+		BasicDataSource bds = (BasicDataSource)ds;
+		int active = bds.getNumActive();
+		int idle = bds.getNumIdle();
+		System.out.println(active);
+		System.out.println(idle);
+	}
 
 	public static void main(String[] args)
 	{
 		Dao dao = Dao.getInstance();
 		dao.find("select * from log");
-		dao.update("insert users values(280, '123', '123', 2, '2015-01-15 14:44:50', 'aa@123.com','123456','memo')");
+		//dao.update("insert users values(280, '123', '123', 2, '2015-01-15 14:44:50', 'aa@123.com','123456','memo')");
+		//dao.state();
 	}
 }
