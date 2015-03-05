@@ -7,7 +7,7 @@ import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.dao.Dao;
-import com.rz.transaction.Transaction;
+import com.rz.tx.Transaction;
 import com.rz.util.WebUtil;
 
 public class DefaultServiceCaller implements ServiceCaller

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.rz.dao.Dao;
 import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
-import com.rz.transaction.Transaction;
+import com.rz.tx.Transaction;
 import com.rz.util.CryptUtil;
 import com.rz.util.StringUtils;
 import com.rz.util.TimeUtil;

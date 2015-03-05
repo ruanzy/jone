@@ -1,4 +1,4 @@
-package com.rz.transaction;
+package com.rz.tx;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
