@@ -3,6 +3,7 @@ package action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.util.WebUtil;
+import com.rz.web.CaptchaKit;
 import com.rz.web.View;
 import com.rz.web.view.Msg;
 
@@ -12,7 +13,7 @@ public class Login
 
 	public View execute()
 	{
-		String svc = WebUtil.getCaptcha();
+		String svc = CaptchaKit.get();
 		String vc = WebUtil.getParameter("vc");
 		String username = WebUtil.getParameter("username");
 		String password = WebUtil.getParameter("password");
