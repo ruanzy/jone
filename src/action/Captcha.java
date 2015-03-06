@@ -1,6 +1,6 @@
 package action;
 
-import com.rz.web.CaptchaKit;
+import com.rz.util.CaptchaKit;
 
 public class Captcha
 {

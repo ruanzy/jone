@@ -1,4 +1,4 @@
-package com.rz.web;
+package com.rz.util;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
+import com.rz.web.ActionContext;
 
 public class CaptchaKit
 {

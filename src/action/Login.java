@@ -2,8 +2,8 @@ package action;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.rz.util.CaptchaKit;
 import com.rz.util.WebUtil;
-import com.rz.web.CaptchaKit;
 import com.rz.web.View;
 import com.rz.web.view.Msg;
 
