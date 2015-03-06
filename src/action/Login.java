@@ -31,11 +31,6 @@ public class Login
 			WebUtil.Session.attr("res", WebUtil.call("PmsService.userres", username));
 		}
 		WebUtil.setUserinfo(username + "_" + password);
-		Object allres = WebUtil.Application.attr("allres");
-		if (allres == null)
-		{
-			WebUtil.Application.attr("allres", WebUtil.call("PmsService.res"));
-		}
 		if(go != null && go.length() > 0){
 			return new Msg(true, "SSO?go=" + go);
 		}
