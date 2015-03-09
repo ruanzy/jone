@@ -2,10 +2,7 @@ package com.rz.web;
 
 import javax.servlet.ServletContext;
 
-
-public interface Plugin
+public interface Initializer
 {
 	public void init(ServletContext context);
-
-	public void destroy();
 }

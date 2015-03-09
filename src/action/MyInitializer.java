@@ -1,18 +1,15 @@
-package plugin;
+package action;
 
 import javax.servlet.ServletContext;
-import com.rz.web.Plugin;
 import service.PmsService;
+import com.rz.web.Initializer;
 
-public class ResMgr implements Plugin
+public class MyInitializer implements Initializer
 {
+
 	public void init(ServletContext context)
 	{
 		context.setAttribute("allres", new PmsService().res());
 	}
 
-	public void destroy()
-	{
-		
-	}
 }

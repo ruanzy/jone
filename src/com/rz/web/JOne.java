@@ -16,6 +16,7 @@ import com.rz.schedule.Schedules;
 public class JOne implements Filter
 {
 	private ServletContext context;
+	private Initializer initializer;
 	private ActionHandler ah;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
@@ -57,15 +58,17 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		String _logs = cfg.getInitParameter("logs");
-		if (_logs != null)
-		{
-			System.setProperty("logs", _logs);
-		}
+		String _initializer = cfg.getInitParameter("initializer");
 		String _ah = "com.rz.web.DefaultActionHandler";
 		try
 		{
 			this.context = cfg.getServletContext();
+			if (_initializer != null)
+			{
+				Class<?> initializercls = Class.forName(_initializer);
+				this.initializer = (Initializer) (initializercls.newInstance());
+				this.initializer.init(this.context);
+			}
 			String _ActionHandler = cfg.getInitParameter("ActionHandler");
 			if (_ActionHandler != null)
 			{
@@ -82,7 +85,6 @@ public class JOne implements Filter
 			System.out.println(sb);
 			Schedules.init();
 			Interceptors.init();
-			Plugins.init(this.context);
 		}
 		catch (Exception e)
 		{
