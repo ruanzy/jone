@@ -57,6 +57,11 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
+		String _logs = cfg.getInitParameter("logs");
+		if (_logs != null)
+		{
+			System.setProperty("logs", _logs);
+		}
 		String _ah = "com.rz.web.DefaultActionHandler";
 		try
 		{
