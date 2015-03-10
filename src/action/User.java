@@ -36,12 +36,27 @@ public class User
 		return new Msg("add success");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public View changed()
 	{
 		String data = WebUtil.getParameter("changed");
 		Map<String, Object> map = JSONUtil.toMap(data);
-		WebUtil.call("PmsService.moduser", map);
-		return new Msg("update success");
+		List<Map<String, Object>> inserted = (List<Map<String, Object>>)map.get("inserted");
+		List<Map<String, Object>> deleted = (List<Map<String, Object>>)map.get("deleted");
+		List<Map<String, Object>> updated = (List<Map<String, Object>>)map.get("updated");
+		for (Map<String, Object> m : inserted)
+		{
+			WebUtil.call("PmsService.reg", m);
+		}
+		for (Map<String, Object> m : deleted)
+		{
+			WebUtil.call("PmsService.moduser", m);
+		}
+		for (Map<String, Object> m : updated)
+		{
+			WebUtil.call("PmsService.moduser", m);
+		}
+		return new Msg("save success");
 	}
 
 	public View del()
