@@ -127,9 +127,13 @@
 	$('#delbtn').click(del);
 	$('#assignbtn').click(mk);
 	$('#updatedbtn').click(function(){
+		var nn = $('#kkk').table('getInserted');
 		var mm = $('#kkk').table('getUpdated');
-		var text = JSON.stringify(mm);
-		$.ajax({
+		var nntext = JSON.stringify(nn);
+		var mmtext = JSON.stringify(mm);
+		alert(nntext);
+		alert(mmtext);
+		/**$.ajax({
 			url : 'user/updated',
 			type : 'post',
 			data : {updated: text},
@@ -142,7 +146,7 @@
 					});
 				}
 			}
-		});
+		});**/
 	});
 	$('#appendbtn').click(function(){
 		$('#kkk').table('addRow', 0, {username:'rzy'});

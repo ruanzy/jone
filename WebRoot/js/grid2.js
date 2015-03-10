@@ -50,7 +50,7 @@
 				el.data('pagesize', 10);
 				$(this).data('inserted', []);
 				$(this).data('deleted', []);
-				$(this).data('updated', {});
+				$(this).data('updated', []);
 				$(this).data('allrow', {});
 				var data = new Array();
 				if(settings.url){
@@ -308,11 +308,16 @@
         	var allrow = $(this).data('allrow');
         	var len = allrow.length;
         	allrow.splice(rowid, 0, record);  
+        	$(this).data('inserted').push(rowid);
         	var rows = $(this).data('rows');
 			var code = new Array();
 			code.push(buildRow(record, 0, opts));
-			$('tbody tr:nth-child(' + rowid + ')',this).after(code.join(''));
-			this.table('editRow', 0);
+			if(rowid == 0){
+				$('tbody',this).prepend(code.join(''));
+			}else{
+				$('tbody tr:eq(' + (rowid - 1) + ')',this).after(code.join(''));
+        	}
+			//this.table('editRow', rowid);
         },
         appendRow: function(record){
         	var len = $(this).data('allrow').length;
@@ -449,7 +454,12 @@
         	}
         	if(changed){
 	        	var updated = $(this).data('updated');
-	        	updated[rowindex] = newData;
+	        	var inserted = $(this).data('inserted');
+	        	//updated[rowindex] = newData;
+	        	$(this).data('allrow')[rowindex] = newData;
+	        	if($.inArray(rowindex, inserted) == -1){
+	        		updated.push(rowindex);
+	        	}
         	}
         },
         save: function(data){
@@ -486,14 +496,30 @@
         	var rows = $(this).data('allrow');
         	return rows[rowindex];
         },
+        getInserted: function(){
+        	var allrow = $(this).data('allrow');
+        	var inserted = $(this).data('inserted');
+        	var ret = [];
+        	for(rowindex in inserted){
+        		ret.push(allrow[rowindex]);
+        	}
+        	return ret;
+        },
         getUpdated: function(){
-        	var rows = $(this).data('rows');
+        	var allrow = $(this).data('allrow');
         	var updated = $(this).data('updated');
         	var ret = [];
         	for(rowindex in updated){
-        		if(rows[rowindex] != updated[rowindex]){
-        			ret.push(updated[rowindex]);
-        		}
+        		ret.push(allrow[rowindex]);
+        	}
+        	return ret;
+        },
+        getDeleted: function(){
+        	var allrow = $(this).data('allrow');
+        	var deleted = $(this).data('deleted');
+        	var ret = [];
+        	for(rowindex in deleted){
+        		ret.push(allrow[rowindex]);
         	}
         	return ret;
         },
