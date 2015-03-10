@@ -28,4 +28,20 @@ public class JSONUtil
 		}
 		return data;
 	}
+	
+	public static Map<String, Object> toMap(String str)
+	{
+		Map<String, Object> data = null;
+		try
+		{
+			data = JSON.parseObject(str, new TypeReference<Map<String, Object>>()
+			{
+			});
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException(e.getMessage(), e.getCause());
+		}
+		return data;
+	}
 }

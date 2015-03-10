@@ -36,14 +36,11 @@ public class User
 		return new Msg("add success");
 	}
 	
-	public View updated()
+	public View changed()
 	{
-		String data = WebUtil.getParameter("updated");
-		List<Map<String, Object>> list = JSONUtil.toList(data);
-		for (Map<String, Object> map : list)
-		{
-			WebUtil.call("PmsService.moduser", map);
-		}
+		String data = WebUtil.getParameter("changed");
+		Map<String, Object> map = JSONUtil.toMap(data);
+		WebUtil.call("PmsService.moduser", map);
 		return new Msg("update success");
 	}
 

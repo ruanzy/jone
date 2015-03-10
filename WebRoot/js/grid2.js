@@ -303,7 +303,16 @@
         	});
         	return ret;
         },
+        endEdit: function(){
+        	var trs = $('tbody tr', this);
+        	var editingrows = $('tbody tr[editable=1]', this);
+        	if(editingrows.size() > 0){
+        		var editingrowid = trs.index(editingrows[0]);
+        		this.table('saveRow', editingrowid);
+        	}
+        },
         addRow: function(rowid, record){
+        	this.table('endEdit');
         	var opts = $(this).data('options');
         	var allrow = $(this).data('allrow');
         	var len = allrow.length;
@@ -500,8 +509,8 @@
         	var allrow = $(this).data('allrow');
         	var inserted = $(this).data('inserted');
         	var ret = [];
-        	for(rowindex in inserted){
-        		ret.push(allrow[rowindex]);
+        	for(var rowid in inserted){
+        		ret.push(allrow[inserted[rowid]]);
         	}
         	return ret;
         },
@@ -509,8 +518,8 @@
         	var allrow = $(this).data('allrow');
         	var updated = $(this).data('updated');
         	var ret = [];
-        	for(rowindex in updated){
-        		ret.push(allrow[rowindex]);
+        	for(var rowid in updated){
+        		ret.push(allrow[updated[rowid]]);
         	}
         	return ret;
         },
@@ -518,8 +527,8 @@
         	var allrow = $(this).data('allrow');
         	var deleted = $(this).data('deleted');
         	var ret = [];
-        	for(rowindex in deleted){
-        		ret.push(allrow[rowindex]);
+        	for(var rowid in deleted){
+        		ret.push(allrow[deleted[rowid]]);
         	}
         	return ret;
         },
@@ -548,26 +557,10 @@
 			return render;
 		},
         getChanged: function(){
-        	var ret = new Array();
-        	var rows = $(this).data('rows');
-        	var editingrows = $('tr.editing', this);
-        	editingrows.each(function(){
-        		var idx = this.rowIndex;
-        		var tds = $(this).find('td[field]');
-        		var obj = {};
-        		tds.each(function(){
-        			var f = $(this).attr('field');
-        			var editor = $(this).find('.editor');
-        			var v = editor.val();
-        			if(editor.hasClass('combox')){
-        				v = editor.AutoComplete('val');
-        			}
-        			obj[f] = v;
-        		});
-        		var mk = $.extend({}, rows[idx - 1], obj);
-        		ret.push(mk);
-        	});
-        	$(this).data('rows').length = 0;
+        	var ret = {};
+        	ret['inserted'] = this.table('getInserted');
+        	ret['deleted'] = this.table('getDeleted');
+        	ret['updated'] = this.table('getUpdated');
         	return ret;
         }
 	}; 
