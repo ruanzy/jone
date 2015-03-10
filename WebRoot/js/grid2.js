@@ -51,7 +51,6 @@
 				$(this).data('inserted', []);
 				$(this).data('deleted', []);
 				$(this).data('updated', []);
-				$(this).data('allrow', {});
 				var data = new Array();
 				if(settings.url){
 					el.data('url', settings.url);
@@ -259,7 +258,9 @@
 			$(this).data('ds', dd);
 			$(this).data('rows', dd.data);
 			$(this).data('allrow', dd.data);
-			$(this).data('updated', {});
+			$(this).data('inserted', []);
+			$(this).data('deleted', []);
+			$(this).data('updated', []);
 			$('tbody',this).empty().append(body(dd.data, opts));
 			$('div.pagination',this).empty().append(pager2(dd.total, 1, pagesize));
 			$('tbody tr:odd', this).addClass('strips');
@@ -285,7 +286,9 @@
 			$(this).data('ds', dd);
 			$(this).data('rows', dd.data);
 			$(this).data('allrow', dd.data);
-			$(this).data('updated', {});
+			$(this).data('inserted', []);
+			$(this).data('deleted', []);
+			$(this).data('updated', []);
 			$('tbody',this).empty().append(body(dd.data, opts));
 			$('div.pagination',this).empty().append(pager2(dd.total, dd.page, pagesize));
 				$('tbody tr:odd', this).addClass('strips');
