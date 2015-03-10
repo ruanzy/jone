@@ -48,6 +48,8 @@
 			return this.each(function(){
 				var el = $(this).addClass('grid');
 				el.data('pagesize', 10);
+				$(this).data('inserted', []);
+				$(this).data('deleted', []);
 				$(this).data('updated', {});
 				$(this).data('allrow', {});
 				var data = new Array();
@@ -301,15 +303,20 @@
         	});
         	return ret;
         },
-        addRow: function(record){
-        	var len = $(this).data('allrow').length;
+        addRow: function(rowid, record){
         	var opts = $(this).data('options');
+        	var allrow = $(this).data('allrow');
+        	var len = allrow.length;
+        	allrow.splice(rowid, 0, record);  
         	var rows = $(this).data('rows');
 			var code = new Array();
 			code.push(buildRow(record, 0, opts));
-			$('tbody',this).prepend(code.join(''));
-			$(this).data('allrow').push(record);
+			$('tbody tr:nth-child(' + rowid + ')',this).after(code.join(''));
 			this.table('editRow', 0);
+        },
+        appendRow: function(record){
+        	var len = $(this).data('allrow').length;
+			this.table('addRow', len, record);
         },
         editRow: function(rowindex){
         	var opts = $(this).data('options');
