@@ -254,7 +254,7 @@ public class PmsService
 
 	public void addres(Map<String, Object> map)
 	{
-		String sql = "insert into resources(id,name,url,icon,type,pid,path,method,flag) values(?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into resources(id,name,url,iconcls,type,pid,path,method,flag) values(?,?,?,?,?,?,?,?,?)";
 		int id = dao.getID("resources");
 		Object type = map.get("type");
 		Object url = map.get("url");

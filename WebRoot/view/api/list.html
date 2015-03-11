@@ -1,0 +1,42 @@
+<p>接口说明:根据条件查询用户列表</p>
+<p>请求方法:GET</p>
+<p>请求url:user/list</p>
+<p>参数列表:</p>
+<div id='kkk'></div>
+
+<script type="text/javascript">
+	$('#kkk').table({
+		columns : [
+		//{header:"ID",field:"id",width:50,align:'center'},
+		{
+			header : "参数名",
+			field : "pname",
+			align : 'left',
+			tip : true,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "必填(Y/N)",
+			field : "required",
+			align : 'center',
+			width : 100,
+			//render : requiredRender,
+			editor : {
+				type : 'select',
+				option : {
+					ds : [{'Y':1},{'N':0}]
+				}
+			}
+		}, {
+			header : "备注",
+			field : "memo",
+			align : 'left',
+			width : 180,
+			editor : {
+				type : 'text'
+			}
+		}],
+		url : 'api/params'
+	});
+</script>
