@@ -81,12 +81,17 @@
 				el.data('ds', _ds);
 				el.data('total', _ds.total);
 				var html = new Array();
+				html.push("<div class='grid-head'>");
+				html.push(header2(settings));
+				html.push("</div>");
+				html.push("<div class='grid-bd'>");
 				html.push("<table class='table'>");
-				html.push(header(settings));
+				//html.push(header(settings));
 				html.push("<tbody>");
 				html.push(body(rows, settings));
 				html.push("</tbody>");
 				html.push("</table>");
+				html.push("</div>");
 				if(settings.pager){
 					var total = parseInt(el.data('total'));
 					html.push("<div class='pagination'>");
@@ -788,6 +793,7 @@
 			var align = this.align;
 			var tip = this.tip;
 			var render = this.render;
+			var w = this.width;
 			var editor = this.editor;
 			var v = record[f]==undefined?'':record[f];
 			code.push("<td");
@@ -796,6 +802,9 @@
 			}
 			if(tip){
 				code.push(" title=" + span.text(v).html() + "");
+			}
+			if(w){
+				code.push(" width=" + w);
 			}
 			if(align){
 				code.push(" align='" + align + "'");
@@ -845,6 +854,33 @@
 			
 		});
 		code.push("</tr></thead>");
+		return code.join('');
+	}
+	function header2(opts){
+		var code = new Array();
+		code.push("<table class='table'>");
+		code.push("<thead><tr>");
+		if(opts.multiselect){
+			code.push("<th align=center width=20 class='checkbox checkall'><i class='icon-check-empty'></i></th>");
+		}
+		if(opts.linenum){
+			code.push("<th align=center width=20 class='linenum'>#</th>");
+		}
+		$(opts.columns).each(function(){
+			var h = this.header;
+			var w = this.width;
+			var align = this.align;
+			code.push("<th");
+			if(w){
+				code.push(" width=" + w);
+			}
+			if(align){
+				code.push(" align='" + align + "'");
+			}
+			code.push(">" + h + "</th>");
+			
+		});
+		code.push("</tr></thead></table>");
 		return code.join('');
 	}
 })(jQuery);

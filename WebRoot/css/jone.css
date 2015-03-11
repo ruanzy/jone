@@ -560,12 +560,17 @@ msg.css
 /**
 grid.css
 **/
+.grid {
+	width: 100%;
+	border: 1px solid #ddd;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+}
 .table {
 	table-layout: fixed;
 	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0;
-	border: 1px solid #ddd;
+	border: 1px dotted #ddd;
 	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
 }
 
@@ -586,7 +591,7 @@ grid.css
 	padding: 0 5px;
 	height: 35px;
 	line-height: 35px;
-	border: 1px solid #ddd;
+	border: 1px dotted #ddd;
 	color: #333;
 	font-size: 13px;
 	word-wrap: break-word;
