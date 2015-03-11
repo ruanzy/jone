@@ -23,9 +23,9 @@
 			width : 100,
 			//render : requiredRender,
 			editor : {
-				type : 'select',
+				type : 'selectbox',
 				option : {
-					ds : [{'Y':1},{'N':0}]
+					ds : [{text:'Y', value:1}, {text:'N', value:0}]
 				}
 			}
 		}, {
@@ -37,6 +37,7 @@
 				type : 'text'
 			}
 		}],
+		pager : false,
 		url : 'api/params'
 	});
 </script>

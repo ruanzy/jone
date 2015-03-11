@@ -47,37 +47,44 @@
 			var settings = $.extend({}, $.fn.table.defaults, options);
 			return this.each(function(){
 				var el = $(this).addClass('grid');
+				var pager = settings.pager;
 				el.data('pagesize', 10);
 				$(this).data('inserted', []);
 				$(this).data('deleted', []);
 				$(this).data('updated', []);
-				var data = new Array();
+				var _ds;
 				if(settings.url){
 					el.data('url', settings.url);
-					var baseparams = {page: 1, pagesize: 10};
+					var baseparams = {};
+					if(pager){
+						baseparams['page'] = 1;
+						baseparams['pagesize'] = 10;
+					}
 					if(settings.condition){
 						if($.isFunction(settings.condition)){
 							baseparams = $.extend(baseparams, settings.condition());
 						}
 					}
-					data = ds(settings.url, baseparams);
+					_ds = ds(settings.url, baseparams);
 				}else{
-					data = settings.data;
+					_ds = settings.data;
 				}
-				if(!data.data){
-					data.data = [];
+				var rows = [];
+				if(pager){
+					rows = _ds.data.slice(0); 
+				}else{
+					rows = _ds; 
 				}
-				var rows = data.data.slice(0); 
 				$(this).data('options', settings);
 				el.data('rows', rows);
 				$(this).data('allrow', rows);
-				el.data('ds', data);
-				el.data('total', data.total);
+				el.data('ds', _ds);
+				el.data('total', _ds.total);
 				var html = new Array();
 				html.push("<table class='table'>");
 				html.push(header(settings));
 				html.push("<tbody>");
-				html.push(body(data.data, settings));
+				html.push(body(rows, settings));
 				html.push("</tbody>");
 				html.push("</table>");
 				if(settings.pager){
@@ -166,7 +173,7 @@
 					}
 				});
 				
-				$('.pageNum', el).live('click',function(e){
+				/**$('.pageNum', el).live('click',function(e){
 					$('.checkbox', el).removeClass('selected').html("<i class='icon-check-empty'></i>");
 					var p = parseInt($(this).attr('p'));
 					var pagesize = parseInt(el.data('pagesize'));
@@ -184,7 +191,7 @@
 					$('tbody',el).empty().append(body(dd.data, opts));
 					$('.pager',el).empty().append(pager2(dd.total, p, pagesize));
 					$('tbody tr:odd', el).addClass('strips');
-				});
+				});**/
 				$('div.pagination a', el).live('click',function(e){
 					var p = 1;
 					$('.checkbox', el).removeClass('selected').html("<i class='icon-check-empty'></i>");
