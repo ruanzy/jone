@@ -321,6 +321,21 @@
         	var len = allrow.length;
         	allrow.splice(rowid, 0, record);  
         	$(this).data('inserted').push(rowid);
+        	var updated = $(this).data('updated');
+        	updated.sort();
+    		var min = updated[0];
+    		var max = updated[updated.length - 1];
+    		if(rowid <= min){
+    			for(var k in updated){
+    				updated[k] = updated[k] + 1;
+    			}
+    		}else if(rowid <= max){
+    			for(var k in updated){
+    				if(updated[k] >= rowid){
+    					updated[k] = updated[k] + 1;
+    				}
+    			}
+    		}
         	var rows = $(this).data('rows');
 			var code = new Array();
 			code.push(buildRow(record, 0, opts));
