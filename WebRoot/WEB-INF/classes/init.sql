@@ -139,3 +139,6 @@ insert into resources values(200,'UI模块',1,null,null,0,null,'200',1);
 insert into resources values(201,'Label',2,null,'view/comp/label.html',200,null,'200/201',1);
 insert into resources values(202,'Button',2,null,'view/comp/button.html',200,null,'200/202',1);
 insert into resources values(203,'Dialog',2,null,'view/comp/msg.html',200,null,'200/203',1);
+
+insert into resources values(300,'接口管理',1,null,null,0,null,'300',1);
+insert into resources values(301,'接口管理',2,null,'view/api/list.html',300,null,'300/301',1);
