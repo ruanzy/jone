@@ -87,6 +87,22 @@ CREATE TABLE departemp (
 	empid varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS api;
+CREATE TABLE api (
+	id int(11) NOT NULL,
+	name varchar(100) NOT NULL,
+	path varchar(100) NOT NULL,
+	memo varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS apiparam;
+CREATE TABLE apiparam (
+	apiid int(11) NOT NULL,
+	pname varchar(100) NOT NULL,
+	required int(1) default 0,
+	memo varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
 
 insert into resources values ('1', '系统管理', '1', null, null, '0', null, '1', '1');

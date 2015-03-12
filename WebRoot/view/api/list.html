@@ -2,6 +2,8 @@
 <p>请求方法:GET</p>
 <p>请求url:user/list</p>
 <p>参数列表:</p>
+<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
+<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加参数</a>
 <div id='kkk'></div>
 
 <script type="text/javascript">
@@ -21,7 +23,7 @@
 			field : "required",
 			align : 'center',
 			width : 100,
-			//render : requiredRender,
+			render : requiredRender,
 			editor : {
 				type : 'selectbox',
 				option : {
@@ -38,6 +40,38 @@
 			}
 		}],
 		pager : false,
+		condition : condition,
 		url : 'api/params'
 	});
+	function condition() {
+		var params = {
+			apiid : '1'
+		};
+		return params;
+	}
+	$('#updatedbtn').click(function(){
+		$('#kkk').table('endEdit');
+		var mm = $('#kkk').table('getChanged');
+		var text = JSON.stringify(mm);
+		$.ajax({
+			url : 'api/changed',
+			type : 'post',
+			data : {apiid: '1', changed: text},
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			dataType : 'json',
+			success : function(result) {
+				if (result.result) {
+					$.pop(result.msg, function() {
+						$('#kkk').table('refresh');
+					});
+				}
+			}
+		});
+	});
+	$('#appendbtn').click(function(){
+		$('#kkk').table('addRow', 0, {apiid:1});
+	});
+	function requiredRender(v, r) {
+		return v==1 ? 'Y' : 'N';
+	}
 </script>
