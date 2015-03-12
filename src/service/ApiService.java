@@ -17,12 +17,13 @@ public class ApiService
 	
 	public void add(Map<String, Object> map)
 	{
-		String sql = "insert into apiparam(apiid,pname,required,memo) values(?,?,?,?)";
+		String sql = "insert into apiparam(id,pname,required,memo,apiid) values(?,?,?,?,?)";
+		Object id = dao.getID("apiparam");
 		Object apiid = map.get("apiid");
 		Object pname = map.get("pname");
 		Object required = map.get("required");
 		Object memo = map.get("memo");
-		Object[] params = new Object[] { apiid, pname, required, memo };
+		Object[] params = new Object[] { id, pname, required, memo, apiid };
 		dao.update(sql, params);
 	}
 	
@@ -35,12 +36,12 @@ public class ApiService
 	
 	public void mod(Map<String, Object> map)
 	{
-		String sql = "update apiparam set pname=?,required=?,memo=? where apiid=?";
-		Object apiid = map.get("apiid");
+		String sql = "update apiparam set pname=?,required=?,memo=? where id=?";
 		Object pname = map.get("pname");
 		Object required = map.get("required");
 		Object memo = map.get("memo");
-		Object[] params = new Object[] { pname, required, memo, apiid };
+		Object id = map.get("id");
+		Object[] params = new Object[] { pname, required, memo, id };
 		dao.update(sql, params);
 	}
 }

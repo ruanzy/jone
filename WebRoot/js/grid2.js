@@ -285,9 +285,14 @@
     		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
     		var opts = $(this).data('options');
     		var url = opts.url;
+    		var pager = opts.pager;
     		var page = parseInt($('div.pagination a.active', this).text());
     		var pagesize = parseInt($(this).data('pagesize'));
-    		var p = {page:page, pagesize:pagesize};
+			var p = {};
+			if(pager){
+				p['page'] = page;
+				p['pagesize'] = pagesize;
+			}
     		if(params){
     			p = $.extend(p, params);
     		}else{
@@ -298,15 +303,24 @@
     			}
     		}
 
-			var dd = ds(url, p);
-			$(this).data('ds', dd);
-			$(this).data('rows', dd.data);
-			$(this).data('allrow', dd.data);
+			var _ds = ds(url, p);
+			
+			var rows = [];
+			if(pager){
+				rows = _ds.data.slice(0); 
+			}else{
+				rows = _ds; 
+			}
+			$(this).data('ds', _ds);
+			$(this).data('rows', rows);
+			$(this).data('allrow', rows);
 			$(this).data('inserted', []);
 			$(this).data('deleted', []);
 			$(this).data('updated', []);
-			$('tbody',this).empty().append(body(dd.data, opts));
-			$('div.pagination',this).empty().append(pager2(dd.total, dd.page, pagesize));
+			$('tbody',this).empty().append(body(rows, opts));
+			if(pager){
+				$('div.pagination',this).empty().append(pager2(dd.total, dd.page, pagesize));
+			}
 				$('tbody tr:odd', this).addClass('strips');
         },
         getSelected: function(){
