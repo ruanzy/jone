@@ -103,6 +103,7 @@
 				el.append(html.join(''));
 				var W = $('.grid-head', el).outerWidth();
 				if(rows.length <= 10){
+					alert(W - 17);
 					$('.grid-bd', el).width(W - 17);
 				}
 				$('.grid-row').live('mouseenter', function(){

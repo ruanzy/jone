@@ -568,7 +568,7 @@ grid.css
 
 .grid-bd {
 	overflow: auto;
-	max-height: 311px;
+	max-height: 331px;
 }
 
 .table {
@@ -596,8 +596,8 @@ grid.css
 
 .table tbody tr td {
 	padding: 0 5px;
-	height: 30px;
-	line-height: 30px;
+	height: 32px;
+	line-height: 32px;
 	border: 1px dotted #ddd;
 	color: #333;
 	font-size: 13px;
