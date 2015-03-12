@@ -101,10 +101,10 @@
 					html.push("</div>");
 				}
 				el.append(html.join(''));
-				var W = $('.grid-head', el).outerWidth();
+				/**var W = $('.grid-head', el).outerWidth();
 				if(rows.length <= 10){
 					$('.grid-bd', el).width(W - 17);
-				}
+				}**/
 				$('.grid-row').live('mouseenter', function(){
 					$(this).addClass('strips');
 				}).live('mouseleave', function(){
@@ -884,7 +884,7 @@
 			code.push(">" + h + "</th>");
 			
 		});
-		code.push("<th align=center width=6 class='scrollbar'></th>");
+		//code.push("<th align=center width=6 class='scrollbar'></th>");
 		code.push("</tr></thead></table>");
 		return code.join('');
 	}
