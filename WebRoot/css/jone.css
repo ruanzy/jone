@@ -565,6 +565,12 @@ grid.css
 	border: 1px solid #ddd;
 	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
 }
+
+.grid-bd {
+	overflow: auto;
+	max-height: 311px;
+}
+
 .table {
 	table-layout: fixed;
 	width: 100%;
@@ -577,6 +583,7 @@ grid.css
 .table thead tr th {
 	padding: 0 5px;
 	border: 1px solid #ddd;
+	border-top: 0px solid #ddd;
 	height: 35px;
 	line-height: 35px;
 	color: #333;
@@ -589,8 +596,8 @@ grid.css
 
 .table tbody tr td {
 	padding: 0 5px;
-	height: 35px;
-	line-height: 35px;
+	height: 30px;
+	line-height: 30px;
 	border: 1px dotted #ddd;
 	color: #333;
 	font-size: 13px;

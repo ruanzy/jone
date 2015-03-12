@@ -46,7 +46,7 @@
 		init: function(options) {
 			var settings = $.extend({}, $.fn.table.defaults, options);
 			return this.each(function(){
-				var el = $(this).addClass('grid');
+				var el = $(this);
 				var pager = settings.pager;
 				el.data('pagesize', 10);
 				$(this).data('inserted', []);
@@ -81,6 +81,7 @@
 				el.data('ds', _ds);
 				el.data('total', _ds.total);
 				var html = new Array();
+				html.push("<div class='grid'>");
 				html.push("<div class='grid-head'>");
 				html.push(header2(settings));
 				html.push("</div>");
@@ -92,6 +93,7 @@
 				html.push("</tbody>");
 				html.push("</table>");
 				html.push("</div>");
+				html.push("</div>");
 				if(settings.pager){
 					var total = parseInt(el.data('total'));
 					html.push("<div class='pagination'>");
@@ -99,8 +101,10 @@
 					html.push("</div>");
 				}
 				el.append(html.join(''));
-				
-				
+				var W = $('.grid-head', el).outerWidth();
+				if(rows.length <= 10){
+					$('.grid-bd', el).width(W - 17);
+				}
 				$('.grid-row').live('mouseenter', function(){
 					$(this).addClass('strips');
 				}).live('mouseleave', function(){
@@ -858,7 +862,7 @@
 	}
 	function header2(opts){
 		var code = new Array();
-		code.push("<table class='table'>");
+		code.push("<table class='table' style='border:none;'>");
 		code.push("<thead><tr>");
 		if(opts.multiselect){
 			code.push("<th align=center width=20 class='checkbox checkall'><i class='icon-check-empty'></i></th>");
@@ -880,6 +884,7 @@
 			code.push(">" + h + "</th>");
 			
 		});
+		code.push("<th align=center width=6 class='scrollbar'></th>");
 		code.push("</tr></thead></table>");
 		return code.join('');
 	}
