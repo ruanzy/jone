@@ -76,7 +76,6 @@ CREATE TABLE depart (
 	id int(11) NOT NULL,
 	name varchar(100) NOT NULL,
 	pid int(11) NOT NULL,
-	path varchar(100) NOT NULL,
 	isparent int(1) NOT NULL,
 	memo varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -128,6 +127,7 @@ insert into seq values(1000,'resources');
 insert into seq values(2,'dic');
 insert into dic values(1,'正常','1','userstate','userstate');
 insert into dic values(2,'禁止','0','userstate','userstate');
+insert into depart values(1,'总公司', 0, 1,'总公司');
 
 insert into resources values(100,'测试模块',1,null,null,0,null,'100',1);
 insert into resources values(101,'测试菜单',2,null,'test.jsp',100,null,'100/101',1);
