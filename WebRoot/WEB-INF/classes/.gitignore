@@ -1,7 +1,12 @@
-/dao1.properties
-/dao.properties
-/dao2.properties
 /action
 /com
-/plugin
+/dao.properties
+/dao2.properties
+/init.sql
+/interceptor
+/log
+/logback.xml
+/mappers
+/resource.properties
+/schedule
 /service
