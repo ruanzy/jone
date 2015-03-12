@@ -27,7 +27,7 @@ CREATE TABLE resources (
 	method varchar(100),
 	url varchar(100),
 	pid int(11) NOT NULL,
-	icon varchar(20),
+	iconcls varchar(20),
 	path varchar(100) NOT NULL,
 	flag char(1) default '1' NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -81,7 +81,7 @@ CREATE TABLE depart (
 	memo varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS depart;
+DROP TABLE IF EXISTS departemp;
 CREATE TABLE departemp (
 	departid int(11) NOT NULL,
 	empid varchar(100) NOT NULL
@@ -122,7 +122,7 @@ insert into resources values ('14', '字典删除', '3', 'PmsService.deldic', 'p
 insert into resources values ('15', '用户增加', '3', 'PmsService.reg', 'pmsreg', '2', null, '1/2/15', '1');
 insert into resources values ('16', '用户激活', '3', 'PmsService.activeuser', 'pmsactiveuser', '2', null, '1/2/16', '1');
 insert into resources values ('17', '用户禁止', '3', 'PmsService.canceluser', 'pmscanceluser', '2', null, '1/2/17', '1');
-insert into resources values ('18', '组织机构管理', '2', null, 'view/organize/list.html', '1', null, '1/18', '1');
+insert into resources values ('18', '组织机构管理', '2', null, 'view/depart/list.html', '1', null, '1/18', '1');
 
 insert into seq values(1000,'resources');
 insert into seq values(2,'dic');

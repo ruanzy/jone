@@ -128,8 +128,8 @@ public final class SQLMapper
 				page = (pagecount < page) ? pagecount : page;
 			}
 			data = dao.pager(sql2, s2.getPs().toArray(), page, pagesize);
-			pager.setData(data);
 		}
+		pager.setData(data);
 		return pager;
 	}
 
