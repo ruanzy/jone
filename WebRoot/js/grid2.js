@@ -352,7 +352,23 @@
         	var allrow = $(this).data('allrow');
         	var len = allrow.length;
         	allrow.splice(rowid, 0, record);  
-        	$(this).data('inserted').push(rowid);
+        	
+        	var inserted = $(this).data('inserted');
+        	inserted.sort();
+    		var min1 = inserted[0];
+    		var max1 = inserted[inserted.length - 1];
+    		if(rowid <= min1){
+    			for(var k in inserted){
+    				inserted[k] = inserted[k] + 1;
+    			}
+    		}else if(rowid <= max1){
+    			for(var k in inserted){
+    				if(inserted[k] >= rowid){
+    					inserted[k] = inserted[k] + 1;
+    				}
+    			}
+    		}
+    		
         	var updated = $(this).data('updated');
         	updated.sort();
     		var min = updated[0];
@@ -368,6 +384,9 @@
     				}
     			}
     		}
+    		
+    		inserted.push(rowid);
+    		
         	var rows = $(this).data('rows');
 			var code = new Array();
 			code.push(buildRow(record, 0, opts));
