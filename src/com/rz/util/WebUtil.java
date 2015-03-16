@@ -237,11 +237,10 @@ public class WebUtil
 
 	public static Map<String, String> getParameters()
 	{
-		Map<String, String> ps = null;
+		Map<String, String> ps = new HashMap<String, String>();
 		Enumeration<?> em = WebUtil.Request.get().getParameterNames();
 		if (em.hasMoreElements())
 		{
-			ps = new HashMap<String, String>();
 			while (em.hasMoreElements())
 			{
 				String k = (String) em.nextElement();
