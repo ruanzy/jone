@@ -71,10 +71,11 @@ CREATE TABLE dic (
 	memo varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS depart;
+DROP TABLE IF EXISTS org;
 CREATE TABLE depart (
 	id int(11) NOT NULL,
 	name varchar(100) NOT NULL,
+	--path varchar(255) NOT NULL,
 	pid int(11) NOT NULL,
 	isparent int(1) NOT NULL,
 	memo varchar(100)
@@ -100,6 +101,52 @@ CREATE TABLE apiparam (
 	pname varchar(100) NOT NULL,
 	required int(1) default 0,
 	memo varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS warehouse;
+CREATE TABLE warehouse (
+	id int(11) NOT NULL,
+	code varchar(100) NOT NULL,
+	name varchar(100) NOT NULL,
+	state int(1) default 0,
+	memo varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS goods;
+CREATE TABLE goods (
+	id int(11) NOT NULL,
+	category int(11) NOT NULL,
+	name varchar(100) NOT NULL,
+	spec varchar(255) NOT NULL,
+	purchase_price decimal(19,2) default 0.00,
+	sale_price decimal(19,2) default 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS goods_category;
+CREATE TABLE goods_category (
+	id int(11) NOT NULL,
+	name varchar(100) NOT NULL,
+	pid int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS goods_unit;
+CREATE TABLE goods_unit (
+	id int(11) NOT NULL,
+	name varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS supplier;
+CREATE TABLE supplier (
+	id int(11) NOT NULL,
+	category int(11) NOT NULL,
+	name varchar(100) NOT NULL,
+	phone varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS supplier_category;
+CREATE TABLE supplier_category (
+	id int(11) NOT NULL,
+	name varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
