@@ -15,7 +15,7 @@ public class PmsService
 {
 	private Dao dao = Dao.getInstance();
 
-	public Pager finduser(Map<String, Object> map)
+	public Pager finduser(Map<String, String> map)
 	{
 		String sqlid1 = "user.count";
 		String sqlid2 = "user.selectAll";
@@ -23,7 +23,7 @@ public class PmsService
 		return pager;
 	}
 
-	public void adduser(Map<String, Object> map)
+	public void adduser(Map<String, String> map)
 	{
 		String sql = "insert into topic(id,title,memo,content,creator,createtime,updatetime,toptime) values(?,?,?,?,?,?,?,?)";
 		int id = dao.getID("topic");
@@ -213,7 +213,7 @@ public class PmsService
 		return dao.find(sql);
 	}
 
-	public Pager findlog(Map<String, Object> map)
+	public Pager findlog(Map<String, String> map)
 	{
 		String sqlid1 = "log.count";
 		String sqlid2 = "log.selectAll";
@@ -221,7 +221,7 @@ public class PmsService
 		return pager;
 	}
 
-	public void addcatalog(Map<String, Object> map)
+	public void addcatalog(Map<String, String> map)
 	{
 		String sql = "insert into catalog(text,value) values(?,?)";
 		Object text = map.get("text");
@@ -292,7 +292,7 @@ public class PmsService
 		return dao.find(sql, params);
 	}
 
-	public Pager finddic(Map<String, Object> map)
+	public Pager finddic(Map<String, String> map)
 	{
 		String sqlid1 = "dic.count";
 		String sqlid2 = "dic.selectAll";
@@ -345,7 +345,7 @@ public class PmsService
 		return dao.find(sql);
 	}
 
-	public Pager findrole(Map<String, Object> map)
+	public Pager findrole(Map<String, String> map)
 	{
 		String sqlid1 = "role.count";
 		String sqlid2 = "role.selectAll";

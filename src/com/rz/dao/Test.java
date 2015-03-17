@@ -9,13 +9,13 @@ public class Test
 	{
 		String countsqlid = "log.count";
 		String pagersqlid = "log.selectAll";
-		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, String> params = new HashMap<String, String>();
 		params.put("operator", "admin");
 		params.put("operator_text", "admin");
 		params.put("time1", "2014-05-28");
 		params.put("time2", "2014-08-29");
-		params.put("page", 1);
-		params.put("pagesize", 10);
+		params.put("page", "1");
+		params.put("pagesize", "10");
 		Pager p = SQLMapper.pager(countsqlid, pagersqlid, params);
 		System.out.println(p.getTotal());
 //		List<Map<String, Object>> list = (List<Map<String, Object>>)p.getData();

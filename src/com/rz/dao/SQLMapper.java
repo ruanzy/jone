@@ -72,7 +72,7 @@ public final class SQLMapper
 
 	}
 
-	public static void update(String sqlid, Map<String, ?> params)
+	public static void update(String sqlid, Map<String, String> params)
 	{
 		SQL s = getSQL(sqlid, params);
 		String sql = s.getSql();
@@ -82,7 +82,7 @@ public final class SQLMapper
 		dao.commit();
 	}
 
-	public static Map<String, Object> findOne(String sqlid, Map<String, ?> params)
+	public static Map<String, Object> findOne(String sqlid, Map<String, String> params)
 	{
 		SQL s = getSQL(sqlid, params);
 		String sql = s.getSql();
@@ -95,7 +95,7 @@ public final class SQLMapper
 		return null;
 	}
 
-	public static List<Map<String, Object>> find(String sqlid, Map<String, ?> params)
+	public static List<Map<String, Object>> find(String sqlid, Map<String, String> params)
 	{
 		SQL s = getSQL(sqlid, params);
 		String sql = s.getSql();
@@ -103,10 +103,10 @@ public final class SQLMapper
 		return dao.find(sql, ps.toArray());
 	}
 
-	public static Pager pager(String countsqlid, String pagersqlid, Map<String, ?> params)
+	public static Pager pager(String countsqlid, String pagersqlid, Map<String, String> params)
 	{
-		int page = toInt(params.get("page").toString(), 1);
-		int pagesize = toInt(params.get("pagesize").toString(), 10);
+		int page = toInt(params.get("page"), 1);
+		int pagesize = toInt(params.get("pagesize"), 10);
 		Pager pager = new Pager(page, pagesize);
 		SQL s1 = getSQL(countsqlid, params);
 		SQL s2 = getSQL(pagersqlid, params);
@@ -133,7 +133,7 @@ public final class SQLMapper
 		return pager;
 	}
 
-	private static SQL parse(String text, String openToken, String closeToken, Map<String, ?> params)
+	private static SQL parse(String text, String openToken, String closeToken, Map<String, String> params)
 	{
 		StringBuilder builder = new StringBuilder();
 		List<Object> ps = new ArrayList<Object>();
@@ -186,7 +186,7 @@ public final class SQLMapper
 		return s;
 	}
 
-	public static SQL getSQL(String sqlid, Map<String, ?> params)
+	public static SQL getSQL(String sqlid, Map<String, String> params)
 	{
 		SQL tt = null;
 		String sqlxml = sqls.get(sqlid);
@@ -294,7 +294,7 @@ public final class SQLMapper
 	public static void main(String[] args)
 	{
 		// String sqlid = "log.selectAll";
-		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, String> params = new HashMap<String, String>();
 		params.put("operator", "admin");
 		params.put("operator_text", "admin");
 		params.put("time1", "2014-08-28");

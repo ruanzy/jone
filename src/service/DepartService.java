@@ -16,7 +16,7 @@ public class DepartService
 		return dao.find(sql);
 	}
 	
-	public Pager find(Map<String, Object> map)
+	public Pager find(Map<String, String> map)
 	{
 		String sqlid1 = "depart.count";
 		String sqlid2 = "depart.selectAll";
