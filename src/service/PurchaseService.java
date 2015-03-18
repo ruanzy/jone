@@ -19,10 +19,10 @@ public class PurchaseService
 		return pager;
 	}
 	
-	public List<Map<String, Object>> detaillist(String pbill)
+	public List<Map<String, Object>> detaillist(String purchasebill)
 	{
-		String sql = "select * from pbill_detail where pbill=?";
-		Object[] params = new Object[] { pbill };
+		String sql = "select * from pbill_detail left join goods on goods.id=pbill_detail.goods where pbill_detail.purchase_bill=?";
+		Object[] params = new Object[] { purchasebill };
 		return dao.find(sql, params);
 	}
 

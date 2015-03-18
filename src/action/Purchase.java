@@ -20,8 +20,11 @@ public class Purchase
 	
 	public View detaillist()
 	{
-		String pbill = WebUtil.getParameter("pbill");
-		return new Json(WebUtil.call("PurchaseService.detaillist", pbill));
+		String purchasebill = WebUtil.getParameter("purchasebill");
+		Object detaillist = WebUtil.call("PurchaseService.detaillist", purchasebill);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("detaillist", detaillist);
+		return new Ftl("pdetail.ftl", map);
 	}
 
 	public View add()

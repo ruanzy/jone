@@ -5,35 +5,73 @@
 </div>
 <div id='kkk2'></div>
 <script type="text/javascript">
+	var warehouse;
+	var supplier;
+	$.ajax({
+		url : "warehouse/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				warehouse = data;
+			}
+		}
+	});
+	$.ajax({
+		url : "supplier/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				supplier = data;
+			}
+		}
+	});
 	$('#kkk2').table({
 		columns : [
 		//{header:"ID",field:"id",width:50,align:'center'},
 		{
 			header : "状态",
 			field : "state",
-			render : stateRender
+			render : stateRender,
+			align : 'center',
+			width : 80
+		}, {
+			header : "入库单号",
+			field : "pno",
+			align : 'center',
+			render : pnoRender,
+			width : 150
 		}, {
 			header : "拟单时间",
 			field : "createtime",
 			align : 'center',
-			width : 180
+			width : 100
+		}, {
+			header : "拟单人",
+			field : "creator",
+			align : 'center',
+			width : 100
 		}, {
 			header : "供应商",
 			field : "supplier",
 			align : 'center',
+			render : supplierRender,
 			width : 200
 		}, {
 			header : "入库仓库",
 			field : "warehouse",
 			align : 'center',
-			width : 200
+			render : warehouseRender,
+			width : 150
 		}, {
 			header : "采购金额",
-			field : "supplier",
-			align : 'center',
-			width : 200
+			field : "money",
+			align : 'center'
 		} ],
-		url : 'user/list',
+		url : 'purchase/list',
 		condition : condition
 	});
 	$('#addbtn').click(add);
@@ -180,10 +218,44 @@
 
 	function stateRender(s) {
 		if (s == 1) {
-			return "<label class='label label-success'>正常</label>";
+			return "<label class='label label-success'>已入库</label>";
 		} else {
-			return "<label class='label label-danger'>禁止</label>";
+			return "<label class='label label-danger'>未入库</label>";
 		}
+	}
+	
+	function pnoRender(v) {
+		var str = "<a href='javascript:;' onclick='viewdetail(\"" + v + "\")'>" + v + "</a>";
+		return str;
+	}
+	
+	function viewdetail(v) {
+		$.dialog({
+			title : '采购入库单详情',
+			url : 'purchase/detaillist?purchasebill=' + v
+		});
+	}
+	
+	function warehouseRender(v) {
+		var c;
+		$.each(warehouse, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
+	}
+	
+	function supplierRender(v) {
+		var c;
+		$.each(supplier, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
 	}
 
 	function opRender(v, r) {

@@ -164,7 +164,7 @@ CREATE TABLE customer_category (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS pbill;
-CREATE TABLE pbill (
+CREATE TABLE purchase_bill (
 	id int(11) NOT NULL,
 	pno varchar(100),
 	supplier int(11) NOT NULL,
@@ -178,7 +178,7 @@ CREATE TABLE pbill (
 DROP TABLE IF EXISTS pbill_detail;
 CREATE TABLE pbill_detail (
 	id int(11) NOT NULL,
-	pbill int(11) NOT NULL,
+	purchase_bill int(11) NOT NULL,
 	goods int(11) NOT NULL,
 	purchase_num int(11) NOT NULL,
 	purchase_price decimal(19,2) default 0.00,
