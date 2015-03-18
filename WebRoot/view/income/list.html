@@ -1,26 +1,39 @@
+<div style='position: relative;margin-bottom:5px;'>
+	<a id='addbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
+	<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
+	<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> append</a>
+</div>
 <div id='kkk2'></div>
 <script type="text/javascript">
 	$('#kkk2').table({
 		columns : [
 		//{header:"ID",field:"id",width:50,align:'center'},
 		{
-			header : "用户名",
-			field : "username",
-			tip : true
+			header : "状态",
+			field : "state",
+			render : stateRender
 		}, {
-			header : "注册时间",
-			field : "regtime",
+			header : "拟单时间",
+			field : "createtime",
 			align : 'center',
 			width : 180
 		}, {
-			header : "状态",
-			field : "state",
+			header : "供应商",
+			field : "supplier",
 			align : 'center',
-			width : 100,
-			render : stateRender
+			width : 200
+		}, {
+			header : "入库仓库",
+			field : "warehouse",
+			align : 'center',
+			width : 200
+		}, {
+			header : "采购金额",
+			field : "supplier",
+			align : 'center',
+			width : 200
 		} ],
 		url : 'user/list',
-		selector : 'm',
 		condition : condition
 	});
 	$('#addbtn').click(add);

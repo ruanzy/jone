@@ -1,24 +1,21 @@
-<from class='form'>
-<table>
+<from>
+<table style='width:100%'>
 	<tr>
-		<td class='form-label'>采购单编号</td>
+		<td>采购单编号</td>
 		<td><input type="text" id='pno' name="pno" class='txt'
 			autocomplete="off" /></td>
-		<td class='form-label'>制单时间</td>
+		<td>拟定时间</td>
 		<td><input type="text" id='createtime' name='createtime' class='txt' /></td>
-	</tr>
-	<tr>
-		<td class='form-label'>供应商</td>
-		<td><input type="text" id='supplier' name='supplier' class='txt' /></td>
-		<td class='form-label'>入库仓库</td>
-		<td><input type="text" id='warehouse' name="warehouse" class='txt' /></td>
-		<td class='form-label'>制单人</td>
+		<td>拟定人</td>
 		<td><input type="text" id='depart' name="depart" class='txt' /></td>
 	</tr>
 	<tr>
-		<td class='form-label'>备注</td>
-		<td colspan="3"><textarea id='memo' name="memo" class='textarea'
-				style='width:80%;'></textarea></td>
+		<td>供应商</td>
+		<td><input type="text" id='supplier' name='supplier' class='txt' /></td>
+		<td>入库仓库</td>
+		<td><input type="text" id='warehouse' name="warehouse" class='txt' /></td>
+		<td>备注</td>
+		<td><input type="text" id='memo' name="memo" class='txt' /></td>
 	</tr>
 </table>
 </from>
@@ -29,5 +26,93 @@
 		textField : 'name',
 		valueField : 'id'
 	});
-	$('#createtime').val(new Date().toLocaleString());
+	$('#warehouse').selectbox({
+		url : 'warehouse/list',
+		textField : 'name',
+		valueField : 'id'
+	});
+	var date = new Date();
+	var yyyy = date.getFullYear();
+	var MM = date.getMonth() + 1;
+	var dd = date.getDate();
+	$('#pno').val('PW' + yyyy + MM + dd);
+	$('#createtime').val(yyyy + '-' + MM + '-' + dd);
+	var unit;
+	$.ajax({
+		url : "goods/unitlist",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				unit = data;
+			}
+		}
+	});
+	$('#detail').table({
+		columns : [
+		//{header:"ID",field:"id",width:50,align:'center'},
+		{
+			header : "商品名",
+			field : "name",
+			align : 'left',
+			tip : true,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "计量单位",
+			field : "unit",
+			align : 'left',
+			width : 100,
+			render : unitRender,
+			editor : {
+				type : 'selectbox',
+				option : {
+					ds : unit
+				}
+			}
+		}, {
+			header : "规格",
+			field : "spec",
+			align : 'left',
+			width : 180,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "采购价格",
+			field : "purchase_price",
+			align : 'left',
+			width : 100,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "售出价格",
+			field : "sale_price",
+			align : 'center',
+			width : 100,
+			editor : {
+				type : 'datebox'
+			}
+		}, {
+			header : "操作",
+			field : "",
+			align : 'center',
+			width : 100,
+			render : opRender
+		} ],
+		url : 'goods/list'
+	});
+	function unitRender(v, r) {
+		var c;
+		$.each(unit, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
+	}
 </script>

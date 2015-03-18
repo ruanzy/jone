@@ -1,22 +1,26 @@
 package service;
 
+import java.util.List;
 import java.util.Map;
 import com.rz.dao.Dao;
-import com.rz.dao.Pager;
-import com.rz.dao.SQLMapper;
 import com.rz.tx.Transaction;
-import com.rz.util.TimeUtil;
 
 public class WarehouseService
 {
 	private Dao dao = Dao.getInstance();
 
-	public Pager list(Map<String, String> map)
+//	public Pager list(Map<String, String> map)
+//	{
+//		String sqlid1 = "warehouse.count";
+//		String sqlid2 = "warehouse.selectAll";
+//		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+//		return pager;
+//	}
+	
+	public List<Map<String,Object>> list(Map<String, String> map)
 	{
-		String sqlid1 = "warehouse.count";
-		String sqlid2 = "warehouse.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
-		return pager;
+		String sql = "select * from warehouse";
+		return dao.find(sql);
 	}
 
 	public void add(Map<String, String> map)
