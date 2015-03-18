@@ -1,0 +1,33 @@
+<from class='form'>
+<table>
+	<tr>
+		<td class='form-label'>采购单编号</td>
+		<td><input type="text" id='pno' name="pno" class='txt'
+			autocomplete="off" /></td>
+		<td class='form-label'>制单时间</td>
+		<td><input type="text" id='createtime' name='createtime' class='txt' /></td>
+	</tr>
+	<tr>
+		<td class='form-label'>供应商</td>
+		<td><input type="text" id='supplier' name='supplier' class='txt' /></td>
+		<td class='form-label'>入库仓库</td>
+		<td><input type="text" id='warehouse' name="warehouse" class='txt' /></td>
+		<td class='form-label'>制单人</td>
+		<td><input type="text" id='depart' name="depart" class='txt' /></td>
+	</tr>
+	<tr>
+		<td class='form-label'>备注</td>
+		<td colspan="3"><textarea id='memo' name="memo" class='textarea'
+				style='width:80%;'></textarea></td>
+	</tr>
+</table>
+</from>
+<div id='detail'></div>
+<script type="text/javascript">
+	$('#supplier').selectbox({
+		url : 'supplier/list',
+		textField : 'name',
+		valueField : 'id'
+	});
+	$('#createtime').val(new Date().toLocaleString());
+</script>

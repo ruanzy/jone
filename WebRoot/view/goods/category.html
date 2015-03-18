@@ -1,29 +1,14 @@
 <div style='position: relative;margin-bottom:5px;'>
-	<a id='addbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
+	<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
 	<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
-	<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> append</a>
 	<!-- 
 <a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
-<a id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配角色</a>
  -->
-	<div style="position: absolute;bottom : 0; right:10px;">
-		<form id='search-form' class='search-box'>
-			<table>
-				<tr>
-					<td><input type="text" id='searchtxt' name="name"
-						autocomplete="off" placeholder="请输入商品名" /></td>
-					<td><button type="button" class="btn btn-primary">查询</button></td>
-				</tr>
-			</table>
-		</form>
-	</div>
 </div>
 <div id='kkk'></div>
 
 <script type="text/javascript">
-	//var state = dic('userstate');
 	var category;
-	var unit;
 	$.ajax({
 		url : "goods/category",
 		async : false,
@@ -35,95 +20,42 @@
 			}
 		}
 	});
-	$.ajax({
-		url : "goods/unitlist",
-		async : false,
-		type : 'post',
-		dataType : 'json',
-		success : function(data) {
-			if (data) {
-				unit = data;
-			}
-		}
-	});
 	$('#kkk').table({
 		columns : [
-		//{header:"ID",field:"id",width:50,align:'center'},
-		{
-			header : "商品名",
-			field : "name",
-			align : 'left',
-			tip : true,
-			editor : {
-				type : 'text'
-			}
-		}, {
-			header : "类别",
-			field : "category",
-			align : 'left',
-			width : 100,
-			render : categoryRender,
-			editor : {
-				type : 'selecttree',
-				option : {
-					ds : category
+			{header:"ID",field:"id",width:50,align:'center'},
+			{
+				header : "类别",
+				field : "name",
+				align : 'left',
+				tip : true,
+				editor : {
+					type : 'text'
+				}
+			},
+			{
+				header : "父类别",
+				field : "pid",
+				align : 'left',
+				render : pidRender,
+				editor : {
+					type : 'selecttree',
+					option : {
+						ds : category
+					}
 				}
 			}
-		}, {
-			header : "计量单位",
-			field : "unit",
-			align : 'left',
-			width : 100,
-			render : unitRender,
-			editor : {
-				type : 'selectbox',
-				option : {
-					ds : unit
-				}
-			}
-		}, {
-			header : "规格",
-			field : "spec",
-			align : 'left',
-			width : 180,
-			editor : {
-				type : 'text'
-			}
-		}, {
-			header : "购入价格",
-			field : "purchase_price",
-			align : 'left',
-			width : 100,
-			editor : {
-				type : 'text'
-			}
-		}, {
-			header : "售出价格",
-			field : "sale_price",
-			align : 'center',
-			width : 100,
-			editor : {
-				type : 'datebox'
-			}
-		}, {
-			header : "操作",
-			field : "",
-			align : 'center',
-			width : 100,
-			render : opRender
-		} ],
-		url : 'goods/list',
-		condition : condition
+		],
+		pager : false,
+		url : 'goods/category'
 	});
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);
-	$('#assignbtn').click(mk);
 	$('#updatedbtn').click(function(){
 		$('#kkk').table('endEdit');
 		var mm = $('#kkk').table('getChanged');
 		var text = JSON.stringify(mm);
 		$.ajax({
-			url : 'user/changed',
+			url : 'goods/unitchanged',
 			type : 'post',
 			data : {changed: text},
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -138,12 +70,12 @@
 		});
 	});
 	$('#appendbtn').click(function(){
-		$('#kkk').table('addRow', 0, {username:'rzy'});
+		$('#kkk').table('addRow', 0, {name:'计量单位'});
 	});
 	function add() {
 		$.dialog({
-			title : '商品新增',
-			url : 'view/goods/addgoods.html',
+			title : '用户新增',
+			url : 'view/user/adduser.html',
 			drag : true,
 			buttons : [ {
 				text : '确定',
@@ -167,22 +99,28 @@
 	}
 
 	function ok(win) {
-		var name = win.find('input[name=name]').val();
-		var category = win.find('input[name=category]').val();
-		var unit = win.find('input[name=unit]').val();
-		var spec = win.find('input[name=spec]').val();
-		var purchase_price = win.find('input[name=purchase_price]').val();
-		var sale_price = win.find('input[name=sale_price]').val();
+		var username = win.find('input[name=username]').val();
+		var password = win.find('input[name=password]').val();
+		var email = win.find('input[name=email]').val();
+		var phone = win.find('input[name=phone]').val();
+		var depart = win.find('input[name=depart]').val();
+		var memo = win.find('textarea[name=memo]').val();
+		var state = win.find('input[name=state]').val();
+		var birth = win.find('input[name=birth]').val();
+		var gender = win.find('input[name=gender]').val();
 		var params = {
-			name : name,
-			category : category,
-			unit : unit,
-			spec : spec,
-			purchase_price : purchase_price,
-			sale_price : sale_price
+			username : username,
+			password : password,
+			email : email,
+			phone : phone,
+			depart : depart,
+			birth : birth,
+			gender : gender,
+			memo : memo,
+			state : state
 		};
 		$.ajax({
-			url : 'goods/add',
+			url : 'user/add',
 			type : 'post',
 			data : params,
 			dataType : 'json',
@@ -307,7 +245,7 @@
 	function condition() {
 		var name = $('input[name=name]').val();
 		var params = {
-			name : name
+			username : name
 		};
 		return params;
 	}
@@ -332,20 +270,9 @@
 		}
 	}
 	
-	function categoryRender(v, r) {
+	function pidRender(v, r) {
 		var c;
 		$.each(category, function(){
-			if(this['id'] == v){
-				c = this['name'];
-				return false;
-			}
-		});
-		return c;
-	}unitRender
-	
-	function unitRender(v, r) {
-		var c;
-		$.each(unit, function(){
 			if(this['id'] == v){
 				c = this['name'];
 				return false;

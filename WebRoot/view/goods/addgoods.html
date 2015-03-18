@@ -1,0 +1,33 @@
+<from class='form'>
+<table>
+	<tr>
+		<td class='form-label'>商品分类</td>
+		<td><input type="text" id='category' name="category" class='txt' /></td>
+		<td class='form-label'>商品名称</td>
+		<td><input type="text" id='name' name="name" class='txt'
+			autocomplete="off" /></td>
+	</tr>
+	<tr>
+		<td class='form-label'>规格</td>
+		<td><input type="text" id='spec' name="spec" class='txt' /></td>
+		<td class='form-label'>计量单位</td>
+		<td><input type="text" id='unit' name="unit" class='txt' /></td>
+	</tr>
+	<tr>
+		<td class='form-label'>购入价格</td>
+		<td><input type="text" id='purchase_price' name="purchase_price" class='txt' /></td>
+		<td class='form-label'>售出价格</td>
+		<td><input type="text" id='sale_price' name="sale_price" class='txt' /></td>
+	</tr>
+</table>
+</from>
+<script type="text/javascript">
+	$('#unit').selectbox({
+		url : 'goods/unitlist',
+		textField : 'name',
+		valueField : 'id'
+	});
+	$('#category').selecttree({
+		url : 'goods/category'
+	});
+</script>
