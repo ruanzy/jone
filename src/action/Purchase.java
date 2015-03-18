@@ -17,6 +17,12 @@ public class Purchase
 		Map<String, String> map = WebUtil.getParameters();
 		return new Json(WebUtil.call("PurchaseService.list", map));
 	}
+	
+	public View detaillist()
+	{
+		String pbill = WebUtil.getParameter("pbill");
+		return new Json(WebUtil.call("PurchaseService.detaillist", pbill));
+	}
 
 	public View add()
 	{

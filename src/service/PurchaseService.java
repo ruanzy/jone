@@ -1,5 +1,6 @@
 package service;
 
+import java.util.List;
 import java.util.Map;
 import com.rz.dao.Dao;
 import com.rz.dao.Pager;
@@ -16,6 +17,13 @@ public class PurchaseService
 		String sqlid2 = "purchase.selectAll";
 		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
 		return pager;
+	}
+	
+	public List<Map<String, Object>> detaillist(String pbill)
+	{
+		String sql = "select * from pbill_detail where pbill=?";
+		Object[] params = new Object[] { pbill };
+		return dao.find(sql, params);
 	}
 
 	public void add(Map<String, String> map)

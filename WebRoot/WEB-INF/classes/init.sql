@@ -149,6 +149,42 @@ CREATE TABLE supplier_category (
 	name varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS customer;
+CREATE TABLE customer (
+	id int(11) NOT NULL,
+	category int(11) NOT NULL,
+	name varchar(100) NOT NULL,
+	phone varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS customer_category;
+CREATE TABLE customer_category (
+	id int(11) NOT NULL,
+	name varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS pbill;
+CREATE TABLE pbill (
+	id int(11) NOT NULL,
+	pno varchar(100),
+	supplier int(11) NOT NULL,
+	warehouse int(11) NOT NULL,
+	creator varchar(100),
+	createtime varchar(100),
+	state int(1) default 0,
+	money decimal(19,2) default 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS pbill_detail;
+CREATE TABLE pbill_detail (
+	id int(11) NOT NULL,
+	pbill int(11) NOT NULL,
+	goods int(11) NOT NULL,
+	purchase_num int(11) NOT NULL,
+	purchase_price decimal(19,2) default 0.00,
+	purchase_money decimal(19,2) default 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
 
 insert into resources values ('1', '系统管理', '1', null, null, '0', null, '1', '1');
