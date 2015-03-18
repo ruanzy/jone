@@ -19,7 +19,7 @@ public class DefaultServiceCaller implements ServiceCaller
 		String[] arr = sid.split("\\.");
 		if (arr.length != 2)
 		{
-			throw new RuntimeException("业务接口不存在");
+			throw new ServiceException("业务接口不规范");
 		}
 		String className = arr[0];
 		String methodName = arr[1];
@@ -58,6 +58,10 @@ public class DefaultServiceCaller implements ServiceCaller
 			Class<?>[] parameterTypes = getParameterTypes(args);
 			Class<?> cls = Class.forName(fullName);
 			Method m = MethodUtils.getMatchingAccessibleMethod(cls, methodName, parameterTypes);
+			if(m == null){
+				String error = "业务处理接口" + fullName + "." + methodName + " Not Found!";
+				throw new ServiceException(error);
+			}
 			if (m.isAnnotationPresent(Transaction.class))
 			{
 				Dao dao = Dao.getInstance();
@@ -82,9 +86,9 @@ public class DefaultServiceCaller implements ServiceCaller
 		catch (Exception e)
 		{
 			String error = "";
-			if (e instanceof ClassNotFoundException || e instanceof NoSuchMethodException)
+			if (e instanceof ServiceException)
 			{
-				error = "业务处理接口" + e.getMessage() + " Not Found!";
+				error = e.getMessage();
 			}
 			else if (e instanceof InvocationTargetException)
 			{
