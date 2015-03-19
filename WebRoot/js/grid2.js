@@ -641,14 +641,14 @@
         	var allrow = $(this).data('allrow');
         	for(var k in allrow){
         		var d = allrow[k];
-        		if(k['_r']){
-        			if(k['_r'] == 1){
+        		if(d['_r']){
+        			if(d['_r'] == 1){
         				ret['inserted'].push(d);
         			}
-        			if(k['_r'] == 2){
+        			if(d['_r'] == 2){
         				ret['updated'].push(d);
         			}
-        			if(k['_r'] == 3){
+        			if(d['_r'] == 3){
         				ret['deleted'].push(d);
         			}
         		}
