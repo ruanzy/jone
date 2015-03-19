@@ -351,9 +351,10 @@
         	var opts = $(this).data('options');
         	var allrow = $(this).data('allrow');
         	var len = allrow.length;
+        	record['_r'] = 1;
         	allrow.splice(rowid, 0, record);  
         	
-        	var inserted = $(this).data('inserted');
+        	/**var inserted = $(this).data('inserted');
         	inserted.sort();
     		var min1 = inserted[0];
     		var max1 = inserted[inserted.length - 1];
@@ -386,8 +387,8 @@
     		}
     		
     		inserted.push(rowid);
-    		
-        	var rows = $(this).data('rows');
+    		**/
+        	//var rows = $(this).data('rows');
 			var code = new Array();
 			code.push(buildRow(record, 0, opts));
 			if(rowid == 0){
@@ -400,6 +401,10 @@
         appendRow: function(record){
         	var len = $(this).data('allrow').length;
 			this.table('addRow', len, record);
+        },
+        deleteRow: function(rowindex){
+        	var rowData = this.table('getRowData', rowindex);
+        	rowData['_r'] = 3;
         },
         editRow: function(rowindex){
         	var opts = $(this).data('options');
@@ -531,12 +536,15 @@
 	        	});
         	}
         	if(changed){
-	        	var updated = $(this).data('updated');
+	        	/**var updated = $(this).data('updated');
 	        	var inserted = $(this).data('inserted');
 	        	//updated[rowindex] = newData;
 	        	$(this).data('allrow')[rowindex] = newData;
 	        	if($.inArray(rowindex, inserted) == -1){
 	        		updated.push(rowindex);
+	        	}**/
+	        	if(!newData['_r']){
+	        		newData['_r'] = 2;
 	        	}
         	}
         },
@@ -627,9 +635,24 @@
 		},
         getChanged: function(){
         	var ret = {};
-        	ret['inserted'] = this.table('getInserted');
-        	ret['deleted'] = this.table('getDeleted');
-        	ret['updated'] = this.table('getUpdated');
+        	ret['inserted'] = [];
+        	ret['deleted'] = [];
+        	ret['updated'] = [];
+        	var allrow = $(this).data('allrow');
+        	for(var k in allrow){
+        		var d = allrow[k];
+        		if(k['_r']){
+        			if(k['_r'] == 1){
+        				ret['inserted'].push(d);
+        			}
+        			if(k['_r'] == 2){
+        				ret['updated'].push(d);
+        			}
+        			if(k['_r'] == 3){
+        				ret['deleted'].push(d);
+        			}
+        		}
+        	}
         	return ret;
         }
 	}; 
