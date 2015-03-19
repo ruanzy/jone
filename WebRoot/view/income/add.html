@@ -20,6 +20,7 @@
 </table>
 </from>
 <a id='adddetail' class='btn btn-primary'><i class="icon-plus"></i> 新建明细</a>
+<a id='savedetail' class='btn btn-primary'><i class="icon-plus"></i> 全部保存</a>
 <div id='detail'></div>
 <script type="text/javascript">
 	$('#supplier').selectbox({
@@ -111,7 +112,7 @@
 			header : "操作",
 			field : "",
 			align : 'center',
-			width : 100,
+			width : 80,
 			render : opRender
 		} ],
 		data : []
@@ -135,5 +136,8 @@
 	}
 	$('#adddetail').click(function(){
 		$('#detail').table('addRow', 0, {});
+	});
+	$('#savedetail').click(function(){
+		
 	});
 </script>
