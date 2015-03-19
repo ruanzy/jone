@@ -18,13 +18,22 @@ public class Purchase
 		return new Json(WebUtil.call("PurchaseService.list", map));
 	}
 	
+	public View detailview()
+	{
+		String purchasebill = WebUtil.getParameter("purchasebill");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("purchasebill", purchasebill);
+		return new Ftl("pdetail.html", map);
+	}
+	
 	public View detaillist()
 	{
 		String purchasebill = WebUtil.getParameter("purchasebill");
 		Object detaillist = WebUtil.call("PurchaseService.detaillist", purchasebill);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("detaillist", detaillist);
-		return new Ftl("pdetail.ftl", map);
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("detaillist", detaillist);
+//		return new Ftl("pdetail.ftl", map);
+		return new Json(detaillist);
 	}
 
 	public View add()
