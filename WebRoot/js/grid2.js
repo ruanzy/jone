@@ -539,13 +539,13 @@
 	        	/**var updated = $(this).data('updated');
 	        	var inserted = $(this).data('inserted');
 	        	//updated[rowindex] = newData;
-	        	$(this).data('allrow')[rowindex] = newData;
 	        	if($.inArray(rowindex, inserted) == -1){
 	        		updated.push(rowindex);
 	        	}**/
 	        	if(!newData['_r']){
 	        		newData['_r'] = 2;
 	        	}
+	        	$(this).data('allrow')[rowindex] = newData;
         	}
         },
         save: function(data){
