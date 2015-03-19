@@ -815,7 +815,7 @@
 				code.push(buildRow(this, index, opts));
 			});
 		}else{
-			code.push("没有数据");
+			//code.push("没有数据");
 		}
 		return code.join('');
 	}

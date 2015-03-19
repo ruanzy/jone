@@ -19,6 +19,7 @@
 	</tr>
 </table>
 </from>
+<a id='adddetail' class='btn btn-primary'><i class="icon-plus"></i> 新建明细</a>
 <div id='detail'></div>
 <script type="text/javascript">
 	$('#supplier').selectbox({
@@ -61,6 +62,14 @@
 				type : 'text'
 			}
 		}, {
+			header : "规格",
+			field : "spec",
+			align : 'left',
+			width : 180,
+			editor : {
+				type : 'text'
+			}
+		}, {
 			header : "计量单位",
 			field : "unit",
 			align : 'left',
@@ -69,16 +78,10 @@
 			editor : {
 				type : 'selectbox',
 				option : {
-					ds : unit
+					ds : unit,
+					textField : 'name',
+					valueField : 'id'
 				}
-			}
-		}, {
-			header : "规格",
-			field : "spec",
-			align : 'left',
-			width : 180,
-			editor : {
-				type : 'text'
 			}
 		}, {
 			header : "采购价格",
@@ -89,12 +92,20 @@
 				type : 'text'
 			}
 		}, {
-			header : "售出价格",
-			field : "sale_price",
+			header : "采购数量",
+			field : "purchase_num",
 			align : 'center',
 			width : 100,
 			editor : {
-				type : 'datebox'
+				type : 'text'
+			}
+		}, {
+			header : "采购金额",
+			field : "purchase_money",
+			align : 'center',
+			width : 100,
+			editor : {
+				type : 'text'
 			}
 		}, {
 			header : "操作",
@@ -103,7 +114,7 @@
 			width : 100,
 			render : opRender
 		} ],
-		url : 'goods/list'
+		data : []
 	});
 	function unitRender(v, r) {
 		var c;
@@ -115,4 +126,14 @@
 		});
 		return c;
 	}
+	function opRender(v, r) {
+		var str = "<a href='javascript:;' onclick='del()'>删除</a>";
+		return str;
+	}
+	function del() {
+
+	}
+	$('#adddetail').click(function(){
+		$('#detail').table('addRow', 0, {});
+	});
 </script>
