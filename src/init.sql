@@ -119,6 +119,7 @@ CREATE TABLE goods (
 	category int(11) NOT NULL,
 	name varchar(100) NOT NULL,
 	spec varchar(255) NOT NULL,
+	unit int(11) NOT NULL,
 	purchase_price decimal(19,2) default 0.00,
 	sale_price decimal(19,2) default 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
