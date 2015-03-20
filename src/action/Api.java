@@ -33,7 +33,8 @@ public class Api
 		}
 		for (Map<String, Object> m : deleted)
 		{
-			//WebUtil.call("ApiService.mod", m);
+			String id = m.get("id").toString();
+			WebUtil.call("ApiService.del", id);
 		}
 		for (Map<String, Object> m : updated)
 		{

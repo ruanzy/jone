@@ -338,6 +338,18 @@
         	});
         	return ret;
         },
+        getSelected2: function(){
+        	var ret = [];
+        	var grid = this;
+        	var rows = $('tbody tr', grid);
+        	rows.each(function(){
+        		if($(this).hasClass('highlight')){
+        			var rowid = rows.index(this);
+        			ret.push(rowid);   
+        		}
+        	});
+        	return ret;
+        },
         endEdit: function(){
         	var trs = $('tbody tr', this);
         	var editingrows = $('tbody tr[editable=1]', this);
@@ -403,8 +415,15 @@
 			this.table('addRow', len, record);
         },
         deleteRow: function(rowindex){
+        	$('tbody tr:eq(' + rowindex + ')',this).remove();
+        	var rows = $(this).data('allrow');
         	var rowData = this.table('getRowData', rowindex);
-        	rowData['_r'] = 3;
+        	var _r = rowData['_r'];
+        	if(_r && _r == 1){
+        		rows.splice(rowindex, 1);
+        	}else if(!_r || _r == 2){
+        		rowData['_r'] = 3;
+        	}
         },
         editRow: function(rowindex){
         	var opts = $(this).data('options');

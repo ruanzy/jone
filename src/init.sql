@@ -71,7 +71,7 @@ CREATE TABLE dic (
 	memo varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS org;
+DROP TABLE IF EXISTS depart;
 CREATE TABLE depart (
 	id int(11) NOT NULL,
 	name varchar(100) NOT NULL,
@@ -97,6 +97,7 @@ CREATE TABLE api (
 
 DROP TABLE IF EXISTS apiparam;
 CREATE TABLE apiparam (
+	id int(11) NOT NULL,
 	apiid int(11) NOT NULL,
 	pname varchar(100) NOT NULL,
 	required int(1) default 0,

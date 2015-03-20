@@ -27,10 +27,10 @@ public class ApiService
 		dao.update(sql, params);
 	}
 	
-	public void del(String apiid, String pname)
+	public void del(String id)
 	{
-		String sql = "delete from apiparam where apiid=? and pname=?";
-		Object[] params = new Object[] { apiid, pname };
+		String sql = "delete from apiparam where id=?";
+		Object[] params = new Object[] { id };
 		dao.update(sql, params);
 	}
 	

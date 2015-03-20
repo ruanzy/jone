@@ -2,8 +2,9 @@
 <p>请求方法:POST</p>
 <p>请求url:user/add</p>
 <p>参数列表:</p>
-<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
 <a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加参数</a>
+<a id='delbtn' class='btn btn-primary'><i class="icon-save"></i> 删除参数</a>
+<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
 <div id='kkk'></div>
 
 <script type="text/javascript">
@@ -69,6 +70,16 @@
 	});
 	$('#appendbtn').click(function(){
 		$('#kkk').table('addRow', 0, {apiid:1});
+	});
+	$('#delbtn').click(function(){
+		var selected = $('#kkk').table('getSelected2');
+		if (selected.length == 0) {
+			$.tip({
+				content : 'Please select one record!'
+			});
+			return false;
+		}
+		$('#kkk').table('deleteRow', selected[0]);
 	});
 	function requiredRender(v, r) {
 		return v==1 ? 'Y' : 'N';
