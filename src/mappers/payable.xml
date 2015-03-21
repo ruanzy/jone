@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<sql id='count'>
+		select count(*) from payable
+	</sql>
+	<sql id='selectAll'>
+		select * from payable order by id DESC
+	</sql>
+</sqls>

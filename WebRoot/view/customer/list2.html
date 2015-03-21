@@ -1,0 +1,221 @@
+<div id='kkk2'></div>
+<script type="text/javascript">
+	$('#kkk2').table({
+		columns : [
+		//{header:"ID",field:"id",width:50,align:'center'},
+		{
+			header : "用户名",
+			field : "username",
+			tip : true
+		}, {
+			header : "注册时间",
+			field : "regtime",
+			align : 'center',
+			width : 180
+		}, {
+			header : "状态",
+			field : "state",
+			align : 'center',
+			width : 100,
+			render : stateRender
+		} ],
+		url : 'user/list',
+		selector : 'm',
+		condition : condition
+	});
+	$('#addbtn').click(add);
+	$('#delbtn').click(del);
+	$('#assignbtn').click(mk);
+	function add() {
+		$.dialog({
+			title : '用户新增',
+			url : 'view/user/adduser.html',
+			ok : ok
+		});
+		//$('#kkk').Grid('addRow', {username:'asd'});
+	}
+
+	function ok(win) {
+		var username = win.find('input[name=username]').val();
+		var password = win.find('input[name=password]').val();
+		var params = {
+			username : username,
+			password : password
+		};
+		$.ajax({
+			url : 'user/add',
+			type : 'post',
+			data : params,
+			dataType : 'json',
+			success : function(result) {
+				if (result.success) {
+					$('#kkk2').table('reload');
+				}
+			}
+		});
+	}
+
+	function save() {
+		$('#kkk2').Grid('save');
+	}
+
+	function del() {
+		var selected = $('#kkk').table('getSelected');
+		if (selected.length == 0) {
+			$.tip({
+				content : '请选择至少一条记录'
+			});
+			return false;
+		}
+		$.confirm({
+			content : '确定要干掉吗',
+			ok : function() {
+				var ids = [];
+				for ( var k in selected) {
+					ids.push(selected[k].id);
+				}
+				$.ajax({
+					url : 'user/del',
+					type : 'post',
+					data : {
+						ids : ids.join(',')
+					},
+					dataType : 'json',
+					success : function(result) {
+						$('#kkk2').table('refresh');
+					}
+				});
+			}
+		});
+	}
+
+	function cancel() {
+		var selected = $('#kkk2').Grid('getSelected');
+		if (selected.length == 0) {
+			$.alert({
+				msg : '请选择至少一条记录'
+			});
+			return false;
+		}
+		$.confirm({
+			msg : '确定要禁止吗',
+			callback : function(btn) {
+				if (btn) {
+					var ids = [];
+					for ( var k in selected) {
+						ids.push(selected[k].id);
+					}
+					$.ajax({
+						url : 'user/cancel',
+						type : 'post',
+						data : {
+							ids : ids.join(',')
+						},
+						dataType : 'json',
+						success : function(result) {
+							$('#kkk').Grid('refresh');
+						}
+					});
+				}
+			}
+		});
+	}
+
+	function active() {
+		var selected = $('#kkk2').Grid('getSelected');
+		if (selected.length == 0) {
+			$.alert({
+				msg : '请选择至少一条记录'
+			});
+			return false;
+		}
+		$.confirm({
+			msg : '确定要激活吗',
+			callback : function(btn) {
+				if (btn) {
+					var ids = [];
+					for ( var k in selected) {
+						ids.push(selected[k].id);
+					}
+					$.ajax({
+						url : 'user/active',
+						type : 'post',
+						data : {
+							ids : ids.join(',')
+						},
+						dataType : 'json',
+						success : function(result) {
+							$('#kkk2').Grid('refresh');
+						}
+					});
+				}
+			}
+		});
+	}
+
+	$('.btn-lightblue').click(function() {
+		$('#kkk2').table('reload');
+	});
+
+	function condition() {
+		var name = $('input[name=name]').val();
+		var params = {
+			username : name
+		};
+		return params;
+	}
+
+	function stateRender(s) {
+		if (s == 1) {
+			return "<label class='label label-success'>正常</label>";
+		} else {
+			return "<label class='label label-danger'>禁止</label>";
+		}
+	}
+
+	function opRender(v, r) {
+		var h = [];
+		h.push("<a href='javascript:void(0);' onclick=javascript:mk('" + r.id
+				+ "')>分配角色</a>");
+		return h.join('');
+	}
+
+	function mk() {
+		var selected = $('#kkk2').table('getSelected');
+		if (selected.length != 1) {
+			$.tip({
+				content : '请选择一条记录'
+			});
+			return false;
+		}
+		$.dialog({
+			title : '分配角色',
+			height : 120,
+			url : 'user/tosetrole?id=' + selected[0].id,
+			ok : ok1
+		});
+	}
+
+	function ok1(win) {
+		var id = win.find('input[name=user]').val();
+		var roles = new Array();
+		win.find('input[type=checkbox]:checked').each(function() {
+			roles.push($(this).val());
+		});
+		var data = {
+			user : id,
+			roles : roles.join()
+		};
+		$.ajax({
+			url : "user/setrole",
+			type : 'post',
+			data : data,
+			dataType : 'json',
+			success : function(r) {
+				if (r.success) {
+					$('#kkk2').table('reload');
+				}
+			}
+		});
+	}
+</script>

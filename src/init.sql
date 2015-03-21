@@ -187,6 +187,24 @@ CREATE TABLE pbill_detail (
 	purchase_money decimal(19,2) default 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS receivable;
+CREATE TABLE receivable (
+	id int(11) NOT NULL,
+	customer int(11) NOT NULL,
+	total decimal(19,2) default 0.00,
+	received decimal(19,2) default 0.00,
+	nonreceive decimal(19,2) default 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS payable;
+CREATE TABLE payable (
+	id int(11) NOT NULL,
+	supplier int(11) NOT NULL,
+	total decimal(19,2) default 0.00,
+	payed decimal(19,2) default 0.00,
+	nonpay decimal(19,2) default 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
 
 insert into resources values ('1', '系统管理', '1', null, null, '0', null, '1', '1');

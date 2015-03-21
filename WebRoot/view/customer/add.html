@@ -1,0 +1,143 @@
+<from>
+<table style='width:100%'>
+	<tr>
+		<td>采购单编号</td>
+		<td><input type="text" id='pno' name="pno" class='txt'
+			autocomplete="off" /></td>
+		<td>拟定时间</td>
+		<td><input type="text" id='createtime' name='createtime' class='txt' /></td>
+		<td>拟定人</td>
+		<td><input type="text" id='depart' name="depart" class='txt' /></td>
+	</tr>
+	<tr>
+		<td>供应商</td>
+		<td><input type="text" id='supplier' name='supplier' class='txt' /></td>
+		<td>入库仓库</td>
+		<td><input type="text" id='warehouse' name="warehouse" class='txt' /></td>
+		<td>备注</td>
+		<td><input type="text" id='memo' name="memo" class='txt' /></td>
+	</tr>
+</table>
+</from>
+<a id='adddetail' class='btn btn-primary'><i class="icon-plus"></i> 新建明细</a>
+<a id='savedetail' class='btn btn-primary'><i class="icon-plus"></i> 全部保存</a>
+<div id='detail'></div>
+<script type="text/javascript">
+	$('#supplier').selectbox({
+		url : 'supplier/list',
+		textField : 'name',
+		valueField : 'id'
+	});
+	$('#warehouse').selectbox({
+		url : 'warehouse/list',
+		textField : 'name',
+		valueField : 'id'
+	});
+	var date = new Date();
+	var yyyy = date.getFullYear();
+	var MM = date.getMonth() + 1;
+	var dd = date.getDate();
+	$('#pno').val('PW' + yyyy + MM + dd);
+	$('#createtime').val(yyyy + '-' + MM + '-' + dd);
+	var unit;
+	$.ajax({
+		url : "goods/unitlist",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				unit = data;
+			}
+		}
+	});
+	$('#detail').table({
+		columns : [
+		//{header:"ID",field:"id",width:50,align:'center'},
+		{
+			header : "商品名",
+			field : "name",
+			align : 'left',
+			tip : true,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "规格",
+			field : "spec",
+			align : 'left',
+			width : 180,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "计量单位",
+			field : "unit",
+			align : 'left',
+			width : 100,
+			render : unitRender,
+			editor : {
+				type : 'selectbox',
+				option : {
+					ds : unit,
+					textField : 'name',
+					valueField : 'id'
+				}
+			}
+		}, {
+			header : "采购价格",
+			field : "purchase_price",
+			align : 'left',
+			width : 100,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "采购数量",
+			field : "purchase_num",
+			align : 'center',
+			width : 100,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "采购金额",
+			field : "purchase_money",
+			align : 'center',
+			width : 100,
+			editor : {
+				type : 'text'
+			}
+		}, {
+			header : "操作",
+			field : "",
+			align : 'center',
+			width : 80,
+			render : opRender
+		} ],
+		data : []
+	});
+	function unitRender(v, r) {
+		var c;
+		$.each(unit, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
+	}
+	function opRender(v, r) {
+		var str = "<a href='javascript:;' onclick='del()'>删除</a>";
+		return str;
+	}
+	function del() {
+
+	}
+	$('#adddetail').click(function(){
+		$('#detail').table('addRow', 0, {});
+	});
+	$('#savedetail').click(function(){
+		
+	});
+</script>
