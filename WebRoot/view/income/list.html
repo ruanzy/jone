@@ -5,6 +5,7 @@
 <script type="text/javascript">
 	var warehouse;
 	var supplier;
+	var goods;
 	$.ajax({
 		url : "warehouse/list",
 		async : false,
@@ -24,6 +25,17 @@
 		success : function(data) {
 			if (data) {
 				supplier = data;
+			}
+		}
+	});
+	$.ajax({
+		url : "goods/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				goods = data;
 			}
 		}
 	});

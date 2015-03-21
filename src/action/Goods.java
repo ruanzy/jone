@@ -15,6 +15,28 @@ public class Goods
 		return new Json(WebUtil.call("GoodsService.category"));
 	}
 	
+	@SuppressWarnings("unchecked")
+	public View categorychanged()
+	{
+		String apiid = WebUtil.getParameter("apiid");
+		String data = WebUtil.getParameter("changed");
+		Map<String, Object> map = JSONUtil.toMap(data);
+		List<Map<String, Object>> inserted = (List<Map<String, Object>>)map.get("inserted");
+		//List<Map<String, Object>> deleted = (List<Map<String, Object>>)map.get("deleted");
+		List<Map<String, Object>> updated = (List<Map<String, Object>>)map.get("updated");
+		for (Map<String, Object> m : inserted)
+		{
+			m.put("apiid", apiid);
+			WebUtil.call("GoodsService.categoryadd", m);
+		}
+		for (Map<String, Object> m : updated)
+		{
+			m.put("apiid", apiid);
+			WebUtil.call("GoodsService.categorymod", m);
+		}
+		return new Msg("save success");
+	}
+	
 	public View unitlist()
 	{
 		return new Json(WebUtil.call("GoodsService.unitlist"));
@@ -46,6 +68,12 @@ public class Goods
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		return new Json(WebUtil.call("GoodsService.list", map));
+	}
+	
+	public View pager()
+	{
+		Map<String, String> map = WebUtil.getParameters();
+		return new Json(WebUtil.call("GoodsService.pager", map));
 	}
 	
 	public View add()

@@ -22,6 +22,41 @@ public class GoodsService
 		String sql = "select * from goods_unit";
 		return dao.find(sql);
 	}
+	
+	public void categoryadd(Map<String, String> map)
+	{
+		String sql = "insert into goods_category(id,name) values(?,?)";
+		int id = dao.getID("goods_category");
+		Object name = map.get("name");
+		Object[] params = new Object[] { id, name };
+		dao.update(sql, params);
+	}
+
+	@Transaction
+	public void categorydel(String ids)
+	{
+		String[] arr = ids.split(",");
+		StringBuffer sql1 = new StringBuffer("delete from goods_category where id in (");
+		for (int k = 0, len = arr.length; k < len; k++)
+		{
+			sql1.append("?");
+			if (k != len - 1)
+			{
+				sql1.append(",");
+			}
+		}
+		sql1.append(")");
+		dao.update(sql1.toString(), arr);
+	}
+
+	public void categorymod(Map<String, Object> map)
+	{
+		String sql = "update goods_category set name=? where id=?";
+		Object name = map.get("name");
+		Object id = map.get("id");
+		Object[] params = new Object[] { name, id };
+		dao.update(sql, params);
+	}
 
 	public void unitadd(Map<String, String> map)
 	{
@@ -69,7 +104,13 @@ public class GoodsService
 		dao.update(sql, params);
 	}
 
-	public Pager list(Map<String, String> map)
+	public List<Map<String,Object>> list(Map<String, String> map)
+	{
+		String sql = "select * from goods";
+		return dao.find(sql);
+	}
+	
+	public Pager pager(Map<String, String> map)
 	{
 		String sqlid1 = "goods.count";
 		String sqlid2 = "goods.selectAll";

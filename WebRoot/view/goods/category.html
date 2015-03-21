@@ -31,18 +31,6 @@
 				editor : {
 					type : 'text'
 				}
-			},
-			{
-				header : "父类别",
-				field : "pid",
-				align : 'left',
-				render : pidRender,
-				editor : {
-					type : 'selecttree',
-					option : {
-						ds : category
-					}
-				}
 			}
 		],
 		pager : false,
@@ -55,7 +43,7 @@
 		var mm = $('#kkk').table('getChanged');
 		var text = JSON.stringify(mm);
 		$.ajax({
-			url : 'goods/unitchanged',
+			url : 'goods/categorychanged',
 			type : 'post',
 			data : {changed: text},
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -70,7 +58,7 @@
 		});
 	});
 	$('#appendbtn').click(function(){
-		$('#kkk').table('addRow', 0, {name:'计量单位'});
+		$('#kkk').table('addRow', 0, {name:'分类'});
 	});
 	function add() {
 		$.dialog({
