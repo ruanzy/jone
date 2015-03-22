@@ -50,9 +50,9 @@
 			width : 80
 		}, {
 			header : "入库单号",
-			field : "pno",
+			field : "no",
 			align : 'center',
-			render : pnoRender,
+			render : noRender,
 			width : 150
 		}, {
 			header : "拟单时间",
@@ -235,7 +235,7 @@
 		}
 	}
 	
-	function pnoRender(v) {
+	function noRender(v) {
 		var str = "<a href='javascript:;' onclick='viewdetail(\"" + v + "\")'>" + v + "</a>";
 		return str;
 	}

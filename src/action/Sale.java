@@ -2,6 +2,7 @@ package action;
 
 import java.util.List;
 import java.util.Map;
+
 import com.rz.util.JSONUtil;
 import com.rz.util.WebUtil;
 import com.rz.web.View;
@@ -10,11 +11,16 @@ import com.rz.web.view.Msg;
 
 public class Sale
 {
-	public View params()
+	public View outlist()
 	{
-		String apiid = WebUtil.getParameter("apiid");
-		Object obj = WebUtil.call("ApiService.find", apiid);
-		return new Json(obj);
+		Map<String, String> map = WebUtil.getParameters();
+		return new Json(WebUtil.call("SaleService.outlist", map));
+	}
+	
+	public View returnlist()
+	{
+		Map<String, String> map = WebUtil.getParameters();
+		return new Json(WebUtil.call("SaleService.returnlist", map));
 	}
 	
 	@SuppressWarnings("unchecked")

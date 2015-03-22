@@ -168,7 +168,7 @@ CREATE TABLE customer_category (
 DROP TABLE IF EXISTS pbill;
 CREATE TABLE purchase_bill (
 	id int(11) NOT NULL,
-	pno varchar(100),
+	no varchar(100),
 	supplier int(11) NOT NULL,
 	warehouse int(11) NOT NULL,
 	creator varchar(100),
@@ -203,6 +203,18 @@ CREATE TABLE payable (
 	total decimal(19,2) default 0.00,
 	payed decimal(19,2) default 0.00,
 	nonpay decimal(19,2) default 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS saleout;
+CREATE TABLE saleout (
+	id int(11) NOT NULL,
+	no varchar(100),
+	customer int(11) NOT NULL,
+	warehouse int(11) NOT NULL,
+	creator varchar(100),
+	createtime varchar(100),
+	state int(1) default 0,
+	money decimal(19,2) default 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');

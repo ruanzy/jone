@@ -1,8 +1,8 @@
 <from>
 <table style='width:100%'>
 	<tr>
-		<td>采购单编号</td>
-		<td><input type="text" id='no' name="no" class='txt'
+		<td>销售出库单编号</td>
+		<td><input type="text" id='pno' name="no" class='txt'
 			autocomplete="off" /></td>
 		<td>拟定时间</td>
 		<td><input type="text" id='createtime' name='createtime' class='txt' /></td>
@@ -10,9 +10,9 @@
 		<td><input type="text" id='depart' name="depart" class='txt' /></td>
 	</tr>
 	<tr>
-		<td>供应商</td>
-		<td><input type="text" id='supplier' name='supplier' class='txt' /></td>
-		<td>入库仓库</td>
+		<td>客户</td>
+		<td><input type="text" id='customer' name='customer' class='txt' /></td>
+		<td>出库仓库</td>
 		<td><input type="text" id='warehouse' name="warehouse" class='txt' /></td>
 		<td>备注</td>
 		<td><input type="text" id='memo' name="memo" class='txt' /></td>
@@ -23,8 +23,8 @@
 <a id='savedetail' class='btn btn-primary'><i class="icon-plus"></i> 全部保存</a>
 <div id='detail'></div>
 <script type="text/javascript">
-	$('#supplier').selectbox({
-		url : 'supplier/list',
+	$('#customer').selectbox({
+		url : 'customer/list',
 		textField : 'name',
 		valueField : 'id'
 	});
@@ -37,7 +37,7 @@
 	var yyyy = date.getFullYear();
 	var MM = date.getMonth() + 1;
 	var dd = date.getDate();
-	$('#no').val('P' + yyyy + MM + dd);
+	$('#pno').val('S' + yyyy + MM + dd);
 	$('#createtime').val(yyyy + '-' + MM + '-' + dd);
 	var unit;
 	$.ajax({
@@ -85,24 +85,24 @@
 				}
 			}
 		}, {
-			header : "采购价格",
-			field : "purchase_price",
+			header : "销售价格",
+			field : "sale_price",
 			align : 'left',
 			width : 100,
 			editor : {
 				type : 'text'
 			}
 		}, {
-			header : "采购数量",
-			field : "purchase_num",
+			header : "销售数量",
+			field : "sale_num",
 			align : 'center',
 			width : 100,
 			editor : {
 				type : 'text'
 			}
 		}, {
-			header : "采购金额",
-			field : "purchase_money",
+			header : "销售金额",
+			field : "sale_money",
 			align : 'center',
 			width : 100,
 			editor : {

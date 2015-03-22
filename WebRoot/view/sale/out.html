@@ -1,87 +1,317 @@
-<p>接口说明:用户增加</p>
-<p>请求方法:POST</p>
-<p>请求url:user/add</p>
-<p>参数列表:</p>
-<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加参数</a>
-<a id='delbtn' class='btn btn-primary'><i class="icon-save"></i> 删除参数</a>
-<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
-<div id='kkk'></div>
-
+<div style='position: relative;margin-bottom:5px;'>
+	<a id='addbtn' class='btn btn-primary'><i class="icon-plus"></i> 新建销售出库单</a>
+</div>
+<div id='kkk2'></div>
 <script type="text/javascript">
-	$('#kkk').table({
+	var warehouse;
+	var customer;
+	var goods;
+	$.ajax({
+		url : "warehouse/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				warehouse = data;
+			}
+		}
+	});
+	$.ajax({
+		url : "customer/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				customer = data;
+			}
+		}
+	});
+	$.ajax({
+		url : "goods/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				goods = data;
+			}
+		}
+	});
+	$('#kkk2').table({
 		columns : [
 		//{header:"ID",field:"id",width:50,align:'center'},
 		{
-			header : "参数名",
-			field : "pname",
-			align : 'left',
-			tip : true,
-			editor : {
-				type : 'text'
-			}
-		}, {
-			header : "必填(Y/N)",
-			field : "required",
+			header : "状态",
+			field : "state",
+			render : stateRender,
 			align : 'center',
-			width : 100,
-			render : requiredRender,
-			editor : {
-				type : 'selectbox',
-				option : {
-					ds : [{text:'Y', value:1}, {text:'N', value:0}]
-				}
-			}
+			width : 80
 		}, {
-			header : "备注",
-			field : "memo",
-			align : 'left',
-			editor : {
-				type : 'text'
-			}
-		}],
-		pager : false,
-		condition : condition,
-		url : 'api/params'
+			header : "出库单号",
+			field : "no",
+			align : 'center',
+			render : pnoRender,
+			width : 150
+		}, {
+			header : "拟单时间",
+			field : "createtime",
+			align : 'center',
+			width : 100
+		}, {
+			header : "拟单人",
+			field : "creator",
+			align : 'center',
+			width : 100
+		}, {
+			header : "供应商",
+			field : "customer",
+			align : 'center',
+			render : customerRender,
+			width : 200
+		}, {
+			header : "出库仓库",
+			field : "warehouse",
+			align : 'center',
+			render : warehouseRender,
+			width : 150
+		}, {
+			header : "销售金额",
+			field : "money",
+			align : 'center'
+		} ],
+		url : 'sale/outlist',
+		condition : condition
 	});
-	function condition() {
-		var params = {
-			apiid : '1'
-		};
-		return params;
+	$('#addbtn').click(add);
+	$('#delbtn').click(del);
+	$('#assignbtn').click(mk);
+	function add() {
+		$.dialog({
+			title : '新建销售出库单',
+			url : 'view/sale/outadd.html',
+			drag : true,
+			ok : ok
+		});
+		//$('#kkk').Grid('addRow', {username:'asd'});
 	}
-	$('#updatedbtn').click(function(){
-		$('#kkk').table('endEdit');
-		var mm = $('#kkk').table('getChanged');
-		var text = JSON.stringify(mm);
+
+	function ok(win) {
+		var username = win.find('input[name=username]').val();
+		var password = win.find('input[name=password]').val();
+		var params = {
+			username : username,
+			password : password
+		};
 		$.ajax({
-			url : 'api/changed',
+			url : 'user/add',
 			type : 'post',
-			data : {apiid: '1', changed: text},
-			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			data : params,
 			dataType : 'json',
 			success : function(result) {
-				if (result.result) {
-					$.pop(result.msg, function() {
-						$('#kkk').table('refresh');
+				if (result.success) {
+					$('#kkk2').table('reload');
+				}
+			}
+		});
+	}
+
+	function save() {
+		$('#kkk2').Grid('save');
+	}
+
+	function del() {
+		var selected = $('#kkk').table('getSelected');
+		if (selected.length == 0) {
+			$.tip({
+				content : '请选择至少一条记录'
+			});
+			return false;
+		}
+		$.confirm({
+			content : '确定要干掉吗',
+			ok : function() {
+				var ids = [];
+				for ( var k in selected) {
+					ids.push(selected[k].id);
+				}
+				$.ajax({
+					url : 'user/del',
+					type : 'post',
+					data : {
+						ids : ids.join(',')
+					},
+					dataType : 'json',
+					success : function(result) {
+						$('#kkk2').table('refresh');
+					}
+				});
+			}
+		});
+	}
+
+	function cancel() {
+		var selected = $('#kkk2').Grid('getSelected');
+		if (selected.length == 0) {
+			$.alert({
+				msg : '请选择至少一条记录'
+			});
+			return false;
+		}
+		$.confirm({
+			msg : '确定要禁止吗',
+			callback : function(btn) {
+				if (btn) {
+					var ids = [];
+					for ( var k in selected) {
+						ids.push(selected[k].id);
+					}
+					$.ajax({
+						url : 'user/cancel',
+						type : 'post',
+						data : {
+							ids : ids.join(',')
+						},
+						dataType : 'json',
+						success : function(result) {
+							$('#kkk').Grid('refresh');
+						}
 					});
 				}
 			}
 		});
-	});
-	$('#appendbtn').click(function(){
-		$('#kkk').table('addRow', 0, {apiid:1});
-	});
-	$('#delbtn').click(function(){
-		var selected = $('#kkk').table('getSelected2');
+	}
+
+	function active() {
+		var selected = $('#kkk2').Grid('getSelected');
 		if (selected.length == 0) {
-			$.tip({
-				content : 'Please select one record!'
+			$.alert({
+				msg : '请选择至少一条记录'
 			});
 			return false;
 		}
-		$('#kkk').table('deleteRow', selected[0]);
+		$.confirm({
+			msg : '确定要激活吗',
+			callback : function(btn) {
+				if (btn) {
+					var ids = [];
+					for ( var k in selected) {
+						ids.push(selected[k].id);
+					}
+					$.ajax({
+						url : 'user/active',
+						type : 'post',
+						data : {
+							ids : ids.join(',')
+						},
+						dataType : 'json',
+						success : function(result) {
+							$('#kkk2').Grid('refresh');
+						}
+					});
+				}
+			}
+		});
+	}
+
+	$('.btn-lightblue').click(function() {
+		$('#kkk2').table('reload');
 	});
-	function requiredRender(v, r) {
-		return v==1 ? 'Y' : 'N';
+
+	function condition() {
+		var name = $('input[name=name]').val();
+		var params = {
+			username : name
+		};
+		return params;
+	}
+
+	function stateRender(s) {
+		if (s == 1) {
+			return "<label class='label label-success'>已出库</label>";
+		} else {
+			return "<label class='label label-danger'>未出库</label>";
+		}
+	}
+	
+	function pnoRender(v) {
+		var str = "<a href='javascript:;' onclick='viewdetail(\"" + v + "\")'>" + v + "</a>";
+		return str;
+	}
+	
+	function viewdetail(v) {
+		$.dialog({
+			title : '采购入库单详情',
+			url : 'purchase/detailview?purchasebill=' + v
+		});
+	}
+	
+	function warehouseRender(v) {
+		var c;
+		$.each(warehouse, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
+	}
+	
+	function customerRender(v) {
+		var c;
+		$.each(customer, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
+	}
+
+	function opRender(v, r) {
+		var h = [];
+		h.push("<a href='javascript:void(0);' onclick=javascript:mk('" + r.id
+				+ "')>分配角色</a>");
+		return h.join('');
+	}
+
+	function mk() {
+		var selected = $('#kkk2').table('getSelected');
+		if (selected.length != 1) {
+			$.tip({
+				content : '请选择一条记录'
+			});
+			return false;
+		}
+		$.dialog({
+			title : '分配角色',
+			height : 120,
+			url : 'user/tosetrole?id=' + selected[0].id,
+			ok : ok1
+		});
+	}
+
+	function ok1(win) {
+		var id = win.find('input[name=user]').val();
+		var roles = new Array();
+		win.find('input[type=checkbox]:checked').each(function() {
+			roles.push($(this).val());
+		});
+		var data = {
+			user : id,
+			roles : roles.join()
+		};
+		$.ajax({
+			url : "user/setrole",
+			type : 'post',
+			data : data,
+			dataType : 'json',
+			success : function(r) {
+				if (r.success) {
+					$('#kkk2').table('reload');
+				}
+			}
+		});
 	}
 </script>

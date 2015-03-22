@@ -1,7 +1,9 @@
 package action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.rz.util.JSONUtil;
 import com.rz.util.WebUtil;
 import com.rz.web.View;
@@ -12,13 +14,15 @@ public class Fund
 {
 	public View payablepager()
 	{
-		Object obj = WebUtil.call("FundService.payablepager");
+		Map<String, String> map = new HashMap<String, String>();
+		Object obj = WebUtil.call("FundService.payablepager", map);
 		return new Json(obj);
 	}
 	
 	public View receivablepager()
 	{
-		Object obj = WebUtil.call("FundService.receivablepager");
+		Map<String, String> map = new HashMap<String, String>();
+		Object obj = WebUtil.call("FundService.receivablepager", map);
 		return new Json(obj);
 	}
 	

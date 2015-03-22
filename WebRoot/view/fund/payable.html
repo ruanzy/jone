@@ -1,47 +1,48 @@
-<p>接口说明:用户增加</p>
-<p>请求方法:POST</p>
-<p>请求url:user/add</p>
-<p>参数列表:</p>
 <a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加参数</a>
 <a id='delbtn' class='btn btn-primary'><i class="icon-save"></i> 删除参数</a>
 <a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
 <div id='kkk'></div>
 
 <script type="text/javascript">
+	var supplier;
+	$.ajax({
+		url : "supplier/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				supplier = data;
+			}
+		}
+	});
 	$('#kkk').table({
 		columns : [
 		//{header:"ID",field:"id",width:50,align:'center'},
 		{
-			header : "参数名",
-			field : "pname",
+			header : "供应商名",
+			field : "supplier",
 			align : 'left',
-			tip : true,
-			editor : {
-				type : 'text'
-			}
+			render : supplierRender,
+			tip : true
 		}, {
-			header : "必填(Y/N)",
-			field : "required",
+			header : "应付金额",
+			field : "total",
 			align : 'center',
-			width : 100,
-			render : requiredRender,
-			editor : {
-				type : 'selectbox',
-				option : {
-					ds : [{text:'Y', value:1}, {text:'N', value:0}]
-				}
-			}
+			width : 100
 		}, {
-			header : "备注",
-			field : "memo",
-			align : 'left',
-			editor : {
-				type : 'text'
-			}
+			header : "已付金额",
+			field : "payed",
+			align : 'center',
+			width : 100
+		}, {
+			header : "未付金额",
+			field : "nonpay",
+			align : 'center',
+			width : 100
 		}],
-		pager : false,
 		condition : condition,
-		url : 'api/params'
+		url : 'fund/payablepager'
 	});
 	function condition() {
 		var params = {
@@ -81,7 +82,14 @@
 		}
 		$('#kkk').table('deleteRow', selected[0]);
 	});
-	function requiredRender(v, r) {
-		return v==1 ? 'Y' : 'N';
+	function supplierRender(v) {
+		var c;
+		$.each(supplier, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
 	}
 </script>
