@@ -36,11 +36,12 @@ public class Purchase
 		return new Json(detaillist);
 	}
 
-	public View add()
+	public View tobilladd()
 	{
-		Map<String, String> map = WebUtil.getParameters();
-		WebUtil.call("PmsService.reg", map);
-		return new Msg("add success");
+		Map<String, Object> map = new HashMap<String, Object>();
+		String user = WebUtil.getUser();
+		map.put("user", user);
+		return new Ftl("billadd.html", map);
 	}
 
 	public View save()
