@@ -154,7 +154,7 @@ CREATE TABLE supplier_category (
 DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
 	id int(11) NOT NULL,
-	category int(11) NOT NULL,
+	--category int(11) NOT NULL,
 	name varchar(100) NOT NULL,
 	phone varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

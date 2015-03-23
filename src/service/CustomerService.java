@@ -68,12 +68,11 @@ public class CustomerService
 
 	public void add(Map<String, String> map)
 	{
-		String sql = "insert into customer(id,name,category,phone) values(?,?,?,?)";
+		String sql = "insert into customer(id,name,phone) values(?,?,?)";
 		int id = dao.getID("customer");
 		Object name = map.get("name");
-		Object category = map.get("category");
 		Object phone = map.get("phone");
-		Object[] params = new Object[] { id, name, category, phone };
+		Object[] params = new Object[] { id, name, phone };
 		dao.update(sql, params);
 	}
 
