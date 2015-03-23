@@ -130,11 +130,10 @@ public class GoodsService
 		dao.update(sql, params);
 	}
 
-	@Transaction
 	public void del(String ids)
 	{
 		String[] arr = ids.split(",");
-		StringBuffer sql1 = new StringBuffer("delete from goods where userid in (");
+		StringBuffer sql1 = new StringBuffer("delete from goods where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
 			sql1.append("?");
@@ -145,17 +144,6 @@ public class GoodsService
 		}
 		sql1.append(")");
 		dao.update(sql1.toString(), arr);
-		StringBuffer sql2 = new StringBuffer("delete from goods where id in (");
-		for (int k = 0, len = arr.length; k < len; k++)
-		{
-			sql2.append("?");
-			if (k != len - 1)
-			{
-				sql2.append(",");
-			}
-		}
-		sql2.append(")");
-		dao.update(sql2.toString(), arr);
 	}
 
 	public void mod(Map<String, Object> map)

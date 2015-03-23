@@ -101,4 +101,11 @@ public class Goods
 		}
 		return new Msg("save success");
 	}
+	
+	public View del()
+	{
+		String ids = WebUtil.getParameter("ids");
+		WebUtil.call("GoodsService.del", ids);
+		return new Msg("delete success");
+	}
 }
