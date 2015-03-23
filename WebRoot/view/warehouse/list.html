@@ -23,17 +23,14 @@
 		columns : [
 		//{header:"ID",field:"id",width:50,align:'center'},
 		{
+			header : "编码",
+			field : "code",
+			align : 'left'
+		}, {
 			header : "仓库名",
 			field : "name",
 			align : 'left',
 			tip : true,
-			editor : {
-				type : 'text'
-			}
-		}, {
-			header : "编码",
-			field : "code",
-			align : 'left',
 			editor : {
 				type : 'text'
 			}
@@ -260,7 +257,7 @@
 	function condition() {
 		var name = $('input[name=name]').val();
 		var params = {
-			username : name
+			name : name
 		};
 		return params;
 	}
@@ -269,11 +266,11 @@
 		//s = s||'1';
 		//return "<font title='" + state[s] + "' color='" + {0:'red', 1:'green'}[s] + "'>"  +  state[s]  + "</font>";
 		if (s == 1) {
-			return "<label class='label label-success'>正常</label>";
+			return "<label class='label label-success'>可用</label>";
 		} else if (s == 0) {
-			return "<label class='label label-danger'>锁定</label>";
+			return "<label class='label label-danger'>停用</label>";
 		} else {
-			return "<label class='label label-warning'>离职</label>";
+			return "<label class='label label-warning'>维护中</label>";
 		}
 	}
 	

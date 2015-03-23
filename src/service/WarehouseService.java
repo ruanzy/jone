@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 import java.util.Map;
 import com.rz.dao.Dao;
+import com.rz.dao.SQLMapper;
 import com.rz.tx.Transaction;
 
 public class WarehouseService
@@ -19,8 +20,7 @@ public class WarehouseService
 	
 	public List<Map<String,Object>> list(Map<String, String> map)
 	{
-		String sql = "select * from warehouse";
-		return dao.find(sql);
+		return SQLMapper.find("warehouse.selectAll", map);
 	}
 
 	public void add(Map<String, String> map)
@@ -65,16 +65,11 @@ public class WarehouseService
 
 	public void mod(Map<String, Object> map)
 	{
-		String sql = "update warehouse set username=?,depart=?,memo=?,phone=?,email=?,gender=?,state=? where id=?";
-		Object username = map.get("username");
-		Object depart = map.get("depart");
-		Object memo = map.get("memo");
-		Object phone = map.get("phone");
-		Object email = map.get("email");
-		Object gender = map.get("gender");
+		String sql = "update warehouse set name=?,state=? where id=?";
+		Object name = map.get("name");
 		Object state = map.get("state");
 		Object id = map.get("id");
-		Object[] params = new Object[] { username, depart, memo, phone, email, gender, state, id };
+		Object[] params = new Object[] { name, state, id };
 		dao.update(sql, params);
 	}
 }
