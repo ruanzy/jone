@@ -1,8 +1,8 @@
 <div style='position: relative;margin-bottom:5px;'>
-	<a id='addbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
+	<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
 	<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
-	<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> append</a>
 	<!-- 
+	<a id='addbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
 <a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
 <a id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配角色</a>
  -->
@@ -64,9 +64,11 @@
 			width : 100,
 			render : categoryRender,
 			editor : {
-				type : 'selecttree',
+				type : 'selectbox',
 				option : {
-					ds : category
+					ds : category,
+					textField : 'name',
+					valueField : 'id'
 				}
 			}
 		}, {
@@ -78,32 +80,18 @@
 			editor : {
 				type : 'selectbox',
 				option : {
-					ds : unit
+					ds : unit,
+					textField : 'name',
+					valueField : 'id'
 				}
 			}
 		}, {
 			header : "规格",
 			field : "spec",
 			align : 'left',
-			width : 180,
+			width : 200,
 			editor : {
 				type : 'text'
-			}
-		}, {
-			header : "购入价格",
-			field : "purchase_price",
-			align : 'left',
-			width : 100,
-			editor : {
-				type : 'text'
-			}
-		}, {
-			header : "售出价格",
-			field : "sale_price",
-			align : 'center',
-			width : 100,
-			editor : {
-				type : 'datebox'
 			}
 		}, {
 			header : "操作",
@@ -123,7 +111,7 @@
 		var mm = $('#kkk').table('getChanged');
 		var text = JSON.stringify(mm);
 		$.ajax({
-			url : 'user/changed',
+			url : 'goods/changed',
 			type : 'post',
 			data : {changed: text},
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -138,7 +126,7 @@
 		});
 	});
 	$('#appendbtn').click(function(){
-		$('#kkk').table('addRow', 0, {username:'rzy'});
+		$('#kkk').table('addRow', 0, {name:'商品'});
 	});
 	function add() {
 		$.dialog({
@@ -358,8 +346,6 @@
 		var h = [];
 		h.push("<a class='btn btn-danger btn-sm' onclick=del2('" + r.id
 				+ "') title='删除'><i class='icon-trash'></i></a>");
-		h.push("<a class='btn btn-primary btn-sm' onclick=assignrole('" + r.username
-				+ "') title='分配角色'><i class='icon-pencil'></i></a>");
 		return h.join('');
 	}
 

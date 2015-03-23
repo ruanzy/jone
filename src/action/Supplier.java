@@ -17,11 +17,18 @@ public class Supplier
 	
 	public View list()
 	{
-		return new Json(WebUtil.call("SupplierService.list"));
+		Map<String, String> map = WebUtil.getParameters();
+		return new Json(WebUtil.call("SupplierService.list", map));
+	}
+	
+	public View pager()
+	{
+		Map<String, String> map = WebUtil.getParameters();
+		return new Json(WebUtil.call("SupplierService.pager", map));
 	}
 	
 	@SuppressWarnings("unchecked")
-	public View unitchanged()
+	public View changed()
 	{
 		String apiid = WebUtil.getParameter("apiid");
 		String data = WebUtil.getParameter("changed");
@@ -40,12 +47,5 @@ public class Supplier
 			WebUtil.call("SupplierService.mod", m);
 		}
 		return new Msg("save success");
-	}
-	
-	public View add()
-	{
-		Map<String, String> map = WebUtil.getParameters();
-		WebUtil.call("SupplierService.add", map);
-		return new Msg("add success");
 	}
 }

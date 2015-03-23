@@ -120,15 +120,13 @@ public class GoodsService
 
 	public void add(Map<String, String> map)
 	{
-		String sql = "insert into goods(id,name,category,unit,spec,purchase_price,sale_price) values(?,?,?,?,?,?,?)";
+		String sql = "insert into goods(id,name,category,unit,spec) values(?,?,?,?,?)";
 		int id = dao.getID("goods");
 		Object name = map.get("name");
 		Object category = map.get("category");
 		Object unit = map.get("unit");
 		Object spec = map.get("spec");
-		Object purchase_price = map.get("purchase_price");
-		Object sale_price = map.get("sale_price");
-		Object[] params = new Object[] { id, name, category, unit, spec, purchase_price, sale_price };
+		Object[] params = new Object[] { id, name, category, unit, spec };
 		dao.update(sql, params);
 	}
 
@@ -162,16 +160,13 @@ public class GoodsService
 
 	public void mod(Map<String, Object> map)
 	{
-		String sql = "update goods set username=?,depart=?,memo=?,phone=?,email=?,gender=?,state=? where id=?";
-		Object username = map.get("username");
-		Object depart = map.get("depart");
-		Object memo = map.get("memo");
-		Object phone = map.get("phone");
-		Object email = map.get("email");
-		Object gender = map.get("gender");
-		Object state = map.get("state");
+		String sql = "update goods set name=?,category=?,unit=?,spec=? where id=?";
+		Object name = map.get("name");
+		Object category = map.get("category");
+		Object unit = map.get("unit");
+		Object spec = map.get("spec");
 		Object id = map.get("id");
-		Object[] params = new Object[] { username, depart, memo, phone, email, gender, state, id };
+		Object[] params = new Object[] { name, category, unit, spec, id };
 		dao.update(sql, params);
 	}
 }

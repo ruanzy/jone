@@ -78,14 +78,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form id='loginfrm'>
 			<div class="logininput-icon">
 				<i class='icon-user'></i> <input type="text" id="username"
-					name='name' type="text" placeholder="用户名" value="admin"
+					name='name' type="text" placeholder="用户名" value="test"
 					autocomplete="off" /><input type="hidden" id="go"
 					name='go' value="${param.go}" /><input type="hidden" id="domain"
 					name='domain' value="${param.domain}" />
 			</div>
 			<div class="logininput-icon">
 				<i class='icon-lock'></i> <input type="password" id="password"
-					name='password' type="password" placeholder="密码" value="162534" />
+					name='password' type="password" placeholder="密码" value="111111" />
 			</div>
 			<div class="logininput">
 				<div class="loginsubmit fr">

@@ -4,6 +4,17 @@
 	<!-- 
 <a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
  -->
+ 	<div style="position: absolute;bottom : 0; right:10px;">
+		<form id='search-form' class='search-box'>
+			<table>
+				<tr>
+					<td><input type="text" id='searchtxt' name="name"
+						autocomplete="off" placeholder="请输入供应商名" /></td>
+					<td><button type="button" class="btn btn-primary">查询</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </div>
 <div id='kkk'></div>
 
@@ -30,8 +41,8 @@
 				}
 			}
 		],
-		pager : false,
-		url : 'supplier/list'
+		condition : condition,
+		url : 'supplier/pager'
 	});
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);
@@ -40,7 +51,7 @@
 		var mm = $('#kkk').table('getChanged');
 		var text = JSON.stringify(mm);
 		$.ajax({
-			url : 'goods/unitchanged',
+			url : 'supplier/changed',
 			type : 'post',
 			data : {changed: text},
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -55,7 +66,7 @@
 		});
 	});
 	$('#appendbtn').click(function(){
-		$('#kkk').table('addRow', 0, {name:'计量单位'});
+		$('#kkk').table('addRow', 0, {name:'供应商'});
 	});
 	function add() {
 		$.dialog({
@@ -230,7 +241,7 @@
 	function condition() {
 		var name = $('input[name=name]').val();
 		var params = {
-			username : name
+			name : name
 		};
 		return params;
 	}
