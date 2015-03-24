@@ -23,6 +23,7 @@
 <link rel="stylesheet" type="text/css" href="css/smartMenu.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-smartMenu.js"></script>
+<script type="text/javascript" src="js/jquery.slimscroll.js"></script>
 <script type="text/javascript" src="js/drag.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
