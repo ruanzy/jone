@@ -40,6 +40,7 @@
 	$.fn.table.defaults = {
 		columns:[],
 		pager:true,
+		queryParam : {},
 		onSelectRow : function(rowid) {}
 	};
 	$.fn.table.methods = {
@@ -64,6 +65,9 @@
 						if($.isFunction(settings.condition)){
 							baseparams = $.extend(baseparams, settings.condition());
 						}
+					}
+					if(settings.queryParam){
+						baseparams = $.extend(baseparams, settings.queryParam);
 					}
 					_ds = ds(settings.url, baseparams);
 				}else{
@@ -217,17 +221,20 @@
 					var pagesize = parseInt(el.data('pagesize'));
 					var url = el.data('url');
 					
+					var opts = el.data('options');
 					var baseparams = {page: p, pagesize: pagesize};
-					if(settings.condition){
-						if($.isFunction(settings.condition)){
-							baseparams = $.extend(baseparams, settings.condition());
+					if(opts.condition){
+						if($.isFunction(opts.condition)){
+							baseparams = $.extend(baseparams, opts.condition());
 						}
+					}
+					if(opts.queryParam){
+						baseparams = $.extend(baseparams, opts.queryParam);
 					}
 					var dd = ds(url, baseparams);
 					el.data('ds', dd);
 					el.data('rows', dd.data);
 					el.data('allrow', dd.data);
-					var opts = el.data('options');
 					$('tbody',el).empty().append(body(dd.data, opts));
 					$('div.pagination',el).empty().append(pager2(dd.total, p, pagesize));
 					$('tbody tr:odd', el).addClass('strips');
@@ -275,6 +282,9 @@
 						p = $.extend(p, opts.condition());
 					}
 				}
+				if(opts.queryParam){
+					p = $.extend(p, opts.queryParam);
+				}
 			}
 			var _ds = ds(url, p);
 			
@@ -316,6 +326,9 @@
     					p = $.extend(p, opts.condition());
     				}
     			}
+				if(opts.queryParam){
+					p = $.extend(p, opts.queryParam);
+				}
     		}
 
 			var _ds = ds(url, p);
@@ -686,6 +699,10 @@
         		}
         	}
         	return ret;
+        },
+        setQueryParam : function(param){
+        	var opts = $(this).data('options');
+        	opts.queryParam = param;
         }
 	}; 
 	function ds(url, param){

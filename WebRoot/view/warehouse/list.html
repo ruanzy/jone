@@ -56,8 +56,7 @@
 		}
 		],
 		url : 'warehouse/list',
-		pager : false,
-		condition : condition
+		pager : false
 	});
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);
@@ -251,6 +250,11 @@
 	}
 
 	$('#search-form button').click(function() {
+		var name = $('input[name=name]').val();
+		var params = {
+			name : name
+		};
+		$('#kkk').table('setQueryParam', params);
 		$('#kkk').table('reload');
 	});
 

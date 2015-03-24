@@ -120,8 +120,7 @@
 			width : 100,
 			render : opRender
 		} ],
-		url : 'user/list',
-		condition : condition
+		url : 'user/list'
 	});
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);
@@ -315,6 +314,11 @@
 	}
 
 	$('#search-form button').click(function() {
+		var name = $('input[name=name]').val();
+		var params = {
+			username : name
+		};
+		$('#kkk').table('setQueryParam', params);
 		$('#kkk').table('reload');
 	});
 
