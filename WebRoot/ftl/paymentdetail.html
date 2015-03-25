@@ -1,0 +1,30 @@
+<div id='detail'></div>
+<script type="text/javascript">
+	$('#detail').table({
+		columns : [
+		{header:"业务单号",field:"no",width : 200, align:'center'},
+		{
+			header : "付款金额",
+			align : 'left',
+			field : "paymoney"
+		}, {
+			header : "付款人",
+			align : 'left',
+			field : "payuser",
+			width : 100
+		}, {
+			header : "付款时间",
+			field : "paytime",
+			align : 'center',
+			width : 100
+		}, {
+			header : "录入",
+			align : 'left',
+			field : "creator",
+			width : 100
+		} ],
+		url : 'payment/detaillist',
+		pager : false,
+		queryParam : {purchasebill : '${purchasebill}'}
+	});
+</script>

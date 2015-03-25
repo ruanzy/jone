@@ -25,6 +25,15 @@ public class PurchaseService
 		Object[] params = new Object[] { purchasebill };
 		return dao.find(sql, params);
 	}
+	
+	public void income(String purchasebill)
+	{
+		String sql1 = "insert into payment(no,supplier,payment,payment_made, payment_due) select no,supplier,money,0.00,money from purchase_bill where no=?";
+		String sql2 = "update purchase_bill set state=1 where no=?";
+		Object[] params = new Object[] { purchasebill };
+		dao.update(sql1, params);
+		dao.update(sql2, params);
+	}
 
 	public void add(Map<String, String> map)
 	{

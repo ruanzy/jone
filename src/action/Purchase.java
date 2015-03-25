@@ -44,15 +44,13 @@ public class Purchase
 		return new Ftl("billadd.html", map);
 	}
 
-	public View save()
+	public View income()
 	{
-		String data = WebUtil.getParameter("data");
-		List<Map<String, Object>> list = JSONUtil.toList(data);
-		for (Map<String, Object> map : list)
-		{
-			WebUtil.call("PmsService.reg", map);
-		}
-		return new Msg("add success");
+		String purchasebill = WebUtil.getParameter("purchasebill");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("purchasebill", purchasebill);
+		WebUtil.call("PurchaseService.income", purchasebill);
+		return new Msg("income success");
 	}
 
 	@SuppressWarnings("unchecked")

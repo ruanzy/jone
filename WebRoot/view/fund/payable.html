@@ -1,6 +1,14 @@
-<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加参数</a>
-<a id='delbtn' class='btn btn-primary'><i class="icon-save"></i> 删除参数</a>
-<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
+<p>
+	<form id='search-form' class='search-box'>
+		<table>
+			<tr>
+				<td><input type="text" id='searchtxt' name="supplier"
+					autocomplete="off" placeholder="请输入供应商名" /></td>
+				<td><button type="button" class="btn btn-primary">查询</button></td>
+			</tr>
+		</table>
+	</form>
+</p>
 <div id='kkk'></div>
 
 <script type="text/javascript">
@@ -18,7 +26,7 @@
 	});
 	$('#kkk').table({
 		columns : [
-		//{header:"ID",field:"id",width:50,align:'center'},
+		{header:"业务单号",field:"no",width : 200, align:'center'},
 		{
 			header : "供应商名",
 			field : "supplier",
@@ -27,29 +35,24 @@
 			tip : true
 		}, {
 			header : "应付金额",
-			field : "total",
+			field : "payment",
 			align : 'center',
 			width : 100
 		}, {
 			header : "已付金额",
-			field : "payed",
+			field : "payment_made",
+			render : paymentmadeRender,
 			align : 'center',
-			width : 100
+			width : 200
 		}, {
 			header : "未付金额",
-			field : "nonpay",
+			field : "payment_due",
+			render : paymentdueRender,
 			align : 'center',
-			width : 100
+			width : 200
 		}],
-		condition : condition,
-		url : 'fund/payablepager'
+		url : 'payment/pager'
 	});
-	function condition() {
-		var params = {
-			apiid : '1'
-		};
-		return params;
-	}
 	$('#updatedbtn').click(function(){
 		$('#kkk').table('endEdit');
 		var mm = $('#kkk').table('getChanged');
@@ -92,4 +95,75 @@
 		});
 		return c;
 	}
+	function paymentmadeRender(v, r) {
+		var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='viewdetail(\"" + r.no + "\")'>付款明细</a>";
+		return v + str;
+	}
+	function paymentdueRender(v, r) {
+		var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='payrecord(\"" + r.no + "\")'>付款</a>";
+		return (r.payment - r.payment_made) + str;
+	}
+	function viewdetail(no) {
+		$.dialog({
+			title : '付款明细',
+			url : 'payment/detailview?purchasebill=' + no
+		});
+	}
+	function payrecord(no) {
+		var d = $.dialog({
+			title : '付款录入',
+			url : 'payment/record?purchasebill=' + no,
+			buttons : [ {
+				text : '确定',
+				cls : 'btn-primary',
+				action : function(d) {
+					ok(d);
+				}
+			}, {
+				text : '关闭',
+				cls : 'btn-default',
+				action : function(d) {
+					d.close();
+				}
+
+			} ],
+		});
+	}
+	
+	function ok(win) {
+		var no = win.find('input[name=no]').val();
+		var paytime = win.find('input[name=paytime]').val();
+		var paymoney = win.find('input[name=paymoney]').val();
+		var payuser = win.find('input[name=payuser]').val();
+		var creator = win.find('input[name=creator]').val();
+		var params = {
+			no : no,
+			paytime : paytime,
+			paymoney : paymoney,
+			payuser : payuser,
+			creator : creator
+		};
+		$.ajax({
+			url : 'payment/recordadd',
+			type : 'post',
+			data : params,
+			dataType : 'json',
+			success : function(result) {
+				if (result.result) {
+					win.close();
+					$.pop(result.msg, function() {
+						$('#kkk').table('reload');
+					});
+				}
+			}
+		});
+	}
+	$('#search-form button').click(function() {
+		var supplier = $('input[name=supplier]').val();
+		var params = {
+			supplier : supplier
+		};
+		$('#kkk').table('setQueryParam', params);
+		$('#kkk').table('reload');
+	});
 </script>
