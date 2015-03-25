@@ -1,6 +1,14 @@
-<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加参数</a>
-<a id='delbtn' class='btn btn-primary'><i class="icon-save"></i> 删除参数</a>
-<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
+<p>
+	<form id='search-form' class='search-box'>
+		<table>
+			<tr>
+				<td><input type="text" id='searchtxt' name="customer"
+					autocomplete="off" placeholder="请输入客户名" /></td>
+				<td><button type="button" class="btn btn-primary">查询</button></td>
+			</tr>
+		</table>
+	</form>
+</p>
 <div id='kkk'></div>
 
 <script type="text/javascript">
@@ -18,7 +26,7 @@
 	});
 	$('#kkk').table({
 		columns : [
-		//{header:"ID",field:"id",width:50,align:'center'},
+		{header:"业务单号",field:"no",width : 200, align:'center'},
 		{
 			header : "客户名",
 			field : "customer",
@@ -27,60 +35,23 @@
 			tip : true
 		}, {
 			header : "应收金额",
-			field : "total",
+			field : "receive",
 			align : 'center',
 			width : 100
 		}, {
 			header : "已收金额",
-			field : "received",
+			field : "receive_made",
+			render : receivemadeRender,
 			align : 'center',
-			width : 100
+			width : 200
 		}, {
 			header : "未收金额",
-			field : "nonreceive",
+			field : "receive_due",
+			render : receivedueRender,
 			align : 'center',
-			width : 100
+			width : 200
 		}],
-		condition : condition,
-		url : 'fund/receivablepager'
-	});
-	function condition() {
-		var params = {
-			
-		};
-		return params;
-	}
-	$('#updatedbtn').click(function(){
-		$('#kkk').table('endEdit');
-		var mm = $('#kkk').table('getChanged');
-		var text = JSON.stringify(mm);
-		$.ajax({
-			url : 'api/changed',
-			type : 'post',
-			data : {apiid: '1', changed: text},
-			contentType: "application/x-www-form-urlencoded; charset=utf-8",
-			dataType : 'json',
-			success : function(result) {
-				if (result.result) {
-					$.pop(result.msg, function() {
-						$('#kkk').table('refresh');
-					});
-				}
-			}
-		});
-	});
-	$('#appendbtn').click(function(){
-		$('#kkk').table('addRow', 0, {apiid:1});
-	});
-	$('#delbtn').click(function(){
-		var selected = $('#kkk').table('getSelected2');
-		if (selected.length == 0) {
-			$.tip({
-				content : 'Please select one record!'
-			});
-			return false;
-		}
-		$('#kkk').table('deleteRow', selected[0]);
+		url : 'receive/pager'
 	});
 	function customerRender(v) {
 		var c;
@@ -92,4 +63,75 @@
 		});
 		return c;
 	}
+	function receivemadeRender(v, r) {
+		var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='viewdetail(\"" + r.no + "\")'>收款明细</a>";
+		return v + str;
+	}
+	function receivedueRender(v, r) {
+		var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='receiverecord(\"" + r.no + "\")'>收款</a>";
+		return (r.receive - r.receive_made) + str;
+	}
+	function viewdetail(no) {
+		$.dialog({
+			title : '收款明细',
+			url : 'receive/detailview?no=' + no
+		});
+	}
+	function receiverecord(no) {
+		var d = $.dialog({
+			title : '收款录入',
+			url : 'receive/record?no=' + no,
+			buttons : [ {
+				text : '确定',
+				cls : 'btn-primary',
+				action : function(d) {
+					ok(d);
+				}
+			}, {
+				text : '关闭',
+				cls : 'btn-default',
+				action : function(d) {
+					d.close();
+				}
+
+			} ],
+		});
+	}
+	
+	function ok(win) {
+		var no = win.find('input[name=no]').val();
+		var receivetime = win.find('input[name=receivetime]').val();
+		var receivemoney = win.find('input[name=receivemoney]').val();
+		var receiveuser = win.find('input[name=receiveuser]').val();
+		var creator = win.find('input[name=creator]').val();
+		var params = {
+			no : no,
+			receivetime : receivetime,
+			receivemoney : receivemoney,
+			receiveuser : receiveuser,
+			creator : creator
+		};
+		$.ajax({
+			url : 'receive/recordadd',
+			type : 'post',
+			data : params,
+			dataType : 'json',
+			success : function(result) {
+				if (result.result) {
+					win.close();
+					$.pop(result.msg, function() {
+						$('#kkk').table('reload');
+					});
+				}
+			}
+		});
+	}
+	$('#search-form button').click(function() {
+		var customer = $('input[name=customer]').val();
+		var params = {
+			customer : customer
+		};
+		$('#kkk').table('setQueryParam', params);
+		$('#kkk').table('reload');
+	});
 </script>

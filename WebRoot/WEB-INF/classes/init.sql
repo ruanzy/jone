@@ -187,22 +187,40 @@ CREATE TABLE pbill_detail (
 	purchase_money decimal(19,2) default 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS receivable;
-CREATE TABLE receivable (
-	id int(11) NOT NULL,
-	customer int(11) NOT NULL,
-	total decimal(19,2) default 0.00,
-	received decimal(19,2) default 0.00,
-	nonreceive decimal(19,2) default 0.00
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE `payment` (
+  `no` varchar(255) DEFAULT NULL,
+  `supplier` int(11) DEFAULT NULL,
+  `payment` decimal(19,2) DEFAULT 0.00,
+  `payment_made` decimal(19,2) DEFAULT 0.00,
+  `payment_due` decimal(19,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS payable;
-CREATE TABLE payable (
-	id int(11) NOT NULL,
-	supplier int(11) NOT NULL,
-	total decimal(19,2) default 0.00,
-	payed decimal(19,2) default 0.00,
-	nonpay decimal(19,2) default 0.00
+DROP TABLE IF EXISTS `payment_detail`;
+CREATE TABLE `payment_detail` (
+  `no` varchar(255) DEFAULT NULL,
+  `paymoney` decimal(19,2) DEFAULT 0.00,
+  `payuser` varchar(255) DEFAULT NULL,
+  `paytime` varchar(100) DEFAULT NULL,
+  `creator` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `receive`;
+CREATE TABLE `receive` (
+  `no` varchar(255) DEFAULT NULL,
+  `customer` int(11) DEFAULT NULL,
+  `receive` decimal(19,2) DEFAULT 0.00,
+  `receive_made` decimal(19,2) DEFAULT 0.00,
+  `receive_due` decimal(19,2) DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `receive_detail`;
+CREATE TABLE `receive_detail` (
+  `no` varchar(255) DEFAULT NULL,
+  `receivemoney` decimal(19,2) DEFAULT 0.00,
+  `receiveuser` varchar(255) DEFAULT NULL,
+  `receivetime` varchar(100) DEFAULT NULL,
+  `creator` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS saleout;

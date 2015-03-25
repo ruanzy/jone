@@ -1,0 +1,34 @@
+<from>
+<table style='width:100%'>
+	<tr>
+		<td>业务单号</td>
+		<td><input type="text" id='no' name="no" class='txt' value='${no}'
+			autocomplete="off" disabled="disabled" /></td>
+	</tr>
+	<tr>
+		<td>收款时间</td>
+		<td><input type="text" id='receivetime' name='receivetime' class='txt'
+			disabled="disabled" /></td>
+	</tr>
+	<tr>
+		<td>收款金额</td>
+		<td><input type="text" id='receivemoney' name="receivemoney" class='txt' /></td>
+	</tr>
+	<tr>
+		<td>收款人员</td>
+		<td><input type="text" id='receiveuser' name="receiveuser" class='txt' value='rzy'/></td>
+	</tr>
+	<tr>
+		<td>录入人员</td>
+		<td><input type="text" id='creator' name="creator" value='${user}'
+			class='txt' disabled="disabled" /></td>
+	</tr>
+</table>
+</from>
+<script type="text/javascript">
+	var date = new Date();
+	var yyyy = date.getFullYear();
+	var MM = date.getMonth() + 1;
+	var dd = date.getDate();
+	$('#receivetime').val(yyyy + '-' + MM + '-' + dd);
+</script>
