@@ -1,11 +1,12 @@
 package action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.rz.util.JSONUtil;
 import com.rz.util.WebUtil;
 import com.rz.web.View;
+import com.rz.web.view.Ftl;
 import com.rz.web.view.Json;
 import com.rz.web.view.Msg;
 
@@ -21,6 +22,21 @@ public class Sale
 	{
 		Map<String, String> map = WebUtil.getParameters();
 		return new Json(WebUtil.call("SaleService.returnlist", map));
+	}
+	
+	public View detailview()
+	{
+		String no = WebUtil.getParameter("no");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		return new Ftl("sdetail.html", map);
+	}
+	
+	public View detaillist()
+	{
+		String no = WebUtil.getParameter("no");
+		Object detaillist = WebUtil.call("SaleService.detaillist", no);
+		return new Json(detaillist);
 	}
 	
 	@SuppressWarnings("unchecked")

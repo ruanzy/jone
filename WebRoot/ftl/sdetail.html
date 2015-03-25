@@ -1,0 +1,83 @@
+<div id='detail'></div>
+<script type="text/javascript">
+	var unit;
+	var goods;
+	$.ajax({
+		url : "goods/unitlist",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				unit = data;
+			}
+		}
+	});
+	$.ajax({
+		url : "goods/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				goods = data;
+			}
+		}
+	});
+	$('#detail').table({
+		columns : [
+		//{header:"ID",field:"id",width:50,align:'center'},
+		{
+			header : "商品名称",
+			field : "name",
+			tip : true
+		}, {
+			header : "商品规格",
+			field : "spec",
+			align : 'center',
+			width : 180
+		}, {
+			header : "商品计量单位",
+			field : "unit",
+			align : 'center',
+			width : 100,
+			render : unitRender
+		}, {
+			header : "销售数量",
+			field : "sale_num",
+			align : 'center',
+			width : 100
+		}, {
+			header : "销售价格",
+			field : "sale_price",
+			align : 'center',
+			width : 100
+		}, {
+			header : "销售金额",
+			field : "sale_money",
+			align : 'center',
+			width : 100
+		} ],
+		url : 'sale/detaillist',
+		pager : false,
+		condition : condition
+	});
+
+	function condition() {
+		var params = {
+			no : '${no}'
+		};
+		return params;
+	}
+
+	function unitRender(v, r) {
+		var c;
+		$.each(unit, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
+	}
+</script>

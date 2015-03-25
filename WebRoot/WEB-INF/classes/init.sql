@@ -235,6 +235,16 @@ CREATE TABLE saleout (
 	money decimal(19,2) default 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS sale_detail;
+CREATE TABLE sale_detail (
+	id int(11) NOT NULL,
+	saleno int(11) NOT NULL,
+	goods int(11) NOT NULL,
+	sale_num int(11) NOT NULL,
+	sale_price decimal(19,2) default 0.00,
+	sale_money decimal(19,2) default 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --insert into users values(-1,'admin','24182508933eb89c7950e9001e6a0da7',1,'2008-08-08 08:08:08');
 
 INSERT INTO resources VALUES ('1', '系统管理', '1', null, null, '0', null, '1', '1');

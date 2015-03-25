@@ -29,7 +29,7 @@ public class SaleService
 	
 	public List<Map<String, Object>> detaillist(String purchasebill)
 	{
-		String sql = "select * from pbill_detail left join goods on goods.id=pbill_detail.goods where pbill_detail.purchase_bill=?";
+		String sql = "select * from sale_detail left join goods on goods.id=sale_detail.goods where sale_detail.no=?";
 		Object[] params = new Object[] { purchasebill };
 		return dao.find(sql, params);
 	}
