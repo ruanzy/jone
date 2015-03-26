@@ -1,8 +1,2 @@
-/com
-/interceptor
-/log
-/schedule
-/service
 /action
-/mappers
-/rzy.sql
+/com

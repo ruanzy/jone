@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<sql id='count'>
+		select count(*) from purchase_bill
+		<where>
+			<if test="name != null and name != ''">
+				and name like CONCAT('%',#{name},'%')
+			</if>
+		</where>
+	</sql>
+	<sql id='selectAll'>
+		select * from purchase_bill
+		<where>
+			<if test="name != null and name != ''">
+				and name like CONCAT('%',#{name},'%')
+			</if>
+		</where>
+		order by id DESC
+	</sql>
+	<sql id='add'>
+		insert into purchase_bill(id,name,category,spec,purchase_price,sale_price) values(#{id},#{name},#{category},#{spec},#{purchase_price},#{sale_price})
+	</sql>
+</sqls>
