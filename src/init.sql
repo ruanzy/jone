@@ -238,7 +238,7 @@ CREATE TABLE saleout (
 DROP TABLE IF EXISTS sale_detail;
 CREATE TABLE sale_detail (
 	id int(11) NOT NULL,
-	saleno int(11) NOT NULL,
+	no varchar(100),
 	goods int(11) NOT NULL,
 	sale_num int(11) NOT NULL,
 	sale_price decimal(19,2) default 0.00,

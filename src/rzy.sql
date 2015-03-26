@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2015-03-25 18:14:34
+Date: 2015-03-26 09:46:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -459,8 +459,27 @@ CREATE TABLE `saleout` (
 -- ----------------------------
 -- Records of saleout
 -- ----------------------------
-INSERT INTO `saleout` VALUES ('1', 'S2015317000000', '2', '1', 'test', '2015-03-17', '1', '60000.00');
+INSERT INTO `saleout` VALUES ('1', 'S2015317000000', '2', '1', 'test', '2015-03-17', '1', '52980.00');
 INSERT INTO `saleout` VALUES ('2', 'S2015318000000', '4', '1', 'test', '2015-03-18', '0', '50000.00');
+
+-- ----------------------------
+-- Table structure for sale_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_detail`;
+CREATE TABLE `sale_detail` (
+  `id` int(11) NOT NULL,
+  `no` varchar(100) DEFAULT NULL,
+  `goods` int(11) NOT NULL,
+  `sale_num` int(11) NOT NULL,
+  `sale_price` decimal(19,2) DEFAULT '0.00',
+  `sale_money` decimal(19,2) DEFAULT '0.00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sale_detail
+-- ----------------------------
+INSERT INTO `sale_detail` VALUES ('1', 'S2015317000000', '1', '10', '3099.00', '30990.00');
+INSERT INTO `sale_detail` VALUES ('2', 'S2015317000000', '2', '10', '2199.00', '21990.00');
 
 -- ----------------------------
 -- Table structure for seq
