@@ -137,8 +137,31 @@
 
 	}
 	$('#adddetail').click(function(){
-		$('#detail').table('addRow', 0, {});
+		//$('#detail').table('addRow', 0, {});
+		add();
 	});
+	function add() {
+		$.dialog({
+			title : '新增明细',
+			url : 'view/income/adddetail.html',
+			drag : true,
+			buttons : [ {
+				text : '确定',
+				cls : 'btn-primary',
+				action : function(d) {
+					
+				}
+			}, {
+				text : '关闭',
+				cls : 'btn-default',
+				action : function(d) {
+					d.close();
+				}
+
+			} ]
+		});
+		//$('#kkk').Grid('addRow', {username:'asd'});
+	}
 	$('#savedetail').click(function(){
 		
 	});
