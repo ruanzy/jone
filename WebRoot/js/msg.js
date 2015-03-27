@@ -107,16 +107,14 @@
 (function($) {
 	var _dialog = false;
 	$.dialog = function(options) {
-		if (!$.dialog.opened) {
+		/**if (!$.dialog.opened) {
 			$.dialog.opened = true;
 		} else {
 			return _dialog;
-		}
+		}**/
 		options = $.extend({}, $.dialog.defaults, options);
-		var dialog = $('div.dialog-wrap');
-		if (dialog.size() == 0) {
+		var dialog;
 			dialog = $("<div class='dialog-wrap'></div>").appendTo($('body'));
-		}
 		var html = [];
 		html.push("<div class='dialog'>");
 		html.push("<div class='dialog-header dialog-header-success'>");
@@ -143,8 +141,9 @@
 		dialog.append(html.join('')).append("<div class='dialog-mask'></div>");
 		var mask = $(".dialog-mask", dialog);
 		mask.click(function() {
-			dialog.close();
+			//dialog.close();
 		});
+		var d = $(".dialog", dialog).css('zIndex', _nextZ());
 		var bd = $(".dialog-body", dialog).css({
 			padding : options.padding,
 			minWidth : options.minWidth,
@@ -159,7 +158,6 @@
 				if(status == 'error'){
 					dialog.close();
 				}else{
-					var d = $(".dialog", dialog);
 					var ww = $(window).width();
 					var wh = $(window).height();
 					var w = d.outerWidth();
@@ -172,7 +170,7 @@
 					if(options.drag == true) {
 					   var titbar = $('.dialog-header', d);
 					   titbar.css({"cursor":"move"}); 
-					   d.drag('.dialog-header'); 
+					   d.drag({handler:titbar}); 
 					} 
 				}
 			});
@@ -208,6 +206,10 @@
 		onShow : function() {
 		}
 	};
+	function _nextZ() {
+        return $.dialog.zIndex++;
+    }
+	$.dialog.zIndex = 2015;
 })(jQuery);
 
 (function($) {
