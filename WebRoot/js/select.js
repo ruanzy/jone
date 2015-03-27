@@ -11,7 +11,7 @@
 	};
 	$.fn.selectbox.defaults = {
 		url : null,
-		ds : null,
+		ds : [],
 		textField : 'text',
 		valueField : 'value',
 		filter : function(q, item) {
@@ -60,8 +60,8 @@
 						var q = $.trim(searchbox.val());
 						setTimeout(function() {
 							var data2 = [];
-							var data = me.data('data');
-							$.each(data, function(){
+							var opts = $(this).data('options');
+							$.each(opts.ds, function(){
 								var item = this;
 								if(opts.filter(q, item)) {
 									data2.push(item);
@@ -76,27 +76,29 @@
 				if (disabled) {
 					mask.show();
 				}
-				var data = opts.ds;
-				if(!data){
+				if(opts.url){
 					$.ajax({
 						url : opts.url,
 						cache : false,
 						async : false,
 						dataType : 'json',
 						success : function(result) {
-							data = result;
+							opts.ds = result;
 						}
 					});
 				}
-				$(this).data('data', data);
+				$(this).data('options', opts);
 				dt.bind("click", function(e) {
 					$(this).addClass('expand');
 					searchbox.val('');
-					me.selectbox('reload', data);
+					var opts = me.data('options');
+					me.selectbox('reload', opts.ds);
 					dd.show();
 					e.stopPropagation();
 				});
 				dd.delegate('li', "click", function(e) {
+					var as = $('li', dd);
+					var idx = as.index(this);
 					var t = $(this).text();
 					txt.html(t);
 					var v = $(this).attr('v');
@@ -104,7 +106,9 @@
 					$(this).siblings("li.selected").removeClass("selected");
 					$(this).addClass("selected");
 					dd.hide();
-					opts.change({t:t,v:v});
+					var opts = me.data('options');
+					var data = me.data('data');
+					opts.change(data[idx]);
 					dt.removeClass('expand');
 					e.stopPropagation();
 				});
@@ -129,12 +133,12 @@
 		setValue : function(val) {
 			if (val) {
 				this.val(val);
-				var data = $(this).data('data');
+				var ds = $(this).data('options').ds;
 				var opts = this.selectbox('options');
 				var textField = opts.textField;
 				var valueField = opts.valueField;
 				var item;
-				$.each(data, function(){
+				$.each(ds, function(){
 					if(this[valueField] == val){
 						item = this;
 						return false;
@@ -169,6 +173,7 @@
 				items.push("<li class='no-results'>没有找到 </li>");
 			}
 			this.parent("dt").siblings("dd").find('.items').empty().append(items.join(''));
+			$(this).data('data', data);
 		}
 	};
 })(jQuery);

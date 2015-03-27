@@ -2,15 +2,42 @@
 <table>
 	<tr>
 		<td class='form-label'>商品名称</td>
-		<td><input type="goods" name="goods" autocomplete="off" /></td>
+		<td><input type="text" name="name" id='goods' autocomplete="off" /></td>
 	</tr>
 	<tr>
-		<td class='form-label'>新密码</td>
-		<td><input type="password" name="pwd1" autocomplete="off" /></td>
+		<td class='form-label'>规格</td>
+		<td><input type="text" name="spec" autocomplete="off" /></td>
 	</tr>
 	<tr>
-		<td class='form-label'>确认密码</td>
-		<td><input type="password" name="pwd2" autocomplete="off" /></td>
+		<td class='form-label'>计量单位</td>
+		<td><input type="text" name="unit" id='unit' autocomplete="off" /></td>
+	</tr>
+	<tr>
+		<td class='form-label'>采购价格</td>
+		<td><input type="text" name="purchase_price" autocomplete="off" /></td>
+	</tr>
+		<tr>
+		<td class='form-label'>采购数量</td>
+		<td><input type="text" name="purchase_num" autocomplete="off" /></td>
+	</tr>
+	<tr>
+		<td class='form-label'>采购金额</td>
+		<td><input type="text" name="purchase_money" autocomplete="off" /></td>
 	</tr>
 </table>
 </from>
+<script type="text/javascript">
+	$('#unit').selectbox({
+		ds : unit,
+		textField : 'name',
+		valueField : 'id'
+	});
+	$('#goods').selectbox({
+		ds : goods,
+		textField : 'name',
+		valueField : 'id',
+		change : function(item) {
+			$('#unit').val(item.unit);
+		}
+	});
+</script>
