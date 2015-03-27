@@ -1,2 +1,13 @@
 /action
 /com
+/dao.properties
+/dao2.properties
+/init.sql
+/interceptor
+/log
+/logback.xml
+/mappers
+/resource.properties
+/rzy.sql
+/schedule
+/service
