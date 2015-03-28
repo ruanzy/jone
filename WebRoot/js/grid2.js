@@ -703,6 +703,11 @@
         setQueryParam : function(param){
         	var opts = $(this).data('options');
         	opts.queryParam = param;
+        },
+        appendData : function(data){
+        	var opts = $(this).data('options');
+        	var html = buildRow(data, 1, opts);
+        	$('tbody', this).append(html);
         }
 	}; 
 	function ds(url, param){

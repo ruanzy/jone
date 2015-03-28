@@ -70,9 +70,10 @@
 		//{header:"ID",field:"id",width:50,align:'center'},
 		{
 			header : "商品名",
-			field : "name",
+			field : "goods",
 			align : 'left',
 			tip : true,
+			render : goodsRender,
 			editor : {
 				type : 'text'
 			}
@@ -141,6 +142,16 @@
 		});
 		return c;
 	}
+	function goodsRender(v, r) {
+		var c;
+		$.each(goods, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
+	}
 	function opRender(v, r) {
 		var str = "<a href='javascript:;' onclick='del()'>删除</a>";
 		return str;
@@ -161,7 +172,14 @@
 				text : '确定',
 				cls : 'btn-primary',
 				action : function(d) {
-					
+					var goods = $('#goods').selectbox('getValue');
+					var spec = $('#spec').val();
+					var unit = $('#unit').selectbox('getValue');
+					var purchase_price = $('#purchase_price').val();
+					var purchase_num = $('#purchase_num').val();
+					var purchase_money = $('#purchase_money').val();
+					var data = {goods : goods, spec : spec, unit : unit, purchase_price : purchase_price, purchase_num : purchase_num, purchase_money : purchase_money};
+					$('#detail').table('appendData', data);
 				}
 			}, {
 				text : '关闭',
