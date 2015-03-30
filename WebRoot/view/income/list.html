@@ -92,7 +92,9 @@
 	});
 	function billopRender(v, r) {
 		var h = [];
-		h.push("<a href='javascript:;' onclick=income('" + r.no + "') title='入库'>入库</a>");
+		if(r.state == 0){
+			h.push("<a href='javascript:;' onclick=income('" + r.no + "') title='入库'>入库</a>");
+		}
 		return h.join('');
 	}
 	function income(no) {
@@ -111,8 +113,9 @@
 	$('#addbtn').click(addbill);
 	$('#delbtn').click(del);
 	$('#assignbtn').click(mk);
+	var d;
 	function addbill() {
-		$.dialog({
+		d = $.dialog({
 			title : '新建采购入库单',
 			url : 'purchase/tobilladd',
 			drag : true,
@@ -149,9 +152,8 @@
 			data : {bill: text},
 			dataType : 'json',
 			success : function(result) {
-				if (result.success) {
-					$('#kkk2').table('reload');
-				}
+				$('#kkk2').table('reload');
+				d.close();
 			}
 		});
 	}

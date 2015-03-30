@@ -21,7 +21,6 @@
 </from>
 <p>
 <a id='adddetail' class='btn btn-primary'><i class="icon-plus"></i> 新建明细</a>
-<a id='savedetail' class='btn btn-primary'><i class="icon-plus"></i> 全部保存</a>
 </p>
 <div id='detail'></div>
 <script type="text/javascript">
@@ -138,10 +137,6 @@
 		$('#detail').table('deleteRow', idx);
 	}
 	$('#adddetail').click(function(){
-		//$('#detail').table('addRow', 0, {});
-		add();
-	});
-	function add() {
 		$.dialog({
 			title : '新增明细',
 			url : 'view/income/adddetail.html',
@@ -168,9 +163,5 @@
 
 			} ]
 		});
-		//$('#kkk').Grid('addRow', {username:'asd'});
-	}
-	$('#savedetail').click(function(){
-		
 	});
 </script>
