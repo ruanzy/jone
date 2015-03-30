@@ -33,18 +33,44 @@ public class SaleService
 		Object[] params = new Object[] { purchasebill };
 		return dao.find(sql, params);
 	}
-
-	public void add(Map<String, String> map)
+	
+	public void out(String no)
 	{
-		String sql = "insert into purchase(id,name,category,unit,spec,purchase_price,sale_price) values(?,?,?,?,?,?,?)";
-		int id = dao.getID("goods");
-		Object name = map.get("name");
-		Object category = map.get("category");
-		Object unit = map.get("unit");
-		Object spec = map.get("spec");
-		Object purchase_price = map.get("purchase_price");
-		Object sale_price = map.get("sale_price");
-		Object[] params = new Object[] { id, name, category, unit, spec, purchase_price, sale_price };
+		String sql1 = "insert into receive(no,customer,receive,receive_made, receive_due) select no,customer,money,0.00,money from saleout where no=?";
+		String sql2 = "update saleout set state=1 where no=?";
+		Object[] params = new Object[] { no };
+		dao.update(sql1, params);
+		dao.update(sql2, params);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transaction
+	public void add(Map<String, Object> map)
+	{
+		Object no = map.get("no");
+		double money = 0.0;
+		List<Map<String, Object>> detail = (List<Map<String, Object>>)(map.get("detail"));
+		String sql2 = "insert into sale_detail(no,goods,sale_num,sale_price,sale_money) values(?,?,?,?,?)";
+		dao.beginBatch(sql2);
+		for (Map<String, Object> map2 : detail)
+		{
+			Object goods = map2.get("goods");
+			Object sale_num = map2.get("sale_num");
+			Object sale_price = map2.get("sale_price");
+			double sale_money = Double.valueOf(map2.get("sale_money").toString());
+			money += sale_money;
+			Object[] params2 = new Object[] { no, goods, sale_num, sale_price, sale_money };
+			dao.addBatch(params2);
+		}
+		dao.excuteBatch();
+		dao.endBatch();
+		String sql = "insert into saleout(id,no,customer,warehouse,creator,createtime,state,money) values(?,?,?,?,?,?,?,?)";
+		int id = dao.getID("saleout");
+		Object customer = map.get("customer");
+		Object warehouse = map.get("warehouse");
+		Object creator = map.get("creator");
+		Object createtime = map.get("createtime");
+		Object[] params = new Object[] { id, no, customer, warehouse, creator, createtime, 0, money };
 		dao.update(sql, params);
 	}
 

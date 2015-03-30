@@ -68,8 +68,12 @@
 		return v + str;
 	}
 	function receivedueRender(v, r) {
-		var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='receiverecord(\"" + r.no + "\")'>收款</a>";
-		return (r.receive - r.receive_made) + str;
+		var d = r.receive - r.receive_made;
+		if(d > 0){
+			var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='receiverecord(\"" + r.no + "\")'>收款</a>";
+			return d + str;
+		}
+		return '';
 	}
 	function viewdetail(no) {
 		$.dialog({

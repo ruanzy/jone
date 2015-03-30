@@ -39,6 +39,29 @@ public class Sale
 		return new Json(detaillist);
 	}
 	
+	public View tosaleadd()
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		String user = WebUtil.getUser();
+		map.put("user", user);
+		return new Ftl("saleadd.html", map);
+	}
+
+	public View out()
+	{
+		String no = WebUtil.getParameter("no");
+		WebUtil.call("SaleService.out", no);
+		return new Msg("out success");
+	}
+	
+	public View add()
+	{
+		String bill = WebUtil.getParameter("bill");
+		Map<String, Object> map = JSONUtil.toMap(bill);
+		WebUtil.call("SaleService.add", map);
+		return new Msg("save success");
+	}
+	
 	@SuppressWarnings("unchecked")
 	public View changed()
 	{

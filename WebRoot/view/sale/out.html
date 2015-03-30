@@ -52,7 +52,7 @@
 			header : "出库单号",
 			field : "no",
 			align : 'center',
-			render : pnoRender,
+			render : noRender,
 			width : 150
 		}, {
 			header : "拟单时间",
@@ -80,151 +80,81 @@
 			header : "销售金额",
 			field : "money",
 			align : 'center'
+		}, {
+			header : "操作",
+			field : "action",
+			align : 'center',
+			width : 100,
+			render : saleopRender
 		} ],
-		url : 'sale/outlist',
-		condition : condition
+		url : 'sale/outlist'
 	});
-	$('#addbtn').click(add);
-	$('#delbtn').click(del);
-	$('#assignbtn').click(mk);
-	function add() {
-		$.dialog({
-			title : '新建销售出库单',
-			url : 'view/sale/outadd.html',
-			drag : true,
-			ok : ok
-		});
-		//$('#kkk').Grid('addRow', {username:'asd'});
+	function saleopRender(v, r) {
+		var h = [];
+		if(r.state == 0){
+			h.push("<a href='javascript:;' onclick=out('" + r.no + "') title='出库'>出库</a>");
+		}
+		return h.join('');
 	}
-
-	function ok(win) {
-		var username = win.find('input[name=username]').val();
-		var password = win.find('input[name=password]').val();
-		var params = {
-			username : username,
-			password : password
-		};
+	function out(no) {
 		$.ajax({
-			url : 'user/add',
+			url : 'sale/out',
 			type : 'post',
-			data : params,
+			data : { no : no },
 			dataType : 'json',
 			success : function(result) {
-				if (result.success) {
-					$('#kkk2').table('reload');
-				}
-			}
-		});
-	}
-
-	function save() {
-		$('#kkk2').Grid('save');
-	}
-
-	function del() {
-		var selected = $('#kkk').table('getSelected');
-		if (selected.length == 0) {
-			$.tip({
-				content : '请选择至少一条记录'
-			});
-			return false;
-		}
-		$.confirm({
-			content : '确定要干掉吗',
-			ok : function() {
-				var ids = [];
-				for ( var k in selected) {
-					ids.push(selected[k].id);
-				}
-				$.ajax({
-					url : 'user/del',
-					type : 'post',
-					data : {
-						ids : ids.join(',')
-					},
-					dataType : 'json',
-					success : function(result) {
-						$('#kkk2').table('refresh');
-					}
+				$.pop(result.msg, function() {
+					$('#kkk2').table('refresh');
 				});
 			}
 		});
 	}
-
-	function cancel() {
-		var selected = $('#kkk2').Grid('getSelected');
-		if (selected.length == 0) {
-			$.alert({
-				msg : '请选择至少一条记录'
-			});
-			return false;
-		}
-		$.confirm({
-			msg : '确定要禁止吗',
-			callback : function(btn) {
-				if (btn) {
-					var ids = [];
-					for ( var k in selected) {
-						ids.push(selected[k].id);
-					}
-					$.ajax({
-						url : 'user/cancel',
-						type : 'post',
-						data : {
-							ids : ids.join(',')
-						},
-						dataType : 'json',
-						success : function(result) {
-							$('#kkk').Grid('refresh');
-						}
-					});
+	$('#addbtn').click(add);
+	$('#delbtn').click(del);
+	$('#assignbtn').click(mk);
+	var d;
+	function add() {
+		d = $.dialog({
+			title : '新建销售出库单',
+			url : 'sale/tosaleadd',
+			drag : true,
+			buttons : [ {
+				text : '确定',
+				cls : 'btn-primary',
+				action : function(d) {
+					oksale(d);
 				}
-			}
+			}, {
+				text : '关闭',
+				cls : 'btn-default',
+				action : function(d) {
+					d.close();
+				}
+
+			} ]
 		});
 	}
 
-	function active() {
-		var selected = $('#kkk2').Grid('getSelected');
-		if (selected.length == 0) {
-			$.alert({
-				msg : '请选择至少一条记录'
-			});
-			return false;
-		}
-		$.confirm({
-			msg : '确定要激活吗',
-			callback : function(btn) {
-				if (btn) {
-					var ids = [];
-					for ( var k in selected) {
-						ids.push(selected[k].id);
-					}
-					$.ajax({
-						url : 'user/active',
-						type : 'post',
-						data : {
-							ids : ids.join(',')
-						},
-						dataType : 'json',
-						success : function(result) {
-							$('#kkk2').Grid('refresh');
-						}
-					});
-				}
+	function oksale(win) {
+		var no = $('#no').val();
+		var creator = $('#creator').val();
+		var createtime = $('#createtime').val();
+		var customer = $('#customer').selectbox('getValue');
+		var warehouse = $('#warehouse').selectbox('getValue');
+		var memo = $('#memo').val();
+		var detail = $('#detail').table('getData');
+		var params = {no : no, creator : creator, createtime : createtime, customer : customer, warehouse : warehouse, memo : memo, detail : detail};
+		var text = JSON.stringify(params);
+		$.ajax({
+			url : 'sale/add',
+			type : 'post',
+			data : {bill: text},
+			dataType : 'json',
+			success : function(result) {
+				$('#kkk2').table('reload');
+				d.close();
 			}
 		});
-	}
-
-	$('.btn-lightblue').click(function() {
-		$('#kkk2').table('reload');
-	});
-
-	function condition() {
-		var name = $('input[name=name]').val();
-		var params = {
-			username : name
-		};
-		return params;
 	}
 
 	function stateRender(s) {
@@ -235,7 +165,7 @@
 		}
 	}
 	
-	function pnoRender(v) {
+	function noRender(v) {
 		var str = "<a href='javascript:;' onclick='viewdetail(\"" + v + "\")'>" + v + "</a>";
 		return str;
 	}
@@ -267,51 +197,5 @@
 			}
 		});
 		return c;
-	}
-
-	function opRender(v, r) {
-		var h = [];
-		h.push("<a href='javascript:void(0);' onclick=javascript:mk('" + r.id
-				+ "')>分配角色</a>");
-		return h.join('');
-	}
-
-	function mk() {
-		var selected = $('#kkk2').table('getSelected');
-		if (selected.length != 1) {
-			$.tip({
-				content : '请选择一条记录'
-			});
-			return false;
-		}
-		$.dialog({
-			title : '分配角色',
-			height : 120,
-			url : 'user/tosetrole?id=' + selected[0].id,
-			ok : ok1
-		});
-	}
-
-	function ok1(win) {
-		var id = win.find('input[name=user]').val();
-		var roles = new Array();
-		win.find('input[type=checkbox]:checked').each(function() {
-			roles.push($(this).val());
-		});
-		var data = {
-			user : id,
-			roles : roles.join()
-		};
-		$.ajax({
-			url : "user/setrole",
-			type : 'post',
-			data : data,
-			dataType : 'json',
-			success : function(r) {
-				if (r.success) {
-					$('#kkk2').table('reload');
-				}
-			}
-		});
 	}
 </script>

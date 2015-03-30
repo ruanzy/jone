@@ -100,8 +100,12 @@
 		return v + str;
 	}
 	function paymentdueRender(v, r) {
-		var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='payrecord(\"" + r.no + "\")'>付款</a>";
-		return (r.payment - r.payment_made) + str;
+		var d = r.payment - r.payment_made;
+		if(d > 0){
+			var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='payrecord(\"" + r.no + "\")'>付款</a>";
+			return d + str;
+		}
+		return '';
 	}
 	function viewdetail(no) {
 		$.dialog({
