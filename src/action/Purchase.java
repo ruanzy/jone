@@ -1,7 +1,6 @@
 package action;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.rz.util.JSONUtil;
 import com.rz.util.WebUtil;
@@ -46,33 +45,16 @@ public class Purchase
 
 	public View income()
 	{
-		String purchasebill = WebUtil.getParameter("purchasebill");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("purchasebill", purchasebill);
-		WebUtil.call("PurchaseService.income", purchasebill);
+		String no = WebUtil.getParameter("no");
+		WebUtil.call("PurchaseService.income", no);
 		return new Msg("income success");
 	}
 
-	@SuppressWarnings("unchecked")
-	public View changed()
+	public View add()
 	{
-		String data = WebUtil.getParameter("changed");
-		Map<String, Object> map = JSONUtil.toMap(data);
-		List<Map<String, Object>> inserted = (List<Map<String, Object>>) map.get("inserted");
-		List<Map<String, Object>> deleted = (List<Map<String, Object>>) map.get("deleted");
-		List<Map<String, Object>> updated = (List<Map<String, Object>>) map.get("updated");
-		for (Map<String, Object> m : inserted)
-		{
-			WebUtil.call("PmsService.reg", m);
-		}
-		for (Map<String, Object> m : deleted)
-		{
-			WebUtil.call("PmsService.moduser", m);
-		}
-		for (Map<String, Object> m : updated)
-		{
-			WebUtil.call("PmsService.moduser", m);
-		}
+		String bill = WebUtil.getParameter("bill");
+		Map<String, Object> map = JSONUtil.toMap(bill);
+		WebUtil.call("PurchaseService.add", map);
 		return new Msg("save success");
 	}
 

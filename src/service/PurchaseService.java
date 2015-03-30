@@ -26,26 +26,43 @@ public class PurchaseService
 		return dao.find(sql, params);
 	}
 	
-	public void income(String purchasebill)
+	public void income(String no)
 	{
 		String sql1 = "insert into payment(no,supplier,payment,payment_made, payment_due) select no,supplier,money,0.00,money from purchase_bill where no=?";
 		String sql2 = "update purchase_bill set state=1 where no=?";
-		Object[] params = new Object[] { purchasebill };
+		Object[] params = new Object[] { no };
 		dao.update(sql1, params);
 		dao.update(sql2, params);
 	}
 
-	public void add(Map<String, String> map)
+	@SuppressWarnings("unchecked")
+	@Transaction
+	public void add(Map<String, Object> map)
 	{
-		String sql = "insert into purchase(id,name,category,unit,spec,purchase_price,sale_price) values(?,?,?,?,?,?,?)";
-		int id = dao.getID("goods");
-		Object name = map.get("name");
-		Object category = map.get("category");
-		Object unit = map.get("unit");
-		Object spec = map.get("spec");
-		Object purchase_price = map.get("purchase_price");
-		Object sale_price = map.get("sale_price");
-		Object[] params = new Object[] { id, name, category, unit, spec, purchase_price, sale_price };
+		Object no = map.get("no");
+		double money = 0.0;
+		List<Map<String, Object>> detail = (List<Map<String, Object>>)(map.get("detail"));
+		String sql2 = "insert into pbill_detail(purchase_bill,goods,purchase_num,purchase_price,purchase_money) values(?,?,?,?,?)";
+		dao.beginBatch(sql2);
+		for (Map<String, Object> map2 : detail)
+		{
+			Object goods = map2.get("goods");
+			Object purchase_num = map2.get("purchase_num");
+			Object purchase_price = map2.get("purchase_price");
+			double purchase_money = Double.valueOf(map2.get("purchase_money").toString());
+			money += purchase_money;
+			Object[] params2 = new Object[] { no, goods, purchase_num, purchase_price, purchase_money };
+			dao.addBatch(params2);
+		}
+		dao.excuteBatch();
+		dao.endBatch();
+		String sql = "insert into purchase_bill(id,no,supplier,warehouse,creator,createtime,state,money) values(?,?,?,?,?,?,?,?)";
+		int id = dao.getID("purchase_bill");
+		Object supplier = map.get("supplier");
+		Object warehouse = map.get("warehouse");
+		Object creator = map.get("creator");
+		Object createtime = map.get("createtime");
+		Object[] params = new Object[] { id, no, supplier, warehouse, creator, createtime, 0, money };
 		dao.update(sql, params);
 	}
 

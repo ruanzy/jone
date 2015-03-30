@@ -39,7 +39,7 @@
 	var yyyy = date.getFullYear();
 	var MM = date.getMonth() + 1;
 	var dd = date.getDate();
-	$('#no').val('P' + yyyy + MM + dd);
+	$('#no').val('P' + date.format("yyyyMMddhhmmss"));
 	$('#createtime').val(yyyy + '-' + MM + '-' + dd);
 	var unit;
 	$.ajax({
@@ -73,56 +73,33 @@
 			field : "goods",
 			align : 'left',
 			tip : true,
-			render : goodsRender,
-			editor : {
-				type : 'text'
-			}
+			render : goodsRender
 		}, {
 			header : "规格",
 			field : "spec",
 			align : 'left',
-			width : 180,
-			editor : {
-				type : 'text'
-			}
+			width : 180
 		}, {
 			header : "计量单位",
 			field : "unit",
 			align : 'left',
 			width : 100,
-			render : unitRender,
-			editor : {
-				type : 'selectbox',
-				option : {
-					ds : unit,
-					textField : 'name',
-					valueField : 'id'
-				}
-			}
+			render : unitRender
 		}, {
 			header : "采购价格",
 			field : "purchase_price",
 			align : 'left',
-			width : 100,
-			editor : {
-				type : 'text'
-			}
+			width : 100
 		}, {
 			header : "采购数量",
 			field : "purchase_num",
 			align : 'center',
-			width : 100,
-			editor : {
-				type : 'text'
-			}
+			width : 100
 		}, {
 			header : "采购金额",
 			field : "purchase_money",
 			align : 'center',
-			width : 100,
-			editor : {
-				type : 'text'
-			}
+			width : 100
 		}, {
 			header : "操作",
 			field : "",
@@ -153,11 +130,12 @@
 		return c;
 	}
 	function opRender(v, r) {
-		var str = "<a href='javascript:;' onclick='del()'>删除</a>";
+		var str = "<a href='javascript:;' onclick='del(this)'>删除</a>";
 		return str;
 	}
-	function del() {
-
+	function del(obj) {
+		var idx = $(obj).parents('tr').get(0).rowIndex;
+		$('#detail').table('deleteRow', idx);
 	}
 	$('#adddetail').click(function(){
 		//$('#detail').table('addRow', 0, {});
@@ -179,7 +157,7 @@
 					var purchase_num = $('#purchase_num').val();
 					var purchase_money = $('#purchase_money').val();
 					var data = {goods : goods, spec : spec, unit : unit, purchase_price : purchase_price, purchase_num : purchase_num, purchase_money : purchase_money};
-					$('#detail').table('appendData', data);
+					$('#detail').table('appendRow', data);
 				}
 			}, {
 				text : '关闭',

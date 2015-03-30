@@ -80,34 +80,73 @@
 			header : "采购金额",
 			field : "money",
 			align : 'center'
+		}, {
+			header : "操作",
+			field : "action",
+			align : 'center',
+			width : 100,
+			render : billopRender
 		} ],
 		url : 'purchase/list',
 		condition : condition
 	});
-	$('#addbtn').click(add);
+	function billopRender(v, r) {
+		var h = [];
+		h.push("<a href='javascript:;' onclick=income('" + r.no + "') title='入库'>入库</a>");
+		return h.join('');
+	}
+	function income(no) {
+		$.ajax({
+			url : 'purchase/income',
+			type : 'post',
+			data : { no : no },
+			dataType : 'json',
+			success : function(result) {
+				$.pop(result.msg, function() {
+					$('#kkk2').table('refresh');
+				});
+			}
+		});
+	}
+	$('#addbtn').click(addbill);
 	$('#delbtn').click(del);
 	$('#assignbtn').click(mk);
-	function add() {
+	function addbill() {
 		$.dialog({
 			title : '新建采购入库单',
 			url : 'purchase/tobilladd',
 			drag : true,
-			ok : ok
+			buttons : [ {
+				text : '确定',
+				cls : 'btn-primary',
+				action : function(d) {
+					okbill(d);
+				}
+			}, {
+				text : '关闭',
+				cls : 'btn-default',
+				action : function(d) {
+					d.close();
+				}
+
+			} ]
 		});
-		//$('#kkk').Grid('addRow', {username:'asd'});
 	}
 
-	function ok(win) {
-		var username = win.find('input[name=username]').val();
-		var password = win.find('input[name=password]').val();
-		var params = {
-			username : username,
-			password : password
-		};
+	function okbill(win) {
+		var no = $('#no').val();
+		var creator = $('#creator').val();
+		var createtime = $('#createtime').val();
+		var supplier = $('#supplier').selectbox('getValue');
+		var warehouse = $('#warehouse').selectbox('getValue');
+		var memo = $('#memo').val();
+		var detail = $('#detail').table('getData');
+		var params = {no : no, creator : creator, createtime : createtime, supplier : supplier, warehouse : warehouse, memo : memo, detail : detail};
+		var text = JSON.stringify(params);
 		$.ajax({
-			url : 'user/add',
+			url : 'purchase/add',
 			type : 'post',
-			data : params,
+			data : {bill: text},
 			dataType : 'json',
 			success : function(result) {
 				if (result.success) {
