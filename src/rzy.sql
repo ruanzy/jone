@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2015-03-26 09:46:44
+Date: 2015-03-30 17:05:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,7 +72,6 @@ INSERT INTO `customer` VALUES ('2', '大连海恩橡胶辅机有限公司', '123
 INSERT INTO `customer` VALUES ('3', '哈尔滨工大建设监理有限公司', '456');
 INSERT INTO `customer` VALUES ('4', '大连华城电子有限公司', '345');
 INSERT INTO `customer` VALUES ('5', '大连宏光天宝大酒店有限公司', '234');
-INSERT INTO `customer` VALUES ('6', 'customer', '3123');
 
 -- ----------------------------
 -- Table structure for customer_category
@@ -232,7 +231,8 @@ CREATE TABLE `payment` (
 -- ----------------------------
 -- Records of payment
 -- ----------------------------
-INSERT INTO `payment` VALUES ('P2015318000000', '2', '80000.00', '50000.00', '50000.00');
+INSERT INTO `payment` VALUES ('P20150330120646', '1', '38980.00', '18980.00', '38980.00');
+INSERT INTO `payment` VALUES ('P20150330154910', '2', '3998.00', '3998.00', '3998.00');
 
 -- ----------------------------
 -- Table structure for payment_detail
@@ -253,13 +253,14 @@ INSERT INTO `payment_detail` VALUES ('P2015318000000', '20000.00', 'test', '2015
 INSERT INTO `payment_detail` VALUES ('P2015318000000', '10000.00', 'test', '2015-03-25', 'test');
 INSERT INTO `payment_detail` VALUES ('P2015318000000', '10000.00', 'rzy', '2015-3-25', 'test');
 INSERT INTO `payment_detail` VALUES ('P2015318000000', '10000.00', 'rzy', '2015-3-25', 'test');
+INSERT INTO `payment_detail` VALUES ('P20150330120646', '18980.00', 'rzy', '2015-3-30', 'test');
+INSERT INTO `payment_detail` VALUES ('P20150330154910', '3998.00', 'rzy', '2015-3-30', 'test');
 
 -- ----------------------------
 -- Table structure for pbill_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `pbill_detail`;
 CREATE TABLE `pbill_detail` (
-  `id` int(11) NOT NULL,
   `purchase_bill` varchar(100) NOT NULL,
   `goods` int(11) NOT NULL,
   `purchase_num` int(11) NOT NULL,
@@ -270,9 +271,12 @@ CREATE TABLE `pbill_detail` (
 -- ----------------------------
 -- Records of pbill_detail
 -- ----------------------------
-INSERT INTO `pbill_detail` VALUES ('1', 'P2015318000000', '2', '10', '1899.00', '18990.00');
-INSERT INTO `pbill_detail` VALUES ('1', 'P2015318000000', '1', '1', '2799.00', '2799.00');
-INSERT INTO `pbill_detail` VALUES ('1', 'P2015317000000', '1', '10', '2799.00', '27990.00');
+INSERT INTO `pbill_detail` VALUES ('P20150330120646', '1', '10', '1999.00', '19990.00');
+INSERT INTO `pbill_detail` VALUES ('P20150330120646', '2', '10', '1899.00', '18990.00');
+INSERT INTO `pbill_detail` VALUES ('P20150330154200', '1', '5', '1999.00', '9995.00');
+INSERT INTO `pbill_detail` VALUES ('P20150330154200', '2', '5', '1899.00', '9495.00');
+INSERT INTO `pbill_detail` VALUES ('P20150330154806', '2', '3', '1899.00', '5697.00');
+INSERT INTO `pbill_detail` VALUES ('P20150330154910', '1', '2', '1999.00', '3998.00');
 
 -- ----------------------------
 -- Table structure for purchase_bill
@@ -292,8 +296,10 @@ CREATE TABLE `purchase_bill` (
 -- ----------------------------
 -- Records of purchase_bill
 -- ----------------------------
-INSERT INTO `purchase_bill` VALUES ('1', 'P2015317000000', '1', '1', 'admin', '2015-03-18', '0', '60000.00');
-INSERT INTO `purchase_bill` VALUES ('2', 'P2015318000000', '2', '2', 'admin', '2015-03-18', '1', '80000.00');
+INSERT INTO `purchase_bill` VALUES ('2', 'P20150330120646', '1', '3', 'test', '2015-3-30', '1', '38980.00');
+INSERT INTO `purchase_bill` VALUES ('10', 'P20150330154200', '2', '1', 'test', '2015-3-30', '0', '19490.00');
+INSERT INTO `purchase_bill` VALUES ('11', 'P20150330154806', '2', '3', 'test', '2015-3-30', '0', '5697.00');
+INSERT INTO `purchase_bill` VALUES ('12', 'P20150330154910', '2', '2', 'test', '2015-3-30', '1', '3998.00');
 
 -- ----------------------------
 -- Table structure for receive
@@ -310,7 +316,7 @@ CREATE TABLE `receive` (
 -- ----------------------------
 -- Records of receive
 -- ----------------------------
-INSERT INTO `receive` VALUES ('S2015317000000', '2', '60000.00', '10000.00', '0.00');
+INSERT INTO `receive` VALUES ('S20150330162303', '3', '19995.00', '19995.00', '19995.00');
 
 -- ----------------------------
 -- Table structure for receive_detail
@@ -327,7 +333,8 @@ CREATE TABLE `receive_detail` (
 -- ----------------------------
 -- Records of receive_detail
 -- ----------------------------
-INSERT INTO `receive_detail` VALUES ('S2015317000000', '10000.00', 'rzy', '2015-3-25', 'test');
+INSERT INTO `receive_detail` VALUES ('S20150330162303', '9995.00', 'rzy', '2015-3-30', 'test');
+INSERT INTO `receive_detail` VALUES ('S20150330162303', '10000.00', 'rzy', '2015-3-30', 'test');
 
 -- ----------------------------
 -- Table structure for resources
@@ -459,15 +466,13 @@ CREATE TABLE `saleout` (
 -- ----------------------------
 -- Records of saleout
 -- ----------------------------
-INSERT INTO `saleout` VALUES ('1', 'S2015317000000', '2', '1', 'test', '2015-03-17', '1', '52980.00');
-INSERT INTO `saleout` VALUES ('2', 'S2015318000000', '4', '1', 'test', '2015-03-18', '0', '50000.00');
+INSERT INTO `saleout` VALUES ('1', 'S20150330162303', '3', '3', 'test', '2015-3-30', '1', '19995.00');
 
 -- ----------------------------
 -- Table structure for sale_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `sale_detail`;
 CREATE TABLE `sale_detail` (
-  `id` int(11) NOT NULL,
   `no` varchar(100) DEFAULT NULL,
   `goods` int(11) NOT NULL,
   `sale_num` int(11) NOT NULL,
@@ -478,8 +483,8 @@ CREATE TABLE `sale_detail` (
 -- ----------------------------
 -- Records of sale_detail
 -- ----------------------------
-INSERT INTO `sale_detail` VALUES ('1', 'S2015317000000', '1', '10', '3099.00', '30990.00');
-INSERT INTO `sale_detail` VALUES ('2', 'S2015317000000', '2', '10', '2199.00', '21990.00');
+INSERT INTO `sale_detail` VALUES ('S20150330162303', '1', '5', '2000.00', '10000.00');
+INSERT INTO `sale_detail` VALUES ('S20150330162303', '2', '5', '1999.00', '9995.00');
 
 -- ----------------------------
 -- Table structure for seq
@@ -499,12 +504,14 @@ INSERT INTO `seq` VALUES ('10', 'depart');
 INSERT INTO `seq` VALUES ('16', 'users');
 INSERT INTO `seq` VALUES ('1', 'role');
 INSERT INTO `seq` VALUES ('16', 'apiparam');
-INSERT INTO `seq` VALUES ('6', 'warehouse');
+INSERT INTO `seq` VALUES ('7', 'warehouse');
 INSERT INTO `seq` VALUES ('9', 'goodsunit');
-INSERT INTO `seq` VALUES ('4', 'goods');
+INSERT INTO `seq` VALUES ('5', 'goods');
 INSERT INTO `seq` VALUES ('6', 'customer');
 INSERT INTO `seq` VALUES ('5', 'goods_category');
 INSERT INTO `seq` VALUES ('3', 'supplier');
+INSERT INTO `seq` VALUES ('12', 'purchase_bill');
+INSERT INTO `seq` VALUES ('1', 'saleout');
 
 -- ----------------------------
 -- Table structure for supplier
@@ -604,3 +611,4 @@ CREATE TABLE `warehouse` (
 INSERT INTO `warehouse` VALUES ('2', '0002', '仓库2', '2', '仓库2');
 INSERT INTO `warehouse` VALUES ('3', '0003', '仓库3', '1', '仓库3');
 INSERT INTO `warehouse` VALUES ('1', '0001', '仓库1', '1', '仓库1');
+INSERT INTO `warehouse` VALUES ('7', '0004', '仓库4', '0', '仓库4');
