@@ -428,7 +428,7 @@
     		**/
         	//var rows = $(this).data('rows');
 			var code = new Array();
-			code.push(buildRow(record, 0, opts));
+			code.push(buildRow(record, rowid, opts));
 			if(rowid == 0){
 				$('tbody',this).prepend(code.join(''));
 			}else{
@@ -706,8 +706,12 @@
         },
         appendData : function(data){
         	var opts = $(this).data('options');
-        	var html = buildRow(data, 1, opts);
+        	var allRow = $(this).data('allrow');
+        	var html = buildRow(data, allRow.length, opts);
         	$('tbody', this).append(html);
+        },
+        getData : function(){
+        	return $(this).data('allrow');
         }
 	}; 
 	function ds(url, param){
@@ -937,7 +941,7 @@
 			code.push(">");
 			//code.push("<span class='content'>");
 			if(render){
-				code.push(render(v, record));
+				code.push(render(v, record, index));
 			}else{					
 				code.push(span.text(v).html());
 			}
