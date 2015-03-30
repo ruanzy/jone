@@ -179,7 +179,6 @@ CREATE TABLE purchase_bill (
 
 DROP TABLE IF EXISTS pbill_detail;
 CREATE TABLE pbill_detail (
-	id int(11) NOT NULL,
 	purchase_bill int(11) NOT NULL,
 	goods int(11) NOT NULL,
 	purchase_num int(11) NOT NULL,
@@ -237,7 +236,6 @@ CREATE TABLE saleout (
 
 DROP TABLE IF EXISTS sale_detail;
 CREATE TABLE sale_detail (
-	id int(11) NOT NULL,
 	no varchar(100),
 	goods int(11) NOT NULL,
 	sale_num int(11) NOT NULL,
