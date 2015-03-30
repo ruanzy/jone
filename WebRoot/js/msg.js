@@ -178,8 +178,9 @@
 		$(".dialog-close", dialog).click(function(e) {
 			dialog.close();
 		});
-		var btns = $(".dialog-footer a");
-		$(".dialog-footer").delegate('a', 'click', function(e) {
+		var footer = dialog.find(".dialog-footer");
+		var btns = footer.find("a");
+		footer.delegate('a', 'click', function(e) {
 			var index = btns.index(this);
 			options.buttons[index].action(dialog);
 		});
