@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+import com.rz.common.Record;
 import com.rz.dao.Dao;
 import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
@@ -11,13 +12,13 @@ public class SupplierService
 {
 	private Dao dao = Dao.getInstance();
 	
-	public List<Map<String,Object>> category()
+	public List<Record> category()
 	{
 		String sql = "select * from supplier_category";
 		return dao.find(sql);
 	}
 	
-	public List<Map<String,Object>> list(Map<String, String> map)
+	public List<Record> list(Map<String, String> map)
 	{
 		return SQLMapper.find("supplier.selectAll", map);
 	}

@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+import com.rz.common.Record;
 import com.rz.dao.Dao;
 import com.rz.dao.SQLMapper;
 import com.rz.tx.Transaction;
@@ -18,7 +19,7 @@ public class WarehouseService
 //		return pager;
 //	}
 	
-	public List<Map<String,Object>> list(Map<String, String> map)
+	public List<Record> list(Map<String, String> map)
 	{
 		return SQLMapper.find("warehouse.selectAll", map);
 	}

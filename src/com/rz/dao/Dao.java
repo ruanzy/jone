@@ -14,15 +14,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.rz.common.Record;
 
 public final class Dao
 {
@@ -349,9 +348,9 @@ public final class Dao
 		}
 	}
 
-	public List<Map<String, Object>> find(String sql)
+	public List<Record> find(String sql)
 	{
-		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		final List<Record> list = new ArrayList<Record>();
 		find(sql, new ResultHandler()
 		{
 			public void handle(ResultSet rs) throws SQLException
@@ -360,14 +359,14 @@ public final class Dao
 				int colCount = rsmd.getColumnCount();
 				while (rs.next())
 				{
-					Map<String, Object> map = new HashMap<String, Object>();
+					Record r = new Record();
 					for (int i = 0; i < colCount; i++)
 					{
 						String key = rsmd.getColumnLabel(i + 1);//.toLowerCase();
 						Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
-						map.put(key, val);
+						r.put(key, val);
 					}
-					list.add(map);
+					list.add(r);
 				}
 			}
 		});
@@ -404,9 +403,9 @@ public final class Dao
 		}
 	}
 
-	public List<Map<String, Object>> find(String sql, Object[] params)
+	public List<Record> find(String sql, Object[] params)
 	{
-		final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		final List<Record> list = new ArrayList<Record>();
 		find(sql, params, new ResultHandler()
 		{
 			public void handle(ResultSet rs) throws SQLException
@@ -415,14 +414,14 @@ public final class Dao
 				int colCount = rsmd.getColumnCount();
 				while (rs.next())
 				{
-					Map<String, Object> map = new HashMap<String, Object>();
+					Record r = new Record();
 					for (int i = 0; i < colCount; i++)
 					{
 						String key = rsmd.getColumnLabel(i + 1);//.toLowerCase();
 						Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
-						map.put(key, val);
+						r.put(key, val);
 					}
-					list.add(map);
+					list.add(r);
 				}
 			}
 
@@ -430,9 +429,9 @@ public final class Dao
 		return list;
 	}
 
-	public Map<String, Object> findOne(String sql)
+	public Record findOne(String sql)
 	{
-		List<Map<String, Object>> list = find(sql);
+		List<Record> list = find(sql);
 		if (list != null && list.size() > 0)
 		{
 			return list.get(0);
@@ -440,9 +439,9 @@ public final class Dao
 		return null;
 	}
 
-	public Map<String, Object> findOne(String sql, Object[] params)
+	public Record findOne(String sql, Object[] params)
 	{
-		List<Map<String, Object>> list = find(sql, params);
+		List<Record> list = find(sql, params);
 		if (list != null && list.size() > 0)
 		{
 			return list.get(0);
@@ -450,9 +449,9 @@ public final class Dao
 		return null;
 	}
 
-	public List<Map<String, Object>> pager(String sql, int currPage, int pageSize)
+	public List<Record> pager(String sql, int currPage, int pageSize)
 	{
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		List<Record> list = new ArrayList<Record>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -469,14 +468,14 @@ public final class Dao
 			int colCount = rsmd.getColumnCount();
 			while (rs.next())
 			{
-				Map<String, Object> map = new HashMap<String, Object>();
+				Record r = new Record();
 				for (int i = 0; i < colCount; i++)
 				{
 					String key = rsmd.getColumnLabel(i + 1).toLowerCase();
 					Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
-					map.put(key, val);
+					r.put(key, val);
 				}
-				list.add(map);
+				list.add(r);
 			}
 		}
 		catch (SQLException e)
@@ -490,9 +489,9 @@ public final class Dao
 		return list;
 	}
 
-	public List<Map<String, Object>> pager(String sql, Object[] params, int currPage, int pageSize)
+	public List<Record> pager(String sql, Object[] params, int currPage, int pageSize)
 	{
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		List<Record> list = new ArrayList<Record>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -516,14 +515,14 @@ public final class Dao
 			int colCount = rsmd.getColumnCount();
 			while (rs.next())
 			{
-				Map<String, Object> map = new HashMap<String, Object>();
+				Record r = new Record();
 				for (int i = 0; i < colCount; i++)
 				{
 					String key = rsmd.getColumnLabel(i + 1).toLowerCase();
 					Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
-					map.put(key, val);
+					r.put(key, val);
 				}
-				list.add(map);
+				list.add(r);
 			}
 		}
 		catch (SQLException e)
@@ -862,7 +861,8 @@ public final class Dao
 	public static void main(String[] args)
 	{
 		Dao dao = Dao.getInstance();
-		dao.find("select * from log");
+		List<Record> r = dao.find("select * from users");
+		System.out.println(r);
 		//dao.update("insert users values(280, '123', '123', 2, '2015-01-15 14:44:50', 'aa@123.com','123456','memo')");
 		//dao.state();
 	}

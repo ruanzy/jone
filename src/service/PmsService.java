@@ -3,6 +3,7 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import com.rz.common.Record;
 import com.rz.dao.Dao;
 import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
@@ -111,35 +112,33 @@ public class PmsService
 		dao.update(sql.toString(), arr);
 	}
 
-	public Map<String, Object> getuser(String id)
+	public Record getuser(String id)
 	{
-		Map<String, Object> map = null;
 		String sql = "select * from topic where id=?";
-		List<Map<String, Object>> list = dao.find(sql, new Object[] { id });
+		List<Record> list = dao.find(sql, new Object[] { id });
 		if (list.size() == 1)
 		{
-			map = list.get(0);
+			return list.get(0);
 		}
-		return map;
+		return null;
 	}
 
-	public List<Map<String, Object>> getContents(String id)
+	public List<Record> getContents(String id)
 	{
 		String sql = "select * from reply where tid=? order by createtime desc";
 		return dao.find(sql, new Object[] { id });
 	}
 
-	public Map<String, Object> login(String username, String password)
+	public Record login(String username, String password)
 	{
-		Map<String, Object> result = null;
 		String sql = "select * from users where username=? and pwd=?";
 		password = CryptUtil.encrypt(username + password);
-		List<Map<String, Object>> list = dao.find(sql, new Object[] { username, password });
+		List<Record> list = dao.find(sql, new Object[] { username, password });
 		if (list.size() == 1)
 		{
-			result = list.get(0);
+			return list.get(0);
 		}
-		return result;
+		return null;
 	}
 
 	public void addContent(Map<String, Object> map)
@@ -181,7 +180,7 @@ public class PmsService
 		dao.update(sql, params);
 	}
 
-	public List<Map<String, Object>> getTopics()
+	public List<Record> getTopics()
 	{
 		String sql = "select * from topic";
 		return dao.find(sql);
@@ -207,7 +206,7 @@ public class PmsService
 		return count;
 	}
 
-	public List<Map<String, Object>> getCatalogs()
+	public List<Record> getCatalogs()
 	{
 		String sql = "select * from catalog order by value";
 		return dao.find(sql);
@@ -279,13 +278,13 @@ public class PmsService
 		return path;
 	}
 
-	public List<Map<String, Object>> getRes()
+	public List<Record> getRes()
 	{
 		String sql = "select r.*,'true' as open from resources r where r.id>=100";
 		return dao.find(sql);
 	}
 
-	public List<Map<String, Object>> menubymoudle(String pid)
+	public List<Record> menubymoudle(String pid)
 	{
 		String sql = "select * from resources where pid=?";
 		Object[] params = new Object[] { pid };
@@ -379,13 +378,13 @@ public class PmsService
 		}
 	}
 
-	public List<Map<String, Object>> allrole()
+	public List<Record> allrole()
 	{
 		String sql = "select * from role";
 		return dao.find(sql);
 	}
 	
-	public List<Map<String, Object>> userrole(String user)
+	public List<Record> userrole(String user)
 	{
 		String sql = "select r.id, r.name, EXISTS(select * from userrole where userrole.userid = ? and userrole.roleid = r.id) as checked from role r";
 		Object[] params = new Object[] { user };
@@ -415,8 +414,8 @@ public class PmsService
 	{
 		List<String> ret = new ArrayList<String>();
 		String sql = "select roleid from userrole where userid=?";
-		List<Map<String, Object>> list = dao.find(sql, new Object[] { user });
-		for (Map<String, Object> map : list)
+		List<Record> list = dao.find(sql, new Object[] { user });
+		for (Record map : list)
 		{
 			ret.add(String.valueOf(map.get("roleid")));
 		}
@@ -427,8 +426,8 @@ public class PmsService
 	{
 		List<String> ret = new ArrayList<String>();
 		String sql = "select resid from roleres where roleid=?";
-		List<Map<String, Object>> list = dao.find(sql, new Object[] { role });
-		for (Map<String, Object> map : list)
+		List<Record> list = dao.find(sql, new Object[] { role });
+		for (Record map : list)
 		{
 			ret.add(String.valueOf(map.get("resid")));
 		}
@@ -455,33 +454,33 @@ public class PmsService
 		dao.update(sql3);
 	}
 
-	public List<Map<String, Object>> userres(String user)
+	public List<Record> userres(String user)
 	{
 		String sql2 = "select * from resources where id in(select distinct resid from roleres where roleid in (select roleid from userrole where userid=?))";
 		Object[] params = new Object[] { user };
 		return dao.find(sql2, params);
 	}
 
-	public List<Map<String, Object>> dics()
+	public List<Record> dics()
 	{
 
 		String sql = "select * from dic";
 		return dao.find(sql);
 	}
 
-	public List<Map<String, Object>> res()
+	public List<Record> res()
 	{
 		String sql = "select * from resources";
 		return dao.find(sql);
 	}
 
-	public List<Map<String, Object>> alluser()
+	public List<Record> alluser()
 	{
 		String sql = "select u.id as value, u.username as text from users u";
 		return dao.find(sql);
 	}
 
-	public List<Map<String, Object>> test(Map<String, Object> p, int page, int pagesize)
+	public List<Record> test(Map<String, Object> p, int page, int pagesize)
 	{
 		String sql = "select * from users";
 		return dao.pager(sql, page, pagesize);
@@ -489,7 +488,7 @@ public class PmsService
 	
 	public static void main(String[] args)
 	{
-		List<Map<String, Object>> list = new PmsService().userrole("用户测试");
+		List<Record> list = new PmsService().userrole("用户测试");
 		for (Map<String, Object> map : list)
 		{
 			System.out.println(map.get("name")+ "==" + map.get("checked"));

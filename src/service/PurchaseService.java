@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+import com.rz.common.Record;
 import com.rz.dao.Dao;
 import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
@@ -19,7 +20,7 @@ public class PurchaseService
 		return pager;
 	}
 	
-	public List<Map<String, Object>> detaillist(String purchasebill)
+	public List<Record> detaillist(String purchasebill)
 	{
 		String sql = "select * from pbill_detail left join goods on goods.id=pbill_detail.goods where pbill_detail.purchase_bill=?";
 		Object[] params = new Object[] { purchasebill };

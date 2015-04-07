@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+import com.rz.common.Record;
 import com.rz.dao.Dao;
 import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
@@ -10,7 +11,7 @@ public class DepartService
 {
 	private Dao dao = Dao.getInstance();
 
-	public List<Map<String,Object>> tree()
+	public List<Record> tree()
 	{
 		String sql = "select * from depart";
 		return dao.find(sql);
