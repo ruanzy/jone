@@ -17,6 +17,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import com.rz.common.Record;
 
 @SuppressWarnings("unchecked")
 public final class SQLMapper
@@ -82,12 +83,12 @@ public final class SQLMapper
 		dao.commit();
 	}
 
-	public static Map<String, Object> findOne(String sqlid, Map<String, String> params)
+	public static Record findOne(String sqlid, Map<String, String> params)
 	{
 		SQL s = getSQL(sqlid, params);
 		String sql = s.getSql();
 		List<Object> ps = s.getPs();
-		List<Map<String, Object>> list = dao.find(sql, ps.toArray());
+		List<Record> list = dao.find(sql, ps.toArray());
 		if (list != null && list.size() > 0)
 		{
 			return list.get(0);
@@ -95,7 +96,7 @@ public final class SQLMapper
 		return null;
 	}
 
-	public static List<Map<String, Object>> find(String sqlid, Map<String, String> params)
+	public static List<Record> find(String sqlid, Map<String, String> params)
 	{
 		SQL s = getSQL(sqlid, params);
 		String sql = s.getSql();
@@ -113,7 +114,7 @@ public final class SQLMapper
 		String sql1 = s1.getSql();
 		String sql2 = s2.getSql();
 		int total = 0;
-		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+		List<Record> data = new ArrayList<Record>();
 		Object scalar = dao.scalar(sql1, s1.getPs().toArray());
 		if (scalar != null)
 		{

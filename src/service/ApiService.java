@@ -2,13 +2,14 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+import com.rz.common.Record;
 import com.rz.dao.Dao;
 
 public class ApiService
 {
 	private Dao dao = Dao.getInstance();
 	
-	public List<Map<String,Object>> find(String apiid)
+	public List<Record> find(String apiid)
 	{
 		String sql = "select * from apiparam where apiid=?";
 		Object[] params = new Object[] { apiid };

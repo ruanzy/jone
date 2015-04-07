@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+import com.rz.common.Record;
 import com.rz.dao.Dao;
 import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
@@ -53,7 +54,7 @@ public class ReceiveService {
 		return pager;
 	}
 	
-	public List<Map<String, Object>> detailllist(String no)
+	public List<Record> detailllist(String no)
 	{
 		String sql = "select * from receive_detail where no=?";
 		Object[] params = new Object[] { no };
