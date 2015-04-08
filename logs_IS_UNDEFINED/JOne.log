@@ -1,0 +1,4 @@
+2015-04-08 11:09:16.064 SQL==>select * from users
+2015-04-08 11:23:41.879 SQL==>select * from log
+2015-04-08 11:23:57.455 SQL==>select * from users
+2015-04-08 11:25:18.948 SQL==>select * from log

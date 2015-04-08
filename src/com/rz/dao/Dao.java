@@ -336,7 +336,10 @@ public final class Dao
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			rh.handle(rs);
+			if (rs != null)
+			{
+				rh.handle(rs);
+			}
 		}
 		catch (SQLException e)
 		{
@@ -348,32 +351,7 @@ public final class Dao
 		}
 	}
 
-	public List<Record> find(String sql)
-	{
-		final List<Record> list = new ArrayList<Record>();
-		find(sql, new ResultHandler()
-		{
-			public void handle(ResultSet rs) throws SQLException
-			{
-				ResultSetMetaData rsmd = rs.getMetaData();
-				int colCount = rsmd.getColumnCount();
-				while (rs.next())
-				{
-					Record r = new Record();
-					for (int i = 0; i < colCount; i++)
-					{
-						String key = rsmd.getColumnLabel(i + 1);//.toLowerCase();
-						Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
-						r.put(key, val);
-					}
-					list.add(r);
-				}
-			}
-		});
-		return list;
-	}
-
-	public void find(String sql, Object[] params, ResultHandler rh)
+	public <T> List<T> find(String sql, Object[] params, RowHandler<T> rh)
 	{
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -388,10 +366,19 @@ public final class Dao
 				{
 					ps.setObject(i + 1, params[i]);
 				}
-				showSQL(sql, params);
 			}
+			showSQL(sql, params);
 			rs = ps.executeQuery();
-			rh.handle(rs);
+			List<T> list = null;
+			if (rs != null)
+			{
+				list = new ArrayList<T>();
+				while (rs.next())
+				{
+					list.add(rh.handle(rs));
+				}
+			}
+			return list;
 		}
 		catch (SQLException e)
 		{
@@ -403,30 +390,25 @@ public final class Dao
 		}
 	}
 
-	public List<Record> find(String sql, Object[] params)
+	public List<Record> find(String sql, Object... params)
 	{
-		final List<Record> list = new ArrayList<Record>();
-		find(sql, params, new ResultHandler()
+		return find(sql, params, new RowHandler<Record>()
 		{
-			public void handle(ResultSet rs) throws SQLException
+			public Record handle(ResultSet rs) throws SQLException
 			{
 				ResultSetMetaData rsmd = rs.getMetaData();
 				int colCount = rsmd.getColumnCount();
-				while (rs.next())
+				Record r = new Record();
+				for (int i = 0; i < colCount; i++)
 				{
-					Record r = new Record();
-					for (int i = 0; i < colCount; i++)
-					{
-						String key = rsmd.getColumnLabel(i + 1);//.toLowerCase();
-						Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
-						r.put(key, val);
-					}
-					list.add(r);
+					String key = rsmd.getColumnLabel(i + 1);// .toLowerCase();
+					Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
+					r.put(key, val);
 				}
+				return r;
 			}
 
 		});
-		return list;
 	}
 
 	public Record findOne(String sql)
@@ -610,18 +592,7 @@ public final class Dao
 		return pageSql.toString();
 	}
 
-	private void showSQL(String sql)
-	{
-		if (log.isDebugEnabled())
-		{
-			if (showsql)
-			{
-				log.debug("SQL==>" + sql);
-			}
-		}
-	}
-
-	private void showSQL(String sql, Object[] params)
+	private void showSQL(String sql, Object... params)
 	{
 		if (log.isDebugEnabled())
 		{
@@ -649,6 +620,10 @@ public final class Dao
 					returnSQL.append(subSQL[subSQL.length - 1]);
 				}
 				log.debug("SQL==>" + returnSQL.toString());
+			}
+			else
+			{
+				log.debug("SQL==>" + sql);
 			}
 		}
 	}
@@ -848,10 +823,10 @@ public final class Dao
 		}
 		return result;
 	}
-	
+
 	public void state()
 	{
-		BasicDataSource bds = (BasicDataSource)ds;
+		BasicDataSource bds = (BasicDataSource) ds;
 		int active = bds.getNumActive();
 		int idle = bds.getNumIdle();
 		System.out.println(active);
@@ -863,7 +838,7 @@ public final class Dao
 		Dao dao = Dao.getInstance();
 		List<Record> r = dao.find("select * from users");
 		System.out.println(r);
-		//dao.update("insert users values(280, '123', '123', 2, '2015-01-15 14:44:50', 'aa@123.com','123456','memo')");
-		//dao.state();
+		// dao.update("insert users values(280, '123', '123', 2, '2015-01-15 14:44:50', 'aa@123.com','123456','memo')");
+		// dao.state();
 	}
 }
