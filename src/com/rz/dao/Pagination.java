@@ -33,6 +33,16 @@ public class Pagination
 	{
 		this.total = total;
 	}
+	
+	public int getPagecount()
+	{
+		return pagecount;
+	}
+
+	public void setPagecount(int pagecount)
+	{
+		this.pagecount = pagecount;
+	}
 
 	public List<?> getRows()
 	{
@@ -47,5 +57,6 @@ public class Pagination
 	private int page = 1;
 	private int pagesize = 10;
 	private long total = 0;
+	private int pagecount = 0;
 	private List<?> rows;
 }
