@@ -431,9 +431,9 @@ public final class Dao
 		return null;
 	}
 
-	public List<Record> pager(String sql, int currPage, int pageSize)
+	public List<Record> pager(String sql, int page, int pagesize)
 	{
-		List<Record> list = new ArrayList<Record>();
+		List<Record> rows = new ArrayList<Record>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -442,7 +442,7 @@ public final class Dao
 			conn = getConnection();
 			DatabaseMetaData metaData = conn.getMetaData();
 			String databaseProductName = metaData.getDatabaseProductName();
-			sql = getPageSql(databaseProductName, sql, currPage, pageSize);
+			sql = getPageSql(databaseProductName, sql, page, pagesize);
 			showSQL(sql);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -457,7 +457,7 @@ public final class Dao
 					Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
 					r.put(key, val);
 				}
-				list.add(r);
+				rows.add(r);
 			}
 		}
 		catch (SQLException e)
@@ -468,7 +468,7 @@ public final class Dao
 		{
 			close(rs, ps, conn);
 		}
-		return list;
+		return rows;
 	}
 
 	public List<Record> pager(String sql, Object[] params, int currPage, int pageSize)
