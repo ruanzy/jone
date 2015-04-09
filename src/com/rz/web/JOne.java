@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.rz.interceptor.ActionInvocation;
 import com.rz.interceptor.Interceptors;
 import com.rz.schedule.Schedules;
 
@@ -17,7 +18,6 @@ public class JOne implements Filter
 {
 	private ServletContext context;
 	private Initializer initializer;
-	private ActionHandler ah;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -35,13 +35,9 @@ public class JOne implements Filter
 		try
 		{
 			ActionContext ac = ActionContext.create(context, request, response);
-			ah.handle(ac);
+			new ActionInvocation(ac).invoke();
 		}
-		catch (IOException e)
-		{
-			throw new IOException(e);
-		}
-		catch (ServletException e)
+		catch (Exception e)
 		{
 			throw new ServletException(e);
 		}
@@ -59,7 +55,6 @@ public class JOne implements Filter
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		String _initializer = cfg.getInitParameter("initializer");
-		String _ah = "com.rz.web.DefaultActionHandler";
 		try
 		{
 			this.context = cfg.getServletContext();
@@ -69,13 +64,6 @@ public class JOne implements Filter
 				this.initializer = (Initializer) (initializercls.newInstance());
 				this.initializer.init(this.context);
 			}
-			String _ActionHandler = cfg.getInitParameter("ActionHandler");
-			if (_ActionHandler != null)
-			{
-				_ah = _ActionHandler;
-			}
-			Class<?> cls = Class.forName(_ah);
-			this.ah = (ActionHandler) (cls.newInstance());
 			StringBuffer sb = new StringBuffer();
 			sb.append("*************************************").append("\r\n");
 			sb.append("**                                 **").append("\r\n");
