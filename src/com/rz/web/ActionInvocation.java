@@ -1,10 +1,10 @@
-package com.rz.interceptor;
+package com.rz.web;
 
 import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.web.ActionContext;
-import com.rz.web.View;
+import com.rz.web.interceptor.Interceptor;
+import com.rz.web.interceptor.Interceptors;
 
 public class ActionInvocation
 {

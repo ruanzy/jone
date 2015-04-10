@@ -1,9 +1,7 @@
-package com.rz.interceptor;
+package com.rz.web.interceptor;
 
-import com.rz.interceptor.ActionInvocation;
-import com.rz.interceptor.Interceptor;
-import com.rz.interceptor.InterceptorPath;
 import com.rz.util.WebUtil;
+import com.rz.web.ActionInvocation;
 
 @InterceptorPath("*")
 public class ExceptionInterceptor implements Interceptor

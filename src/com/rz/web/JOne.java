@@ -10,9 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.rz.interceptor.ActionInvocation;
-import com.rz.interceptor.Interceptors;
-import com.rz.schedule.Schedules;
 
 public class JOne implements Filter
 {
@@ -49,7 +46,6 @@ public class JOne implements Filter
 
 	public void destroy()
 	{
-		Schedules.stop();
 	}
 
 	public void init(FilterConfig cfg) throws ServletException
@@ -71,8 +67,6 @@ public class JOne implements Filter
 			sb.append("**                                 **").append("\r\n");
 			sb.append("*************************************");
 			System.out.println(sb);
-			Schedules.init();
-			Interceptors.init();
 		}
 		catch (Exception e)
 		{

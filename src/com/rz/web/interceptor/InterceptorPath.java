@@ -1,4 +1,4 @@
-package com.rz.interceptor;
+package com.rz.web.interceptor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

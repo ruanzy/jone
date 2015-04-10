@@ -1,4 +1,4 @@
-package com.rz.interceptor;
+package com.rz.web.interceptor;
 
 import java.io.File;
 import java.net.URL;
