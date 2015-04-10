@@ -1,0 +1,164 @@
+﻿<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Tabs - Default functionality</title>
+  	<link rel="stylesheet" href="common.css"/><!-- 基本样式 -->
+	<link rel="stylesheet" href="animate.min.css"/> 
+  <script src="jquery.js"></script>
+  <script src="jquery.hDialog.js"></script>
+  <style>
+  body{
+  font-size:12px;
+  }
+.lrc-scroll-ctrl {
+  display: none;
+  width: 7px;
+  height: 111px;
+  border-left: 1px solid #e1e1e1;
+  border-right: 1px solid #f2f2f2;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+  background-color: #f2f2f2;
+  position: absolute;
+  _zoom: 1;
+  top: 16px;
+  right: 0;
+  cursor: pointer;
+  }
+  
+  .lrc-scroll-ctrl-hover {
+  border: 1px solid #bfbfbf;
+  background-color: #a1a1a1;
+  }
+  
+ .lrc-scroll-slider {
+  z-index: 20;
+  position: absolute;
+  width: 7px;
+  height: 15px;
+  border: 1px solid #e1e1e1;
+  border-bottom: 1px solid #d4d4d4;
+  background-color: #fff;
+  overflow: hidden;
+  top: 0;
+  left: -1px;
+  cursor: pointer;
+  }
+  
+  .single-checkbox {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.single-checkbox a, .single-checkbox a:visited {
+  display: inline-block;
+  padding: 1px;
+  border: 1px solid #d4d4d4;
+  background: #d4d4d4;
+  width: 80px;
+  vertical-align: middle;
+  text-decoration: none;
+}
+.single-checkbox a.selected {
+  border: 1px solid #16a0d3;
+  background: #16a0d3;
+}
+.single-checkbox a.selected i.on {
+  display: block;
+}
+.single-checkbox a i.on {
+  float: right;
+  display: none;
+}
+
+.single-checkbox a.selected i.off {
+  display: none;
+}
+.single-checkbox a i.off {
+  float: left;
+  display: block;
+}
+.single-checkbox a i {
+  display: block;
+  width: 50%;
+  height: 28px;
+  line-height: 28px;
+  font-style: normal;
+  background: #fff;
+  color: #333;
+  text-align: center;
+}
+  </style>
+</head>
+<body>
+<div class="lrc-scroll-ctrl s-opacity-scroll" style="display: block;"> 
+
+<div class="lrc-scroll-slider s-opacity-scroll-slider" style="top: 8.80392156862745px;"> </div> 
+
+</div>
+
+<div class="rule-single-checkbox single-checkbox"><a href="javascript:;" class="selected"><i class="on">是</i><i class="off">否</i></a>
+          <input id="cbIsRed" type="checkbox" name="cbIsRed" style="display: none;">
+      </div>
+	  
+	  
+	  <button class="zoomInLeft dialog">aas</button>
+	  
+		<div id="HBox">
+			<form action="" method="post" onsubmit="return false;">
+				<ul class="list">
+					<li>
+						<strong>昵 称  <font color="#ff0000">*</font></strong>
+						<div class="fl"><input type="text" name="nickname" value="" class="ipt nickname" /></div>
+					</li>
+					<li>
+						<strong>手 机 <font color="#ff0000">*</font></strong>
+						<div class="fl"><input type="text" name="phone" value="" class="ipt phone" /></div>
+					</li>
+					<li>
+						<strong>邮 箱 <font color="#ff0000">*</font></strong>
+						<div class="fl"><input type="text" name="email" value="" class="ipt email" /></div>
+					</li>
+					<li>
+						<strong>性 别 <font color="#ff0000">&nbsp;</font></strong>
+						<div class="fl">
+							<label class="mr10"><input type="radio" name="sex" value="1"/>男</label>
+							<label class="mr10"><input type="radio" name="sex" value="2"/>女</label>
+							<label><input type="radio" name="sex" value="3"/>保密</label>
+						</div>
+					</li>
+					<li>
+						<strong>爱 好 <font color="#ff0000">&nbsp;</font></strong>
+						<div class="fl">
+							<label class="mr10"><input type="checkbox" name="like" value="男" />男</label>
+							<label class="mr10"><input type="checkbox" name="like" value="女"/>女</label>
+							<label><input type="checkbox" name="like" value="都喜欢"/>都喜欢</label>
+						</div>
+					</li>
+					<li><input type="submit" value="确认提交" class="submitBtn" /></li>
+				</ul>
+			</form>
+		</div><!-- HBox end -->	
+
+</div>
+<script type="text/javascript">
+	function Person() {
+  this.name = 'hanzichi';
+  this.age = 10;
+}
+
+var p2 = {name:'hanzichi'};
+var p = Person.prototype;
+var pp = p2.constructor;
+
+	$(function() {   	 
+		 var el = $('.single-checkbox a');
+		 el.on('click', 'i', function(){
+			el.toggleClass('selected');
+		 });
+		 
+		 $('button').hDialog({box:'#HBox'});
+	});
+</script>
+</body>
+</html>
