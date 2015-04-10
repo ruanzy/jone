@@ -2,10 +2,10 @@
 <head>
   <meta charset="utf-8">
   <title>jQuery UI Tabs - Default functionality</title>
-  	<link rel="stylesheet" href="common.css"/><!-- 基本样式 -->
-	<link rel="stylesheet" href="animate.min.css"/> 
-  <script src="jquery.js"></script>
-  <script src="jquery.hDialog.js"></script>
+  	<link rel="stylesheet" href="css/common.css"/><!-- 基本样式 -->
+	<link rel="stylesheet" href="css/animate.min.css"/> 
+  <script src="js/jquery-1.11.0.min.js"></script>
+  <script src="js/jquery.hDialog.js"></script>
   <style>
   body{
   font-size:12px;
@@ -102,7 +102,7 @@
       </div>
 	  
 	  
-	  <button class="zoomInLeft dialog">aas</button>
+	  <button class="fadeIn dialog">aas</button>
 	  
 		<div id="HBox">
 			<form action="" method="post" onsubmit="return false;">
@@ -157,7 +157,7 @@ var pp = p2.constructor;
 			el.toggleClass('selected');
 		 });
 		 
-		 $('button').hDialog({box:'#HBox'});
+		 $('button').hDialog({box:'#HBox', title:'add user'});
 	});
 </script>
 </body>
