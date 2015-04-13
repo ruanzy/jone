@@ -10,6 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.rz.schedule.Schedules;
+import com.rz.web.interceptor.Interceptors;
 
 public class JOne implements Filter
 {
@@ -67,6 +69,8 @@ public class JOne implements Filter
 			sb.append("**                                 **").append("\r\n");
 			sb.append("*************************************");
 			System.out.println(sb);
+			Schedules.init();
+			Interceptors.init();
 		}
 		catch (Exception e)
 		{
