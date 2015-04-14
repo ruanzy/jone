@@ -117,11 +117,13 @@
 			dialog = $("<div class='dialog-wrap'></div>").appendTo($('body'));
 		var html = [];
 		html.push("<div class='dialog'>");
-		html.push("<div class='dialog-header dialog-header-success'>");
+		if(options.title){
+			html.push("<div class='dialog-header dialog-header-success'>");
+			html.push("<i class='icon-desktop'></i> ");
+			html.push(options.title);
+			html.push("</div>");
+		}
 		html.push("<a class='dialog-close'><i class='icon-remove'></i></a>");
-		html.push("<i class='icon-desktop'></i> ");
-		html.push(options.title);
-		html.push("</div>");
 		html
 				.push("<div class='dialog-body'><div class='dialog-loading'><i class='icon-spinner icon-spin'></i>loading...</div></div>");
 		if (options.buttons) {
@@ -175,6 +177,7 @@
 				}
 			});
 		}
+		var close = $(".dialog-close", dialog);
 		$(".dialog-close", dialog).click(function(e) {
 			dialog.close();
 		});
@@ -197,7 +200,7 @@
 		return _dialog;
 	};
 	$.dialog.defaults = {
-		title : 'Window',
+		//title : 'Window',
 		minWidth : 300,
 		height : 100,
 		padding : 30,

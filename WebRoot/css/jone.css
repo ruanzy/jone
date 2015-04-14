@@ -516,7 +516,6 @@ msg.css
 }
 
 .dialog-body {
-	position: relative;
 	color: #737373;
 	overflow: auto;
 }
@@ -531,7 +530,6 @@ msg.css
 
 .dialog-close {
 	font-size: 16px;
-	color: #fff;
 	text-shadow: 0 1px 0 #fff;
 	cursor: pointer;
 	position: absolute;

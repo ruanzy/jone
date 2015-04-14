@@ -57,7 +57,7 @@ $(function() {
 		}
 		function info(){
 			var dialog = $.dialog({
-					title:'个人资料',
+					//title:'个人资料',
 					width: 350,
 					//url:'view/income/list.html'
 					url:'common/userinfo',
