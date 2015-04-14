@@ -529,12 +529,16 @@ msg.css
 }
 
 .dialog-close {
-	font-size: 16px;
+	font-size: 1.4em;
 	text-shadow: 0 1px 0 #fff;
+	line-height: 24px;
+	background-color: #ccc;
+	color: #fff;
+	text-align:center;
 	cursor: pointer;
 	position: absolute;
-	top: 13px;
-	right: 10px;
+	top: 8px;
+	right: 8px;
 }
 
 .message-pop {
