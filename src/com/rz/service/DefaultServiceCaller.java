@@ -54,11 +54,12 @@ public class DefaultServiceCaller implements ServiceCaller
 			logs.append(sid).append("|");
 			// logs.append(requestBody).append("|");
 			logs.append("").append("|");
-			//Object proxy = ServiceProxy.get(fullName);
+			// Object proxy = ServiceProxy.get(fullName);
 			Class<?>[] parameterTypes = getParameterTypes(args);
 			Class<?> cls = Class.forName(fullName);
 			Method m = MethodUtils.getMatchingAccessibleMethod(cls, methodName, parameterTypes);
-			if(m == null){
+			if (m == null)
+			{
 				String error = "业务处理接口" + fullName + "." + methodName + " Not Found!";
 				throw new ServiceException(error);
 			}
@@ -93,7 +94,10 @@ public class DefaultServiceCaller implements ServiceCaller
 			else if (e instanceof InvocationTargetException)
 			{
 				Throwable t = ((InvocationTargetException) e).getTargetException();
-				error = t.getMessage();
+				if (t != null)
+				{
+					error = t.getMessage();
+				}
 			}
 			logs.append(error).append("|");
 			logs.append(0);
