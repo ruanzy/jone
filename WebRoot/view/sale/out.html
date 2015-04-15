@@ -69,7 +69,7 @@
 			field : "customer",
 			align : 'center',
 			render : customerRender,
-			width : 200
+			width : 250
 		}, {
 			header : "出库仓库",
 			field : "warehouse",
@@ -80,12 +80,6 @@
 			header : "销售金额",
 			field : "money",
 			align : 'center'
-		}, {
-			header : "操作",
-			field : "action",
-			align : 'center',
-			width : 100,
-			render : saleopRender
 		} ],
 		url : 'sale/outlist'
 	});
@@ -157,11 +151,12 @@
 		});
 	}
 
-	function stateRender(s) {
+	function stateRender(s, r) {
 		if (s == 1) {
 			return "<label class='label label-success'>已出库</label>";
 		} else {
-			return "<label class='label label-danger'>未出库</label>";
+			return "<a href='javascript:;' onclick=out('" + r.no + "')>出库</a>"
+			//return "<label class='label label-danger'>未出库</label>";
 		}
 	}
 	
