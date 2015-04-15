@@ -123,7 +123,9 @@
 			html.push(options.title);
 			html.push("</div>");
 		}
-		html.push("<span class='dialog-close'>&#215;</span>");
+		if(options.btnclose){
+			html.push("<span class='dialog-close'>&#215;</span>");
+		}
 		html
 				.push("<div class='dialog-body'><div class='dialog-loading'><i class='icon-spinner icon-spin'></i>loading...</div></div>");
 		if (options.buttons) {
@@ -147,6 +149,7 @@
 		});
 		var d = $(".dialog", dialog).css('zIndex', _nextZ());
 		var bd = $(".dialog-body", dialog).css({
+			border : options.border,
 			padding : options.padding,
 			minWidth : options.minWidth,
 			width : options.width
@@ -201,7 +204,9 @@
 	};
 	$.dialog.defaults = {
 		//title : 'Window',
-		minWidth : 300,
+		btnclose:true,
+		minWidth : 100,
+		border : 0,
 		height : 100,
 		padding : 30,
 		drag : false,
@@ -209,6 +214,14 @@
 		params : null,
 		onShow : function() {
 		}
+	};
+	$.dialog.loading = function(msg) {
+		var txt = msg || '加载中...';
+		var content = [];
+		content.push("<div class='wrap_remind'>");
+		content.push(txt);
+		content.push("</div");
+		return $.dialog({ border : '5px solid #ccc',btnclose:false,padding : 10,content: content });
 	};
 	function _nextZ() {
         return $.dialog.zIndex++;
