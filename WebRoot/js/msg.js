@@ -123,7 +123,7 @@
 			html.push(options.title);
 			html.push("</div>");
 		}
-		html.push("<span class='dialog-close' style='width:24px;height:24px;display:inline-block;'>&#215;</span>");
+		html.push("<span class='dialog-close'>&#215;</span>");
 		html
 				.push("<div class='dialog-body'><div class='dialog-loading'><i class='icon-spinner icon-spin'></i>loading...</div></div>");
 		if (options.buttons) {
