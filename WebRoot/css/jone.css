@@ -484,6 +484,8 @@ msg.css
 	padding-left: 10px;
 	font-size: 15px;
 	font-weight: bold;
+	background-color: #3875d7;
+	color: #fff;
 }
 
 .dialog-header-success {

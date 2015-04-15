@@ -118,7 +118,7 @@
 		var html = [];
 		html.push("<div class='dialog'>");
 		if(options.title){
-			html.push("<div class='dialog-header dialog-header-success'>");
+			html.push("<div class='dialog-header dialog-header-success1'>");
 			html.push("<i class='icon-desktop'></i> ");
 			html.push(options.title);
 			html.push("</div>");
@@ -145,9 +145,9 @@
 		dialog.append(html.join('')).append("<div class='dialog-mask'></div>");
 		var mask = $(".dialog-mask", dialog);
 		if(options.bg){		
-			mask.css({backgroundColor: #000; opacity: .15});
+			mask.css({backgroundColor: '#000', opacity: .1});
 		}else{
-			mask.css({backgroundColor: #fff; opacity: 1});
+			mask.css({backgroundColor: 'transparent', opacity: 1});
 		}
 		if(options.bgclose){		
 			mask.click(function() {
@@ -217,7 +217,7 @@
 		height : 100,
 		padding : 30,
 		bgclose : false,
-		bg : false,
+		bg : true,
 		drag : false,
 		content : '',
 		params : null,
