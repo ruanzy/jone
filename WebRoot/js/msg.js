@@ -144,9 +144,16 @@
 		}
 		dialog.append(html.join('')).append("<div class='dialog-mask'></div>");
 		var mask = $(".dialog-mask", dialog);
-		mask.click(function() {
-			//dialog.close();
-		});
+		if(options.bg){		
+			mask.css({backgroundColor: #000; opacity: .15});
+		}else{
+			mask.css({backgroundColor: #fff; opacity: 1});
+		}
+		if(options.bgclose){		
+			mask.click(function() {
+				dialog.close();
+			});
+		}
 		var d = $(".dialog", dialog).css('zIndex', _nextZ());
 		var bd = $(".dialog-body", dialog).css({
 			border : options.border,
@@ -209,6 +216,8 @@
 		border : 0,
 		height : 100,
 		padding : 30,
+		bgclose : false,
+		bg : false,
 		drag : false,
 		content : '',
 		params : null,
@@ -222,6 +231,10 @@
 		content.push(txt);
 		content.push("</div");
 		return $.dialog({ border : '5px solid #ccc',btnclose:false,padding : 10,content: content });
+	};
+	$.dialog.tip = function(msg) {
+		var g = $.dialog.loading(msg);
+		setTimeout(function(){g.close();},1500);
 	};
 	function _nextZ() {
         return $.dialog.zIndex++;
