@@ -350,6 +350,71 @@ public final class Dao
 			close(rs, ps, conn);
 		}
 	}
+	
+	public void find(String sql, Object[] params, ResultHandler rh)
+	{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			if (params != null)
+			{
+				for (int i = 0; i < params.length; i++)
+				{
+					ps.setObject(i + 1, params[i]);
+				}
+			}
+			showSQL(sql, params);
+			rs = ps.executeQuery();
+			if (rs != null)
+			{
+				rh.handle(rs);
+			}
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
+		finally
+		{
+			close(rs, ps, conn);
+		}
+	}
+	
+	public <T> List<T> find(String sql, RowHandler<T> rh)
+	{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			showSQL(sql);
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			List<T> list = null;
+			if (rs != null)
+			{
+				list = new ArrayList<T>();
+				while (rs.next())
+				{
+					list.add(rh.handle(rs));
+				}
+			}
+			return list;
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage(), e);
+		}
+		finally
+		{
+			close(rs, ps, conn);
+		}
+	}
 
 	public <T> List<T> find(String sql, Object[] params, RowHandler<T> rh)
 	{
