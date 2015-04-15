@@ -35,6 +35,6 @@ public class Login
 		if(go != null && go.length() > 0){
 			return new Msg(true, "SSO?go=" + go);
 		}
-		return new Msg(true, "index.jsp");
+		return new Msg(true, "");
 	}
 }
