@@ -60,7 +60,7 @@ $(function() {
 					//title:'个人资料',
 					width: 350,
 					//url:'view/income/list.html'
-					url:'common/userinfo',
+					url:'ftl/userinfo.html',
 					buttons:[
 					    {
 					    	text : 'OK',

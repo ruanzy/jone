@@ -309,6 +309,7 @@ public class WebUtil
 	public static void setUserinfo(String userinfo)
 	{
 		WebUtil.Session.attr("RZY_USER", userinfo.split("_")[0]);
+		WebUtil.Session.attr("user", userinfo.split("_")[0]);
 		// String domain = WebUtil.Request.get().getServerName();
 		Cookie token = new Cookie("SSOTOKEN", userinfo);
 		token.setMaxAge(30 * 60);
