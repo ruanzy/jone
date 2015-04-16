@@ -22,7 +22,7 @@ import freemarker.template.Template;
 public class JOne implements Filter
 {
 	private ServletContext context;
-	static Configuration conf = new Configuration();
+	private static Configuration conf = new Configuration();
 	private Initializer initializer;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
@@ -34,26 +34,24 @@ public class JOne implements Filter
 		request.setCharacterEncoding("UTF-8");
 		boolean isStatic = (url.lastIndexOf(".") != -1);
 		boolean isHtml = url.endsWith(".html") || url.endsWith(".htm");
-		if (isStatic && !isHtml)
-		{
-			chain.doFilter(request, response);
-			return;
-		}
 		try
 		{
-			ActionContext ac = ActionContext.create(context, request, response);
+			if (isStatic && !isHtml)
+			{
+				chain.doFilter(request, response);
+				return;
+			}
 			if (isHtml)
 			{
 				String fn = url.substring(1);
 				response.setContentType("text/html;charset=UTF-8");
 				Template t = conf.getTemplate(fn, "UTF-8");
-				Map<String, Object> data = getScopeMap(ac);
+				Map<String, Object> data = getScopeMap(context, request);
 				t.process(data, response.getWriter());
+				return;
 			}
-			else
-			{
-				new ActionInvocation(ac).invoke();
-			}
+			ActionContext ac = ActionContext.create(context, request, response);
+			new ActionInvocation(ac).invoke();
 		}
 		catch (Exception e)
 		{
@@ -99,21 +97,25 @@ public class JOne implements Filter
 		}
 	}
 
-	public Map<String, Object> getScopeMap(ActionContext ac)
+	public Map<String, Object> getScopeMap(ServletContext servletContext, HttpServletRequest request)
 	{
 		Map<String, Object> ps = new HashMap<String, Object>();
-		ps.putAll(getApplicationMap(ac.getServletContext()));
-		ps.putAll(getSessionMap(ac.getRequest().getSession()));
-		ps.putAll(getRequestMap(ac.getRequest()));
-		ps.putAll(getParametersMap(ac.getRequest()));
-		ps.put("Application", getApplicationMap(ac.getServletContext()));
-		ps.put("Session", getSessionMap(ac.getRequest().getSession()));
-		ps.put("Request", getRequestMap(ac.getRequest()));
-		ps.put("Parameters", getParametersMap(ac.getRequest()));
+		Map<String, Object> applicationMap = getApplicationMap(servletContext);
+		Map<String, Object> sessionMap = getSessionMap(request.getSession());
+		Map<String, Object> requestMap = getRequestMap(request);
+		Map<String, Object> parametersMap = getParametersMap(request);
+		ps.putAll(applicationMap);
+		ps.putAll(sessionMap);
+		ps.putAll(requestMap);
+		ps.putAll(parametersMap);
+		ps.put("Application", applicationMap);
+		ps.put("Session", sessionMap);
+		ps.put("Request", requestMap);
+		ps.put("Parameters", parametersMap);
 		return ps;
 	}
 
-	public Map<String, Object> getParametersMap(HttpServletRequest request)
+	private Map<String, Object> getParametersMap(HttpServletRequest request)
 	{
 		Map<String, Object> ps = new HashMap<String, Object>();
 		Enumeration<?> em = request.getParameterNames();
@@ -129,7 +131,7 @@ public class JOne implements Filter
 		return ps;
 	}
 
-	public Map<String, Object> getRequestMap(HttpServletRequest request)
+	private Map<String, Object> getRequestMap(HttpServletRequest request)
 	{
 		Map<String, Object> ps = new HashMap<String, Object>();
 		Enumeration<?> em = request.getAttributeNames();
@@ -145,7 +147,7 @@ public class JOne implements Filter
 		return ps;
 	}
 
-	public Map<String, Object> getSessionMap(HttpSession session)
+	private Map<String, Object> getSessionMap(HttpSession session)
 	{
 		Map<String, Object> ps = new HashMap<String, Object>();
 		Enumeration<?> em = session.getAttributeNames();
@@ -161,7 +163,7 @@ public class JOne implements Filter
 		return ps;
 	}
 
-	public Map<String, Object> getApplicationMap(ServletContext servletContext)
+	private Map<String, Object> getApplicationMap(ServletContext servletContext)
 	{
 		Map<String, Object> ps = new HashMap<String, Object>();
 		Enumeration<?> em = servletContext.getAttributeNames();
