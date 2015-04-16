@@ -1,0 +1,12 @@
+<dl class='accordion' id='accordion1'>
+	<#list res as r> <#if r.type=='1'>
+	<dt>
+		<i class="${r.iconcls}"></i> ${r.name}
+	</dt>
+	<dd>
+		<#list res as r2> <#if r2.type=='2' && r2.pid == r.id> <a
+			id='${r2.id?c}' url='${r2.url}'><i class="${r2.iconcls}"></i>
+			${r2.name}<b class="icon-angle-right"></b></a> </#if> </#list>
+	</dd>
+	</#if> </#list>
+</dl>
