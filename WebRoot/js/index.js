@@ -15,7 +15,7 @@ $(function() {
 		var H = h - 2*parseInt(padding) - 40;
 		$('#main').height(H);
 	});
-	$('#header').load('common/header', function(){
+	//$('#header').load('ftl/header.html', function(){
 		var items = [ {
 			icon : 'icon-cog',
 			text : '设置',
@@ -125,8 +125,8 @@ $(function() {
 			});
 		});
 		$('ul.nav li:first').click();
-	});
-	$('#sidebar').load('common/sidebar', function(){
+	//});
+	//$('#sidebar').load('common/sidebar', function(){
 		var dt = $('dt', '#accordion1');
 		var dd = $('dd', '#accordion1');
 		var a = $('a', dd);
@@ -149,7 +149,7 @@ $(function() {
 				permit('#main');
 			});
 		});
-	});
+	//});
 	/**$('#sidebar').Accordion({
 		title : '导航菜单',
 		url : 'common/menu',
