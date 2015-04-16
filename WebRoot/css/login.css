@@ -17,7 +17,8 @@ h3 {
 	margin: 130px auto;
 	background: #fff;
 	padding: 30px;
-	border:5px solid #f8f8f8;
+	border:0px solid #f8f8f8;
+	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
 }
 
 .loginsubmit {
@@ -32,7 +33,7 @@ h3 {
 	height: 40px;
 	line-height: 40px; 
 	background: #70CA10;
-	background: #1da0d0;
+	background: #3875d7;
 	text-align: center;
 	border-color: transparent;
 	cursor: pointer;

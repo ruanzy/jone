@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<div class="loginwrap">
 		<h3
-			style='height: 62px; background: #1da0d0 url(css/logo_rz.png) no-repeat center;'></h3>
+			style='height: 62px; background: #3875d7 url(css/logo_rz.png) no-repeat center;'></h3>
 		<!-- <h3 class='form-title'>请输入你的帐号和密码</h3> -->
 		<form id='loginfrm'>
 			<div class="logininput-icon">
