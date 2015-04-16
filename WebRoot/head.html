@@ -10,6 +10,7 @@
 			<dd></dd>
 		</dl>
 	</li>
+	<li><a href='javascript:;' onclick='xx(this)' id='lang'>English</a></li>
 	<li><a><i class="icon-envelope"></i> 信息</a> <span
 		class='badge label-warning'>5</span></li>
 	<li>
@@ -21,4 +22,103 @@
 		</dl>
 	</li>
 </ul>
-</div>
+<script type="text/javascript">
+	var lang = 'zh';
+	if($.cookie('lang')){
+		lang = $.cookie('lang');
+	}
+	var txt = (lang == "zh" ? "English" : "中文");
+	$('#lang').html(txt);
+	var items = [ {
+		icon : 'icon-cog',
+		text : '设置',
+		action : set
+	}, {
+		icon : 'icon-user',
+		text : '个人资料',
+		action : info
+	}, '-', {
+		icon : 'icon-off',
+		text : '退出',
+		action : logout
+	} ];
+	function set() {
+		var dialog = $.dialog({
+			title : '设置',
+			url : 'view/user/set.html',
+			buttons : [ {
+				text : 'OK',
+				cls : 'btn-primary',
+				action : function(d) {
+
+				}
+			}, {
+				text : 'Close',
+				cls : 'btn-default',
+				action : function(d) {
+					dialog.close();
+				}
+
+			} ],
+			onShow : function() {
+
+			}
+		});
+	}
+	function info() {
+		var dialog = $.dialog({
+			//title:'个人资料',
+			width : 350,
+			//url:'view/income/list.html'
+			url : 'ftl/userinfo.html',
+			buttons : [ {
+				text : 'OK',
+				cls : 'btn-primary',
+				action : function(d) {
+
+				}
+			}, {
+				text : 'Close',
+				cls : 'btn-default',
+				action : function(d) {
+					dialog.close();
+				}
+
+			} ],
+			onShow : function() {
+				$('#sex').MultiRadio();
+			}
+		});
+	}
+	function logout() {
+		document.location = 'logout';
+	}
+	$('#asd').SideDown({
+		items : items
+	});
+	$('#theme').SideDown({
+		width : 'auto',
+		url : 'theme.html'
+	});
+	$('#toggle').toggle(function(e) {
+		$('#sidebar').hide();
+		$('#content', body).css('margin-left', 0);
+		$('#pill', body).css('left', 0);
+	}, function(e) {
+		$('#sidebar').show();
+		var sw = $('#sidebar').outerWidth();
+		$('#content', body).css('margin-left', sw);
+		$('#pill', body).css('left', sw);
+	});
+	function xx(obj){
+		var lang = 'zh';
+		if($.cookie('lang')){
+			lang = $.cookie('lang');
+		}
+		var txt = $(obj).html();
+		txt = (lang == "zh" ? "English" : "中文");
+		lang = (lang == "zh" ? "en" : "zh");
+		$(obj).html(txt);
+		$.cookie('lang', lang, { path: '/', expires: 10 });
+	}
+</script>

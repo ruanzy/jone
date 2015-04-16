@@ -16,96 +16,7 @@ $(function() {
 		$('#main').height(H);
 	});
 	//$('#header').load('ftl/header.html', function(){
-		var items = [ {
-			icon : 'icon-cog',
-			text : '设置',
-			action : set
-		}, {
-			icon : 'icon-user',
-			text : '个人资料',
-			action : info
-		}, '-', {
-			icon : 'icon-off',
-			text : '退出',
-			action : logout
-		} ];
-		function set(){
-			var dialog = $.dialog({
-				title:'设置',
-				url:'view/user/set.html',
-				buttons:[
-				    {
-				    	text : 'OK',
-				    	cls : 'btn-primary',
-				    	action : function(d) {
-				    		
-				    	}
-				    },
-				    {
-				    	text : 'Close',
-				    	cls : 'btn-default',
-				    	action : function(d) {
-				    		dialog.close();
-				    	}
-				    	
-				    }
-				],
-				onShow : function(){
-					
-				}
-			});
-		}
-		function info(){
-			var dialog = $.dialog({
-					//title:'个人资料',
-					width: 350,
-					//url:'view/income/list.html'
-					url:'ftl/userinfo.html',
-					buttons:[
-					    {
-					    	text : 'OK',
-					    	cls : 'btn-primary',
-					    	action : function(d) {
-					    		
-					    	}
-					    },
-					    {
-					    	text : 'Close',
-					    	cls : 'btn-default',
-					    	action : function(d) {
-					    		dialog.close();
-					    	}
-					    	
-					    }
-					],
-					onShow:function(){
-						$('#sex').MultiRadio();
-					}
-				});
-		}
-		function logout(){
-			document.location = 'logout';
-		}
-		$('#asd').SideDown({
-			items:items
-		});
-		$('#theme').SideDown({
-			width: 'auto',
-			url:'theme.html'
-		});
-		$('#toggle').toggle(
-				function(e) {
-					$('#sidebar').hide();
-					$('#content', body).css('margin-left', 0);
-					$('#pill', body).css('left', 0);
-				},
-				function(e) {
-					$('#sidebar').show();
-					var sw = $('#sidebar').outerWidth();
-					$('#content', body).css('margin-left', sw);
-					$('#pill', body).css('left', sw);
-				}
-		);
+
 		$('ul.nav').delegate('li', 'click', function(){
 			$(this).siblings().removeClass('selected');
 			$(this).addClass('selected');
@@ -127,28 +38,6 @@ $(function() {
 		$('ul.nav li:first').click();
 	//});
 	//$('#sidebar').load('common/sidebar', function(){
-		var dt = $('dt', '#accordion1');
-		var dd = $('dd', '#accordion1');
-		var a = $('a', dd);
-		dt.click(function(){
-			if($(this).hasClass('active')){
-				return false;
-			}else{
-				$('dt.active', '#accordion1').removeClass('active').next('dd').slideUp();
-				$(this).addClass('active').next('dd').slideDown();
-			}
-		});
-		a.click(function(){
-			var url = $(this).attr('url');
-			var title = $(this).text();
-			$('#nav').text(title);
-			$(this).addClass('active').siblings('a').removeClass('active');
-			var page = url + '?_=' + new Date().getTime();
-			//page = url;
-			$('#main').load(page, function(){
-				permit('#main');
-			});
-		});
 	//});
 	/**$('#sidebar').Accordion({
 		title : '导航菜单',

@@ -14,8 +14,26 @@ public class I18N
 	{
 		try
 		{
-			ResourceBundle rb = ResourceBundle.getBundle("resource", Locale.getDefault(), I18N.class.getClassLoader(),
-					ctl);
+			Locale locale = Locale.getDefault();
+			ResourceBundle rb = ResourceBundle.getBundle("resource", locale, I18N.class.getClassLoader(), ctl);
+			String text = (rb != null) ? rb.getString(key) : null;
+			return (text != null) ? MessageFormat.format(text, args) : null;
+		}
+		catch (MissingResourceException e)
+		{
+			return null;
+		}
+		catch (NullPointerException e)
+		{
+			return null;
+		}
+	}
+
+	public static String get(Locale locale, String key, Object... args)
+	{
+		try
+		{
+			ResourceBundle rb = ResourceBundle.getBundle("resource", locale, I18N.class.getClassLoader(), ctl);
 			String text = (rb != null) ? rb.getString(key) : null;
 			return (text != null) ? MessageFormat.format(text, args) : null;
 		}

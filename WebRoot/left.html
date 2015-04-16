@@ -10,3 +10,27 @@
 	</dd>
 	</#if> </#list>
 </dl>
+<script type="text/javascript">
+	var dt = $('dt', '#accordion1');
+	var dd = $('dd', '#accordion1');
+	var a = $('a', dd);
+	dt.click(function(){
+		if($(this).hasClass('active')){
+			return false;
+		}else{
+			$('dt.active', '#accordion1').removeClass('active').next('dd').slideUp();
+			$(this).addClass('active').next('dd').slideDown();
+		}
+	});
+	a.click(function(){
+		var url = $(this).attr('url');
+		var title = $(this).text();
+		$('#nav').text(title);
+		$(this).addClass('active').siblings('a').removeClass('active');
+		var page = url + '?_=' + new Date().getTime();
+		//page = url;
+		$('#main').load(page, function(){
+			permit('#main');
+		});
+	});
+</script>
