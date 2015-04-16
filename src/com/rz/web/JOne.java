@@ -1,8 +1,6 @@
 package com.rz.web;
 
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,7 +11,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import com.rz.schedule.Schedules;
 import com.rz.web.interceptor.Interceptors;
 import freemarker.template.Configuration;
@@ -46,7 +43,7 @@ public class JOne implements Filter
 				String fn = url.substring(1);
 				response.setContentType("text/html;charset=UTF-8");
 				Template t = conf.getTemplate(fn, "UTF-8");
-				Map<String, Object> data = getScopeMap(context, request);
+				Map<String, Object> data = WebKit.getScopeMap(context, request);
 				t.process(data, response.getWriter());
 				return;
 			}
@@ -95,87 +92,5 @@ public class JOne implements Filter
 		{
 			throw new ServletException(e);
 		}
-	}
-
-	public Map<String, Object> getScopeMap(ServletContext servletContext, HttpServletRequest request)
-	{
-		Map<String, Object> ps = new HashMap<String, Object>();
-		Map<String, Object> applicationMap = getApplicationMap(servletContext);
-		Map<String, Object> sessionMap = getSessionMap(request.getSession());
-		Map<String, Object> requestMap = getRequestMap(request);
-		Map<String, Object> parametersMap = getParametersMap(request);
-		ps.putAll(applicationMap);
-		ps.putAll(sessionMap);
-		ps.putAll(requestMap);
-		ps.putAll(parametersMap);
-		ps.put("Application", applicationMap);
-		ps.put("Session", sessionMap);
-		ps.put("Request", requestMap);
-		ps.put("Parameters", parametersMap);
-		return ps;
-	}
-
-	private Map<String, Object> getParametersMap(HttpServletRequest request)
-	{
-		Map<String, Object> ps = new HashMap<String, Object>();
-		Enumeration<?> em = request.getParameterNames();
-		if (em.hasMoreElements())
-		{
-			while (em.hasMoreElements())
-			{
-				String k = (String) em.nextElement();
-				String v = request.getParameter(k);
-				ps.put(k, v);
-			}
-		}
-		return ps;
-	}
-
-	private Map<String, Object> getRequestMap(HttpServletRequest request)
-	{
-		Map<String, Object> ps = new HashMap<String, Object>();
-		Enumeration<?> em = request.getAttributeNames();
-		if (em.hasMoreElements())
-		{
-			while (em.hasMoreElements())
-			{
-				String k = (String) em.nextElement();
-				Object v = request.getAttribute(k);
-				ps.put(k, v);
-			}
-		}
-		return ps;
-	}
-
-	private Map<String, Object> getSessionMap(HttpSession session)
-	{
-		Map<String, Object> ps = new HashMap<String, Object>();
-		Enumeration<?> em = session.getAttributeNames();
-		if (em.hasMoreElements())
-		{
-			while (em.hasMoreElements())
-			{
-				String k = (String) em.nextElement();
-				Object v = session.getAttribute(k);
-				ps.put(k, v);
-			}
-		}
-		return ps;
-	}
-
-	private Map<String, Object> getApplicationMap(ServletContext servletContext)
-	{
-		Map<String, Object> ps = new HashMap<String, Object>();
-		Enumeration<?> em = servletContext.getAttributeNames();
-		if (em.hasMoreElements())
-		{
-			while (em.hasMoreElements())
-			{
-				String k = (String) em.nextElement();
-				Object v = servletContext.getAttribute(k);
-				ps.put(k, v);
-			}
-		}
-		return ps;
 	}
 }
