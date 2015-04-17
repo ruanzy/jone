@@ -32,18 +32,17 @@
 				var disabled = me.attr('disabled');
 				var rdm = new Date().getTime() + '_'
 						+ Math.floor(Math.random() * (100 - 1 + 1) + 1);
-				var li = $("<li class='selectbox'></li>");
+				var dl = $("<dl class='selectbox'><dt id='dt_" + rdm
+						+ "'></dt><dd><input type='text' class='searchbox'/><ul class='items'></ul></dd><div class='mask'></div></dl>");
 				var p1 = [];
 				p1.push("<div class='text'></div><i class='icon-angle-down'></i>");
-				p1.push("<input type='text' class='searchbox'/><ul class='items'></ul><div class='mask'></div>");
-				me.wrap(li).after(p1.join(''));
-				var dropdown = me.parent("li").width(me.outerWidth() - 2).height(me.outerHeight() - 2).css('line-height', (me.outerHeight() - 2) + 'px');
-				var txt = dropdown.find("div.text");
+				me.wrap(dl).after(p1.join(''));
+				var txt = me.siblings("div.text");
+				var dt = me.parent("dt").width(me.outerWidth() - 2).height(me.outerHeight() - 2).css('line-height', (me.outerHeight() - 2) + 'px');
 				var W = dt.width();
 				var H = dt.outerWidth();
-				var dropdown_toggle = dt.siblings("a.dropdown-toggle").css('min-width', me.outerWidth() - 2);
-				var dd = dropdown.find('.items').css('min-width', me.outerWidth() - 2);
-				var searchbox = dropdown.find('.searchbox').width(W - 22).hide();
+				var dd = dt.siblings("dd").css('min-width', me.outerWidth() - 2);
+				var searchbox = dd.find('.searchbox').width(W - 22).hide();
 				if(opts.searchbox){
 					searchbox.show();
 					//解决点击searchbox 冒泡到$(document).bind("mouseup")的问题
@@ -89,7 +88,7 @@
 					});
 				}
 				$(this).data('options', opts);
-				dropdown.bind("click", function(e) {
+				dt.bind("click", function(e) {
 					$(this).addClass('expand');
 					searchbox.val('');
 					var opts = me.data('options');
@@ -147,7 +146,7 @@
 				});
 				if(item){
 					this.siblings("div.text").html(item[textField]);
-					this.siblings(".items").find("li[v='" + item[valueField] + "']").addClass("selected");
+					this.parent("dt").siblings("dd").find("li[v='" + item[valueField] + "']").addClass("selected");
 				}
 			}
 		},
@@ -173,7 +172,7 @@
 			}else{
 				items.push("<li class='no-results'>没有找到 </li>");
 			}
-			this.siblings('.items').empty().append(items.join(''));
+			this.parent("dt").siblings("dd").find('.items').empty().append(items.join(''));
 			$(this).data('data', data);
 		}
 	};
