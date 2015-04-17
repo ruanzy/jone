@@ -46,6 +46,7 @@ public class JOne implements Filter
 			}
 			if (isHtml)
 			{
+				final String lang = WebKit.getLang(request);
 				String fn = url.substring(1);
 				response.setContentType("text/html;charset=UTF-8");
 				Template t = conf.getTemplate(fn, "UTF-8");
@@ -55,7 +56,7 @@ public class JOne implements Filter
 					public Object exec(List list) throws TemplateModelException
 					{
 						String key = (String) list.get(0);
-						Locale locale = new Locale("zh", "CN");
+						Locale locale = new Locale(lang);
 						String value = I18N.get(locale, key);
 						return new SimpleScalar(value);
 					}

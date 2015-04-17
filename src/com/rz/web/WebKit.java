@@ -4,11 +4,30 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class WebKit
 {
+	public static String getLang(HttpServletRequest request)
+	{
+		String cookieValue = null;
+		Cookie[] cks = request.getCookies();
+		if (cks != null)
+		{
+			for (Cookie cookie : cks)
+			{
+				if ("lang".equals(cookie.getName()))
+				{
+					cookieValue = cookie.getValue();
+					break;
+				}
+			}
+		}
+		return cookieValue;
+	}
+	
 	public static Map<String, Object> getScopeMap(ServletContext servletContext, HttpServletRequest request)
 	{
 		Map<String, Object> ps = new HashMap<String, Object>();
