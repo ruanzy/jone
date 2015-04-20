@@ -37,8 +37,8 @@
 				p1.push("<div class='text'></div><i class='icon-angle-down'></i>");
 				p1.push("<input type='text' class='searchbox'/><ul class='items'></ul><div class='mask'></div>");
 				me.wrap(li).after(p1.join(''));
-				var dropdown = me.parent("li").width(me.outerWidth() - 2).height(me.outerHeight() - 2).css('line-height', (me.outerHeight() - 2) + 'px');
-				var txt = dropdown.find("div.text");
+				var dropdown = me.parent("li");
+				var txt = dropdown.find("div.text").width(me.outerWidth() - 2).height(me.outerHeight() - 2).css('line-height', (me.outerHeight() - 2) + 'px');
 				var W = dt.width();
 				var H = dt.outerWidth();
 				var dropdown_toggle = dt.siblings("a.dropdown-toggle").css('min-width', me.outerWidth() - 2);

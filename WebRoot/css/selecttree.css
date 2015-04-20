@@ -52,7 +52,6 @@
 	position: relative;
 	display: inline-block;
 	color: #333;
-	border: 1px solid #ccc;
 	cursor: pointer;
 }
 
@@ -68,6 +67,7 @@
 	text-indent: 5px;
 	color: #555;
 	text-align: left;
+	border: 1px solid #ccc;
 }
 
 .selectbox dt.expand {
@@ -105,10 +105,9 @@
 .selectbox ul.items{
 	position: absolute;
 	top : 100%;
-	left : -1px;
+	left : 0;
 	z-index: 2000;
 	border: 1px solid #ccc;
-	border-top: none;
 	max-height: 260px;
 	margin: 1px 0 0;
 	padding: 0px;
