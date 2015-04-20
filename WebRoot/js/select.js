@@ -72,10 +72,19 @@
 						}, 0);
 					});
 				}
-				var ul = dd.find('.items');
-				var mask = dt.siblings("div.mask");
+				var mask = dropdown.find("div.mask");
 				if (disabled) {
 					mask.show();
+					dropdown.unbind("click");
+				}else{
+					dropdown.bind("click", function(e) {
+						$(this).addClass('expand');
+						searchbox.val('');
+						var opts = me.data('options');
+						me.selectbox('reload', opts.ds);
+						dd.show();
+						e.stopPropagation();
+					});
 				}
 				if(opts.url){
 					$.ajax({
@@ -89,14 +98,6 @@
 					});
 				}
 				$(this).data('options', opts);
-				dropdown.bind("click", function(e) {
-					$(this).addClass('expand');
-					searchbox.val('');
-					var opts = me.data('options');
-					me.selectbox('reload', opts.ds);
-					dd.show();
-					e.stopPropagation();
-				});
 				dd.delegate('li', "click", function(e) {
 					var as = $('li', dd);
 					var idx = as.index(this);

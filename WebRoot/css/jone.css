@@ -1150,8 +1150,8 @@ dl.select dd a.selected {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	opacity: 0.5;
-	background-color: #fff;
+	opacity: 0.1;
+	background-color: #000;
 	display: none;
 }
 

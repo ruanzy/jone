@@ -52,7 +52,6 @@
 	position: relative;
 	display: inline-block;
 	color: #333;
-	cursor: pointer;
 }
 
 .selectbox dt {
@@ -68,6 +67,7 @@
 	color: #555;
 	text-align: left;
 	border: 1px solid #ccc;
+	cursor: pointer;
 }
 
 .selectbox dt.expand {
