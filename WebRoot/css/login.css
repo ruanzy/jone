@@ -1,5 +1,5 @@
 body {
-	background: #f2f2f2;
+	background: url(body-bg.jpg) top repeat-x;
 	font-size: 13px;
 	padding: 0px;
 	margin: 0px;
