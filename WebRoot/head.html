@@ -102,13 +102,13 @@
 	});
 	$('#toggle').toggle(function(e) {
 		$('#sidebar').hide();
-		$('#content', body).css('margin-left', 0);
-		$('#pill', body).css('left', 0);
+		$('#content').css('margin-left', 0);
+		$('#pill').css('left', 0);
 	}, function(e) {
 		$('#sidebar').show();
 		var sw = $('#sidebar').outerWidth();
-		$('#content', body).css('margin-left', sw);
-		$('#pill', body).css('left', sw);
+		$('#content').css('margin-left', sw);
+		$('#pill').css('left', sw);
 	});
 	$('#lang').click(function(){
 		var lang = 'zh';
