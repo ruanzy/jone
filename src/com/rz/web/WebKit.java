@@ -12,7 +12,7 @@ public class WebKit
 {
 	public static String getLang(HttpServletRequest request)
 	{
-		String cookieValue = null;
+		String lang = "zh";
 		Cookie[] cks = request.getCookies();
 		if (cks != null)
 		{
@@ -20,12 +20,12 @@ public class WebKit
 			{
 				if ("lang".equals(cookie.getName()))
 				{
-					cookieValue = cookie.getValue();
+					lang = cookie.getValue();
 					break;
 				}
 			}
 		}
-		return cookieValue;
+		return lang;
 	}
 	
 	public static Map<String, Object> getScopeMap(ServletContext servletContext, HttpServletRequest request)
