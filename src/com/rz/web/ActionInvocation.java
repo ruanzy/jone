@@ -39,15 +39,17 @@ public class ActionInvocation
 				String url = actionContext.getRequest().getServletPath();
 				String[] parts = url.substring(1).split("/");
 				String _action = parts[0];
-				String action = Character.toTitleCase(_action.charAt(0)) + _action.substring(1);
+				String actionName = Character.toTitleCase(_action.charAt(0)) + _action.substring(1);
 				String actionMethod = (parts.length > 1) ? parts[1] : "execute";
-				Class<?> cls = Class.forName("action." + action);
-				Method method = cls.getMethod(actionMethod);
+				// Class<?> cls = Class.forName("action." + action);
+				// Method method = cls.getMethod(actionMethod);
+				Object action = Actions.get(actionName);
+				Method method = action.getClass().getMethod(actionMethod);
 				String ip = actionContext.getRequest().getRemoteAddr();
 				String m = actionContext.getRequest().getMethod();
 				Object[] ps = new Object[] { ip, m, url };
 				log.debug("{} {} {}", ps);
-				result = method.invoke(cls.newInstance());
+				result = method.invoke(action);
 				if (result instanceof View)
 				{
 					((View) result).render(actionContext);

@@ -102,6 +102,7 @@ public class JOne implements Filter
 			sb.append("*************************************");
 			System.out.println(sb);
 			Schedules.init();
+			Actions.init();
 			Interceptors.init();
 			conf.setServletContextForTemplateLoading(this.context, "/");
 			conf.setDefaultEncoding("UTF-8");
