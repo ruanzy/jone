@@ -551,11 +551,13 @@ msg.css
 	padding: 10px;
 	position: relative;
 	z-index: 1050;
-	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
 	color: #53a93f;
 	background-color: #fff;
 	overflow: hidden;
 	display: none;
+	color: #3a87ad;
+  	background-color: #d9edf7;
+  	border-color: #bce8f1;
 }
 
 .bg-red {
@@ -890,12 +892,11 @@ dl.rzy-sidedown {
 .rzy-sidedown dd {
 	position: absolute;
 	z-index: 100;
-	-webkit-box-shadow: 0 2px 6px #CCC;
-	-moz-box-shadow: 0 2px 6px #ccc;
-	-ms-box-shadow: 0 2px 6px #ccc;
-	box-shadow: 0 2px 6px #CCC;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+ 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	left: -1px;
-	border: 1px solid #CFCFCF;
+	border: 1px solid #CCC;
 	background-color: white;
 	display: none;
 	margin-top: 7px;
