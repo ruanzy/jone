@@ -43,6 +43,16 @@
 				var H = dt.outerWidth();
 				var dropdown_toggle = dt.siblings("a.dropdown-toggle").css('min-width', me.outerWidth() - 2);
 				var dd = dropdown.find('.items').css('min-width', me.outerWidth() - 2);
+				dd.niceScroll({
+			        touchbehavior:false,
+			        cursorcolor:"#ccc",
+			        cursoropacitymax:1,
+			        cursorwidth:4,
+			        cursorborder:"none",
+			        cursorborderradius:"0px",
+			        background:"#fff",
+			        autohidemode:true
+			    });
 				var searchbox = dropdown.find('.searchbox').width(W - 22).hide();
 				if(opts.searchbox){
 					searchbox.show();
