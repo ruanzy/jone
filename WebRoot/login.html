@@ -9,20 +9,9 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
 	$(function() {
-		/**$.i18n.properties({
-			name : 'message',
-			path : 'i18n/',
-			mode : 'map',
-			callback : function() {
-				$('[id^=i18n]').each(function() {
-					var key = $(this).attr('id').substr(5);
-					$(this).html($.i18n.prop(key));
-				});
-			}
-		});**/
-		document.oncontextmenu = function() {
+		/**document.oncontextmenu = function() {
 			return false;
-		};
+		};**/
 		$(document).keydown(function(e) {
 			if (e.keyCode == 13) {
 				$('#submit').click();
@@ -89,7 +78,6 @@
 <body>
 	<div class="loginwrap">
 		<h3 id='logo'></h3>
-		<!-- <h3 class='form-title'>请输入你的帐号和密码</h3> -->
 		<form id='loginfrm'>
 			<p class="form-item">
 				<i class='loginlabel icon-user'></i> <input type="text" id="username"
