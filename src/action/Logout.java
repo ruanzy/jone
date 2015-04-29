@@ -10,6 +10,6 @@ public class Logout
 	{
 		WebUtil.Session.clear();
 		WebUtil.Cookies.clear("SSOTOKEN");
-		return new Redirect("login.jsp");
+		return new Redirect("login.html");
 	}
 }

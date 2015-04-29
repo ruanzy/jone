@@ -59,8 +59,8 @@
 				dataType : 'json',
 				success : function(result) {
 					if (result.result) {
-						//document.location = 'index.jsp';
-						document.location = result.msg;
+						document.location = './';
+						//document.location = result.msg;
 					} else {
 						$('#error').html(result.msg);
 						submiting.hide();
