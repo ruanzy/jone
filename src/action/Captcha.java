@@ -6,6 +6,6 @@ public class Captcha
 {
 	public void execute()
 	{
-		CaptchaKit.create(75, 35);
+		CaptchaKit.create(75, 36);
 	}
 }

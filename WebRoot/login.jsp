@@ -35,6 +35,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		});
 		var loginfrm = $('#loginfrm');
+		loginfrm.find('input').focus(function(){
+			$(this).addClass('logininput-focus');
+			$(this).siblings('i').addClass('loginlabel-focus');
+		}).blur(function(){
+			$(this).removeClass('logininput-focus');
+			$(this).siblings('i').removeClass('loginlabel-focus');
+		});
 		$('#submit', loginfrm).click(function() {
 			var submiting = $('.loginsubmiting').show();
 			var un = $("#username", loginfrm).val();
@@ -72,37 +79,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<div class="loginwrap">
-		<h3
-			style='height: 62px; background: #3875d7 url(css/logo_rz.png) no-repeat center;'></h3>
+		<h3 id='logo'></h3>
 		<!-- <h3 class='form-title'>请输入你的帐号和密码</h3> -->
 		<form id='loginfrm'>
-			<div class="logininput-icon">
-				<i class='icon-user'></i> <input type="text" id="username"
+			<p class="form-item">
+				<i class='loginlabel icon-user'></i> <input type="text" id="username"
 					name='name' type="text" placeholder="用户名" value="test"
-					autocomplete="off" /><input type="hidden" id="go"
+					autocomplete="off" class='logininput'/><input type="hidden" id="go"
 					name='go' value="${param.go}" /><input type="hidden" id="domain"
 					name='domain' value="${param.domain}" />
-			</div>
-			<div class="logininput-icon">
-				<i class='icon-lock'></i> <input type="password" id="password"
-					name='password' type="password" placeholder="密码" value="111111" />
-			</div>
-			<div class="logininput">
-				<div class="loginsubmit fr">
-					<a id="submit">登&nbsp;&nbsp;&nbsp;&nbsp;录 <i
-						class='icon-circle-arrow-right'></i>
-					</a>
-					<div class="loginsubmiting">登录中...</div>
-				</div>
-				<div class="fl">
-					<input id="vcinput" name='vc' type="text" placeholder="验证码" /> <img
+			</p>
+			<p class="form-item">
+				<i class='loginlabel icon-lock'></i> <input type="password" id="password"
+					name='password' type="password" placeholder="密码" value="111111" class='logininput'/>
+			</p>
+			<p class="form-item">
+				<span class="loginsubmit fr">
+					<a id="submit">登&nbsp;录 </a>
+					<span class="loginsubmiting">登录中...</span>
+				</span>
+				<span class="fl">
+					<input id="vcinput" name='vc' type="text" placeholder="验证码" class='logininput'/> <img
 						src="captcha" id="VerifyImage" title="看不清？点击换一个"
 						onclick="javascript:document.getElementById('VerifyImage').src='captcha?_r=' + new Date().getTime();return false;" />
-				</div>
+				</span>
 				<div class="clear"></div>
-			</div>
+			</p>
+			<div id="error"></div>
 		</form>
-		<div id="error"></div>
 	</div>
 </body>
 </html>
