@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginFilter implements Filter
 {
-	private static final String lOGIN = "login.jsp";
+	private static final String lOGIN = "login.html";
 	private static final String NOCHECK = "(captcha|login.*|logout)$";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
