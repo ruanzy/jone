@@ -53,6 +53,13 @@ JAVA版本: ${version}
 	</div>
 </div>
 <select id="userSelect" style='width:300px;'></select>
+<select id="userSelect2" style='width:200px;'>
+ <option value=""></option>  
+                <option value="United States">United States</option>  
+                <option value="United Kingdom">United Kingdom</option>  
+                <option value="Afghanistan">Afghanistan</option>  
+                <option value="Albania">Albania</option>  
+</select>
 <script type="text/javascript">
 
 	$('.well-header-buttons').click(function(){
@@ -95,7 +102,9 @@ JAVA版本: ${version}
 				  });
 				$('#userSelect').select2({
 				  data: data
-				})
+				});
 			}
 		});
+				$('#userSelect2').chosen();
+		
 </script>
