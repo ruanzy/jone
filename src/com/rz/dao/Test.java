@@ -14,6 +14,7 @@ public class Test
 		params.put("operator_text", "admin");
 		params.put("time1", "2014-05-28");
 		params.put("time2", "2014-08-29");
+		PageHelper.create(1, 10);
 		params.put("page", "1");
 		params.put("pagesize", "10");
 		Pager p = SQLMapper.pager(countsqlid, pagersqlid, params);
