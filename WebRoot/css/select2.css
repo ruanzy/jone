@@ -10,6 +10,7 @@
 	box-sizing: border-box;
 	cursor: pointer;
 	display: block;
+	outline: none;
 	height: 28px;
 	user-select: none;
 	-webkit-user-select: none;
@@ -83,7 +84,7 @@
 
 .select2-results__options {
 	list-style: none;
-	margin: 0;
+	margin: 0 5px 5px 5px;
 	padding: 0;
 }
 

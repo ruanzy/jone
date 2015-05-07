@@ -53,8 +53,7 @@ JAVA版本: ${version}
 	</div>
 </div>
 <select id="userSelect" style='width:300px;'></select>
-<select id="userSelect2" style='width:200px;'>
- <option value=""></option>  
+<select id="userSelect2" style='width:200px;'> 
                 <option value="United States">United States</option>  
                 <option value="United Kingdom">United Kingdom</option>  
                 <option value="Afghanistan">Afghanistan</option>  
@@ -105,6 +104,6 @@ JAVA版本: ${version}
 				});
 			}
 		});
-				$('#userSelect2').chosen();
+				$('#userSelect2').select2();
 		
 </script>
