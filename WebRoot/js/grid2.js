@@ -117,7 +117,7 @@
 					$(this).removeClass('strips');
 				});
 				
-				$('tbody tr', el).on('click', function(){
+				el.on('click', 'tbody tr', function(){
 					var rows = $('tbody tr', el);
 					var idx = rows.index(this);
 					if($(this).hasClass('highlight')){
