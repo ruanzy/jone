@@ -111,13 +111,13 @@
 				if(rows.length <= 10){
 					$('.grid-bd', el).width(W - 17);
 				}**/
-				$('.grid-row').live('mouseenter', function(){
+				$('.grid-row').on('mouseenter', function(){
 					$(this).addClass('strips');
-				}).live('mouseleave', function(){
+				}).on('mouseleave', function(){
 					$(this).removeClass('strips');
 				});
 				
-				$('tbody tr', el).live('click', function(){
+				$('tbody tr', el).on('click', function(){
 					var rows = $('tbody tr', el);
 					var idx = rows.index(this);
 					if($(this).hasClass('highlight')){
@@ -207,7 +207,7 @@
 					$('.pager',el).empty().append(pager2(dd.total, p, pagesize));
 					$('tbody tr:odd', el).addClass('strips');
 				});**/
-				$('div.pagination a', el).live('click',function(e){
+				$('div.pagination a', el).on('click',function(e){
 					var p = 1;
 					$('.checkbox', el).removeClass('selected').html("<i class='icon-check-empty'></i>");
 					var curpage = parseInt($('div.pagination a.active', el).text());
