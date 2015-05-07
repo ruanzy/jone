@@ -52,13 +52,6 @@ JAVA版本: ${version}
 		<p><span class='block block-warning'></span>剩余内存:<span id='free'>0</span></p>
 	</div>
 </div>
-<select id="userSelect" style='width:300px;'></select>
-<select id="userSelect2" style='width:200px;'> 
-                <option value="United States">United States</option>  
-                <option value="United Kingdom">United Kingdom</option>  
-                <option value="Afghanistan">Afghanistan</option>  
-                <option value="Albania">Albania</option>  
-</select>
 <script type="text/javascript">
 
 	$('.well-header-buttons').click(function(){
@@ -87,23 +80,5 @@ JAVA版本: ${version}
 		//setTimeout(onData, 2000);
 	}
 	onData();
-	
-	 	$.ajax({
-			url : 'user/list',
-			type : 'get',
-			async : false,
-			dataType : 'json',
-			success : function(result) {
-				var d = result.data;
-				 var data = [];
-				  $(d).each(function () {
-				    data.push({id: this['id'], text: this['username']});
-				  });
-				$('#userSelect').select2({
-				  data: data
-				});
-			}
-		});
-				$('#userSelect2').select2();
 		
 </script>

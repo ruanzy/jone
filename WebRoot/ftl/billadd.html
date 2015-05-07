@@ -1,4 +1,3 @@
-<from>
 <table style='width:100%'>
 	<tr>
 		<td>采购单编号</td>
@@ -18,21 +17,50 @@
 		<td><input type="text" id='memo' name="memo" class='txt' /></td>
 	</tr>
 </table>
-</from>
 <p>
 <a id='adddetail' class='btn btn-primary'><i class="icon-plus"></i> 新建明细</a>
 </p>
 <div id='detail'></div>
 <script type="text/javascript">
-	$('#supplier').selectbox({
+	/**$('#supplier').selectbox({
 		url : 'supplier/list',
 		textField : 'name',
 		valueField : 'id'
+	});**/
+	$.ajax({
+		url : 'supplier/list',
+		type : 'get',
+		async : false,
+		dataType : 'json',
+		success : function(result) {
+			var data = [];
+			$(result).each(function () {
+			  data.push({id: this['id'], text: this['name']});
+			});
+			$('#supplier').select2({
+			  data: data
+			});
+		}
 	});
-	$('#warehouse').selectbox({
+	/**$('#warehouse').selectbox({
 		url : 'warehouse/list',
 		textField : 'name',
 		valueField : 'id'
+	});**/
+	$.ajax({
+		url : 'warehouse/list',
+		type : 'get',
+		async : false,
+		dataType : 'json',
+		success : function(result) {
+			var data = [];
+			$(result).each(function () {
+			  data.push({id: this['id'], text: this['name']});
+			});
+			$('#warehouse').select2({
+			  data: data
+			});
+		}
 	});
 	var date = new Date();
 	var yyyy = date.getFullYear();
