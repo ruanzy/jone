@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>div</title>
+<link href="css/jquery.pagination.css" rel="stylesheet">
+<script type="text/javascript" src='js/jquery-1.11.0.min.js'></script>
+<script type="text/javascript" src='js/jsrender.js'></script>
+<script type="text/javascript" src='js/jquery.pagination-1.2.3.js'></script>
+</head>
+
+<body>
+<div id="result"></div>
+<div id="res"></div>
+<div id="page" class="m-pagination"></div>
+
+<script id="personTmpl" type="text/x-jsrender">
+ <table width=100% border=1><tbody>
+<tr><td>Name:</td><td>Birth:</td></tr>
+{{for data}}    
+	<tr><td>{{:username}}</td><td>{{:birth}}</td></tr>
+{{/for}}
+  </tbody></table>
+</script>
+	<script type="text/javascript">
+		$(function(){
+			var tmpl = $.templates("#personTmpl");
+
+// Render template against plain object hierarchy
+
+$("#page").page({
+firstBtnText: '首页',
+    lastBtnText: '尾页',
+    prevBtnText: '上一页',
+    nextBtnText: '下一页',
+    showInfo: true,
+    showJump: true,
+    jumpBtnText:'跳转',
+    showPageSizes: true,
+    infoFormat: '{start} ~ {end}条，共{total}条',
+    remote: {
+        url: 'user/list',
+        pageIndexName: 'page',     //请求参数，当前页数，索引从0开始
+        pageSizeName: 'pagesize',
+        callback: function (result, pageIndex) {
+            //$("#res").append(' remote callback : ' + JSON.stringify(result) + '');
+            $("#result").empty().html(tmpl.render(result));
+        }
+    }
+        })
+
+
+});
+	</script>
+</body>
+</html>

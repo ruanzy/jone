@@ -106,7 +106,7 @@ public final class SQLMapper
 
 	public static Pager pager(String countsqlid, String pagersqlid, Map<String, String> params)
 	{
-		int page = toInt(params.get("page"), 1);
+		int page = toInt(params.get("page"), 1) + 1;
 		int pagesize = toInt(params.get("pagesize"), 10);
 		Pager pager = new Pager(page, pagesize);
 		SQL s1 = getSQL(countsqlid, params);
