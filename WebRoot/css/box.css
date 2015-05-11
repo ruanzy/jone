@@ -1,0 +1,103 @@
+.boxwarp {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: none;
+}
+
+.box {
+	max-width: 1000px;
+	max-height: 800px;
+	position: fixed;
+	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
+	color: #000;
+	background-color: #fff;
+	visibility: hidden;
+}
+
+.box-mask {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #000;
+	opacity: .1;
+}
+
+.masked {
+	border: 1px solid #6593cf;
+	background: #c3daf9;
+	padding: 2px;
+	box-shadow: none;
+}
+
+.tip {
+	box-shadow: 0 0 1px rgba(0, 0, 0, .5);
+}
+
+div.loadmask-msg {
+	padding: 10px 10px 10px 30px;
+	background: #fbfbfb url('loading.gif') no-repeat 10px center;
+	border: 1px solid #a3bad9;
+	color: #222;
+	cursor: wait;
+}
+
+.box .title {
+	font: 18px/1 'Cuprum', 'Lucida Sans Unicode', 'Lucida Grande',
+		sans-serif;
+	background: #3875d7;
+	padding: 12px 0 12px 8px;
+	margin: 0;
+	color: #fff;
+}
+
+.box .closebtn {
+	font: 18px/1 'Cuprum', 'Lucida Sans Unicode', 'Lucida Grande',
+		sans-serif;
+	position: absolute;
+	margin: 0;
+	padding: 12px;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+
+.f_white {
+	color: #fff;
+}
+
+.box .content {
+	background: none;
+	margin: 0;
+	padding: 15px 20px;
+	word-break: break-all;
+}
+
+.box .btns {
+	margin: 0;
+	padding: 10px 0;
+	text-align: center;
+}
+
+.box .button {
+	display: inline-block;
+	background: #3875d7;
+	color: white;
+	height: 33px;
+	font: 17px/33px 'Cuprum', 'Lucida Sans Unicode', 'Lucida Grande',
+		sans-serif;
+	margin-right: 15px;
+	padding: 0 20px;
+	text-decoration: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.box .button:last-child {
+	margin-right: 0;
+}

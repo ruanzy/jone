@@ -116,14 +116,14 @@
 			buttons : [ {
 				text : '确定',
 				cls : 'btn-primary',
-				action : function(d) {
-					okbill(d);
+				action : function() {
+					okbill(this);
 				}
 			}, {
 				text : '关闭',
 				cls : 'btn-default',
-				action : function(d) {
-					d.close();
+				action : function() {
+					this.close();
 				}
 
 			} ]
