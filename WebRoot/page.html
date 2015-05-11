@@ -10,6 +10,8 @@
 </head>
 
 <body>
+
+<input name='username' id='username'/><button id='search'>search</button>
 <div id="result"></div>
 <div id="res"></div>
 <div id="page" class="m-pagination"></div>
@@ -51,6 +53,11 @@ firstBtnText: '首页',
 
 
 });
+
+	$("#search").click(function(){
+		var p = {username:$("#username").val()};
+		$("#page").page('remote', 0, p);
+	});
 	</script>
 </body>
 </html>
