@@ -35,7 +35,11 @@
 }
 
 .tip {
-	box-shadow: 0 0 1px rgba(0, 0, 0, .5);
+	font-family: '\5FAE\8F6F\96C5\9ED1';
+	font-size: 14px;
+	background-color: #53a93f;
+	color: #fff;
+	box-shadow: none;
 }
 
 div.loadmask-msg {

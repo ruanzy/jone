@@ -80,9 +80,11 @@
 			dataType : 'json',
 			success : function(result) {
 				if (result.result) {
-					$.pop(result.msg, function() {
+					/**$.pop(result.msg, function() {
 						$('#kkk').table('refresh');
-					});
+					});**/
+					$.tip(result.msg, 1000);
+					$('#kkk').table('refresh');
 				}
 			}
 		});

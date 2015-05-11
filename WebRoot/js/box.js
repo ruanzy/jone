@@ -130,7 +130,8 @@
 			padding : 20,
 			content:msg
 		};
-		var box = $.box(opts).addClass('tip');
+		var box = $.box(opts);
+		box.find('.box').addClass('tip')
 		if(delay){
 			var fnn = function(){
 				box.close();
