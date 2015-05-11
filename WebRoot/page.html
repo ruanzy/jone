@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>div</title>
 <link href="css/jquery.pagination.css" rel="stylesheet">
+<link href="css/jone.css" rel="stylesheet">
 <script type="text/javascript" src='js/jquery-1.11.0.min.js'></script>
 <script type="text/javascript" src='js/jsrender.js'></script>
 <script type="text/javascript" src='js/jquery.pagination-1.2.3.js'></script>
@@ -17,12 +18,33 @@
 <div id="page" class="m-pagination"></div>
 
 <script id="personTmpl" type="text/x-jsrender">
- <table width=100% border=1><tbody>
-<tr><td>Name:</td><td>Birth:</td></tr>
+ <table class='table' width=100% border=1><thead>
+<tr><th>Name</th><th>Gender</th><th>Birth</th><th>regtime</th><th>email</th><th>phone</th><th>state</th></tr></thead>
+<tbody>
 {{for data}}    
-	<tr><td>{{:username}}</td><td>{{:birth}}</td></tr>
+	<tr>
+<td>{{:username}}</td>
+<td>
+{{if gender==1}} 
+男
+{{/if}}
+{{if gender==2}} 
+女
+{{/if}}
+</td>
+<td>{{:birth}}</td><td>{{:regtime}}</td><td>{{:email}}</td><td>{{:phone}}</td>
+<td>
+{{if state=="1"}} 
+<label class='label label-success'>正常</label>
+{{/if}}
+{{if state=="0"}} 
+<label class='label label-warn'>正常</label>
+{{/if}}
+</td>
+</tr>
 {{/for}}
-  </tbody></table>
+  </tbody>
+</table>
 </script>
 	<script type="text/javascript">
 		$(function(){
