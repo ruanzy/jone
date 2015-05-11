@@ -336,7 +336,7 @@ function permit(context) {
 
 $(document).ajaxError(function(event, xhr, options, exc) {
 	if (xhr.status == 1111) {
-		$.alert('success', '您的登录已过期,请重新登录！', function() {
+		$.alert('您的登录已过期,请重新登录！', function() {
 			top.document.location = './';
 		});
 	} else if (xhr.status == 1112) {
@@ -346,7 +346,7 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 	} else if (xhr.status == 2222) {
 		alert('您没有权限！');
 	} else if (xhr.status == 404) {
-		$.alert('warning', '您访问的资源' + options.url + '不存在！');
+		$.alert('您访问的资源' + options.url + '不存在！');
 	} else if (xhr.status == 3333) {
 		R.alert({
 			msg : '业务接口请求异常！'
@@ -356,7 +356,7 @@ $(document).ajaxError(function(event, xhr, options, exc) {
 			msg : '业务接口连接异常！'
 		});
 	} else if (xhr.status == 0) {
-		$.alert('warning', '服务已停止');
+		$.alert('服务已停止');
 	} else {
 		$.alert('success', xhr.responseText);
 	}
