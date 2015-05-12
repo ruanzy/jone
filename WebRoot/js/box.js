@@ -6,7 +6,7 @@
 			padding : 20,
 			width:350
 		};
-        var markup = ['<div class="boxwarp">', '<div class="box">'];
+        var markup = ['<div><div class="box">'];
 		if(params.title){
 			markup.push('<p class="title">',params.title,'</p>');
 		}
@@ -27,7 +27,7 @@
 		}
 		markup.push('</div><div class="box-mask"></div></div>');
         var boxwarp = $(markup.join('')).appendTo('body');
-        var mask = boxwarp.find('.dialog-mask');
+        var mask = boxwarp.find('.box-mask').css('zIndex', _nextZ());
         mask.css({backgroundColor: '#000', opacity: .1});
 		var box = boxwarp.find('.box').css('zIndex', _nextZ());
 		var title = box.find('.title');
@@ -57,7 +57,6 @@
 		var padding = 0;
 		if(params.padding){
 			padding = params.padding;
-			wd = wd - 2*parseInt(params.padding);
 		}
 		content.css('padding', padding);
 		if(params.content){
@@ -72,14 +71,10 @@
 			}else{
 				content.append(cnt);
 			}
-			var W = $(window).width();
-			var H = $(window).height();
-			var w = content.outerWidth();
-			var h = content.outerHeight();
-			var th = title.outerHeight();
-			var bh = btns.outerHeight();
+			var w = box.outerWidth();
+			var h = box.outerHeight();
 			box.css('top', '50%').css('left', '50%')
-			box.css('margin-top', -(h + th + bh)/2).css('margin-left', -w/2);
+			box.css('margin-top', -h/2).css('margin-left', -w/2);
 			box.css("visibility","visible");
 		}else if(params.url){
 			content.load(params.url, function(){
@@ -118,7 +113,6 @@
 				}	
 			}).empty().remove();
 		};
-		boxwarp.show();
 		return boxwarp;
     }
 	function _nextZ() {
