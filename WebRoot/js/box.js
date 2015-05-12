@@ -15,20 +15,24 @@
 		}
 		markup.push('<p class="content"></p>');
 		if(params.buttons){							
-			var buttonHTML = '';
+			var buttonHTML = [];
 			$.each(params.buttons,function(){	
-				var cls = this['class']||'';
-				buttonHTML += '<button class="button '+cls+'">'+this['text']+'<span></span></button>';
+				buttonHTML.push('<button class="btn');
+				if(this.cls){
+					buttonHTML.push(' ', this.cls);
+				}	
+				buttonHTML.push('">');	
+				buttonHTML.push(this['text']);
+				buttonHTML.push('</button>');
 				if(!this.action){
 					this.action = function(){};
 				}
 			});				
-            markup.push('<p class="btns">',buttonHTML,'</p>');
+            markup.push('<p class="btns">',buttonHTML.join(''),'</p>');
 		}
 		markup.push('</div><div class="box-mask"></div></div>');
         var boxwarp = $(markup.join('')).appendTo('body');
         var mask = boxwarp.find('.box-mask').css('zIndex', _nextZ());
-        mask.css({backgroundColor: '#000', opacity: .1});
 		var box = boxwarp.find('.box').css('zIndex', _nextZ());
 		var title = box.find('.title');
 		var closebtn = box.find('.closebtn');
@@ -90,8 +94,8 @@
 		if(params.buttons){
 			var i = 0;
 			$.each(params.buttons,function(){
-				var action = this.action;
-				btns.find('.button').eq(i++).click(function(){
+				var action = this.action || function(){};
+				btns.find('button').eq(i++).click(function(){
 					action.call(boxwarp, boxwarp);
 					return false;
 				});

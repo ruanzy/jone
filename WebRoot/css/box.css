@@ -42,20 +42,19 @@ div.loadmask-msg {
 }
 
 .box .title {
-	font: 15px/1 'Cuprum', 'Lucida Sans Unicode', 'Lucida Grande',
-		sans-serif;
+	font: 15px/40px "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
 	background: #3875d7;
-	padding: 12px 0 12px 8px;
+	text-indent: 8px;
 	margin: 0;
 	color: #fff;
 }
 
 .box .closebtn {
-	font: 18px/1 'Cuprum', 'Lucida Sans Unicode', 'Lucida Grande',
+	font: 15px/40px 'Cuprum', 'Lucida Sans Unicode', 'Lucida Grande',
 		sans-serif;
 	position: absolute;
 	margin: 0;
-	padding: 12px;
+	padding: 0 10px;
 	top: 0;
 	right: 0;
 	cursor: pointer;
@@ -74,23 +73,8 @@ div.loadmask-msg {
 
 .box .btns {
 	margin: 0;
-	padding: 10px 0;
+	padding: 15px 0;
 	text-align: center;
-}
-
-.box .button {
-	display: inline-block;
-	background: #3875d7;
-	color: white;
-	height: 33px;
-	font: 15px/33px 'Cuprum', 'Lucida Sans Unicode', 'Lucida Grande',
-		sans-serif;
-	margin-right: 15px;
-	padding: 0 20px;
-	text-decoration: none;
-	border: none;
-	outline: none;
-	cursor: pointer;
 }
 
 .box .button:last-child {

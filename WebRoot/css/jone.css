@@ -779,12 +779,14 @@ button.css
 .btn {
 	text-align: center;
 	border: 1px solid transparent;
+	outline: none;
 	cursor: pointer;
-	padding: 6px 10px;
+	padding: 0 10px;
 	white-space: nowrap;
 	position: relative;
 	display: inline-block;
 	margin: 0 5px 0 0;
+	font: 14px/2 "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
 }
 
 .btn-link {
