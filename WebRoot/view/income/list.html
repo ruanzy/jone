@@ -130,7 +130,7 @@
 		});
 	}
 
-	function okbill(win) {
+	function okbill(d) {
 		var no = $('#no').val();
 		var creator = $('#creator').val();
 		var createtime = $('#createtime').val();
@@ -146,8 +146,10 @@
 			data : {bill: text},
 			dataType : 'json',
 			success : function(result) {
-				$('#kkk2').table('reload');
 				d.close();
+				$.noty('新建采购单成功', function(){
+					$('#kkk2').table('reload');
+				});
 			}
 		});
 	}

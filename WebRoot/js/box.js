@@ -114,7 +114,10 @@
 					if(cnt.charAt(0) == '#'){
 						$(cnt).hide().appendTo('body');
 					}
-				}	
+				}
+				if(params.close){
+					params.close();
+				}
 			}).empty().remove();
 		};
 		return boxwarp;
@@ -122,7 +125,19 @@
 	function _nextZ() {
         return $.box.zIndex++;
     }
-	$.box.zIndex = 2015;	
+	$.box.zIndex = 2015;
+	$.noty = function(msg, ck){
+		var opts = {
+			padding : 20,
+			content:msg,
+			close : ck
+		};
+		var box = $.box(opts);
+		box.find('.box').addClass('tip')
+		setTimeout(function(){
+			box.close();
+		}, 1000);
+    }	
 	$.tip = function(msg, delay){
 		var opts = {
 			padding : 20,
