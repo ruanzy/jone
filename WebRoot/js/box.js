@@ -129,7 +129,7 @@
 	$.noty = function(msg, ck){
 		var opts = {
 			padding : 20,
-			content:msg,
+			content: '<i class="ok"></i>' + msg,
 			close : ck
 		};
 		var box = $.box(opts);
