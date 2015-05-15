@@ -782,12 +782,15 @@ button.css
 	border: 1px solid transparent;
 	outline: none;
 	cursor: pointer;
-	padding: 0 10px;
+	padding: 5px 10px;
 	white-space: nowrap;
 	position: relative;
 	display: inline-block;
-	margin: 0 5px 0 0;
-	font: 14px/2 "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+	margin-bottom: 0;
+	line-height: 1.42857143;
+	vertical-align: middle;
+	font-size: 14px;
+	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
 }
 
 .btn-link {
@@ -846,6 +849,12 @@ button.css
 .btn-sm {
 	font-size: 12px;
 	padding: 3px 8px;
+	line-height: 1.39;
+}
+
+.btn-xs {
+	font-size: 12px;
+	padding: 1px 8px;
 	line-height: 1.39;
 }
 
@@ -1176,7 +1185,7 @@ dl.select dd a.selected {
 }
 
 .search-pane {
-  margin-bottom: 5px;
+  margin-bottom: 0;
   background: #fff;
   border: 1px solid #ccc;
   display: inline-block;
