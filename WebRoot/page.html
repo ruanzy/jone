@@ -90,7 +90,29 @@ li {
 		}
 		return res.join('');
 	}
-	var p =2;
+	
+	function getData2(p){
+		var start = p*10 + 1;
+		var end = (p + 1)*10;
+		var data = {page:p,pagesize:3};
+		var res = [];
+		$.ajax({
+			url : 'user/list',
+			async :false,
+			type : 'post',
+			data : data,
+			dataType : 'json',
+			success : function(result) {
+				if (result.data) {
+					for(var k in result.data){
+						res.push('<li>' + result.data[k]['username'] + '</li>');
+					}
+				} 
+			}
+		});
+		return res;
+	}
+	var p=0;
 		$(function() {
 
 			var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)
@@ -100,8 +122,8 @@ li {
 				nScrollHight = $(this)[0].scrollHeight;
 				nScrollTop = $(this)[0].scrollTop;
 				if (nScrollTop + nDivHight >= nScrollHight){
-					if(p<10){
-						$("#c").append(getData(p++));
+					if(p<4){
+						$("#c").append(getData2(p++));
 					}
 				}
 					
