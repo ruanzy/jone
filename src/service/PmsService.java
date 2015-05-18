@@ -40,7 +40,7 @@ public class PmsService
 	@Transaction
 	public void deluser(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from userrole where userid in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
@@ -83,7 +83,7 @@ public class PmsService
 	public void activeuser(String ids)
 	{
 		StringBuffer sql = new StringBuffer("update users set state=1 where id in(");
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
 			sql.append("?");
@@ -99,7 +99,7 @@ public class PmsService
 	public void canceluser(String ids)
 	{
 		StringBuffer sql = new StringBuffer("update users set state=0 where id in(");
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
 			sql.append("?");
@@ -314,7 +314,7 @@ public class PmsService
 	public void deldic(String ids)
 	{
 		StringBuffer sql = new StringBuffer("delete from dic where id in(");
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
 			sql.append("?");

@@ -23,7 +23,7 @@ public class PaymentService {
 	@Transaction
 	public void payabledel(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from goods_category where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
@@ -87,7 +87,7 @@ public class PaymentService {
 	@Transaction
 	public void receivabledel(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from goods_category where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{

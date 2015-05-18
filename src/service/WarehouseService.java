@@ -39,7 +39,7 @@ public class WarehouseService
 	@Transaction
 	public void del(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from warehouse where userid in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{

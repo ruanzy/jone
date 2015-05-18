@@ -36,7 +36,7 @@ public class GoodsService
 	@Transaction
 	public void categorydel(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from goods_category where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
@@ -71,7 +71,7 @@ public class GoodsService
 	@Transaction
 	public void unitdel(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from goods_unit where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
@@ -133,7 +133,7 @@ public class GoodsService
 
 	public void del(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from goods where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{

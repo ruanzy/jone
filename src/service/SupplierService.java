@@ -44,7 +44,7 @@ public class SupplierService
 	@Transaction
 	public void del(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from supplier where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{

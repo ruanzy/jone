@@ -16,6 +16,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
@@ -119,7 +121,7 @@ public final class Dao
 		}
 	}
 
-	public int update(String sql)
+	public int update(String sql, Object... params)
 	{
 		int result = 0;
 		if (begintx.get())
@@ -128,53 +130,8 @@ public final class Dao
 			{
 				Connection conn = tl.get();
 				PreparedStatement ps = conn.prepareStatement(sql);
-				result = ps.executeUpdate();
-				showSQL(sql);
-			}
-			catch (SQLException e)
-			{
-				throw new DataAccessException(e.getMessage(), e);
-			}
-		}
-		else
-		{
-			Connection conn = null;
-			PreparedStatement ps = null;
-			try
-			{
-				conn = getConnection();
-				ps = conn.prepareStatement(sql);
-				result = ps.executeUpdate();
-			}
-			catch (SQLException e)
-			{
-				throw new DataAccessException(e.getMessage(), e);
-			}
-			finally
-			{
-				close(ps, conn);
-			}
-		}
-		return result;
-	}
-
-	public int update(String sql, Object[] params)
-	{
-		int result = 0;
-		if (begintx.get())
-		{
-			try
-			{
-				Connection conn = tl.get();
-				PreparedStatement ps = conn.prepareStatement(sql);
-				if (params != null)
-				{
-					for (int i = 0; i < params.length; i++)
-					{
-						ps.setObject(i + 1, params[i]);
-					}
-					showSQL(sql, params);
-				}
+				setParams(ps, params);
+				showSQL(sql, params);
 				result = ps.executeUpdate();
 			}
 			catch (SQLException e)
@@ -190,14 +147,8 @@ public final class Dao
 			{
 				conn = getConnection();
 				ps = conn.prepareStatement(sql);
-				if (params != null)
-				{
-					for (int i = 0; i < params.length; i++)
-					{
-						ps.setObject(i + 1, params[i]);
-					}
-					showSQL(sql, params);
-				}
+				setParams(ps, params);
+				showSQL(sql, params);
 				result = ps.executeUpdate();
 			}
 			catch (SQLException e)
@@ -262,35 +213,7 @@ public final class Dao
 		sl.remove();
 	}
 
-	public Object scalar(String sql)
-	{
-		Object res = null;
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try
-		{
-			showSQL(sql);
-			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			if (rs.next())
-			{
-				res = rs.getObject(1);
-			}
-		}
-		catch (SQLException e)
-		{
-			throw new DataAccessException(e.getMessage(), e);
-		}
-		finally
-		{
-			close(rs, ps, conn);
-		}
-		return res;
-	}
-
-	public Object scalar(String sql, Object[] params)
+	public Object scalar(String sql, Object... params)
 	{
 		Object res = null;
 		Connection conn = null;
@@ -300,14 +223,8 @@ public final class Dao
 		{
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			if (params != null)
-			{
-				for (int i = 0; i < params.length; i++)
-				{
-					ps.setObject(i + 1, params[i]);
-				}
-				showSQL(sql, params);
-			}
+			setParams(ps, params);
+			showSQL(sql, params);
 			rs = ps.executeQuery();
 			if (rs.next())
 			{
@@ -350,7 +267,7 @@ public final class Dao
 			close(rs, ps, conn);
 		}
 	}
-	
+
 	public void find(String sql, Object[] params, ResultHandler rh)
 	{
 		Connection conn = null;
@@ -383,7 +300,7 @@ public final class Dao
 			close(rs, ps, conn);
 		}
 	}
-	
+
 	public <T> List<T> find(String sql, RowHandler<T> rh)
 	{
 		Connection conn = null;
@@ -536,7 +453,7 @@ public final class Dao
 		return rows;
 	}
 
-	public List<Record> pager(String sql, Object[] params, int currPage, int pageSize)
+	public List<Record> pager(String sql, List<Object> params, int currPage, int pageSize)
 	{
 		List<Record> list = new ArrayList<Record>();
 		Connection conn = null;
@@ -547,13 +464,13 @@ public final class Dao
 			conn = getConnection();
 			DatabaseMetaData metaData = conn.getMetaData();
 			String databaseProductName = metaData.getDatabaseProductName();
-			sql = getPageSql(databaseProductName, sql, currPage, pageSize);
+			sql = getPageSql(databaseProductName, sql, params, currPage, pageSize);
 			ps = conn.prepareStatement(sql);
 			if (params != null)
 			{
-				for (int i = 0; i < params.length; i++)
+				for (int i = 0, len = params.size(); i < len; i++)
 				{
-					ps.setObject(i + 1, params[i]);
+					ps.setObject(i + 1, params.get(i));
 				}
 				showSQL(sql, params);
 			}
@@ -643,7 +560,7 @@ public final class Dao
 
 	private String getPageSql(String dialect, String sql, int currPage, int pageSize)
 	{
-		StringBuffer pageSql = new StringBuffer(0);
+		StringBuffer pageSql = new StringBuffer();
 		if ("oracle".equalsIgnoreCase(dialect))
 		{
 			pageSql.append("SELECT * FROM(SELECT FA.*, ROWNUM RN FROM (");
@@ -656,11 +573,31 @@ public final class Dao
 		}
 		return pageSql.toString();
 	}
+	
+	public String getPageSql(String dialect, String sql, List<Object> params, int pageSize, int pageNo)
+	{
+		StringBuffer pageSql = new StringBuffer(sql);
+		if ("oracle".equalsIgnoreCase(dialect))
+		{
+			String format = "SELECT * FROM(SELECT FA.*, ROWNUM RN FROM (%s) t FA WHERE ROWNUM <= ?) WHERE RN >= ?";
+			pageSql.replace(0, pageSql.length(), String.format(format, sql));
+			params.add(pageSize * pageNo);
+			params.add(pageSize * (pageNo - 1) + 1);
+		}
+		if ("mysql".equalsIgnoreCase(dialect))
+		{
+			pageSql.append(" limit ?, ?");
+			params.add(pageSize * (pageNo - 1));
+			params.add(pageSize);
+		}
+		return pageSql.toString();
+	}
 
 	private void showSQL(String sql, Object... params)
 	{
 		if (log.isDebugEnabled())
 		{
+			match(sql, params);
 			if (null != params)
 			{
 				StringBuffer returnSQL = new StringBuffer();
@@ -697,22 +634,23 @@ public final class Dao
 	{
 		try
 		{
-			if (params != null)
+			if (params == null)
 			{
-				// log.debug("set parameters");
-				for (int i = 0; i < params.length; i++)
+				return;
+			}
+			// log.debug("set parameters");
+			for (int i = 0; i < params.length; i++)
+			{
+				Object o = params[i];
+				if (o != null)
 				{
-					Object o = params[i];
-					if (o != null)
-					{
-						ps.setObject(i + 1, params[i]);
-					}
-					else
-					{
-						ps.setNull(i + 1, java.sql.Types.NULL);
-					}
-					// log.debug("{}:{}", i + 1, params[i]);
+					ps.setObject(i + 1, params[i]);
 				}
+				else
+				{
+					ps.setNull(i + 1, java.sql.Types.NULL);
+				}
+				// log.debug("{}:{}", i + 1, params[i]);
 			}
 		}
 		catch (SQLException e)
@@ -819,6 +757,17 @@ public final class Dao
 		{
 			throw new DataAccessException("Transaction rollback exception!");
 		}
+	}
+
+	private boolean match(String sql, Object[] params)
+	{
+		Matcher m = Pattern.compile("(\\?)").matcher(sql);
+		int count = 0;
+		while (m.find())
+		{
+			count++;
+		}
+		return count == params.length;
 	}
 
 	public void runScript(Reader reader)

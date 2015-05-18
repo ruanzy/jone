@@ -39,7 +39,7 @@ public class DepartService
 	
 	public void del(String ids)
 	{
-		String[] arr = ids.split(",");
+		Object[] arr = ids.split(",");
 		StringBuffer sql1 = new StringBuffer("delete from depart where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{
