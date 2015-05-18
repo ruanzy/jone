@@ -574,20 +574,20 @@ public final class Dao
 		return pageSql.toString();
 	}
 	
-	public String getPageSql(String dialect, String sql, List<Object> params, int pageSize, int pageNo)
+	public String getPageSql(String dialect, String sql, List<Object> params, int page, int pageSize)
 	{
 		StringBuffer pageSql = new StringBuffer(sql);
 		if ("oracle".equalsIgnoreCase(dialect))
 		{
 			String format = "SELECT * FROM(SELECT FA.*, ROWNUM RN FROM (%s) t FA WHERE ROWNUM <= ?) WHERE RN >= ?";
 			pageSql.replace(0, pageSql.length(), String.format(format, sql));
-			params.add(pageSize * pageNo);
-			params.add(pageSize * (pageNo - 1) + 1);
+			params.add(pageSize * page);
+			params.add(pageSize * (page - 1) + 1);
 		}
 		if ("mysql".equalsIgnoreCase(dialect))
 		{
 			pageSql.append(" limit ?, ?");
-			params.add(pageSize * (pageNo - 1));
+			params.add(pageSize * (page - 1));
 			params.add(pageSize);
 		}
 		return pageSql.toString();
