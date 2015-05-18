@@ -100,15 +100,18 @@
 		width : 'auto',
 		url : 'theme.html'
 	});
-	$('#toggle').toggle(function(e) {
-		$('#sidebar').hide();
-		$('#content').css('margin-left', 0);
-		$('#pill').css('left', 0);
-	}, function(e) {
-		$('#sidebar').show();
-		var sw = $('#sidebar').outerWidth();
-		$('#content').css('margin-left', sw);
-		$('#pill').css('left', sw);
+	$('#toggle').click(function(){
+	    var sb = $('#sidebar');
+	    if(sb.is(":visible")){
+			$('#sidebar').hide();
+			$('#content').css('margin-left', 0);
+			$('#pill').css('left', 0);
+	    }else{
+			$('#sidebar').show();
+			var sw = $('#sidebar').outerWidth();
+			$('#content').css('margin-left', sw);
+			$('#pill').css('left', sw);
+	    }
 	});
 	$('#lang').click(function(){
 		var lang = 'zh';
