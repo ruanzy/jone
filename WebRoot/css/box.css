@@ -77,6 +77,10 @@ div.loadmask-msg {
 	text-align: center;
 }
 
+.box .btns button{
+	margin: 15px;
+}
+
 .box .button:last-child {
 	margin-right: 0;
 }
