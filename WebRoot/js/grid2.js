@@ -92,7 +92,7 @@
 				html.push(header2(settings));
 				html.push("</div>");
 				html.push("<div class='grid-bd'>");
-				html.push("<table class='table'>");
+				html.push("<table class='table1'>");
 				//html.push(header(settings));
 				html.push("<tbody>");
 				html.push(body(rows, settings));
@@ -984,7 +984,7 @@
 	}
 	function header2(opts){
 		var code = new Array();
-		code.push("<table class='table' style='border:none;'>");
+		code.push("<table class='table1' style='border:none;'>");
 		code.push("<thead><tr>");
 		if(opts.multiselect){
 			code.push("<th align=center width=20 class='checkbox checkall'><i class='icon-check-empty'></i></th>");

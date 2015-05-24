@@ -17,7 +17,7 @@ $(function() {
 	});
 	//$('#header').load('ftl/header.html', function(){
 
-		$('ul.nav').delegate('li', 'click', function(){
+		/**$('ul.nav').delegate('li', 'click', function(){
 			$(this).siblings().removeClass('selected');
 			$(this).addClass('selected');
 			var mid = $(this).attr('id').substring(1);
@@ -35,7 +35,7 @@ $(function() {
 				$('#sidebar dd:first a').click();
 			});
 		});
-		$('ul.nav li:first').click();
+		$('ul.nav li:first').click();**/
 	//});
 	//$('#sidebar').load('common/sidebar', function(){
 	//});

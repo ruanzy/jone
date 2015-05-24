@@ -1,10 +1,5 @@
 body {
 	background: url(body-bg.jpg) top repeat-x;
-	font-size: 13px;
-	padding: 0px;
-	margin: 0px;
-	font-family: "Microsoft Yahei", "微软雅黑", "宋体", "Simsun", "Open Sans";
-	color: #666;
 }
 
 h3 {
@@ -14,7 +9,7 @@ h3 {
 
 .loginwrap {
 	width: 400px;
-	margin: 130px auto;
+	margin: 100px auto;
 	background: #fff;
 	border:0px solid #f8f8f8;
 	box-shadow: 0 0 40px rgba(0, 0, 0, .5);
@@ -35,20 +30,6 @@ h3 {
 	width: 130px;
 	height: 36px;
 	position: relative;
-}
-
-.loginsubmit a {
-	display: block;
-	width: 130px;
-	height: 36px;
-	line-height: 36px; 
-	background: #70CA10;
-	background: #3875d7;
-	text-align: center;
-	border-color: transparent;
-	cursor: pointer;
-	font-size: 15px;
-	color: #fff;
 }
 
 .loginsubmiting {
@@ -72,12 +53,6 @@ h3 {
 	display: none;
 }
 
-.form-item {
-	position: relative;
-	margin: 0px;
-	margin-bottom: 15px;
-}
-
 .loginlabel {
 	color: #ccc;
 	display: block !important;
@@ -91,30 +66,18 @@ h3 {
 	left: 8px;
 }
 
-.logininput {
-	width: 100%;
-	text-indent: 28px;
-	overflow: hidden;
-	color: #666;
-	padding: 10px 0;
-	outline: none;
-	border: 1px solid #dedede;
-	font-size: 14px;
-	height: 14px;
-  	line-height: 14px;
+.input-icon {
+	position: relative;
+	margin: 0px;
+	margin-bottom: 15px;
 }
 
-.logininput-focus {
-	border: 1px solid #3875d7;
-}
-
-.loginlabel-focus {
-	color: #3875d7;
+.left input{
+	text-indent: 20px;
 }
 
 #vcinput {
 	width: 80px;
-	text-indent: 8px;
 }
 
 #VerifyImage{

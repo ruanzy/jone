@@ -3,10 +3,13 @@
 <head>
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link type="text/css" rel="stylesheet"
 	href="awesome/css/font-awesome.css" />
+<link type="text/css" rel="stylesheet" href="mb/css/metro-bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="css/login.css" />
-<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="mb/scripts/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
 		/**document.oncontextmenu = function() {
@@ -18,10 +21,10 @@
 			}
 		});
 		var loginfrm = $('#loginfrm');
-		loginfrm.find('input').focus(function(){
+		loginfrm.find('input').focus(function() {
 			$(this).addClass('logininput-focus');
 			$(this).siblings('i').addClass('loginlabel-focus');
-		}).blur(function(){
+		}).blur(function() {
 			$(this).removeClass('logininput-focus');
 			$(this).siblings('i').removeClass('loginlabel-focus');
 		});
@@ -30,17 +33,17 @@
 			var ps = $("#password", loginfrm);
 			var vc = $("#vcinput", loginfrm);
 			var go = $("#go", loginfrm);
-			if(!un.val()){
+			if (!un.val()) {
 				un.addClass('logininput-focus');
 				$('#error').html('请输入用户名!');
 				return;
 			}
-			if(!ps.val()){
+			if (!ps.val()) {
 				ps.addClass('logininput-focus');
 				$('#error').html('请输入密码!');
 				return;
 			}
-			if(!vc.val()){
+			if (!vc.val()) {
 				vc.addClass('logininput-focus');
 				$('#error').html('请输入验证码!');
 				return;
@@ -52,6 +55,7 @@
 				go : go.val()
 			};
 			var submiting = $('.loginsubmiting').show();
+			var $submit = $(this).button('loading');
 			$.ajax({
 				url : 'login',
 				type : 'post',
@@ -63,12 +67,12 @@
 						//document.location = result.msg;
 					} else {
 						$('#error').html(result.msg);
-						submiting.hide();
+						$submit.button('reset');
 					}
 				},
 				error : function(response, b, c) {
 					$('#error').html(response.responseText);
-					submiting.hide();
+					$submit.button('reset');
 				}
 			});
 		});
@@ -79,28 +83,28 @@
 	<div class="loginwrap">
 		<h3 id='logo'></h3>
 		<form id='loginfrm'>
-			<p class="form-item">
-				<i class='loginlabel icon-user'></i> <input type="text" id="username"
-					name='name' type="text" placeholder="用户名" value="test"
-					autocomplete="off" class='logininput'/>
-			</p>
-			<p class="form-item">
-				<i class='loginlabel icon-lock'></i> <input type="password" id="password"
-					name='password' type="password" placeholder="密码" value="111111" class='logininput'/>
-			</p>
-			<p class="form-item">
-				<span class="loginsubmit fr">
-					<a id="submit">登&nbsp;录 </a>
-					<span class="loginsubmiting">登录中...</span>
-				</span>
-				<span class="fl">
-					<input id="vcinput" name='vc' type="text" placeholder="验证码" class='logininput'/> <img
-						src="captcha" id="VerifyImage" title="看不清？点击换一个"
-						onclick="javascript:document.getElementById('VerifyImage').src='captcha?_r=' + new Date().getTime();return false;" />
-				</span>
-				<div class="clear"></div>
-			</p>
-			<div id="error"></div>
+			<div class="input-icon left">
+				<i class='loginlabel icon-user'></i> <input type="text"
+					id="username" name='name' type="text" placeholder="用户名"
+					value="test" autocomplete="off" class='form-control' />
+			</div>
+			<div class="input-icon left">
+				<i class='loginlabel icon-lock'></i> <input type="password"
+					id="password" name='password' type="password" placeholder="密码"
+					value="111111" class='form-control' />
+			</div>
+			<div>
+				<div style='display:inline-block;'>
+					<input id="vcinput" name='vc' type="text" placeholder="验证码"
+						class='form-control' />
+				</div>
+				<a id="submit" class='btn btn-primary pull-right'
+					data-loading-text="登录中...">登&nbsp;录 <i
+					class='icon-circle-arrow-right'></i></a>
+				<img src="captcha" id="VerifyImage" title="看不清？点击换一个"
+					onclick="javascript:document.getElementById('VerifyImage').src='captcha?_r=' + new Date().getTime();return false;" />
+			</div>
+			<span id="error"></span>
 		</form>
 	</div>
 </body>

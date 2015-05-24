@@ -1,13 +1,8 @@
-<div class="well" style='width:45%;height:auto;'>
-	<div class="well-header well-header-success">
-		<span class='well-header-title'> <i class="icon-desktop"></i>
-			服务器信息
-		</span>
-		<div class='well-header-buttons'>
-			<i class='icon-plus'></i>
-		</div>
+<div class="panel panel-primary" style='width:45%;height:auto;'>
+	<div class="panel-heading">
+		<h3 class="panel-title">服务器信息</h3>
 	</div>
-	<div class="well-body">
+	<div class="panel-body">
 		<p>
 服务器IP: ${ip}
 </p>
@@ -31,7 +26,11 @@ JAVA版本: ${version}
 <span>CPU使用情况:</span><div class='progress'><div class='progress-bar' id='pb1'></div></div>
 </p>-->
 <p>		
-<span>内存使用情况:</span><div class='progress'><div class='progress-bar' id='pb2'></div></div>
+<span>内存使用情况:</span>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" id='pb3'>
+  </div>
+</div>
 <div style='font-size:10px;'><span id='used' style='color:red;'></span>/<span id='total'></span></div>
 </p>
 	</div>
@@ -71,7 +70,7 @@ JAVA版本: ${version}
 				var pv1 = '0.00%';
 				var pv2 = ((use/total)*100).toFixed(2) + '%';
 				$('#pb1').width(pv1).html(pv1);
-				$('#pb2').width(pv2).html(pv2);
+				$('#pb3').width(pv2).html(pv2);
 				$('#totalThread').text(totalThread);
 				$('#used').html(use + 'M');
 				$('#total').html(total + 'M');

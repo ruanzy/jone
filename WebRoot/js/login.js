@@ -1,33 +1,50 @@
 $(function() {
-	$.i18n.properties({
-		name : 'message',
-		path : 'i18n/',
-		mode : 'map',
-		callback : function() {
-			$('[id^=i18n]').each(function() {
-				var key = $(this).attr('id').substr(5);
-				$(this).html($.i18n.prop(key));
-			});
-		}
-	});
-	document.oncontextmenu = function() {
-		return false;
-	};
+	/***************************************************************************
+	 * document.oncontextmenu = function() { return false; };
+	 **************************************************************************/
 	$(document).keydown(function(e) {
 		if (e.keyCode == 13) {
 			$('#submit').click();
 		}
 	});
 	var loginfrm = $('#loginfrm');
+	loginfrm.find('input').focus(function() {
+		$(this).addClass('logininput-focus');
+		$(this).siblings('i').addClass('loginlabel-focus');
+	}).blur(function() {
+		$(this).removeClass('logininput-focus');
+		$(this).siblings('i').removeClass('loginlabel-focus');
+	});
 	$('#submit', loginfrm).click(function() {
-		var un = $("#username", loginfrm).val();
-		var ps = $("#password", loginfrm).val();
-		var vc = $("#vcinput", loginfrm).val();
+		var un = $("#username", loginfrm);
+		var ps = $("#password", loginfrm);
+		var vc = $("#vcinput", loginfrm);
+		var go = $("#go", loginfrm);
+		if (!un.val()) {
+			un.addClass('logininput-focus');
+			$('#error').html('请输入用户名!');
+			return;
+		}
+		if (!ps.val()) {
+			ps.addClass('logininput-focus');
+			$('#error').html('请输入密码!');
+			return;
+		}
+		if (!vc.val()) {
+			vc.addClass('logininput-focus');
+			$('#error').html('请输入验证码!');
+			return;
+		}
+		debugger;
 		var data = {
-			username : un,
-			password : ps,
-			vc : vc
+			username : un.val(),
+			password : ps.val(),
+			vc : vc.val(),
+			go : go.val()
 		};
+		var submiting = $('.loginsubmiting').show();
+		debugger;
+		$(this).button('loading');
 		$.ajax({
 			url : 'login',
 			type : 'post',
@@ -35,10 +52,17 @@ $(function() {
 			dataType : 'json',
 			success : function(result) {
 				if (result.result) {
-					document.location = 'index.jsp';
+					$(this).button('reset');
+					document.location = './';
+					// document.location = result.msg;
 				} else {
 					$('#error').html(result.msg);
+					submiting.hide();
 				}
+			},
+			error : function(response, b, c) {
+				$('#error').html(response.responseText);
+				submiting.hide();
 			}
 		});
 	});

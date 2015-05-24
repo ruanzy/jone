@@ -1,30 +1,29 @@
-<div id='logo'></div>
-<span id='toggle'><i class="icon-th"></i></span>
-<ul class='info'>
-	<li>
-		<dl id='asd' class='rzy-sidedown'>
-			<dt>
-				<i class="icon-user"></i> 欢迎您,${Session.RZY_USER} <i
-					class="icon-angle-down"></i>
-			</dt>
-			<dd></dd>
-		</dl>
-	</li>
-	<li id='lang'>English</li>
-	<li><a><i class="icon-envelope"></i> 信息</a> <span
-		class='badge label-warning'>5</span></li>
-	<li>
-		<dl id='theme' class='rzy-sidedown'>
-			<dt>
-				更换样式 <i class="icon-angle-down"></i>
-			</dt>
-			<dd></dd>
-		</dl>
-	</li>
-</ul>
+<nav class="navbar navbar-default navbar-static-top" style='margin-bottom:0;'>
+	<div style='margin-right:100px'>
+		<ul class="nav navbar-nav">
+			<li class="navbar-brand logo" style='width:200px;'></li>
+			<li class="divider-vertical"></li>
+			<li class=""><a><i class="icon-th"></i></a></li>
+		</ul>
+		<ul class="nav navbar-nav pull-right">
+			<li><a href="#"><i class="icon-envelope"></i> 信息  <span
+					class='badge'>5</span></a></li>
+			<li class="divider-vertical"></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown"><i class="icon-user"></i>
+					欢迎您,${Session.RZY_USER} <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li id='set'><a>设置</a></li>
+					<li id='info'><a>用户信息</a></li>
+					<li class="divider"></li>
+					<li id='logout'><a>退出</a></li>
+				</ul></li>
+		</ul>
+	</div>
+</nav>
 <script type="text/javascript">
 	var lang = 'zh';
-	if($.cookie('lang')){
+	if ($.cookie('lang')) {
 		lang = $.cookie('lang');
 	}
 	var txt = (lang == "zh" ? "English" : "中文");
@@ -90,9 +89,15 @@
 			}
 		});
 	}
-	function logout() {
+	$('#set').click(function() {
+		set();
+	});
+	$('#info').click(function() {
+		info();
+	});
+	$('#logout').click(function() {
 		document.location = 'logout';
-	}
+	});
 	$('#asd').SideDown({
 		items : items
 	});
@@ -100,28 +105,31 @@
 		width : 'auto',
 		url : 'theme.html'
 	});
-	$('#toggle').click(function(){
-	    var sb = $('#sidebar');
-	    if(sb.is(":visible")){
+	$('#toggle').click(function() {
+		var sb = $('#sidebar');
+		if (sb.is(":visible")) {
 			$('#sidebar').hide();
 			$('#content').css('margin-left', 0);
 			$('#pill').css('left', 0);
-	    }else{
+		} else {
 			$('#sidebar').show();
 			var sw = $('#sidebar').outerWidth();
 			$('#content').css('margin-left', sw);
 			$('#pill').css('left', sw);
-	    }
+		}
 	});
-	$('#lang').click(function(){
+	$('#lang').click(function() {
 		var lang = 'zh';
-		if($.cookie('lang')){
+		if ($.cookie('lang')) {
 			lang = $.cookie('lang');
 		}
 		var txt = (lang == "zh" ? "中文" : "English");
 		lang = (lang == "zh" ? "en" : "zh");
 		$(this).html(txt);
-		$.cookie('lang', lang, { path: '/', expires: 10 });
+		$.cookie('lang', lang, {
+			path : '/',
+			expires : 10
+		});
 		document.location = '';
 	});
 </script>
