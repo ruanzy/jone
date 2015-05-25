@@ -1,135 +1,22 @@
-<nav class="navbar navbar-default navbar-static-top" style='margin-bottom:0;'>
+<nav class="navbar navbar-default" style='margin-bottom:0;'>
 	<div style='margin-right:100px'>
-		<ul class="nav navbar-nav">
-			<li class="navbar-brand logo" style='width:200px;'></li>
-			<li class="divider-vertical"></li>
-			<li class=""><a><i class="icon-th"></i></a></li>
-		</ul>
+		<li class="navbar-brand" style='width:200px;background: url(css/logo_rz.png) no-repeat center;'></li>
 		<ul class="nav navbar-nav pull-right">
-			<li><a href="#"><i class="icon-envelope"></i> 信息  <span
-					class='badge'>5</span></a></li>
-			<li class="divider-vertical"></li>
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown"><i class="icon-user"></i>
-					欢迎您,${Session.RZY_USER} <b class="caret"></b></a>
+				data-toggle="dropdown"><i class="icon-user"></i> 欢迎您,
+					${Session.RZY_USER} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li id='set'><a>设置</a></li>
-					<li id='info'><a>用户信息</a></li>
+					<li id='set'><a href='javascript:;'><i class="icon-cog"></i>
+							设置</a></li>
+					<li id='info'><a href='javascript:;'><i class="icon-user"></i>
+							用户信息</a></li>
 					<li class="divider"></li>
-					<li id='logout'><a>退出</a></li>
+					<li id='logout'><a href='javascript:;'><i class="icon-off"></i>
+							退出</a></li>
 				</ul></li>
+			<li><a href="#"><i class="icon-envelope"></i> 信息 <span
+					class='badge badge-warning'>5</span></a></li>
 		</ul>
 	</div>
 </nav>
-<script type="text/javascript">
-	var lang = 'zh';
-	if ($.cookie('lang')) {
-		lang = $.cookie('lang');
-	}
-	var txt = (lang == "zh" ? "English" : "中文");
-	$('#lang').html(txt);
-	var items = [ {
-		icon : 'icon-cog',
-		text : '设置',
-		action : set
-	}, {
-		icon : 'icon-user',
-		text : '个人资料',
-		action : info
-	}, '-', {
-		icon : 'icon-off',
-		text : '退出',
-		action : logout
-	} ];
-	function set() {
-		var dialog = $.dialog({
-			title : '设置',
-			url : 'view/user/set.html',
-			buttons : [ {
-				text : 'OK',
-				cls : 'btn-primary',
-				action : function(d) {
-
-				}
-			}, {
-				text : 'Close',
-				cls : 'btn-default',
-				action : function(d) {
-					dialog.close();
-				}
-
-			} ],
-			onShow : function() {
-
-			}
-		});
-	}
-	function info() {
-		var dialog = $.dialog({
-			//title:'个人资料',
-			width : 350,
-			//url:'view/income/list.html'
-			url : 'ftl/userinfo.html',
-			buttons : [ {
-				text : 'OK',
-				cls : 'btn-primary',
-				action : function(d) {
-
-				}
-			}, {
-				text : 'Close',
-				cls : 'btn-default',
-				action : function(d) {
-					dialog.close();
-				}
-
-			} ],
-			onShow : function() {
-				$('#sex').MultiRadio();
-			}
-		});
-	}
-	$('#set').click(function() {
-		set();
-	});
-	$('#info').click(function() {
-		info();
-	});
-	$('#logout').click(function() {
-		document.location = 'logout';
-	});
-	$('#asd').SideDown({
-		items : items
-	});
-	$('#theme').SideDown({
-		width : 'auto',
-		url : 'theme.html'
-	});
-	$('#toggle').click(function() {
-		var sb = $('#sidebar');
-		if (sb.is(":visible")) {
-			$('#sidebar').hide();
-			$('#content').css('margin-left', 0);
-			$('#pill').css('left', 0);
-		} else {
-			$('#sidebar').show();
-			var sw = $('#sidebar').outerWidth();
-			$('#content').css('margin-left', sw);
-			$('#pill').css('left', sw);
-		}
-	});
-	$('#lang').click(function() {
-		var lang = 'zh';
-		if ($.cookie('lang')) {
-			lang = $.cookie('lang');
-		}
-		var txt = (lang == "zh" ? "中文" : "English");
-		lang = (lang == "zh" ? "en" : "zh");
-		$(this).html(txt);
-		$.cookie('lang', lang, {
-			path : '/',
-			expires : 10
-		});
-		document.location = '';
-	});
-</script>
+<script type="text/javascript" src='js/head.js'></script>

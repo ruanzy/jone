@@ -4504,6 +4504,21 @@ a.label:focus {
   background-color: #777777;
   border-radius: 0px;
 }
+.badge-primary {
+  background-color: #428bca;
+}
+.badge-success {
+  background-color: #2ecc71;
+}
+.badge-info {
+  background-color: #3498db;
+}
+.badge-warning {
+  background-color: #f1c40f;
+}
+.badge-danger {
+  background-color: #e74c3c;
+}
 .badge:empty {
   display: none;
 }
@@ -6560,4 +6575,3 @@ a.fa-links:focus {
     display: none;
   }
 }
-/*# sourceMappingURL=metro-bootstrap.css.map */
