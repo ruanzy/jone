@@ -11,12 +11,18 @@
 	</div>
 	<div class='item'>
 		<p class='item_key'>昵称:</p>
-		<p class='item_value'><input type='text' name='nickname' value='${user}'/></p>
+		<p class='item_value'>
+			<input type='text' name='nickname' value='${user}' />
+		</p>
 	</div>
 	<div class='item'>
-		<p class='item_key'>性别:</p>
-		<p class='item_value multi-radio' id='sex'>
-			<a href='javascript:;' class='active' v='1'>男</a><a href='javascript:;' v='2'>女</a><a href='jaascript:;' v='3'>保密</a>
-		</p>
+		<label class="control radio"> 
+			<input type="radio" name="sex" value='1' checked="checked">
+			<span class="radio-label"> 男</span>
+		</label>
+		<label class="control radio"> 
+			<input type="radio" name="sex" value='2'>
+			<span class="radio-label"> 女</span>
+		</label>
 	</div>
 </div>

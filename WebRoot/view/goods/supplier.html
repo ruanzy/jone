@@ -1,60 +1,61 @@
-<div style='position: relative;margin-bottom:5px;'>
-	<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
-	<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
-	<!-- 
-<a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
- -->
- 	<div style="position: absolute;bottom : 0; right:10px;">
-		<form id='search-form' class='search-box'>
-			<table>
-				<tr>
-					<td><input type="text" id='searchtxt' name="name"
-						autocomplete="off" placeholder="请输入供应商名" /></td>
-					<td><button type="button" class="btn btn-primary">查询</button></td>
-				</tr>
-			</table>
-		</form>
+<p>
+<div class="row">
+	<div class="col-lg-8"><button id='appendbtn' class='btn btn-primary'>
+		<i class="icon-plus"></i> 增加
+	</button>
+	<button id='updatedbtn' class='btn btn-primary'>
+		<i class="icon-save"></i> 保存
+	</button></div>
+	<div class="col-lg-4">
+		<div class="input-group pull-right"><input type="text" class="form-control" id='searchtxt' placeholder="请输入供应商名"> <span
+		class="input-group-btn">
+		<button class="btn btn-primary" type="button" id='searchbtn'>查询</button>
+	</span>
+	</div>
 	</div>
 </div>
+</p>
 <div id='kkk'></div>
-
 <script type="text/javascript">
 	$('#kkk').table({
-		columns : [
-			{header:"ID",field:"id",width:50,align:'center'},
-			{
-				header : "供应商名称",
-				field : "name",
-				align : 'left',
-				tip : true,
-				editor : {
-					type : 'text'
-				}
-			},
-			{
-				header : "联系电话",
-				field : "phone",
-				align : 'left',
-				tip : true,
-				editor : {
-					type : 'text'
-				}
+		columns : [ {
+			header : "ID",
+			field : "id",
+			width : 50,
+			align : 'center'
+		}, {
+			header : "供应商名称",
+			field : "name",
+			align : 'left',
+			tip : true,
+			editor : {
+				type : 'text'
 			}
-		],
+		}, {
+			header : "联系电话",
+			field : "phone",
+			align : 'left',
+			tip : true,
+			editor : {
+				type : 'text'
+			}
+		} ],
 		condition : condition,
 		url : 'supplier/pager'
 	});
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);
-	$('#updatedbtn').click(function(){
+	$('#updatedbtn').click(function() {
 		$('#kkk').table('endEdit');
 		var mm = $('#kkk').table('getChanged');
 		var text = JSON.stringify(mm);
 		$.ajax({
 			url : 'supplier/changed',
 			type : 'post',
-			data : {changed: text},
-			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			data : {
+				changed : text
+			},
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
 			dataType : 'json',
 			success : function(result) {
 				if (result.result) {
@@ -65,8 +66,10 @@
 			}
 		});
 	});
-	$('#appendbtn').click(function(){
-		$('#kkk').table('addRow', 0, {name:'供应商'});
+	$('#appendbtn').click(function() {
+		$('#kkk').table('addRow', 0, {
+			name : '供应商'
+		});
 	});
 	function add() {
 		$.dialog({
@@ -234,12 +237,12 @@
 		});
 	}
 
-	$('#search-form button').click(function() {
+	$('#searchbtn').click(function() {
 		$('#kkk').table('reload');
 	});
 
 	function condition() {
-		var name = $('input[name=name]').val();
+		var name = $('#searchtxt').val();
 		var params = {
 			name : name
 		};
@@ -257,7 +260,7 @@
 			return "<label class='label label-warning'>离职</label>";
 		}
 	}
-	
+
 	function genderRender(s) {
 		if (s == 1) {
 			return "<label class='label label-success'>男</label>";
@@ -265,11 +268,11 @@
 			return "<label class='label label-danger'>女</label>";
 		}
 	}
-	
+
 	function departRender(v, r) {
 		var depart;
-		$.each(departs, function(){
-			if(this['id'] == v){
+		$.each(departs, function() {
+			if (this['id'] == v) {
 				depart = this['name'];
 				return false;
 			}
@@ -281,7 +284,8 @@
 		var h = [];
 		h.push("<a class='btn btn-danger btn-sm' onclick=del2('" + r.id
 				+ "') title='删除'><i class='icon-trash'></i></a>");
-		h.push("<a class='btn btn-primary btn-sm' onclick=assignrole('" + r.username
+		h.push("<a class='btn btn-primary btn-sm' onclick=assignrole('"
+				+ r.username
 				+ "') title='分配角色'><i class='icon-pencil'></i></a>");
 		return h.join('');
 	}
