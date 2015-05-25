@@ -6575,3 +6575,7 @@ a.fa-links:focus {
     display: none;
   }
 }
+
+.sidebar .panel + .panel {
+	margin-top: 0;
+}
