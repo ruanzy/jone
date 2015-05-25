@@ -83,26 +83,30 @@
 	<div class="loginwrap">
 		<h3 id='logo'></h3>
 		<form id='loginfrm'>
-			<div class="input-icon left">
+			<div class="form-group input-icon-left">
 				<i class='loginlabel icon-user'></i> <input type="text"
 					id="username" name='name' type="text" placeholder="用户名"
 					value="test" autocomplete="off" class='form-control' />
 			</div>
-			<div class="input-icon left">
+			<div class="form-group input-icon-left">
 				<i class='loginlabel icon-lock'></i> <input type="password"
 					id="password" name='password' type="password" placeholder="密码"
 					value="111111" class='form-control' />
 			</div>
-			<div>
-				<div style='display:inline-block;'>
-					<input id="vcinput" name='vc' type="text" placeholder="验证码"
+			<div class="row">
+				<div class="form-group col-md-4">
+					<input id="vcinput2" name='vc' type="text" placeholder="验证码"
 						class='form-control' />
 				</div>
-				<a id="submit" class='btn btn-primary pull-right'
-					data-loading-text="登录中...">登&nbsp;录 <i
-					class='icon-circle-arrow-right'></i></a>
-				<img src="captcha" id="VerifyImage" title="看不清？点击换一个"
-					onclick="javascript:document.getElementById('VerifyImage').src='captcha?_r=' + new Date().getTime();return false;" />
+				<div class="form-group col-md-3">
+					<img src="captcha" id="VerifyImage" title="看不清？点击换一个"
+						onclick="javascript:document.getElementById('VerifyImage').src='captcha?_r=' + new Date().getTime();return false;" />
+				</div>
+				<div class="form-group col-md-5">
+					<a id="submit" class='btn btn-primary pull-right'
+						data-loading-text="登录中...">登&nbsp;录 <i
+						class='icon-circle-arrow-right'></i></a>
+				</div>
 			</div>
 			<span id="error"></span>
 		</form>

@@ -2,11 +2,6 @@ body {
 	background: url(body-bg.jpg) top repeat-x;
 }
 
-h3 {
-	display: block;
-	font-size: 1.4em;
-}
-
 .loginwrap {
 	width: 400px;
 	margin: 100px auto;
@@ -18,42 +13,18 @@ h3 {
 #logo {
 	margin: 0px;
 	height: 75px; 
-	background: #3875d7 url(logo_rz.png) no-repeat center;
+	background: #428bca url(logo_rz.png) no-repeat center;
 }
 
 #loginfrm {
 	padding: 30px;
 }
 
-.loginsubmit {
-	display: block;
-	width: 130px;
-	height: 36px;
+.input-icon-left {
 	position: relative;
 }
 
-.loginsubmiting {
-	display: block;
-	width: 130px;
-	height: 36px;
-	line-height: 36px; 
-	text-align: center;
-	background: #70CA10;
-	background: #3875d7;
-	color: #fff;
-	cursor:not-allowed; 
-	border-color: transparent;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	opacity: 1;
-	filter: alpha(opacity = 80);
-	display: none;
-}
-
-.loginlabel {
+.input-icon-left i{
 	color: #ccc;
 	display: block !important;
 	position: absolute !important;
@@ -66,18 +37,8 @@ h3 {
 	left: 8px;
 }
 
-.input-icon {
-	position: relative;
-	margin: 0px;
-	margin-bottom: 15px;
-}
-
-.left input{
+.input-icon-left input{
 	text-indent: 20px;
-}
-
-#vcinput {
-	width: 80px;
 }
 
 #VerifyImage{
@@ -85,25 +46,6 @@ h3 {
 	vertical-align:top;
 }
 
-.fl {
-	float: left;
-}
-
-.fr {
-	float: right;
-}
-
-.clear:after {
-	display: block;
-	content: '.';
-	clear: both;
-	visibility: hidden;
-}
-
 #error {
 	color: red;
-}
-
-button.disabled {
-	background: #ccc;
 }
