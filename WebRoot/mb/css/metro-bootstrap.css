@@ -6578,4 +6578,9 @@ a.fa-links:focus {
 
 .sidebar .panel + .panel {
 	margin-top: 0;
+	border-bottom:0;
+}
+
+.sidebar .panel {
+	border-bottom:0;
 }

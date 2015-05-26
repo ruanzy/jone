@@ -31,11 +31,13 @@ form,button {
 
 #sidebar {
 	width: 200px;
-	border-right: 1px solid #ccc;
+	border-right: 0px solid #ccc;
 	position: fixed;
 	top: 52px;
 	bottom: 0;
 	white-space: nowrap;
+	background: #fff;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
 }
 
 #content {
@@ -46,12 +48,14 @@ form,button {
 	bottom: 0;
 	overflow: hidden;
 	margin-left: 200px;
+	background: #fff;
 }
 
 #pill {
 	height: 40px;
 	border-bottom: 1px solid #E1E1E1;
 	box-shadow: 1px 0 3px #EEE, inset 0 0 3px white;
+	  box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
 	color: #D84C31;
 	white-space: nowrap;
 	font-size: 16px;
@@ -60,6 +64,7 @@ form,button {
 	padding-left: 20px;
 	overflow: hidden;
 	background-color: #fafafa;
+	background: #f3f3f3;
 	z-index: 1005;
 }
 
@@ -588,20 +593,29 @@ grid.css
 	border-spacing: 0;
 	border: 1px dotted #ddd;
 	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+	background: #fff;
+}
+
+.table1 thead tr {
+	box-shadow: 0 0 3px rgba(0,0,0,.2);
+	  border-bottom: 1px solid #e5e5e5;
+  background-color: #fbfbfb;
 }
 
 .table1 thead tr th {
 	padding: 0 5px;
-	border: 1px solid #ddd;
-	border-top: 0px solid #ddd;
+	border-left: 0;
+	border-right: 1px solid #ddd;
 	height: 35px;
 	line-height: 35px;
 	color: #333;
 	font-size: 14px;
 	text-shadow: 1px 2px 1px #FFFFFF;
 	background: #fcfcfc;
-	background-image: linear-gradient(to bottom,#fff 0,#eee 100%);
 	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+	background: #fff;
+	  border-bottom: 1px solid #e5e5e5;
+  background-color: #fbfbfb;
 }
 
 .table1 tbody tr td {
