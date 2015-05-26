@@ -1,39 +1,48 @@
-<div class="panel-group sidebar" id="accordion1">
-	<div class="panel-heading">
-		<strong>系统菜单</strong>
-	</div>
-	<#list res as r> <#if r.type=='1'>
-	<div class="panel panel-default">
-		<div class="panel-heading" data-toggle="collapse"
-			data-parent="#accordion1" href="#collapse${r_index}">
-			<a class="accordion-toggle" href='javascript:;'><i
-				class="${r.iconcls}"></i> ${r.name}</a>
-		</div>
-		<div id="collapse${r_index}" class="panel-collapse collapse"
-			style="height: 0px;">
-			<div class="panel-body">
-				<ul class="nav nav-pills nav-stacked">
-					<#list res as r2> <#if r2.type=='2' && r2.pid == r.id>
-					<li><a href='javascript:;' id='${r2.id?c}' url='${r2.url}'><i
-							class="${r2.iconcls}"></i> ${r2.name}</a></li> </#if> </#list>
+
+		<div id="jquery-accordion-menu" class="jquery-accordion-menu white">
+				<div class="jquery-accordion-menu-header">
+					系统菜单
+				</div>
+				<ul>
+					<li>
+						<a href="#">
+							<i class="icon-home"></i>
+							Home
+						</a>
+					</li>
+					<#list res as r> <#if r.type=='1'>
+					<li>
+						<a href="#">
+							<i class="${r.iconcls}"></i>
+							${r.name}
+						</a>
+						<ul class="submenu">
+						<#list res as r2> <#if r2.type=='2' && r2.pid == r.id>
+						<li>
+						<a href="#"  url='${r2.url}'>
+							<i class="icon-home"></i>
+							${r2.name}
+						</a>
+						</li>
+						</#if> </#list>
+						</ul>
+					</li>
+					</#if> </#list>
 				</ul>
 			</div>
-		</div>
-	</div>
-	</#if> </#list>
-</div>
 <script type="text/javascript">
-	var dd = $('.collapse', '#accordion1');
-	var a = $('a', dd);
-	a.click(function() {
+	var submenu = $('.submenu', '#jquery-accordion-menu');
+	var lis = $('li', submenu);
+	lis.on('click', 'a', function() {
 		var url = $(this).attr('url');
 		var title = $(this).text();
 		$('#nav').text(title);
-		$(this).addClass('active').siblings('a').removeClass('active');
+		//$(this).addClass('active').siblings('a').removeClass('active');
 		var page = url + '?_=' + new Date().getTime();
 		//page = url;
 		$('#main').load(page, function() {
 			permit('#main');
 		});
 	});
+	jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
 </script>
