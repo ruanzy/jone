@@ -30,7 +30,7 @@ form,button {
 }
 
 #sidebar {
-	width: 199px;
+	width: 198px;
 	border-right: 0px solid #ccc;
 	position: fixed;
 	top: 52px;
@@ -56,17 +56,15 @@ box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
 #pill {
 	height: 50px;
 	border-bottom: 1px solid #E1E1E1;
-	box-shadow: 1px 0 3px #EEE, inset 0 0 3px white;
-	  box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
+	  background-color: #fff;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 	color: #D84C31;
 	white-space: nowrap;
 	font-size: 16px;
 	font-weight: bold;
-	line-height: 50px;
+	line-height: 49px;
 	padding-left: 20px;
 	overflow: hidden;
-	background-color: #fafafa;
-	background: #f3f3f3;
 	z-index: 1005;
 }
 
