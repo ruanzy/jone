@@ -1,11 +1,11 @@
-.jquery-accordion-menu {
+.sidebar {
 	min-width: 190px;
 	float: left;
 	position: relative;
 	background-color: #fff;
 }
 
-.jquery-accordion-menu .jquery-accordion-menu-footer,.jquery-accordion-menu .jquery-accordion-menu-header
+.sidebar .sidebar-footer, .sidebar .sidebar-header
 	{
 	width: 100%;
 	height: 50px;
@@ -16,23 +16,23 @@
 	color: #f0f0f0;
 	border-bottom: solid 1px #ddd;
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 }
 
-.jquery-accordion-menu ul {
+.sidebar ul {
 	margin: 0;
 	padding: 0;
 	list-style: none
 }
 
-.jquery-accordion-menu ul li {
+.sidebar ul li {
 	width: 100%;
 	display: block;
 	float: left;
 	position: relative
 }
 
-.jquery-accordion-menu ul li a {
+.sidebar ul li a {
 	width: 100%;
 	padding: 10px 22px;
 	float: left;
@@ -49,17 +49,17 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
 	transition: color .2s linear, background .2s linear
 }
 
-.jquery-accordion-menu>ul>li.active>a,.jquery-accordion-menu>ul>li:hover>a
+.sidebar>ul>li.active>a,.sidebar>ul>li:hover>a
 	{
 	color: #fff;
 	background: #3b424d
 }
 
-.jquery-accordion-menu>ul>li>a {
+.sidebar>ul>li>a {
 	border-bottom: solid 1px #3b424d
 }
 
-.jquery-accordion-menu .submenu-indicator {
+.sidebar .submenu-indicator {
 	float: right;
 	right: 22px;
 	position: absolute;
@@ -71,30 +71,30 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
 	-ms-transition: transform .3s linear
 }
 
-.jquery-accordion-menu ul ul.submenu .submenu-indicator {
+.sidebar ul ul.submenu .submenu-indicator {
 	line-height: 16px
 }
 
-.jquery-accordion-menu .submenu-indicator-minus>.submenu-indicator {
+.sidebar .submenu-indicator-minus>.submenu-indicator {
 	-ms-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg)
 }
 
-.jquery-accordion-menu ul ul.submenu,.jquery-accordion-menu ul ul.submenu li ul.submenu
+.sidebar ul ul.submenu,.sidebar ul ul.submenu li ul.submenu
 	{
 	width: 100%;
 	display: none;
 	position: static
 }
 
-.jquery-accordion-menu ul ul.submenu li {
+.sidebar ul ul.submenu li {
 	clear: both;
 	width: 100%
 }
 
-.jquery-accordion-menu ul ul.submenu li a {
+.sidebar ul ul.submenu li a {
 	width: 100%;
 	float: left;
 	font-size: 13px;
@@ -108,23 +108,23 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
 	transition: border .2s linear
 }
 
-.jquery-accordion-menu ul ul.submenu li:hover>a {
+.sidebar ul ul.submenu li:hover>a {
 	border-left-color: #414956
 }
 
-.jquery-accordion-menu ul ul.submenu>li>a {
+.sidebar ul ul.submenu>li>a {
 	padding-left: 30px
 }
 
-.jquery-accordion-menu ul ul.submenu>li>ul.submenu>li>a {
+.sidebar ul ul.submenu>li>ul.submenu>li>a {
 	padding-left: 45px
 }
 
-.jquery-accordion-menu ul ul.submenu>li>ul.submenu>li>ul.submenu>li>a {
+.sidebar ul ul.submenu>li>ul.submenu>li>ul.submenu>li>a {
 	padding-left: 60px
 }
 
-.jquery-accordion-menu ul li .jquery-accordion-menu-label,.jquery-accordion-menu ul ul.submenu li .jquery-accordion-menu-label
+.sidebar ul li .jquery-accordion-menu-label,.sidebar ul ul.submenu li .jquery-accordion-menu-label
 	{
 	min-width: 20px;
 	padding: 1px 2px 1px 1px;
@@ -140,7 +140,7 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
 	border-radius: 100%
 }
 
-.jquery-accordion-menu ul ul.submenu li .jquery-accordion-menu-label {
+.sidebar ul ul.submenu li .jquery-accordion-menu-label {
 	top: 12px
 }
 
@@ -192,101 +192,33 @@ keyframes ripple { 100%{
 }
 
 }
-.blue.jquery-accordion-menu .jquery-accordion-menu-footer,.blue.jquery-accordion-menu .jquery-accordion-menu-header,.blue.jquery-accordion-menu ul li a
-	{
-	background: #4A89DC
-}
 
-.blue.jquery-accordion-menu>ul>li.active>a,.blue.jquery-accordion-menu>ul>li:hover>a
-	{
-	background: #3e82da
-}
 
-.blue.jquery-accordion-menu>ul>li>a {
-	border-bottom-color: #3e82da
-}
 
-.blue.jquery-accordion-menu ul ul.submenu li:hover>a {
-	border-left-color: #3e82da
-}
-
-.green.jquery-accordion-menu .jquery-accordion-menu-footer,.green.jquery-accordion-menu .jquery-accordion-menu-header,.green.jquery-accordion-menu ul li a
-	{
-	background: #03A678
-}
-
-.green.jquery-accordion-menu>ul>li.active>a,.green.jquery-accordion-menu>ul>li:hover>a
-	{
-	background: #049372
-}
-
-.green.jquery-accordion-menu>ul>li>a {
-	border-bottom-color: #049372
-}
-
-.green.jquery-accordion-menu ul ul.submenu li:hover>a {
-	border-left-color: #049372
-}
-
-.red.jquery-accordion-menu .jquery-accordion-menu-footer,.red.jquery-accordion-menu .jquery-accordion-menu-header,.red.jquery-accordion-menu ul li a
-	{
-	background: #ED5565
-}
-
-.red.jquery-accordion-menu>ul>li.active>a,.red.jquery-accordion-menu>ul>li:hover>a
-	{
-	background: #DA4453
-}
-
-.red.jquery-accordion-menu>ul>li>a {
-	border-bottom-color: #DA4453
-}
-
-.red.jquery-accordion-menu ul ul.submenu li:hover>a {
-	border-left-color: #DA4453
-}
-
-.white.jquery-accordion-menu .jquery-accordion-menu-footer,.white.jquery-accordion-menu .jquery-accordion-menu-header,.white.jquery-accordion-menu ul li a
+.white.sidebar .sidebar-footer,.white.sidebar .sidebar-header,.white.sidebar ul li a
 	{
 	background: #fff;
 	color: #555
 }
 
-.white.jquery-accordion-menu>ul>li.active>a,.white.jquery-accordion-menu>ul>li:hover>a
+.white.sidebar>ul>li.active>a,.white.sidebar>ul>li:hover>a
 	{
 	background: #f0f0f0
 }
 
-.white.jquery-accordion-menu>ul>li>a {
+.white.sidebar>ul>li>a {
 	border-bottom-color: #f0f0f0
 }
 
-.white.jquery-accordion-menu ul ul.submenu li:hover>a {
+.white.sidebar ul ul.submenu li:hover>a {
 	border-left-color: #f0f0f0
 }
 
-.white.jquery-accordion-menu ul ul.submenu li a {
+.white.sidebar ul ul.submenu li a {
 	color: #f0f0f0
 }
 
-.white.jquery-accordion-menu>ul>li>a>.ink {
+.white.sidebar>ul>li>a>.ink {
 	background: rgba(0, 0, 0, .1)
 }
 
-.black.jquery-accordion-menu .jquery-accordion-menu-footer,.black.jquery-accordion-menu .jquery-accordion-menu-header,.black.jquery-accordion-menu ul li a
-	{
-	background: #292929
-}
-
-.black.jquery-accordion-menu>ul>li.active>a,.black.jquery-accordion-menu>ul>li:hover>a
-	{
-	background: #222
-}
-
-.black.jquery-accordion-menu>ul>li>a {
-	border-bottom-color: #222
-}
-
-.black.jquery-accordion-menu ul ul.submenu li:hover>a {
-	border-left-color: #222
-}

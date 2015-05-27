@@ -1,6 +1,6 @@
 
-		<div id="jquery-accordion-menu" class="jquery-accordion-menu white">
-				<div class="jquery-accordion-menu-header">
+		<div id="accordion" class="sidebar white">
+				<div class="sidebar-header">
 					系统菜单
 				</div>
 				<ul>
@@ -31,7 +31,7 @@
 				</ul>
 			</div>
 <script type="text/javascript">
-	var submenu = $('.submenu', '#jquery-accordion-menu');
+	var submenu = $('.submenu', '#accordion');
 	var lis = $('li', submenu);
 	lis.on('click', 'a', function() {
 		var url = $(this).attr('url');
@@ -44,5 +44,5 @@
 			permit('#main');
 		});
 	});
-	jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+	jQuery("#accordion").jqueryAccordionMenu();
 </script>

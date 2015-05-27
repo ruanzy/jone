@@ -37,9 +37,7 @@ form,button {
 	bottom: 0;
 	white-space: nowrap;
 	background: #fff;
--webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
--moz-box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
-box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
+box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 }
 
 #content {
@@ -54,9 +52,9 @@ box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
 }
 
 #pill {
-	height: 50px;
-	border-bottom: 1px solid #E1E1E1;
-	  background-color: #fff;
+	height: 49px;
+	border-bottom: 0px solid #E1E1E1;
+	background-color: #fff;
 	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 	color: #D84C31;
 	white-space: nowrap;
