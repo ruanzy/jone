@@ -1,9 +1,9 @@
+var langs = {"zh":"Chinese", "en" : "English"};
 var lang = 'zh';
 if ($.cookie('lang')) {
 	lang = $.cookie('lang');
 }
-var txt = (lang == "zh" ? "English" : "中文");
-$('#lang').html(txt);
+$('#lang').html(langs[lang]);
 $('#info').click(function() {
 	var dialog = $.dialog({
 		//title:'个人资料',
@@ -72,17 +72,12 @@ $('#toggle').click(function() {
 		$('#pill').css('left', sw);
 	}
 });
-$('#lang').click(function() {
-	var lang = 'zh';
-	if ($.cookie('lang')) {
-		lang = $.cookie('lang');
-	}
-	var txt = (lang == "zh" ? "中文" : "English");
-	lang = (lang == "zh" ? "en" : "zh");
-	$(this).html(txt);
+
+function changeLang(lang){
+	$('#lang').html(langs[lang]);
 	$.cookie('lang', lang, {
 		path : '/',
 		expires : 10
 	});
 	document.location = '';
-});
+}
