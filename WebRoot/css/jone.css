@@ -30,14 +30,13 @@ form,button {
 }
 
 #sidebar {
-	width: 198px;
-	border-right: 0px solid #ccc;
+	width: 199px;
+	border-right: 1px solid #ddd;
 	position: fixed;
 	top: 52px;
 	bottom: 0;
 	white-space: nowrap;
 	background: #fff;
-box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 }
 
 #content {
