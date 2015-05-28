@@ -60,3 +60,7 @@
 	background: #ddd;
 	text-decoration: none;
 }
+
+.selected {
+	background: #ddd;
+}

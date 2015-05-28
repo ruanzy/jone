@@ -24,7 +24,10 @@
 		}
     });
 	var lis = sidebar.find('.sidebar-body li');
+	var lis = sidebar.find('.sidebar-body li');
 	lis.on('click', 'a', function() {
+		$('a.selected').removeClass('selected');
+		$(this).addClass('selected');
 		var url = $(this).attr('url');
 		var title = $(this).text();
 		$('#nav').text(title);
