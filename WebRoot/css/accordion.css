@@ -3,6 +3,7 @@
 	float: left;
 	position: relative;
 	background-color: #fff;
+	box-shadow: 0 1px 3px rgba(198,198,198,0.5);
 }
 
 .sidebar .sidebar-footer, .sidebar .sidebar-header
@@ -17,6 +18,8 @@
 	border-bottom: solid 1px #ddd;
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
 box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+
+box-shadow: 0 1px 3px rgba(198,198,198,0.5);
 }
 
 .sidebar ul {
@@ -29,7 +32,8 @@ box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 	width: 100%;
 	display: block;
 	float: left;
-	position: relative
+	position: relative;
+	box-shadow: 0 1px 3px rgba(198,198,198,0.5);
 }
 
 .sidebar ul li a {
