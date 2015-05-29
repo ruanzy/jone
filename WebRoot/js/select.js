@@ -38,10 +38,7 @@
 				p1.push("<input type='text' class='searchbox'/><ul class='items'></ul><div class='mask'></div>");
 				me.wrap(li).after(p1.join(''));
 				var dropdown = me.parent("li");
-				var txt = dropdown.find("div.text").width(me.outerWidth() - 2).height(me.outerHeight() - 2).css('line-height', (me.outerHeight() - 2) + 'px');
-				var W = dt.width();
-				var H = dt.outerWidth();
-				var dropdown_toggle = dt.siblings("a.dropdown-toggle").css('min-width', me.outerWidth() - 2);
+				var txt = dropdown.find("div.text").width(me.outerWidth() - 27).height(me.outerHeight() - 2).css('line-height', (me.outerHeight() - 2) + 'px');
 				var dd = dropdown.find('.items').css('min-width', me.outerWidth() - 2);
 				dd.niceScroll({
 			        touchbehavior:false,
@@ -53,7 +50,7 @@
 			        background:"#fff",
 			        autohidemode:true
 			    });
-				var searchbox = dropdown.find('.searchbox').width(W - 22).hide();
+				var searchbox = dropdown.find('.searchbox').width(me.outerWidth() - 22).hide();
 				if(opts.searchbox){
 					searchbox.show();
 					//解决点击searchbox 冒泡到$(document).bind("mouseup")的问题
@@ -121,12 +118,12 @@
 					var opts = me.data('options');
 					var data = me.data('data');
 					opts.change(data[idx]);
-					dt.removeClass('expand');
+					txt.removeClass('expand');
 					e.stopPropagation();
 				});
 				$(document).click(function() {
 					dd.hide();
-					dt.removeClass('expand');
+					txt.removeClass('expand');
 				});
 				//解决点击其他下拉dd不隐藏的问题
 				$(document).bind("mouseup", function(e) {
@@ -134,7 +131,7 @@
 					var tp = t.parents('#dt_' + rdm);
 					if(tp.length == 0){
 						dd.hide();
-						dt.removeClass('expand');
+						txt.removeClass('expand');
 					}
 				});
 			});
