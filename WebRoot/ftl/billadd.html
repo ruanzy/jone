@@ -1,24 +1,36 @@
-<table style='width:100%'>
-	<tr>
-		<td>采购单编号</td>
-		<td><input type="text" id='no' name="no" class='txt'
-			autocomplete="off" disabled="disabled"/></td>
-		<td>拟定时间</td>
-		<td><input type="text" id='createtime' name='createtime' class='txt' disabled="disabled"/></td>
-		<td>拟定人</td>
-		<td><input type="text" id='creator' name="creator" value=${user} class='txt' disabled="disabled"/></td>
-	</tr>
-	<tr>
-		<td>供应商</td>
-		<td><input type="text" id='supplier' name='supplier' class='txt' /></td>
-		<td>入库仓库</td>
-		<td><input type="text" id='warehouse' name="warehouse" class='txt' /></td>
-		<td>备注</td>
-		<td><input type="text" id='memo' name="memo" class='txt' /></td>
-	</tr>
-</table>
+<form class="form-horizontal" role="form">
+	<div class="form-group">
+		<label class="col-sm-1 control-label" for="no">编号</label>
+		<div class="col-sm-3">
+			<input class="form-control" id="no" type="text" />
+		</div>
+		<label class="col-sm-2 control-label" for="createtime">拟定时间</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="createtime" type="text" />
+		</div>
+		<label class="col-sm-2 control-label" for="createtor">拟定人</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="createtor" type="text" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-1 control-label" for="supplier">供应商</label>
+		<div class="col-sm-3">
+			<input class="form-control" id="supplier" type="text" style='width:100%' />
+		</div>
+		<label class="col-sm-2 control-label" for="warehouse">入库仓库</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="warehouse" type="text" style='width:100%' />
+		</div>
+		<label class="col-sm-2 control-label" for="memo">备注</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="memo" type="text" />
+		</div>
+	</div>
+</form>
 <p>
-<a id='adddetail' class='btn btn-primary'><i class="icon-plus"></i> 新建明细</a>
+	<a id='adddetail' class='btn btn-primary'><i class="icon-plus"></i>
+		新建明细</a>
 </p>
 <div id='detail'></div>
 <script type="text/javascript">
@@ -34,11 +46,14 @@
 		dataType : 'json',
 		success : function(result) {
 			var data = [];
-			$(result).each(function () {
-			  data.push({id: this['id'], text: this['name']});
+			$(result).each(function() {
+				data.push({
+					id : this['id'],
+					text : this['name']
+				});
 			});
 			$('#supplier').select2({
-			  data: data
+				data : data
 			});
 		}
 	});
@@ -54,11 +69,14 @@
 		dataType : 'json',
 		success : function(result) {
 			var data = [];
-			$(result).each(function () {
-			  data.push({id: this['id'], text: this['name']});
+			$(result).each(function() {
+				data.push({
+					id : this['id'],
+					text : this['name']
+				});
 			});
 			$('#warehouse').select2({
-			  data: data
+				data : data
 			});
 		}
 	});
@@ -66,7 +84,7 @@
 	var yyyy = date.getFullYear();
 	var MM = date.getMonth() + 1;
 	var dd = date.getDate();
-	$('#no').val('P' + date.format("yyyyMMddhhmmss"));
+	$('#no').val('P_' + date.format("yyyyMMddhhmmss"));
 	$('#createtime').val(yyyy + '-' + MM + '-' + dd);
 	var unit;
 	$.ajax({
@@ -138,8 +156,8 @@
 	});
 	function unitRender(v, r) {
 		var c;
-		$.each(unit, function(){
-			if(this['id'] == v){
+		$.each(unit, function() {
+			if (this['id'] == v) {
 				c = this['name'];
 				return false;
 			}
@@ -148,8 +166,8 @@
 	}
 	function goodsRender(v, r) {
 		var c;
-		$.each(goods, function(){
-			if(this['id'] == v){
+		$.each(goods, function() {
+			if (this['id'] == v) {
 				c = this['name'];
 				return false;
 			}
@@ -164,7 +182,7 @@
 		var idx = $(obj).parents('tr').get(0).rowIndex;
 		$('#detail').table('deleteRow', idx);
 	}
-	$('#adddetail').click(function(){
+	$('#adddetail').click(function() {
 		$.dialog({
 			title : '新增明细',
 			url : 'view/income/adddetail.html',
@@ -179,7 +197,14 @@
 					var purchase_price = $('#purchase_price').val();
 					var purchase_num = $('#purchase_num').val();
 					var purchase_money = $('#purchase_money').val();
-					var data = {goods : goods, spec : spec, unit : unit, purchase_price : purchase_price, purchase_num : purchase_num, purchase_money : purchase_money};
+					var data = {
+						goods : goods,
+						spec : spec,
+						unit : unit,
+						purchase_price : purchase_price,
+						purchase_num : purchase_num,
+						purchase_money : purchase_money
+					};
 					$('#detail').table('appendRow', data);
 				}
 			}, {

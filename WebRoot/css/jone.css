@@ -292,13 +292,13 @@ dl.accordion dd a b {
 }
 
 input[type=text],input[type=password],textarea {
-	outline: none;
-	margin: 0;
-	padding: 5px;
-	font-family: "微软雅黑", Arial, sans-serif;
-	color: #555;
-	width: 190px;
-	border: 1px solid #ccc;
+/* 	outline: none; */
+/* 	margin: 0; */
+/* 	padding: 5px; */
+/* 	font-family: "微软雅黑", Arial, sans-serif; */
+/* 	color: #555; */
+/* 	width: 190px; */
+/* 	border: 1px solid #ccc; */
 }
 
 input[type=text]:focus,input[type=password]:focus {
