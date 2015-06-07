@@ -51,6 +51,214 @@ JAVA版本: ${version}
 		<p><span class='block block-warning'></span>剩余内存:<span id='free'>0</span></p>
 	</div>
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title">
+            Ajax 异步获取数据
+        </div>
+    </div>
+    <div class="panel-body">
+							<div class="table-toolbar">
+								<div class="btn-group">
+									<button id="sample_editable_1_new" class="btn green">
+									Add New <i class="fa fa-plus"></i>
+									</button>
+								</div>
+								<div class="btn-group pull-right">
+									<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
+									</button>
+									<ul class="dropdown-menu pull-right">
+										<li>
+											<a href="#">
+												 Print
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												 Save as PDF
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												 Export to Excel
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+							<thead>
+							<tr>
+								<th>
+									 Username
+								</th>
+								<th>
+									 Full Name
+								</th>
+								<th>
+									 Points
+								</th>
+								<th>
+									 Notes
+								</th>
+								<th>
+									 Edit
+								</th>
+								<th>
+									 Delete
+								</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>
+									 alex
+								</td>
+								<td>
+									 Alex Nilson
+								</td>
+								<td>
+									 1234
+								</td>
+								<td class="center">
+									 power user
+								</td>
+								<td>
+									<a class="edit" href="javascript:;">
+										 Edit
+									</a>
+								</td>
+								<td>
+									<a class="delete" href="javascript:;">
+										 Delete
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									 lisa
+								</td>
+								<td>
+									 Lisa Wong
+								</td>
+								<td>
+									 434
+								</td>
+								<td class="center">
+									 new user
+								</td>
+								<td>
+									<a class="edit" href="javascript:;">
+										 Edit
+									</a>
+								</td>
+								<td>
+									<a class="delete" href="javascript:;">
+										 Delete
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									 nick12
+								</td>
+								<td>
+									 Nick Roberts
+								</td>
+								<td>
+									 232
+								</td>
+								<td class="center">
+									 power user
+								</td>
+								<td>
+									<a class="edit" href="javascript:;">
+										 Edit
+									</a>
+								</td>
+								<td>
+									<a class="delete" href="javascript:;">
+										 Delete
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									 goldweb
+								</td>
+								<td>
+									 Sergio Jackson
+								</td>
+								<td>
+									 132
+								</td>
+								<td class="center">
+									 elite user
+								</td>
+								<td>
+									<a class="edit" href="javascript:;">
+										 Edit
+									</a>
+								</td>
+								<td>
+									<a class="delete" href="javascript:;">
+										 Delete
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									 webriver
+								</td>
+								<td>
+									 Antonio Sanches
+								</td>
+								<td>
+									 462
+								</td>
+								<td class="center">
+									 new user
+								</td>
+								<td>
+									<a class="edit" href="javascript:;">
+										 Edit
+									</a>
+								</td>
+								<td>
+									<a class="delete" href="javascript:;">
+										 Delete
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									 gist124
+								</td>
+								<td>
+									 Nick Roberts
+								</td>
+								<td>
+									 62
+								</td>
+								<td class="center">
+									 new user
+								</td>
+								<td>
+									<a class="edit" href="javascript:;">
+										 Edit
+									</a>
+								</td>
+								<td>
+									<a class="delete" href="javascript:;">
+										 Delete
+									</a>
+								</td>
+							</tr>
+							</tbody>
+							</table>
+    </div>
+</div>
 <script type="text/javascript">
 
 	$('.well-header-buttons').click(function(){
@@ -79,5 +287,5 @@ JAVA版本: ${version}
 		//setTimeout(onData, 2000);
 	}
 	onData();
-		
+	TableEditable.init();
 </script>
