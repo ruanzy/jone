@@ -642,7 +642,7 @@ div.pagination {
 }
 
 .pagination a,.pagination span {
-	display: inline-block;
+/* 	display: inline-block; */
 	padding: 2px 10px;
 	margin-left: -1px;
 	line-height: 1.42857143;
