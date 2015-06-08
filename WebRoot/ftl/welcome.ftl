@@ -1,4 +1,6 @@
-<div class="panel panel-primary" style='width:45%;height:auto;'>
+<div class='row'>
+<div class='col-md-4'>
+<div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title">服务器信息</h3>
 	</div>
@@ -33,8 +35,6 @@ JAVA版本: ${version}
 </div>
 <div style='font-size:10px;'><span id='used' style='color:red;'></span>/<span id='total'></span></div>
 </p>
-	</div>
-</div>
 <div class="well" style='width:auto;height:auto;display:none;'>
 	<div class="well-header well-header-success">
 		<span class='well-header-title'> <i class="icon-desktop"></i>
@@ -49,6 +49,46 @@ JAVA版本: ${version}
 		<!--<p><span class='block block-success'></span>总内存:<span id='total'>0</span></p>-->
 		<p><span class='block block-danger'></span>已用内存:<span id='use'>0</span></p>
 		<p><span class='block block-warning'></span>剩余内存:<span id='free'>0</span></p>
+	</div>
+</div>
+</div>
+</div>
+</div>
+<div class='col-md-8'>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h3 class="panel-title">服务器信息</h3>
+	</div>
+	<div class="panel-body">
+	"sAjaxSource": "demo/table_ajax.php", // ajax source
+		<table class="table table-striped table-hover table-bordered" id="sample_editable_2">
+		<thead>
+		<tr>
+			<th>
+				 Username
+			</th>
+			<th>
+				 Full Name
+			</th>
+			<th>
+				 Points
+			</th>
+			<th>
+				 Notes
+			</th>
+			<th>
+				 Edit
+			</th>
+			<th>
+				 Delete
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		</table>
+	</div>
+</div>
 	</div>
 </div>
 
@@ -288,4 +328,5 @@ JAVA版本: ${version}
 	}
 	onData();
 	TableEditable.init();
+	
 </script>
