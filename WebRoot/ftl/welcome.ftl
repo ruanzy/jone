@@ -60,6 +60,10 @@ JAVA版本: ${version}
 		<h3 class="panel-title">服务器信息</h3>
 	</div>
 	<div class="panel-body">
+	
+	<p id="Dynamic">Dynamic page content</p>
+<p id="pagination-here"></p>
+ 
 	"sAjaxSource": "demo/table_ajax.php", // ajax source
 		<table class="table table-striped table-hover table-bordered" id="sample_editable_2">
 		<thead>
@@ -328,5 +332,14 @@ JAVA版本: ${version}
 	}
 	onData();
 	TableEditable.init();
-	
+	$('#pagination-here').bootpag({
+	    total: 38,          // total pages
+	    //page: 1,            // default page
+	    maxVisible: 10,     // visible pagination
+	    leaps: true,         // next/prev leaps through maxVisible
+		next: 'next',
+	   	prev: 'prev'
+	}).on("page", function(event, num){
+	    $("#Dynamic").html("Page " + num); // or some ajax content loading...
+	});
 </script>

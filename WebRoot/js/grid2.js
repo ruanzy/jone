@@ -103,10 +103,38 @@
 				if(settings.pager){
 					var total = parseInt(el.data('total'));
 					html.push("<div class='pagination'>");
-					html.push(pager2(total, 1, 10));
+					//html.push(pager2(total, 1, 10));
 					html.push("</div>");
+					el.append(html.join(''));
+					var pagesize = parseInt(el.data('pagesize'));
+					var pn = Math.ceil(total/pagesize);
+					el.find('.pagination').bootpag({
+					    total: pn,          // total pages
+					    page: 1,            // default page
+					    maxVisible: 10,     // visible pagination
+					    leaps: true,         // next/prev leaps through maxVisible
+						next: 'next',
+					   	prev: 'prev'
+					}).on("page", function(event, num){
+						var url = el.data('url');
+						var opts = el.data('options');
+						var baseparams = {page: num, pagesize: pagesize};
+						if(opts.condition){
+							if($.isFunction(opts.condition)){
+								baseparams = $.extend(baseparams, opts.condition());
+							}
+						}
+						if(opts.queryParam){
+							baseparams = $.extend(baseparams, opts.queryParam);
+						}
+						var dd = ds(url, baseparams);
+						el.data('ds', dd);
+						el.data('rows', dd.data);
+						el.data('allrow', dd.data);
+						$('tbody',el).empty().append(body(dd.data, opts));
+						$('tbody tr:odd', el).addClass('strips');
+					});
 				}
-				el.append(html.join(''));
 				/**var W = $('.grid-head', el).outerWidth();
 				if(rows.length <= 10){
 					$('.grid-bd', el).width(W - 17);
@@ -207,7 +235,7 @@
 					$('.pager',el).empty().append(pager2(dd.total, p, pagesize));
 					$('tbody tr:odd', el).addClass('strips');
 				});**/
-				$('div.pagination a', el).on('click',function(e){
+				/**$('div.pagination a', el).on('click',function(e){
 					var p = 1;
 					$('.checkbox', el).removeClass('selected').html("<i class='icon-check-empty'></i>");
 					var curpage = parseInt($('div.pagination a.active', el).text());
@@ -238,7 +266,7 @@
 					$('tbody',el).empty().append(body(dd.data, opts));
 					$('div.pagination',el).empty().append(pager2(dd.total, p, pagesize));
 					$('tbody tr:odd', el).addClass('strips');
-				});
+				});**/
 				/**var len = settings.columns.length;
 				$(settings.columns).each(function(index){
 					var idx = index;
@@ -302,7 +330,9 @@
 			$(this).data('updated', []);
 			$('tbody',this).empty().append(body(rows, opts));
 			if(pager){
-				$('div.pagination',this).empty().append(pager2(_ds.total, _ds.page, _ds.pagesize));
+				//$('div.pagination',this).empty().append(pager2(_ds.total, _ds.page, _ds.pagesize));
+				var pn = Math.ceil(_ds.total/_ds.pagesize);
+				$(this).find('.pagination').bootpag({total: pn});
 			}
 			$('tbody tr:odd', this).addClass('strips');
         },
@@ -347,7 +377,9 @@
 			$(this).data('updated', []);
 			$('tbody',this).empty().append(body(rows, opts));
 			if(pager){
-				$('div.pagination',this).empty().append(pager2(_ds.total, _ds.page, _ds.pagesize));
+				//$('div.pagination',this).empty().append(pager2(_ds.total, _ds.page, _ds.pagesize));
+				var pn = Math.ceil(_ds.total/_ds.pagesize);
+				$(this).find('.pagination').bootpag({total: pn});
 			}
 				$('tbody tr:odd', this).addClass('strips');
         },
