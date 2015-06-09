@@ -332,7 +332,10 @@
 			if(pager){
 				//$('div.pagination',this).empty().append(pager2(_ds.total, _ds.page, _ds.pagesize));
 				var pn = Math.ceil(_ds.total/_ds.pagesize);
-				$(this).find('.pagination').bootpag({total: pn});
+				$(this).find('.pagination').bootpag({
+					total: pn,
+					page: _ds.page
+				});
 			}
 			$('tbody tr:odd', this).addClass('strips');
         },
@@ -379,7 +382,10 @@
 			if(pager){
 				//$('div.pagination',this).empty().append(pager2(_ds.total, _ds.page, _ds.pagesize));
 				var pn = Math.ceil(_ds.total/_ds.pagesize);
-				$(this).find('.pagination').bootpag({total: pn});
+				$(this).find('.pagination').bootpag({
+					total: pn,
+					page: _ds.page
+				});
 			}
 				$('tbody tr:odd', this).addClass('strips');
         },
