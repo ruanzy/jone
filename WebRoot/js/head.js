@@ -7,7 +7,7 @@ $('#lang').html(langs[lang]);
 $('#info').click(function() {
 	var dialog = $.dialog({
 		//title:'个人资料',
-		width : 350,
+		width : 400,
 		//url:'view/income/list.html'
 		url : 'ftl/userinfo.html',
 		buttons : [ {
@@ -20,7 +20,7 @@ $('#info').click(function() {
 			text : 'Close',
 			cls : 'btn-default',
 			action : function(d) {
-				dialog.close();
+				d.close();
 			}
 
 		} ],
@@ -43,7 +43,7 @@ $('#set').click(function() {
 			text : 'Close',
 			cls : 'btn-default',
 			action : function(d) {
-				dialog.close();
+				d.close();
 			}
 
 		} ],
