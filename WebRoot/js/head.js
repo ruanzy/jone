@@ -81,3 +81,12 @@ function changeLang(lang){
 	});
 	document.location = '';
 }
+$('#sidebar-toggle').click(function(){
+	if($('#sidebar1').hasClass('sidebar-closed')){
+		$('#sidebar1').css('width', '').removeClass('sidebar-closed');
+		$('#content1').css('margin-left', '');
+	}else{		
+		$('#sidebar1').css('width', 0).addClass('sidebar-closed');
+		$('#content1').css('margin-left', 50);
+	}
+});

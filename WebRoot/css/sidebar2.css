@@ -15,20 +15,24 @@
 	font-size: 16px;
  	background: #fff;
 	color:#333;
-	padding-left: 15px;
+	padding-left: 5px;
+	white-space:nowrap;
+  	overflow:hidden;
 }
 
 .sidebar-body>h3 {
 	border-bottom: solid 1px #ddd;
 	margin: 0;
 	padding-left: 5px;
-	background: #f4f4f4;
+	background: #fff;
 	border-bottom: 1px solid white;
   	border-top: 1px solid #e7e7e7;
+  	white-space:nowrap;
+  	overflow:hidden;
 }
 
 .sidebar-body>h3.active{
-	background: #4cae4c;
+	background: #428bca;
 }
 
 .sidebar-body>h3 a {
@@ -39,7 +43,7 @@
 	font-size: 16px;
 	color:#333;
 	font-size: 16px;
-	padding: 0 20px;
+	padding: 0;
 }
 
 .sidebar-body>h3.active a {

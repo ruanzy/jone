@@ -1,8 +1,8 @@
   <div id="accordion" class="sidebar">
-    <div class="sidebar-header"><i class="icon-sitemap"></i> 导航菜单</div>
+    <div class="sidebar-header"><div style='display:inline-block;width:50px;padding:0 5px 0 20px;color:#428bca;'><i class="icon-sitemap"></i></div>导航菜单</div>
 	<div class="sidebar-body">
 		<#list res as r> <#if r.type=='1'>
-		<h3><a href='#'><i class="${r.iconcls}"></i> ${r.name}</a></h3>
+		<h3><a href='#'><div style='display:inline-block;width:50px;padding:0 5px 0 20px;color:#428bca;'><i class="${r.iconcls}"></i></div>${r.name}</a></h3>
 		<div>
 		  <#list res as r2> <#if r2.type=='2' && r2.pid == r.id>
 			<li><a href='#' url='${r2.url}'><i class="${r2.iconcls}"></i> ${r2.name}</a></li>
