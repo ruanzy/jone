@@ -3,6 +3,10 @@ html {
   min-height: 100%;
 }
 
+body {
+  background-color: #fff !important;
+}
+
 .navbar-fixed-top {
   border: 0;
 }
@@ -31,7 +35,6 @@ html {
   position: absolute;
   top: 51px;
   bottom: 0;
-  background-color: #fff;
 }
 @media (min-width: 768px) {
   .main {
