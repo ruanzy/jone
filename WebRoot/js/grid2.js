@@ -134,6 +134,8 @@
 						$('tbody',el).empty().append(body(dd.data, opts));
 						$('tbody tr:odd', el).addClass('strips');
 					});
+				}else{
+					el.append(html.join(''));
 				}
 				/**var W = $('.grid-head', el).outerWidth();
 				if(rows.length <= 10){
