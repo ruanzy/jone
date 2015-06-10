@@ -86,7 +86,13 @@ $('#sidebar-toggle').click(function(){
 		$('#sidebar1').css('width', '').removeClass('sidebar-closed');
 		$('#content1').css('margin-left', '');
 	}else{		
-		$('#sidebar1').css('width', 0).addClass('sidebar-closed');
-		$('#content1').css('margin-left', 50);
+		$('#sidebar1').animate({
+            width: 0
+        }, 400);
+		$('#sidebar1').addClass('sidebar-closed');
+		$('#content1').animate({
+			marginLeft: 50
+        }, 400);
+		//$('#content1').css('margin-left', 50);
 	}
 });
