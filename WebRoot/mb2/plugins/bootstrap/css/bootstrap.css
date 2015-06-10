@@ -4117,6 +4117,7 @@ background-color: transparent;
   list-style: none;
   background-color: #f5f5f5;
   border-radius: 4px;
+  border-radius: 0px;
 }
 .breadcrumb > li {
   display: inline-block;
@@ -5784,4 +5785,3 @@ button.close {
     display: none !important;
   }
 }
-/*# sourceMappingURL=bootstrap.css.map */

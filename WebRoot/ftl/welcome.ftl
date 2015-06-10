@@ -1,5 +1,5 @@
 <div class='row'>
-<div class='col-md-4'>
+<div class='col-md-6'>
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title">服务器信息</h3>
@@ -54,46 +54,6 @@ JAVA版本: ${version}
 </div>
 </div>
 </div>
-<div class='col-md-8'>
-<div class="panel panel-success">
-	<div class="panel-heading">
-		<h3 class="panel-title">服务器信息</h3>
-	</div>
-	<div class="panel-body">
-	
-	<p id="Dynamic">Dynamic page content</p>
-<p id="pagination-here"></p>
- 
-	"sAjaxSource": "demo/table_ajax.php", // ajax source
-		<table class="table table-striped table-hover table-bordered" id="sample_editable_2">
-		<thead>
-		<tr>
-			<th>
-				 Username
-			</th>
-			<th>
-				 Full Name
-			</th>
-			<th>
-				 Points
-			</th>
-			<th>
-				 Notes
-			</th>
-			<th>
-				 Edit
-			</th>
-			<th>
-				 Delete
-			</th>
-		</tr>
-		</thead>
-		<tbody>
-		</tbody>
-		</table>
-	</div>
-</div>
-	</div>
 </div>
 
 <div class="panel panel-default">

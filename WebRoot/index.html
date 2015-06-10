@@ -53,18 +53,25 @@
 	<script type="text/javascript" src="mb2/plugins/jquery-bootpag/jquery.bootpag.js"></script>
 </head>
 <BODY>
-
-		<#include "head.html"/>
-	
-	<div id='center'>
-		<div id="sidebar">
-			<#include "left.html"/>
-		</div>
-		<div id="content">
-			<div id="pill">
-				<i class='icon-home'></i> <span id='nav'>${i18n('welcome')}</span>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="row">
+				<#include "head.html"/>
 			</div>
-			<div id="main"></div>
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 left" id="sidebar1">
+				<#include "left.html"/>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="content1">
+				<ol class="breadcrumb">
+				  <li><i class='icon-home'></i> <a href="#">Home</a></li>
+				  <li class="active">Data</li>
+				</ol>
+				<div id="main"></div>
+			</div>
 		</div>
 	</div>
 </BODY>

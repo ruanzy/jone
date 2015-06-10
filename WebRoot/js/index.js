@@ -2,7 +2,7 @@ $(function() {
 	$.goPage = function(url, params){
 		$('#main').load(url, params);	
 	};
-	var body = $('body');
+	/**var body = $('body');
 	var WW = $(window).width();
 	var WH = $(window).height();
 	var h = $('#content').outerHeight();
@@ -14,7 +14,7 @@ $(function() {
 		var padding = $('#main').css('padding-top');
 		var H = h - 2*parseInt(padding) - 40;
 		$('#main').height(H);
-	});
+	});**/
 	//$('#header').load('ftl/header.html', function(){
 
 		/**$('ul.nav').delegate('li', 'click', function(){
