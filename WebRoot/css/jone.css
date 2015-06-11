@@ -30,12 +30,32 @@ body {
     min-width: 50px;
   }
 }
-
-.main {
-  padding: 20px;
-  position: absolute;
-  top: 51px;
-  bottom: 0;
+#container1 {
+	margin-top: 51px;
+	position: relative;
+	
+}
+#container1:before, #container1:after {
+  display: table;
+  content: " ";
+}
+#sidebar1 {
+	width: 200px;
+	border-right: 1px solid #ddd;
+	position: fixed;
+	top: 51px;
+	bottom: 0;
+	white-space: nowrap;
+	background: #fff;
+}
+#content1{
+	top: 51px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+  	padding: 30px;
+  	margin-left: 200px;
+  	z-index: 1000;
 }
 @media (min-width: 768px) {
   .main {

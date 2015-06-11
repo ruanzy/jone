@@ -83,11 +83,16 @@ function changeLang(lang){
 }
 $('#sidebar-toggle').click(function(){
 	if($('#sidebar1').hasClass('sidebar-closed')){
-		$('#sidebar1').css('width', '').removeClass('sidebar-closed');
-		$('#content1').css('margin-left', '');
+		$('#sidebar1').animate({
+            width: 200
+        }, 400);
+		$('#sidebar1').removeClass('sidebar-closed');
+		$('#content1').animate({
+			marginLeft: 200
+        }, 400);
 	}else{		
 		$('#sidebar1').animate({
-            width: 0
+            width: 50
         }, 400);
 		$('#sidebar1').addClass('sidebar-closed');
 		$('#content1').animate({

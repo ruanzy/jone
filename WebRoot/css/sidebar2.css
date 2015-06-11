@@ -1,7 +1,4 @@
 .sidebar {
-	margin-right: -21px;
-  	margin-bottom: 20px;
- 	margin-left: -20px;
 	display: block;
 	z-index: 2;
 /* 	box-shadow: 0 0 4px rgba(0, 0, 0, .3); */
@@ -15,7 +12,6 @@
 	font-size: 16px;
  	background: #fff;
 	color:#333;
-	padding-left: 5px;
 	white-space:nowrap;
   	overflow:hidden;
 }
@@ -23,7 +19,6 @@
 .sidebar-body>h3 {
 	border-bottom: solid 1px #ddd;
 	margin: 0;
-	padding-left: 5px;
 	background: #fff;
 	border-bottom: 1px solid white;
   	border-top: 1px solid #e7e7e7;
