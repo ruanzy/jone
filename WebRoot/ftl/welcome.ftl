@@ -54,8 +54,7 @@ JAVA版本: ${version}
 </div>
 </div>
 </div>
-</div>
-
+<div class='col-md-6'>
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">
@@ -262,6 +261,8 @@ JAVA版本: ${version}
 							</tbody>
 							</table>
     </div>
+</div>
+</div>
 </div>
 <script type="text/javascript">
 
