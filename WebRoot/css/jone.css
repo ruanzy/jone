@@ -41,12 +41,13 @@ body {
 }
 #sidebar1 {
 	width: 200px;
-	border-right: 1px solid #ddd;
+	border-right: 0px solid #ddd;
 	position: fixed;
 	top: 51px;
 	bottom: 0;
 	white-space: nowrap;
 	background: #fff;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 }
 #content1{
 	top: 51px;

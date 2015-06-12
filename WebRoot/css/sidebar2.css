@@ -1,12 +1,11 @@
 .sidebar {
 	display: block;
 	z-index: 2;
-/* 	box-shadow: 0 0 4px rgba(0, 0, 0, .3); */
 	color: #444;
 }
 
 .sidebar-header,.sidebar-footer {
-	border-bottom: solid 1px #ddd;
+	border-bottom: solid 2px #428bca;
 	height: 65px;
 	line-height: 65px;
 	font-size: 16px;
@@ -20,8 +19,8 @@
 	border-bottom: solid 1px #ddd;
 	margin: 0;
 	background: #fff;
-	border-bottom: 1px solid white;
-  	border-top: 1px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+  	border-top: 1px solid transparent;
   	white-space:nowrap;
   	overflow:hidden;
 }
@@ -53,8 +52,8 @@
 .sidebar-body>div {
 	width: 100%;
 	padding: 15px;
-	border-bottom: solid 0px #ddd;
-	border-top: 1px solid #ddd;
+	border-bottom: solid 1px #ddd;
+	border-top: 0px solid #ddd;
 	background: #eee;
 	color: #262626!important;
 }
