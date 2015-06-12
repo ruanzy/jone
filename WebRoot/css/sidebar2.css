@@ -27,7 +27,7 @@
 }
 
 .sidebar-body>h3.active{
-	background: #428bca;
+	background: #fff;
 }
 
 .sidebar-body>h3 a {
@@ -42,11 +42,11 @@
 }
 
 .sidebar-body>h3.active a {
-	color:#fff;
+/* 	color:#fff; */
 }
 
 .sidebar-body>div li a:hover {
-	background: #ddd;
+/* 	background: #ddd; */
 	text-decoration: none;
 }
 
@@ -54,7 +54,9 @@
 	width: 100%;
 	padding: 15px;
 	border-bottom: solid 0px #ddd;
-	background: #fff;
+	border-top: 1px solid #ddd;
+	background: #eee;
+	color: #262626!important;
 }
 
 .sidebar-body>div li {
@@ -72,10 +74,10 @@
 }
 
 .sidebar-body>div li a:hover {
-	background: #e7e7e7;
+/* 	background: #e7e7e7; */
 	text-decoration: none;
 }
 
 .selected {
-	background: #ddd;
+/* 	background: #ddd; */
 }
