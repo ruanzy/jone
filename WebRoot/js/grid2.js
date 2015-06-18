@@ -519,8 +519,8 @@
 					cell.html("");
 					var padding = parseInt(cell.css('padding-left'));
 					if(editor.type == 'text'){
-			    		var input = $('<input type="text" id="' + rowindex + '_' + field + '"/>');
-			    		input.width(cell.width() - 2*padding).val(v0).appendTo(cell);
+			    		var input = $('<input type="text" id="' + rowindex + '_' + field + '" class="form-control"/>');
+			    		input.width(cell.width()).val(v0).appendTo(cell);
 			    		//input.focus();
 			    		input.click(function() {
 							return false;
@@ -547,8 +547,8 @@
 						ctrhtml.push('<input type="text" id="', rowindex, '_', field, '"/>');
 			    		var ctr = $(ctrhtml.join(''));
 			    		ctr.width(cell.width() - 2*padding).appendTo(cell);
-			    		ctr.selectbox(editor.option);
-			    		ctr.selectbox('setValue', v0);
+			    		ctr.select2(editor.option);
+			    		ctr.select2("val", v0);
 					}
     			}
         	});
