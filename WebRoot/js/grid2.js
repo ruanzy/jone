@@ -520,7 +520,8 @@
 					var padding = parseInt(cell.css('padding-left'));
 					if(editor.type == 'text'){
 			    		var input = $('<input type="text" id="' + rowindex + '_' + field + '" class="form-control"/>');
-			    		input.width(cell.width()).val(v0).appendTo(cell);
+			    		//input.width(cell.width())
+			    		input.val(v0).appendTo(cell);
 			    		//input.focus();
 			    		input.click(function() {
 							return false;
