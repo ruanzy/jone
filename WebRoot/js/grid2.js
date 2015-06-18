@@ -87,19 +87,19 @@
 				el.data('ds', _ds);
 				el.data('total', _ds.total);
 				var html = new Array();
-				html.push("<div class='grid'>");
-				html.push("<div class='grid-head'>");
+				html.push("<table class='table table-striped table-hover table-bordered'>");
+				//html.push("<div class='grid-head'>");
 				html.push(header2(settings));
-				html.push("</div>");
-				html.push("<div class='grid-bd'>");
-				html.push("<table class='table1'>");
+				//html.push("</div>");
+				//html.push("<div class='grid-bd'>");
+				//html.push("<table class='table table-striped table-hover table-bordered'>");
 				//html.push(header(settings));
 				html.push("<tbody>");
 				html.push(body(rows, settings));
 				html.push("</tbody>");
 				html.push("</table>");
-				html.push("</div>");
-				html.push("</div>");
+				//html.push("</div>");
+				//html.push("</div>");
 				if(settings.pager){
 					var total = parseInt(el.data('total'));
 					html.push("<div class='pagination'>");
@@ -132,7 +132,7 @@
 						el.data('rows', dd.data);
 						el.data('allrow', dd.data);
 						$('tbody',el).empty().append(body(dd.data, opts));
-						$('tbody tr:odd', el).addClass('strips');
+						//$('tbody tr:odd', el).addClass('strips');
 					});
 				}else{
 					el.append(html.join(''));
@@ -339,7 +339,7 @@
 					page: _ds.page
 				});
 			}
-			$('tbody tr:odd', this).addClass('strips');
+			//$('tbody tr:odd', this).addClass('strips');
         },
         refresh: function(params){
     		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
@@ -389,7 +389,7 @@
 					page: _ds.page
 				});
 			}
-				$('tbody tr:odd', this).addClass('strips');
+				//$('tbody tr:odd', this).addClass('strips');
         },
         getSelected: function(){
         	var ret = [];
@@ -945,7 +945,7 @@
 		var span = $('<span>');
 		code.push("<tr");
 		if((index + 1) % 2 == 0){
-			code.push(" class='strips'");
+			//code.push(" class='strips'");
 		}
 		code.push(" editable=0>");
 		if(opts.multiselect){
@@ -1024,7 +1024,7 @@
 	}
 	function header2(opts){
 		var code = new Array();
-		code.push("<table class='table1' style='border:none;'>");
+		//code.push("<table class='table1' style='border:none;'>");
 		code.push("<thead><tr>");
 		if(opts.multiselect){
 			code.push("<th align=center width=20 class='checkbox checkall'><i class='icon-check-empty'></i></th>");
@@ -1047,7 +1047,8 @@
 			
 		});
 		//code.push("<th align=center width=6 class='scrollbar'></th>");
-		code.push("</tr></thead></table>");
+		code.push("</tr>");
+		//code.push("</thead></table>");
 		return code.join('');
 	}
 })(jQuery);
