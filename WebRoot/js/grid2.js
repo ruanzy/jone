@@ -545,9 +545,10 @@
 			    		ctr.selecttree('setValue', v0);
 					}else if(editor.type == 'selectbox'){
 						var ctrhtml = [];
-						ctrhtml.push('<input type="text" id="', rowindex, '_', field, '"/>');
+						ctrhtml.push('<input class="form-control" type="text" id="', rowindex, '_', field, '"/>');
 			    		var ctr = $(ctrhtml.join(''));
-			    		ctr.width(cell.width() - 2*padding).appendTo(cell);
+			    		//ctr.width(cell.width() - 2*padding);
+			    		ctr.appendTo(cell);
 			    		ctr.select2(editor.option);
 			    		ctr.select2("val", v0);
 					}
