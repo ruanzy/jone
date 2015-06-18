@@ -50,11 +50,11 @@ Version: 3.4.5 Timestamp: Mon Nov  4 08:22:42 PST 2013
               user-select: none;
 
     background-color: #fff;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff));
-    background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 50%);
-    background-image: -moz-linear-gradient(center bottom, #eee 0%, #fff 50%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#eeeeee', GradientType = 0);
-    background-image: linear-gradient(top, #fff 0%, #eee 50%);
+/*     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff)); */
+/*     background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 50%); */
+/*     background-image: -moz-linear-gradient(center bottom, #eee 0%, #fff 50%); */
+/*     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#eeeeee', GradientType = 0); */
+/*     background-image: linear-gradient(top, #fff 0%, #eee 50%); */
 }
 
 .select2-container.select2-drop-above .select2-choice {
