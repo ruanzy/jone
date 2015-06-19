@@ -2,11 +2,11 @@
 	<div class="form-group">
 		<label class="col-sm-1 control-label" for="no">编号</label>
 		<div class="col-sm-3">
-			<input class="form-control" id="no" type="text" />
+			<input class="form-control" id="no" type="text" disabled="disabled"/>
 		</div>
 		<label class="col-sm-2 control-label" for="createtime">拟定时间</label>
 		<div class="col-sm-2">
-			<input class="form-control" id="createtime" type="text" />
+			<input class="form-control" id="createtime" type="text" disabled="disabled"/>
 		</div>
 		<label class="col-sm-2 control-label" for="createtor">拟定人</label>
 		<div class="col-sm-2">
@@ -152,6 +152,7 @@
 			width : 80,
 			render : opRender
 		} ],
+		pager: false,
 		data : []
 	});
 	function unitRender(v, r) {
