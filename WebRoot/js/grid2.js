@@ -43,6 +43,21 @@
 		queryParam : {},
 		onSelectRow : function(rowid) {}
 	};
+	function loadData(url, param){
+		var ret = {total:0, data:[]};
+		$.ajax({
+			url:url,
+			type: 'post',
+			cache: false,
+			async: false,
+			data: param,
+			dataType: 'json',
+	        success: function(result){
+	        	ret = result;
+			}
+		});
+		return ret;
+	}
 	$.fn.table.methods = {
 		init: function(options) {
 			var settings = $.extend({}, $.fn.table.defaults, options);
