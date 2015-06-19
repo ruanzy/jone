@@ -47,7 +47,7 @@
 		init: function(options) {
 			var settings = $.extend({}, $.fn.table.defaults, options);
 			return this.each(function(){
-				var el = $(this).css({position: 'relative', zoom: 1});
+				var el = $(this);
 				var pager = settings.pager;
 				el.data('pagesize', 10);
 				$(this).data('inserted', []);
@@ -87,6 +87,7 @@
 				el.data('ds', _ds);
 				el.data('total', _ds.total);
 				var html = new Array();
+				html.push("<div style='position:relative; zoom: 1'>");
 				html.push("<table class='table table-striped table-hover table-bordered'>");
 				//html.push("<div class='grid-head'>");
 				html.push(header2(settings));
@@ -100,8 +101,9 @@
 				html.push("</table>");
 				//html.push("</div>");
 				//html.push("</div>");
-				html.push("<div class='loading' style='display : none; position:absolute;z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; opacity: .1; background-color: rgb(0, 0, 0);'></div>");
-				html.push('<div class="loadingMsg" style="display : none; z-index: 1011; position: absolute; padding: 10px; margin: 0 auto; top: 45%; left: 40%; text-align: center; color: rgb(0, 0, 0); border: 2px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255);">数据加载中...</div>');
+				html.push("<div class='loading' style='display : none; position:absolute;z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; opacity: .05; background-color: #000;'></div>");
+				html.push('<div class="loadingMsg" style="display : none; z-index: 1011; position: absolute; padding: 10px; top: 50%; left: 50%; text-align: center; color: rgb(0, 0, 0); border: 2px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255);">数据加载中...</div>');
+				html.push("</div>");
 				if(settings.pager){
 					var total = parseInt(el.data('total'));
 					html.push("<div class='pagination'>");
@@ -296,13 +298,11 @@
 			});
         },
         reload: function(params){
-        	var W = $(this).outerWidth();
-        	var H = $(this).outerHeight();
         	var loading = $(this).find('.loading').fadeIn();
         	var loadingMsg = $(this).find('.loadingMsg');
         	var w = loadingMsg.outerWidth();
         	var h = loadingMsg.outerHeight();
-        	loadingMsg.css({top: (H-h)/2, left:(W-w)/2}).fadeIn();
+        	loadingMsg.css({marginTop: -h/2, marginLeft: -w/2}).fadeIn();
     		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
     		var opts = $(this).data('options');
     		var pager = opts.pager;
