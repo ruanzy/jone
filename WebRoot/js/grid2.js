@@ -1,4 +1,4 @@
-﻿(function($){        
+﻿(function($){  
 	$.fn.table = function(method) {
 		if (typeof method == 'string') {
 			return arguments.callee.methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -40,6 +40,7 @@
 	$.fn.table.defaults = {
 		columns:[],
 		pager:true,
+		pagesize : 10,
 		queryParam : {},
 		onSelectRow : function(rowid) {}
 	};
@@ -68,6 +69,8 @@
 				$(this).data('inserted', []);
 				$(this).data('deleted', []);
 				$(this).data('updated', []);
+				var pageinfo = {'pagesize' : 10, 'page' : 1, 'total' : 0};
+				var changed = {'inserted' : [], 'deleted' : [], 'updated' : []};
 				var _ds;
 				if(settings.url){
 					el.data('url', settings.url);
@@ -312,12 +315,21 @@
 				});**/
 			});
         },
-        reload: function(params){
+        showLoading: function(){
         	var loading = $(this).find('.loading').fadeIn();
         	var loadingMsg = $(this).find('.loadingMsg');
         	var w = loadingMsg.outerWidth();
         	var h = loadingMsg.outerHeight();
         	loadingMsg.css({marginTop: -h/2, marginLeft: -w/2}).fadeIn();
+        },
+        hideLoading: function(){
+        	var loading = $(this).find('.loading');
+        	var loadingMsg = $(this).find('.loadingMsg');
+			loading.fadeOut();
+			loadingMsg.fadeOut();
+        },
+        reload: function(params){
+        	$(this).table('showLoading');
     		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
     		var opts = $(this).data('options');
     		var pager = opts.pager;
@@ -363,8 +375,7 @@
 					page: _ds.page
 				});
 			}
-			loading.fadeOut();
-			loadingMsg.fadeOut();
+			$(this).table('hideLoading');
         },
         refresh: function(params){
     		$('.checkbox', this).removeClass('selected').html("<i class='icon-check-empty'></i>");
