@@ -1,13 +1,13 @@
 <p>
-	<form id='search-form' class='search-box'>
-		<table>
-			<tr>
-				<td><input type="text" id='searchtxt' name="supplier"
-					autocomplete="off" placeholder="请输入供应商名" /></td>
-				<td><button type="button" class="btn btn-primary">查询</button></td>
-			</tr>
-		</table>
-	</form>
+<div class="row">
+	<div class="col-lg-4">
+		<div class="input-group pull-right"><input type="text" class="form-control" id='searchtxt' placeholder="请输入供应商名"> <span
+		class="input-group-btn">
+		<button class="btn btn-primary" type="button" id='searchbtn'>查询</button>
+	</span>
+	</div>
+	</div>
+</div>
 </p>
 <div id='kkk'></div>
 
@@ -96,8 +96,11 @@
 		return c;
 	}
 	function paymentmadeRender(v, r) {
-		var str = "&nbsp;&nbsp;<a href='javascript:;' onclick='viewdetail(\"" + r.no + "\")'>付款明细</a>";
-		return v + str;
+		var str = v;
+		if(v > 0){
+			str += "&nbsp;&nbsp;<a href='javascript:;' onclick='viewdetail(\"" + r.no + "\")'>付款明细</a>";
+		}
+		return str;
 	}
 	function paymentdueRender(v, r) {
 		var d = r.payment - r.payment_made;
@@ -162,8 +165,8 @@
 			}
 		});
 	}
-	$('#search-form button').click(function() {
-		var supplier = $('input[name=supplier]').val();
+	$('#searchbtn').click(function() {
+		var supplier = $('#searchtxt').val();
 		var params = {
 			supplier : supplier
 		};

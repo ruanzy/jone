@@ -1,14 +1,13 @@
-<p>
-	<form id='search-form' class='search-box'>
-		<table>
-			<tr>
-				<td><input type="text" id='searchtxt' name="customer"
-					autocomplete="off" placeholder="请输入客户名" /></td>
-				<td><button type="button" class="btn btn-primary">查询</button></td>
-			</tr>
-		</table>
-	</form>
-</p>
+<div class='row'> 
+	<div class="col-lg-4">
+		<div class="input-group pull-right"><input type="text" class="form-control" id='searchtxt' placeholder="请输入客户名"> <span
+		class="input-group-btn">
+		<button class="btn btn-primary" type="button" id='searchbtn'>查询</button>
+	</span>
+	</div>
+	</div>
+</div>
+<br>
 <div id='kkk'></div>
 
 <script type="text/javascript">
@@ -130,8 +129,8 @@
 			}
 		});
 	}
-	$('#search-form button').click(function() {
-		var customer = $('input[name=customer]').val();
+	$('#searchbtn').click(function() {
+		var customer = $('#searchtxt').val();
 		var params = {
 			customer : customer
 		};

@@ -1,23 +1,20 @@
-<div style='position: relative;margin-bottom:5px;'>
-	<a id='appendbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
-	<a id='updatedbtn' class='btn btn-primary'><i class="icon-save"></i> 保存</a>
-	<!-- 
-	<a id='addbtn' class='btn btn-primary'><i class="icon-plus"></i> 增加</a>
-<a id='delbtn' class='btn btn-default'><i class="icon-remove"></i> 删除</a>
-<a id='assignbtn' class='btn btn-default'><i class="icon-pencil"></i> 分配角色</a>
- -->
-	<div style="position: absolute;bottom : 0; right:10px;">
-		<form id='search-form' class='search-box'>
-			<table>
-				<tr>
-					<td><input type="text" id='searchtxt' name="name"
-						autocomplete="off" placeholder="请输入商品名" /></td>
-					<td><button type="button" class="btn btn-primary">查询</button></td>
-				</tr>
-			</table>
-		</form>
+<p>
+<div class="row">
+	<div class="col-lg-8"><button id='appendbtn' class='btn btn-primary'>
+		<i class="icon-plus"></i> 新建客户
+	</button>
+	<button id='updatedbtn' class='btn btn-primary'>
+		<i class="icon-save"></i> 保存
+	</button></div>
+	<div class="col-lg-4">
+		<div class="input-group pull-right"><input type="text" class="form-control" id='searchtxt' placeholder="请请输入商品名"> <span
+		class="input-group-btn">
+		<button class="btn btn-primary" type="button" id='searchbtn'>查询</button>
+	</span>
+	</div>
 	</div>
 </div>
+</p>
 <div id='kkk'></div>
 
 <script type="text/javascript">
@@ -288,12 +285,12 @@
 		});
 	}
 
-	$('#search-form button').click(function() {
+	$('#searchbtn').click(function() {
 		$('#kkk').table('reload');
 	});
 
 	function condition() {
-		var name = $('input[name=name]').val();
+		var name = $('#searchtxt').val();
 		var params = {
 			name : name
 		};
