@@ -61,5 +61,5 @@ public abstract class AbstractParser implements Parser
 		return sqlParser.getSmartCountSql(sql);
 	}
 
-	public abstract String getPageSql(String sql);
+	public abstract String getPageSql(String sql, int pageNum, int pageSize);
 }

@@ -1,14 +1,14 @@
 package com.rz.sql;
 
+import com.alibaba.fastjson.JSON;
+
 public class Test
 {
 	public static void main(String[] args)
 	{
-		String sql = "select a.name,a.age, b.* from a,b where name='abc' order by a.name desc";
-		Parser parser = AbstractParser.newParser("mysql");
-		String countSql = parser.getCountSql(sql);
-		System.out.println(countSql);
-		String pageSql = parser.getPageSql(sql);
-		System.out.println(pageSql);
+		String sql = "select * from users order by username desc";
+		PageHelper.startPage(1, 3);
+		Page p = PageHelper.pager(sql);
+		System.out.println(JSON.toJSON(p));
 	}
 }

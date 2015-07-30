@@ -1,4 +1,11 @@
-2015-04-08 11:09:16.064 SQL==>select * from users
-2015-04-08 11:23:41.879 SQL==>select * from log
-2015-04-08 11:23:57.455 SQL==>select * from users
-2015-04-08 11:25:18.948 SQL==>select * from log
+2015-07-30 13:42:22.484 SQL==>SELECT count(*) FROM user
+2015-07-30 13:42:53.577 SQL==>SELECT count(*) FROM users
+2015-07-30 13:42:53.655 SQL==>,
+2015-07-30 13:44:47.547 SQL==>SELECT count(*) FROM users
+2015-07-30 13:45:18.798 SQL==>,
+2015-07-30 13:45:51.017 SQL==>SELECT count(*) FROM users
+2015-07-30 13:46:09.068 SQL==>,
+2015-07-30 13:59:11.568 SQL==>SELECT count(*) FROM users
+2015-07-30 13:59:11.568 SQL==>select * from users order by name desc limit 0,3
+2015-07-30 13:59:33.521 SQL==>SELECT count(*) FROM users
+2015-07-30 13:59:33.521 SQL==>select * from users order by username desc limit 0,3

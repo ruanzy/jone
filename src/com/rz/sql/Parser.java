@@ -31,6 +31,6 @@ public interface Parser
 
 	String getCountSql(String sql);
 
-	String getPageSql(String sql);
+	String getPageSql(String sql, int pageNum, int pageSize);
 
 }
