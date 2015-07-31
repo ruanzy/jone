@@ -3,7 +3,7 @@ package com.rz.sql;
 import java.util.List;
 import com.rz.common.Record;
 
-public class Page
+public class Pager
 {
 	private int pageNum;
 
@@ -19,7 +19,7 @@ public class Page
 
 	private int pages;
 
-	public Page(int pageNum, int pageSize)
+	public Pager(int pageNum, int pageSize)
 	{
 		this.pageNum = pageNum;
 		this.pageSize = pageSize;

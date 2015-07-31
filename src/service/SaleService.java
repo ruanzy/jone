@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import com.rz.common.Record;
 import com.rz.dao.Dao;
-import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
+import com.rz.sql.Pager;
 import com.rz.tx.Transaction;
 
 public class SaleService
@@ -14,17 +14,15 @@ public class SaleService
 
 	public Pager outlist(Map<String, String> map)
 	{
-		String sqlid1 = "saleout.count";
 		String sqlid2 = "saleout.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 	
 	public Pager returnlist(Map<String, String> map)
 	{
-		String sqlid1 = "salereturn.count";
 		String sqlid2 = "salereturn.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 	

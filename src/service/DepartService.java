@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import com.rz.common.Record;
 import com.rz.dao.Dao;
-import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
+import com.rz.sql.Pager;
 
 public class DepartService
 {
@@ -19,9 +19,8 @@ public class DepartService
 	
 	public Pager find(Map<String, String> map)
 	{
-		String sqlid1 = "depart.count";
 		String sqlid2 = "depart.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 	

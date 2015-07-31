@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import com.rz.common.Record;
 import com.rz.dao.Dao;
-import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
+import com.rz.sql.Pager;
 import com.rz.tx.Transaction;
 
 public class CustomerService
@@ -61,9 +61,8 @@ public class CustomerService
 	
 	public Pager pager(Map<String, String> map)
 	{
-		String sqlid1 = "customer.count";
 		String sqlid2 = "customer.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 

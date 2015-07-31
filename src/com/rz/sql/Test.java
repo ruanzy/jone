@@ -8,7 +8,7 @@ public class Test
 	{
 		String sql = "select * from users order by username desc";
 		PageHelper.startPage(1, 3);
-		Page p = PageHelper.pager(sql);
+		Pager p = PageHelper.pager(sql);
 		System.out.println(JSON.toJSON(p));
 	}
 }

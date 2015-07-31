@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 import com.rz.common.Record;
 import com.rz.dao.Dao;
-import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
+import com.rz.sql.Pager;
 import com.rz.tx.Transaction;
 import com.rz.util.CryptUtil;
 import com.rz.util.StringUtils;
@@ -18,9 +18,8 @@ public class PmsService
 
 	public Pager finduser(Map<String, String> map)
 	{
-		String sqlid1 = "user.count";
 		String sqlid2 = "user.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 
@@ -214,9 +213,8 @@ public class PmsService
 
 	public Pager findlog(Map<String, String> map)
 	{
-		String sqlid1 = "log.count";
 		String sqlid2 = "log.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 
@@ -293,9 +291,8 @@ public class PmsService
 
 	public Pager finddic(Map<String, String> map)
 	{
-		String sqlid1 = "dic.count";
 		String sqlid2 = "dic.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 
@@ -346,9 +343,8 @@ public class PmsService
 
 	public Pager findrole(Map<String, String> map)
 	{
-		String sqlid1 = "role.count";
 		String sqlid2 = "role.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 

@@ -1,11 +1,5 @@
-2015-07-30 13:42:22.484 SQL==>SELECT count(*) FROM user
-2015-07-30 13:42:53.577 SQL==>SELECT count(*) FROM users
-2015-07-30 13:42:53.655 SQL==>,
-2015-07-30 13:44:47.547 SQL==>SELECT count(*) FROM users
-2015-07-30 13:45:18.798 SQL==>,
-2015-07-30 13:45:51.017 SQL==>SELECT count(*) FROM users
-2015-07-30 13:46:09.068 SQL==>,
-2015-07-30 13:59:11.568 SQL==>SELECT count(*) FROM users
-2015-07-30 13:59:11.568 SQL==>select * from users order by name desc limit 0,3
-2015-07-30 13:59:33.521 SQL==>SELECT count(*) FROM users
-2015-07-30 13:59:33.521 SQL==>select * from users order by username desc limit 0,3
+2015-07-31 10:40:54.346 SQL==>SELECT count(*) FROM log WHERE operator = 'admin' AND time >= '2014-05-28' AND time <= '2014-08-29'
+2015-07-31 10:42:51.165 SQL==>SELECT count(*) FROM users LEFT JOIN depart ON users.depart = depart.id
+2015-07-31 10:42:51.311 SQL==>select users.*, depart.name as departname from users left join depart on users.depart = depart.id order by users.id desc limit 0,10
+2015-07-31 10:44:55.152 SQL==>SELECT count(*) FROM users LEFT JOIN depart ON users.depart = depart.id
+2015-07-31 10:44:55.160 SQL==>select users.*, depart.name as departname from users left join depart on users.depart = depart.id order by users.id desc limit 0,10

@@ -18,6 +18,8 @@ import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import com.rz.common.Record;
+import com.rz.sql.PageHelper;
+import com.rz.sql.Pager;
 
 @SuppressWarnings("unchecked")
 public final class SQLMapper
@@ -104,34 +106,13 @@ public final class SQLMapper
 		return dao.find(sql, ps.toArray());
 	}
 
-	public static Pager pager(String countsqlid, String pagersqlid, Map<String, String> params)
+	public static Pager pager(String sqlid, Map<String, String> params)
 	{
 		int page = toInt(params.get("page"), 1);
 		int pagesize = toInt(params.get("pagesize"), 10);
-		Pager pager = new Pager(page, pagesize);
-		SQL s1 = getSQL(countsqlid, params);
-		SQL s2 = getSQL(pagersqlid, params);
-		String sql1 = s1.getSql();
-		String sql2 = s2.getSql();
-		int total = 0;
-		List<Record> data = new ArrayList<Record>();
-		Object scalar = dao.scalar(sql1, s1.getPs().toArray());
-		if (scalar != null)
-		{
-			total = Integer.valueOf(scalar.toString());
-			pager.setTotal(total);
-		}
-		if (total > 0)
-		{
-			int pagecount = (total % pagesize == 0) ? (total / pagesize) : (total / pagesize + 1);
-			if (pagecount > 0)
-			{
-				page = (pagecount < page) ? pagecount : page;
-			}
-			data = dao.pager(sql2, s2.getPs(), page, pagesize);
-		}
-		pager.setData(data);
-		return pager;
+		PageHelper.startPage(page, pagesize);
+		SQL sql = getSQL(sqlid, params);
+		return PageHelper.pager(sql.getSql(), sql.getPs().toArray());
 	}
 
 	private static SQL parse(String text, String openToken, String closeToken, Map<String, String> params)

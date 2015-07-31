@@ -1,10 +1,9 @@
 package service;
 
 import java.util.Map;
-
 import com.rz.dao.Dao;
-import com.rz.dao.Pager;
 import com.rz.dao.SQLMapper;
+import com.rz.sql.Pager;
 import com.rz.tx.Transaction;
 
 public class FundService {
@@ -47,9 +46,8 @@ public class FundService {
 	
 	public Pager payablepager(Map<String, String> map)
 	{
-		String sqlid1 = "payable.count";
 		String sqlid2 = "payable.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 
@@ -90,9 +88,8 @@ public class FundService {
 	
 	public Pager receivablepager(Map<String, String> map)
 	{
-		String sqlid1 = "receivable.count";
 		String sqlid2 = "receivable.selectAll";
-		Pager pager = SQLMapper.pager(sqlid1, sqlid2, map);
+		Pager pager = SQLMapper.pager(sqlid2, map);
 		return pager;
 	}
 }
