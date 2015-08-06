@@ -19,7 +19,7 @@ public class PageHelper
 		Pager pager = LOCAL_PAGE.get();
 		Parser parser = AbstractParser.newParser("mysql");
 		String countSql = parser.getCountSql(sql);
-		String pageSql = parser.getPageSql(sql, pager.getPageNum(), pager.getPageSize());
+		String pageSql = parser.getPageSql(sql, pager.getPage(), pager.getPagesize());
 		Long count = 0L;
 		Object scalar = Dao.getInstance().scalar(countSql, params);
 		if (scalar != null)

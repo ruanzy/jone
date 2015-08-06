@@ -5,13 +5,9 @@ import com.rz.common.Record;
 
 public class Pager
 {
-	private int pageNum;
+	private int page;
 
-	private int pageSize;
-
-	private int startRow;
-
-	private int endRow;
+	private int pagesize;
 
 	private long total;
 
@@ -19,12 +15,10 @@ public class Pager
 
 	private int pages;
 
-	public Pager(int pageNum, int pageSize)
+	public Pager(int page, int pagesize)
 	{
-		this.pageNum = pageNum;
-		this.pageSize = pageSize;
-		this.startRow = this.pageNum > 0 ? (this.pageNum - 1) * this.pageSize : 0;
-		this.endRow = this.startRow + this.pageSize * (this.pageNum > 0 ? 1 : 0);
+		this.page = page;
+		this.pagesize = pagesize;
 	}
 
 	public List<Record> getData()
@@ -37,24 +31,14 @@ public class Pager
 		return pages;
 	}
 
-	public int getEndRow()
+	public int getPage()
 	{
-		return endRow;
+		return page;
 	}
 
-	public int getPageNum()
+	public int getPagesize()
 	{
-		return pageNum;
-	}
-
-	public int getPageSize()
-	{
-		return pageSize;
-	}
-
-	public int getStartRow()
-	{
-		return startRow;
+		return pagesize;
 	}
 
 	public long getTotal()
@@ -65,9 +49,9 @@ public class Pager
 	public void setTotal(long total)
 	{
 		this.total = total;
-		if (pageSize > 0)
+		if (pagesize > 0)
 		{
-			pages = (int) (total / pageSize + ((total % pageSize == 0) ? 0 : 1));
+			pages = (int) (total / pagesize + ((total % pagesize == 0) ? 0 : 1));
 		}
 		else
 		{
