@@ -1,0 +1,5 @@
+2015-07-31 10:40:54.346 SQL==>SELECT count(*) FROM log WHERE operator = 'admin' AND time >= '2014-05-28' AND time <= '2014-08-29'
+2015-07-31 10:42:51.165 SQL==>SELECT count(*) FROM users LEFT JOIN depart ON users.depart = depart.id
+2015-07-31 10:42:51.311 SQL==>select users.*, depart.name as departname from users left join depart on users.depart = depart.id order by users.id desc limit 0,10
+2015-07-31 10:44:55.152 SQL==>SELECT count(*) FROM users LEFT JOIN depart ON users.depart = depart.id
+2015-07-31 10:44:55.160 SQL==>select users.*, depart.name as departname from users left join depart on users.depart = depart.id order by users.id desc limit 0,10
