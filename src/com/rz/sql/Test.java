@@ -1,7 +1,8 @@
 package com.rz.sql;
 
-import it.sauronsoftware.cron4j.Scheduler;
+import java.util.Date;
 import com.alibaba.fastjson.JSON;
+import com.rz.schedule.Schedules2;
 
 public class Test
 {
@@ -12,15 +13,23 @@ public class Test
 		Pager p = PageHelper.pager(sql);
 		System.out.println(JSON.toJSON(p));
 
-		Scheduler s = new Scheduler();
-		s.schedule("* * * * *", new Runnable()
+		Schedules2.addTask("* * * * *", new Runnable()
 		{
 			public void run()
 			{
+				System.out.println(new Date());
+				System.out.println("A minute ticked away...");
+			}
+		});
+		Schedules2.addTask("*/2 * * * *", new Runnable()
+		{
+			public void run()
+			{
+				System.out.println(new Date());
 				System.out.println("Another minute ticked away...");
 			}
 		});
-		s.start();
+		Schedules2.start();
 //		try
 //		{
 //			Thread.sleep(1000L * 60L * 5);
