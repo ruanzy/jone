@@ -1,18 +1,34 @@
 package com.rz.aop2;
 
 import java.lang.reflect.Method;
+import java.util.List;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 public class ProxyFactory implements MethodInterceptor
 {
-	private Enhancer enhancer = new Enhancer();
-	AOPHandler handler;
+	List<AOPHandler> handlers;
 
-	public Object create(Class<?> clazz, AOPHandler handler)
+	private ProxyFactory()
 	{
-		this.handler = handler;
+
+	}
+
+	private static class SingletonHolder
+	{
+		private final static ProxyFactory INSTANCE = new ProxyFactory();
+	}
+
+	public static ProxyFactory getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+
+	public Object create(Class<?> clazz, List<AOPHandler> handlers)
+	{
+		Enhancer enhancer = new Enhancer();
+		this.handlers = handlers;
 		enhancer.setSuperclass(clazz);
 		enhancer.setCallback(this);
 		return enhancer.create();
@@ -21,19 +37,31 @@ public class ProxyFactory implements MethodInterceptor
 	public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
 	{
 		Object result = null;
-		handler.doBefore();
+		for (AOPHandler handler : handlers)
+		{
+			handler.doBefore();
+		}
 		try
 		{
 			result = methodProxy.invokeSuper(proxy, args);
-			handler.doAfter();
+			for (AOPHandler handler : handlers)
+			{
+				handler.doAfter();
+			}
 		}
 		catch (Exception e)
 		{
-			handler.doException();
+			for (AOPHandler handler : handlers)
+			{
+				handler.doException();
+			}
 		}
 		finally
 		{
-			handler.doFinally();
+			for (AOPHandler handler : handlers)
+			{
+				handler.doFinally();
+			}
 		}
 		return result;
 	}
