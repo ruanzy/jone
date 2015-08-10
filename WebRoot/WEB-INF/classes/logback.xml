@@ -41,6 +41,8 @@
     <logger name="action.Login" level="DEBUG" additivity="false">  
         <appender-ref ref="MONGO3"/>  
     </logger>
+    
+    <logger name="org.quartz" level="OFF" />  
 	
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />

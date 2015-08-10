@@ -1,12 +1,638 @@
-2015-08-07 10:21:46.332 SQL==>SELECT count(*) FROM users
-2015-08-07 10:21:46.346 SQL==>select * from users order by username desc limit 0,3
-2015-08-07 10:23:04.989 SQL==>SELECT count(*) FROM users
-2015-08-07 10:23:04.996 SQL==>select * from users order by username desc limit 0,3
-2015-08-07 10:24:33.735 SQL==>SELECT count(*) FROM users
-2015-08-07 10:24:33.742 SQL==>select * from users order by username desc limit 0,3
-2015-08-07 10:26:29.560 SQL==>SELECT count(*) FROM users
-2015-08-07 10:26:29.566 SQL==>select * from users order by username desc limit 0,3
-2015-08-07 10:27:56.504 SQL==>SELECT count(*) FROM users
-2015-08-07 10:27:56.512 SQL==>select * from users order by username desc limit 0,3
-2015-08-07 17:41:33.614 SQL==>SELECT count(*) FROM users
-2015-08-07 17:41:33.799 SQL==>select * from users order by username desc limit 0,3
+2015-08-10 14:56:35.358 Using default implementation for ThreadExecutor
+2015-08-10 14:56:35.374 Job execution threads will use class loader of thread: main
+2015-08-10 14:56:35.389 Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2015-08-10 14:56:35.389 Quartz Scheduler v.2.0.2 created.
+2015-08-10 14:56:35.389 RAMJobStore initialized.
+2015-08-10 14:56:35.389 Scheduler meta-data: Quartz Scheduler (v2.0.2) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2015-08-10 14:56:35.389 Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2015-08-10 14:56:35.389 Quartz scheduler version: 2.0.2
+2015-08-10 14:56:35.483 Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2015-08-10 14:56:35.483 batch acquisition of 1 triggers
+2015-08-10 14:56:35.483 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:56:35.483 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:56:35.483 batch acquisition of 1 triggers
+2015-08-10 14:56:35.483 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:56:35.483 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:56:35.483 batch acquisition of 1 triggers
+2015-08-10 14:56:36.398 Checking for available updated version of Quartz...
+2015-08-10 14:56:36.982 New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2015-08-10 14:56:40.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:56:40.014 batch acquisition of 1 triggers
+2015-08-10 14:56:40.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:56:40.014 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:56:40.014 batch acquisition of 1 triggers
+2015-08-10 14:56:40.014 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:56:45.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:56:45.005 batch acquisition of 1 triggers
+2015-08-10 14:56:45.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:56:45.005 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:56:45.005 batch acquisition of 1 triggers
+2015-08-10 14:56:45.005 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:56:50.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:56:50.015 batch acquisition of 1 triggers
+2015-08-10 14:56:50.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:56:50.015 batch acquisition of 1 triggers
+2015-08-10 14:56:50.015 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:56:50.015 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:56:55.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:56:55.008 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:56:55.008 batch acquisition of 1 triggers
+2015-08-10 14:56:55.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:56:55.008 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:56:55.008 batch acquisition of 1 triggers
+2015-08-10 14:57:00.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:00.006 batch acquisition of 1 triggers
+2015-08-10 14:57:00.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:00.006 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:00.006 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:00.006 batch acquisition of 1 triggers
+2015-08-10 14:57:05.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:05.008 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:05.008 batch acquisition of 1 triggers
+2015-08-10 14:57:05.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:05.008 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:05.008 batch acquisition of 1 triggers
+2015-08-10 14:57:10.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:10.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:10.001 batch acquisition of 1 triggers
+2015-08-10 14:57:10.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:10.001 batch acquisition of 1 triggers
+2015-08-10 14:57:10.001 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:15.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:15.008 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:15.008 batch acquisition of 1 triggers
+2015-08-10 14:57:15.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:15.008 batch acquisition of 1 triggers
+2015-08-10 14:57:15.008 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:20.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:20.014 batch acquisition of 1 triggers
+2015-08-10 14:57:20.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:20.014 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:20.014 batch acquisition of 1 triggers
+2015-08-10 14:57:20.030 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:25.013 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:25.013 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:25.013 batch acquisition of 1 triggers
+2015-08-10 14:57:25.013 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:25.013 batch acquisition of 1 triggers
+2015-08-10 14:57:25.013 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:30.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:30.011 batch acquisition of 1 triggers
+2015-08-10 14:57:30.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:30.011 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:30.011 batch acquisition of 1 triggers
+2015-08-10 14:57:30.011 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:35.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:35.014 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:35.014 batch acquisition of 1 triggers
+2015-08-10 14:57:35.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:35.014 batch acquisition of 1 triggers
+2015-08-10 14:57:35.014 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:40.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:40.015 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:40.015 batch acquisition of 1 triggers
+2015-08-10 14:57:40.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:40.015 batch acquisition of 1 triggers
+2015-08-10 14:57:40.042 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:45.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:45.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:45.002 batch acquisition of 1 triggers
+2015-08-10 14:57:45.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:45.002 batch acquisition of 1 triggers
+2015-08-10 14:57:45.002 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:50.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:50.006 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:50.006 batch acquisition of 1 triggers
+2015-08-10 14:57:50.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:50.006 batch acquisition of 1 triggers
+2015-08-10 14:57:50.021 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:57:55.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:57:55.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:57:55.002 batch acquisition of 1 triggers
+2015-08-10 14:57:55.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:57:55.004 batch acquisition of 1 triggers
+2015-08-10 14:57:55.007 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:00.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:00.006 batch acquisition of 1 triggers
+2015-08-10 14:58:00.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:00.006 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:00.006 batch acquisition of 1 triggers
+2015-08-10 14:58:00.006 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:05.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:05.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:05.002 batch acquisition of 1 triggers
+2015-08-10 14:58:05.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:05.004 batch acquisition of 1 triggers
+2015-08-10 14:58:05.017 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:10.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:10.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:10.002 batch acquisition of 1 triggers
+2015-08-10 14:58:10.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:10.002 batch acquisition of 1 triggers
+2015-08-10 14:58:10.002 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:15.000 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:15.000 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:15.001 batch acquisition of 1 triggers
+2015-08-10 14:58:15.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:15.002 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:15.002 batch acquisition of 1 triggers
+2015-08-10 14:58:20.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:20.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:20.002 batch acquisition of 1 triggers
+2015-08-10 14:58:20.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:20.003 batch acquisition of 1 triggers
+2015-08-10 14:58:20.003 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:25.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:25.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:25.002 batch acquisition of 1 triggers
+2015-08-10 14:58:25.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:25.004 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:25.005 batch acquisition of 1 triggers
+2015-08-10 14:58:30.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:30.006 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:30.006 batch acquisition of 1 triggers
+2015-08-10 14:58:30.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:30.006 batch acquisition of 1 triggers
+2015-08-10 14:58:30.006 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:35.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:35.011 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:35.011 batch acquisition of 1 triggers
+2015-08-10 14:58:35.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:35.011 batch acquisition of 1 triggers
+2015-08-10 14:58:35.011 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:40.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:40.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:40.002 batch acquisition of 1 triggers
+2015-08-10 14:58:40.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:40.002 batch acquisition of 1 triggers
+2015-08-10 14:58:40.002 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:45.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:45.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:45.002 batch acquisition of 1 triggers
+2015-08-10 14:58:45.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:45.005 batch acquisition of 1 triggers
+2015-08-10 14:58:45.006 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:50.000 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:50.001 batch acquisition of 1 triggers
+2015-08-10 14:58:50.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:50.005 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:58:50.005 batch acquisition of 1 triggers
+2015-08-10 14:58:50.006 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:55.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:58:55.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:58:55.003 batch acquisition of 1 triggers
+2015-08-10 14:58:55.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:58:55.005 batch acquisition of 1 triggers
+2015-08-10 14:58:55.005 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:00.000 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:00.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:00.010 batch acquisition of 1 triggers
+2015-08-10 14:59:00.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:00.012 batch acquisition of 1 triggers
+2015-08-10 14:59:00.013 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:05.000 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:05.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:05.001 batch acquisition of 1 triggers
+2015-08-10 14:59:05.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:05.002 batch acquisition of 1 triggers
+2015-08-10 14:59:05.003 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:10.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:10.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:10.003 batch acquisition of 1 triggers
+2015-08-10 14:59:10.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:10.005 batch acquisition of 1 triggers
+2015-08-10 14:59:10.006 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:15.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:15.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:15.002 batch acquisition of 1 triggers
+2015-08-10 14:59:15.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:15.005 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:15.006 batch acquisition of 1 triggers
+2015-08-10 14:59:20.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:20.005 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:20.005 batch acquisition of 1 triggers
+2015-08-10 14:59:20.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:20.005 batch acquisition of 1 triggers
+2015-08-10 14:59:20.005 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:25.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:25.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:25.003 batch acquisition of 1 triggers
+2015-08-10 14:59:25.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:25.004 batch acquisition of 1 triggers
+2015-08-10 14:59:25.008 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:30.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:30.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:30.002 batch acquisition of 1 triggers
+2015-08-10 14:59:30.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:30.002 batch acquisition of 1 triggers
+2015-08-10 14:59:30.003 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:35.010 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:35.010 batch acquisition of 1 triggers
+2015-08-10 14:59:35.010 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:35.010 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:35.010 batch acquisition of 1 triggers
+2015-08-10 14:59:35.010 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:40.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:40.003 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:40.003 batch acquisition of 1 triggers
+2015-08-10 14:59:40.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:40.003 batch acquisition of 1 triggers
+2015-08-10 14:59:40.003 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:45.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:45.031 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:45.047 batch acquisition of 1 triggers
+2015-08-10 14:59:45.047 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:45.063 batch acquisition of 1 triggers
+2015-08-10 14:59:45.063 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:50.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:50.003 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:50.003 batch acquisition of 1 triggers
+2015-08-10 14:59:50.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:50.003 batch acquisition of 1 triggers
+2015-08-10 14:59:50.003 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 14:59:55.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 14:59:55.006 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 14:59:55.006 batch acquisition of 1 triggers
+2015-08-10 14:59:55.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 14:59:55.006 batch acquisition of 1 triggers
+2015-08-10 14:59:55.006 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:00.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:00.014 batch acquisition of 1 triggers
+2015-08-10 15:00:00.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:00.014 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:00.014 batch acquisition of 1 triggers
+2015-08-10 15:00:00.014 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:05.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:05.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:05.001 batch acquisition of 1 triggers
+2015-08-10 15:00:05.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:05.033 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:05.033 batch acquisition of 1 triggers
+2015-08-10 15:00:10.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:10.002 batch acquisition of 1 triggers
+2015-08-10 15:00:10.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:10.002 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:10.002 batch acquisition of 1 triggers
+2015-08-10 15:00:10.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:15.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:15.003 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:15.003 batch acquisition of 1 triggers
+2015-08-10 15:00:15.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:15.003 batch acquisition of 1 triggers
+2015-08-10 15:00:15.003 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:20.010 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:20.010 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:20.010 batch acquisition of 1 triggers
+2015-08-10 15:00:20.010 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:20.010 batch acquisition of 1 triggers
+2015-08-10 15:00:20.010 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:25.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:25.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:25.002 batch acquisition of 1 triggers
+2015-08-10 15:00:25.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:25.002 batch acquisition of 1 triggers
+2015-08-10 15:00:25.002 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:30.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:30.004 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:30.004 batch acquisition of 1 triggers
+2015-08-10 15:00:30.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:30.004 batch acquisition of 1 triggers
+2015-08-10 15:00:30.004 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:35.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:35.008 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:35.008 batch acquisition of 1 triggers
+2015-08-10 15:00:35.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:35.008 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:35.008 batch acquisition of 1 triggers
+2015-08-10 15:00:40.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:40.011 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:40.011 batch acquisition of 1 triggers
+2015-08-10 15:00:40.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:40.011 batch acquisition of 1 triggers
+2015-08-10 15:00:40.011 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:45.013 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:45.013 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:45.013 batch acquisition of 1 triggers
+2015-08-10 15:00:45.013 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:45.013 batch acquisition of 1 triggers
+2015-08-10 15:00:45.013 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:50.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:50.014 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:50.014 batch acquisition of 1 triggers
+2015-08-10 15:00:50.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:50.014 batch acquisition of 1 triggers
+2015-08-10 15:00:50.014 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:00:55.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:00:55.008 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:00:55.008 batch acquisition of 1 triggers
+2015-08-10 15:00:55.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:00:55.008 batch acquisition of 1 triggers
+2015-08-10 15:00:55.008 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:00.013 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:00.013 batch acquisition of 1 triggers
+2015-08-10 15:01:00.013 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:00.013 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:00.013 batch acquisition of 1 triggers
+2015-08-10 15:01:00.013 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:05.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:05.014 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:05.014 batch acquisition of 1 triggers
+2015-08-10 15:01:05.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:05.014 batch acquisition of 1 triggers
+2015-08-10 15:01:05.014 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:10.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:10.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:10.001 batch acquisition of 1 triggers
+2015-08-10 15:01:10.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:10.001 batch acquisition of 1 triggers
+2015-08-10 15:01:10.001 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:15.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:15.004 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:15.004 batch acquisition of 1 triggers
+2015-08-10 15:01:15.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:15.004 batch acquisition of 1 triggers
+2015-08-10 15:01:15.004 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:20.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:20.015 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:20.015 batch acquisition of 1 triggers
+2015-08-10 15:01:20.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:20.015 batch acquisition of 1 triggers
+2015-08-10 15:01:20.031 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:25.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:25.003 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:25.003 batch acquisition of 1 triggers
+2015-08-10 15:01:25.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:25.003 batch acquisition of 1 triggers
+2015-08-10 15:01:25.003 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:30.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:30.005 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:30.005 batch acquisition of 1 triggers
+2015-08-10 15:01:30.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:30.005 batch acquisition of 1 triggers
+2015-08-10 15:01:30.005 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:35.007 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:35.007 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:35.007 batch acquisition of 1 triggers
+2015-08-10 15:01:35.007 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:35.007 batch acquisition of 1 triggers
+2015-08-10 15:01:35.007 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:40.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:40.011 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:40.011 batch acquisition of 1 triggers
+2015-08-10 15:01:40.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:40.011 batch acquisition of 1 triggers
+2015-08-10 15:01:40.011 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:45.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:45.011 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:45.011 batch acquisition of 1 triggers
+2015-08-10 15:01:45.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:45.011 batch acquisition of 1 triggers
+2015-08-10 15:01:45.011 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:50.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:50.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:01:50.001 batch acquisition of 1 triggers
+2015-08-10 15:01:50.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:50.001 batch acquisition of 1 triggers
+2015-08-10 15:01:50.001 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:55.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:01:55.001 batch acquisition of 1 triggers
+2015-08-10 15:01:55.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:01:55.001 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:01:55.001 batch acquisition of 1 triggers
+2015-08-10 15:01:55.001 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:00.010 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:00.010 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:00.010 batch acquisition of 1 triggers
+2015-08-10 15:02:00.010 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:00.010 batch acquisition of 1 triggers
+2015-08-10 15:02:00.010 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:02:05.016 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:05.016 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:05.016 batch acquisition of 1 triggers
+2015-08-10 15:02:05.016 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:05.016 batch acquisition of 1 triggers
+2015-08-10 15:02:05.016 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:02:10.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:10.002 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:10.002 batch acquisition of 1 triggers
+2015-08-10 15:02:10.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:10.002 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:02:10.002 batch acquisition of 1 triggers
+2015-08-10 15:02:15.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:15.005 batch acquisition of 1 triggers
+2015-08-10 15:02:15.005 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:15.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:15.005 batch acquisition of 1 triggers
+2015-08-10 15:02:15.005 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:02:20.007 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:20.007 batch acquisition of 1 triggers
+2015-08-10 15:02:20.007 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:20.007 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:02:20.007 batch acquisition of 1 triggers
+2015-08-10 15:02:20.007 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:25.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:25.014 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:25.014 batch acquisition of 1 triggers
+2015-08-10 15:02:25.014 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:25.014 batch acquisition of 1 triggers
+2015-08-10 15:02:25.014 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:02:30.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:30.015 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:30.015 batch acquisition of 1 triggers
+2015-08-10 15:02:30.015 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:30.015 batch acquisition of 1 triggers
+2015-08-10 15:02:30.015 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:02:35.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:35.005 batch acquisition of 1 triggers
+2015-08-10 15:02:35.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:35.005 Calling execute on job DEFAULT.6da64b5bd2ee-1a78a6af-ddeb-4f74-9123-6b05e37bc0b3
+2015-08-10 15:02:35.005 batch acquisition of 1 triggers
+2015-08-10 15:02:35.005 Calling execute on job DEFAULT.6da64b5bd2ee-4d23cebe-a258-4a8c-9008-0761a7e1d97f
+2015-08-10 15:02:44.372 Using default implementation for ThreadExecutor
+2015-08-10 15:02:44.387 Job execution threads will use class loader of thread: main
+2015-08-10 15:02:44.418 Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2015-08-10 15:02:44.418 Quartz Scheduler v.2.0.2 created.
+2015-08-10 15:02:44.418 RAMJobStore initialized.
+2015-08-10 15:02:44.418 Scheduler meta-data: Quartz Scheduler (v2.0.2) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2015-08-10 15:02:44.418 Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2015-08-10 15:02:44.418 Quartz scheduler version: 2.0.2
+2015-08-10 15:02:44.528 Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2015-08-10 15:02:44.528 batch acquisition of 1 triggers
+2015-08-10 15:02:45.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:45.027 batch acquisition of 1 triggers
+2015-08-10 15:02:45.027 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:45.027 batch acquisition of 1 triggers
+2015-08-10 15:02:45.027 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:02:45.027 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:02:45.422 Checking for available updated version of Quartz...
+2015-08-10 15:02:45.891 New Quartz update(s) found: 2.1.7 [http://www.terracotta.org/kit/reflector?kitID=default&pageID=QuartzChangeLog]
+2015-08-10 15:02:50.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:50.001 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:02:50.001 batch acquisition of 1 triggers
+2015-08-10 15:02:50.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:50.001 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:02:50.001 batch acquisition of 1 triggers
+2015-08-10 15:02:55.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:02:55.005 batch acquisition of 1 triggers
+2015-08-10 15:02:55.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:02:55.005 batch acquisition of 1 triggers
+2015-08-10 15:02:55.005 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:02:55.005 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:00.007 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:00.007 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:00.007 batch acquisition of 1 triggers
+2015-08-10 15:03:00.007 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:00.007 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:00.007 batch acquisition of 1 triggers
+2015-08-10 15:03:05.013 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:05.013 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:05.013 batch acquisition of 1 triggers
+2015-08-10 15:03:05.013 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:05.013 batch acquisition of 1 triggers
+2015-08-10 15:03:05.013 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:10.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:10.002 batch acquisition of 1 triggers
+2015-08-10 15:03:10.003 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:10.007 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:10.010 batch acquisition of 1 triggers
+2015-08-10 15:03:10.015 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:15.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:15.005 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:15.006 batch acquisition of 1 triggers
+2015-08-10 15:03:15.008 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:15.008 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:15.009 batch acquisition of 1 triggers
+2015-08-10 15:03:20.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:20.006 batch acquisition of 1 triggers
+2015-08-10 15:03:20.007 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:20.008 batch acquisition of 1 triggers
+2015-08-10 15:03:20.009 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:20.010 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:25.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:25.002 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:25.002 batch acquisition of 1 triggers
+2015-08-10 15:03:25.004 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:25.005 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:25.006 batch acquisition of 1 triggers
+2015-08-10 15:03:30.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:30.002 batch acquisition of 1 triggers
+2015-08-10 15:03:30.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:30.003 batch acquisition of 1 triggers
+2015-08-10 15:03:30.007 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:30.008 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:35.000 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:35.000 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:35.001 batch acquisition of 1 triggers
+2015-08-10 15:03:35.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:35.002 batch acquisition of 1 triggers
+2015-08-10 15:03:35.010 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:40.000 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:40.000 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:40.001 batch acquisition of 1 triggers
+2015-08-10 15:03:40.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:40.002 batch acquisition of 1 triggers
+2015-08-10 15:03:40.003 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:45.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:45.009 batch acquisition of 1 triggers
+2015-08-10 15:03:45.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:45.012 batch acquisition of 1 triggers
+2015-08-10 15:03:45.017 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:45.019 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:50.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:50.003 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:50.007 batch acquisition of 1 triggers
+2015-08-10 15:03:50.009 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:50.010 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:03:50.011 batch acquisition of 1 triggers
+2015-08-10 15:03:55.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:03:55.002 batch acquisition of 1 triggers
+2015-08-10 15:03:55.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:03:55.004 batch acquisition of 1 triggers
+2015-08-10 15:03:55.004 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:03:55.005 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:00.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:00.010 batch acquisition of 1 triggers
+2015-08-10 15:04:00.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:00.013 batch acquisition of 1 triggers
+2015-08-10 15:04:00.020 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:00.019 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:05.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:05.002 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:05.003 batch acquisition of 1 triggers
+2015-08-10 15:04:05.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:05.003 batch acquisition of 1 triggers
+2015-08-10 15:04:05.004 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:10.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:10.002 batch acquisition of 1 triggers
+2015-08-10 15:04:10.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:10.004 batch acquisition of 1 triggers
+2015-08-10 15:04:10.004 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:10.005 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:15.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:15.002 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:15.002 batch acquisition of 1 triggers
+2015-08-10 15:04:15.005 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:15.006 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:15.006 batch acquisition of 1 triggers
+2015-08-10 15:04:20.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:20.002 batch acquisition of 1 triggers
+2015-08-10 15:04:20.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:20.003 batch acquisition of 1 triggers
+2015-08-10 15:04:20.004 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:20.005 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:25.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:25.002 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:25.009 batch acquisition of 1 triggers
+2015-08-10 15:04:25.011 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:25.012 batch acquisition of 1 triggers
+2015-08-10 15:04:25.013 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:30.000 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:30.000 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:30.001 batch acquisition of 1 triggers
+2015-08-10 15:04:30.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:30.002 batch acquisition of 1 triggers
+2015-08-10 15:04:30.006 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:35.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:35.001 batch acquisition of 1 triggers
+2015-08-10 15:04:35.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:35.003 batch acquisition of 1 triggers
+2015-08-10 15:04:35.004 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:35.004 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:40.002 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:40.008 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:40.009 batch acquisition of 1 triggers
+2015-08-10 15:04:40.010 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:40.011 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:40.011 batch acquisition of 1 triggers
+2015-08-10 15:04:45.000 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:45.011 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:45.022 batch acquisition of 1 triggers
+2015-08-10 15:04:45.025 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:45.026 batch acquisition of 1 triggers
+2015-08-10 15:04:45.027 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:50.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:50.002 batch acquisition of 1 triggers
+2015-08-10 15:04:50.006 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:50.006 batch acquisition of 1 triggers
+2015-08-10 15:04:50.007 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:50.008 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:55.001 Producing instance of Job 'DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b', class=com.rz.task.QuartzTeacher
+2015-08-10 15:04:55.001 Calling execute on job DEFAULT.6da64b5bd2ee-a291938c-b4dd-448e-85b5-1f7b181bf42b
+2015-08-10 15:04:55.002 batch acquisition of 1 triggers
+2015-08-10 15:04:55.003 Producing instance of Job 'DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78', class=com.rz.task.QuartzStudent
+2015-08-10 15:04:55.004 Calling execute on job DEFAULT.6da64b5bd2ee-6e79dbf5-6ef8-4dc2-92ad-704acb0d5b78
+2015-08-10 15:04:55.004 batch acquisition of 1 triggers
