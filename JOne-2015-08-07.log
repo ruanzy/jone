@@ -1,0 +1,12 @@
+2015-08-07 10:21:46.332 SQL==>SELECT count(*) FROM users
+2015-08-07 10:21:46.346 SQL==>select * from users order by username desc limit 0,3
+2015-08-07 10:23:04.989 SQL==>SELECT count(*) FROM users
+2015-08-07 10:23:04.996 SQL==>select * from users order by username desc limit 0,3
+2015-08-07 10:24:33.735 SQL==>SELECT count(*) FROM users
+2015-08-07 10:24:33.742 SQL==>select * from users order by username desc limit 0,3
+2015-08-07 10:26:29.560 SQL==>SELECT count(*) FROM users
+2015-08-07 10:26:29.566 SQL==>select * from users order by username desc limit 0,3
+2015-08-07 10:27:56.504 SQL==>SELECT count(*) FROM users
+2015-08-07 10:27:56.512 SQL==>select * from users order by username desc limit 0,3
+2015-08-07 17:41:33.614 SQL==>SELECT count(*) FROM users
+2015-08-07 17:41:33.799 SQL==>select * from users order by username desc limit 0,3
