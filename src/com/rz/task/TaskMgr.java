@@ -18,16 +18,26 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.rz.util.StringUtils;
 
-public class TaskUtil
+public class TaskMgr
 {
 	private static Scheduler sched;
+	
+	private static class SingletonHolder
+	{
+		private final static TaskMgr INSTANCE = new TaskMgr();
+	}
 
-	public TaskUtil()
+	public static TaskMgr getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+
+	private TaskMgr()
 	{
 
 	}
 
-	public static boolean start()
+	public boolean start()
 	{
 		try
 		{
@@ -37,7 +47,7 @@ public class TaskUtil
 		{
 
 		}
-		String configName = "quartz-config.js";
+		String configName = "task.js";
 		JSONArray jsonArray = loadJobs(configName);
 		if (jsonArray == null)
 		{
@@ -90,7 +100,7 @@ public class TaskUtil
 	}
 
 	@SuppressWarnings("unchecked")
-	private static Class<? extends Job> getJobClass(String className)
+	private Class<? extends Job> getJobClass(String className)
 	{
 		try
 		{
@@ -141,7 +151,7 @@ public class TaskUtil
 		return jsonArray;
 	}
 
-	public static boolean stop()
+	public boolean stop()
 	{
 		try
 		{
