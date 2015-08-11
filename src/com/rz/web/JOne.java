@@ -13,7 +13,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.rz.schedule.Schedules;
 import com.rz.util.I18N;
 import com.rz.web.interceptor.Interceptors;
 import freemarker.template.Configuration;
@@ -26,7 +25,7 @@ public class JOne implements Filter
 {
 	private ServletContext context;
 	private static Configuration conf = new Configuration();
-	private Initializer initializer;
+	private Starter starter;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -84,16 +83,10 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		String _initializer = cfg.getInitParameter("initializer");
+		String _starter = cfg.getInitParameter("starter");
 		try
 		{
 			this.context = cfg.getServletContext();
-			if (_initializer != null)
-			{
-				Class<?> initializercls = Class.forName(_initializer);
-				this.initializer = (Initializer) (initializercls.newInstance());
-				this.initializer.init(this.context);
-			}
 			StringBuffer sb = new StringBuffer();
 			sb.append("*************************************").append("\r\n");
 			sb.append("**                                 **").append("\r\n");
@@ -101,7 +94,12 @@ public class JOne implements Filter
 			sb.append("**                                 **").append("\r\n");
 			sb.append("*************************************");
 			System.out.println(sb);
-			Schedules.init();
+			if (_starter != null)
+			{
+				Class<?> startercls = Class.forName(_starter);
+				this.starter = (Starter) (startercls.newInstance());
+				this.starter.start(this.context);
+			}
 			Actions.init();
 			Interceptors.init();
 			conf.setServletContextForTemplateLoading(this.context, "/");

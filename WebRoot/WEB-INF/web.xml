@@ -23,7 +23,7 @@
 		<filter-name>JOne</filter-name>
 		<filter-class>com.rz.web.JOne</filter-class>
 		<init-param>
-			<param-name>initializer</param-name>
+			<param-name>starter</param-name>
 			<param-value>action.MyInitializer</param-value>
 		</init-param>
 	</filter>
