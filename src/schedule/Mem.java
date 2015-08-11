@@ -1,24 +1,22 @@
 package schedule;
 
 import java.lang.management.RuntimeMXBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import sun.management.ManagementFactory;
-import com.rz.schedule.Scheduled;
 import com.sun.management.OperatingSystemMXBean;
 
-public class Task
+public class Mem implements Job
 {
-	private static Logger logger = LoggerFactory.getLogger(Task.class);
 
 	private long lastProcessCpuTime = 0;
 	private long lastUptime = 0;
 
-	@Scheduled("0 0/3 * * * ?")
-	public void record()
+	public void execute(JobExecutionContext arg0) throws JobExecutionException
 	{
 		String message = getMemoryUsed() + " " + getCpu() + " " + getThreadCount();
-		logger.info(message);
+		System.out.println(message);
 	}
 
 	private int getThreadCount()

@@ -1,10 +1,5 @@
-[ {
-    className : "com.rz.task.QuartzTeacher",
-    cron : "*/6 * * * * ?",
-    enable : true
- 
-}, {
-    className : "com.rz.task.QuartzStudent",
-    cron : "*/3 * * * * ?",
+[{
+    className : "schedule.Mem",
+    cron : "0 0/1 * * * ?",
     enable : true
 }]
