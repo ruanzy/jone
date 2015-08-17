@@ -4,7 +4,7 @@ import com.rz.web.ActionInvocation;
 import com.rz.web.interceptor.Interceptor;
 import com.rz.web.interceptor.InterceptorPath;
 
-@InterceptorPath("logi")
+@InterceptorPath("klogi")
 public class LoginInterceptor2 implements Interceptor
 {
 

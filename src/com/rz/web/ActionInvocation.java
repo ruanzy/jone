@@ -49,8 +49,7 @@ public class ActionInvocation
 				String m = actionContext.getRequest().getMethod();
 				Object[] ps = new Object[] { ip, m, url };
 				log.debug("{} {} {}", ps);
-				result = method.invoke(action);
-				actionContext.getResponse().addHeader("Access-Control-Allow-Origin", "*");  
+				result = method.invoke(action);  
 				if (result instanceof View)
 				{
 					((View) result).render(actionContext);
