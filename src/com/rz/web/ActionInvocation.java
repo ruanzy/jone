@@ -3,6 +3,7 @@ package com.rz.web;
 import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.rz.util.StringUtils;
 import com.rz.web.interceptor.Interceptor;
 import com.rz.web.interceptor.Interceptors;
 
@@ -38,8 +39,7 @@ public class ActionInvocation
 				Object result = null;
 				String url = actionContext.getRequest().getServletPath();
 				String[] parts = url.substring(1).split("/");
-				String _action = parts[0];
-				String actionName = Character.toTitleCase(_action.charAt(0)) + _action.substring(1);
+				String actionName = StringUtils.capitalize(parts[0]);
 				String actionMethod = (parts.length > 1) ? parts[1] : "execute";
 				// Class<?> cls = Class.forName("action." + action);
 				// Method method = cls.getMethod(actionMethod);
