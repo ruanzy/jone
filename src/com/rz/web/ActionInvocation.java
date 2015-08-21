@@ -30,6 +30,15 @@ public class ActionInvocation
 	{
 		try
 		{
+			String m = actionContext.getRequest().getMethod();
+			if ("OPTIONS".equalsIgnoreCase(m))
+			{
+				actionContext.getResponse().addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+				actionContext.getResponse().addHeader("Access-Control-Allow-Headers",
+						"X-Requested-With, Content-Type, Accept");
+				actionContext.getResponse().addHeader("Access-Control-Max-Age", "1728000");
+				actionContext.getResponse().setStatus(204);
+			}
 			if (index < inters.length)
 			{
 				inters[index++].intercept(this);
@@ -46,10 +55,9 @@ public class ActionInvocation
 				Object action = Actions.get(actionName);
 				Method method = action.getClass().getMethod(actionMethod);
 				String ip = actionContext.getRequest().getRemoteAddr();
-				String m = actionContext.getRequest().getMethod();
 				Object[] ps = new Object[] { ip, m, url };
 				log.debug("{} {} {}", ps);
-				result = method.invoke(action);  
+				result = method.invoke(action);
 				if (result instanceof View)
 				{
 					((View) result).render(actionContext);

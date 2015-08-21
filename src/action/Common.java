@@ -198,4 +198,10 @@ public class Common
 		// String callback = WebUtil.getParameter("callback");
 		return new Jsonp("callback", WebUtil.Cookies.getAll());
 	}
+	
+	public View userres()
+	{
+		String user = WebUtil.getParameter("user");
+		return new Json(WebUtil.call("PmsService.userres", user));
+	}
 }

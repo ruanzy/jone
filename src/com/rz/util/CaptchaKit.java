@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 import com.rz.web.ActionContext;
 
 public class CaptchaKit
@@ -49,7 +50,7 @@ public class CaptchaKit
 			g.drawString(rand, 13 * i + 12, height * 2 / 3);
 		}
 		g.dispose();
-		ActionContext.get().getRequest().getSession(false).setAttribute(CAPTCHAKEY, randomStr.toLowerCase());
+		ActionContext.get().getRequest().getSession(true).setAttribute(CAPTCHAKEY, randomStr.toLowerCase());
 		try
 		{
 			ImageIO.write(img, "JPEG", ActionContext.get().getResponse().getOutputStream());
@@ -79,6 +80,7 @@ public class CaptchaKit
 
 	public static String get()
 	{
-		return (String) ActionContext.get().getRequest().getSession(false).getAttribute(CAPTCHAKEY);
+		HttpSession s = ActionContext.get().getRequest().getSession(false);
+		return (String)(s.getAttribute(CAPTCHAKEY));
 	}
 }

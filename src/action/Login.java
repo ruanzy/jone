@@ -13,15 +13,15 @@ public class Login
 
 	public View execute()
 	{
-		String svc = CaptchaKit.get();
+		//String svc = CaptchaKit.get();
 		String vc = WebUtil.getParameter("vc");
 		String username = WebUtil.getParameter("username");
 		String password = WebUtil.getParameter("password");
 		String go = WebUtil.getParameter("go");
-		if (!svc.equalsIgnoreCase(vc))
-		{
-			return new Msg(false, "验证码不正确!");
-		}
+//		if (!svc.equalsIgnoreCase(vc))
+//		{
+//			return new Msg(false, "验证码不正确!");
+//		}
 		if (!WebUtil.isAdmin(username, password))
 		{
 			Object user = WebUtil.call("PmsService.login", username, password);
@@ -29,9 +29,9 @@ public class Login
 			{
 				return new Msg(false, "用户名或密码错误!");
 			}
-			WebUtil.Session.attr("res", WebUtil.call("PmsService.userres", username));
+			//WebUtil.Session.attr("res", WebUtil.call("PmsService.userres", username));
 		}
-		WebUtil.setUserinfo(username + "_" + password);
+		//WebUtil.setUserinfo(username + "_" + password);
 		if(go != null && go.length() > 0){
 			return new Msg(true, "SSO?go=" + go);
 		}

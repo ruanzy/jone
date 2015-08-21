@@ -4,7 +4,8 @@
 			title:'Window',
 			content:'',
 			padding : 20,
-			width:350
+			width:350,
+			open : function(box){}
 		};
         var markup = ['<div><div class="box">'];
 		if(params.title){
@@ -81,7 +82,15 @@
 			box.css('margin-top', -h/2).css('margin-left', -w/2);
 			box.css("visibility","visible");
 		}else if(params.url){
-			content.load(params.url, function(){
+			var url = params.url;
+			var idx = url.indexOf('?');
+			if(idx == -1){
+				url += "?" + new Date().getTime();
+			}else{
+				url += "&_=" + new Date().getTime();
+			}
+			content.load(url, function(){
+				params.open&&params.open(boxwarp);
 				var W = $(window).width();
 				var H = $(window).height();
 				var w = box.outerWidth();
