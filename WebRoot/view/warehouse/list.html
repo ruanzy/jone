@@ -28,6 +28,8 @@
 	</div>
 </div>
 <script type="text/javascript">
+	var base = "http://11.0.0.141:8089/JOne/";
+	var url = base + "warehouse/list";
 	$('#kkk').table({
 		columns : [
 		//{header:"ID",field:"id",width:50,align:'center'},
@@ -69,7 +71,7 @@
 			}
 		}
 		],
-		url : 'warehouse/list',
+		url : url,
 		pager : false
 	});
 	$('#addbtn').click(add);

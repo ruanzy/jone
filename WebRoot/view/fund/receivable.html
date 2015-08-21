@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	var customer;
 	$.ajax({
-		url : "customer/list",
+		url : base + "customer/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -50,7 +50,7 @@
 			align : 'center',
 			width : 200
 		}],
-		url : 'receive/pager'
+		url : base + 'receive/pager'
 	});
 	function customerRender(v) {
 		var c;
@@ -77,13 +77,17 @@
 	function viewdetail(no) {
 		$.dialog({
 			title : '收款明细',
-			url : 'receive/detailview?no=' + no
+			url : 'view/fund/receivedetail.html',
+			open :function(){
+				loaddetail(no);
+			}
 		});
 	}
 	function receiverecord(no) {
 		var d = $.dialog({
 			title : '收款录入',
-			url : 'receive/record?no=' + no,
+			width : 400,
+			url : 'view/fund/receiverecord.html',
 			buttons : [ {
 				text : '确定',
 				cls : 'btn-primary',
@@ -98,6 +102,9 @@
 				}
 
 			} ],
+			open : function(d) {
+				$('#no').text(no);
+			}
 		});
 	}
 	

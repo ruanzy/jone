@@ -18,11 +18,12 @@
 <div id='kkk'></div>
 
 <script type="text/javascript">
+	var base = "http://11.0.0.141:8089/JOne/";
 	//var state = dic('userstate');
 	var category;
 	var unit;
 	$.ajax({
-		url : "goods/category",
+		url : base + "goods/category",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -33,7 +34,7 @@
 		}
 	});
 	$.ajax({
-		url : "goods/unitlist",
+		url : base + "goods/unitlist",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -97,7 +98,7 @@
 			width : 100,
 			render : opRender
 		} ],
-		url : 'goods/pager',
+		url : base + 'goods/pager',
 		condition : condition
 	});
 	$('#addbtn').click(add);

@@ -1,0 +1,38 @@
+<div id='detail'></div>
+<script type="text/javascript">
+	var unit;
+	var goods;
+	$.ajax({
+		url : base + "goods/unitlist",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				unit = data;
+			}
+		}
+	});
+	$.ajax({
+		url : base + "goods/list",
+		async : false,
+		type : 'post',
+		dataType : 'json',
+		success : function(data) {
+			if (data) {
+				goods = data;
+			}
+		}
+	});
+
+	function unitRender(v, r) {
+		var c;
+		$.each(unit, function(){
+			if(this['id'] == v){
+				c = this['name'];
+				return false;
+			}
+		});
+		return c;
+	}
+</script>

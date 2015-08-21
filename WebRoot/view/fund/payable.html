@@ -14,7 +14,7 @@
 <script type="text/javascript">
 	var supplier;
 	$.ajax({
-		url : "supplier/list",
+		url : base + "supplier/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -51,7 +51,7 @@
 			align : 'center',
 			width : 200
 		}],
-		url : 'payment/pager'
+		url : base + 'payment/pager'
 	});
 	$('#updatedbtn').click(function(){
 		$('#kkk').table('endEdit');
@@ -113,13 +113,17 @@
 	function viewdetail(no) {
 		$.dialog({
 			title : '付款明细',
-			url : 'payment/detailview?purchasebill=' + no
+			url : 'view/fund/paymentdetail.html',
+			open :function(){
+				loaddetail(no);
+			}
 		});
 	}
 	function payrecord(no) {
 		var d = $.dialog({
 			title : '付款录入',
-			url : 'payment/record?purchasebill=' + no,
+			width : 400,
+			url : 'view/fund/paymentrecord.html',
 			buttons : [ {
 				text : '确定',
 				cls : 'btn-primary',
@@ -134,6 +138,9 @@
 				}
 
 			} ],
+			open : function(d) {
+				$('#no').text(no);
+			}
 		});
 	}
 	

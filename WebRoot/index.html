@@ -34,7 +34,8 @@
 	<script type="text/javascript" src="js/jquery.loadmask.js"></script>
 	<script type="text/javascript" src="js/drag.js"></script>
 	<script type="text/javascript" src="js/sidebar.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/index1.js"></script>
+	<script type="text/javascript" src='js/head.js'></script>
 	<script type="text/javascript" src="js/tree.js"></script>
 	<script type="text/javascript" src="js/grid2.js"></script>
 	<script type="text/javascript" src="js/msg.js"></script>
@@ -56,14 +57,40 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="row">
-				<#include "head.html"/>
+<div class="navbar-brand col-md-2" style='background: url(css/logo_rz.png) no-repeat center;'></div>
+<div class="navbar-brand" id="sidebar-toggle" style='color:#fff;font-size:18px;'><i class="icon-th"></i></div>
+<p class="navbar-text" style='color:#fff;padding-left:20px;'>JOne 开发平台框架Demo</p>
+<ul class="nav navbar-nav pull-right" style='margin-right:50px'>
+	<li class="dropdown"><a href="#" class="dropdown-toggle"
+		data-toggle="dropdown"><i class="icon-user"></i> 欢迎您,
+			<span id='userspan'></span> <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li id='set'><a href='javascript:;'><i class="icon-cog"></i>
+					设置</a></li>
+			<li id='info'><a href='javascript:;'><i class="icon-user"></i>
+					用户信息</a></li>
+			<li class="divider"></li>
+			<li id='logout'><a href='javascript:;'><i class="icon-off"></i>
+					退出</a></li>
+		</ul></li>
+	<li><a href="#"><i class="icon-envelope"></i> 信息 <span
+			class='badge badge-warning'>5</span></a></li>
+	<li class="dropdown"><a href="#" class="dropdown-toggle"
+		data-toggle="dropdown"><i class="icon-th"></i> <span id='lang' style='display:inline-block;width:45px;'></span> <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li id='set' onclick="changeLang('zh')"><a href='javascript:;'><i class="icon-cog"></i>
+					Chinese</a></li>
+			<li id='info' onclick="changeLang('en')"><a href='javascript:;'><i class="icon-user"></i>
+					English</a></li>
+		</ul></li>
+</ul>
+<script type="text/javascript" src='js/head.js'></script>
 			</div>
 		</div>
 	</nav>
 	<div class="clearfix"></div>
 	<div id="container1">
 			<div id="sidebar1">
-				<#include "left.html"/>
 			</div>
 			<div id="content1">
 				<ol class="breadcrumb">
@@ -75,4 +102,92 @@
 		</div>
 	</div>
 </BODY>
+<script id="viewAppTmpl" type="text/x-jsrender">
+  <div id="accordion" class="sidebar">
+    <div class="sidebar-header"><div style='display:inline-block;width:50px;padding:0 5px 0 15px;color:#428bca;'><i class="icon-sitemap"></i></div>导航菜单</div>
+	<div class="sidebar-body">
+		{{for res}} {{if type=='1'}}
+		<h3><a href='#'><div style='display:inline-block;width:50px;padding:0 5px 0 15px;color:#428bca;'><i class="{{:iconcls}}"></i></div>{{:name}}</a></h3>
+		<div>
+		  {{for children}}
+		  {{if type=='2'}}
+			<li>{{:#parent.parent.data.id}}<a href='#' url='{{:url}}'><i class="{{:iconcls}}"></i> {{:name}}</a></li>
+		  {{/if}}
+		  {{/for}}
+		</div>
+		{{/if}} {{/for}}
+	</div>
+  </div>
+</script>
+<script type="text/javascript">
+	function p2s(data) {
+		var i,l;
+		if (!data) return [];
+		var r = [];
+		var t = [];
+		for (i=0, l=data.length; i<l; i++) {
+			t[data[i]["id"]] = data[i];
+		}
+		for (i=0, l=data.length; i<l; i++) {
+			if (t[data[i]["pid"]]) {
+				if (!t[data[i]["pid"]]["children"])
+					t[data[i]["pid"]]["children"] = [];
+				t[data[i]["pid"]]["children"].push(data[i]);
+			} else {
+				r.push(data[i]);
+			}
+		}
+		return r;
+	}
+	
+	function initsidebar(){
+		var sidebar = $("#accordion");
+		var headers = sidebar.find('h3');
+		headers.next().addClass('collapse');
+		headers.click(function(){
+			if(!$(this).hasClass("active")){
+				sidebar.find('.active').removeClass('active');
+				sidebar.find('.in').removeClass('in').addClass("collapse");
+				$(this).addClass("active");
+				$(this).next().removeClass('collapse').addClass("in");
+			}
+		});
+		var lis = sidebar.find('.sidebar-body li');
+		var lis = sidebar.find('.sidebar-body li');
+		lis.on('click', 'a', function() {
+			$('a.selected').removeClass('selected');
+			$(this).addClass('selected');
+			var url = $(this).attr('url');
+			var title = $(this).text();
+			$('#nav').text(title);
+			//$(this).addClass('active').siblings('a').removeClass('active');
+			var page = url + '?_=' + new Date().getTime();
+			//page = url;
+			$('#main').load(page, function() {
+				//permit('#main');
+			});
+		});
+	}
+	$(function() {
+		$('#userspan').text($.cookie("user"));
+		var base = "http://11.0.0.141:8089/JOne/";
+		var url = base + "common/userres";
+		$.ajax({
+			url : url,
+			type : 'post',
+			data : {user : "test"},
+			dataType : 'json',
+			success : function(data) {
+				if (data) {
+					var ret = {res : p2s(data)};
+					var html = $("#viewAppTmpl").render(ret);
+					$("#sidebar1").empty().append(html);
+					initsidebar();
+				}
+			},
+			error : function(response, b, c) {
+			}
+		});
+	});
+</script>
 <HTML>

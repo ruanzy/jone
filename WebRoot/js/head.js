@@ -9,7 +9,7 @@ $('#info').click(function() {
 		//title:'个人资料',
 		width : 400,
 		//url:'view/income/list.html'
-		url : 'ftl/userinfo.html',
+		url : 'view/user/userinfo.html',
 		buttons : [ {
 			text : 'OK',
 			cls : 'btn-primary',
@@ -55,10 +55,10 @@ $('#set').click(function() {
 $('#logout').click(function() {
 	document.location = 'logout';
 });
-$('#theme').SideDown({
-	width : 'auto',
-	url : 'theme.html'
-});
+//$('#theme').SideDown({
+//	width : 'auto',
+//	url : 'theme.html'
+//});
 $('#toggle').click(function() {
 	var sb = $('#sidebar');
 	if (sb.is(":visible")) {

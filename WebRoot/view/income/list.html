@@ -7,7 +7,7 @@
 	var supplier;
 	var goods;
 	$.ajax({
-		url : "warehouse/list",
+		url : base + "warehouse/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -18,7 +18,7 @@
 		}
 	});
 	$.ajax({
-		url : "supplier/list",
+		url : base + "supplier/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -29,7 +29,7 @@
 		}
 	});
 	$.ajax({
-		url : "goods/list",
+		url : base + "goods/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -81,7 +81,7 @@
 			field : "money",
 			align : 'center'
 		} ],
-		url : 'purchase/list',
+		url : base + 'purchase/list',
 		condition : condition
 	});
 	function billopRender(v, r) {
@@ -281,7 +281,10 @@
 	function viewdetail(v) {
 		$.dialog({
 			//title : '采购入库单明细',
-			url : 'ftl/pdetail.html?purchasebill=' + v
+			url : 'view/income/pdetail.html',
+			open :function(){
+				loaddetail(v);
+			}
 		});
 	}
 	
@@ -351,5 +354,53 @@
 				}
 			}
 		});
+	}
+	
+	function loaddetail(purchasebill){
+		$('#detail').table({
+			columns : [
+			//{header:"ID",field:"id",width:50,align:'center'},
+			{
+				header : "商品名称",
+				field : "name",
+				tip : true
+			}, {
+				header : "商品规格",
+				field : "spec",
+				align : 'center',
+				width : 180
+			}, {
+				header : "商品计量单位",
+				field : "unit",
+				align : 'center',
+				width : 120,
+				render : unitRender
+			}, {
+				header : "采购数量",
+				field : "purchase_num",
+				align : 'center',
+				width : 100
+			}, {
+				header : "采购价格",
+				field : "purchase_price",
+				align : 'center',
+				width : 100
+			}, {
+				header : "采购金额",
+				field : "purchase_money",
+				align : 'center',
+				width : 100
+			} ],
+			url : base + 'purchase/detaillist',
+			pager : false,
+			condition : condition
+		});
+	
+		function condition() {
+			var params = {
+				purchasebill : purchasebill
+			};
+			return params;
+		}
 	}
 </script>

@@ -1,0 +1,32 @@
+<div id='detail'></div>
+<script type="text/javascript">
+function loaddetail(no){
+	$('#detail').table({
+		columns : [
+		{header:"业务单号",field:"no",width : 200, align:'center'},
+		{
+			header : "收款金额",
+			align : 'left',
+			field : "receivemoney"
+		}, {
+			header : "收款人",
+			align : 'left',
+			field : "receiveuser",
+			width : 100
+		}, {
+			header : "收款时间",
+			field : "receivetime",
+			align : 'center',
+			width : 100
+		}, {
+			header : "录入",
+			align : 'left',
+			field : "creator",
+			width : 100
+		} ],
+		url : base + 'receive/detaillist',
+		pager : false,
+		queryParam : {no : no}
+	});
+}
+</script>

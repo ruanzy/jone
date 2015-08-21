@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	var category;
 	$.ajax({
-		url : "goods/category",
+		url : base + "goods/category",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -34,7 +34,7 @@
 			}
 		],
 		pager : false,
-		url : 'goods/category'
+		url : base + 'goods/category'
 	});
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);

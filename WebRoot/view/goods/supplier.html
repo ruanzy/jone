@@ -24,6 +24,7 @@
 	</div>
 </div>
 <script type="text/javascript">
+	var base = "http://11.0.0.141:8089/JOne/";
 	$('#kkk').table({
 		columns : [ {
 			header : "ID",
@@ -49,7 +50,7 @@
 			}
 		} ],
 		condition : condition,
-		url : 'supplier/pager'
+		url : base + 'supplier/pager'
 	});
 	$('#addbtn').click(add);
 	$('#delbtn').click(del);

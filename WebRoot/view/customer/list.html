@@ -19,7 +19,7 @@
 <script type="text/javascript">
 	var customer_category;
 	$.ajax({
-		url : "customer/category",
+		url : base + "customer/category",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -50,7 +50,7 @@
 				type : 'text'
 			}
 		} ],
-		url : 'customer/pager',
+		url : base + 'customer/pager',
 		condition : condition
 	});
 	$('#updatedbtn').click(function(){

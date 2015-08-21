@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	var supplier;
 	$.ajax({
-		url : "supplier/list",
+		url : base + "supplier/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -42,7 +42,7 @@
 			width : 100
 		}],
 		condition : condition,
-		url : 'fund/payablepager'
+		url : base + 'fund/payablepager'
 	});
 	function condition() {
 		var params = {

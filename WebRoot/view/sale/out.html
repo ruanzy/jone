@@ -7,7 +7,7 @@
 	var customer;
 	var goods;
 	$.ajax({
-		url : "warehouse/list",
+		url : base + "warehouse/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -18,7 +18,7 @@
 		}
 	});
 	$.ajax({
-		url : "customer/list",
+		url : base + "customer/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -29,7 +29,7 @@
 		}
 	});
 	$.ajax({
-		url : "goods/list",
+		url : base + "goods/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -81,7 +81,7 @@
 			field : "money",
 			align : 'center'
 		} ],
-		url : 'sale/outlist'
+		url : base + 'sale/outlist'
 	});
 	function saleopRender(v, r) {
 		var h = [];
@@ -92,7 +92,7 @@
 	}
 	function out(no) {
 		$.ajax({
-			url : 'sale/out',
+			url : base + 'sale/out',
 			type : 'post',
 			data : { no : no },
 			dataType : 'json',
@@ -104,13 +104,12 @@
 		});
 	}
 	$('#addbtn').click(add);
-	$('#delbtn').click(del);
 	$('#assignbtn').click(mk);
 	var d;
 	function add() {
 		d = $.dialog({
 			title : '新建销售出库单',
-			url : 'sale/tosaleadd',
+			url : base + 'sale/tosaleadd',
 			drag : true,
 			buttons : [ {
 				text : '确定',
@@ -140,7 +139,7 @@
 		var params = {no : no, creator : creator, createtime : createtime, customer : customer, warehouse : warehouse, memo : memo, detail : detail};
 		var text = JSON.stringify(params);
 		$.ajax({
-			url : 'sale/add',
+			url : base + 'sale/add',
 			type : 'post',
 			data : {bill: text},
 			dataType : 'json',
@@ -168,7 +167,10 @@
 	function viewdetail(v) {
 		$.dialog({
 			title : '销售出库单详情',
-			url : 'sale/detailview?no=' + v
+			url : 'view/sale/sdetail.html',
+			open :function(){
+				loaddetail(v);
+			}
 		});
 	}
 	
@@ -192,5 +194,53 @@
 			}
 		});
 		return c;
+	}
+	
+	function loaddetail(no){
+		$('#detail').table({
+			columns : [
+			//{header:"ID",field:"id",width:50,align:'center'},
+			{
+				header : "商品名称",
+				field : "name",
+				tip : true
+			}, {
+				header : "商品规格",
+				field : "spec",
+				align : 'center',
+				width : 180
+			}, {
+				header : "商品计量单位",
+				field : "unit",
+				align : 'center',
+				width : 120,
+				render : unitRender
+			}, {
+				header : "销售数量",
+				field : "sale_num",
+				align : 'center',
+				width : 100
+			}, {
+				header : "销售价格",
+				field : "sale_price",
+				align : 'center',
+				width : 100
+			}, {
+				header : "销售金额",
+				field : "sale_money",
+				align : 'center',
+				width : 100
+			} ],
+			url : base + 'sale/detaillist',
+			pager : false,
+			condition : condition
+		});
+	
+		function condition() {
+			var params = {
+				no : no
+			};
+			return params;
+		}
 	}
 </script>

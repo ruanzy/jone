@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	var customer;
 	$.ajax({
-		url : "customer/list",
+		url : base + "customer/list",
 		async : false,
 		type : 'post',
 		dataType : 'json',
@@ -42,7 +42,7 @@
 			width : 100
 		}],
 		condition : condition,
-		url : 'fund/receivablepager'
+		url : base + 'fund/receivablepager'
 	});
 	function condition() {
 		var params = {

@@ -1,0 +1,38 @@
+<form class="form-horizontal" role="form">
+	<div class="form-group">
+		<label class="col-sm-3 control-label">业务单号</label>
+		<div class="col-sm-9">
+			<p class="form-control-static" id='no'></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">收款时间</label>
+		<div class="col-sm-9">
+			<p class="form-control-static" id='receivetime'></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">收款金额</label>
+		<div class="col-sm-9">
+			<input type="text" id='receivemoney' name='receivemoney' class='form-control' />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">收款人员</label>
+		<div class="col-sm-9">
+			<input type="text" id='receiveuser' name="receiveuser" class='form-control' value='rzy'/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">录入人员</label>
+		<div class="col-sm-9">
+			<input type="text" id='creator' name='creator' class='form-control'
+			disabled="disabled" />
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	var date = new Date();
+	var dd = date.format("yyyy-MM-dd hh:mm:ss");
+	$('#receivetime').text(dd);
+</script>
