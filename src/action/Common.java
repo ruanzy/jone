@@ -135,7 +135,7 @@ public class Common
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", WebUtil.getParameter("id"));
 		map = ServerInfo.base();
-		return new Ftl("welcome.ftl", map);
+		return new Json(map);
 	}
 
 	public View header()
