@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.fileupload.FileItem;
 import com.rz.util.ServerInfo;
+import com.rz.util.Uploader;
 import com.rz.util.WebUtil;
 import com.rz.web.View;
 import com.rz.web.view.Ftl;
 import com.rz.web.view.Json;
 import com.rz.web.view.Jsonp;
 import com.rz.web.view.Redirect;
+import com.rz.web.view.Text;
 
 public class Common
 {
@@ -169,14 +172,24 @@ public class Common
 		return new Ftl("center.ftl", map);
 	}
 
-	public void upload()
+	public View upload()
 	{
-		// String path = "d:/upload/";
-		// Uploader uploader = Uploader.prepare();
-		// Map<String, String> parameters = uploader.getParameters();
-		// List<FileItem> items = uploader.getItems();
-		// String flag = parameters.get("flag");
-		// String id = parameters.get("id");
+		String path = "d:/upload/";
+		Uploader uploader;
+		uploader = Uploader.prepare(64000000L);
+		Map<String, String> parameters = uploader.getParameters();
+		List<FileItem> items = uploader.getItems();
+		String tmpurl = parameters.get("tmpurl");
+		String id = parameters.get("id");
+		uploader.upload(path);
+		WebUtil.setHeader("Location", tmpurl + "?data=" + "asdasd");
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html><head><script type='text/javascript'>");
+		sb.append("window.parent.callback('");
+		sb.append("This data is from server!");
+		sb.append("');");
+		sb.append("</script></head><body>This data is from server!</body></html>");
+		return new Text(sb.toString());
 	}
 
 	public View base()

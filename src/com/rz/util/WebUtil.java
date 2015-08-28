@@ -265,6 +265,11 @@ public class WebUtil
 	{
 		return WebUtil.Request.get().getHeader(key);
 	}
+	
+	public static void setHeader(String key, String value)
+	{
+		WebUtil.Response.get().addHeader(key, value);
+	}
 
 	public static boolean isAjax()
 	{

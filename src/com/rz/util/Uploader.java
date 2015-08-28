@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -31,7 +32,7 @@ public class Uploader
 		items = new ArrayList<FileItem>();
 	}
 
-	public static Uploader prepare(long maxSize) throws Exception
+	public static Uploader prepare(long maxSize)
 	{
 		boolean isMultipart = ServletFileUpload.isMultipartContent(WebUtil.Request.get());
 		if (!isMultipart)
@@ -49,24 +50,32 @@ public class Uploader
 		{
 			upload.setSizeMax(maxSize);
 		}
-		List<FileItem> list = upload.parseRequest(WebUtil.Request.get());
-		for (FileItem item : list)
+		List<FileItem> list = null;
+		try
 		{
-			if (item.isFormField())
+			list = upload.parseRequest(WebUtil.Request.get());
+			for (FileItem item : list)
 			{
-				String name = item.getFieldName();
-				String v = item.getString();
-				uploader.parameters.put(name, v);
+				if (item.isFormField())
+				{
+					String name = item.getFieldName();
+					String v = item.getString();
+					uploader.parameters.put(name, v);
+				}
+				else
+				{
+					uploader.items.add(item);
+				}
 			}
-			else
-			{
-				uploader.items.add(item);
-			}
+		}
+		catch (FileUploadException e)
+		{
+			e.printStackTrace();
 		}
 		return uploader;
 	}
 
-	public Map<String, String> upload(String upDir) throws Exception
+	public Map<String, String> upload(String upDir)
 	{
 		Map<String, String> files = new HashMap<String, String>();
 		for (FileItem item : this.items)
@@ -74,7 +83,14 @@ public class Uploader
 			String srcName = item.getName();
 			String randomName = UUID.randomUUID().toString() + srcName.substring(srcName.lastIndexOf("."));
 			File savedFile = new File(upDir, randomName);
-			item.write(savedFile);
+			try
+			{
+				item.write(savedFile);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 			files.put(item.getFieldName(), randomName);
 		}
 		return files;
