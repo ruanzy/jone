@@ -151,15 +151,14 @@ CREATE TABLE `goods` (
   `category` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `unit` int(11) NOT NULL,
-  `spec` varchar(255) NOT NULL,
-  `sale_price` decimal(19,2) DEFAULT '0.00'
+  `spec` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('1', '1', '创维酷开网络平板液晶电视', '1', '50英寸黑色K50J', '2899.00');
-INSERT INTO `goods` VALUES ('2', '1', '康佳窄边全高清液晶电视', '1', '42英寸黑色LED42E330CE', '1999.00');
+INSERT INTO `goods` VALUES ('1', '1', '创维酷开网络平板液晶电视', '1', '50英寸黑色K50J');
+INSERT INTO `goods` VALUES ('2', '1', '康佳窄边全高清液晶电视', '1', '42英寸黑色LED42E330CE');
 
 -- ----------------------------
 -- Table structure for goods_category
@@ -473,6 +472,7 @@ INSERT INTO `saleout` VALUES ('1', 'S20150330162303', '3', '3', 'test', '2015-3-
 -- ----------------------------
 DROP TABLE IF EXISTS `sale_detail`;
 CREATE TABLE `sale_detail` (
+  `id` int(11) NOT NULL,
   `no` varchar(100) DEFAULT NULL,
   `goods` int(11) NOT NULL,
   `sale_num` int(11) NOT NULL,
