@@ -49,16 +49,17 @@ public class SaleService
 		Object no = map.get("no");
 		double money = 0.0;
 		List<Map<String, Object>> detail = (List<Map<String, Object>>)(map.get("detail"));
-		String sql2 = "insert into sale_detail(no,goods,sale_num,sale_price,sale_money) values(?,?,?,?,?)";
+		String sql2 = "insert into sale_detail(id,no,goods,sale_num,sale_price,sale_money) values(?,?,?,?,?,?)";
 		dao.beginBatch(sql2);
 		for (Map<String, Object> map2 : detail)
 		{
+			int id = dao.getID("sale_detail");
 			Object goods = map2.get("goods");
 			Object sale_num = map2.get("sale_num");
 			Object sale_price = map2.get("sale_price");
 			double sale_money = Double.valueOf(map2.get("sale_money").toString());
 			money += sale_money;
-			Object[] params2 = new Object[] { no, goods, sale_num, sale_price, sale_money };
+			Object[] params2 = new Object[] { id, no, goods, sale_num, sale_price, sale_money };
 			dao.addBatch(params2);
 		}
 		dao.excuteBatch();
