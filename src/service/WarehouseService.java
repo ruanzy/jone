@@ -40,17 +40,6 @@ public class WarehouseService
 	public void del(String ids)
 	{
 		Object[] arr = ids.split(",");
-		StringBuffer sql1 = new StringBuffer("delete from warehouse where userid in (");
-		for (int k = 0, len = arr.length; k < len; k++)
-		{
-			sql1.append("?");
-			if (k != len - 1)
-			{
-				sql1.append(",");
-			}
-		}
-		sql1.append(")");
-		dao.update(sql1.toString(), arr);
 		StringBuffer sql2 = new StringBuffer("delete from warehouse where id in (");
 		for (int k = 0, len = arr.length; k < len; k++)
 		{

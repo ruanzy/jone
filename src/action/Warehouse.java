@@ -16,6 +16,13 @@ public class Warehouse
 		return new Json(WebUtil.call("WarehouseService.list", map));
 	}
 	
+	public View del()
+	{
+		String ids = WebUtil.getParameter("ids");
+		WebUtil.call("WarehouseService.del", ids);
+		return new Msg("del success");
+	}
+	
 	@SuppressWarnings("unchecked")
 	public View changed()
 	{
