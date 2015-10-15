@@ -3,7 +3,7 @@ package com.rz.sql;
 import java.util.ArrayList;
 import java.util.List;
 import com.rz.common.Record;
-import com.rz.dao.Dao;
+import com.rz.dao.DB;
 
 public class PageHelper
 {
@@ -21,7 +21,7 @@ public class PageHelper
 		String countSql = parser.getCountSql(sql);
 		String pageSql = parser.getPageSql(sql, pager.getPage(), pager.getPagesize());
 		Long count = 0L;
-		Object scalar = Dao.getInstance().scalar(countSql, params);
+		Object scalar = DB.getInstance().scalar(countSql, params);
 		if (scalar != null)
 		{
 			count = Long.valueOf(scalar.toString());
@@ -29,7 +29,7 @@ public class PageHelper
 		}
 		if (count > 0)
 		{
-			List<Record> rs = Dao.getInstance().find(pageSql, params);
+			List<Record> rs = DB.getInstance().find(pageSql, params);
 			pager.setData(rs);
 		}
 		else

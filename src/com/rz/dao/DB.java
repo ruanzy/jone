@@ -25,27 +25,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.common.Record;
 
-public final class Dao
+public final class DB
 {
 	private DataSource ds = null;
 	private ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
 	private ThreadLocal<Statement> sl = new ThreadLocal<Statement>();
 	private ThreadLocal<Boolean> begintx = new ThreadLocal<Boolean>();
 	boolean showsql = false;
-	Logger log = LoggerFactory.getLogger(Dao.class);
+	Logger log = LoggerFactory.getLogger(DB.class);
 
 	private static class SingletonHolder
 	{
-		private final static Dao INSTANCE = new Dao();
+		private final static DB INSTANCE = new DB();
 	}
 
-	public static Dao getInstance()
+	public static DB getInstance()
 	{
 		SingletonHolder.INSTANCE.begintx.set(false);
 		return SingletonHolder.INSTANCE;
 	}
 
-	private Dao()
+	private DB()
 	{
 		InputStream is = null;
 		Properties prop = new Properties();
@@ -849,7 +849,7 @@ public final class Dao
 
 	public static void main(String[] args)
 	{
-		Dao dao = Dao.getInstance();
+		DB dao = DB.getInstance();
 		List<Record> r = dao.find("select * from users");
 		System.out.println(r);
 		// dao.update("insert users values(280, '123', '123', 2, '2015-01-15 14:44:50', 'aa@123.com','123456','memo')");

@@ -24,7 +24,7 @@ import com.rz.sql.Pager;
 @SuppressWarnings("unchecked")
 public final class SQLMapper
 {
-	private static Dao dao = Dao.getInstance();
+	private static DB dao = DB.getInstance();
 	private static Map<String, String> sqls = new HashMap<String, String>();
 	static
 	{

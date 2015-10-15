@@ -7,7 +7,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.proxy.NoOp;
-import com.rz.dao.Dao;
+import com.rz.dao.DB;
 import com.rz.tx.Transaction;
 
 class ServiceProxy
@@ -17,7 +17,7 @@ class ServiceProxy
 		public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
 		{
 			Object result = null;
-			Dao dao = Dao.getInstance();
+			DB dao = DB.getInstance();
 			try
 			{
 				dao.begin();

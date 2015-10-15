@@ -3,11 +3,11 @@ package service;
 import java.util.List;
 import java.util.Map;
 import com.rz.common.Record;
-import com.rz.dao.Dao;
+import com.rz.dao.DB;
 
 public class ApiService
 {
-	private Dao dao = Dao.getInstance();
+	private DB dao = DB.getInstance();
 	
 	public List<Record> find(String apiid)
 	{

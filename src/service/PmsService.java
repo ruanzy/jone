@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.rz.common.Record;
-import com.rz.dao.Dao;
+import com.rz.dao.DB;
 import com.rz.dao.SQLMapper;
 import com.rz.sql.Pager;
 import com.rz.tx.Transaction;
@@ -14,7 +14,7 @@ import com.rz.util.TimeUtil;
 
 public class PmsService
 {
-	private Dao dao = Dao.getInstance();
+	private DB dao = DB.getInstance();
 
 	public Pager finduser(Map<String, String> map)
 	{

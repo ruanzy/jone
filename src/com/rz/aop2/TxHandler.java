@@ -1,11 +1,11 @@
 package com.rz.aop2;
 
 import com.rz.aop2.AOPHandler;
-import com.rz.dao.Dao;
+import com.rz.dao.DB;
 
 public class TxHandler implements AOPHandler
 {
-	Dao dao = Dao.getInstance();
+	DB dao = DB.getInstance();
 
 	public void doBefore()
 	{

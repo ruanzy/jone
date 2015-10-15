@@ -11,7 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DateUtil;
-import com.rz.dao.Dao;
+import com.rz.dao.DB;
 import com.rz.dao.ResultHandler;
 
 public class DB2Excel
@@ -23,7 +23,7 @@ public class DB2Excel
 			long begin = System.currentTimeMillis();
 			HSSFWorkbook workbook = new HSSFWorkbook();
 			final HSSFSheet sheet = workbook.createSheet();
-			Dao dao = Dao.getInstance();
+			DB dao = DB.getInstance();
 			dao.find(sql, new ResultHandler()
 			{
 				public void handle(ResultSet rs) throws SQLException
@@ -63,7 +63,7 @@ public class DB2Excel
 	public static void imp(String sql, String file)
 	{
 		long begin = System.currentTimeMillis();
-		Dao dao = Dao.getInstance();
+		DB dao = DB.getInstance();
 		try
 		{
 			HSSFWorkbook wrokbook = new HSSFWorkbook(new FileInputStream(file));

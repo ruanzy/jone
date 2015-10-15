@@ -1,10 +1,10 @@
 package com.rz.aop2;
 
-import com.rz.dao.Dao;
+import com.rz.dao.DB;
 
 public class UserService
 {
-	Dao dao = Dao.getInstance();
+	DB dao = DB.getInstance();
 	
 	public void save(String name)
 	{
