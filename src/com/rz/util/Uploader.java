@@ -81,8 +81,13 @@ public class Uploader
 		for (FileItem item : this.items)
 		{
 			String srcName = item.getName();
-			String randomName = UUID.randomUUID().toString() + srcName.substring(srcName.lastIndexOf("."));
-			File savedFile = new File(upDir, randomName);
+			int idx = srcName.lastIndexOf("/");
+			StringBuffer newName = new StringBuffer();
+			newName.append(UUID.randomUUID().toString());
+			if(idx > 0){
+				newName.append(srcName.substring(idx));
+			}
+			File savedFile = new File(upDir, newName.toString());
 			try
 			{
 				item.write(savedFile);
@@ -91,7 +96,7 @@ public class Uploader
 			{
 				e.printStackTrace();
 			}
-			files.put(item.getFieldName(), randomName);
+			files.put(item.getFieldName(), newName.toString());
 		}
 		return files;
 	}
