@@ -83,9 +83,11 @@ public class Uploader
 			String srcName = item.getName();
 			int idx = srcName.lastIndexOf("/");
 			StringBuffer newName = new StringBuffer();
-			newName.append(UUID.randomUUID().toString());
+			newName.append(UUID.randomUUID().toString() + "_");
 			if(idx > 0){
 				newName.append(srcName.substring(idx));
+			}else{
+				newName.append(srcName);
 			}
 			File savedFile = new File(upDir, newName.toString());
 			try
