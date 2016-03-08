@@ -9,8 +9,10 @@ import com.rz.web.interceptor.Interceptor;
 public class ActionInvocation
 {
 	private Logger log = LoggerFactory.getLogger(ActionInvocation.class);
-	private Interceptor[] inters;
 	private ActionContext actionContext;
+	private String action;
+	private String method;
+	private Interceptor[] inters;
 	private int index = 0;
 
 	public ActionContext getActionContext()
@@ -20,17 +22,27 @@ public class ActionInvocation
 
 	public ActionInvocation(ActionContext ac)
 	{
-		this.actionContext = ac;
-		String url = actionContext.getRequest().getServletPath();
-		this.inters = Container.getInterceptor(url);
+		try
+		{
+			this.actionContext = ac;
+			String url = actionContext.getRequest().getServletPath();
+			String[] parts = url.substring(1).split("/");
+			this.action = StringUtils.capitalize(parts[0]);
+			this.method = (parts.length > 1) ? parts[1] : "execute";
+			this.inters = Container.getInterceptor(url);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public void invoke()
 	{
 		try
 		{
-			String m = actionContext.getRequest().getMethod();
-			if ("OPTIONS".equalsIgnoreCase(m))
+			String _m = actionContext.getRequest().getMethod();
+			if ("OPTIONS".equalsIgnoreCase(_m))
 			{
 				actionContext.getResponse().addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
 				actionContext.getResponse().addHeader("Access-Control-Allow-Headers",
@@ -45,18 +57,12 @@ public class ActionInvocation
 			else if (index++ == inters.length)
 			{
 				Object result = null;
-				String url = actionContext.getRequest().getServletPath();
-				String[] parts = url.substring(1).split("/");
-				String actionName = StringUtils.capitalize(parts[0]);
-				String actionMethod = (parts.length > 1) ? parts[1] : "execute";
-				// Class<?> cls = Class.forName("action." + action);
-				// Method method = cls.getMethod(actionMethod);
-				Object action = Container.getAction(actionName);
-				Method method = action.getClass().getMethod(actionMethod);
-				String ip = actionContext.getRequest().getRemoteAddr();
-				Object[] ps = new Object[] { ip, m, url };
-				log.debug("{} {} {}", ps);
-				result = method.invoke(action);
+				//String ip = actionContext.getRequest().getRemoteAddr();
+				Object a = Container.getAction(action);
+				Method m = a.getClass().getMethod(method);
+				Object[] ps = new Object[] { action, method };
+				log.debug("{} {}", ps);
+				result = m.invoke(a);
 				if (result instanceof View)
 				{
 					((View) result).render(actionContext);

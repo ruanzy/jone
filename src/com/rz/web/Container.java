@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.rz.web.interceptor.Interceptor;
 import com.rz.web.interceptor.InterceptorPath;
 
 public class Container
 {
+	private static Logger log = LoggerFactory.getLogger(Container.class);
 	private static Properties props = new Properties();
 	private static Map<String, Object> actions = new HashMap<String, Object>();
 	private static Map<String, Interceptor> interceptors = new HashMap<String, Interceptor>();
@@ -28,6 +31,7 @@ public class Container
 
 	private static void properties()
 	{
+		log.debug("Loading jone.properties");
 		InputStream is = null;
 		try
 		{
@@ -61,6 +65,7 @@ public class Container
 	private static void actions()
 	{
 		String pck = props.getProperty("action.package", "action");
+		log.debug("Loading actions in " + pck + " package");
 		try
 		{
 			URL url = Thread.currentThread().getContextClassLoader().getResource(pck);
@@ -86,6 +91,7 @@ public class Container
 	private static void interceptors()
 	{
 		String pck = props.getProperty("interceptor.package", "interceptor");
+		log.debug("Loading interceptors in " + pck + " package");
 		try
 		{
 			URL url = Thread.currentThread().getContextClassLoader().getResource(pck);

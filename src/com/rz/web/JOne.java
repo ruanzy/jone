@@ -107,6 +107,12 @@ public class JOne implements Filter
 		{
 			throw new ServletException(e);
 		}
-		System.out.println("JOne Satrtup");
+		StringBuffer sb2 = new StringBuffer();
+		sb2.append("*************************************").append("\r\n");
+		sb2.append("**                                 **").append("\r\n");
+		sb2.append("**           JOne Satrtup          **").append("\r\n");
+		sb2.append("**                                 **").append("\r\n");
+		sb2.append("*************************************");
+		System.out.println(sb2);
 	}
 }
