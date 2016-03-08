@@ -61,7 +61,7 @@ public class ActionInvocation
 				Object a = Container.getAction(action);
 				Method m = a.getClass().getMethod(method);
 				Object[] ps = new Object[] { action, method };
-				log.debug("{} {}", ps);
+				log.debug("Action={}, method={}", ps);
 				result = m.invoke(a);
 				if (result instanceof View)
 				{
