@@ -14,7 +14,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.rz.util.I18N;
-import com.rz.web.interceptor.Interceptors;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleScalar;
 import freemarker.template.Template;
@@ -83,31 +82,31 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		String _starter = cfg.getInitParameter("starter");
+		StringBuffer sb = new StringBuffer();
+		sb.append("*************************************").append("\r\n");
+		sb.append("**                                 **").append("\r\n");
+		sb.append("**          JOne Satrting...       **").append("\r\n");
+		sb.append("**                                 **").append("\r\n");
+		sb.append("*************************************");
+		System.out.println(sb);
 		try
 		{
+			String _starter = cfg.getInitParameter("starter");
 			this.context = cfg.getServletContext();
-			StringBuffer sb = new StringBuffer();
-			sb.append("*************************************").append("\r\n");
-			sb.append("**                                 **").append("\r\n");
-			sb.append("**          JOne Satrting...       **").append("\r\n");
-			sb.append("**                                 **").append("\r\n");
-			sb.append("*************************************");
-			System.out.println(sb);
+			conf.setServletContextForTemplateLoading(this.context, "/");
+			conf.setDefaultEncoding("UTF-8");
 			if (_starter != null)
 			{
 				Class<?> startercls = Class.forName(_starter);
 				this.starter = (Starter) (startercls.newInstance());
 				this.starter.start(this.context);
 			}
-			Actions.init();
-			Interceptors.init();
-			conf.setServletContextForTemplateLoading(this.context, "/");
-			conf.setDefaultEncoding("UTF-8");
+			Container.init();
 		}
 		catch (Exception e)
 		{
 			throw new ServletException(e);
 		}
+		System.out.println("JOne Satrtup");
 	}
 }

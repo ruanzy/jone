@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.util.StringUtils;
 import com.rz.web.interceptor.Interceptor;
-import com.rz.web.interceptor.Interceptors;
 
 public class ActionInvocation
 {
@@ -23,7 +22,7 @@ public class ActionInvocation
 	{
 		this.actionContext = ac;
 		String url = actionContext.getRequest().getServletPath();
-		this.inters = Interceptors.match(url);
+		this.inters = Container.getInterceptor(url);
 	}
 
 	public void invoke()
@@ -52,7 +51,7 @@ public class ActionInvocation
 				String actionMethod = (parts.length > 1) ? parts[1] : "execute";
 				// Class<?> cls = Class.forName("action." + action);
 				// Method method = cls.getMethod(actionMethod);
-				Object action = Actions.get(actionName);
+				Object action = Container.getAction(actionName);
 				Method method = action.getClass().getMethod(actionMethod);
 				String ip = actionContext.getRequest().getRemoteAddr();
 				Object[] ps = new Object[] { ip, m, url };

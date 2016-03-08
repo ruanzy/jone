@@ -1,6 +1,5 @@
 package com.rz.service;
 
-import com.rz.web.Config;
 
 
 public class ServiceUtil
@@ -11,10 +10,10 @@ public class ServiceUtil
 		try
 		{
 			String serviceCaller = "com.rz.service.DefaultServiceCaller";
-			String _serviceCaller = Config.get("ServiceCaller");
-			if(_serviceCaller != null && _serviceCaller.length() > 0){
-				serviceCaller = _serviceCaller;
-			}
+//			String _serviceCaller = Config.get("ServiceCaller");
+//			if(_serviceCaller != null && _serviceCaller.length() > 0){
+//				serviceCaller = _serviceCaller;
+//			}
 			Class<?> cls = Class.forName(serviceCaller);
 			caller = (ServiceCaller) (cls.newInstance());
 		}
