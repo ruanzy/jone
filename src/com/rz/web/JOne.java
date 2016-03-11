@@ -1,9 +1,6 @@
 package com.rz.web;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,17 +10,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.rz.util.I18N;
-import freemarker.template.Configuration;
-import freemarker.template.SimpleScalar;
-import freemarker.template.Template;
-import freemarker.template.TemplateMethodModel;
-import freemarker.template.TemplateModelException;
 
 public class JOne implements Filter
 {
 	private ServletContext context;
-	private static Configuration conf = new Configuration();
 	private Starter starter;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
@@ -37,30 +27,14 @@ public class JOne implements Filter
 		boolean isHtml = url.endsWith(".html") || url.endsWith(".htm");
 		try
 		{
-			if (isStatic && !isHtml)
-			{
-				chain.doFilter(request, response);
-				return;
-			}
 			if (isHtml)
 			{
-				final String lang = WebKit.getLang(request);
-				String fn = url.substring(1);
-				response.setContentType("text/html;charset=UTF-8");
-				Template t = conf.getTemplate(fn, "UTF-8");
-				conf.setSharedVariable("i18n", new TemplateMethodModel()
-				{
-					@SuppressWarnings("rawtypes")
-					public Object exec(List list) throws TemplateModelException
-					{
-						String key = (String) list.get(0);
-						Locale locale = new Locale(lang);
-						String value = I18N.get(locale, key);
-						return new SimpleScalar(value);
-					}
-				});
-				Map<String, Object> data = WebKit.getScopeMap(context, request);
-				t.process(data, response.getWriter());
+				HtmlHandler.handle(context, request, response);
+				return;
+			}
+			if (isStatic)
+			{
+				chain.doFilter(request, response);
 				return;
 			}
 			ActionContext ac = ActionContext.create(context, request, response);
@@ -93,8 +67,6 @@ public class JOne implements Filter
 		{
 			String _starter = cfg.getInitParameter("starter");
 			this.context = cfg.getServletContext();
-			conf.setServletContextForTemplateLoading(this.context, "/");
-			conf.setDefaultEncoding("UTF-8");
 			if (_starter != null)
 			{
 				Class<?> startercls = Class.forName(_starter);

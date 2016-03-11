@@ -1,6 +1,5 @@
 package com.rz.web;
 
-import java.io.UnsupportedEncodingException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,14 +19,6 @@ public class ActionContext
 	{
 		ActionContext ac = new ActionContext();
 		ac.servletContext = servletContext;
-		try
-		{
-			req.setCharacterEncoding("UTF-8");
-		}
-		catch (UnsupportedEncodingException e)
-		{
-			e.printStackTrace();
-		}
 		ac.request = req;
 		ac.response = res;
 		actionContext.set(ac);
