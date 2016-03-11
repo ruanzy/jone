@@ -29,8 +29,6 @@ public class ActionContext
 			e.printStackTrace();
 		}
 		ac.request = req;
-		res.addHeader("Access-Control-Allow-Origin", "*");
-//		res.addHeader("Access-Control-Allow-Credentials", "true");
 		ac.response = res;
 		actionContext.set(ac);
 		return ac;
