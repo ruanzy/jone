@@ -124,7 +124,7 @@ public class Container
 		return actions.get(actionName);
 	}
 	
-	public static Interceptor[] getInterceptor(String url)
+	public static List<Interceptor> getInterceptor(String url)
 	{
 		List<Interceptor> list = new ArrayList<Interceptor>();
 		Set<String> keys = interceptors.keySet();
@@ -135,6 +135,6 @@ public class Container
 				list.add(interceptors.get(key));
 			}
 		}
-		return list.toArray(new Interceptor[list.size()]);
+		return list;
 	}
 }

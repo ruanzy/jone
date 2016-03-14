@@ -1,6 +1,7 @@
 package com.rz.web;
 
 import java.lang.reflect.Method;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.util.StringUtils;
@@ -12,7 +13,7 @@ public class ActionInvocation
 	private ActionContext actionContext;
 	private String action;
 	private String method;
-	private Interceptor[] inters;
+	private List<Interceptor> inters;
 	private int index = 0;
 
 	public ActionContext getActionContext()
@@ -41,20 +42,20 @@ public class ActionInvocation
 	{
 		try
 		{
-			String _m = actionContext.getRequest().getMethod();
-			if ("OPTIONS".equalsIgnoreCase(_m))
+//			String _m = actionContext.getRequest().getMethod();
+//			if ("OPTIONS".equalsIgnoreCase(_m))
+//			{
+//				actionContext.getResponse().addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+//				actionContext.getResponse().addHeader("Access-Control-Allow-Headers",
+//						"X-Requested-With, Content-Type, Accept");
+//				actionContext.getResponse().addHeader("Access-Control-Max-Age", "1728000");
+//				actionContext.getResponse().setStatus(204);
+//			}
+			if (index < inters.size())
 			{
-				actionContext.getResponse().addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-				actionContext.getResponse().addHeader("Access-Control-Allow-Headers",
-						"X-Requested-With, Content-Type, Accept");
-				actionContext.getResponse().addHeader("Access-Control-Max-Age", "1728000");
-				actionContext.getResponse().setStatus(204);
+				inters.get(index++).intercept(this);
 			}
-			if (index < inters.length)
-			{
-				inters[index++].intercept(this);
-			}
-			else if (index++ == inters.length)
+			else if (index++ == inters.size())
 			{
 				Object result = null;
 				//String ip = actionContext.getRequest().getRemoteAddr();
