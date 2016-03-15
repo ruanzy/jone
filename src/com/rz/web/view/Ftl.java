@@ -1,6 +1,8 @@
 package com.rz.web.view;
 
 import java.util.Map;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import com.rz.web.ActionContext;
 import com.rz.web.View;
 import freemarker.template.Configuration;
@@ -25,14 +27,16 @@ public class Ftl implements View
 		this.map = map;
 	}
 
-	public void render(ActionContext ac)
+	public void handle()
 	{
 		try
 		{
-			cfg.setServletContextForTemplateLoading(ac.getServletContext(), "ftl");
-			ac.getResponse().setContentType("text/html;charset=UTF-8");
+			ServletContext servletContext = ActionContext.getServletContext();
+			HttpServletResponse response = ActionContext.getResponse();
+			cfg.setServletContextForTemplateLoading(servletContext, "ftl");
+			response.setContentType("text/html;charset=UTF-8");
 			Template t = cfg.getTemplate(ftl, "UTF-8");
-			t.process(map, ac.getResponse().getWriter());
+			t.process(map, response.getWriter());
 		}
 		catch (Exception e)
 		{
@@ -40,3 +44,4 @@ public class Ftl implements View
 		}
 	}
 }
+

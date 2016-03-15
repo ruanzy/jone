@@ -50,10 +50,10 @@ public class CaptchaKit
 			g.drawString(rand, 13 * i + 12, height * 2 / 3);
 		}
 		g.dispose();
-		ActionContext.get().getRequest().getSession(true).setAttribute(CAPTCHAKEY, randomStr.toLowerCase());
+		ActionContext.getRequest().getSession(true).setAttribute(CAPTCHAKEY, randomStr.toLowerCase());
 		try
 		{
-			ImageIO.write(img, "JPEG", ActionContext.get().getResponse().getOutputStream());
+			ImageIO.write(img, "JPEG", ActionContext.getResponse().getOutputStream());
 		}
 		catch (IOException e)
 		{
@@ -80,7 +80,7 @@ public class CaptchaKit
 
 	public static String get()
 	{
-		HttpSession s = ActionContext.get().getRequest().getSession(false);
+		HttpSession s = ActionContext.getRequest().getSession(false);
 		return (String)(s.getAttribute(CAPTCHAKEY));
 	}
 }

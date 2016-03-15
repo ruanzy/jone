@@ -21,6 +21,7 @@ public class JOne implements Filter
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
+		ActionContext.create(context, request, response);
 		String url = request.getServletPath();
 		request.setCharacterEncoding("UTF-8");
 		boolean isStatic = (url.lastIndexOf(".") != -1);
@@ -29,7 +30,7 @@ public class JOne implements Filter
 		{
 			if (isHtml)
 			{
-				HtmlHandler.handle(context, request, response);
+				new Html(url).handle();
 				return;
 			}
 			if (isStatic)
@@ -37,8 +38,7 @@ public class JOne implements Filter
 				chain.doFilter(request, response);
 				return;
 			}
-			ActionContext ac = ActionContext.create(context, request, response);
-			new ActionInvocation(ac).invoke();
+			new ActionInvocation().invoke();
 		}
 		catch (Exception e)
 		{

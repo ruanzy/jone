@@ -37,7 +37,7 @@ public class WebUtil
 	{
 		public static HttpServletRequest get()
 		{
-			return ActionContext.get().getRequest();
+			return ActionContext.getRequest();
 		}
 
 		public static void setCharacterEncoding(String encoding)
@@ -67,7 +67,7 @@ public class WebUtil
 	{
 		public static HttpServletResponse get()
 		{
-			return ActionContext.get().getResponse();
+			return ActionContext.getResponse();
 		}
 
 		public static void setContentType(String type)
@@ -200,7 +200,7 @@ public class WebUtil
 	{
 		public static ServletContext get()
 		{
-			return ActionContext.get().getServletContext();
+			return ActionContext.getServletContext();
 		}
 
 		public static void attr(String key, Object value)

@@ -28,8 +28,10 @@ public class WebKit
 		return lang;
 	}
 	
-	public static Map<String, Object> getScopeMap(ServletContext servletContext, HttpServletRequest request)
+	public static Map<String, Object> getScopeMap()
 	{
+		ServletContext servletContext = ActionContext.getServletContext();
+		HttpServletRequest request = ActionContext.getRequest();
 		Map<String, Object> ps = new HashMap<String, Object>();
 		Map<String, Object> applicationMap = getApplicationMap(servletContext);
 		Map<String, Object> sessionMap = getSessionMap(request.getSession());

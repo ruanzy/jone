@@ -2,5 +2,5 @@ package com.rz.web;
 
 public interface View
 {
-	void render(ActionContext ac);
+	void handle();
 }

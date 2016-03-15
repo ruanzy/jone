@@ -30,22 +30,22 @@ public class ActionContext
 		actionContext.remove();
 	}
 	
-	public static ActionContext get()
+	static ActionContext get()
 	{
 		return actionContext.get();
 	}
 
-	public ServletContext getServletContext()
+	public static ServletContext getServletContext()
 	{
 		return get().servletContext;
 	}
 
-	public HttpServletRequest getRequest()
+	public static HttpServletRequest getRequest()
 	{
 		return get().request;
 	}
 
-	public HttpServletResponse getResponse()
+	public static HttpServletResponse getResponse()
 	{
 		return get().response;
 	}

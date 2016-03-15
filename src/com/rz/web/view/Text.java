@@ -1,6 +1,7 @@
 package com.rz.web.view;
 
 import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import com.rz.web.ActionContext;
 import com.rz.web.View;
 
@@ -13,12 +14,13 @@ public class Text implements View
 		this.txt = txt;
 	}
 
-	public void render(ActionContext ac)
+	public void handle()
 	{
-		ac.getResponse().setContentType("text/plain;charset=UTF-8");
+		HttpServletResponse response = ActionContext.getResponse();
+		response.setContentType("text/plain;charset=UTF-8");
 		try
 		{
-			ac.getResponse().getWriter().print(txt);
+			response.getWriter().print(txt);
 		}
 		catch (IOException e)
 		{

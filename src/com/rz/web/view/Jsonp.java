@@ -1,6 +1,7 @@
 package com.rz.web.view;
 
 import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import com.rz.web.ActionContext;
 import com.rz.web.View;
@@ -16,12 +17,13 @@ public class Jsonp implements View
 		this.data = data;
 	}
 
-	public void render(ActionContext ac)
+	public void handle()
 	{
-		ac.getResponse().setContentType("text/javascript;charset=UTF-8");
+		HttpServletResponse response = ActionContext.getResponse();
+		response.setContentType("text/javascript;charset=UTF-8");
 		try
 		{
-			ac.getResponse().getWriter().print(callback + "(" + JSON.toJSONString(data) + ")");
+			response.getWriter().print(callback + "(" + JSON.toJSONString(data) + ")");
 		}
 		catch (IOException e)
 		{

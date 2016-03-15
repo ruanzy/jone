@@ -10,23 +10,16 @@ import com.rz.web.interceptor.Interceptor;
 public class ActionInvocation
 {
 	private Logger log = LoggerFactory.getLogger(ActionInvocation.class);
-	private ActionContext actionContext;
 	private String action;
 	private String method;
 	private List<Interceptor> inters;
 	private int index = 0;
 
-	public ActionContext getActionContext()
-	{
-		return actionContext;
-	}
-
-	public ActionInvocation(ActionContext ac)
+	public ActionInvocation()
 	{
 		try
 		{
-			this.actionContext = ac;
-			String url = actionContext.getRequest().getServletPath();
+			String url = ActionContext.getRequest().getServletPath();
 			String[] parts = url.substring(1).split("/");
 			this.action = StringUtils.capitalize(parts[0]);
 			this.method = (parts.length > 1) ? parts[1] : "execute";
@@ -66,7 +59,7 @@ public class ActionInvocation
 				result = m.invoke(a);
 				if (result instanceof View)
 				{
-					((View) result).render(actionContext);
+					((View) result).handle();
 				}
 			}
 		}
