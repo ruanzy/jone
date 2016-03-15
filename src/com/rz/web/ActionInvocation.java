@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.util.StringUtils;
 import com.rz.web.interceptor.Interceptor;
 
 public class ActionInvocation
@@ -21,7 +20,7 @@ public class ActionInvocation
 		{
 			String url = ActionContext.getRequest().getServletPath();
 			String[] parts = url.substring(1).split("/");
-			this.action = StringUtils.capitalize(parts[0]);
+			this.action = WebKit.capitalize(parts[0]);
 			this.method = (parts.length > 1) ? parts[1] : "execute";
 			this.inters = Container.getInterceptor(url);
 		}

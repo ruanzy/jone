@@ -42,7 +42,7 @@ public class Html implements View
 					return new SimpleScalar(value);
 				}
 			});
-			Map<String, Object> data = WebKit.getScopeMap();
+			Map<String, Object> data = ActionContext.getScopeMap();
 			t.process(data, response.getWriter());
 		}
 		catch (Exception e)
