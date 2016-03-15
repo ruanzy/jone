@@ -22,7 +22,7 @@ public class ActionInvocation
 			String[] parts = url.substring(1).split("/");
 			this.action = WebKit.capitalize(parts[0]);
 			this.method = (parts.length > 1) ? parts[1] : "execute";
-			this.inters = Container.getInterceptor(url);
+			this.inters = Container.findInterceptor(url);
 		}
 		catch (Exception e)
 		{
@@ -51,7 +51,7 @@ public class ActionInvocation
 			{
 				Object result = null;
 				//String ip = actionContext.getRequest().getRemoteAddr();
-				Object a = Container.getAction(action);
+				Object a = Container.findAction(action);
 				Method m = a.getClass().getMethod(method);
 				Object[] ps = new Object[] { action, method };
 				log.debug("Action={}, method={}", ps);

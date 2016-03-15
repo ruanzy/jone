@@ -119,12 +119,12 @@ public class Container
 		}
 	}
 	
-	public static Object getAction(String actionName)
+	public static Object findAction(String actionName)
 	{
 		return actions.get(actionName);
 	}
 	
-	public static List<Interceptor> getInterceptor(String url)
+	public static List<Interceptor> findInterceptor(String url)
 	{
 		List<Interceptor> list = new ArrayList<Interceptor>();
 		Set<String> keys = interceptors.keySet();
