@@ -1,24 +1,24 @@
 package com.rz.aop2;
 
-public class MyAOPHandler implements AOPHandler
+public class MyAdvice implements Advice
 {
 
-	public void doBefore()
+	public void before()
 	{
 		System.out.println("我是doBefore通知");
 	}
 
-	public void doAfter()
+	public void after()
 	{
 		System.out.println("我是doAfter通知");
 	}
 
-	public void doException()
+	public void exception()
 	{
 		System.out.println("我是doException通知");
 	}
 
-	public void doFinally()
+	public void around()
 	{
 		System.out.println("我是doFinally通知");
 	}

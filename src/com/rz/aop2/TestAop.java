@@ -3,7 +3,6 @@ package com.rz.aop2;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.beanutils.MethodUtils;
 
 public class TestAop
 {
@@ -21,14 +20,11 @@ public class TestAop
 			InvocationTargetException
 	{
 		ProxyFactory pf = ProxyFactory.getInstance();
-		List<AOPHandler> handlers = new ArrayList<AOPHandler>();
-		handlers.add(new MyAOPHandler());
-		handlers.add(new MyAOPHandler2());
-		Object proxy = pf.create(UserService.class, handlers);
-		Object r = null;
-		r = MethodUtils.invokeMethod(proxy, "save", new Object[] { "abc" });
-		System.out.println("FInal Result :::" + r);
-
+		List<Advice> advices = new ArrayList<Advice>();
+		advices.add(new MyAdvice());
+		advices.add(new MyAdvice2());
+		UserService userService = pf.create(UserService.class, advices);
+		userService.save("abc");
 	}
 
 }

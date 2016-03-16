@@ -1,28 +1,27 @@
 package com.rz.aop2;
 
-import com.rz.aop2.AOPHandler;
 import com.rz.dao.DB;
 
-public class TxHandler implements AOPHandler
+public class TxAdvice implements Advice
 {
 	DB dao = DB.getInstance();
 
-	public void doBefore()
+	public void before()
 	{
 		dao.begin();
 	}
 
-	public void doAfter()
+	public void after()
 	{
 		dao.commit();
 	}
 
-	public void doException()
+	public void exception()
 	{
 		dao.rollback();
 	}
 
-	public void doFinally()
+	public void around()
 	{
 		// TODO Auto-generated method stub
 

@@ -8,7 +8,7 @@ import net.sf.cglib.proxy.MethodProxy;
 
 public class ProxyFactory implements MethodInterceptor
 {
-	List<AOPHandler> handlers;
+	List<Advice> advices;
 
 	private ProxyFactory()
 	{
@@ -25,42 +25,43 @@ public class ProxyFactory implements MethodInterceptor
 		return SingletonHolder.INSTANCE;
 	}
 
-	public Object create(Class<?> clazz, List<AOPHandler> handlers)
+	@SuppressWarnings("unchecked")
+	public <T> T create(Class<T> cls, List<Advice> advices)
 	{
 		Enhancer enhancer = new Enhancer();
-		this.handlers = handlers;
-		enhancer.setSuperclass(clazz);
+		this.advices = advices;
+		enhancer.setSuperclass(cls);
 		enhancer.setCallback(this);
-		return enhancer.create();
+		return (T) enhancer.create();
 	}
 
 	public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
 	{
 		Object result = null;
-		for (AOPHandler handler : handlers)
+		for (Advice advice : advices)
 		{
-			handler.doBefore();
+			advice.before();
 		}
 		try
 		{
 			result = methodProxy.invokeSuper(proxy, args);
-			for (AOPHandler handler : handlers)
+			for (Advice advice : advices)
 			{
-				handler.doAfter();
+				advice.after();
 			}
 		}
 		catch (Exception e)
 		{
-			for (AOPHandler handler : handlers)
+			for (Advice advice : advices)
 			{
-				handler.doException();
+				advice.exception();
 			}
 		}
 		finally
 		{
-			for (AOPHandler handler : handlers)
+			for (Advice advice : advices)
 			{
-				handler.doFinally();
+				advice.around();
 			}
 		}
 		return result;
