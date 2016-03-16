@@ -3,6 +3,7 @@ package com.rz.web;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.rz.util.I18N;
@@ -24,12 +25,14 @@ public class Html implements View
 
 	public void handle()
 	{
+		ServletContext servletContext = ActionContext.getServletContext();
 		HttpServletRequest request = ActionContext.getRequest();
 		HttpServletResponse response = ActionContext.getResponse();
 		final String lang = WebKit.getLang(request);
 		try
 		{
 			response.setContentType("text/html;charset=UTF-8");
+			conf.setServletContextForTemplateLoading(servletContext, "/");
 			Template t = conf.getTemplate(path, "UTF-8");
 			conf.setSharedVariable("i18n", new TemplateMethodModel()
 			{

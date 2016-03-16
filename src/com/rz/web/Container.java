@@ -124,13 +124,15 @@ public class Container
 		return actions.get(actionName);
 	}
 	
-	public static List<Interceptor> findInterceptor(String url)
+	public static List<Interceptor> findInterceptor(String action, String method)
 	{
 		List<Interceptor> list = new ArrayList<Interceptor>();
+		String express1 = action + ".*";
+		String express2 = action + "." + method;
 		Set<String> keys = interceptors.keySet();
 		for (String key : keys)
 		{
-			if (url.startsWith("/" + key))
+			if (key.equals("*") || key.equals(express1) || key.equals(express2))
 			{
 				list.add(interceptors.get(key));
 			}

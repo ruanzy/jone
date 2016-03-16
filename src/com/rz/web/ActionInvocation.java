@@ -22,7 +22,7 @@ public class ActionInvocation
 			String[] parts = url.substring(1).split("/");
 			this.action = WebKit.capitalize(parts[0]);
 			this.method = (parts.length > 1) ? parts[1] : "execute";
-			this.inters = Container.findInterceptor(url);
+			this.inters = Container.findInterceptor(action, method);
 		}
 		catch (Exception e)
 		{
