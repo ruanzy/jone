@@ -17,6 +17,26 @@ public class Html implements View
 {
 	private static Configuration conf = new Configuration();
 	private String path;
+	
+	static{		
+		ServletContext servletContext = ActionContext.getServletContext();
+		HttpServletRequest request = ActionContext.getRequest();
+		HttpServletResponse response = ActionContext.getResponse();
+		final String lang = WebKit.getLang(request);
+		response.setContentType("text/html;charset=UTF-8");
+		conf.setServletContextForTemplateLoading(servletContext, "/");
+		conf.setSharedVariable("i18n", new TemplateMethodModel()
+		{
+			@SuppressWarnings("rawtypes")
+			public Object exec(List list) throws TemplateModelException
+			{
+				String key = (String) list.get(0);
+				Locale locale = new Locale(lang);
+				String value = I18N.get(locale, key);
+				return new SimpleScalar(value);
+			}
+		});
+	}
 
 	public Html(String path)
 	{
@@ -25,26 +45,10 @@ public class Html implements View
 
 	public void handle()
 	{
-		ServletContext servletContext = ActionContext.getServletContext();
-		HttpServletRequest request = ActionContext.getRequest();
-		HttpServletResponse response = ActionContext.getResponse();
-		final String lang = WebKit.getLang(request);
 		try
 		{
-			response.setContentType("text/html;charset=UTF-8");
-			conf.setServletContextForTemplateLoading(servletContext, "/");
+			HttpServletResponse response = ActionContext.getResponse();
 			Template t = conf.getTemplate(path, "UTF-8");
-			conf.setSharedVariable("i18n", new TemplateMethodModel()
-			{
-				@SuppressWarnings("rawtypes")
-				public Object exec(List list) throws TemplateModelException
-				{
-					String key = (String) list.get(0);
-					Locale locale = new Locale(lang);
-					String value = I18N.get(locale, key);
-					return new SimpleScalar(value);
-				}
-			});
 			Map<String, Object> data = ActionContext.getScopeMap();
 			t.process(data, response.getWriter());
 		}
