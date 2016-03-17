@@ -1,3 +1,16 @@
 /action
 /com
+/dao.properties
+/dao2.properties
+/init.sql
 /interceptor
+/jone.properties
+/log
+/logback.xml
+/mappers
+/resource_en.properties
+/resource_zh.properties
+/rzy.sql
+/schedule
+/service
+/task.js
