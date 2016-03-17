@@ -38,7 +38,9 @@ public class JOne implements Filter
 				chain.doFilter(request, response);
 				return;
 			}
-			new ActionInvocation().invoke();
+			String name = UrlParser.getActionName(url);
+			String method = UrlParser.getActionMethod(url);
+			new Action(name, method).invoke();
 		}
 		catch (Exception e)
 		{

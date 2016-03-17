@@ -1,7 +1,7 @@
 package interceptor;
 
 import com.rz.util.WebUtil;
-import com.rz.web.ActionInvocation;
+import com.rz.web.Action;
 import com.rz.web.Interceptor;
 import com.rz.web.InterceptorPath;
 
@@ -9,7 +9,7 @@ import com.rz.web.InterceptorPath;
 public class LoginInterceptor implements Interceptor
 {
 
-	public void intercept(ActionInvocation ai)
+	public void intercept(Action ai)
 	{
 		System.out.println("LoginInterceptor before");
 		try

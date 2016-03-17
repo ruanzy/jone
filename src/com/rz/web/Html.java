@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import freemarker.template.Configuration;
@@ -21,7 +22,7 @@ public class Html implements View
 		ServletContext servletContext = ActionContext.getServletContext();
 		HttpServletRequest request = ActionContext.getRequest();
 		HttpServletResponse response = ActionContext.getResponse();
-		final String lang = WebKit.getLang(request);
+		final String lang = getLang(request);
 		response.setContentType("text/html;charset=UTF-8");
 		conf.setServletContextForTemplateLoading(servletContext, "/");
 		conf.setSharedVariable("i18n", new TemplateMethodModel()
@@ -55,5 +56,23 @@ public class Html implements View
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static String getLang(HttpServletRequest request)
+	{
+		String lang = "zh";
+		Cookie[] cks = request.getCookies();
+		if (cks != null)
+		{
+			for (Cookie cookie : cks)
+			{
+				if ("lang".equals(cookie.getName()))
+				{
+					lang = cookie.getValue();
+					break;
+				}
+			}
+		}
+		return lang;
 	}
 }
