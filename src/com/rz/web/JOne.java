@@ -22,7 +22,7 @@ public class JOne implements Filter
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		ActionContext.create(context, request, response);
-		String url = request.getServletPath();
+		String url = request.getServletPath().substring(1);
 		request.setCharacterEncoding("UTF-8");
 		boolean isStatic = (url.lastIndexOf(".") != -1);
 		boolean isHtml = url.endsWith(".html") || url.endsWith(".htm");
