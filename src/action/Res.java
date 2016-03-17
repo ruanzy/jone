@@ -2,8 +2,8 @@ package action;
 
 import java.util.Map;
 import com.rz.util.WebUtil;
+import com.rz.web.Json;
 import com.rz.web.View;
-import com.rz.web.view.Json;
 import com.rz.web.view.Msg;
 
 public class Res

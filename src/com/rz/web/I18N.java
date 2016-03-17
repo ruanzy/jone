@@ -1,4 +1,4 @@
-package com.rz.util;
+package com.rz.web;
 
 import java.text.MessageFormat;
 import java.util.Locale;

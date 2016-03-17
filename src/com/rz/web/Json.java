@@ -1,4 +1,4 @@
-package com.rz.web.view;
+package com.rz.web;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;

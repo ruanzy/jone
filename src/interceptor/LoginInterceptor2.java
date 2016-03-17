@@ -1,8 +1,8 @@
 package interceptor;
 
 import com.rz.web.ActionInvocation;
-import com.rz.web.interceptor.Interceptor;
-import com.rz.web.interceptor.InterceptorPath;
+import com.rz.web.Interceptor;
+import com.rz.web.InterceptorPath;
 
 @InterceptorPath("klogi")
 public class LoginInterceptor2 implements Interceptor

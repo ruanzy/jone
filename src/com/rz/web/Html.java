@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.rz.util.I18N;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleScalar;
 import freemarker.template.Template;

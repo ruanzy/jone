@@ -1,4 +1,4 @@
-package com.rz.web.interceptor;
+package com.rz.web;
 
 import com.rz.web.ActionInvocation;
 

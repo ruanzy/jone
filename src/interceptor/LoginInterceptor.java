@@ -2,8 +2,8 @@ package interceptor;
 
 import com.rz.util.WebUtil;
 import com.rz.web.ActionInvocation;
-import com.rz.web.interceptor.Interceptor;
-import com.rz.web.interceptor.InterceptorPath;
+import com.rz.web.Interceptor;
+import com.rz.web.InterceptorPath;
 
 @InterceptorPath("klogin")
 public class LoginInterceptor implements Interceptor

@@ -12,8 +12,6 @@ import java.util.Properties;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.web.interceptor.Interceptor;
-import com.rz.web.interceptor.InterceptorPath;
 
 public class Container
 {
