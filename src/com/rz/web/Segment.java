@@ -13,10 +13,11 @@ import freemarker.template.Template;
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;
 
-public class Html implements View
+public class Segment implements View
 {
 	private static Configuration conf = new Configuration();
 	private String path;
+	private Map<String, Object> data;
 
 	static
 	{
@@ -39,9 +40,15 @@ public class Html implements View
 		});
 	}
 
-	public Html(String path)
+	public Segment(String path)
 	{
 		this.path = path;
+	}
+
+	public Segment(String path, Map<String, Object> data)
+	{
+		this.path = path;
+		this.data = data;
 	}
 
 	public void handle()
@@ -52,6 +59,10 @@ public class Html implements View
 			response.setCharacterEncoding("UTF-8");
 			Template t = conf.getTemplate(path, "UTF-8");
 			Map<String, Object> scope = ActionContext.getScopeMap();
+			if (data != null)
+			{
+				scope.putAll(data);
+			}
 			t.process(scope, response.getWriter());
 		}
 		catch (Exception e)
