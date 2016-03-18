@@ -19,32 +19,25 @@ public class Action
 		this.method = method;
 		this.inters = Container.findInterceptor(name, method);
 	}
-	
-	public void invoke()
+
+	public void invoke() throws Exception
 	{
-		try
+		if (index < inters.size())
 		{
-			if (index < inters.size())
-			{
-				inters.get(index++).intercept(this);
-			}
-			else if (index++ == inters.size())
-			{
-				Object result = null;
-				Object a = Container.findAction(name);
-				Method m = a.getClass().getMethod(method);
-				Object[] ps = new Object[] { name, method };
-				log.debug("Action={}, method={}", ps);
-				result = m.invoke(a);
-				if (result instanceof View)
-				{
-					((View) result).handle();
-				}
-			}
+			inters.get(index++).intercept(this);
 		}
-		catch (Exception e)
+		else if (index++ == inters.size())
 		{
-			throw new RuntimeException(e);
+			Object result = null;
+			Object a = Container.findAction(name);
+			Method m = a.getClass().getMethod(method);
+			Object[] ps = new Object[] { name, method };
+			log.debug("Action={}, method={}", ps);
+			result = m.invoke(a);
+			if (result instanceof View)
+			{
+				((View) result).handle();
+			}
 		}
 	}
 
