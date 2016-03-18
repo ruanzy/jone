@@ -28,16 +28,16 @@ public class Action
 		}
 		else if (index++ == inters.size())
 		{
+			Object[] ps = new Object[] { name, method };
+			log.debug("Action={}, method={}", ps);
 			Object result = null;
 			Object a = Container.findAction(name);
 			if(a == null){
-				String error = "Action" + name + " not found!";
+				String error = "Action " + name + " not found!";
 				log.error(error);
 				throw new ClassNotFoundException(error);
 			}
 			Method m = a.getClass().getMethod(method);
-			Object[] ps = new Object[] { name, method };
-			log.debug("Action={}, method={}", ps);
 			result = m.invoke(a);
 			if (result instanceof View)
 			{
