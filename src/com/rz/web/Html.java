@@ -22,8 +22,8 @@ public class Html implements View
 		ServletContext servletContext = ActionContext.getServletContext();
 		HttpServletRequest request = ActionContext.getRequest();
 		HttpServletResponse response = ActionContext.getResponse();
+		response.setCharacterEncoding("UTF-8");
 		final String lang = getLang(request);
-		response.setContentType("text/html;charset=UTF-8");
 		conf.setServletContextForTemplateLoading(servletContext, "/");
 		conf.setSharedVariable("i18n", new TemplateMethodModel()
 		{
