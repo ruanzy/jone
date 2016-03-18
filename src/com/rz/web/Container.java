@@ -29,7 +29,6 @@ public class Container
 
 	private static void properties()
 	{
-		log.debug("Loading jone.properties");
 		InputStream is = null;
 		try
 		{
@@ -37,6 +36,7 @@ public class Container
 			is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 			if (is != null)
 			{
+				log.debug("Loading jone.properties");
 				props.load(is);
 			}
 		}
@@ -102,11 +102,11 @@ public class Container
 					String name = f.getName().substring(0, f.getName().indexOf(".class"));
 					String className = pck + "." + name;
 					Class<?> cls = Class.forName(className);
-					InterceptorPath interceptorpath = cls.getAnnotation(InterceptorPath.class);
-					if (interceptorpath != null)
+					Expression expression = cls.getAnnotation(Expression.class);
+					if (expression != null)
 					{
-						String path = interceptorpath.value();
-						interceptors.put(path, (Interceptor) cls.newInstance());
+						String exp = expression.value();
+						interceptors.put(exp, (Interceptor) cls.newInstance());
 					}
 				}
 			}

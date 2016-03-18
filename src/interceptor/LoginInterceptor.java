@@ -2,10 +2,10 @@ package interceptor;
 
 import com.rz.util.WebUtil;
 import com.rz.web.Action;
+import com.rz.web.Expression;
 import com.rz.web.Interceptor;
-import com.rz.web.InterceptorPath;
 
-@InterceptorPath("klogin")
+@Expression("klogin")
 public class LoginInterceptor implements Interceptor
 {
 
