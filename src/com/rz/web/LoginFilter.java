@@ -8,13 +8,12 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.rz.common.TokenUtil;
 
 public class LoginFilter implements Filter
 {
-	private static final String lOGIN = "login.html";
 	private static final String NOCHECK = "(captcha|login.*|logout)$";
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
@@ -23,6 +22,11 @@ public class LoginFilter implements Filter
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		String path = request.getServletPath();
+		if ("/".equals(path))
+		{
+			chain.doFilter(request, response);
+			return;
+		}
 		boolean extension = path.lastIndexOf(".") != -1;
 		boolean page = Pattern.compile("(.jsp|.html|.htm)$").matcher(path).find();
 		boolean nocheck = Pattern.compile(NOCHECK).matcher(path).find();
@@ -31,17 +35,22 @@ public class LoginFilter implements Filter
 			chain.doFilter(request, response);
 			return;
 		}
-		String token = getToken(request, "SSOTOKEN");
-		if (token == null)
+		if (page)
 		{
-			String xhr = request.getHeader("x-requested-with");
-			if (xhr != null && xhr.length() > 0)
+			chain.doFilter(request, response);
+			return;
+		}
+		String token = getToken(request);
+		boolean valid = TokenUtil.validateToken(token);
+		if (!valid)
+		{
+			if (isAjax(request))
 			{
-				response.sendError(1111, lOGIN);
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			}
 			else
 			{
-				response.sendRedirect(lOGIN);
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			}
 		}
 		else
@@ -59,21 +68,32 @@ public class LoginFilter implements Filter
 	{
 	}
 
-	private String getToken(HttpServletRequest request, String cookieName)
+	// private String getToken(HttpServletRequest request, String cookieName)
+	// {
+	// Cookie[] cookies = request.getCookies();
+	// String token = null;
+	// if (cookies != null)
+	// {
+	// for (Cookie cookie : cookies)
+	// {
+	// if (cookie.getName().equals(cookieName))
+	// {
+	// token = cookie.getValue();
+	// break;
+	// }
+	// }
+	// }
+	// return token;
+	// }
+
+	private String getToken(HttpServletRequest request)
 	{
-		Cookie[] cookies = request.getCookies();
-		String token = null;
-		if (cookies != null)
-		{
-			for (Cookie cookie : cookies)
-			{
-				if (cookie.getName().equals(cookieName))
-				{
-					token = cookie.getValue();
-					break;
-				}
-			}
-		}
-		return token;
+		return request.getHeader("Authorization");
+	}
+
+	private boolean isAjax(HttpServletRequest request)
+	{
+		String xhr = request.getHeader("X-Requested-With");
+		return (xhr != null) && ("XMLHttpRequest".equals(xhr));
 	}
 }
