@@ -45,7 +45,7 @@ public final class DB
 		return SingletonHolder.INSTANCE;
 	}
 
-	private DB()
+	public DB()
 	{
 		InputStream is = null;
 		Properties prop = new Properties();
@@ -68,7 +68,12 @@ public final class DB
 			throw new DataAccessException("Create DataSource Exception!", e);
 		}
 	}
-
+	
+	public DB(DataSource ds)
+	{
+		this.ds = ds;
+	}
+	
 	public synchronized void showSql(boolean isShowsql)
 	{
 		showsql = isShowsql;

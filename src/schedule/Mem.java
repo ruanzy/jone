@@ -1,12 +1,12 @@
 package schedule;
 
+import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.management.ManagementFactory;
 import com.sun.management.OperatingSystemMXBean;
 
 public class Mem implements Job
@@ -26,7 +26,8 @@ public class Mem implements Job
 
 	private int getThreadCount()
 	{
-		return ManagementFactory.getThreadMXBean().getThreadCount();
+		//return ManagementFactory.getThreadMXBean().getThreadCount();
+		return 0;
 	}
 
 	private long getMemoryUsed()
