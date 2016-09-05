@@ -32,14 +32,14 @@ public class JOne implements Filter
 		String url = path.substring(1);
 		request.setCharacterEncoding("UTF-8");
 		boolean isStatic = (url.lastIndexOf(".") != -1);
-		boolean isHtml = url.endsWith(".html") || url.endsWith(".htm");
+		//boolean isHtml = url.endsWith(".html") || url.endsWith(".htm");
 		try
 		{
-			if (isHtml)
-			{
-				new Html(url).handle();
-				return;
-			}
+//			if (isHtml)
+//			{
+//				new Html(url).handle();
+//				return;
+//			}
 			if (isStatic)
 			{
 				chain.doFilter(request, response);
