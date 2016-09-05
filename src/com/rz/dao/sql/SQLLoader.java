@@ -17,7 +17,7 @@ import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
 import org.beetl.core.resource.StringTemplateResourceLoader;
 
-public class SqlMapper {
+public class SQLLoader {
 	static String lineSeparator = System.getProperty("line.separator", "\n");
 	static Map<String, String> sqls = new LinkedHashMap<String, String>();
 	static GroupTemplate gt;
@@ -62,7 +62,8 @@ public class SqlMapper {
 			if (true) {
 				sqltext = sqltext.replaceAll("\n\t*", " ")
 						.replaceAll("\\s{2,}", " ").trim()
-						.replaceAll("where 1=1 and", "where");
+						.replaceAll("where 1=1 and", "where")
+						.replaceAll("where 1=1", "");
 			}
 			sql.sql = sqltext;
 			sql.params = _paras;

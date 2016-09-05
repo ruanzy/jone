@@ -458,7 +458,7 @@ public final class DB
 		return rows;
 	}
 
-	public List<Record> pager(String sql, List<Object> params, int currPage, int pageSize)
+	public List<Record> pager(String sql, Object[] params, int currPage, int pageSize)
 	{
 		List<Record> list = new ArrayList<Record>();
 		Connection conn = null;
@@ -469,13 +469,13 @@ public final class DB
 			conn = getConnection();
 			DatabaseMetaData metaData = conn.getMetaData();
 			String databaseProductName = metaData.getDatabaseProductName();
-			sql = getPageSql(databaseProductName, sql, params, currPage, pageSize);
+			sql = getPageSql(databaseProductName, sql, currPage, pageSize);
 			ps = conn.prepareStatement(sql);
 			if (params != null)
 			{
-				for (int i = 0, len = params.size(); i < len; i++)
+				for (int i = 0, len = params.length; i < len; i++)
 				{
-					ps.setObject(i + 1, params.get(i));
+					ps.setObject(i + 1, params[i]);
 				}
 				showSQL(sql, params);
 			}
@@ -584,16 +584,20 @@ public final class DB
 		StringBuffer pageSql = new StringBuffer(sql);
 		if ("oracle".equalsIgnoreCase(dialect))
 		{
-			String format = "SELECT * FROM(SELECT FA.*, ROWNUM RN FROM (%s) t FA WHERE ROWNUM <= ?) WHERE RN >= ?";
+			int begin = pageSize * (page - 1) + 1;
+			int end = pageSize * page;
+			String format = "SELECT * FROM(SELECT FA.*, ROWNUM RN FROM (%s) t FA WHERE ROWNUM <= " + end + ") WHERE RN >= " + begin;
 			pageSql.replace(0, pageSql.length(), String.format(format, sql));
 			params.add(pageSize * page);
 			params.add(pageSize * (page - 1) + 1);
 		}
 		if ("mysql".equalsIgnoreCase(dialect))
 		{
-			pageSql.append(" limit ?, ?");
-			params.add(pageSize * (page - 1));
-			params.add(pageSize);
+			int begin = pageSize * (page - 1);
+			pageSql.append(" limit ");
+			pageSql.append(begin);
+			pageSql.append(",");
+			pageSql.append(pageSize);
 		}
 		return pageSql.toString();
 	}

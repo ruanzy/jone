@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sqls>
-	<sql id='count'>
-		select count(*) from receivable
-	</sql>
-	<sql id='selectAll'>
-		select * from receivable order by id DESC
-	</sql>
-</sqls>

@@ -11,6 +11,12 @@
 			"url" : "jdbc:dbone://11.0.1.83:9001/", 
 			"username" : "dbone", 
 			"password" : "dbone" 
+		}, 
+		"mysql": { 
+			"driverClassName" : "com.mysql.jdbc.Driver", 
+			"url" : "jdbc:mysql://localhost:3306/rzy?useUnicode=true&amp;characterEncoding=utf8", 
+			"username" : "root", 
+			"password" : "1234" 
 		}
 	},
 	"rrdpath" : "d:/rrd"
