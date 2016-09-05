@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="java-output-path" value="/jOne/WebRoot/WEB-INF/classes"/>
-        <property name="me-merge-utility-modules" value="true"/>
         <property name="context-root" value="/JOne"/>
+        <property name="me-merge-utility-modules" value="true"/>
     </wb-module>
 </project-modules>

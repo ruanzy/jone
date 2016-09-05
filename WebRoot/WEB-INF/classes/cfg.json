@@ -1,0 +1,17 @@
+{	
+	"datasource" : { 
+		"hsqldb": { 
+			"driverClassName" : "org.hsqldb.jdbcDriver", 
+			"url" : "jdbc:hsqldb:file:/d:/database/dbonemonitor.db", 
+			"username" : "SA", 
+			"password" : "" 
+		}, 
+		"dbone": { 
+			"driverClassName" : "com.intple.dbone.Driver", 
+			"url" : "jdbc:dbone://11.0.1.83:9001/", 
+			"username" : "dbone", 
+			"password" : "dbone" 
+		}
+	},
+	"rrdpath" : "d:/rrd"
+}
