@@ -43,7 +43,7 @@ public class LuceneUtil
 		{
 			IndexWriter writer = getIndexWriter(indexDir);
 			Document document = new Document();
-			document.add(new TextField("context", new FileReader(file)));
+			document.add(new TextField("content", new FileReader(file)));
 			document.add(new TextField("filename", file.getName(), Field.Store.YES));
 			document.add(new TextField("filepath", file.getCanonicalPath(), Field.Store.YES));
 			writer.addDocument(document);
@@ -79,10 +79,11 @@ public class LuceneUtil
 		IndexReader reader = null;
 		try
 		{
+			long t0 = System.currentTimeMillis();
 			Directory dir = FSDirectory.open(Paths.get(indexDir));
 			reader = DirectoryReader.open(dir);
 			IndexSearcher is = new IndexSearcher(reader);
-			QueryParser parser = new QueryParser("context", analyzer);
+			QueryParser parser = new QueryParser("content", analyzer);
 			Query query = parser.parse(q);
 			TopDocs hits = is.search(query, Integer.MAX_VALUE);
 			for (ScoreDoc scoreDoc : hits.scoreDocs)
@@ -90,12 +91,14 @@ public class LuceneUtil
 				Document doc = is.doc(scoreDoc.doc);
 				// String filepath = doc.get("filepath");
 				// String filename = doc.get("filename");
-				InputStream in = new FileInputStream(doc.get("filePath"));
+				InputStream in = new FileInputStream(doc.get("filepath"));
 				String c = IOUtils.toString(in, "UTF-8");
 				String h = getHighlighterString(query, c);
 				IOUtils.closeQuietly(in);
 				list.add(h);
 			}
+			long t1 = System.currentTimeMillis();
+			System.out.println(t1- t0);
 		}
 		catch (Exception e)
 		{
@@ -136,10 +139,16 @@ public class LuceneUtil
 
 	public static void main(String[] ages)
 	{
-		String indexDir = "d:/Lindex";
-		String dataDir = "d:/upload";
-		String fn = "a.txt";
-		File f = new File(dataDir, fn);
-		indexFile(indexDir, f);
+		String indexDir = "d:/Lindex2";
+		//String dataDir = "d:/upload";
+		//String fn = "a.txt";
+		//File f = new File(dataDir, fn);
+		//indexFile(indexDir, f);
+		List<String> list = search(indexDir, "管理");
+		System.out.println(list.size());
+		for (String string : list)
+		{
+			System.out.println(string);
+		}
 	}
 }
