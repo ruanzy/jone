@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.FilenameUtils;
@@ -81,6 +83,46 @@ public class FileUtil
 		{
 		}
 		return list;
+	}
+
+	@SuppressWarnings("resource")
+	public static void mergeFiles(List<String> files, String outFile)
+	{
+		int BUFSIZE = 1024 * 8;
+		FileChannel outChannel = null;
+		try
+		{
+			outChannel = new FileOutputStream(outFile).getChannel();
+			for (String f : files)
+			{
+				FileChannel fc = new FileInputStream(f).getChannel();
+				ByteBuffer bb = ByteBuffer.allocate(BUFSIZE);
+				while (fc.read(bb) != -1)
+				{
+					bb.flip();
+					outChannel.write(bb);
+					bb.clear();
+				}
+				fc.close();
+			}
+		}
+		catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (outChannel != null)
+				{
+					outChannel.close();
+				}
+			}
+			catch (IOException ignore)
+			{
+			}
+		}
 	}
 
 	public static int getLineNum(File file)

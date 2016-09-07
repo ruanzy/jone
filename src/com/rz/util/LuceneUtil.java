@@ -18,6 +18,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
@@ -55,16 +56,69 @@ public class LuceneUtil
 		}
 	}
 
+	public static void indexDir(String indexDir, String dir)
+	{
+		try
+		{
+			File[] files = new File(dir).listFiles();
+			IndexWriter writer = getIndexWriter(indexDir);
+			for (File file : files)
+			{
+				Document document = new Document();
+				document.add(new TextField("content", new FileReader(file)));
+				document.add(new TextField("filename", file.getName(), Field.Store.YES));
+				document.add(new TextField("filepath", file.getCanonicalPath(), Field.Store.YES));
+				writer.addDocument(document);
+			}
+			writer.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void updateIndex(String indexDir, File file)
+	{
+		try
+		{
+			Term term = new Term("filepath", file.getCanonicalPath());
+			Document doc = new Document();
+			Document document = new Document();
+			document.add(new TextField("content", new FileReader(file)));
+			document.add(new TextField("filename", file.getName(), Field.Store.YES));
+			document.add(new TextField("filepath", file.getCanonicalPath(), Field.Store.YES));
+			writer.updateDocument(term, doc);
+			writer.commit();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void deleteIndex(String field, String text)
+	{
+		try
+		{
+			Term term = new Term(field, text);
+			writer.deleteDocuments(new Term[] { term });
+			writer.commit();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	private static IndexWriter getIndexWriter(String indexDir)
 	{
+		IndexWriter writer = null;
 		IndexWriterConfig writerConfig = new IndexWriterConfig(analyzer);
 		try
 		{
-			if (writer == null)
-			{
-				Directory directory = FSDirectory.open(Paths.get(indexDir));
-				writer = new IndexWriter(directory, writerConfig);
-			}
+			Directory directory = FSDirectory.open(Paths.get(indexDir));
+			writer = new IndexWriter(directory, writerConfig);
 		}
 		catch (IOException e)
 		{
@@ -98,7 +152,7 @@ public class LuceneUtil
 				list.add(h);
 			}
 			long t1 = System.currentTimeMillis();
-			System.out.println(t1- t0);
+			System.out.println(t1 - t0);
 		}
 		catch (Exception e)
 		{
@@ -140,10 +194,10 @@ public class LuceneUtil
 	public static void main(String[] ages)
 	{
 		String indexDir = "d:/Lindex2";
-		//String dataDir = "d:/upload";
-		//String fn = "a.txt";
-		//File f = new File(dataDir, fn);
-		//indexFile(indexDir, f);
+		// String dataDir = "d:/upload";
+		// String fn = "a.txt";
+		// File f = new File(dataDir, fn);
+		// indexFile(indexDir, f);
 		List<String> list = search(indexDir, "管理");
 		System.out.println(list.size());
 		for (String string : list)
