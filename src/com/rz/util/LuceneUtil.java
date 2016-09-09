@@ -1,10 +1,12 @@
 package com.rz.util;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,7 +46,10 @@ public class LuceneUtil
 		{
 			IndexWriter writer = getIndexWriter(indexDir);
 			Document document = new Document();
-			document.add(new TextField("content", new FileReader(file)));
+			//document.add(new TextField("content", new FileReader(file)));
+			//这个问题困扰了我半天,请注意编码问题
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+			document.add(new TextField("content", br));
 			document.add(new TextField("filename", file.getName(), Field.Store.YES));
 			document.add(new TextField("filepath", file.getCanonicalPath(), Field.Store.YES));
 			writer.addDocument(document);
