@@ -27,22 +27,34 @@ public class SQLExecutor
 		return db.update(sql, _params.toArray());
 	}
 
-	public List<Record> find(String sqlid, Map<String, Object> params)
+	public List<Record> find(String sqlid, Map<String, String> params)
 	{
-		Sql _sql = SQLLoader.getSql(sqlid, params);
+		Map<String, Object> p = new HashMap<String, Object>(params);
+		Sql _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
 		List<Object> _params = _sql.getParams();
 		log.debug(sql);
 		return db.find(sql, _params.toArray());
 	}
 
-	public Record findOne(String sqlid, Map<String, Object> params)
+	public Record findOne(String sqlid, Map<String, String> params)
 	{
-		Sql _sql = SQLLoader.getSql(sqlid, params);
+		Map<String, Object> p = new HashMap<String, Object>(params);
+		Sql _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
 		List<Object> _params = _sql.getParams();
 		log.debug(sql);
 		return db.findOne(sql, _params.toArray());
+	}
+
+	public Object scalar(String sqlid, Map<String, String> params)
+	{
+		Map<String, Object> p = new HashMap<String, Object>(params);
+		Sql _sql = SQLLoader.getSql(sqlid, p);
+		String sql = _sql.getSql();
+		List<Object> _params = _sql.getParams();
+		log.debug(sql);
+		return db.scalar(sql, _params.toArray());
 	}
 
 	public List<Record> pager(String sqlid, Map<String, String> params, int page, int pagesize)
