@@ -572,7 +572,11 @@ public final class DB
 			pageSql.append(sql).append(") FA WHERE ROWNUM <= ");
 			pageSql.append(currPage * pageSize).append(") WHERE RN >= ").append((currPage - 1) * pageSize + 1);
 		}
-		if ("mysql".equalsIgnoreCase(dialect))
+		else if ("mysql".equalsIgnoreCase(dialect))
+		{
+			pageSql.append(sql).append(" limit ").append((currPage - 1) * pageSize).append(",").append(pageSize);
+		}
+		else
 		{
 			pageSql.append(sql).append(" limit ").append((currPage - 1) * pageSize).append(",").append(pageSize);
 		}
