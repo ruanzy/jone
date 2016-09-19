@@ -44,7 +44,7 @@ public class ServiceKit
 	};
 
 	@SuppressWarnings("unchecked")
-	public static <T> T get(Class<? extends T> cls) throws Exception
+	public static <T> T get(Class<? extends T> cls)
 	{
 		try
 		{
@@ -57,7 +57,7 @@ public class ServiceKit
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			throw e;
 		}
+		return null;
 	}
 }
