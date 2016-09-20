@@ -59,6 +59,15 @@ public class TokenUtil
 		}
 		return null;
 	}
+	
+	public static String getUser(String token)
+	{
+		if (tokenStore.containsKey(token))
+		{
+			return tokenStore.get(token).getUsername();
+		}
+		return null;
+	}
 
 	public static void removeToken(String token)
 	{

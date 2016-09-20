@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.rz.common.TokenUtil;
 import com.rz.service.ServiceUtil;
 import com.rz.web.ActionContext;
 
@@ -265,7 +266,7 @@ public class WebUtil
 	{
 		return WebUtil.Request.get().getHeader(key);
 	}
-	
+
 	public static void setHeader(String key, String value)
 	{
 		WebUtil.Response.get().addHeader(key, value);
@@ -332,26 +333,32 @@ public class WebUtil
 		return null;
 	}
 
+	// public static String getUser()
+	// {
+	// String ssotoken = null;
+	// Cookie[] cks = WebUtil.Request.get().getCookies();
+	// if (cks != null)
+	// {
+	// for (Cookie cookie : cks)
+	// {
+	// if ("SSOTOKEN".equals(cookie.getName()))
+	// {
+	// ssotoken = cookie.getValue();
+	// break;
+	// }
+	// }
+	// }
+	// if (ssotoken != null)
+	// {
+	// String[] arr = ssotoken.split("_");
+	// return arr[0];
+	// }
+	// return null;
+	// }
+
 	public static String getUser()
 	{
-		String ssotoken = null;
-		Cookie[] cks = WebUtil.Request.get().getCookies();
-		if (cks != null)
-		{
-			for (Cookie cookie : cks)
-			{
-				if ("SSOTOKEN".equals(cookie.getName()))
-				{
-					ssotoken = cookie.getValue();
-					break;
-				}
-			}
-		}
-		if (ssotoken != null)
-		{
-			String[] arr = ssotoken.split("_");
-			return arr[0];
-		}
-		return null;
+		String token = getHeader("Authorization");
+		return TokenUtil.getUser(token);
 	}
 }
