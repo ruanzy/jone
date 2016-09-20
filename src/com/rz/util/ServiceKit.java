@@ -1,18 +1,21 @@
 package com.rz.util;
 
 import java.lang.reflect.Method;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.proxy.NoOp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.rz.util.WebUtil;
 
 public class ServiceKit
 {
-	static Logger log = LoggerFactory.getLogger(WebUtil.class);
+	static Logger log = LoggerFactory.getLogger(ServiceKit.class);
 
 	static MethodInterceptor interceptor = new MethodInterceptor()
 	{
@@ -23,8 +26,20 @@ public class ServiceKit
 			{
 				result = methodProxy.invokeSuper(obj, args);
 				String operation = method.getAnnotation(Operation.class).value();
-				String user = WebUtil.getUser();
-				log.debug(operation + "(" + user + ")");
+				StringBuffer log = new StringBuffer(); 
+				String user = "";
+				if("login".equals(method.getName())){
+					user = WebUtil.getParameter("username");
+				}else{
+					user = WebUtil.getUser();
+				}
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+				String time = df.format(new Date());
+				log.append(user).append("|");
+				log.append(time).append("|");
+				log.append(operation).append("|");
+				log.append(operation);
+				LogHandle.put(log.toString());
 			}
 			catch (Exception e)
 			{

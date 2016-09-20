@@ -611,7 +611,7 @@ public final class DB
 		if (log.isDebugEnabled())
 		{
 			match(sql, params);
-			if (null != params)
+			if (null != params && params.length > 0)
 			{
 				StringBuffer returnSQL = new StringBuffer();
 				int paramNum = params.length;
