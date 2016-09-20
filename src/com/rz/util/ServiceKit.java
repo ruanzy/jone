@@ -13,7 +13,7 @@ import net.sf.cglib.proxy.NoOp;
 public class ServiceKit
 {
 	static Logger log = LoggerFactory.getLogger(WebUtil.class);
-	
+
 	static MethodInterceptor interceptor = new MethodInterceptor()
 	{
 		public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable
@@ -23,7 +23,8 @@ public class ServiceKit
 			{
 				result = methodProxy.invokeSuper(obj, args);
 				String operation = method.getAnnotation(Operation.class).value();
-				log.debug(operation);
+				String user = WebUtil.getUser();
+				log.debug(operation + "(" + user + ")");
 			}
 			catch (Exception e)
 			{
