@@ -1,6 +1,7 @@
 package com.rz.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 
 public class HttpUtil
 {
@@ -40,12 +40,19 @@ public class HttpUtil
 			}
 			HttpResponse response = client.execute(get);
 			HttpEntity entity = response.getEntity();
+			InputStream in = entity.getContent();
+			StringBuffer body = new StringBuffer();
+			byte[] b = new byte[4096];
+			for (int n; (n = in.read(b)) != -1;)
+			{
+				body.append(new String(b, 0, n));
+			}
 			res = new HttpResult();
 			res.setCookies(cookieStore.getCookies());
 			res.setStatusCode(response.getStatusLine().getStatusCode());
 			res.setHeaders(response.getAllHeaders());
 			res.setHttpEntity(entity);
-			res.setBody(EntityUtils.toString(entity));
+			res.setBody(body.toString());
 			return res;
 		}
 		catch (Exception e)
@@ -93,12 +100,19 @@ public class HttpUtil
 			}
 			HttpResponse response = client.execute(post);
 			HttpEntity entity = response.getEntity();
+			InputStream in = entity.getContent();
+			StringBuffer body = new StringBuffer();
+			byte[] b = new byte[4096];
+			for (int n; (n = in.read(b)) != -1;)
+			{
+				body.append(new String(b, 0, n));
+			}
 			res = new HttpResult();
 			res.setCookies(cookieStore.getCookies());
 			res.setStatusCode(response.getStatusLine().getStatusCode());
 			res.setHeaders(response.getAllHeaders());
 			res.setHttpEntity(entity);
-			res.setBody(EntityUtils.toString(entity));
+			res.setBody(body.toString());
 			return res;
 		}
 		catch (Exception e)
