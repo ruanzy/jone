@@ -25,4 +25,12 @@ public class Base64Util {
 		}
 		return result;
 	}
+	
+	public static void main(String[] args)
+	{
+		String d = encode("ruanzy_111111");
+		System.out.println(d);
+		String d2 = decode(d);
+		System.out.println(d2);
+	}
 }
