@@ -1,31 +1,52 @@
 package com.rz.common;
 
 import java.io.UnsupportedEncodingException;
-
 import org.apache.commons.codec.binary.Base64;
 
-public class Base64Util {
+public class Base64Util
+{
 
-	public static String encode(String str) {
+	public static String encode(String str)
+	{
 		String s = null;
-		try {
+		try
+		{
 			s = new String(Base64.encodeBase64(str.getBytes()), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
+		}
+		catch (UnsupportedEncodingException e)
+		{
 			e.printStackTrace();
 		}
 		return s;
 	}
 
-	public static String decode(String str) {
+	public static String decode(String str)
+	{
 		String result = null;
-		try {
+		try
+		{
 			result = new String(Base64.decodeBase64(str.getBytes()), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
+		}
+		catch (UnsupportedEncodingException e)
+		{
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
+
+	public static byte[] decode2(String str)
+	{
+		try
+		{
+			return Base64.decodeBase64(str.getBytes());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public static void main(String[] args)
 	{
 		String d = encode("ruanzy_111111");
