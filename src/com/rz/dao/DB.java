@@ -388,7 +388,7 @@ public final class DB
 				Record r = new Record();
 				for (int i = 0; i < colCount; i++)
 				{
-					String key = rsmd.getColumnLabel(i + 1);// .toLowerCase();
+					String key = rsmd.getColumnLabel(i + 1).toLowerCase();
 					Object val = rs.getObject(i + 1) != null ? rs.getObject(i + 1) : "";
 					r.put(key, val);
 				}
