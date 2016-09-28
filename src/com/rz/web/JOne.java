@@ -2,6 +2,7 @@ package com.rz.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 public class JOne implements Filter
 {
 	private ServletContext context;
-	private Starter starter;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException
@@ -32,14 +32,14 @@ public class JOne implements Filter
 		String url = path.substring(1);
 		request.setCharacterEncoding("UTF-8");
 		boolean isStatic = (url.lastIndexOf(".") != -1);
-		//boolean isHtml = url.endsWith(".html") || url.endsWith(".htm");
+		// boolean isHtml = url.endsWith(".html") || url.endsWith(".htm");
 		try
 		{
-//			if (isHtml)
-//			{
-//				new Html(url).handle();
-//				return;
-//			}
+			// if (isHtml)
+			// {
+			// new Html(url).handle();
+			// return;
+			// }
 			if (isStatic)
 			{
 				chain.doFilter(request, response);
@@ -49,14 +49,17 @@ public class JOne implements Filter
 			String method = UrlParser.getActionMethod(url);
 			new Action(name, method).invoke();
 		}
-		catch (InvocationTargetException e) {
+		catch (InvocationTargetException e)
+		{
 			Throwable t = e.getTargetException();
-			throw t instanceof RuntimeException ? (RuntimeException)t : new RuntimeException(e);
+			throw t instanceof RuntimeException ? (RuntimeException) t : new RuntimeException(e);
 		}
-		catch (RuntimeException e) {
+		catch (RuntimeException e)
+		{
 			throw e;
 		}
-		catch (Throwable t) {
+		catch (Throwable t)
+		{
 			throw new ServletException(t);
 		}
 		finally
@@ -67,27 +70,25 @@ public class JOne implements Filter
 
 	public void destroy()
 	{
+		List<Plugin> plugins = Container.findPlugins();
+		for (Plugin plugin : plugins)
+		{
+			plugin.stop();
+		}
 	}
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("|-----------------------------------|").append("\r\n");
-		sb.append("|								   |").append("\r\n");
+		sb.append("|                                   |").append("\r\n");
 		sb.append("|          JOne Initing...          |").append("\r\n");
 		sb.append("|                                   |").append("\r\n");
 		sb.append("|-----------------------------------|");
 		System.out.println(sb);
 		try
 		{
-			String _starter = cfg.getInitParameter("starter");
 			this.context = cfg.getServletContext();
-			if (_starter != null)
-			{
-				Class<?> startercls = Class.forName(_starter);
-				this.starter = (Starter) (startercls.newInstance());
-				this.starter.start(this.context);
-			}
 			Container.init();
 		}
 		catch (Exception e)
@@ -95,11 +96,11 @@ public class JOne implements Filter
 			throw new ServletException(e);
 		}
 		StringBuffer sb2 = new StringBuffer();
-		sb.append("|-----------------------------------|").append("\r\n");
-		sb.append("|								   |").append("\r\n");
-		sb.append("|           JOne Started            |").append("\r\n");
-		sb.append("|                                   |").append("\r\n");
-		sb.append("|-----------------------------------|");
+		sb2.append("|-----------------------------------|").append("\r\n");
+		sb2.append("|                                   |").append("\r\n");
+		sb2.append("|           JOne Started            |").append("\r\n");
+		sb2.append("|                                   |").append("\r\n");
+		sb2.append("|-----------------------------------|");
 		System.out.println(sb2);
 	}
 }
