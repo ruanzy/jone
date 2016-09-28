@@ -1,7 +1,7 @@
 package com.rz.sql;
 
 import java.util.List;
-import com.rz.common.Record;
+import com.rz.common.R;
 
 public class Pager
 {
@@ -11,7 +11,7 @@ public class Pager
 
 	private long total;
 
-	private List<Record> data;
+	private List<R> data;
 
 	private int pages;
 
@@ -21,7 +21,7 @@ public class Pager
 		this.pagesize = pagesize;
 	}
 
-	public List<Record> getData()
+	public List<R> getData()
 	{
 		return data;
 	}
@@ -59,7 +59,7 @@ public class Pager
 		}
 	}
 
-	public void setData(List<Record> data)
+	public void setData(List<R> data)
 	{
 		this.data = data;
 	}

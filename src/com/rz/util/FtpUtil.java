@@ -337,8 +337,8 @@ public class FtpUtil
 	{
 		try
 		{
-			connect("11.0.1.83", 21, "root", "!qaz2wsx");
-			System.out.println(download("/home/rzy/cfg.json", "D:\\ddd.json"));
+			connect("11.0.1.83", 21, "test", "123abc");
+			System.out.println(download("/home/rzy/dmas.zip", "D:\\dmas2.zip"));
 			disconnect();
 		}
 		catch (IOException e)

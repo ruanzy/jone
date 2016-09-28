@@ -2,7 +2,7 @@ package com.rz.sql;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.rz.common.Record;
+import com.rz.common.R;
 import com.rz.dao.DB;
 
 public class PageHelper
@@ -29,12 +29,12 @@ public class PageHelper
 		}
 		if (count > 0)
 		{
-			List<Record> rs = DB.getInstance().find(pageSql, params);
+			List<R> rs = DB.getInstance().find(pageSql, params);
 			pager.setData(rs);
 		}
 		else
 		{
-			pager.setData(new ArrayList<Record>());
+			pager.setData(new ArrayList<R>());
 		}
 		return pager;
 	}

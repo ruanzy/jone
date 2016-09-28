@@ -23,7 +23,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.common.Record;
+import com.rz.common.R;
 
 public final class DB
 {
@@ -377,15 +377,15 @@ public final class DB
 		}
 	}
 
-	public List<Record> find(String sql, Object... params)
+	public List<R> find(String sql, Object... params)
 	{
-		return find(sql, params, new RowHandler<Record>()
+		return find(sql, params, new RowHandler<R>()
 		{
-			public Record handle(ResultSet rs) throws SQLException
+			public R handle(ResultSet rs) throws SQLException
 			{
 				ResultSetMetaData rsmd = rs.getMetaData();
 				int colCount = rsmd.getColumnCount();
-				Record r = new Record();
+				R r = new R();
 				for (int i = 0; i < colCount; i++)
 				{
 					String key = rsmd.getColumnLabel(i + 1).toLowerCase();
@@ -398,9 +398,9 @@ public final class DB
 		});
 	}
 
-	public Record findOne(String sql)
+	public R findOne(String sql)
 	{
-		List<Record> list = find(sql);
+		List<R> list = find(sql);
 		if (list != null && list.size() > 0)
 		{
 			return list.get(0);
@@ -408,9 +408,9 @@ public final class DB
 		return null;
 	}
 
-	public Record findOne(String sql, Object[] params)
+	public R findOne(String sql, Object[] params)
 	{
-		List<Record> list = find(sql, params);
+		List<R> list = find(sql, params);
 		if (list != null && list.size() > 0)
 		{
 			return list.get(0);
@@ -418,9 +418,9 @@ public final class DB
 		return null;
 	}
 
-	public List<Record> pager(String sql, int page, int pagesize)
+	public List<R> pager(String sql, int page, int pagesize)
 	{
-		List<Record> rows = new ArrayList<Record>();
+		List<R> rows = new ArrayList<R>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -437,7 +437,7 @@ public final class DB
 			int colCount = rsmd.getColumnCount();
 			while (rs.next())
 			{
-				Record r = new Record();
+				R r = new R();
 				for (int i = 0; i < colCount; i++)
 				{
 					String key = rsmd.getColumnLabel(i + 1).toLowerCase();
@@ -458,9 +458,9 @@ public final class DB
 		return rows;
 	}
 
-	public List<Record> pager(String sql, Object[] params, int currPage, int pageSize)
+	public List<R> pager(String sql, Object[] params, int currPage, int pageSize)
 	{
-		List<Record> list = new ArrayList<Record>();
+		List<R> list = new ArrayList<R>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -484,7 +484,7 @@ public final class DB
 			int colCount = rsmd.getColumnCount();
 			while (rs.next())
 			{
-				Record r = new Record();
+				R r = new R();
 				for (int i = 0; i < colCount; i++)
 				{
 					String key = rsmd.getColumnLabel(i + 1).toLowerCase();
@@ -863,7 +863,7 @@ public final class DB
 	public static void main(String[] args)
 	{
 		DB dao = DB.getInstance();
-		List<Record> r = dao.find("select * from users");
+		List<R> r = dao.find("select * from users");
 		System.out.println(r);
 		// dao.update("insert users values(280, '123', '123', 2, '2015-01-15 14:44:50', 'aa@123.com','123456','memo')");
 		// dao.state();

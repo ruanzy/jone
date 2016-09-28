@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.common.Record;
+import com.rz.common.R;
 import com.rz.dao.DB;
 
 public class SQLExecutor
@@ -27,7 +27,7 @@ public class SQLExecutor
 		return db.update(sql, _params.toArray());
 	}
 
-	public List<Record> find(String sqlid, Map<String, String> params)
+	public List<R> find(String sqlid, Map<String, String> params)
 	{
 		Map<String, Object> p = new HashMap<String, Object>(params);
 		Sql _sql = SQLLoader.getSql(sqlid, p);
@@ -37,7 +37,7 @@ public class SQLExecutor
 		return db.find(sql, _params.toArray());
 	}
 
-	public Record findOne(String sqlid, Map<String, String> params)
+	public R findOne(String sqlid, Map<String, String> params)
 	{
 		Map<String, Object> p = new HashMap<String, Object>(params);
 		Sql _sql = SQLLoader.getSql(sqlid, p);
@@ -57,7 +57,7 @@ public class SQLExecutor
 		return db.scalar(sql, _params.toArray());
 	}
 
-	public List<Record> pager(String sqlid, Map<String, String> params, int page, int pagesize)
+	public List<R> pager(String sqlid, Map<String, String> params, int page, int pagesize)
 	{
 		Map<String, Object> p = new HashMap<String, Object>(params);
 		Sql _sql = SQLLoader.getSql(sqlid, p);

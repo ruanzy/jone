@@ -3,7 +3,7 @@ package com.rz.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.rz.common.Record;
+import com.rz.common.R;
 import com.rz.dao.sql.SQLExecutor;
 
 public class Test
@@ -17,8 +17,8 @@ public class Test
 		params.put("operator", "admin");
 		params.put("page", "1");
 		params.put("pagesize", "10");
-		List<Record> list = executor.pager(sqlid, params, 2, 3);
-		for (Record record : list)
+		List<R> list = executor.pager(sqlid, params, 2, 3);
+		for (R record : list)
 		{
 			System.out.println(record);
 		}
