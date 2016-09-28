@@ -25,11 +25,7 @@ public class Container
 		readCfg();
 		loadActions();
 		loadInterceptors();
-		loadPlugins();
-		for (Plugin plugin : plugins)
-		{
-			plugin.start();
-		}
+		initPlugins();
 	}
 
 	private static void readCfg()
@@ -77,7 +73,7 @@ public class Container
 
 	private static String getPluginsPck()
 	{
-		return props.getProperty("plugins.package", "plugins");
+		return props.getProperty("plugin.package", "plugin");
 	}
 
 	private static void loadActions()
@@ -127,7 +123,7 @@ public class Container
 		}
 	}
 
-	private static void loadPlugins()
+	private static void initPlugins()
 	{
 		String pck = getPluginsPck();
 		log.debug("Loading plugins in " + pck);
@@ -136,11 +132,17 @@ public class Container
 			Set<Class<?>> _plugins = Scaner.scan(pck);
 			for (Class<?> cls : _plugins)
 			{
-				String name = cls.getName();
+				//String name = cls.getName();
 				plugins.add((Plugin) cls.newInstance());
-				log.debug("Loading plugin " + name);
+				//log.debug("Loading plugin " + name);
 			}
-			log.debug("Plugins loaded!");
+			for (Plugin plugin : plugins)
+			{
+				plugin.start();
+				String name = plugin.getClass().getName();
+				log.debug("initing plugin " + name);
+			}
+			//log.debug("Plugins loaded!");
 		}
 		catch (Exception e)
 		{
