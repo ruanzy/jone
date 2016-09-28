@@ -72,11 +72,11 @@ public class JOne implements Filter
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("*************************************").append("\r\n");
-		sb.append("**                                 **").append("\r\n");
-		sb.append("**          JOne Satrting...       **").append("\r\n");
-		sb.append("**                                 **").append("\r\n");
-		sb.append("*************************************");
+		sb.append("|-----------------------------------|").append("\r\n");
+		sb.append("|								   |").append("\r\n");
+		sb.append("|          JOne Initing...          |").append("\r\n");
+		sb.append("|                                   |").append("\r\n");
+		sb.append("|-----------------------------------|");
 		System.out.println(sb);
 		try
 		{
@@ -95,11 +95,11 @@ public class JOne implements Filter
 			throw new ServletException(e);
 		}
 		StringBuffer sb2 = new StringBuffer();
-		sb2.append("*************************************").append("\r\n");
-		sb2.append("**                                 **").append("\r\n");
-		sb2.append("**           JOne Satrtup          **").append("\r\n");
-		sb2.append("**                                 **").append("\r\n");
-		sb2.append("*************************************");
+		sb.append("|-----------------------------------|").append("\r\n");
+		sb.append("|								   |").append("\r\n");
+		sb.append("|           JOne Started            |").append("\r\n");
+		sb.append("|                                   |").append("\r\n");
+		sb.append("|-----------------------------------|");
 		System.out.println(sb2);
 	}
 }
