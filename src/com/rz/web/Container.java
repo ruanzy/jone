@@ -63,90 +63,99 @@ public class Container
 
 	private static String getActionsPck()
 	{
-		return props.getProperty("action.package", "action");
+		return props.getProperty("action.package");
 	}
 
 	private static String getInterceptorsPck()
 	{
-		return props.getProperty("interceptor.package", "interceptor");
+		return props.getProperty("interceptor.package");
 	}
 
 	private static String getPluginsPck()
 	{
-		return props.getProperty("plugin.package", "plugin");
+		return props.getProperty("plugin.package");
 	}
 
 	private static void loadActions()
 	{
 		String pck = getActionsPck();
-		log.debug("Loading actions in " + pck);
-		try
+		if (null != pck)
 		{
-			Set<Class<?>> _actions = Scaner.scan(pck);
-			for (Class<?> cls : _actions)
+			log.debug("Loading actions in " + pck);
+			try
 			{
-				String name = cls.getName();
-				actions.put(name, cls.newInstance());
-				log.debug("Loading action " + name);
+				Set<Class<?>> _actions = Scaner.scan(pck);
+				for (Class<?> cls : _actions)
+				{
+					String name = cls.getName();
+					actions.put(name, cls.newInstance());
+					log.debug("Loading action " + name);
+				}
+				log.debug("Actions loaded!");
 			}
-			log.debug("Actions loaded!");
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("Actions load error!", e);
+			catch (Exception e)
+			{
+				throw new RuntimeException("Actions load error!", e);
+			}
 		}
 	}
 
 	private static void loadInterceptors()
 	{
 		String pck = getInterceptorsPck();
-		log.debug("Loading interceptors in " + pck + " package");
-		try
+		if (null != pck)
 		{
-			Set<Class<?>> _interceptors = Scaner.scan(pck);
-			for (Class<?> cls : _interceptors)
+			log.debug("Loading interceptors in " + pck + " package");
+			try
 			{
-				String name = cls.getName();
-				Expression expression = cls.getAnnotation(Expression.class);
-				if (expression != null)
+				Set<Class<?>> _interceptors = Scaner.scan(pck);
+				for (Class<?> cls : _interceptors)
 				{
-					String exp = expression.value();
-					interceptors.put(exp, (Interceptor) cls.newInstance());
+					String name = cls.getName();
+					Expression expression = cls.getAnnotation(Expression.class);
+					if (expression != null)
+					{
+						String exp = expression.value();
+						interceptors.put(exp, (Interceptor) cls.newInstance());
+					}
+					log.debug("Loading interceptor " + name);
 				}
-				log.debug("Loading interceptor " + name);
+				log.debug("Interceptors loaded!");
 			}
-			log.debug("Interceptors loaded!");
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("Interceptors load error!", e);
+			catch (Exception e)
+			{
+				throw new RuntimeException("Interceptors load error!", e);
+			}
 		}
 	}
 
 	private static void initPlugins()
 	{
 		String pck = getPluginsPck();
-		log.debug("Loading plugins in " + pck);
-		try
+		if (null != pck)
 		{
-			Set<Class<?>> _plugins = Scaner.scan(pck);
-			for (Class<?> cls : _plugins)
+			log.debug("Loading plugins in " + pck);
+			try
 			{
-				//String name = cls.getName();
-				plugins.add((Plugin) cls.newInstance());
-				//log.debug("Loading plugin " + name);
+				Set<Class<?>> _plugins = Scaner.scan(pck);
+				for (Class<?> cls : _plugins)
+				{
+					// String name = cls.getName();
+					plugins.add((Plugin) cls.newInstance());
+					// log.debug("Loading plugin " + name);
+				}
+				for (Plugin plugin : plugins)
+				{
+					String name = plugin.getClass().getName();
+					log.debug("initing plugin " + name);
+					plugin.start();
+				}
+				// log.debug("Plugins loaded!");
 			}
-			for (Plugin plugin : plugins)
+			catch (Exception e)
 			{
-				plugin.start();
-				String name = plugin.getClass().getName();
-				log.debug("initing plugin " + name);
+				throw new RuntimeException("Plugins load error!", e);
 			}
-			//log.debug("Plugins loaded!");
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("Plugins load error!", e);
 		}
 	}
 
