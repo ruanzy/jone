@@ -1,4 +1,4 @@
-package com.rz.common;
+package com.rz.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

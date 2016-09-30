@@ -45,8 +45,8 @@ public class JOne implements Filter
 				chain.doFilter(request, response);
 				return;
 			}
-			String name = UrlParser.getActionName(url);
-			String method = UrlParser.getActionMethod(url);
+			String name = getActionName(url);
+			String method = getActionMethod(url);
 			new Action(name, method).invoke();
 		}
 		catch (InvocationTargetException e)
@@ -102,5 +102,18 @@ public class JOne implements Filter
 		sb2.append("|                                   |").append("\r\n");
 		sb2.append("|-----------------------------------|");
 		System.out.println(sb2);
+	}
+	
+	private String getActionName(String url)
+	{
+		String[] parts = url.split("/");
+		String str = parts[0];
+		return Character.toTitleCase(str.charAt(0)) + str.substring(1);
+	}
+
+	private String getActionMethod(String url)
+	{
+		String[] parts = url.split("/");
+		return (parts.length > 1) ? parts[1] : "execute";
 	}
 }

@@ -1,4 +1,4 @@
-package com.rz.util;
+package com.rz.web;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.common.TokenUtil;
-import com.rz.service.ServiceUtil;
-import com.rz.web.ActionContext;
 
 public class WebUtil
 {
@@ -27,11 +24,6 @@ public class WebUtil
 
 	private WebUtil()
 	{
-	}
-
-	public static Object call(String sid, Object... args)
-	{
-		return ServiceUtil.call(sid, args);
 	}
 
 	public static class Request

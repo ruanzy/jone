@@ -10,7 +10,7 @@ import java.util.Properties;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.common.Scaner;
+import com.rz.util.Scaner;
 
 public class Container
 {

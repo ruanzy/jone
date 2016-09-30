@@ -1,4 +1,4 @@
-package com.rz.common;
+package com.rz.web;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;

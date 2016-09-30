@@ -1,4 +1,4 @@
-package com.rz.common;
+package com.rz.util;
 
 import java.util.concurrent.CountDownLatch;
 

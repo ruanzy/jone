@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.dao.DB;
 import com.rz.tx.Transaction;
-import com.rz.util.WebUtil;
+import com.rz.web.WebUtil;
 
 public class DefaultServiceCaller implements ServiceCaller
 {
