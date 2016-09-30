@@ -21,7 +21,7 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/**">
+		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/web/**,com/rz/util/**,com/rz/dao/**,com/rz/common/**">
 			<classpath refid="lib_classpath" />
 		</javac>
 		<jar destfile="${dir.dist}/JOne.jar" basedir="${dir.build.classes}"/> 
