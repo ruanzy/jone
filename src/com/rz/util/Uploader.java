@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -82,15 +81,7 @@ public class Uploader
 		for (FileItem item : this.items)
 		{
 			String srcName = item.getName();
-			int idx = srcName.lastIndexOf("/");
-			StringBuffer newName = new StringBuffer();
-			newName.append(UUID.randomUUID().toString() + "_");
-			if(idx > 0){
-				newName.append(srcName.substring(idx));
-			}else{
-				newName.append(srcName);
-			}
-			File savedFile = new File(upDir, newName.toString());
+			File savedFile = new File(upDir, srcName);
 			try
 			{
 				item.write(savedFile);
@@ -99,7 +90,7 @@ public class Uploader
 			{
 				e.printStackTrace();
 			}
-			files.put(item.getFieldName(), newName.toString());
+			files.put(item.getFieldName(), upDir + File.separator + srcName);
 		}
 		return files;
 	}
