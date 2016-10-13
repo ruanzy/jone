@@ -1,5 +1,6 @@
 package com.rz.util;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
@@ -14,7 +15,7 @@ public class MailUtil
 			String hostname = "smtp.qq.com";
 			String username = "602146904@qq.com";
 			String password = "dlbqkvnyirtbbcde";
-			String port = "25";
+			String port = "465";
 			String sender = "602146904@qq.com";
 			SimpleEmail email = new SimpleEmail();
 			email.setHostName(hostname);
@@ -31,5 +32,15 @@ public class MailUtil
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args)
+	{
+		String from = "";
+		List<String> to = new ArrayList<String>();
+		to.add("1493902841@qq.com");
+		String subject = "哈哈";
+		String content = "asdas";
+		sendEmail(from, to, subject, content);
 	}
 }
