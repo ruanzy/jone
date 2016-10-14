@@ -266,12 +266,8 @@ public class WebUtil
 
 	public static boolean isAjax()
 	{
-		String xhr = getHeader("x-requested-with");
-		if (xhr != null && xhr.trim().length() > 0)
-		{
-			return true;
-		}
-		return false;
+		String xhr = getHeader("X-Requested-With");
+		return (xhr != null) && ("XMLHttpRequest".equals(xhr));
 	}
 
 	public static boolean isAdmin(String username, String password)
