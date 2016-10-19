@@ -18,13 +18,21 @@
 
 	<target name="init">
 		<mkdir dir="${dir.build.classes}" />
+		<mkdir dir="${dir.build.classes2}" />
 	</target>
 
-	<target name="compile" depends="init">
+	<target name="compile" depends="compile2">
 		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/web/**,com/rz/util/**,com/rz/dao/**,com/rz/common/**">
 			<classpath refid="lib_classpath" />
 		</javac>
-		<jar destfile="${dir.dist}/JOne.jar" basedir="${dir.build.classes}"/> 
+		<jar destfile="${dir.dist}/JOne.jar" basedir="${dir.build.classes}"/>
+	</target>
+	
+	<target name="compile2" depends="init">
+		<javac srcdir="${dir.src}" destdir="${dir.build.classes2}" includeantruntime="on" includes="com/rz/monitor/**">
+			<classpath refid="lib_classpath" />
+		</javac>
+		<jar destfile="${dir.dist}/Monitor.jar" basedir="${dir.build.classes2}"/> 
 	</target>
 	
 </project>

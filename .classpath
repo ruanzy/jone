@@ -28,6 +28,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-net-3.5.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-email-1.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jrobin-1.5.9.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-jobs-2.2.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
