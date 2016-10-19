@@ -116,13 +116,14 @@ public class RrdUtil
 		try
 		{
 			pool = RrdDbPool.getInstance();
-			long time = Util.getTime();
+			long time = Util.normalize(Util.getTime(), step);
 			File f = new File(rrdDir, rrd);
 			rrdDb = pool.requestRrdDb(f.getPath());
 			Sample sample = rrdDb.createSample(time);
 			if (value == null)
 				value = Double.NaN;
 			sample.setValue(ds, value);
+			System.out.println("w=" + time + ":" + value);
 			sample.update();
 		}
 		catch (Exception e)
@@ -147,12 +148,12 @@ public class RrdUtil
 		File file = new File(rrdDir, rrd);
 		RrdDb rrdDb = null;
 		double[] vs = null;
-		long e = Util.normalize(Util.getTime(), step);
-		long s = e - (size - 1) * step * steps;
 		try
 		{
 			rrdDb = RrdDbPool.getInstance().requestRrdDb(file.getPath());
-			FetchRequest f = rrdDb.createFetchRequest("AVERAGE", s, e, steps * steps);
+			long e = rrdDb.getLastUpdateTime();
+			long s = e - (size - 1) * step * steps;
+			FetchRequest f = rrdDb.createFetchRequest("AVERAGE", s, e, step * steps);
 			FetchData dt = f.fetchData();
 			vs = dt.getValues(ds);
 		}
