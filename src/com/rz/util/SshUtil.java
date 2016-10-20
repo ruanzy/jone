@@ -1,6 +1,8 @@
 package com.rz.util;
 
 import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
@@ -61,16 +63,62 @@ public class SshUtil
 		}
 		return result;
 	}
-	
-	
-	public static void main(String[] args)
+
+	public static void disk()
 	{
 		String host = "11.0.1.83";
 		String user = "root";
 		String password = "!qaz2wsx";
 		int port = 22;
-		String cmd = "cat /proc/stat|awk /cpu[^0-9]/";
+		String cmd = "df --total -k|awk /total/";
 		String s = execute(host, port, user, password, cmd);
 		System.out.println(s);
+		Pattern p = Pattern.compile("total\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+%)");
+		Matcher m = p.matcher(s);
+		if (m.find())
+		{
+			long total = Long.parseLong(m.group(1));
+			long used = Long.parseLong(m.group(2));
+			long available = Long.parseLong(m.group(3));
+			double usg = used * 1.0 / available;
+			String r = String.format("total:%s, used:%s, available:%s, usg:%s", total, used, available, usg);
+			System.out.println(r);
+		}
+	}
+
+	public static void mem()
+	{
+		String host = "11.0.1.83";
+		String user = "root";
+		String password = "!qaz2wsx";
+		int port = 22;
+		String cmd = "free|awk /Mem/";
+		String s = execute(host, port, user, password, cmd);
+		System.out.println(s);
+		Pattern p = Pattern.compile("Mem:\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)");
+		Matcher m = p.matcher(s);
+		if (m.find())
+		{
+			long total = Long.parseLong(m.group(1));
+			long free = Long.parseLong(m.group(3));
+			long buffers = Long.parseLong(m.group(5));
+			long cached = Long.parseLong(m.group(6));
+			double usg = Math.round((0.0d + total - free) / total * 10000) / 100d;
+			String r = String.format("total:%s, free:%s, buffers:%s, cached:%s, usg:%s", total, free, buffers, cached,
+					usg);
+			System.out.println(r);
+		}
+	}
+
+	public static void main(String[] args) throws Exception
+	{
+		// String host = "11.0.1.83";
+		// String user = "root";
+		// String password = "!qaz2wsx";
+		// int port = 22;
+		// String cmd = "cat /proc/stat|awk /cpu[^0-9]/";
+		// String s = execute(host, port, user, password, cmd);
+		// System.out.println(s);
+		disk();
 	}
 }
