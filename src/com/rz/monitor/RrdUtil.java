@@ -123,7 +123,6 @@ public class RrdUtil
 			if (value == null)
 				value = Double.NaN;
 			sample.setValue(ds, value);
-			System.out.println("w=" + time + ":" + value);
 			sample.update();
 		}
 		catch (Exception e)
@@ -152,7 +151,16 @@ public class RrdUtil
 		{
 			rrdDb = RrdDbPool.getInstance().requestRrdDb(file.getPath());
 			long e = rrdDb.getLastUpdateTime();
+			org.jrobin.core.Archive archive = rrdDb.getArchive("AVERAGE", steps);
+			long archStart = archive.getStartTime() - archive.getArcStep();
+			long archEnd = archive.getEndTime();
 			long s = e - (size - 1) * step * steps;
+			if (s < archStart) {
+				s = archStart;
+			}
+			if (e > archEnd) {
+				e = archEnd;
+			}
 			FetchRequest f = rrdDb.createFetchRequest("AVERAGE", s, e, step * steps);
 			FetchData dt = f.fetchData();
 			vs = dt.getValues(ds);

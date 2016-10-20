@@ -9,6 +9,8 @@ public class CpuMonitor implements Monitor
 	{
 		Random r = new Random();
 		double v = r.nextDouble() * 100;
-		return v;
+		java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");  
+		
+		return Double.valueOf(df.format(v));
 	}
 }

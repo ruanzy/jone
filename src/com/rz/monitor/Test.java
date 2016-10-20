@@ -2,8 +2,6 @@ package com.rz.monitor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Test
 {
@@ -20,30 +18,36 @@ public class Test
 		Archive a2 = new Archive("AVERAGE", 2, 6);
 		archives.add(a1);
 		archives.add(a2);
-		m.addMonitor(ip, ds, archives);
-		new Timer().schedule(new TimerTask()
+		//m.addMonitor(ip, ds, archives);
+		
+		double[] vs = m.fetch(ip, ds, 40, 2);
+		for (int i = 0; i < vs.length; i++)
 		{
-			@Override
-			public void run()
-			{
-				double[] vs = m.fetch(ip, ds, 1, 1);
-				for (int i = 0; i < vs.length; i++)
-				{
-					System.out.println("read=" + vs[i]);
-				}
-			}
-		}, 5000, 5000);
-		new Timer().schedule(new TimerTask()
-		{
-			@Override
-			public void run()
-			{
-				double[] vs = m.fetch(ip, ds, 1, 2);
-				for (int i = 0; i < vs.length; i++)
-				{
-					System.out.println("read2=" + vs[i]);
-				}
-			}
-		}, 10000, 10000);
+			System.out.println("read=" + vs[i]);
+		}
+//		new Timer().schedule(new TimerTask()
+//		{
+//			@Override
+//			public void run()
+//			{
+//				double[] vs = m.fetch(ip, ds, 1, 1);
+//				for (int i = 0; i < vs.length; i++)
+//				{
+//					System.out.println("read=" + vs[i]);
+//				}
+//			}
+//		}, 0, 5000);
+//		new Timer().schedule(new TimerTask()
+//		{
+//			@Override
+//			public void run()
+//			{
+//				double[] vs = m.fetch(ip, ds, 1, 2);
+//				for (int i = 0; i < vs.length; i++)
+//				{
+//					System.out.println("read2=" + vs[i]);
+//				}
+//			}
+//		}, 0, 5000);
 	}
 }
