@@ -19,6 +19,18 @@ public class JmxUtil
 {
 	private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+	public static int getPid(String ip, int jmxport) throws Exception
+	{
+		JMXConnector jmxConnector = null;
+		String jmxURL = "service:jmx:rmi:///jndi/rmi://" + ip + ":" + jmxport + "/jmxrmi";
+		JMXServiceURL serviceURL = new JMXServiceURL(jmxURL);
+		jmxConnector = JMXConnectorFactory.connect(serviceURL);
+		MBeanServerConnection mBeanServerConnection = jmxConnector.getMBeanServerConnection();
+		RuntimeMXBean runtimeMXBean = ManagementFactory.newPlatformMXBeanProxy(mBeanServerConnection,
+				ManagementFactory.RUNTIME_MXBEAN_NAME, RuntimeMXBean.class);
+		return Integer.parseInt(runtimeMXBean.getName().split("@")[0]);
+	}
+	
 	public Map<String, Object> getJvmInfo(String ip, String jmxport)
 	{
 		JMXConnector jmxConnector = null;
@@ -77,7 +89,6 @@ public class JmxUtil
 			map.put("name", opMXbean.getName());
 			map.put("systemLoadAverage", opMXbean.getSystemLoadAverage());
 			map.put("version", opMXbean.getVersion());
-			
 			Long start = System.currentTimeMillis();  
 	        long startT = opMXbean.getProcessCpuTime();  
 	        try {  
