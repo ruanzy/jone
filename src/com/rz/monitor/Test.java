@@ -20,7 +20,7 @@ public class Test
 		archives.add(a2);
 		//m.addMonitor(ip, ds, archives);
 		
-		double[] vs = m.fetch(ip, ds, 40, 2);
+		double[] vs = m.fetch(ip, ds, 40, 1);
 		for (int i = 0; i < vs.length; i++)
 		{
 			System.out.println("read=" + vs[i]);

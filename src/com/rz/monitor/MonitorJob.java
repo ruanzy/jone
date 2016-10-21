@@ -13,7 +13,8 @@ public class MonitorJob implements Job
 		JobDataMap data = context.getJobDetail().getJobDataMap();
 		String ip = String.valueOf(data.get("ip"));
 		String ds = String.valueOf(data.get("ds"));
-		double v = MonitorManger.getInstance().getMonitor(ds).getData();
+		double v = MonitorManger.getInstance().getMonitor(ds).getData(ip);
+		System.out.println(v);
 		String rrd = ip + "_" + ds + ".rrd";
 		RrdUtil.getInstance().writeData(rrd, "cpu", v);
 	}
