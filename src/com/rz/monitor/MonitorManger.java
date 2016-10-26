@@ -36,7 +36,7 @@ public class MonitorManger
 	{
 		types.put(ds, monitor);
 	}
-	
+
 	public Monitor getMonitor(String ds)
 	{
 		return types.get(ds);
@@ -53,24 +53,20 @@ public class MonitorManger
 		int step = ru.getStep();
 		String rrd = ip + "_" + ds + ".rrd";
 		ru.createRrd(rrd, ds, archives);
-		JobInfo job = new JobInfo();
-		job.setName(ip + "_" + ds);
-		job.setGroup("group");
-		job.setCron("0/" + step + " * * * * ?");
-		job.setJobClass(MonitorJob.class);
+		String name = ip + "_" + ds;
+		String group = "group";
+		String cron = "0/" + step + " * * * * ?";
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("ip", ip);
 		dataMap.put("ds", ds);
-		job.setDataMap(dataMap);
-		JobManager.addJob(job);
+		JobManager.addJob(name, group, cron, MonitorJob.class, dataMap);
 	}
 
 	public void pauseMonitor(String ip, String ds)
 	{
-		JobInfo job = new JobInfo();
-		job.setName(ip + "_" + ds);
-		job.setGroup("group");
-		JobManager.removeJob(job);
+		String name = ip + "_" + ds;
+		String group = "group";
+		JobManager.removeJob(name, group);
 	}
 
 	public double[] fetch(String ip, String ds, int size, int steps)
