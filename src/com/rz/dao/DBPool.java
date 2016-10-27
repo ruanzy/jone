@@ -27,6 +27,7 @@ public class DBPool
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 			throw new DataAccessException("Create DataSource Exception!", e);
 		}
 	}
