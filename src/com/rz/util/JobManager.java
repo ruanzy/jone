@@ -28,7 +28,7 @@ public class JobManager
 	private static SchedulerFactory sf = new StdSchedulerFactory();
 
 	public static void addJob(String name, String group, String cron, Class<? extends Job> jobClass,
-			Map<String, Object> dataMap)
+			Map<String, Object> dataMap, boolean start)
 	{
 		JobKey jobKey = JobKey.jobKey(name, group);
 		try
@@ -49,7 +49,15 @@ public class JobManager
 				throw new RuntimeException("cron expression parser exception.");
 			}
 			Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();
-			scheduler.scheduleJob(jobDetail, trigger);
+			if (start)
+			{
+				scheduler.scheduleJob(jobDetail, trigger);
+			}
+			else
+			{
+				scheduler.scheduleJob(jobDetail, trigger);
+				scheduler.pauseJob(jobDetail.getKey());
+			}
 			if (!scheduler.isShutdown())
 			{
 				scheduler.start();
@@ -70,6 +78,28 @@ public class JobManager
 			if (scheduler.checkExists(jobKey))
 			{
 				scheduler.pauseJob(jobKey);
+			}
+			else
+			{
+				logger.debug("Job {}  does't exist.", jobKey);
+			}
+		}
+		catch (Exception e)
+		{
+			logger.error("pauseJob job {} fail.", jobKey);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	public static void resumeJob(String name, String group)
+	{
+		JobKey jobKey = JobKey.jobKey(name, group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			if (scheduler.checkExists(jobKey))
+			{
+				scheduler.resumeJob(jobKey);
 			}
 			else
 			{
