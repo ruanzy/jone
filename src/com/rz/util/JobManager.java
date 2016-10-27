@@ -123,6 +123,7 @@ public class JobManager
 					r.put("name", jobKey.getName());
 					r.put("group", jobKey.getGroup());
 					r.put("jobclass", jd.getJobClass());
+					r.put("datamap", jd.getJobDataMap());
 					Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
 					r.put("status", triggerState.name());
 					r.put("starttime", trigger.getStartTime());
