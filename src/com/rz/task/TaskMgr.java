@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.ParseException;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
@@ -21,7 +20,7 @@ import com.rz.util.StringUtils;
 public class TaskMgr
 {
 	private static Scheduler sched;
-	
+
 	private static class SingletonHolder
 	{
 		private final static TaskMgr INSTANCE = new TaskMgr();
@@ -69,14 +68,7 @@ public class TaskMgr
 
 			JobDetail jobDetail = JobBuilder.newJob(jobClass).build();
 			CronScheduleBuilder builder = null;
-			try
-			{
-				builder = CronScheduleBuilder.cronSchedule(cron);
-			}
-			catch (ParseException e1)
-			{
-				e1.printStackTrace();
-			}
+			builder = CronScheduleBuilder.cronSchedule(cron);
 			Trigger trigger = TriggerBuilder.newTrigger().startNow().withSchedule(builder).build();
 			try
 			{

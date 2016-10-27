@@ -1,8 +1,12 @@
 package com.rz.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -13,8 +17,10 @@ import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.rz.common.R;
 
 public class JobManager
 {
@@ -24,19 +30,25 @@ public class JobManager
 	public static void addJob(String name, String group, String cron, Class<? extends Job> jobClass,
 			Map<String, Object> dataMap)
 	{
-		JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
-		for (Map.Entry<String, Object> entry : dataMap.entrySet())
-		{
-			jobDetail.getJobDataMap().put(entry.getKey(), entry.getValue());
-		}
-		if (!checkCronExpression(cron))
-		{
-			throw new RuntimeException("cron expression parser exception.");
-		}
+		JobKey jobKey = JobKey.jobKey(name, group);
 		try
 		{
-			Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();
 			Scheduler scheduler = sf.getScheduler();
+			if (scheduler.checkExists(jobKey))
+			{
+				logger.debug("Job {} already exists.", jobKey);
+				return;
+			}
+			JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
+			for (Map.Entry<String, Object> entry : dataMap.entrySet())
+			{
+				jobDetail.getJobDataMap().put(entry.getKey(), entry.getValue());
+			}
+			if (!checkCronExpression(cron))
+			{
+				throw new RuntimeException("cron expression parser exception.");
+			}
+			Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();
 			scheduler.scheduleJob(jobDetail, trigger);
 			if (!scheduler.isShutdown())
 			{
@@ -46,6 +58,28 @@ public class JobManager
 		catch (Exception e)
 		{
 			e.printStackTrace();
+		}
+	}
+
+	public static void pauseJob(String name, String group)
+	{
+		JobKey jobKey = JobKey.jobKey(name, group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			if (scheduler.checkExists(jobKey))
+			{
+				scheduler.pauseJob(jobKey);
+			}
+			else
+			{
+				logger.debug("Job {}  does't exist.", jobKey);
+			}
+		}
+		catch (Exception e)
+		{
+			logger.error("pauseJob job {} fail.", jobKey);
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 
@@ -68,6 +102,44 @@ public class JobManager
 		{
 			logger.error("removeJob job {} fail.", jobKey);
 			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	public static List<R> getAllJob()
+	{
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();
+			Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);
+			List<R> jobList = new ArrayList<R>();
+			for (JobKey jobKey : jobKeys)
+			{
+				List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
+				JobDetail jd = scheduler.getJobDetail(jobKey);
+				for (Trigger trigger : triggers)
+				{
+					R r = new R();
+					r.put("name", jobKey.getName());
+					r.put("group", jobKey.getGroup());
+					r.put("jobclass", jd.getJobClass());
+					Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
+					r.put("status", triggerState.name());
+					r.put("starttime", trigger.getStartTime());
+					if (trigger instanceof CronTrigger)
+					{
+						CronTrigger cronTrigger = (CronTrigger) trigger;
+						String cronExpression = cronTrigger.getCronExpression();
+						r.put("cron", cronExpression);
+					}
+					jobList.add(r);
+				}
+			}
+			return jobList;
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException(e);
 		}
 	}
 
