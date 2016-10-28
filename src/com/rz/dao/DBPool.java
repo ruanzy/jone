@@ -70,6 +70,12 @@ public class DBPool
 	private static Map<String, Properties> loadDS()
 	{
 		Map<String, Properties> dbProperties = new HashMap<String, Properties>();
+		Properties jone = new Properties();
+		jone.put("driverClassName", "org.hsqldb.jdbcDriver");
+		jone.put("url", "jdbc:hsqldb:file:db/jone");
+		jone.put("username", "SA");
+		jone.put("password", "");
+		dbProperties.put("jone", jone);
 		Map<String, Object> datasource = (Map<String, Object>) Config.get("datasource");
 		for (Map.Entry<String, Object> entry : datasource.entrySet())
 		{
@@ -84,6 +90,7 @@ public class DBPool
 
 	public static void main(String[] args)
 	{
-
+		DB db = getDB("jone");
+		System.out.println(db);
 	}
 }
