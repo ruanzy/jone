@@ -1,4 +1,7 @@
 {	
+	"action.package" : "action",
+	"interceptor.package" : "interceptor",
+	"plugin.package" : "plugin",
 	"datasource" : { 
 		"hsqldb": { 
 			"driverClassName" : "org.hsqldb.jdbcDriver", 
@@ -19,5 +22,4 @@
 			"password" : "1234" 
 		}
 	},
-	"rrdpath" : "d:/rrd"
 }

@@ -1,79 +1,42 @@
 package com.rz.web;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.rz.util.Config;
 import com.rz.util.Scaner;
 
 public class Container
 {
 	private static Logger log = LoggerFactory.getLogger(Container.class);
-	private static Properties props = new Properties();
 	private static Map<String, Object> actions = new HashMap<String, Object>();
 	private static Map<String, Interceptor> interceptors = new HashMap<String, Interceptor>();
 	private static List<Plugin> plugins = new ArrayList<Plugin>();
 
 	public static void init()
 	{
-		readCfg();
 		loadActions();
 		loadInterceptors();
 		initPlugins();
 	}
 
-	private static void readCfg()
-	{
-		InputStream is = null;
-		try
-		{
-			String fileName = "jone.properties";
-			is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-			if (is != null)
-			{
-				log.debug("Loading jone.properties");
-				props.load(is);
-			}
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException(e);
-		}
-		finally
-		{
-			try
-			{
-				if (is != null)
-				{
-					is.close();
-				}
-			}
-			catch (IOException e)
-			{
-
-			}
-		}
-	}
-
 	private static String getActionsPck()
 	{
-		return props.getProperty("action.package");
+		return Config.get("action.package").toString();
 	}
 
 	private static String getInterceptorsPck()
 	{
-		return props.getProperty("interceptor.package");
+		return Config.get("interceptor.package").toString();
 	}
 
 	private static String getPluginsPck()
 	{
-		return props.getProperty("plugin.package");
+		return Config.get("plugin.package").toString();
 	}
 
 	private static void loadActions()

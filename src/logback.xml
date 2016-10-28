@@ -2,50 +2,12 @@
 <configuration>
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %msg%n
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %logger{36} %msg%n
 			</pattern>
 		</encoder>
 	</appender>
-	<appender name="FILE"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logs}/JOne.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${logs}/JOne-%d{yyyy-MM-dd}.log</fileNamePattern>
-			<maxHistory>3</maxHistory>
-		</rollingPolicy>
-		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %msg%n</pattern>
-		</encoder>
-	</appender>
-	
-	<appender name="MONGO" class="log.LogMongoAppender">
-	    <collection>logs</collection> 
-	</appender>
-	
-	<appender name="MONGO2" class="log.JvmMongoAppender">
-	    <collection>jvm</collection> 
-	</appender>
-	
-	<appender name="MONGO3" class="log.LoginMongoAppender">
-	    <collection>login</collection> 
-	</appender>
-	
-	<logger name="org.rzy.web.WebUtil" level="DEBUG" additivity="false">  
-        <appender-ref ref="MONGO"/>  
-    </logger>  
-    
-    <logger name="task.JvmMonitor" level="DEBUG" additivity="false">  
-        <appender-ref ref="MONGO2"/>  
-    </logger>
-    
-    <logger name="action.Login" level="DEBUG" additivity="false">  
-        <appender-ref ref="MONGO3"/>  
-    </logger>
-    
-    <logger name="org.quartz" level="OFF" />  
 	
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
 	</root>
 </configuration>

@@ -38,7 +38,7 @@ public class Config
 		}
 	}
 
-	public static Object getValue(String expression)
+	public static Object get(String expression)
 	{
 		try
 		{

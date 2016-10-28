@@ -79,13 +79,7 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		StringBuffer sb = new StringBuffer();
-		sb.append("|-----------------------------------|").append("\r\n");
-		sb.append("|                                   |").append("\r\n");
-		sb.append("|          JOne Initing...          |").append("\r\n");
-		sb.append("|                                   |").append("\r\n");
-		sb.append("|-----------------------------------|");
-		System.out.println(sb);
+		System.out.println("JOne Starting...");
 		try
 		{
 			this.context = cfg.getServletContext();
@@ -95,13 +89,7 @@ public class JOne implements Filter
 		{
 			throw new ServletException(e);
 		}
-		StringBuffer sb2 = new StringBuffer();
-		sb2.append("|-----------------------------------|").append("\r\n");
-		sb2.append("|                                   |").append("\r\n");
-		sb2.append("|           JOne Started            |").append("\r\n");
-		sb2.append("|                                   |").append("\r\n");
-		sb2.append("|-----------------------------------|");
-		System.out.println(sb2);
+		System.out.println("JOne Started");
 	}
 	
 	private String getActionName(String url)

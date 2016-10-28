@@ -70,7 +70,7 @@ public class DBPool
 	private static Map<String, Properties> loadDS()
 	{
 		Map<String, Properties> dbProperties = new HashMap<String, Properties>();
-		Map<String, Object> datasource = (Map<String, Object>) Config.getValue("datasource");
+		Map<String, Object> datasource = (Map<String, Object>) Config.get("datasource");
 		for (Map.Entry<String, Object> entry : datasource.entrySet())
 		{
 			String dsName = entry.getKey();
