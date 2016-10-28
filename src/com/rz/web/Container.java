@@ -24,29 +24,14 @@ public class Container
 		initPlugins();
 	}
 
-	private static String getActionsPck()
-	{
-		return Config.get("actionpck").toString();
-	}
-
-	private static String getInterceptorsPck()
-	{
-		return Config.get("interceptorpck").toString();
-	}
-
-	private static String getPluginsPck()
-	{
-		return Config.get("pluginpck").toString();
-	}
-
 	private static void loadActions()
 	{
-		String pck = getActionsPck();
+		Object pck = Config.get("actionpck");
 		if (null != pck)
 		{
 			try
 			{
-				Set<Class<?>> _actions = Scaner.scan(pck);
+				Set<Class<?>> _actions = Scaner.scan(pck.toString());
 				if (_actions.size() > 0)
 				{
 					log.debug("Loading actions in " + pck);
@@ -68,12 +53,12 @@ public class Container
 
 	private static void loadInterceptors()
 	{
-		String pck = getInterceptorsPck();
+		Object pck = Config.get("interceptorpck");
 		if (null != pck)
 		{
 			try
 			{
-				Set<Class<?>> _interceptors = Scaner.scan(pck);
+				Set<Class<?>> _interceptors = Scaner.scan(pck.toString());
 				if (_interceptors.size() > 0)
 				{
 					log.debug("Loading interceptors in " + pck + " package");
@@ -100,12 +85,12 @@ public class Container
 
 	private static void initPlugins()
 	{
-		String pck = getPluginsPck();
+		Object pck = Config.get("pluginpck");
 		if (null != pck)
 		{
 			try
 			{
-				Set<Class<?>> _plugins = Scaner.scan(pck);
+				Set<Class<?>> _plugins = Scaner.scan(pck.toString());
 				if (_plugins.size() > 0)
 				{
 					log.debug("Loading plugins in " + pck);
@@ -130,8 +115,12 @@ public class Container
 
 	public static Object findAction(String actionName)
 	{
-		String pck = getActionsPck();
-		return actions.get(pck + "." + actionName);
+		Object pck = Config.get("actionpck");
+		if (null != pck)
+		{
+			return actions.get(pck + "." + actionName);
+		}
+		return null;
 	}
 
 	public static List<Interceptor> findInterceptor(String action, String method)
