@@ -12,9 +12,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JOne implements Filter
 {
+	static final Logger logger = LoggerFactory.getLogger(JOne.class);
 	private ServletContext context;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
@@ -79,7 +82,7 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		System.out.println("JOne Starting...");
+		logger.debug("JOne Starting...");
 		try
 		{
 			this.context = cfg.getServletContext();
@@ -89,9 +92,9 @@ public class JOne implements Filter
 		{
 			throw new ServletException(e);
 		}
-		System.out.println("JOne Started");
+		logger.debug("JOne Started");
 	}
-	
+
 	private String getActionName(String url)
 	{
 		String[] parts = url.split("/");
