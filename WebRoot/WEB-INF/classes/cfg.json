@@ -1,7 +1,7 @@
 {	
-	"action.package" : "action",
-	"interceptor.package" : "interceptor",
-	"plugin.package" : "plugin",
+	"actionpck" : "action",
+	"interceptorpck" : "interceptor",
+	"pluginpck" : "plugin",
 	"datasource" : { 
 		"hsqldb": { 
 			"driverClassName" : "org.hsqldb.jdbcDriver", 

@@ -26,17 +26,17 @@ public class Container
 
 	private static String getActionsPck()
 	{
-		return Config.get("action.package").toString();
+		return Config.get("actionpck").toString();
 	}
 
 	private static String getInterceptorsPck()
 	{
-		return Config.get("interceptor.package").toString();
+		return Config.get("interceptorpck").toString();
 	}
 
 	private static String getPluginsPck()
 	{
-		return Config.get("plugin.package").toString();
+		return Config.get("pluginpck").toString();
 	}
 
 	private static void loadActions()
@@ -44,17 +44,20 @@ public class Container
 		String pck = getActionsPck();
 		if (null != pck)
 		{
-			log.debug("Loading actions in " + pck);
 			try
 			{
 				Set<Class<?>> _actions = Scaner.scan(pck);
-				for (Class<?> cls : _actions)
+				if (_actions.size() > 0)
 				{
-					String name = cls.getName();
-					actions.put(name, cls.newInstance());
-					log.debug("Loading action " + name);
+					log.debug("Loading actions in " + pck);
+					for (Class<?> cls : _actions)
+					{
+						String name = cls.getName();
+						actions.put(name, cls.newInstance());
+						log.debug("Loading action " + name);
+					}
+					log.debug("Actions loaded!");
 				}
-				log.debug("Actions loaded!");
 			}
 			catch (Exception e)
 			{
@@ -68,22 +71,25 @@ public class Container
 		String pck = getInterceptorsPck();
 		if (null != pck)
 		{
-			log.debug("Loading interceptors in " + pck + " package");
 			try
 			{
 				Set<Class<?>> _interceptors = Scaner.scan(pck);
-				for (Class<?> cls : _interceptors)
+				if (_interceptors.size() > 0)
 				{
-					String name = cls.getName();
-					Expression expression = cls.getAnnotation(Expression.class);
-					if (expression != null)
+					log.debug("Loading interceptors in " + pck + " package");
+					for (Class<?> cls : _interceptors)
 					{
-						String exp = expression.value();
-						interceptors.put(exp, (Interceptor) cls.newInstance());
+						String name = cls.getName();
+						Expression expression = cls.getAnnotation(Expression.class);
+						if (expression != null)
+						{
+							String exp = expression.value();
+							interceptors.put(exp, (Interceptor) cls.newInstance());
+						}
+						log.debug("Loading interceptor " + name);
 					}
-					log.debug("Loading interceptor " + name);
+					log.debug("Interceptors loaded!");
 				}
-				log.debug("Interceptors loaded!");
 			}
 			catch (Exception e)
 			{
@@ -97,23 +103,23 @@ public class Container
 		String pck = getPluginsPck();
 		if (null != pck)
 		{
-			log.debug("Loading plugins in " + pck);
 			try
 			{
 				Set<Class<?>> _plugins = Scaner.scan(pck);
-				for (Class<?> cls : _plugins)
+				if (_plugins.size() > 0)
 				{
-					// String name = cls.getName();
-					plugins.add((Plugin) cls.newInstance());
-					// log.debug("Loading plugin " + name);
+					log.debug("Loading plugins in " + pck);
+					for (Class<?> cls : _plugins)
+					{
+						plugins.add((Plugin) cls.newInstance());
+					}
+					for (Plugin plugin : plugins)
+					{
+						String name = plugin.getClass().getName();
+						log.debug("initing plugin " + name);
+						plugin.start();
+					}
 				}
-				for (Plugin plugin : plugins)
-				{
-					String name = plugin.getClass().getName();
-					log.debug("initing plugin " + name);
-					plugin.start();
-				}
-				// log.debug("Plugins loaded!");
 			}
 			catch (Exception e)
 			{
@@ -147,5 +153,10 @@ public class Container
 	public static List<Plugin> findPlugins()
 	{
 		return plugins;
+	}
+
+	public static void main(String[] args)
+	{
+		init();
 	}
 }
