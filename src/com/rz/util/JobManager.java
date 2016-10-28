@@ -11,6 +11,8 @@ import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
+import org.quartz.JobListener;
+import org.quartz.Matcher;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
@@ -18,6 +20,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
+import org.quartz.impl.matchers.KeyMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.common.R;
@@ -48,6 +51,50 @@ public class JobManager
 			{
 				throw new RuntimeException("cron expression parser exception.");
 			}
+			Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();
+			if (start)
+			{
+				scheduler.scheduleJob(jobDetail, trigger);
+			}
+			else
+			{
+				scheduler.scheduleJob(jobDetail, trigger);
+				scheduler.pauseJob(jobDetail.getKey());
+			}
+			if (!scheduler.isShutdown())
+			{
+				scheduler.start();
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void addJob(String name, String group, String cron, Class<? extends Job> jobClass,
+			Map<String, Object> dataMap, JobListener lsn, boolean start)
+	{
+		JobKey jobKey = JobKey.jobKey(name, group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			if (scheduler.checkExists(jobKey))
+			{
+				logger.debug("Job {} already exists.", jobKey);
+				return;
+			}
+			JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
+			for (Map.Entry<String, Object> entry : dataMap.entrySet())
+			{
+				jobDetail.getJobDataMap().put(entry.getKey(), entry.getValue());
+			}
+			if (!checkCronExpression(cron))
+			{
+				throw new RuntimeException("cron expression parser exception.");
+			}
+			Matcher<JobKey> matcher = KeyMatcher.keyEquals(new JobKey(name, group));
+			scheduler.getListenerManager().addJobListener(lsn, matcher);
 			Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();
 			if (start)
 			{
