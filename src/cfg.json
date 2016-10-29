@@ -1,7 +1,4 @@
 {	
-	"actionpck" : "action",
-	"interceptorpck" : "interceptor",
-	"pluginpck" : "plugin",
 	"datasource" : { 
 		"hsqldb": { 
 			"driverClassName" : "org.hsqldb.jdbcDriver", 
@@ -21,5 +18,5 @@
 			"username" : "root", 
 			"password" : "1234" 
 		}
-	},
+	}
 }
