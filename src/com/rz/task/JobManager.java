@@ -36,15 +36,11 @@ import com.rz.dao.DBPool;
 public class JobManager {
 	private static final Logger logger = LoggerFactory
 			.getLogger(JobManager.class);
-	private static Properties cfg = new Properties();
 	private static SchedulerFactory sf;
 
 	static {
 		initSQL();
-		loadCfg();
-	}
-
-	public static void init() {
+		Properties cfg = loadCfg();
 		try {
 			sf = new StdSchedulerFactory(cfg);
 		} catch (SchedulerException e) {
