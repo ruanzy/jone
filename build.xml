@@ -22,6 +22,18 @@
 		<mkdir dir="${dir.build.classes2}" />
 	</target>
 
+	<target name="srczip" depends="init">
+		<zip destfile="${dir.dist}/JOne-src.zip">
+			<fileset dir="${dir.src}">
+				<include name="com/rz/web/**" />
+				<include name="com/rz/common/**" />
+				<include name="com/rz/dao/**" />
+				<include name="com/rz/util/**" />
+				<include name="com/rz/task/**" />
+			</fileset>
+		</zip>
+	</target>
+
 	<target name="compile" depends="compile2">
 		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/web/**,com/rz/util/**,com/rz/dao/**,com/rz/common/**,com/rz/task/**">
 			<classpath refid="lib_classpath" />
@@ -42,7 +54,7 @@
 		<delete dir="${dir.build}" />
 	</target>
 
-	<target name="compile2" depends="init">
+	<target name="compile2" depends="srczip">
 		<javac srcdir="${dir.src}" destdir="${dir.build.classes2}" includeantruntime="on" includes="com/rz/monitor/**">
 			<classpath refid="lib_classpath" />
 		</javac>
