@@ -68,12 +68,12 @@ public final class DB
 			throw new DataAccessException("Create DataSource Exception!", e);
 		}
 	}
-	
+
 	public DB(DataSource ds)
 	{
 		this.ds = ds;
 	}
-	
+
 	public synchronized void showSql(boolean isShowsql)
 	{
 		showsql = isShowsql;
@@ -582,7 +582,7 @@ public final class DB
 		}
 		return pageSql.toString();
 	}
-	
+
 	public String getPageSql(String dialect, String sql, List<Object> params, int page, int pageSize)
 	{
 		StringBuffer pageSql = new StringBuffer(sql);
@@ -590,7 +590,8 @@ public final class DB
 		{
 			int begin = pageSize * (page - 1) + 1;
 			int end = pageSize * page;
-			String format = "SELECT * FROM(SELECT FA.*, ROWNUM RN FROM (%s) t FA WHERE ROWNUM <= " + end + ") WHERE RN >= " + begin;
+			String format = "SELECT * FROM(SELECT FA.*, ROWNUM RN FROM (%s) t FA WHERE ROWNUM <= " + end
+					+ ") WHERE RN >= " + begin;
 			pageSql.replace(0, pageSql.length(), String.format(format, sql));
 			params.add(pageSize * page);
 			params.add(pageSize * (page - 1) + 1);
@@ -849,6 +850,30 @@ public final class DB
 			close(rs, null, conn);
 		}
 		return result;
+	}
+
+	public String getDriver()
+	{
+		BasicDataSource bds = (BasicDataSource) ds;
+		return bds.getDriverClassName();
+	}
+
+	public String getUrl()
+	{
+		BasicDataSource bds = (BasicDataSource) ds;
+		return bds.getUrl();
+	}
+
+	public String getUsername()
+	{
+		BasicDataSource bds = (BasicDataSource) ds;
+		return bds.getUsername();
+	}
+
+	public String getPassword()
+	{
+		BasicDataSource bds = (BasicDataSource) ds;
+		return bds.getPassword();
 	}
 
 	public void state()

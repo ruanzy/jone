@@ -1,5 +1,8 @@
 package com.rz.task;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +28,7 @@ import org.quartz.impl.matchers.KeyMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.common.R;
+import com.rz.dao.DB;
 
 public class JobManager
 {
@@ -230,28 +234,80 @@ public class JobManager
 		return CronExpression.isValidExpression(cron);
 	}
 
-	public static void start()
+	public static void init(DB db)
 	{
+		InputStream sqlis = null;
 		try
 		{
-			sf = new StdSchedulerFactory();
+			String sqlfile = "quartz.sql";
+			sqlis = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/rz/task/" + sqlfile);
+			db.runScript(new InputStreamReader(sqlis, "UTF8"));
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+		finally
+		{
+			try
+			{
+				if (sqlis != null)
+				{
+					sqlis.close();
+				}
+			}
+			catch (IOException e)
+			{
+
+			}
+		}
+	}
+
+	public static void start(DB db)
+	{
+		InputStream cfgis = null;
+		try
+		{
+			Properties p = new Properties();
+			String cfgfile = "quartz.properties";
+			cfgis = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/rz/task/" + cfgfile);
+			p.load(cfgis);
+			p.put("org.quartz.dataSource.DS.driver", db.getDriver());
+			p.put("org.quartz.dataSource.DS.URL", db.getUrl());
+			p.put("org.quartz.dataSource.DS.user", db.getUsername());
+			p.put("org.quartz.dataSource.DS.password", db.getPassword());
+			sf = new StdSchedulerFactory(p);
 			Scheduler scheduler = sf.getScheduler();
 			if (!scheduler.isShutdown())
 			{
 				scheduler.start();
 			}
 		}
-		catch (SchedulerException e)
+		catch (Exception e)
 		{
-			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		finally
+		{
+			try
+			{
+				if (cfgis != null)
+				{
+					cfgis.close();
+				}
+			}
+			catch (IOException e)
+			{
+
+			}
 		}
 	}
 
-	public static void start(Properties cfg)
+	public static void start()
 	{
 		try
 		{
-			sf = new StdSchedulerFactory(cfg);
+			sf = new StdSchedulerFactory();
 			Scheduler scheduler = sf.getScheduler();
 			if (!scheduler.isShutdown())
 			{
