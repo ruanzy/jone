@@ -1,14 +1,10 @@
 package com.rz.task;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-
 import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -28,211 +24,192 @@ import org.quartz.impl.matchers.GroupMatcher;
 import org.quartz.impl.matchers.KeyMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.rz.common.R;
-import com.rz.dao.DB;
-import com.rz.dao.DBPool;
 
-public class JobManager {
-	private static final Logger logger = LoggerFactory
-			.getLogger(JobManager.class);
+public class JobManager
+{
+	private static final Logger logger = LoggerFactory.getLogger(JobManager.class);
 	private static SchedulerFactory sf;
 
-	static {
-		initSQL();
-		Properties cfg = loadCfg();
-		try {
-			sf = new StdSchedulerFactory(cfg);
-		} catch (SchedulerException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static void initSQL() {
-		DB db = DBPool.getDB("jone");
-		InputStream is = null;
-		try {
-			String fileName = "quartz.sql";
-			is = Thread.currentThread().getContextClassLoader()
-					.getResourceAsStream("com/rz/task/" + fileName);
-			db.runScript(new InputStreamReader(is, "UTF8"));
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			} catch (IOException e) {
-
-			}
-		}
-	}
-
-	private static Properties loadCfg() {
-		Properties cfg = new Properties();
-		InputStream is = null;
-		try {
-			String fileName = "quartz.properties";
-			is = Thread.currentThread().getContextClassLoader()
-					.getResourceAsStream("com/rz/task/" + fileName);
-			cfg.load(is);
-			return cfg;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			} catch (IOException e) {
-
-			}
-		}
-	}
-
-	public static void addJob(String name, String group, String cron,
-			Class<? extends Job> jobClass, Map<String, Object> dataMap,
-			boolean start) {
+	public static void addJob(String name, String group, String cron, Class<? extends Job> jobClass,
+			Map<String, Object> dataMap, boolean start)
+	{
 		JobKey jobKey = JobKey.jobKey(name, group);
-		try {
+		try
+		{
 			Scheduler scheduler = sf.getScheduler();
-			if (scheduler.checkExists(jobKey)) {
+			if (scheduler.checkExists(jobKey))
+			{
 				logger.debug("Job {} already exists.", jobKey);
 				return;
 			}
-			JobDetail jobDetail = JobBuilder.newJob(jobClass)
-					.withIdentity(name, group).build();
-			for (Map.Entry<String, Object> entry : dataMap.entrySet()) {
+			JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
+			for (Map.Entry<String, Object> entry : dataMap.entrySet())
+			{
 				jobDetail.getJobDataMap().put(entry.getKey(), entry.getValue());
 			}
-			if (!checkCronExpression(cron)) {
+			if (!checkCronExpression(cron))
+			{
 				throw new RuntimeException("cron expression parser exception.");
 			}
-			Trigger trigger = TriggerBuilder.newTrigger()
-					.withSchedule(CronScheduleBuilder.cronSchedule(cron))
-					.build();
-			if (start) {
+			Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();
+			if (start)
+			{
 				scheduler.scheduleJob(jobDetail, trigger);
-			} else {
+			}
+			else
+			{
 				scheduler.scheduleJob(jobDetail, trigger);
 				scheduler.pauseJob(jobDetail.getKey());
 			}
-			if (!scheduler.isShutdown()) {
+			if (!scheduler.isShutdown())
+			{
 				scheduler.start();
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public static void addJob(String name, String group, String cron,
-			Class<? extends Job> jobClass, Map<String, Object> dataMap,
-			JobListener lsn, boolean start) {
+	public static void addJob(String name, String group, String cron, Class<? extends Job> jobClass,
+			Map<String, Object> dataMap, JobListener lsn, boolean start)
+	{
 		JobKey jobKey = JobKey.jobKey(name, group);
-		try {
+		try
+		{
 			Scheduler scheduler = sf.getScheduler();
-			if (scheduler.checkExists(jobKey)) {
+			if (scheduler.checkExists(jobKey))
+			{
 				logger.debug("Job {} already exists.", jobKey);
 				return;
 			}
-			JobDetail jobDetail = JobBuilder.newJob(jobClass)
-					.withIdentity(name, group).build();
-			for (Map.Entry<String, Object> entry : dataMap.entrySet()) {
+			JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
+			for (Map.Entry<String, Object> entry : dataMap.entrySet())
+			{
 				jobDetail.getJobDataMap().put(entry.getKey(), entry.getValue());
 			}
-			if (!checkCronExpression(cron)) {
+			if (!checkCronExpression(cron))
+			{
 				throw new RuntimeException("cron expression parser exception.");
 			}
-			Matcher<JobKey> matcher = KeyMatcher.keyEquals(new JobKey(name,
-					group));
+			Matcher<JobKey> matcher = KeyMatcher.keyEquals(new JobKey(name, group));
 			scheduler.getListenerManager().addJobListener(lsn, matcher);
-			Trigger trigger = TriggerBuilder.newTrigger()
-					.withSchedule(CronScheduleBuilder.cronSchedule(cron))
-					.build();
-			if (start) {
+			Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();
+			if (start)
+			{
 				scheduler.scheduleJob(jobDetail, trigger);
-			} else {
+			}
+			else
+			{
 				scheduler.scheduleJob(jobDetail, trigger);
 				scheduler.pauseJob(jobDetail.getKey());
 			}
-			if (!scheduler.isShutdown()) {
+			if (!scheduler.isShutdown())
+			{
 				scheduler.start();
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public static void pauseJob(String name, String group) {
+	public static void pauseJob(String name, String group)
+	{
 		JobKey jobKey = JobKey.jobKey(name, group);
-		try {
+		try
+		{
 			Scheduler scheduler = sf.getScheduler();
-			if (scheduler.checkExists(jobKey)) {
+			if (scheduler.checkExists(jobKey))
+			{
 				scheduler.pauseJob(jobKey);
-			} else {
+			}
+			else
+			{
 				logger.debug("Job {}  does't exist.", jobKey);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			logger.error("pauseJob job {} fail.", jobKey);
 			throw new RuntimeException(e.getMessage());
 		}
 	}
 
-	public static void resumeJob(String name, String group) {
+	public static void resumeJob(String name, String group)
+	{
 		JobKey jobKey = JobKey.jobKey(name, group);
-		try {
+		try
+		{
 			Scheduler scheduler = sf.getScheduler();
-			if (scheduler.checkExists(jobKey)) {
+			if (scheduler.checkExists(jobKey))
+			{
 				scheduler.resumeJob(jobKey);
-			} else {
+			}
+			else
+			{
 				logger.debug("Job {}  does't exist.", jobKey);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			logger.error("pauseJob job {} fail.", jobKey);
 			throw new RuntimeException(e.getMessage());
 		}
 	}
 
-	public static void removeJob(String name, String group) {
+	public static void removeJob(String name, String group)
+	{
 		JobKey jobKey = JobKey.jobKey(name, group);
-		try {
+		try
+		{
 			Scheduler scheduler = sf.getScheduler();
-			if (scheduler.checkExists(jobKey)) {
+			if (scheduler.checkExists(jobKey))
+			{
 				scheduler.deleteJob(jobKey);
-			} else {
+			}
+			else
+			{
 				logger.debug("Job {}  does't exist.", jobKey);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			logger.error("removeJob job {} fail.", jobKey);
 			throw new RuntimeException(e.getMessage());
 		}
 	}
 
-	public static List<R> getAllJob() {
-		try {
+	public static List<R> getAllJob()
+	{
+		try
+		{
 			Scheduler scheduler = sf.getScheduler();
 			GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();
 			Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);
 			List<R> jobList = new ArrayList<R>();
-			for (JobKey jobKey : jobKeys) {
-				List<? extends Trigger> triggers = scheduler
-						.getTriggersOfJob(jobKey);
+			for (JobKey jobKey : jobKeys)
+			{
+				List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
 				JobDetail jd = scheduler.getJobDetail(jobKey);
-				for (Trigger trigger : triggers) {
+				for (Trigger trigger : triggers)
+				{
 					R r = new R();
 					r.put("name", jobKey.getName());
 					r.put("group", jobKey.getGroup());
 					r.put("jobclass", jd.getJobClass());
-					for (Map.Entry<String, Object> entry : jd.getJobDataMap()
-							.entrySet()) {
+					for (Map.Entry<String, Object> entry : jd.getJobDataMap().entrySet())
+					{
 						r.put(entry.getKey(), entry.getValue());
 					}
-					Trigger.TriggerState triggerState = scheduler
-							.getTriggerState(trigger.getKey());
+					Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
 					r.put("status", triggerState.name());
 					r.put("starttime", trigger.getStartTime());
-					if (trigger instanceof CronTrigger) {
+					if (trigger instanceof CronTrigger)
+					{
 						CronTrigger cronTrigger = (CronTrigger) trigger;
 						String cronExpression = cronTrigger.getCronExpression();
 						r.put("cron", cronExpression);
@@ -241,31 +218,61 @@ public class JobManager {
 				}
 			}
 			return jobList;
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static boolean checkCronExpression(String cron) {
+	public static boolean checkCronExpression(String cron)
+	{
 		return CronExpression.isValidExpression(cron);
 	}
 
-	public static void start() {
-		try {
+	public static void start()
+	{
+		try
+		{
+			sf = new StdSchedulerFactory();
 			Scheduler scheduler = sf.getScheduler();
-			if (!scheduler.isShutdown()) {
+			if (!scheduler.isShutdown())
+			{
 				scheduler.start();
 			}
-		} catch (SchedulerException e) {
+		}
+		catch (SchedulerException e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public static void shutdown() {
-		try {
+	public static void start(Properties cfg)
+	{
+		try
+		{
+			sf = new StdSchedulerFactory(cfg);
+			Scheduler scheduler = sf.getScheduler();
+			if (!scheduler.isShutdown())
+			{
+				scheduler.start();
+			}
+		}
+		catch (SchedulerException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void shutdown()
+	{
+		try
+		{
 			Scheduler scheduler = sf.getScheduler();
 			scheduler.shutdown(true);
-		} catch (SchedulerException e) {
+		}
+		catch (SchedulerException e)
+		{
 			e.printStackTrace();
 		}
 	}
