@@ -46,13 +46,13 @@ public class DBPool
 		return null;
 	}
 
-	public static DB createDB(String engine, String dsName, Properties prop)
+	public static DB createDB(String dsName, Properties prop)
 	{
-		if (!dbs.containsKey(engine + '_' + dsName))
+		if (!dbs.containsKey(dsName))
 		{
 			try
 			{
-				dbProperties.put(engine + '_' + dsName, prop);
+				dbProperties.put(dsName, prop);
 				DataSource ds = BasicDataSourceFactory.createDataSource(prop);
 				DB db = new DB(ds);
 				dbs.put(dsName, db);
@@ -70,12 +70,6 @@ public class DBPool
 	private static Map<String, Properties> loadDS()
 	{
 		Map<String, Properties> dbProperties = new HashMap<String, Properties>();
-		Properties jone = new Properties();
-		jone.put("driverClassName", "org.hsqldb.jdbcDriver");
-		jone.put("url", "jdbc:hsqldb:file:db/jone");
-		jone.put("username", "SA");
-		jone.put("password", "");
-		dbProperties.put("jone", jone);
 		Map<String, Object> datasource = (Map<String, Object>) Config.get("datasource");
 		for (Map.Entry<String, Object> entry : datasource.entrySet())
 		{
@@ -90,7 +84,7 @@ public class DBPool
 
 	public static void main(String[] args)
 	{
-		DB db = getDB("jone");
+		DB db = getDB("hsqldb");
 		System.out.println(db);
 	}
 }
