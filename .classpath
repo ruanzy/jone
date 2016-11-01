@@ -22,14 +22,12 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpcore-4.3.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/beetl-2.3.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.4.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/freemarker-2.3.13.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-net-3.5.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-email-1.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jrobin-1.5.9.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-jobs-2.2.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-2.2.2.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/h2-1.4.192.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hsqldb.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/c3p0-0.9.1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
