@@ -29,26 +29,16 @@
 				<include name="com/rz/common/**" />
 				<include name="com/rz/dao/**" />
 				<include name="com/rz/util/**" />
-				<include name="com/rz/task/**" />
 			</fileset>
 		</zip>
 	</target>
 
 	<target name="compile" depends="compile2">
-		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/web/**,com/rz/util/**,com/rz/dao/**,com/rz/common/**,com/rz/task/**">
+		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/web/**,com/rz/util/**,com/rz/dao/**,com/rz/common/**">
 			<classpath refid="lib_classpath" />
 		</javac>
-		<copy tofile="${dir.build.classes}/com/rz/task/quartz.sql">
-			<fileset dir="${dir.src}" includes="com/rz/task/quartz.sql" />
-		</copy>
-		<copy tofile="${dir.build.classes}/com/rz/task/quartz.properties">
-			<fileset dir="${dir.src}" includes="com/rz/task/quartz.properties" />
-		</copy>
 		<copy tofile="${dir.build.classes}/com/rz/web/defsult.properties">
 			<fileset dir="${dir.src}" includes="com/rz/web/defsult.properties" />
-		</copy>
-		<copy tofile="${dir.build.classes}/com/rz/web/jone.sql">
-			<fileset dir="${dir.src}" includes="com/rz/web/jone.sql" />
 		</copy>
 		<jar destfile="${dir.dist}/JOne.jar" basedir="${dir.build.classes}" />
 		<delete dir="${dir.build}" />
