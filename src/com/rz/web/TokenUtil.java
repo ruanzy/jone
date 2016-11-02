@@ -24,7 +24,7 @@ public class TokenUtil
 				for (Map.Entry<String, Token> entry : tokenStore.entrySet())
 				{
 					long t2 = entry.getValue().getTime();
-					if (t2 - t1 > DIFF)
+					if (t1 - t2 > DIFF * 1000)
 					{
 						tokenStore.remove(entry.getKey());
 					}
