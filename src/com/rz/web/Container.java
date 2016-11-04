@@ -25,7 +25,7 @@ public class Container
 		InputStream is = null;
 		try
 		{
-			String fileName = "defsult.properties";
+			String fileName = "default.properties";
 			is = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/rz/web/" + fileName);
 			if (is != null)
 			{
