@@ -1,6 +1,7 @@
 package com.rz.util;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -61,6 +62,41 @@ public class JobManager
 				scheduler.scheduleJob(jobDetail, trigger);
 				scheduler.pauseJob(jobDetail.getKey());
 			}
+			if (!scheduler.isShutdown())
+			{
+				scheduler.start();
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void addJob(String name, String group, String cron, Date startTime, Date endTime,
+			Class<? extends Job> jobClass, Map<String, Object> dataMap)
+	{
+		JobKey jobKey = JobKey.jobKey(name, group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			if (scheduler.checkExists(jobKey))
+			{
+				logger.debug("Job {} already exists.", jobKey);
+				return;
+			}
+			JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
+			for (Map.Entry<String, Object> entry : dataMap.entrySet())
+			{
+				jobDetail.getJobDataMap().put(entry.getKey(), entry.getValue());
+			}
+			if (!checkCronExpression(cron))
+			{
+				throw new RuntimeException("cron expression parser exception.");
+			}
+			Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(cron))
+					.startAt(startTime).endAt(endTime).build();
+			scheduler.scheduleJob(jobDetail, trigger);
 			if (!scheduler.isShutdown())
 			{
 				scheduler.start();
