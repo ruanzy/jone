@@ -37,9 +37,6 @@
 		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/web/**,com/rz/util/**,com/rz/dao/**,com/rz/common/**">
 			<classpath refid="lib_classpath" />
 		</javac>
-		<copy tofile="${dir.build.classes}/com/rz/web/defsult.properties">
-			<fileset dir="${dir.src}" includes="com/rz/web/defsult.properties" />
-		</copy>
 		<jar destfile="${dir.dist}/JOne.jar" basedir="${dir.build.classes}" />
 		<delete dir="${dir.build}" />
 	</target>

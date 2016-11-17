@@ -27,7 +27,7 @@ public class Container
 
 	private static String getActionPck()
 	{
-		if (BASEPACKAGE == null || BASEPACKAGE.length() > 0)
+		if (BASEPACKAGE == null || BASEPACKAGE.length() == 0)
 		{
 			return "action";
 		}
@@ -36,7 +36,7 @@ public class Container
 
 	private static String getInterceptorPck()
 	{
-		if (BASEPACKAGE == null || BASEPACKAGE.length() > 0)
+		if (BASEPACKAGE == null || BASEPACKAGE.length() == 0)
 		{
 			return "interceptor";
 		}
@@ -45,7 +45,7 @@ public class Container
 
 	private static String getPluginPck()
 	{
-		if (BASEPACKAGE == null || BASEPACKAGE.length() > 0)
+		if (BASEPACKAGE == null || BASEPACKAGE.length() == 0)
 		{
 			return "plugin";
 		}
