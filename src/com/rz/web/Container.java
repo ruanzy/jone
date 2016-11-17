@@ -1,12 +1,9 @@
 package com.rz.web;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,90 +12,49 @@ import com.rz.util.Scaner;
 public class Container
 {
 	private static Logger log = LoggerFactory.getLogger(Container.class);
-	private static Properties cfg = new Properties();
+	private static String BASEPACKAGE;
 	private static Map<String, Object> actions = new HashMap<String, Object>();
 	private static Map<String, Interceptor> interceptors = new HashMap<String, Interceptor>();
 	private static List<Plugin> plugins = new ArrayList<Plugin>();
 
-	static
+	public static void init(String basePackage)
 	{
-		InputStream is = null;
-		try
-		{
-			String fileName = "default.properties";
-			is = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/rz/web/" + fileName);
-			if (is != null)
-			{
-				log.debug("Loading " + fileName);
-				cfg.load(is);
-			}
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException(e);
-		}
-		finally
-		{
-			try
-			{
-				if (is != null)
-				{
-					is.close();
-				}
-			}
-			catch (IOException e)
-			{
-
-			}
-		}
-	}
-
-	public static void init()
-	{
-		loadCfg();
+		BASEPACKAGE = basePackage;
 		loadActions();
 		loadInterceptors();
 		initPlugins();
 	}
 
-	private static void loadCfg()
+	private static String getActionPck()
 	{
-		Properties p = new Properties();
-		InputStream is = null;
-		try
+		if (BASEPACKAGE == null || BASEPACKAGE.length() > 0)
 		{
-			String fileName = "jone.properties";
-			is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-			if (is != null)
-			{
-				log.debug("Loading " + fileName);
-				p.load(is);
-				cfg.putAll(p);
-			}
+			return "action";
 		}
-		catch (Exception e)
-		{
-			throw new RuntimeException(e);
-		}
-		finally
-		{
-			try
-			{
-				if (is != null)
-				{
-					is.close();
-				}
-			}
-			catch (IOException e)
-			{
+		return BASEPACKAGE + ".action";
+	}
 
-			}
+	private static String getInterceptorPck()
+	{
+		if (BASEPACKAGE == null || BASEPACKAGE.length() > 0)
+		{
+			return "interceptor";
 		}
+		return BASEPACKAGE + ".interceptor";
+	}
+
+	private static String getPluginPck()
+	{
+		if (BASEPACKAGE == null || BASEPACKAGE.length() > 0)
+		{
+			return "plugin";
+		}
+		return BASEPACKAGE + ".plugin";
 	}
 
 	private static void loadActions()
 	{
-		String pck = cfg.getProperty("action.package");
+		String pck = getActionPck();
 		try
 		{
 			Set<Class<?>> _actions = Scaner.scan(pck);
@@ -122,7 +78,7 @@ public class Container
 
 	private static void loadInterceptors()
 	{
-		String pck = cfg.getProperty("interceptor.package");
+		String pck = getInterceptorPck();
 		try
 		{
 			Set<Class<?>> _interceptors = Scaner.scan(pck);
@@ -151,7 +107,7 @@ public class Container
 
 	private static void initPlugins()
 	{
-		String pck = cfg.getProperty("plugin.package");
+		String pck = getPluginPck();
 		try
 		{
 			Set<Class<?>> _plugins = Scaner.scan(pck);
@@ -178,7 +134,7 @@ public class Container
 
 	public static Object findAction(String actionName)
 	{
-		String pck = cfg.getProperty("action.package");
+		String pck = getActionPck();
 		return actions.get(pck + "." + actionName);
 	}
 
@@ -201,10 +157,5 @@ public class Container
 	public static List<Plugin> findPlugins()
 	{
 		return plugins;
-	}
-
-	public static void main(String[] args)
-	{
-		init();
 	}
 }

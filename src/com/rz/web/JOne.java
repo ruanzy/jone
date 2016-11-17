@@ -86,7 +86,8 @@ public class JOne implements Filter
 		try
 		{
 			this.context = cfg.getServletContext();
-			Container.init();
+			String basePackage = cfg.getInitParameter("base-package");
+			Container.init(basePackage);
 		}
 		catch (Exception e)
 		{
