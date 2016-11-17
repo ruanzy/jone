@@ -2,7 +2,7 @@
 	"datasource" : { 
 		"hsqldb": { 
 			"driverClassName" : "org.hsqldb.jdbcDriver", 
-			"url" : "jdbc:hsqldb:hsql://11.0.0.124/rzy123", 
+			"url" : "jdbc:hsqldb:file:d:/database/rzy123", 
 			"username" : "SA", 
 			"password" : "" 
 		}, 

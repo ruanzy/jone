@@ -1,8 +1,12 @@
 package com.rz.dao;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.rz.common.R;
 import com.rz.dao.sql.SQLExecutor;
 
@@ -10,14 +14,23 @@ public class Test
 {
 	public static void main(String[] args)
 	{
-		DB db = DBPool.getDB("mysql");
+		DB db = DBPool.getDB("hsqldb");
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("rzy.sql");
+		try
+		{
+			db.runScript(new InputStreamReader(is, "UTF8"));
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+		}
 		SQLExecutor executor = new SQLExecutor(db);
-		String sqlid = "user.select1";
+		String sqlid = "user.list";
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("operator", "admin");
 		params.put("page", "1");
 		params.put("pagesize", "10");
-		List<R> list = executor.pager(sqlid, params, 2, 3);
+		List<R> list = executor.pager(sqlid, params, 1, 3);
 		for (R record : list)
 		{
 			System.out.println(record);

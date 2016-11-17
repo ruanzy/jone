@@ -51,25 +51,25 @@ public class SQLLoader {
 
 	public static Sql getSql(String sqlid, Map<String, Object> params) {
 		Sql sql = null;
-		try {
-			String sqlTmpl = sqls.get(sqlid);
-			Template t = gt.getTemplate(sqlTmpl);
-			t.binding(params);
-			List<Object> _paras = new LinkedList<Object>();
-			t.binding("_paras", _paras);
-			String sqltext = t.render();
-			sql = new Sql();
-			if (true) {
-				sqltext = sqltext.replaceAll("\n\t*", " ")
-						.replaceAll("\\s{2,}", " ").trim()
-						.replaceAll("where 1=1 and", "where")
-						.replaceAll("where 1=1", "");
-			}
-			sql.sql = sqltext;
-			sql.params = _paras;
-		} catch (Exception e) {
-			e.printStackTrace();
+		String sqlTmpl = sqls.get(sqlid);
+		if(null == sqlTmpl){
+			String msg = String.format("Failed to obtain SQL through [%s]", sqlid);
+			throw new RuntimeException(msg);
 		}
+		Template t = gt.getTemplate(sqlTmpl);
+		t.binding(params);
+		List<Object> _paras = new LinkedList<Object>();
+		t.binding("_paras", _paras);
+		String sqltext = t.render();
+		sql = new Sql();
+		if (true) {
+			sqltext = sqltext.replaceAll("\n\t*", " ")
+					.replaceAll("\\s{2,}", " ").trim()
+					.replaceAll("where 1=1 and", "where")
+					.replaceAll("where 1=1", "");
+		}
+		sql.sql = sqltext;
+		sql.params = _paras;
 		return sql;
 	}
 
