@@ -812,8 +812,8 @@ public final class DB
 			for (String sql : sqlList)
 			{
 				smt.addBatch(sql);
-				log.debug("SQL==>" + sql);
 			}
+			log.debug("SQL==>" + script);
 			smt.executeBatch();
 			smt.close();
 		}
