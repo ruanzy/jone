@@ -243,6 +243,7 @@ public class JobManager
 					Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
 					r.put("status", triggerState.name());
 					r.put("starttime", trigger.getStartTime());
+					r.put("endtime", trigger.getEndTime());
 					if (trigger instanceof CronTrigger)
 					{
 						CronTrigger cronTrigger = (CronTrigger) trigger;

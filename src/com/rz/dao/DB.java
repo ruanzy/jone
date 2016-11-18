@@ -129,7 +129,8 @@ public final class DB
 	public int update(String sql, Object... params)
 	{
 		int result = 0;
-		if (begintx.get())
+		Boolean flag = begintx.get();
+		if (flag!= null && flag.booleanValue())
 		{
 			try
 			{
