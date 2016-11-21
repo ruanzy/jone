@@ -22,7 +22,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpcore-4.3.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/beetl-2.3.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.4.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-net-3.5.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-email-1.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jrobin-1.5.9.jar"/>
@@ -30,6 +29,9 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-2.2.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hsqldb.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/c3p0-0.9.1.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jetty-all-9.2.6.v20141205.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jetty-io-9.2.14.v20151106.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api-3.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
