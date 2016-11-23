@@ -1,0 +1,42 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading" style="background-color: #fff;">
+        <h3 class="panel-title">
+            <i class="fa fa-home"></i> 动态sql
+        </h3>
+    </div>
+    <div class="panel-body">
+<pre class="mydoc"><code class="sql">
+<b>以用户相关的db操作为例，在sql目录下新建一个user.sql文件</b>
+count
+===
+select count(1) from users where 1=1
+@if(isNotEmpty(name)){
+and name = #{name}
+@}
+and isadmin = 0
+
+list
+===
+select * from users where 1=1
+@if(isNotEmpty(name)){
+and name = #{name}
+@}
+and isadmin = 0
+order by regtime DESC
+
+===上面的是sqlid(同一个文件唯一)
+===下面的是动态sql
+
+<b>使用：</b>
+DB db = DBs.get("hsqldb");
+SQLExecutor executor = new SQLExecutor(db);
+int total = 0;
+Object o = executor.scalar("log.count", params);
+if (o != null)
+{
+	total = Integer.valueOf(o.toString());
+}
+List&lt;R&gt; list = executor.pager("log.list", params, page, pagesize);
+</code></pre>
+    </div>
+</div>

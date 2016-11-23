@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>Grid</title> 
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="lib/bootstrap/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="css/rui.css">
+	<link rel="stylesheet" href="lib/highlight/solarized-light.css">
+	<script src="lib/jquery-1.11.0.min.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="lib/highlight/highlight.pack.js"></script>
+<style type="text/css">
+.rui-tree{
+	margin: 0;
+	padding: 0;
+}
+.rui-tree li{
+	line-height: 30px;
+	list-style: none;
+	padding: 0 15px;
+}
+.rui-tree li h4 {
+    line-height: 36px;
+    border-left: 3px solid #337ab7;
+    margin: 15px 0 5px;
+    padding: 0 10px;
+    background-color: #f2f2f2;
+}
+</style>
+<script type="text/javascript">
+		var BASE = "";
+		$(function() {
+			$('.rui-tree a').click(function(){
+				var url = 'html/' + $(this).attr('url');
+				$('#loading').show();
+				$.ajax({
+					url : BASE + url,
+					type : 'get',
+					async : false,
+					cache: false,
+					success : function(data) {
+						$('#rui-content').html(data);
+						$('#loading').hide();
+						$('pre code').each(function(i, block) {
+							hljs.highlightBlock(block);
+						});
+					}
+				});
+			});
+			$('.rui-tree a').eq(0).trigger('click');
+		});
+
+
+
+
+</script>
+
+
+</head>
+<body class="hide-aside1">
+<header class="layout">
+<div class="logo"> <i class="fa fa-book fa-lg"></i> JOne开发手册 -- <span style="font-size:13px;">极速开发 JavaOne(少写代码，多撩妹子)</span></div>
+<ul class="operation">
+<li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		设置 <b class="caret"></b>
+	</a>
+	<ul class="dropdown-menu">
+		<li><a href="#">jmeter</a></li>
+		<li><a href="#">EJB</a></li>
+		<li><a href="#">Jasper Report</a></li>
+		<li class="divider"></li>
+		<li><a href="#">分离的链接</a></li>
+		<li class="divider"></li>
+		<li><a href="#">另一个链接</a></li>
+	</ul>
+</li>
+<li><span class="">admin,您好!</span></li>
+<li><a href="#">退出</a></li>
+</ul>
+</header>
+<aside class="layout">
+<ul class="rui-tree">
+  
+    <li><h4>JOne起步</h4></li>
+  
+    <li class="site-tree-noicon ">
+      <a href="#" url="1.html">JOne简介</a>
+    </li>
+    <li class="site-tree-noicon layui-this">
+      <a href="#" url="2.html">
+        配置
+      </a>
+    </li>
+    <li class="site-tree-noicon ">
+      <a href="#" url="3.html">
+        如何编写Action
+      </a>
+    </li>
+    
+    <li><h4>数据库操作</h4></li>
+    
+    
+    
+    <li class="site-tree-noicon ">
+      <a href="#" url="4.html">
+        DB简介
+      </a>
+    </li>
+    
+    <li class="site-tree-noicon ">
+      <a href="#" url="5.html">
+        动态sql
+      </a>
+    </li>
+
+    
+   
+    
+    <li><h4>编写Service</h4></li>
+    
+    <li>
+      <a href="#" url="6.html">
+        如何编写Service
+      </a>
+    </li>
+   
+   
+       
+    <li><h4>常用工具类</h4></li>
+    
+    <li>
+      <a href="#" url="7.html">
+        如何获取系统配置
+      </a>
+    </li>
+	
+	<li><h4>任务管理器</h4></li>
+    
+    <li>
+      <a href="#" url="8.html">
+        任务管理器
+      </a>
+    </li>
+  </ul>
+<ul class="ztree" id="treeDemo1"></ul>
+</aside>
+<section class="layout">
+<div id="rui-content">
+</div>
+</section>
+<footer class="layout">
+<p class="copyright">©2010 JOne 由 <a href="#" href="">Ruanzy</a> 强力驱动</p>
+</footer>
+<div id="loading" style="display: none;"></div>
+</body>
+</html>

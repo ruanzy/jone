@@ -1,0 +1,30 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading" style="background-color: #fff;">
+        <h3 class="panel-title">
+            <i class="fa fa-home"></i> 配置
+        </h3>
+    </div>
+    <div class="panel-body">
+	<pre class="mydoc"><code class="xml">
+JOne核心只有一个Filter(com.rz.web.JOne), 在web.xml中配置即可
+&lt;filter&gt;
+ &lt;filter-name&gt;JOne&lt;/filter-name&gt;
+ &lt;filter-class&gt;com.rz.web.JOne&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+ &lt;filter-name&gt;JOne&lt;/filter-name&gt;
+ &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+非必须可选的配置项base-package, 也可以在web.xml配置
+&lt;init-param&gt;
+  &lt;param-name&gt;base-package&lt;/param-name&gt;
+  &lt;param-value&gt;com.*.*&lt;/param-value&gt;
+&lt;/init-param&gt;
+不配置默认为空.
+JOne启动的时候会到base-package下面的action、interceptor、plugin目录
+分别加载初始化Action、Interceptor、Plugin
+plugin通常用来项目启动之前做一些初始化工作, 例如：数据库的初始化、任务管理器的启动等等。
+只要实现Plugin接口即可(与ServletContextListener类似)
+</code></pre>
+    </div>
+</div>

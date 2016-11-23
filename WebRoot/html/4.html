@@ -1,0 +1,59 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading" style="background-color: #fff;">
+        <h3 class="panel-title">
+            <i class="fa fa-home"></i> 关于DB
+        </h3>
+    </div>
+    <div class="panel-body">
+<pre class="mydoc"><code class="java">
+cfg.json: 系统的配置都放在这儿
+{	
+	datasource : { 
+		hsqldb: { 
+			driverClassName : "org.hsqldb.jdbcDriver", 
+			url : "jdbc:hsqldb:file:/home/rzy/database/dmas.db", 
+			username : "SA", 
+			password : "" 
+		}, 
+		dbone: { 
+			driverClassName : "com.intple.dbone.Driver", 
+			url : "jdbc:dbone://11.0.1.83:9001/", 
+			username : "dbone", 
+			password : "dbone" 
+		}
+	}
+}
+这里配置了2个数据源
+
+<b>概念</b>
+DB：代表一个连接池  对应于cfg.json里配置项datasource中一个具体的配置 如:hsqldb
+DBs: 系统所有的连接池集合 对应于cfg.json里的配置项datasource
+R: 你可以把它看做一个Map.是一个重要的数据载体, 穿梭在Action、Service和数据库操作间!
+
+<b>获取DB</b>
+DB db = DBs.getDB("mysql");
+
+<b>增、删、改</b>
+String sql = "delete from users where username = ?";
+db.begin();
+db.update(sql, new Object[] { username });
+db.commit();
+
+<b>查询单条记录</b>
+String sql = "select  * from users where username=? and pwd=?";
+R r = db.findOne(sql, new Object[] { username, password });
+
+<b>单值查询</b>
+String sql = "select  count(1) from users";
+Object o = db.scalar(sql);
+
+<b>查询多条记录</b>
+String sql = "select  * from users";
+List&lt;R&gt; list = db.find(sql, new Object[] { username, password });
+
+<b>分页查询</b>
+String sql = "select  * from users";
+List&lt;R&gt; list = db.pager(sql, 1, 10);
+</code></pre>
+    </div>
+</div>

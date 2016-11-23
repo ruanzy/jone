@@ -1,0 +1,34 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading" style="background-color: #fff;">
+        <h3 class="panel-title">
+            <i class="fa fa-home"></i> 如何获取系统配置
+        </h3>
+    </div>
+    <div class="panel-body">
+<pre class="mydoc"><code class="java">
+前面讲到有一个系统配置文件cfg.json,系统的所有配置可以放在这个文件里
+{	
+	datasource : { 
+		hsqldb: { 
+			driverClassName : "org.hsqldb.jdbcDriver", 
+			url : "jdbc:hsqldb:file:/home/rzy/database/dmas.db", 
+			username : "SA", 
+			password : "" 
+		}, 
+		dbone: { 
+			driverClassName : "com.intple.dbone.Driver", 
+			url : "jdbc:dbone://11.0.1.83:9001/", 
+			username : "dbone", 
+			password : "dbone" 
+		}
+	},
+	IP: 11.0.1.1,
+	path: abc/a/c
+}
+这里配置了2个数据源、IP、path
+
+<b>获取配置项</b>
+String url = (String)Config.getValue("datasource.hsqldb.url");
+</code></pre>
+    </div>
+</div>
