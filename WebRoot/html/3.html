@@ -1,13 +1,13 @@
 ﻿<div class="panel panel-default">
     <div class="panel-heading" style="background-color: #fff;">
         <h3 class="panel-title">
-            <i class="fa fa-home"></i> 编写Action
+            <span class="text-primary"><i class="fa fa-code"></i> 编写Action</span>
         </h3>
     </div>
     <div class="panel-body">
-	<p>前端访问Action规则: <span class="bg-danger">http://ip:port/actionName[/actionMethod]</span></p>
-	<p>actionName首字母大写后即为Action名</p>
-	<p>actionMethod对应Action里的方法名(不写默认请求的是execute方法)</p>
+	<p>前端访问Action规则: <span class="label label-danger">http://ip:port/actionName[/actionMethod]</span></p>
+	<p><span class="label label-danger">actionName</span>--首字母大写后即为Action名</p>
+	<p><span class="label label-danger">actionMethod</span>--对应Action里的方法名(不写默认请求的是execute方法)</p>
 <pre class="mydoc"><code class="java">
 base-package/action下编写一个POJO:
 
