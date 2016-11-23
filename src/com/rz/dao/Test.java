@@ -11,7 +11,7 @@ public class Test
 {
 	public static void main(String[] args)
 	{
-		DB db = DBPool.getDB("mysql");
+		DB db = DBs.getDB("mysql");
 //		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("rzy.sql");
 //		try
 //		{
