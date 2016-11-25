@@ -79,6 +79,7 @@ section.layout {
 	border: 0px solid #CCC;
 	background-color: #FFF;
 	background-color: #F9F9F9;
+    border-left: 1px solid #e4e5e7;
 	padding: 20px;
 }
 
@@ -125,4 +126,34 @@ footer.layout {
 	background: url(loading.gif) no-repeat;
 	background-position: center;
 	background-color: rgba(255, 255, 255, .5);
+}
+
+header.layout .nav {
+    height: 100%;
+        float: left;
+}
+header.layout .nav>li {
+        float: left;
+}
+
+header.layout .nav >li> a {
+    display: block;
+    padding: 6px 15px;
+    height: 100%;
+    color: #fff;
+}
+header.layout .nav >li >a:hover {
+    background-color: #286090;
+}
+header.layout .nav >li >a.current {
+    background-color: #286090;
+}
+
+
+header.layout .nav >li >a >i {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    display: block;
+    margin: 0 auto;
 }
