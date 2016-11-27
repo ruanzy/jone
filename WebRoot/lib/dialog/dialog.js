@@ -27,7 +27,11 @@
 				var wrapper = $('<div id="' + uuid + '" class="ui-dialog" tabIndex="0">').appendTo('body');
 				wrapper.data('options', options);
 				//wrapper.addClass('animated bounceIn'); 
-				var content = $('<div class="ui-dialog-content">').append(me.show());
+				var content = $('<div class="ui-dialog-content">');
+				if(options.padding){
+					content.css('padding', options.padding);
+				}
+				content.append(me.show());
 				content.appendTo(wrapper);
 				//创建titlebar
 				if(options.title){

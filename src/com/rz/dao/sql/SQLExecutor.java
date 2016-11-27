@@ -29,7 +29,10 @@ public class SQLExecutor
 
 	public List<R> find(String sqlid, Map<String, String> params)
 	{
-		Map<String, Object> p = new HashMap<String, Object>(params);
+		Map<String, Object> p = new HashMap<String, Object>();
+		if(null != params){
+			p.putAll(params);
+		}
 		Sql _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
 		List<Object> _params = _sql.getParams();
@@ -39,7 +42,10 @@ public class SQLExecutor
 
 	public R findOne(String sqlid, Map<String, String> params)
 	{
-		Map<String, Object> p = new HashMap<String, Object>(params);
+		Map<String, Object> p = new HashMap<String, Object>();
+		if(null != params){
+			p.putAll(params);
+		}
 		Sql _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
 		List<Object> _params = _sql.getParams();
@@ -49,7 +55,10 @@ public class SQLExecutor
 
 	public Object scalar(String sqlid, Map<String, String> params)
 	{
-		Map<String, Object> p = new HashMap<String, Object>(params);
+		Map<String, Object> p = new HashMap<String, Object>();
+		if(null != params){
+			p.putAll(params);
+		}
 		Sql _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
 		List<Object> _params = _sql.getParams();
@@ -59,7 +68,10 @@ public class SQLExecutor
 
 	public List<R> pager(String sqlid, Map<String, String> params, int page, int pagesize)
 	{
-		Map<String, Object> p = new HashMap<String, Object>(params);
+		Map<String, Object> p = new HashMap<String, Object>();
+		if(null != params){
+			p.putAll(params);
+		}
 		Sql _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
 		List<Object> _params = _sql.getParams();

@@ -9,14 +9,18 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.rz.common.R;
 
 public class WebUtil
 {
@@ -231,6 +235,22 @@ public class WebUtil
 	public static Map<String, String> getParameters()
 	{
 		Map<String, String> ps = new HashMap<String, String>();
+		Enumeration<?> em = WebUtil.Request.get().getParameterNames();
+		if (em.hasMoreElements())
+		{
+			while (em.hasMoreElements())
+			{
+				String k = (String) em.nextElement();
+				String v = getParameter(k);
+				ps.put(k, v);
+			}
+		}
+		return ps;
+	}
+	
+	public static R getParams()
+	{
+		R ps = new R();
 		Enumeration<?> em = WebUtil.Request.get().getParameterNames();
 		if (em.hasMoreElements())
 		{
