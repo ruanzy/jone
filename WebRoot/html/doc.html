@@ -40,9 +40,9 @@
 		var BASE = "";
 		$(function() {
 			$('.rui-tree a').click(function(){
-				var url = 'html/' + $(this).attr('url');
+				var M = $(this).attr('href').substring(1);
 				$('#loading').show();
-				$JONE['TASK'].init();
+				$JONE[M].init();
 			});
 			$('.rui-tree a').eq(0).trigger('click');
 			$('#about').on('click', function(){
@@ -94,15 +94,15 @@
     <li><h4>JOne起步</h4></li>
   
     <li class="site-tree-noicon ">
-      <a href="#" url="1.html">JOne简介</a>
+      <a href="#M1">JOne简介</a>
     </li>
     <li class="site-tree-noicon layui-this">
-      <a href="#" url="2.html">
+      <a href="#M2" url="2.html">
         配置
       </a>
     </li>
     <li class="site-tree-noicon ">
-      <a href="#" url="3.html">
+      <a href="#M3" url="3.html">
         如何编写Action
       </a>
     </li>
@@ -112,13 +112,13 @@
     
     
     <li class="site-tree-noicon ">
-      <a href="#" url="4.html">
+      <a href="#M4" url="4.html">
         DB简介
       </a>
     </li>
     
     <li class="site-tree-noicon ">
-      <a href="#" url="5.html">
+      <a href="#M5" url="5.html">
         动态sql
       </a>
     </li>
@@ -129,7 +129,7 @@
     <li><h4>编写Service</h4></li>
     
     <li>
-      <a href="#" url="6.html">
+      <a href="#M6" url="6.html">
         如何编写Service
       </a>
     </li>
@@ -139,7 +139,7 @@
     <li><h4>常用工具类</h4></li>
     
     <li>
-      <a href="#" url="7.html">
+      <a href="#M7" url="7.html">
         如何获取系统配置
       </a>
     </li>
@@ -147,7 +147,7 @@
 	<li><h4>任务管理器</h4></li>
     
     <li>
-      <a href="#" url="8.html">
+      <a href="#task" url="8.html">
         任务管理器
       </a>
     </li>

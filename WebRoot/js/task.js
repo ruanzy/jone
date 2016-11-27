@@ -79,4 +79,4 @@ $TASK = {
 		});
 	}
 };
-$JONE['TASK'] = $TASK;
+$JONE['task'] = $TASK;
