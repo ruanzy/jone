@@ -138,11 +138,14 @@ header.layout .nav>li {
 
 header.layout .nav >li> a {
     display: block;
-    padding: 6px 15px;
+    padding: 6px 20px;
     height: 100%;
     color: #fff;
 }
 header.layout .nav >li >a:hover {
+    background-color: #286090;
+}
+header.layout .nav >li >a:visited {
     background-color: #286090;
 }
 header.layout .nav >li >a.current {
@@ -152,10 +155,10 @@ header.layout .nav >li >a.current {
 
 header.layout .nav >li >a >i {
     font-size: 28px;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 2px;
 }
 .toolbar{
 	padding: 15px 0;

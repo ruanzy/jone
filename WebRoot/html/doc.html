@@ -9,15 +9,23 @@
 	<link rel="stylesheet" href="lib/highlight/solarized-light.css">
 	<link rel="stylesheet" href="lib/dialog/dialog.css">
 	<link rel="stylesheet" href="lib/grid/grid.css">
+	<link rel="stylesheet" href="lib/ztree/zTreeStyle/zTreeStyle.css">
+	<link rel="stylesheet" href="lib/tabs/tabs.css">
 	<script src="lib/jquery-1.11.0.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 	<script src="lib/highlight/highlight.pack.js"></script>
+	<script src="lib/ztree/jquery.ztree.all.min.js"></script>
 	<script src="lib/grid/rgrid.js"></script>
 	<script src="lib/template.js"></script>
 	<script src="lib/util.js"></script>
 	<script src="lib/dialog/dialog.js"></script>
+	<script src="lib/tabs/tabs.js"></script>
 	<script src="js/1.js"></script>
 	<script src="js/task.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/apitest.js"></script>
+	<script src="js/rui.js"></script>
+	<script src="js/doc.js"></script>
 <style type="text/css">
 .rui-tree{
 	margin: 0;
@@ -39,12 +47,16 @@
 <script type="text/javascript">
 		var BASE = "";
 		$(function() {
-			$('.rui-tree a').click(function(){
-				var M = $(this).attr('href').substring(1);
-				$('#loading').show();
-				$JONE[M].init();
+			$('#m_doc').on('click', function(){
+				$DOC.init();
 			});
-			$('.rui-tree a').eq(0).trigger('click');
+			$('#m_apitest').on('click', function(){
+				$APITEST.init();
+			});
+			$('#m_rui').on('click', function(){
+				$RUI.init();
+			});
+			$('#m_doc').trigger('click');
 			$('#about').on('click', function(){
 				/**$.dialog('html/aaa.html', {
 					title:'aaa',
@@ -64,13 +76,16 @@
 </head>
 <body class="hide-aside1">
 <header class="layout">
-<div class="logo"> <i class="fa fa-book fa-lg"></i> JOne开发手册 -- <span style="font-size:13px;">极速开发JavaOne</span></div>
+<div class="logo"> <i class="fa fa-book fa-lg"></i> JOne开发手册 <span style="font-size:13px;">&nbsp;&nbsp;</span></div>
 <ul class="nav">
               <li>
-                <a class="current" href=""><i class="fa fa-home"></i>极速JOne</a>
+                <a class="" href="#" id="m_doc"><i class="fa fa-home"></i>极速JOne</a>
               </li>
-              <li><a href="">
-                <i class="fa fa-user"></i>用户管理</a>
+              <li>
+                <a href="#" id="m_rui"><i class="fa fa-laptop"></i>前端开发</a>
+              </li>
+              <li><a href="#" id="m_apitest">
+                <i class="fa fa-cog"></i>接口测试</a>
               </li> </ul>
 <ul class="operation">
 <li class="dropdown">
@@ -88,71 +103,7 @@
 <li><a href="#">退出</a></li>
 </ul>
 </header>
-<aside class="layout">
-<ul class="rui-tree">
-  
-    <li><h4>JOne起步</h4></li>
-  
-    <li class="site-tree-noicon ">
-      <a href="#M1">JOne简介</a>
-    </li>
-    <li class="site-tree-noicon layui-this">
-      <a href="#M2" url="2.html">
-        配置
-      </a>
-    </li>
-    <li class="site-tree-noicon ">
-      <a href="#M3" url="3.html">
-        如何编写Action
-      </a>
-    </li>
-    
-    <li><h4>数据库操作</h4></li>
-    
-    
-    
-    <li class="site-tree-noicon ">
-      <a href="#M4" url="4.html">
-        DB简介
-      </a>
-    </li>
-    
-    <li class="site-tree-noicon ">
-      <a href="#M5" url="5.html">
-        动态sql
-      </a>
-    </li>
-
-    
-   
-    
-    <li><h4>编写Service</h4></li>
-    
-    <li>
-      <a href="#M6" url="6.html">
-        如何编写Service
-      </a>
-    </li>
-   
-   
-       
-    <li><h4>常用工具类</h4></li>
-    
-    <li>
-      <a href="#M7" url="7.html">
-        如何获取系统配置
-      </a>
-    </li>
-	
-	<li><h4>任务管理器</h4></li>
-    
-    <li>
-      <a href="#task" url="8.html">
-        任务管理器
-      </a>
-    </li>
-  </ul>
-<ul class="ztree" id="treeDemo1"></ul>
+<aside class="layout" id="sidebar">
 </aside>
 <section class="layout">
 <div id="rui-content">

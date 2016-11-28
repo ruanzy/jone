@@ -1,0 +1,62 @@
+<a id='btn_alert' class="btn btn-default">Alert</a> 
+<a id='btn_confirm' class="btn btn-primary">Confirm</a>
+<a id='btn_dom' class="btn btn-success">Dom</a> 
+<a id='btn_ajax' class="btn btn-warning">Ajax</a> 
+<a id='btn_noty' class="btn btn-danger">Noty</a> 
+<a id='btn_tip' class="btn btn-info">Tip</a> 
+<br>
+<pre class="mydoc"><code class="xml">&lt;a id='btn_alert' class="btn btn-default"&gt;Alert&lt;/a&gt; 
+&lt;a id='btn_confirm' class="btn btn-primary"&gt;Confirm&lt;/a&gt;
+&lt;a id='btn_dom' class="btn btn-success"&gt;Dom&lt;/a&gt; 
+&lt;a id='btn_ajax' class="btn btn-warning"&gt;Ajax&lt;/a&gt;
+&lt;a id='btn_noty' class="btn btn-danger"&gt;Noty&lt;/a&gt;
+&lt;a id='btn_tip' class="btn btn-info"&gt;Tip&lt;/a&gt;
+</code></pre>
+<pre class="mydoc"><code class="js">
+//Alert
+$.alert('哈哈哈', function(){
+    alert('呵呵呵');
+});
+
+//Confirm
+$.confirm('确定要删除吗?', 
+  function(){
+    alert('yes');
+  }, 
+  function(){
+    alert('no');
+});
+
+//Dom
+var p = $('#kkk');
+p.dialog({
+	title: 'Dom',
+	width: 500,
+	closable: true
+});
+
+//Ajax
+$.dialog('aaa.html', {
+	title: 'Ajax',
+	width: 500,
+	buttons: [
+		{
+			text: '确定',
+			cls: 'btn-primary',
+			action: function(){
+				this.dialog('close');
+			}
+		},
+		{
+			text: '取消',
+			cls: 'btn-default',
+			action: function(){
+				this.dialog('close');
+			}
+		}
+	]
+});
+
+//Noty
+$.noty('哈哈哈');
+</code></pre>
