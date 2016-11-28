@@ -1,5 +1,6 @@
 package com.rz.dao.sql;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,8 @@ public class SQLExecutor
 	public List<R> find(String sqlid, Map<String, String> params)
 	{
 		Map<String, Object> p = new HashMap<String, Object>();
-		if(null != params){
+		if (null != params)
+		{
 			p.putAll(params);
 		}
 		Sql _sql = SQLLoader.getSql(sqlid, p);
@@ -43,7 +45,8 @@ public class SQLExecutor
 	public R findOne(String sqlid, Map<String, String> params)
 	{
 		Map<String, Object> p = new HashMap<String, Object>();
-		if(null != params){
+		if (null != params)
+		{
 			p.putAll(params);
 		}
 		Sql _sql = SQLLoader.getSql(sqlid, p);
@@ -56,7 +59,8 @@ public class SQLExecutor
 	public Object scalar(String sqlid, Map<String, String> params)
 	{
 		Map<String, Object> p = new HashMap<String, Object>();
-		if(null != params){
+		if (null != params)
+		{
 			p.putAll(params);
 		}
 		Sql _sql = SQLLoader.getSql(sqlid, p);
@@ -69,7 +73,8 @@ public class SQLExecutor
 	public List<R> pager(String sqlid, Map<String, String> params, int page, int pagesize)
 	{
 		Map<String, Object> p = new HashMap<String, Object>();
-		if(null != params){
+		if (null != params)
+		{
 			p.putAll(params);
 		}
 		Sql _sql = SQLLoader.getSql(sqlid, p);
@@ -77,5 +82,33 @@ public class SQLExecutor
 		List<Object> _params = _sql.getParams();
 		log.debug(sql);
 		return db.pager(sql, _params.toArray(), page, pagesize);
+	}
+
+	public R pager(String countsql, String pagesql, Map<String, String> params, int page, int pagesize)
+	{
+		R r = new R();
+		List<R> data = new ArrayList<R>();
+		Map<String, Object> p = new HashMap<String, Object>();
+		if (null != params)
+		{
+			p.putAll(params);
+		}
+		Sql _countsql = SQLLoader.getSql(countsql, p);
+		String sql1 = _countsql.getSql();
+		List<Object> params1 = _countsql.getParams();
+		//log.debug(sql);
+		Object count = db.scalar(sql1, params1.toArray());
+		long total = Long.parseLong(count.toString());
+		if (total > 0)
+		{
+			Sql _pagesql = SQLLoader.getSql(pagesql, p);
+			String sql2 = _pagesql.getSql();
+			List<Object> params2 = _pagesql.getParams();
+			//log.debug(sql2);
+			data = db.pager(sql2, params2.toArray(), page, pagesize);
+		}
+		r.put("total", total);
+		r.put("data", data);
+		return r;
 	}
 }
