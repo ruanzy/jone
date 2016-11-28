@@ -157,3 +157,6 @@ header.layout .nav >li >a >i {
     display: block;
     margin: 0 auto;
 }
+.toolbar{
+	padding: 15px 0;
+}

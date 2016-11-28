@@ -1,4 +1,5 @@
 //var template = require('./template');
+localStorage.setItem('lang', 'zh');
 template.helper('i18n', function(key, params) {
 	return $.i18n.prop(key);
 });
