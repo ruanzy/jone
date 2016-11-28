@@ -1,5 +1,7 @@
 package com.rz.util;
 
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Set;
 import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
+import org.quartz.DateBuilder;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -17,6 +20,7 @@ import org.quartz.Matcher;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
+import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
@@ -291,6 +295,30 @@ public class JobManager
 			scheduler.shutdown(true);
 		}
 		catch (SchedulerException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args)
+	{
+		try
+		{
+			start();
+			Date startTime = DateBuilder.nextGivenSecondDate(null, 1);
+			Scheduler scheduler = sf.getScheduler();
+			JobDetail jobDetail = JobBuilder.newJob(MyJob.class).withIdentity("name", "g").build();
+			SimpleTrigger trigger = (SimpleTrigger) newTrigger().withIdentity("name", "g").startAt(startTime)
+					.withSchedule(simpleSchedule().withIntervalInSeconds(5)// 重复间隔
+							.withRepeatCount(2)) // 重复次数
+					.build();
+			scheduler.scheduleJob(jobDetail, trigger);
+			if (!scheduler.isShutdown())
+			{
+				scheduler.start();
+			}
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
