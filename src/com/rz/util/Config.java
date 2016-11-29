@@ -50,4 +50,17 @@ public class Config
 		}
 		return null;
 	}
+	
+	public static Object getString(String expression)
+	{
+		try
+		{
+			return Ognl.getValue(expression, cfg).toString();
+		}
+		catch (OgnlException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
