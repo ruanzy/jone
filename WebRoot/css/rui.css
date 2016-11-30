@@ -151,7 +151,9 @@ header.layout .nav >li >a:visited {
 header.layout .nav >li >a.current {
     background-color: #286090;
 }
-
+header.layout ..nav>li>a:focus {
+    background-color: #286090;
+}
 
 header.layout .nav >li >a >i {
     font-size: 28px;

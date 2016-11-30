@@ -1,0 +1,16 @@
+#docnav{
+	margin: 0;
+	padding: 0;
+}
+#docnav li{
+	line-height: 30px;
+	list-style: none;
+	padding: 0 15px;
+}
+#docnav li h4 {
+    line-height: 36px;
+    border-left: 3px solid #337ab7;
+    margin: 15px 0 5px;
+    padding: 0 10px;
+    background-color: #f2f2f2;
+}

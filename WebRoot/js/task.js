@@ -1,10 +1,5 @@
 $TASK = {
 	init: function(){
-		util.render('html/8.html', 'rui-content');
-		$('#loading').hide();
-		$('pre code').each(function(i, block) {
-			hljs.highlightBlock(block);
-		});
 		$TASK.list();
 		$('#add').on('click', $TASK.add);
 	},
@@ -79,4 +74,3 @@ $TASK = {
 		});
 	}
 };
-$JONE['task'] = $TASK;
