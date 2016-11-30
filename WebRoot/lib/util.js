@@ -29,7 +29,7 @@ var util = {
 	tpl : function(view, d) {
 		var tpl = $.ajax({
 			url : view,
-			cache : true,
+			cache : false,//此处不能缓存
 			async : false
 		}).responseText;
 		return template.compile(tpl)(d);
