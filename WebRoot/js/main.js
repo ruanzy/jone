@@ -8,6 +8,7 @@ require.config({
 		highlight : "lib/highlight/highlight.pack"
 	},
 	shim : {
+		"bootstrap" : [ "jquery" ],
 		"tabs" : [ "util" ],
 		"jquery.validate.min" : [ "jquery" ]
 	}
