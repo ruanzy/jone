@@ -1,3 +1,4 @@
+define(['lib/template'], function(template){
 //var template = require('./template');
 localStorage.setItem('lang', 'zh');
 template.helper('i18n', function(key, params) {
@@ -68,3 +69,5 @@ Date.prototype.Format = function(fmt) {
 					: (("00" + o[k]).substr(("" + o[k]).length)));
 	return fmt;
 };
+return util;
+});

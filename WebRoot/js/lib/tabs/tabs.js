@@ -1,5 +1,5 @@
 ﻿(function($){  
-	//var util = require('../util');
+	var util = require('util');
 	$.fn.tabs = function(method) {
 		if (typeof method == 'string') {
 			return arguments.callee.methods[method].apply(this, Array.prototype.slice.call(arguments, 1));

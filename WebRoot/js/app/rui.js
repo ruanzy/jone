@@ -1,4 +1,5 @@
-$RUI = {
+define(['util','highlight'], function(util, hljs){
+var obj = {
 	init: function(){
 		util.render('html/ruinav.html', 'sidebar');
 		$('body').removeClass('hide-aside');
@@ -8,3 +9,5 @@ $RUI = {
 		});
 	}
 };
+return obj;
+});

@@ -1,4 +1,5 @@
-$APITEST = {
+define(['util','tabs'], function(util){
+var obj = {
 	init: function(){
 		var me = this;
 		util.render('html/apitest.html', 'rui-content');
@@ -89,3 +90,5 @@ $APITEST = {
 		});
 	}
 };
+return obj;
+});
