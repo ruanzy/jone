@@ -1,4 +1,4 @@
-define(['lib/template'], function(template){
+define(['template'], function(template){
 //var template = require('./template');
 localStorage.setItem('lang', 'zh');
 template.helper('i18n', function(key, params) {
