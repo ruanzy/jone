@@ -13,7 +13,8 @@ require.config({
 		"jquery.validate.min" : [ "jquery" ]
 	}
 });
-require(['jquery', 'bootstrap']);
-require(['app/index'], function(index) {
-	index.init();
+require(['bootstrap'], function(index) {
+	require(['app/index'], function(index) {
+		index.init();
+	});
 });
