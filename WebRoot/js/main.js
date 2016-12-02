@@ -2,6 +2,7 @@ require.config({
 	paths : {
 		jquery : "lib/jquery-1.11.0.min",
 		bootstrap : "lib/bootstrap/js/bootstrap.min",
+		ztree : "lib/ztree/jquery.ztree.all.min",
 		template : "lib/template",
 		util : "lib/util",
 		dialog : "lib/dialog/dialog",
@@ -11,6 +12,7 @@ require.config({
 	},
 	shim : {
 		"bootstrap" : [ "jquery", "css!lib/bootstrap/css/bootstrap.min", "css!lib/bootstrap/fonts/font-awesome.min"],
+		"ztree" : [ "css!lib/ztree/zTreeStyle/zTreeStyle"],
 		"highlight" : [ "css!lib/highlight/solarized-light"],
 		"util" : {
 			desp: [ "template"],
