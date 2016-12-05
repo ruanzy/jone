@@ -3,7 +3,7 @@ var task = {
 	init: function(){
 		var me = this;
 		me.list();
-		$('#add').on('click', me.add);
+		$('#add').on('click', function(){me.add();});
 	},
 	list: function(){
 		$('#tasks').grid({
