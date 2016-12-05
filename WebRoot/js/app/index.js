@@ -1,4 +1,4 @@
-define(['util', 'dialog'], function(util){
+define(['util'], function(util){
 	var obj = {
 		init: function(){
 			util.render('html/header.html', 'header');
