@@ -24,37 +24,19 @@ public class Container
 		loadInterceptors();
 		initPlugins();
 	}
-
-	private static String getActionPck()
+	
+	private static String getPackage(String subpackage)
 	{
 		if (BASEPACKAGE == null || BASEPACKAGE.length() == 0)
 		{
-			return "action";
+			return subpackage;
 		}
-		return BASEPACKAGE + ".action";
-	}
-
-	private static String getInterceptorPck()
-	{
-		if (BASEPACKAGE == null || BASEPACKAGE.length() == 0)
-		{
-			return "interceptor";
-		}
-		return BASEPACKAGE + ".interceptor";
-	}
-
-	private static String getPluginPck()
-	{
-		if (BASEPACKAGE == null || BASEPACKAGE.length() == 0)
-		{
-			return "plugin";
-		}
-		return BASEPACKAGE + ".plugin";
+		return BASEPACKAGE + "." + subpackage;
 	}
 
 	private static void loadActions()
 	{
-		String pck = getActionPck();
+		String pck = getPackage("action");
 		try
 		{
 			Set<Class<?>> _actions = Scaner.scan(pck);
@@ -78,7 +60,7 @@ public class Container
 
 	private static void loadInterceptors()
 	{
-		String pck = getInterceptorPck();
+		String pck = getPackage("interceptor");
 		try
 		{
 			Set<Class<?>> _interceptors = Scaner.scan(pck);
@@ -107,7 +89,7 @@ public class Container
 
 	private static void initPlugins()
 	{
-		String pck = getPluginPck();
+		String pck = getPackage("plugin");
 		try
 		{
 			Set<Class<?>> _plugins = Scaner.scan(pck);
@@ -134,7 +116,7 @@ public class Container
 
 	public static Object findAction(String actionName)
 	{
-		String pck = getActionPck();
+		String pck = getPackage("action");
 		return actions.get(pck + "." + actionName);
 	}
 
