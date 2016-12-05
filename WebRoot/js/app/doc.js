@@ -1,4 +1,4 @@
-define(['util','highlight'], function(util, hljs){
+define(['util', 'highlight', 'app/task'], function(util, hljs, task){
 	var obj = {
 		init: function(){
 			util.render('html/docnav.html', 'sidebar');
@@ -8,7 +8,7 @@ define(['util','highlight'], function(util, hljs){
 			$('pre code').each(function(i, block) {
 				hljs.highlightBlock(block);
 			});
-			//$TASK.init();
+			task.init();
 		}
 	};
 	return obj;
