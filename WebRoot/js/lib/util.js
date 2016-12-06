@@ -36,7 +36,7 @@ var util = {
 		return $.i18n.prop(key);
 	},
 	tpl : function(view, d) {
-		var cache = localStorage.getItem(view);
+		var cache = sessionStorage.getItem(view);
 		if(cache){
 			return template.compile(cache)(d);
 		}
@@ -45,7 +45,7 @@ var util = {
 			cache : false,//此处不能缓存
 			async : false
 		}).responseText;
-		localStorage.setItem(view, tpl);
+		sessionStorage.setItem(view, tpl);
 		return template.compile(tpl)(d);
 	},
 	render : function(view, container, d) {
