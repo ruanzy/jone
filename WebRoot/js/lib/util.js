@@ -55,6 +55,12 @@ var util = {
 		}else{
 			$(container).html(tpl);
 		}
+	},
+	selectMenu : function(id) {
+		sessionStorage.setItem('current', id);
+		var lis = $('header.layout .nav >li');
+		lis.removeClass('active');
+		$(id).addClass('active');
 	}
 };
 return util;
