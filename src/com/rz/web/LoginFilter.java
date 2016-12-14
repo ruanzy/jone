@@ -87,7 +87,12 @@ public class LoginFilter implements Filter
 
 	private String getToken(HttpServletRequest request)
 	{
-		return request.getHeader("Authorization");
+		String token = request.getParameter("token");
+		if (null == token)
+		{
+			token = request.getHeader("Authorization");
+		}
+		return token;
 	}
 
 	private boolean isAjax(HttpServletRequest request)
