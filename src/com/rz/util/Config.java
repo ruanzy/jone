@@ -50,12 +50,33 @@ public class Config
 		}
 		return null;
 	}
-	
-	public static Object getString(String expression)
+
+	public static String getString(String expression)
 	{
 		try
 		{
-			return Ognl.getValue(expression, cfg).toString();
+			Object obj = Ognl.getValue(expression, cfg);
+			if (null != obj)
+			{
+				return obj.toString();
+			}
+		}
+		catch (OgnlException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static Integer getInt(String expression)
+	{
+		try
+		{
+			Object obj = Ognl.getValue(expression, cfg);
+			if (null != obj)
+			{
+				return Integer.valueOf(obj.toString());
+			}
 		}
 		catch (OgnlException e)
 		{
