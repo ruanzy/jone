@@ -7,6 +7,7 @@ import java.io.Reader;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -18,11 +19,14 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.sql.DataSource;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.rz.common.R;
 
 public final class DB
@@ -645,15 +649,17 @@ public final class DB
 		}
 	}
 
-	private void setParams(PreparedStatement ps, Object[] params)
+	private void setParams(PreparedStatement ps, Object... params)
 	{
+		ParameterMetaData pmd = null;
 		try
 		{
-			if (params == null)
-			{
-				return;
+			pmd = ps.getParameterMetaData();
+			int psCount = pmd.getParameterCount();
+			int paramsCount = params == null ? 0 : params.length;
+			if (psCount != paramsCount) {
+				throw new DataAccessException("Wrong number of parameters: expected " + psCount + ", was given " + paramsCount);
 			}
-			// log.debug("set parameters");
 			for (int i = 0; i < params.length; i++)
 			{
 				Object o = params[i];
