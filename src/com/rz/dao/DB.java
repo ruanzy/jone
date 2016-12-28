@@ -91,7 +91,7 @@ public final class DB
 		}
 		catch (Exception e)
 		{
-			throw new DataAccessException("Get the database connection failed!", e);
+			throw new DataAccessException(e.getMessage());
 		}
 		return conn;
 	}
@@ -122,7 +122,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 	}
 
@@ -142,7 +142,7 @@ public final class DB
 			}
 			catch (SQLException e)
 			{
-				throw new DataAccessException(e.getMessage(), e);
+				throw new DataAccessException(e.getMessage());
 			}
 		}
 		else
@@ -159,7 +159,7 @@ public final class DB
 			}
 			catch (SQLException e)
 			{
-				throw new DataAccessException(e.getMessage(), e);
+				throw new DataAccessException(e.getMessage());
 			}
 			finally
 			{
@@ -181,7 +181,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 	}
 
@@ -195,7 +195,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 	}
 
@@ -210,7 +210,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 	}
 
@@ -239,7 +239,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -266,7 +266,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -299,7 +299,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -331,7 +331,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -370,7 +370,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -450,7 +450,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -497,7 +497,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -533,7 +533,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -714,7 +714,7 @@ public final class DB
 		}
 		catch (SQLException e)
 		{
-			throw new DataAccessException(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage());
 		}
 		finally
 		{
@@ -819,7 +819,7 @@ public final class DB
 			{
 				smt.addBatch(sql);
 			}
-			log.debug("SQL==>" + script);
+			log.debug("runScript\r\n========begin========\r\n" + script + "=========end=========\r\n");
 			smt.executeBatch();
 			smt.close();
 		}
@@ -841,7 +841,8 @@ public final class DB
 		try
 		{
 			conn = getConnection();
-			rs = conn.getMetaData().getTables(null, null, table, null);
+			String[] types = { "TABLE" };  
+			rs = conn.getMetaData().getTables(null, null, table, types);
 			if (rs.next())
 			{
 				result = true;

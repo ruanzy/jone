@@ -1,4 +1,10 @@
-/com
 /action
+/cfg.json
+/com
+/init.sql
+/interceptor
+/log
+/logback.xml
+/rzy.sql
 /service
 /sql
