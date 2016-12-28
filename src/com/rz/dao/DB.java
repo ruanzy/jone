@@ -659,7 +659,12 @@ public final class DB
 				Object o = params[i];
 				if (o != null)
 				{
-					ps.setObject(i + 1, params[i]);
+					if(o instanceof java.util.Date){
+						java.sql.Date d = new java.sql.Date(((java.util.Date)o).getTime());
+						ps.setDate(i + 1, d);
+					}else{
+						ps.setObject(i + 1, params[i]);
+					}
 				}
 				else
 				{
