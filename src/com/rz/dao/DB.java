@@ -19,14 +19,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.sql.DataSource;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.rz.common.R;
 
 public final class DB
@@ -134,7 +131,7 @@ public final class DB
 	{
 		int result = 0;
 		Boolean flag = begintx.get();
-		if (flag!= null && flag.booleanValue())
+		if (flag != null && flag.booleanValue())
 		{
 			try
 			{
@@ -171,6 +168,53 @@ public final class DB
 			}
 		}
 		return result;
+	}
+
+	public void insertBatch(String sql, Object[][] params)
+	{
+		Boolean flag = begintx.get();
+		if (flag != null && flag.booleanValue())
+		{
+			try
+			{
+				Connection conn = tl.get();
+				PreparedStatement ps = conn.prepareStatement(sql);
+				for (int i = 0; i < params.length; i++)
+				{
+					setParams(ps, params[i]);
+					ps.addBatch();
+				}
+				ps.executeBatch();
+			}
+			catch (SQLException e)
+			{
+				throw new DataAccessException(e.getMessage());
+			}
+		}
+		else
+		{
+			Connection conn = null;
+			PreparedStatement ps = null;
+			try
+			{
+				conn = getConnection();
+				ps = conn.prepareStatement(sql);
+				for (int i = 0; i < params.length; i++)
+				{
+					setParams(ps, params[i]);
+					ps.addBatch();
+				}
+				ps.executeBatch();
+			}
+			catch (SQLException e)
+			{
+				throw new DataAccessException(e.getMessage());
+			}
+			finally
+			{
+				close(ps, conn);
+			}
+		}
 	}
 
 	public void beginBatch(String sql)
@@ -657,18 +701,23 @@ public final class DB
 			pmd = ps.getParameterMetaData();
 			int psCount = pmd.getParameterCount();
 			int paramsCount = params == null ? 0 : params.length;
-			if (psCount != paramsCount) {
-				throw new DataAccessException("Wrong number of parameters: expected " + psCount + ", was given " + paramsCount);
+			if (psCount != paramsCount)
+			{
+				throw new DataAccessException("Wrong number of parameters: expected " + psCount + ", was given "
+						+ paramsCount);
 			}
 			for (int i = 0; i < params.length; i++)
 			{
 				Object o = params[i];
 				if (o != null)
 				{
-					if(o instanceof java.util.Date){
-						java.sql.Timestamp ts = new java.sql.Timestamp(((java.util.Date)o).getTime());
+					if (o instanceof java.util.Date)
+					{
+						java.sql.Timestamp ts = new java.sql.Timestamp(((java.util.Date) o).getTime());
 						ps.setTimestamp(i + 1, ts);
-					}else{
+					}
+					else
+					{
 						ps.setObject(i + 1, params[i]);
 					}
 				}
@@ -846,7 +895,7 @@ public final class DB
 		try
 		{
 			conn = getConnection();
-			String[] types = { "TABLE" };  
+			String[] types = { "TABLE" };
 			rs = conn.getMetaData().getTables(null, null, table, types);
 			if (rs.next())
 			{
