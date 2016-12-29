@@ -698,32 +698,37 @@ public final class DB
 		ParameterMetaData pmd = null;
 		try
 		{
-			pmd = ps.getParameterMetaData();
-			int psCount = pmd.getParameterCount();
-			int paramsCount = params == null ? 0 : params.length;
-			if (psCount != paramsCount)
-			{
-				throw new DataAccessException("Wrong number of parameters: expected " + psCount + ", was given "
-						+ paramsCount);
+			if(null == params){
+				return;
 			}
-			for (int i = 0; i < params.length; i++)
-			{
-				Object o = params[i];
-				if (o != null)
+			pmd = ps.getParameterMetaData();
+			if(pmd != null){
+				int psCount = pmd.getParameterCount();
+				int paramsCount = params == null ? 0 : params.length;
+				if (psCount != paramsCount)
 				{
-					if (o instanceof java.util.Date)
+					throw new DataAccessException("Wrong number of parameters: expected " + psCount + ", was given "
+							+ paramsCount);
+				}
+				for (int i = 0; i < params.length; i++)
+				{
+					Object o = params[i];
+					if (o != null)
 					{
-						java.sql.Timestamp ts = new java.sql.Timestamp(((java.util.Date) o).getTime());
-						ps.setTimestamp(i + 1, ts);
+						if (o instanceof java.util.Date)
+						{
+							java.sql.Timestamp ts = new java.sql.Timestamp(((java.util.Date) o).getTime());
+							ps.setTimestamp(i + 1, ts);
+						}
+						else
+						{
+							ps.setObject(i + 1, params[i]);
+						}
 					}
 					else
 					{
-						ps.setObject(i + 1, params[i]);
+						ps.setNull(i + 1, java.sql.Types.NULL);
 					}
-				}
-				else
-				{
-					ps.setNull(i + 1, java.sql.Types.NULL);
 				}
 			}
 		}
