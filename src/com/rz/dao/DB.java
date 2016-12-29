@@ -666,8 +666,8 @@ public final class DB
 				if (o != null)
 				{
 					if(o instanceof java.util.Date){
-						java.sql.Date d = new java.sql.Date(((java.util.Date)o).getTime());
-						ps.setDate(i + 1, d);
+						java.sql.Timestamp ts = new java.sql.Timestamp(((java.util.Date)o).getTime());
+						ps.setTimestamp(i + 1, ts);
 					}else{
 						ps.setObject(i + 1, params[i]);
 					}
@@ -676,7 +676,6 @@ public final class DB
 				{
 					ps.setNull(i + 1, java.sql.Types.NULL);
 				}
-				// log.debug("{}:{}", i + 1, params[i]);
 			}
 		}
 		catch (SQLException e)
