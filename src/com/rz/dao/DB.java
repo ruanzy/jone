@@ -7,7 +7,6 @@ import java.io.Reader;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -695,40 +694,29 @@ public final class DB
 
 	private void setParams(PreparedStatement ps, Object... params)
 	{
-		ParameterMetaData pmd = null;
 		try
 		{
 			if(null == params){
 				return;
 			}
-			pmd = ps.getParameterMetaData();
-			if(pmd != null){
-				int psCount = pmd.getParameterCount();
-				int paramsCount = params == null ? 0 : params.length;
-				if (psCount != paramsCount)
+			for (int i = 0; i < params.length; i++)
+			{
+				Object o = params[i];
+				if (o != null)
 				{
-					throw new DataAccessException("Wrong number of parameters: expected " + psCount + ", was given "
-							+ paramsCount);
-				}
-				for (int i = 0; i < params.length; i++)
-				{
-					Object o = params[i];
-					if (o != null)
+					if (o instanceof java.util.Date)
 					{
-						if (o instanceof java.util.Date)
-						{
-							java.sql.Timestamp ts = new java.sql.Timestamp(((java.util.Date) o).getTime());
-							ps.setTimestamp(i + 1, ts);
-						}
-						else
-						{
-							ps.setObject(i + 1, params[i]);
-						}
+						java.sql.Timestamp ts = new java.sql.Timestamp(((java.util.Date) o).getTime());
+						ps.setTimestamp(i + 1, ts);
 					}
 					else
 					{
-						ps.setNull(i + 1, java.sql.Types.NULL);
+						ps.setObject(i + 1, params[i]);
 					}
+				}
+				else
+				{
+					ps.setNull(i + 1, java.sql.Types.NULL);
 				}
 			}
 		}
