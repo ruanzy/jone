@@ -55,14 +55,11 @@ public class JOne implements Filter
 		catch (InvocationTargetException e)
 		{
 			Throwable t = e.getTargetException();
-			throw t instanceof RuntimeException ? (RuntimeException) t : new RuntimeException(e);
-		}
-		catch (RuntimeException e)
-		{
-			throw e;
+			t.printStackTrace();
 		}
 		catch (Throwable t)
 		{
+			t.printStackTrace();
 			throw new ServletException(t);
 		}
 		finally

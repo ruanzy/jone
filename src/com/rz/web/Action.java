@@ -31,17 +31,26 @@ public class Action
 			Object[] ps = new Object[] { name, method };
 			log.debug("Action={}, method={}", ps);
 			Object result = null;
-			Object a = Container.findAction(name);
-			if(a == null){
-				String error = "Action " + name + " not found!";
-				log.error(error);
-				throw new ClassNotFoundException(error);
-			}
-			Method m = a.getClass().getMethod(method);
-			result = m.invoke(a);
-			if (result instanceof View)
-			{
-				((View) result).handle();
+			try {
+				Object a = Container.findAction(name);
+				if(a == null){
+					String error = "Action " + name + " not found!";
+					log.error(error);
+					throw new ClassNotFoundException(error);
+				}
+				Method m = a.getClass().getMethod(method);
+				if(m == null){
+					String error = "Method " + method + " not found!";
+					log.error(error);
+					throw new NoSuchMethodException(error);
+				}
+				result = m.invoke(a);
+				if (result instanceof View)
+				{
+					((View) result).handle();
+				}
+			} catch (Exception e) {
+				throw e;
 			}
 		}
 	}
