@@ -8,7 +8,7 @@ import com.rz.dao.DBs;
 public class LogHandle
 {
 	static LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<String>(5000);
-	static DB db = DBs.getDB("hsqldb");
+	static DB db = DBs.getDB("dbone");;
 	static
 	{
 		new Thread(new Runnable()

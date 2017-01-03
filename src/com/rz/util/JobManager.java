@@ -1,16 +1,14 @@
 package com.rz.util;
 
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
-import static org.quartz.TriggerBuilder.newTrigger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
-import org.quartz.DateBuilder;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -20,7 +18,6 @@ import org.quartz.Matcher;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
-import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
@@ -29,6 +26,7 @@ import org.quartz.impl.matchers.KeyMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.common.R;
+import com.rz.dao.DB;
 
 public class JobManager
 {
@@ -270,15 +268,36 @@ public class JobManager
 		return CronExpression.isValidExpression(cron);
 	}
 
-	public static void start()
+	public static void start(DB db)
 	{
 		try
 		{
-			sf = new StdSchedulerFactory();
-			Scheduler scheduler = sf.getScheduler();
-			if (!scheduler.isShutdown())
+			if (sf == null)
 			{
-				scheduler.start();
+				Properties props = new Properties();
+				String driver = db.getDriver();
+				String url = db.getUrl();
+				String user = db.getUsername();
+				String password = db.getPassword();
+				props.put("org.quartz.scheduler.instanceName", "DefaultQuartzScheduler");
+				props.put("org.quartz.threadPool.class", org.quartz.simpl.SimpleThreadPool.class.getName());
+				props.put("org.quartz.threadPool.threadCount", "25");
+				props.put("org.quartz.threadPool.threadPriority", "5");
+				props.put("org.quartz.jobStore.misfireThreshold", "60000");
+				props.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
+				props.put("org.quartz.jobStore.driverDelegateClass", "org.quartz.impl.jdbcjobstore.StdJDBCDelegate");
+				props.put("org.quartz.jobStore.dataSource", "DS");
+				props.put("org.quartz.dataSource.DS.driver", driver);
+				props.put("org.quartz.dataSource.DS.URL", url);
+				props.put("org.quartz.dataSource.DS.user", user);
+				props.put("org.quartz.dataSource.DS.password", password);
+				props.put("org.quartz.dataSource.DS.maxConnections", 30);
+				sf = new StdSchedulerFactory(props);
+				Scheduler scheduler = sf.getScheduler();
+				if (!scheduler.isShutdown())
+				{
+					scheduler.start();
+				}
 			}
 		}
 		catch (SchedulerException e)
@@ -295,30 +314,6 @@ public class JobManager
 			scheduler.shutdown(true);
 		}
 		catch (SchedulerException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public static void main(String[] args)
-	{
-		try
-		{
-			start();
-			Date startTime = DateBuilder.nextGivenSecondDate(null, 1);
-			Scheduler scheduler = sf.getScheduler();
-			JobDetail jobDetail = JobBuilder.newJob(MyJob.class).withIdentity("name", "g").build();
-			SimpleTrigger trigger = (SimpleTrigger) newTrigger().withIdentity("name", "g").startAt(startTime)
-					.withSchedule(simpleSchedule().withIntervalInSeconds(5)// 重复间隔
-							.withRepeatCount(2)) // 重复次数
-					.build();
-			scheduler.scheduleJob(jobDetail, trigger);
-			if (!scheduler.isShutdown())
-			{
-				scheduler.start();
-			}
-		}
-		catch (Exception e)
 		{
 			e.printStackTrace();
 		}

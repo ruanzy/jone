@@ -12,7 +12,7 @@ public class Test
 {
 	public static void main(String[] args)
 	{
-		DB db = DBs.getDB("hsqldb");
+		DB db = DBs.getDB("dbone");;
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("rzy.sql");
 		db.runScript(new InputStreamReader(is));
 		boolean f = db.existTable("USERS");

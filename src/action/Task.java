@@ -13,7 +13,7 @@ import com.rz.web.WebUtil;
 
 public class Task
 {
-	static DB db = DBs.getDB("hsqldb");
+	static DB db = DBs.getDB("dbone");;
 	public View list()
 	{
 		Map<String, String> params = WebUtil.getParameters();

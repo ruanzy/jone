@@ -10,7 +10,7 @@ import com.rz.dao.DBs;
 import com.rz.dao.sql.SQLExecutor;
 
 public class TaskService {
-	static DB db = DBs.getDB("hsqldb");
+	static DB db = DBs.getDB("dbone");;
 
 	public static R list(Map<String, String> params, int page, int pagesize) {
 		R ret = new R();
