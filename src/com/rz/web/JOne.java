@@ -56,6 +56,7 @@ public class JOne implements Filter
 		{
 			Throwable t = e.getTargetException();
 			t.printStackTrace();
+			throw new ServletException(t);
 		}
 		catch (Throwable t)
 		{
