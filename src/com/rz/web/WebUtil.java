@@ -9,17 +9,14 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.rz.common.R;
 
 public class WebUtil
@@ -363,10 +360,19 @@ public class WebUtil
 	// }
 	// return null;
 	// }
+	private static String getToken()
+	{
+		String token = WebUtil.Request.get().getParameter("token");
+		if (null == token)
+		{
+			token = getHeader("Authorization");
+		}
+		return token;
+	}
 
 	public static String getUser()
 	{
-		String token = getHeader("Authorization");
+		String token = getToken();
 		return TokenUtil.getUser(token);
 	}
 }
