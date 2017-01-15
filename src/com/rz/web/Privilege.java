@@ -65,7 +65,7 @@ public class Privilege
 			String sql = "insert into users values(?,?,0,?,?,1,?,?)";
 			_db.begin();
 			_db.update(sql, new Object[] { userid, _password, email, phone, regtime, memo });
-			_db.commit();
+			_db.close();
 		}
 
 		public static void delete(String userid)
@@ -73,7 +73,7 @@ public class Privilege
 			String sql = "delete from users where userid=?";
 			_db.begin();
 			_db.update(sql, new Object[] { userid });
-			_db.commit();
+			_db.close();
 		}
 
 		public static void update(String userid, R r)
@@ -86,7 +86,7 @@ public class Privilege
 			String sql = "update users set password=?,email=?,password=?,phone=?,memo=? where userid=?";
 			_db.begin();
 			_db.update(sql, new Object[] { _password, email, phone, memo, userid });
-			_db.commit();
+			_db.close();
 		}
 
 		public static void setRoles(String userid, List<Integer> roleids)
@@ -99,7 +99,7 @@ public class Privilege
 			{
 				_db.update(sql2, new Object[] { userid, roleid });
 			}
-			_db.commit();
+			_db.close();
 		}
 
 		public static List<R> getRoles(String userid)
@@ -122,7 +122,7 @@ public class Privilege
 			String sql = "insert into role values(?)";
 			_db.begin();
 			_db.update(sql, new Object[] { rolename });
-			_db.commit();
+			_db.close();
 		}
 
 		public void setResources(String roleid, List<Integer> resourceids)
@@ -135,7 +135,7 @@ public class Privilege
 			{
 				_db.update(sql2, new Object[] { roleid, resourceid });
 			}
-			_db.commit();
+			_db.close();
 		}
 
 		public List<R> getResources(String roleid)
@@ -166,7 +166,7 @@ public class Privilege
 				String sql = "insert into resources values(?,?,?,?,?,?,?,?,?)";
 				_db.begin();
 				_db.update(sql, new Object[] { id, name, type, method, pid, url, iconcls, path, flag });
-				_db.commit();
+				_db.close();
 			}
 		}
 	}

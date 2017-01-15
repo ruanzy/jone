@@ -64,7 +64,7 @@ public class LogHandle
 			}
 			db.excuteBatch();
 			db.endBatch();
-			db.commit();
+			db.close();
 			logs.clear();
 		}
 		catch (Exception e)

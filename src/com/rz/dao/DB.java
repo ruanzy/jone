@@ -96,7 +96,7 @@ public final class DB
 		return conn;
 	}
 
-	private void close(Object... sqlObjs)
+	private void closeResource(Object... sqlObjs)
 	{
 		try
 		{
@@ -163,7 +163,7 @@ public final class DB
 			}
 			finally
 			{
-				close(ps, conn);
+				closeResource(ps, conn);
 			}
 		}
 		return result;
@@ -211,7 +211,7 @@ public final class DB
 			}
 			finally
 			{
-				close(ps, conn);
+				closeResource(ps, conn);
 			}
 		}
 	}
@@ -290,7 +290,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, ps, conn);
+			closeResource(rs, ps, conn);
 		}
 		return res;
 	}
@@ -317,7 +317,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, ps, conn);
+			closeResource(rs, ps, conn);
 		}
 	}
 
@@ -350,7 +350,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, ps, conn);
+			closeResource(rs, ps, conn);
 		}
 	}
 
@@ -382,7 +382,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, ps, conn);
+			closeResource(rs, ps, conn);
 		}
 	}
 
@@ -421,7 +421,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, ps, conn);
+			closeResource(rs, ps, conn);
 		}
 	}
 
@@ -501,7 +501,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, ps, conn);
+			closeResource(rs, ps, conn);
 		}
 		return rows;
 	}
@@ -548,7 +548,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, ps, conn);
+			closeResource(rs, ps, conn);
 		}
 		return list;
 	}
@@ -584,7 +584,7 @@ public final class DB
 		}
 		finally
 		{
-			close(null, cs, conn);
+			closeResource(null, cs, conn);
 		}
 		return ret;
 	}
@@ -765,7 +765,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, ps, conn);
+			closeResource(rs, ps, conn);
 		}
 		return id;
 	}
@@ -789,7 +789,7 @@ public final class DB
 			throw new DataAccessException("Transaction begin exception!");
 		}
 	}
-
+	
 	public void commit()
 	{
 		try
@@ -797,8 +797,22 @@ public final class DB
 			log.debug("Transaction commit");
 			Connection conn = tl.get();
 			conn.commit();
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException("Transaction commit exception!");
+		}
+	}
+
+	public void close()
+	{
+		try
+		{
+			log.debug("Connection close");
+			Connection conn = tl.get();
+			conn.commit();
 			conn.setAutoCommit(true);
-			close(null, null, conn);
+			closeResource(null, null, conn);
 			tl.remove();
 			begintx.set(false);
 		}
@@ -815,10 +829,6 @@ public final class DB
 			log.debug("Transaction rollback");
 			Connection conn = tl.get();
 			conn.rollback();
-			conn.setAutoCommit(true);
-			close(null, null, conn);
-			tl.remove();
-			begintx.set(false);
 		}
 		catch (SQLException e)
 		{
@@ -876,7 +886,7 @@ public final class DB
 		}
 		finally
 		{
-			close(null, null, conn);
+			closeResource(null, null, conn);
 		}
 	}
 
@@ -901,7 +911,7 @@ public final class DB
 		}
 		finally
 		{
-			close(rs, null, conn);
+			closeResource(rs, null, conn);
 		}
 		return result;
 	}
