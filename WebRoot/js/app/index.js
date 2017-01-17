@@ -24,6 +24,12 @@ define(['util'], function(util){
 					rui.init();
 				});
 			});
+			$('#m_db').on('click', function(){
+				util.selectMenu('#m_db');
+				require(['app/db'], function(db) {
+					db.init();
+				});
+			});
 			var current = sessionStorage.getItem('current');
 			if(current){
 				$(current).trigger('click');

@@ -36,16 +36,16 @@ var util = {
 		return $.i18n.prop(key);
 	},
 	tpl : function(view, d) {
-		var cache = sessionStorage.getItem(view);
+		/**var cache = sessionStorage.getItem(view);
 		if(cache){
 			return template.compile(cache)(d);
-		}
+		}**/
 		var tpl = $.ajax({
 			url : view,
 			cache : false,//此处不能缓存
 			async : false
 		}).responseText;
-		sessionStorage.setItem(view, tpl);
+		//sessionStorage.setItem(view, tpl);
 		return template.compile(tpl)(d);
 	},
 	render : function(view, container, d) {

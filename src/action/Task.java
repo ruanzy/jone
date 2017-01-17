@@ -1,19 +1,14 @@
 package action;
 
 import java.util.Map;
-
 import service.TaskService;
-
 import com.rz.common.R;
-import com.rz.dao.DB;
-import com.rz.dao.DBs;
 import com.rz.web.Json;
 import com.rz.web.View;
 import com.rz.web.WebUtil;
 
 public class Task
 {
-	static DB db = DBs.getDB("dbone");;
 	public View list()
 	{
 		Map<String, String> params = WebUtil.getParameters();
