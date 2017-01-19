@@ -96,33 +96,42 @@ public final class DB
 		return conn;
 	}
 
-	private void closeResource(Object... sqlObjs)
+	public static void release(ResultSet rs, Statement st, Connection conn)
 	{
-		try
+		if (rs != null)
 		{
-			for (Object obj : sqlObjs)
+			try
 			{
-				if (obj == null)
-				{
-					continue;
-				}
-				if (obj instanceof Connection)
-				{
-					((Connection) obj).close();
-				}
-				else if (obj instanceof Statement)
-				{
-					((Statement) obj).close();
-				}
-				else if (obj instanceof ResultSet)
-				{
-					((ResultSet) obj).close();
-				}
+				rs.close();
 			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			rs = null;
 		}
-		catch (SQLException e)
+		if (st != null)
 		{
-			throw new DataAccessException(e.getMessage());
+			try
+			{
+				st.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			st = null;
+		}
+		if (conn != null)
+		{
+			try
+			{
+				conn.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -163,7 +172,7 @@ public final class DB
 			}
 			finally
 			{
-				closeResource(ps, conn);
+				release(null, ps, conn);
 			}
 		}
 		return result;
@@ -211,7 +220,7 @@ public final class DB
 			}
 			finally
 			{
-				closeResource(ps, conn);
+				release(null, ps, conn);
 			}
 		}
 	}
@@ -290,9 +299,38 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, ps, conn);
+			release(rs, ps, conn);
 		}
 		return res;
+	}
+
+	public long count(String sql, Object... params)
+	{
+		long count = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			setParams(ps, params);
+			showSQL(sql, params);
+			rs = ps.executeQuery();
+			if (rs.next())
+			{
+				count = Long.valueOf(rs.getObject(1).toString());
+			}
+		}
+		catch (SQLException e)
+		{
+			throw new DataAccessException(e.getMessage());
+		}
+		finally
+		{
+			release(rs, ps, conn);
+		}
+		return count;
 	}
 
 	public void find(String sql, ResultHandler rh)
@@ -317,7 +355,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, ps, conn);
+			release(rs, ps, conn);
 		}
 	}
 
@@ -350,7 +388,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, ps, conn);
+			release(rs, ps, conn);
 		}
 	}
 
@@ -382,7 +420,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, ps, conn);
+			release(rs, ps, conn);
 		}
 	}
 
@@ -421,7 +459,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, ps, conn);
+			release(rs, ps, conn);
 		}
 	}
 
@@ -501,7 +539,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, ps, conn);
+			release(rs, ps, conn);
 		}
 		return rows;
 	}
@@ -548,7 +586,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, ps, conn);
+			release(rs, ps, conn);
 		}
 		return list;
 	}
@@ -584,7 +622,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(null, cs, conn);
+			release(null, cs, conn);
 		}
 		return ret;
 	}
@@ -696,7 +734,8 @@ public final class DB
 	{
 		try
 		{
-			if(null == params){
+			if (null == params)
+			{
 				return;
 			}
 			for (int i = 0; i < params.length; i++)
@@ -765,7 +804,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, ps, conn);
+			release(rs, ps, conn);
 		}
 		return id;
 	}
@@ -789,7 +828,7 @@ public final class DB
 			throw new DataAccessException("Transaction begin exception!");
 		}
 	}
-	
+
 	public void commit()
 	{
 		try
@@ -812,7 +851,7 @@ public final class DB
 			Connection conn = tl.get();
 			conn.commit();
 			conn.setAutoCommit(true);
-			closeResource(null, null, conn);
+			release(null, null, conn);
 			tl.remove();
 			begintx.set(false);
 		}
@@ -886,7 +925,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(null, null, conn);
+			release(null, null, conn);
 		}
 	}
 
@@ -911,7 +950,7 @@ public final class DB
 		}
 		finally
 		{
-			closeResource(rs, null, conn);
+			release(rs, null, conn);
 		}
 		return result;
 	}
