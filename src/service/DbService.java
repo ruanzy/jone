@@ -7,7 +7,7 @@ import com.rz.dao.DBs;
 
 public class DbService
 {
-	static DB db = DBs.getDB("h2");;
+	static DB db = DBs.getDB("h2");
 
 	public static List<R> exe(String sql, int page, int pagesize)
 	{

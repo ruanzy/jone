@@ -1,4 +1,4 @@
-define(['util', 'dialog'], function(util){
+define(['util', 'dialog', 'grid'], function(util){
 	var obj = {
 		init: function(){
 			var me = this;
@@ -37,6 +37,7 @@ define(['util', 'dialog'], function(util){
 			});
 		},
 		exe: function(){
+			var me = this;
 			 var editor = ace.edit("editor");
 			 var sql = editor.session.getTextRange(editor.getSelectionRange());
 			 sql = $.trim(sql);
@@ -48,13 +49,27 @@ define(['util', 'dialog'], function(util){
 					 data: data,
 					 dataType: 'json',
 					 success: function(result){
-						 $('#result').html(JSON.stringify(result, null, 2));
-						 $.noty('执行成功!');
+						 //$('#result').html(JSON.stringify(result, null, 2));
+						 //$.noty('执行成功!');
+						 me.showResult(result);
 					 }
 				 });
 			 }else{
 				 $.alert('请选择要执行的sql');
 			 }
+		},
+		showResult: function(result){
+			 var o = result[0];
+			 var columns = [];
+			 $.each(o, function(k, v) {
+				 var col = { header: k , field: k};
+				 columns.push(col);
+			 });
+			 $('#results').grid({
+				 pagesize : -1,
+				 columns: columns,
+				 data: result
+            });
 		}
 	};
 	return obj;

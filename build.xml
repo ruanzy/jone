@@ -4,6 +4,7 @@
 	<property name="dir.WebRoot" value="${basedir}/WebRoot" />
 	<property name="dir.build" value="build" />
 	<property name="dir.lib" value="${dir.WebRoot}/WEB-INF/lib" />
+	<property name="dir.embed" value="${basedir}/embed" />
 	<property name="dir.build.classes" value="build/classes" />
 	<property name="dir.build.classes2" value="build/classes2" />
 	<property name="dir.dist" value="dist" />
@@ -11,9 +12,8 @@
 	<property name="dir.dist.lib" value="dist/WEB-INF/lib" />
 
 	<path id="lib_classpath">
-		<fileset dir="${dir.lib}">
-			<include name="*.jar" />
-		</fileset>
+		<fileset dir="${dir.lib}" includes="*.jar"/>
+		<fileset dir="${dir.embed}" includes="*.jar"/>
 	</path>
 
 
