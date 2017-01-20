@@ -293,11 +293,11 @@ public class JobManager
 				props.put("org.quartz.dataSource.DS.password", password);
 				props.put("org.quartz.dataSource.DS.maxConnections", 30);
 				sf = new StdSchedulerFactory(props);
-				Scheduler scheduler = sf.getScheduler();
-				if (!scheduler.isShutdown())
-				{
-					scheduler.start();
-				}
+			}
+			Scheduler scheduler = sf.getScheduler();
+			if (!scheduler.isShutdown())
+			{
+				scheduler.start();
 			}
 		}
 		catch (SchedulerException e)
