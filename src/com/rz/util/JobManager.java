@@ -175,6 +175,21 @@ public class JobManager
 			throw new RuntimeException(e.getMessage());
 		}
 	}
+	
+	public static void pauseJobs(String group)
+	{
+		GroupMatcher<JobKey> gm = GroupMatcher.groupEquals(group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			scheduler.pauseJobs(gm);
+		}
+		catch (Exception e)
+		{
+			logger.error("pauseJobs group {} fail.", group);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 
 	public static void resumeJob(String name, String group)
 	{
@@ -197,6 +212,21 @@ public class JobManager
 			throw new RuntimeException(e.getMessage());
 		}
 	}
+	
+	public static void resumeJobs(String name, String group)
+	{
+		GroupMatcher<JobKey> gm = GroupMatcher.groupEquals(group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			scheduler.resumeJobs(gm);
+		}
+		catch (Exception e)
+		{
+			logger.error("pauseJob group {} fail.", group);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 
 	public static void removeJob(String name, String group)
 	{
@@ -216,6 +246,24 @@ public class JobManager
 		catch (Exception e)
 		{
 			logger.error("removeJob job {} fail.", jobKey);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	public static void removeJobs(String group)
+	{
+		GroupMatcher<JobKey> gm = GroupMatcher.groupEquals(group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			Set<JobKey> set = scheduler.getJobKeys(gm);
+			List<JobKey> list = new ArrayList<JobKey>();  
+			list.addAll(set);
+			scheduler.deleteJobs(list);
+		}
+		catch (Exception e)
+		{
+			logger.error("removeJob group {} fail.", group);
 			throw new RuntimeException(e.getMessage());
 		}
 	}
