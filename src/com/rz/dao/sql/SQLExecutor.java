@@ -1,5 +1,6 @@
 package com.rz.dao.sql;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,20 @@ public class SQLExecutor
 		List<Object> _params = _sql.getParams();
 		log.debug(sql);
 		return db.find(sql, _params.toArray());
+	}
+	
+	public ResultSet findBigData(String sqlid, Map<String, String> params)
+	{
+		Map<String, Object> p = new HashMap<String, Object>();
+		if (null != params)
+		{
+			p.putAll(params);
+		}
+		Sql _sql = SQLLoader.getSql(sqlid, p);
+		String sql = _sql.getSql();
+		List<Object> _params = _sql.getParams();
+		log.debug(sql);
+		return db.findBigData(sql, _params.toArray());
 	}
 
 	public R findOne(String sqlid, Map<String, String> params)
