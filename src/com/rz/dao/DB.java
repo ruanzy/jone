@@ -492,7 +492,9 @@ public final class DB
 		try
 		{
 			conn = getConnection();
+			conn.setAutoCommit(false);
 			ps = conn.prepareStatement(sql);
+			ps.setFetchSize(500);
 			if (params != null)
 			{
 				for (int i = 0; i < params.length; i++)
