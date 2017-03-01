@@ -6,6 +6,14 @@
 			"username" : "SA", 
 			"password" : "" 
 		},
+		dbone: { 
+			driverClassName : "com.intple.dbone.Driver", 
+			url : "jdbc:dbone://11.0.0.35:9001/appdmas", 
+			username : "dbone", 
+			password : "dbone",
+			initialSize : "20",
+			maxActive : "50"
+		},
 		"mysql": { 
 			"driverClassName" : "com.mysql.jdbc.Driver", 
 			"url" : "jdbc:mysql://localhost:3306/rzy?useUnicode=true&amp;characterEncoding=utf8", 
