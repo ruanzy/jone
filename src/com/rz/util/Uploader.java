@@ -8,7 +8,9 @@ import java.util.Map;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.FileCleanerCleanup;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileCleaningTracker;
 import com.rz.web.WebUtil;
 
 public class Uploader
@@ -41,8 +43,10 @@ public class Uploader
 		}
 		Uploader uploader = new Uploader();
 		String temp = System.getProperty("java.io.tmpdir");
+		FileCleaningTracker fileCleaningTracker = FileCleanerCleanup.getFileCleaningTracker(WebUtil.Application.get());
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setRepository(new File(temp));
+		factory.setFileCleaningTracker(fileCleaningTracker);
 		factory.setSizeThreshold(1024 * 1024 * 10);
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("utf-8");
