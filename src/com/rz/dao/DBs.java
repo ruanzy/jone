@@ -47,7 +47,7 @@ public class DBs
 		{
 			return dbs.get(dsName);
 		}
-		throw new DataAccessException("DataSource " + dsName + " not found!");
+		return null;
 	}
 
 	public static DB createDB(String dsName, Properties prop)
