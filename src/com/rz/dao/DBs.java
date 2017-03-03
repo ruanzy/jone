@@ -16,17 +16,20 @@ public class DBs
 	{
 		try
 		{
-			Map<String, Object> datasource = (Map<String, Object>) Config.get("datasource");
-			for (Map.Entry<String, Object> entry : datasource.entrySet())
-			{
-				String dsName = entry.getKey();
-				Map<String, Object> v = (Map<String, Object>) entry.getValue();
-				Properties p = new Properties();
-				p.putAll(v);
-				dbp.put(dsName, p);
-				DataSource ds = BasicDataSourceFactory.createDataSource(p);
-				DB db = new DB(ds);
-				dbs.put(dsName, db);
+			Object o = Config.get("datasource");
+			if(o != null){
+				Map<String, Object> datasource = (Map<String, Object>) o;
+				for (Map.Entry<String, Object> entry : datasource.entrySet())
+				{
+					String dsName = entry.getKey();
+					Map<String, Object> v = (Map<String, Object>) entry.getValue();
+					Properties p = new Properties();
+					p.putAll(v);
+					dbp.put(dsName, p);
+					DataSource ds = BasicDataSourceFactory.createDataSource(p);
+					DB db = new DB(ds);
+					dbs.put(dsName, db);
+				}
 			}
 		}
 		catch (Exception e)
