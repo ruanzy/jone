@@ -3,17 +3,28 @@ package com.rz.util;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 import com.rz.dao.DB;
-import com.rz.dao.DBs;
 
 public class LogHandle
 {
-	static LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<String>(5000);
-	static DB db = DBs.getDB("dbone");;
-	static
+	private static LinkedBlockingQueue<OpLog> queue = new LinkedBlockingQueue<OpLog>(5000);
+	private DB db;
+
+	private static class SingletonHolder
+	{
+		private final static LogHandle INSTANCE = new LogHandle();
+	}
+
+	public static LogHandle getInstance(DB db)
+	{
+		SingletonHolder.INSTANCE.db = db;
+		return SingletonHolder.INSTANCE;
+	}
+
+	public LogHandle()
 	{
 		new Thread(new Runnable()
 		{
-			LinkedList<String> logs = new LinkedList<String>();
+			LinkedList<OpLog> logs = new LinkedList<OpLog>();
 
 			public void run()
 			{
@@ -21,19 +32,8 @@ public class LogHandle
 				{
 					try
 					{
-						String log = queue.poll();
-						if (log == null)
-						{
-							if (logs.size() > 0)
-							{
-								write(logs);
-							}
-						}
-						else
-						{
-							logs.add(log);
-						}
-
+						queue.drainTo(logs, 500);
+						write(logs);
 					}
 					catch (Exception e)
 					{
@@ -45,36 +45,58 @@ public class LogHandle
 		}).start();
 	}
 
-	private static void write(LinkedList<String> logs)
+	private void write(LinkedList<OpLog> logs)
 	{
 		try
 		{
 			int rows = 0;
-			db.begin();
-			db.beginBatch("insert into logs(operator, time, operation, memo) values(?,?,?,?)");
-			for (String log : logs)
+			if (logs.size() > 0)
 			{
-				String[] arr = log.split("\\|");
-				db.addBatch(new Object[] { arr[0], arr[1], arr[2], arr[3] });
-				rows++;
-				if (0 == rows % 200)
+				db.begin();
+				db.beginBatch("insert into logs(operator, ip, time, operation, memo) values(?,?,?,?,?)");
+				for (OpLog log : logs)
+				{
+					try
+					{
+						String operator = log.getOperator();
+						String ip = log.getIp();
+						String time = log.getTime();
+						String operation = log.getOperation();
+						String memo = log.getMemo();
+						db.addBatch(new Object[] { operator, ip, time, operation, memo });
+						rows++;
+						if (0 == rows % 200)
+						{
+							db.excuteBatch();
+							db.commit();
+						}
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
+				try
 				{
 					db.excuteBatch();
+					db.commit();
 				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				db.endBatch();
+				db.close();
+				logs.clear();
 			}
-			db.excuteBatch();
-			db.endBatch();
-			db.close();
-			logs.clear();
 		}
 		catch (Exception e)
 		{
-			db.rollback();
 			e.printStackTrace();
 		}
 	}
 
-	public static void put(String log)
+	public void put(OpLog log)
 	{
 		try
 		{
