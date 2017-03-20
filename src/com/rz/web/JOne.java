@@ -92,11 +92,14 @@ public class JOne implements Filter
 		{
 			throw new ServletException(e);
 		}
-		logger.debug("+---------------------------+");
-		logger.debug("|                           |");
-		logger.debug("| JOne Started Successfully |");
-		logger.debug("|                      	  |");
-		logger.debug("+---------------------------+");
+		StringBuffer sb = new StringBuffer();
+		sb.append("\r\n");
+		sb.append("+---------------------------+").append("\r\n");
+		sb.append("|                           |").append("\r\n");
+		sb.append("| JOne Started Successfully |").append("\r\n");
+		sb.append("|                           |").append("\r\n");
+		sb.append("+---------------------------+");
+		logger.debug(sb.toString());
 	}
 
 	private String getActionName(String url)
