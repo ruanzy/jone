@@ -85,13 +85,18 @@ public class JOne implements Filter
 		{
 			this.context = cfg.getServletContext();
 			String basePackage = cfg.getInitParameter("base-package");
+			logger.debug("JOne basePackage {}", basePackage);
 			Container.init(basePackage);
 		}
 		catch (Exception e)
 		{
 			throw new ServletException(e);
 		}
-		logger.debug("JOne Started");
+		logger.debug("+---------------------------+");
+		logger.debug("|                           |");
+		logger.debug("| JOne Started Successfully |");
+		logger.debug("|                      	  |");
+		logger.debug("+---------------------------+");
 	}
 
 	private String getActionName(String url)
