@@ -7,53 +7,50 @@ import com.rz.dao.DB;
 public class LogHandle
 {
 	private static LinkedBlockingQueue<OpLog> queue = new LinkedBlockingQueue<OpLog>(5000);
-	private DB db;
+	private static DB _db;
+	private static boolean start = false;
 
-	private static class SingletonHolder
+	public static void start(DB db)
 	{
-		private final static LogHandle INSTANCE = new LogHandle();
-	}
-
-	public static LogHandle getInstance(DB db)
-	{
-		SingletonHolder.INSTANCE.db = db;
-		return SingletonHolder.INSTANCE;
-	}
-
-	public LogHandle()
-	{
-		new Thread(new Runnable()
+		if (!start)
 		{
-			LinkedList<OpLog> logs = new LinkedList<OpLog>();
-
-			public void run()
+			_db = db;
+			new Thread()
 			{
-				while (true)
+				public void run()
 				{
-					try
+					LinkedList<OpLog> list = new LinkedList<OpLog>();
+					while (true)
 					{
-						queue.drainTo(logs, 500);
-						write(logs);
-					}
-					catch (Exception e)
-					{
-
+						try
+						{
+							queue.drainTo(list, 500);
+							write(list);
+						}
+						catch (Exception e)
+						{
+							e.printStackTrace();
+						}
 					}
 				}
-			}
-
-		}).start();
+			}.start();
+		}
 	}
 
-	private void write(LinkedList<OpLog> logs)
+	public static void stop()
+	{
+		_db = null;
+	}
+
+	private static void write(LinkedList<OpLog> logs)
 	{
 		try
 		{
 			int rows = 0;
 			if (logs.size() > 0)
 			{
-				db.begin();
-				db.beginBatch("insert into logs(operator, ip, time, operation, memo) values(?,?,?,?,?)");
+				_db.begin();
+				_db.beginBatch("insert into logs(operator, ip, time, operation, memo) values(?,?,?,?,?)");
 				for (OpLog log : logs)
 				{
 					try
@@ -63,12 +60,12 @@ public class LogHandle
 						String time = log.getTime();
 						String operation = log.getOperation();
 						String memo = log.getMemo();
-						db.addBatch(new Object[] { operator, ip, time, operation, memo });
+						_db.addBatch(new Object[] { operator, ip, time, operation, memo });
 						rows++;
-						if (0 == rows % 200)
+						if (0 == rows % 500)
 						{
-							db.excuteBatch();
-							db.commit();
+							_db.excuteBatch();
+							_db.commit();
 						}
 					}
 					catch (Exception e)
@@ -78,15 +75,15 @@ public class LogHandle
 				}
 				try
 				{
-					db.excuteBatch();
-					db.commit();
+					_db.excuteBatch();
+					_db.commit();
 				}
 				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
-				db.endBatch();
-				db.close();
+				_db.endBatch();
+				_db.close();
 				logs.clear();
 			}
 		}
@@ -96,7 +93,7 @@ public class LogHandle
 		}
 	}
 
-	public void put(OpLog log)
+	public static void put(OpLog log)
 	{
 		try
 		{
@@ -107,5 +104,4 @@ public class LogHandle
 			e.printStackTrace();
 		}
 	}
-
 }
