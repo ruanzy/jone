@@ -8,7 +8,7 @@ import com.rz.web.Interceptor;
 public class LoginInterceptor2 implements Interceptor
 {
 
-	public void intercept(Action ai)
+	public Object intercept(Action ai)
 	{
 		System.out.println("LoginInterceptor2 before");
 		try
@@ -27,6 +27,6 @@ public class LoginInterceptor2 implements Interceptor
 			e.printStackTrace();
 		}
 		System.out.println("LoginInterceptor2 after");
+		return null;
 	}
-
 }

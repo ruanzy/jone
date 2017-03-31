@@ -9,7 +9,7 @@ import com.rz.web.WebUtil;
 public class LoginInterceptor implements Interceptor
 {
 
-	public void intercept(Action ai)
+	public Object intercept(Action ai)
 	{
 		System.out.println("LoginInterceptor before");
 		try
@@ -36,6 +36,7 @@ public class LoginInterceptor implements Interceptor
 		logs.append(ip).append("|");
 		logs.append(ua);
 		System.out.println(logs.toString());
+		return null;
 	}
 
 }

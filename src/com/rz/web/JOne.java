@@ -2,6 +2,7 @@ package com.rz.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -50,7 +51,25 @@ public class JOne implements Filter
 			}
 			String name = getActionName(url);
 			String method = getActionMethod(url);
-			new Action(name, method).invoke();
+			Object a = Container.findAction(name);
+			if (a == null)
+			{
+				String error = "Action " + name + " not found!";
+				throw new ClassNotFoundException(error);
+			}
+			Method m = a.getClass().getMethod(method);
+			if (m == null)
+			{
+				String error = "Method " + method + " not found!";
+				throw new NoSuchMethodException(error);
+			}
+			Object[] ps = new Object[] { name, method };
+			logger.debug("Action={}, method={}", ps);
+			Object result = new Action(a, m).invoke();
+			if (result instanceof View)
+			{
+				((View) result).handle();
+			}
 		}
 		catch (InvocationTargetException e)
 		{
