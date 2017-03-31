@@ -2,6 +2,7 @@ package com.rz.web;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -10,16 +11,18 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.rz.common.R;
 
 public class WebUtil
@@ -269,10 +272,12 @@ public class WebUtil
 		StringBuilder sb = new StringBuilder();
 		try
 		{
-			BufferedReader reader =  WebUtil.Request.get().getReader();
-			String str = null;
-		    while((str = reader.readLine()) != null){
-				sb.append(str);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					WebUtil.Request.get().getInputStream()));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
 			}
 		}
 		catch (IOException e)
@@ -282,10 +287,11 @@ public class WebUtil
 		return sb.toString();
 	}
 	
-	public static JSONObject getJSONObject()
+	public static Map<String, Object> getRequesBody()
 	{
 		String json = getRequestPayload();
-		return JSON.parseObject(json);
+		Map<String, Object> o = JSON.parseObject(json);
+		return o;
 	}
 
 	public static String getParameter(String name)
