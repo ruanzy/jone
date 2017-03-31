@@ -293,6 +293,13 @@ public class WebUtil
 		Map<String, Object> o = JSON.parseObject(json);
 		return o;
 	}
+	
+	public static <T> T getRequesBody(Class<T> cls)
+	{
+		String json = getRequestPayload();
+		T t = JSON.parseObject(json, cls);
+		return t;
+	}
 
 	public static String getParameter(String name)
 	{
