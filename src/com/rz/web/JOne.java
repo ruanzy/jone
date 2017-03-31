@@ -75,12 +75,12 @@ public class JOne implements Filter
 		{
 			Throwable t = e.getTargetException();
 			t.printStackTrace();
-			throw new ServletException(t);
+			response.sendError(500, t.toString());
 		}
-		catch (Throwable t)
+		catch (Exception e)
 		{
-			t.printStackTrace();
-			throw new ServletException(t);
+			e.printStackTrace();
+			response.sendError(500, e.toString());
 		}
 		finally
 		{
