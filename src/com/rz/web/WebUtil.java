@@ -1,5 +1,6 @@
 package com.rz.web;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.rz.common.R;
 
 public class WebUtil
@@ -244,7 +247,7 @@ public class WebUtil
 		}
 		return ps;
 	}
-	
+
 	public static R getParams()
 	{
 		R ps = new R();
@@ -259,6 +262,30 @@ public class WebUtil
 			}
 		}
 		return ps;
+	}
+
+	private static String getRequestPayload()
+	{
+		StringBuilder sb = new StringBuilder();
+		try
+		{
+			BufferedReader reader =  WebUtil.Request.get().getReader();
+			String str = null;
+		    while((str = reader.readLine()) != null){
+				sb.append(str);
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+	
+	public static JSONObject getJSONObject()
+	{
+		String json = getRequestPayload();
+		return JSON.parseObject(json);
 	}
 
 	public static String getParameter(String name)
