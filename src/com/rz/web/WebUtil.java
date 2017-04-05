@@ -1,6 +1,8 @@
 package com.rz.web;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -11,17 +13,16 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.alibaba.fastjson.JSON;
 import com.rz.common.R;
 
@@ -414,5 +415,34 @@ public class WebUtil
 	{
 		String token = getToken();
 		return TokenUtil.getUser(token);
+	}
+	
+	public static void download(File file)
+	{
+		String fileName = FilenameUtils.getName(file.getPath());
+		WebUtil.Response.get().setHeader("Content-type", "text/plain;charset=UTF-8");
+		WebUtil.Response.get().setHeader("Content-Disposition", "attachment; filename=" + fileName);
+		WebUtil.Response.get().setCharacterEncoding("UTF-8");
+		OutputStream pw = null;
+		try
+		{
+			pw = WebUtil.Response.get().getOutputStream();
+			IOUtils.copy(new FileInputStream(file), pw);
+		}
+		catch (Exception e)
+		{
+
+		}
+		finally
+		{
+			try
+			{
+				pw.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 }
