@@ -6,7 +6,7 @@ import java.util.Map;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
 import com.mongodb.BasicDBObject;
-import com.rz.dao.MongoDao;
+import com.rz.data.mongo.MongoUtil;
 
 public abstract class MongoAppender extends UnsynchronizedAppenderBase<ILoggingEvent>
 {
@@ -33,7 +33,7 @@ public abstract class MongoAppender extends UnsynchronizedAppenderBase<ILoggingE
 		{
 			logEntry.append(key, data.get(key));
 		}
-		MongoDao.insert(collection, logEntry);
+		MongoUtil.insert(collection, logEntry);
 	}
 
 	@Override

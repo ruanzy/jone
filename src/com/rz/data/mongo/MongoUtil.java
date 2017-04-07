@@ -1,17 +1,23 @@
-package com.rz.dao;
+package com.rz.data.mongo;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MapReduceOutput;
 import com.mongodb.Mongo;
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.gridfs.GridFSInputFile;
+import com.rz.data.DataAccessException;
 
-public final class MongoDao
+public final class MongoUtil
 {
 	static DB db = null;
 	static
@@ -20,10 +26,10 @@ public final class MongoDao
 		Properties prop = new Properties();
 		try
 		{
-			is = MongoDao.class.getClassLoader().getResourceAsStream("dao.properties");
+			is = MongoUtil.class.getClassLoader().getResourceAsStream("mongo.properties");
 			if (is == null)
 			{
-				is = new FileInputStream("dao.properties");
+				is = new FileInputStream("mongo.properties");
 			}
 			prop.load(is);
 			String ip = prop.getProperty("mongo.ip", "127.0.0.1");
@@ -111,5 +117,45 @@ public final class MongoDao
 		DBCollection resultColl = mapReduceOutput.getOutputCollection();
 		DBCursor cursor = resultColl.find();
 		return cursor;
+	}
+	
+	public static void saveFile(File file) throws Exception
+	{
+		GridFS gridFS = null;
+		gridFS = new GridFS(db);
+		GridFSInputFile mongofile = gridFS.createFile(file);
+		mongofile.save();
+	}
+
+	public static void readFile() throws Exception
+	{
+		GridFS gridFs = null;
+		gridFs = new GridFS(db);
+		DBObject query = new BasicDBObject();
+		List<GridFSDBFile> listfiles = gridFs.find(query);
+		GridFSDBFile gridDBFile = listfiles.get(1);
+
+		// 获得其中的文件名
+		// 注意 ： 不是fs中的表的列名，而是根据调试gridDBFile中的属性而来
+		String fileName = (String) gridDBFile.get("filename");
+
+		String path = (String) gridDBFile.get("path");
+
+		System.out.println("从Mongodb获得文件名为：" + fileName);
+
+		System.out.println("path：" + path);
+
+		File writeFile = new File(fileName);
+		if (!writeFile.exists())
+		{
+			writeFile.createNewFile();
+		}
+
+		// 把数据写入磁盘中
+		// 查看相应的提示
+		gridDBFile.writeTo("d:/upload/a222.xml");
+		// 写入文件中
+		gridDBFile.writeTo(writeFile);
+
 	}
 }
