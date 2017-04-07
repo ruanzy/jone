@@ -751,11 +751,11 @@ public final class DB
 				{
 					returnSQL.append(subSQL[subSQL.length - 1]);
 				}
-				log.debug("SQL==>" + returnSQL.toString());
+				log.debug(returnSQL.toString());
 			}
 			else
 			{
-				log.debug("SQL==>" + sql);
+				log.debug(sql);
 			}
 		}
 	}

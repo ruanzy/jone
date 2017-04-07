@@ -27,14 +27,14 @@
 			<fileset dir="${dir.src}">
 				<include name="com/rz/web/**" />
 				<include name="com/rz/common/**" />
-				<include name="com/rz/dao/**" />
+				<include name="com/rz/data/**" />
 				<include name="com/rz/util/**" />
 			</fileset>
 		</zip>
 	</target>
 
 	<target name="compile" depends="compile2">
-		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/web/**,com/rz/util/**,com/rz/dao/**,com/rz/common/**" debug="on" debuglevel="lines,vars,source">
+		<javac srcdir="${dir.src}" destdir="${dir.build.classes}" includeantruntime="on" includes="com/rz/web/**,com/rz/util/**,com/rz/data/**,com/rz/common/**" debug="on" debuglevel="lines,vars,source">
 			<classpath refid="lib_classpath" />
 		</javac>
 		<jar destfile="${dir.dist}/JOne.jar" basedir="${dir.build.classes}" />

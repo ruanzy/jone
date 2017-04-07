@@ -11,7 +11,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
@@ -25,7 +24,7 @@ public class SQLLoader {
 		try {
 			StringTemplateResourceLoader resourceLoader = new StringTemplateResourceLoader();
 			Configuration cfg = Configuration.defaultConfiguration();
-			cfg.setEngine("com.rz.dao.sql.SQLTemplateEngine");
+			cfg.setEngine("com.rz.data.db.sql.SQLTemplateEngine");
 			cfg.setPlaceholderStart("#{");
 			cfg.setPlaceholderEnd("}");
 			cfg.setStatementStart("@");
