@@ -1,7 +1,7 @@
 package com.rz.service;
 
 import com.rz.aop2.Advice;
-import com.rz.dao.DB;
+import com.rz.data.db.DB;
 
 public class TxAdvice implements Advice
 {

@@ -7,7 +7,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.proxy.NoOp;
-import com.rz.dao.DB;
+import com.rz.data.db.DB;
 import com.rz.tx.Transaction;
 
 class ServiceProxy

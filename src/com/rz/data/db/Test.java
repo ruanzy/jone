@@ -1,12 +1,11 @@
-package com.rz.dao;
+package com.rz.data.db;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.rz.common.R;
-import com.rz.dao.sql.SQLExecutor;
+import com.rz.data.db.sql.SQLExecutor;
 
 public class Test
 {

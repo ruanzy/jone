@@ -1,6 +1,6 @@
 package com.rz.util;
 
-import com.rz.dao.DBMeta;
+import com.rz.data.db.DBMeta;
 
 public class ExportTask implements Runnable
 {

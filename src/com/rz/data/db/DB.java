@@ -1,4 +1,4 @@
-package com.rz.dao;
+package com.rz.data.db;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -24,6 +24,7 @@ import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.common.R;
+import com.rz.data.DataAccessException;
 
 public final class DB
 {

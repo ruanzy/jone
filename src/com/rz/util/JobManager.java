@@ -26,7 +26,7 @@ import org.quartz.impl.matchers.KeyMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.common.R;
-import com.rz.dao.DB;
+import com.rz.data.db.DB;
 
 public class JobManager
 {

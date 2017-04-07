@@ -1,10 +1,11 @@
-package com.rz.dao;
+package com.rz.data.db;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
+import com.rz.data.DataAccessException;
 import com.rz.util.Config;
 
 @SuppressWarnings("unchecked")

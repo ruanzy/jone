@@ -2,8 +2,8 @@ package service;
 
 import java.util.List;
 import com.rz.common.R;
-import com.rz.dao.DB;
-import com.rz.dao.DBs;
+import com.rz.data.db.DB;
+import com.rz.data.db.DBs;
 
 public class DbService
 {

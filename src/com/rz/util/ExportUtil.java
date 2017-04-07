@@ -3,7 +3,7 @@ package com.rz.util;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import com.rz.dao.DBMeta;
+import com.rz.data.db.DBMeta;
 
 public class ExportUtil
 {

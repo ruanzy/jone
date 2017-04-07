@@ -3,7 +3,7 @@ package com.rz.sql;
 import java.util.ArrayList;
 import java.util.List;
 import com.rz.common.R;
-import com.rz.dao.DB;
+import com.rz.data.db.DB;
 
 public class PageHelper
 {

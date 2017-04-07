@@ -5,9 +5,9 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.dao.DB;
-import com.rz.dao.DBs;
-import com.rz.dao.DataAccessException;
+import com.rz.data.DataAccessException;
+import com.rz.data.db.DB;
+import com.rz.data.db.DBs;
 import com.rz.web.Plugin;
 
 public class MyPlugin implements Plugin

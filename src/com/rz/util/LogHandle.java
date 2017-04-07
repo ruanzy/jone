@@ -2,7 +2,7 @@ package com.rz.util;
 
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
-import com.rz.dao.DB;
+import com.rz.data.db.DB;
 
 public class LogHandle
 {

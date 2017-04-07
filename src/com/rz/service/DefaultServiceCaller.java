@@ -6,7 +6,7 @@ import java.net.InetAddress;
 import org.apache.commons.beanutils.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.dao.DB;
+import com.rz.data.db.DB;
 import com.rz.tx.Transaction;
 import com.rz.web.WebUtil;
 

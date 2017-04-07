@@ -1,4 +1,4 @@
-package com.rz.dao;
+package com.rz.data.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

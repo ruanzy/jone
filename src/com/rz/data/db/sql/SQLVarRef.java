@@ -1,4 +1,4 @@
-package com.rz.dao.sql;
+package com.rz.data.db.sql;
 
 import org.beetl.core.Context;
 import org.beetl.core.exception.BeetlException;

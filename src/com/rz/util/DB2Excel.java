@@ -11,8 +11,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DateUtil;
-import com.rz.dao.DB;
-import com.rz.dao.ResultHandler;
+import com.rz.data.db.DB;
+import com.rz.data.db.ResultHandler;
 
 public class DB2Excel
 {

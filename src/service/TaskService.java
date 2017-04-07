@@ -3,11 +3,10 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import com.rz.common.R;
-import com.rz.dao.DB;
-import com.rz.dao.DBs;
-import com.rz.dao.sql.SQLExecutor;
+import com.rz.data.db.DB;
+import com.rz.data.db.DBs;
+import com.rz.data.db.sql.SQLExecutor;
 
 public class TaskService {
 	static DB db = DBs.getDB("dbone");;

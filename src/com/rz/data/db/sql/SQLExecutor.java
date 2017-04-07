@@ -1,4 +1,4 @@
-package com.rz.dao.sql;
+package com.rz.data.db.sql;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.rz.common.R;
-import com.rz.dao.DB;
+import com.rz.data.db.DB;
 
 public class SQLExecutor
 {

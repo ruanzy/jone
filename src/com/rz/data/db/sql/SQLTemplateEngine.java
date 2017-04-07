@@ -1,4 +1,4 @@
-package com.rz.dao.sql;
+package com.rz.data.db.sql;
 
 import java.io.Reader;
 import java.util.Map;
