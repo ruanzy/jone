@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rz.util.Scaner;
+import com.rz.util.ClassUtil;
 
 public class Container
 {
@@ -39,7 +39,7 @@ public class Container
 		String pck = getPackage("action");
 		try
 		{
-			Set<Class<?>> _actions = Scaner.scan(pck);
+			Set<Class<?>> _actions = ClassUtil.scan(pck);
 			if (_actions.size() > 0)
 			{
 				log.debug("Loading actions in " + pck);
@@ -63,7 +63,7 @@ public class Container
 		String pck = getPackage("interceptor");
 		try
 		{
-			Set<Class<?>> _interceptors = Scaner.scan(pck);
+			Set<Class<?>> _interceptors = ClassUtil.scan(pck);
 			if (_interceptors.size() > 0)
 			{
 				log.debug("Loading interceptors in " + pck + " package");
@@ -92,7 +92,7 @@ public class Container
 		String pck = getPackage("plugin");
 		try
 		{
-			Set<Class<?>> _plugins = Scaner.scan(pck);
+			Set<Class<?>> _plugins = ClassUtil.scan(pck);
 			if (_plugins.size() > 0)
 			{
 				log.debug("Loading plugins in " + pck);
