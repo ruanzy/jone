@@ -2,7 +2,6 @@ package com.rz.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.UnknownHostException;
 import java.util.List;
 import com.mongodb.BasicDBObject;
@@ -62,13 +61,12 @@ public class MongoUtil
 		LuceneUtil.indexFile(indexDir, readFile);
 	}
 
-	public static void saveFile(InputStream in, FileItem fileItem)
+	public static void saveFile(File file) throws Exception
 	{
 		DB db = mongo.getDB("testGridFS");
 		GridFS gridFS = null;
 		gridFS = new GridFS(db);
-		GridFSInputFile mongofile = gridFS.createFile(in);
-		mongofile.putAll(fileItem.toMap());
+		GridFSInputFile mongofile = gridFS.createFile(file);
 		mongofile.save();
 	}
 
