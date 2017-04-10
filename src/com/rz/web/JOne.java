@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.alibaba.fastjson.JSON;
 
 public class JOne implements Filter
 {
@@ -49,8 +50,10 @@ public class JOne implements Filter
 				chain.doFilter(request, response);
 				return;
 			}
-			String name = getActionName(url);
-			String method = getActionMethod(url);
+			String[] parts = url.split("/");
+			String str = parts[0];
+			String name = Character.toTitleCase(str.charAt(0)) + str.substring(1);
+			String method = (parts.length > 1) ? parts[1] : "execute";
 			Object a = Container.findAction(name);
 			if (a == null)
 			{
@@ -66,9 +69,19 @@ public class JOne implements Filter
 			Object[] ps = new Object[] { name, method };
 			logger.debug("Action={}, method={}", ps);
 			Object result = new Action(a, m).invoke();
-			if (result instanceof View)
+			NoRender nr = m.getAnnotation(NoRender.class);
+			if (nr == null)
 			{
-				((View) result).handle();
+				if (result == null)
+				{
+					response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+					response.flushBuffer();
+				}
+				else
+				{
+					response.setContentType("application/json;charset=UTF-8");
+					response.getWriter().print(JSON.toJSONString(result));
+				}
 			}
 		}
 		catch (InvocationTargetException e)
@@ -119,18 +132,5 @@ public class JOne implements Filter
 		sb.append("|                           |").append("\r\n");
 		sb.append("+---------------------------+");
 		logger.debug(sb.toString());
-	}
-
-	private String getActionName(String url)
-	{
-		String[] parts = url.split("/");
-		String str = parts[0];
-		return Character.toTitleCase(str.charAt(0)) + str.substring(1);
-	}
-
-	private String getActionMethod(String url)
-	{
-		String[] parts = url.split("/");
-		return (parts.length > 1) ? parts[1] : "execute";
 	}
 }
