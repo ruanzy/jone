@@ -1,7 +1,14 @@
 package com.rz.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
+import org.apache.commons.lang.time.DateUtils;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import com.rz.data.db.DB;
 
 public class LogHandle
@@ -35,6 +42,7 @@ public class LogHandle
 				}
 			}.start();
 		}
+		JobManager.addJob("ClearLog", "ClearLogs", "0 59 23 L * ?", ClearLog.class, new HashMap<String, Object>(), true);
 	}
 
 	public static void stop()
@@ -104,4 +112,28 @@ public class LogHandle
 			e.printStackTrace();
 		}
 	}
+	
+	public static void clear()
+	{
+		try
+		{
+			String sql = "delete from logs where time < ?";
+			Date date = DateUtils.addDays(new Date(), -30);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			_db.update(sql, sdf.format(date));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+}
+class ClearLog implements Job{
+
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException
+	{
+		LogHandle.clear();
+	}
+	
 }
