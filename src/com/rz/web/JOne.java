@@ -88,7 +88,7 @@ public class JOne implements Filter
 		{
 			Throwable t = e.getTargetException();
 			t.printStackTrace();
-			response.sendError(500, t.toString());
+			response.sendError(500, t.getCause().getMessage());
 		}
 		catch (Exception e)
 		{
