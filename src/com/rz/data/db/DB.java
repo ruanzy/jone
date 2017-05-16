@@ -178,6 +178,58 @@ public final class DB
 		}
 		return result;
 	}
+		
+	public int insert(String sql, Object... params)
+	{
+		int result = 0;
+		Boolean flag = begintx.get();
+		if (flag != null && flag.booleanValue())
+		{
+			try
+			{
+				Connection conn = tl.get();
+				PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				setParams(ps, params);
+				showSQL(sql, params);
+				int row = ps.executeUpdate();
+				ResultSet rs = ps.getGeneratedKeys();  
+			    if (rs.next()) {  
+			    	result = rs.getInt(row);
+			    }  
+			}
+			catch (SQLException e)
+			{
+				throw new DataAccessException(e.getMessage());
+			}
+		}
+		else
+		{
+			Connection conn = null;
+			PreparedStatement ps = null;
+			try
+			{
+				conn = getConnection();
+				ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				setParams(ps, params);
+				showSQL(sql, params);
+				result = ps.executeUpdate();
+				int row = ps.executeUpdate();
+				ResultSet rs = ps.getGeneratedKeys();  
+			    if (rs.next()) {  
+			    	result = rs.getInt(row);
+			    }
+			}
+			catch (SQLException e)
+			{
+				throw new DataAccessException(e.getMessage());
+			}
+			finally
+			{
+				release(null, ps, conn);
+			}
+		}
+		return result;
+	}
 
 	public void insertBatch(String sql, Object[][] params)
 	{
