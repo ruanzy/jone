@@ -178,7 +178,7 @@ public final class DB
 		}
 		return result;
 	}
-		
+
 	public int insert(String sql, Object... params)
 	{
 		int result = 0;
@@ -192,10 +192,11 @@ public final class DB
 				setParams(ps, params);
 				showSQL(sql, params);
 				int row = ps.executeUpdate();
-				ResultSet rs = ps.getGeneratedKeys();  
-			    if (rs.next()) {  
-			    	result = rs.getInt(row);
-			    }  
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next())
+				{
+					result = rs.getInt(row);
+				}
 			}
 			catch (SQLException e)
 			{
@@ -213,10 +214,11 @@ public final class DB
 				setParams(ps, params);
 				showSQL(sql, params);
 				int row = ps.executeUpdate();
-				ResultSet rs = ps.getGeneratedKeys();  
-			    if (rs.next()) {  
-			    	result = rs.getInt(row);
-			    }
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next())
+				{
+					result = rs.getInt(row);
+				}
 			}
 			catch (SQLException e)
 			{
@@ -535,7 +537,7 @@ public final class DB
 
 		});
 	}
-	
+
 	public ResultSet findBigData(String sql, Object... params)
 	{
 		Connection conn = null;
@@ -828,6 +830,10 @@ public final class DB
 					{
 						java.sql.Timestamp ts = new java.sql.Timestamp(((java.util.Date) o).getTime());
 						ps.setTimestamp(i + 1, ts);
+					}
+					else if (o instanceof java.sql.Clob)
+					{
+						ps.setCharacterStream(i + 1, ((java.sql.Clob) o).getCharacterStream());
 					}
 					else
 					{
