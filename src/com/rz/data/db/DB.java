@@ -212,7 +212,6 @@ public final class DB
 				ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				setParams(ps, params);
 				showSQL(sql, params);
-				result = ps.executeUpdate();
 				int row = ps.executeUpdate();
 				ResultSet rs = ps.getGeneratedKeys();  
 			    if (rs.next()) {  
