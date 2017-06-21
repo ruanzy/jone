@@ -30,6 +30,9 @@ public class R extends HashMap<String, Object>
 		if(o == null){
 			return null;
 		}
+		if(o instanceof String){
+			return o.toString();
+		}
 		StringBuffer sb = new StringBuffer();
 		Reader is = null;
 		try
