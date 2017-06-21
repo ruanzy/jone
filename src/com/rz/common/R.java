@@ -27,6 +27,9 @@ public class R extends HashMap<String, Object>
 	public String getClob(String columnName)
 	{
 		Object o = this.get(columnName);
+		if(o == null){
+			return null;
+		}
 		StringBuffer sb = new StringBuffer();
 		Reader is = null;
 		try

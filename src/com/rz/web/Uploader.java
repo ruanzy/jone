@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import com.rz.web.WebUtil;
 
 public class Uploader
 {
@@ -41,7 +39,7 @@ public class Uploader
 	public static void init(long maxSize)
 	{
 		upload = new ServletFileUpload(new DiskFileItemFactory());
-		upload.setHeaderEncoding("utf-8");
+		upload.setHeaderEncoding("UTF-8");
 		if (maxSize > 0)
 		{
 			upload.setSizeMax(maxSize);
@@ -59,7 +57,7 @@ public class Uploader
 				if (item.isFormField())
 				{
 					String name = item.getFieldName();
-					String v = item.getString();
+					String v = item.getString("UTF-8");
 					uploader.parameters.put(name, v);
 				}
 				else
@@ -68,7 +66,7 @@ public class Uploader
 				}
 			}
 		}
-		catch (FileUploadException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
