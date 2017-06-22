@@ -11,7 +11,8 @@ public class R extends HashMap<String, Object>
 
 	public String getString(String columnName)
 	{
-		return String.valueOf(this.get(columnName));
+		Object o = this.get(columnName);
+		return (o == null) ? null : String.valueOf(this.get(columnName));
 	}
 
 	public Integer getInt(String columnName)
@@ -27,10 +28,12 @@ public class R extends HashMap<String, Object>
 	public String getClob(String columnName)
 	{
 		Object o = this.get(columnName);
-		if(o == null){
+		if (o == null)
+		{
 			return null;
 		}
-		if(o instanceof String){
+		if (o instanceof String)
+		{
 			return o.toString();
 		}
 		StringBuffer sb = new StringBuffer();
