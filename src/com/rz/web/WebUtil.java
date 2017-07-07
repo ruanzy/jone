@@ -13,16 +13,20 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSON;
 import com.rz.common.R;
 
@@ -415,6 +419,11 @@ public class WebUtil
 	{
 		String token = getToken();
 		return TokenUtil.getUser(token);
+	}
+	
+	public static List<FileItem> getFiles()
+	{
+		return UploadHelper.getFiles();
 	}
 	
 	public static void download(File file)
