@@ -3,10 +3,13 @@ package com.rz.data.db;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 import javax.sql.DataSource;
+
 import org.apache.commons.dbcp.BasicDataSourceFactory;
+
 import com.rz.data.DataAccessException;
-import com.rz.util.Config;
+import com.rz.util.Cfg;
 
 @SuppressWarnings("unchecked")
 public class DBs
@@ -17,7 +20,7 @@ public class DBs
 	{
 		try
 		{
-			Object o = Config.get("datasource");
+			Object o = Cfg.get("datasource");
 			if(o != null){
 				Map<String, Object> datasource = (Map<String, Object>) o;
 				for (Map.Entry<String, Object> entry : datasource.entrySet())

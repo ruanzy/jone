@@ -9,7 +9,7 @@ import org.apache.commons.io.IOUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
-public class Config
+public class Cfg
 {
 	private static Map<String, Object> cfg;
 	static
