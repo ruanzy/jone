@@ -1,1 +1,10 @@
+/action/
+/cfg.json
 /com/
+/init.sql
+/interceptor/
+/logback.xml
+/plugin/
+/rzy.sql
+/service/
+/sql/
