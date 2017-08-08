@@ -24,7 +24,8 @@ public class SQLLoader {
 		try {
 			StringTemplateResourceLoader resourceLoader = new StringTemplateResourceLoader();
 			Configuration cfg = Configuration.defaultConfiguration();
-			cfg.setEngine("com.rz.data.db.sql.SQLTemplateEngine");
+			String pck = SQLLoader.class.getPackage().getName();
+			cfg.setEngine(pck + ".SQLTemplateEngine");
 			cfg.setPlaceholderStart("#{");
 			cfg.setPlaceholderEnd("}");
 			cfg.setStatementStart("@");
