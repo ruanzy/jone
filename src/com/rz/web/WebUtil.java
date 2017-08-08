@@ -310,6 +310,11 @@ public class WebUtil
 	{
 		return WebUtil.Request.get().getParameter(name);
 	}
+	
+	public static String param(String name)
+	{
+		return WebUtil.Request.get().getParameter(name);
+	}
 
 	public static String getIP()
 	{
