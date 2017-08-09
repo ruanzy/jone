@@ -19,6 +19,11 @@ public class R extends HashMap<String, Object>
 	{
 		return Integer.valueOf(this.get(columnName).toString());
 	}
+	
+	public Double getDouble(String columnName)
+	{
+		return Double.valueOf(this.get(columnName).toString());
+	}
 
 	public Long getLong(String columnName)
 	{

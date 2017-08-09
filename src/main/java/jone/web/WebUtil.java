@@ -257,7 +257,7 @@ public class WebUtil
 		return ps;
 	}
 
-	public static R getParams()
+	public static R params()
 	{
 		R ps = new R();
 		Enumeration<?> em = WebUtil.Request.get().getParameterNames();
