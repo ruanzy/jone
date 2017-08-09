@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import jone.common.R;
+import jone.R;
 import jone.data.db.sql.SQLExecutor;
 
 public class Test

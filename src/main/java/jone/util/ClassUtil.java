@@ -45,14 +45,6 @@ public class ClassUtil
 //		return null;
 //	}
 	
-
-	/**
-	 * 搜索目录
-	 * 
-	 * @param <T>
-	 *            返回的lcass类型
-	 * @return 搜索到的class
-	 */
 	public static Set<Class<?>> scan(String packageName) {
 		Set<Class<?>> classSet = new HashSet<Class<?>>();
 		Set<String> classFileSet = findFiles(packageName, "*.class");
@@ -179,8 +171,8 @@ public class ClassUtil
 	 * @param pattern
 	 *            通配符模式
 	 * @param str
-	 *            待匹配的字符串 <a href="http://my.oschina.net/u/556800"
-	 *            target="_blank" rel="nofollow">@return</a>
+	 *            
+	 *            
 	 *            匹配成功则返回true，否则返回false
 	 */
 	private static boolean wildcardMatch(String pattern, String str) {
@@ -216,17 +208,6 @@ public class ClassUtil
 		return strIndex == strLength;
 	}
 
-	/**
-	 * find jar file
-	 * 
-	 * @param filePath
-	 *            文件路径
-	 * @param packageName
-	 *            包名
-	 * @return list
-	 * @throws IOException
-	 *             文件读取异常
-	 */
 	private static Set<String> findJarFile(String filePath, String packageName)
 			throws IOException {
 		JarFile localJarFile = new JarFile(new File(filePath));

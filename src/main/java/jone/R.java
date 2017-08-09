@@ -1,4 +1,4 @@
-package jone.common;
+package jone;
 
 import java.io.BufferedReader;
 import java.io.Reader;

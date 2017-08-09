@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
-import jone.common.R;
+import jone.R;
 import jone.data.DataAccessException;
 
 import org.apache.commons.dbcp.BasicDataSource;
