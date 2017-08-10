@@ -77,7 +77,11 @@ public class JOne implements Filter
 					response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 					response.flushBuffer();
 				}
-				else
+				else if(result instanceof String)
+				{
+					response.setContentType("application/json;charset=UTF-8");
+					response.getWriter().print(result);
+				}else
 				{
 					response.setContentType("application/json;charset=UTF-8");
 					response.getWriter().print(JSON.toJSONString(result));
