@@ -2,6 +2,7 @@ package jone;
 
 import java.io.BufferedReader;
 import java.io.Reader;
+import java.math.BigDecimal;
 import java.sql.Clob;
 import java.util.HashMap;
 
@@ -28,6 +29,11 @@ public class R extends HashMap<String, Object>
 	public Long getLong(String columnName)
 	{
 		return Long.valueOf(this.get(columnName).toString());
+	}
+
+	public BigDecimal getBigDecimal(String columnName)
+	{
+		return new BigDecimal(this.get(columnName).toString());
 	}
 
 	public String getClob(String columnName)
