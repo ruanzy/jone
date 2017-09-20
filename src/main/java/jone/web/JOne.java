@@ -128,7 +128,7 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		InputStream is = this.getClass().getResourceAsStream("/logo.txt");
+		InputStream is = this.getClass().getResourceAsStream("/jone/logo.txt");
 		String logo = "";
 		try
 		{
