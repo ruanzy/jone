@@ -1,9 +1,11 @@
 package jone.web;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,8 +15,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSON;
 
 public class JOne implements Filter
@@ -22,8 +27,8 @@ public class JOne implements Filter
 	static final Logger logger = LoggerFactory.getLogger(JOne.class);
 	private ServletContext context;
 
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
-			ServletException
+	public void doFilter(ServletRequest req, ServletResponse res,
+			FilterChain chain) throws IOException, ServletException
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
@@ -52,7 +57,8 @@ public class JOne implements Filter
 			}
 			String[] parts = url.split("/");
 			String str = parts[0];
-			String name = Character.toTitleCase(str.charAt(0)) + str.substring(1);
+			String name = Character.toTitleCase(str.charAt(0))
+					+ str.substring(1);
 			String method = (parts.length > 1) ? parts[1] : "execute";
 			Object a = Container.findAction(name);
 			if (a == null)
@@ -77,11 +83,12 @@ public class JOne implements Filter
 					response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 					response.flushBuffer();
 				}
-				else if(result instanceof String)
+				else if (result instanceof String)
 				{
 					response.setContentType("application/json;charset=UTF-8");
 					response.getWriter().print(result);
-				}else
+				}
+				else
 				{
 					response.setContentType("application/json;charset=UTF-8");
 					response.getWriter().print(JSON.toJSONString(result));
@@ -93,7 +100,8 @@ public class JOne implements Filter
 			Throwable t = e.getTargetException();
 			t.printStackTrace();
 			Throwable tt = t;
-			while((tt.getCause()) != null){
+			while ((tt.getCause()) != null)
+			{
 				tt = tt.getCause();
 			}
 			response.sendError(500, tt.getMessage());
@@ -120,6 +128,16 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
+		InputStream is = this.getClass().getResourceAsStream("/logo.txt");
+		String logo = "";
+		try
+		{
+			logo = IOUtils.toString(is);
+		}
+		catch (IOException e1)
+		{
+		}
+		System.out.println(logo);
 		logger.debug("JOne Starting...");
 		try
 		{
