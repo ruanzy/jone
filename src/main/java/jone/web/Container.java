@@ -105,7 +105,7 @@ public class Container
 				for (Plugin plugin : plugins)
 				{
 					String name = plugin.getClass().getName();
-					log.debug("initing plugin " + name);
+					log.debug("Initing plugin " + name);
 					plugin.start();
 				}
 			}
