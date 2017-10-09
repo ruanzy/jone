@@ -145,18 +145,11 @@ public class JOne implements Filter
 			String basePackage = cfg.getInitParameter("base-package");
 			logger.debug("JOne basePackage {}", basePackage);
 			Container.init(basePackage);
+			logger.debug("JOne Started Successfully!");
 		}
 		catch (Exception e)
 		{
 			throw new ServletException(e);
 		}
-		StringBuffer sb = new StringBuffer();
-		sb.append("\r\n");
-		sb.append("+---------------------------+").append("\r\n");
-		sb.append("|                           |").append("\r\n");
-		sb.append("| JOne Started Successfully |").append("\r\n");
-		sb.append("|                           |").append("\r\n");
-		sb.append("+---------------------------+");
-		logger.debug(sb.toString());
 	}
 }
