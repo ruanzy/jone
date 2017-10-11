@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -129,11 +132,18 @@ public class JOne implements Filter
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		InputStream is = this.getClass().getResourceAsStream("/jone/logo.txt");
+		String jarPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
 		String logo = "";
+		JarFile jarFile = null;
 		try
 		{
 			logo = IOUtils.toString(is);
-			logo = logo.replaceFirst("\\$\\{version\\}", WebUtil.getVersion());
+			jarFile = new JarFile(jarPath.substring(1));  
+			Manifest enu = jarFile.getManifest();  
+			Attributes attr = enu.getMainAttributes();
+			String version = attr.getValue("Build-Version");
+			logo = logo.replaceFirst("\\$\\{version\\}", version);
+			jarFile.close();
 		}
 		catch (IOException e1)
 		{

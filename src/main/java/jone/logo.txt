@@ -6,4 +6,4 @@ Welcome to
   | | (_) | | | |  __/
   | |\___/|_| |_|\___|
  _/ |                 
-|__/                  ${version}
+|__/                  version ${version}

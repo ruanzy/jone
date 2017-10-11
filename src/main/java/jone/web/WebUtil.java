@@ -473,6 +473,7 @@ public class WebUtil
 			String line;
 			while ((line = fileReader.readLine()) != null)
 			{
+				System.out.println(line);
 				if (line.startsWith("Build-Version"))
 				{
 					return line.substring("Build-Version".length()).trim();
