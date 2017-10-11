@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -14,6 +13,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -464,21 +466,15 @@ public class WebUtil
 	
 	public static String getVersion()
 	{
-		InputStream is = null;
-		BufferedReader fileReader = null;
+		JarFile jarFile = null;
 		try
 		{
-			is = WebUtil.class.getResourceAsStream("/META-INF/MANIFEST.MF");
-			fileReader = new BufferedReader(new InputStreamReader(is));
-			String line;
-			while ((line = fileReader.readLine()) != null)
-			{
-				System.out.println(line);
-				if (line.startsWith("Build-Version"))
-				{
-					return line.substring("Build-Version".length()).trim();
-				}
-			}
+			String jarPath = WebUtil.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+			jarFile = new JarFile(jarPath);  
+			Manifest enu = jarFile.getManifest();  
+			Attributes attr = enu.getMainAttributes();
+			String version = attr.getValue("Build-Version");
+			return version;
 		}
 		catch (IOException e)
 		{
@@ -486,8 +482,7 @@ public class WebUtil
 		}
 		finally
 		{
-			IOUtils.closeQuietly(fileReader);
-			IOUtils.closeQuietly(is);
+			IOUtils.closeQuietly(jarFile);
 		}
 		return "unknown";
 	}
