@@ -103,6 +103,17 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			<plugin>  
+				<groupId>org.apache.maven.plugins</groupId>  
+				<artifactId>maven-jar-plugin</artifactId>  
+				<configuration>  
+				<archive>
+				    <manifestEntries>   
+				      <Build-Version>${project.version}</Build-Version>  
+				    </manifestEntries>
+				  </archive>  
+				</configuration>  
+			</plugin>  
 		</plugins>
 	</build>
 </project>

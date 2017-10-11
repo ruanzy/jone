@@ -133,6 +133,7 @@ public class JOne implements Filter
 		try
 		{
 			logo = IOUtils.toString(is);
+			logo = logo.replaceFirst("\\$\\{version\\}", WebUtil.getVersion());
 		}
 		catch (IOException e1)
 		{

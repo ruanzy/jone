@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -459,5 +460,34 @@ public class WebUtil
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static String getVersion()
+	{
+		InputStream is = null;
+		BufferedReader fileReader = null;
+		try
+		{
+			is = WebUtil.class.getResourceAsStream("/META-INF/MANIFEST.MF");
+			fileReader = new BufferedReader(new InputStreamReader(is));
+			String line;
+			while ((line = fileReader.readLine()) != null)
+			{
+				if (line.startsWith("Build-Version"))
+				{
+					return line.substring("Build-Version".length()).trim();
+				}
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			IOUtils.closeQuietly(fileReader);
+			IOUtils.closeQuietly(is);
+		}
+		return "unknown";
 	}
 }
