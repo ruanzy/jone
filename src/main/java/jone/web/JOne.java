@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.eclipse.jetty.server.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +26,7 @@ import com.alibaba.fastjson.JSON;
 public class JOne implements Filter
 {
 	static final Logger logger = LoggerFactory.getLogger(JOne.class);
+	Server server = new Server(9000);
 	private ServletContext context;
 
 	public void doFilter(ServletRequest req, ServletResponse res,
@@ -124,21 +126,43 @@ public class JOne implements Filter
 		{
 			plugin.stop();
 		}
+		try
+		{
+			server.stop();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
 		InputStream is = this.getClass().getResourceAsStream("/jone/logo.txt");
-		String logo = "";
 		try
 		{
-			logo = IOUtils.toString(is);
+			String logo = IOUtils.toString(is);
 			logo = logo.replaceFirst("\\$\\{version\\}", WebUtil.getVersion());
+			System.out.println(logo);
+			server.setHandler(new JOneHandler());
+			server.start();
+			server.join();
 		}
-		catch (IOException e1)
+		catch (Exception e1)
 		{
+			try
+			{
+				server.stop();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
-		System.out.println(logo);
+		finally
+		{
+			IOUtils.closeQuietly(is);
+		}
 		logger.debug("JOne Starting...");
 		try
 		{

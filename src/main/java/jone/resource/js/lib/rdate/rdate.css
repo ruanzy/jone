@@ -1,0 +1,352 @@
+.ybox,.mbox {
+	float: left;
+	border: 0px solid #ccc;
+	position: relative;
+	margin: 0 6px 0 0;
+}
+
+.mbox {
+	margin: 0;
+}
+
+.y_choose_prev,.y_choose_next,.m_choose_prev,.m_choose_next {
+	float: left;
+	width: 20px;
+	height: 24px;
+	background-color: #F6F6F6;
+	position: relative;
+}
+
+.y_choose_prev,.m_choose_prev {
+	border-right: 1px solid #ccc;
+}
+
+.y_choose_next,.m_choose_next {
+	border-left: 1px solid #ccc;
+}
+
+.y_choose {
+	float: left;
+	width: 60px;
+	height: 22px;
+	border: none;
+	margin-right: 15px;
+	line-height: 24px;
+	text-align: center;
+	font-family: '微软雅黑';
+}
+
+.ybox cite,.mbox cite {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-width: 5px;
+	border-style: dashed;
+	border-color: transparent;
+	overflow: hidden;
+	cursor: pointer;
+	left: 50%;
+	top: 50%;
+}
+
+.y_choose_prev cite {
+	margin: -5px 0 0 -7px;
+}
+
+.y_choose_prev cite {
+	border-right-style: solid;
+	border-right-color: #666;
+}
+
+.m_choose_prev cite {
+	margin: -5px 0 0 -7px;
+}
+
+.m_choose_prev cite {
+	border-right-style: solid;
+	border-right-color: #666;
+}
+
+.ybox label,.mbox label {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-width: 5px;
+	border-style: dashed;
+	border-color: transparent;
+	overflow: hidden;
+	cursor: pointer;
+	top: 50%;
+	margin: -2px 0 0 -5px;
+	border-top-style: solid;
+	border-top-color: #666;
+	right: 25px;
+}
+
+.y_choose_next cite {
+	margin: -5px 0 0 -2px;
+	border-left-style: solid;
+	border-left-color: #666;
+}
+
+.m_choose_next cite {
+	margin: -5px 0 0 -2px;
+	border-left-style: solid;
+	border-left-color: #666;
+}
+
+.ybox dt {
+	border: 1px solid #ccc;
+	position: relative;
+}
+
+.mbox dt {
+	border: 1px solid #ccc;
+	position: relative;
+}
+
+.ybox dd {
+	margin: 0;
+	background: #fff;
+	display: none;
+	border: 1px solid #ccc;
+	border-top: 0px solid #ccc;
+	width: 100%;
+}
+
+.ybox dd .yearup{
+	background: #f3f3f3;
+	display: block;
+	position: relative;
+	height: 20px;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+}
+
+.yearup cite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: dashed;
+    border-color: transparent;
+    overflow: hidden;
+    cursor: pointer;
+    top: 50%;
+    margin: -7px 0 0 -5px;
+    border-bottom-style: solid;
+    border-bottom-color: #666;
+}
+
+.ybox dd .yeardown{
+	background: #f3f3f3;
+	display: block;
+	text-align: center;
+	border-top: 1px solid #ccc;
+	height: 20px;
+	position: relative;
+}
+
+.yeardown cite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: dashed;
+    border-color: transparent;
+    overflow: hidden;
+    cursor: pointer;
+    top: 50%;
+    margin: -2px 0 0 -5px;
+    border-top-style: solid;
+    border-top-color: #666;
+}
+
+.ybox dd table.yearlist{
+	width: 100%;
+}
+
+.ybox dd table.yearlist td{
+	width: 50%;
+	text-align: center;
+	padding: 4px;
+}
+
+.ybox dd table.yearlist td:hover{
+	background-color: #F3F3F3;
+	cursor: pointer;
+}
+
+.mbox dd {
+	margin: 0;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-top: 0px solid #ccc;
+	width: 100%;
+	padding: 2px;
+	display: none;
+}
+
+.mbox dd table.monthlist{
+	width: 100%;
+}
+
+.mbox dd table.monthlist td{
+	width: 50%;
+	text-align: center;
+	padding: 5px;
+}
+
+.mbox dd table.monthlist td:hover{
+	background-color: #F3F3F3;
+	cursor: pointer;
+}
+
+.m_choose {
+	float: left;
+	width: 40px;
+	height: 22px;
+	border: none;
+	margin-right: 15px;
+	line-height: 24px;
+	text-align: center;
+	font-family: '微软雅黑';
+}
+
+.box-top {
+	border: 0px solid #ccc;
+	padding: 0px;
+}
+
+.calender {
+	border: 1px solid #ccc;
+	border-spacing: 0;
+	border-collapse: collapse;
+	display: table;
+	width: 100%;
+	margin: 5px 0;
+}
+
+.calender thead {
+	background-color: #F6F6F6;
+	height: 21px !important;
+	line-height: 21px !important;
+}
+
+.calender thead th {
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+}
+
+.calender td {
+	border: 0px solid #ccc;
+	text-align: center;
+	height: 21px !important;
+	line-height: 21px !important;
+	width: 30px;
+}
+
+.calender td.day{
+	cursor: pointer;
+}
+
+.calender td.day:hover{
+	background-color: #F3F3F3;
+}
+
+.calender td.click{
+	background-color: #eee;
+}
+
+.box {
+	width: 230px;
+	font-size: 12px;
+	padding: 4px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, .1);
+	background-color: #FFF;
+	display: none;
+}
+
+.box a{
+	cursor: pointer;
+}
+
+.box-bottom {
+	height: 24px;
+	line-height: 24px;
+	border: 0px solid #ccc;
+}
+
+.box-bottom .d_hms {
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 1px solid #ccc;
+}
+
+.box-bottom .d_hms li {
+	float: left;
+	padding: 0 3px;
+	text-align: center;
+}
+
+.box-bottom .d_h, .box-bottom .d_m, .box-bottom .d_s{
+	cursor: pointer;
+}
+
+.box-bottom .d_hms .d_sj {
+	background-color: #F6F6F6;
+	border-right: 1px solid #ccc;
+}
+
+.box-bottom .d_btn {
+	float: right;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-right: 1px solid #ccc;
+}
+
+.box-bottom .d_btn a {
+	float: left;
+	padding: 0 5px;
+	text-align: center;
+	background-color: #F6F6F6;
+	border: 1px solid #ccc;
+	border-right: none;
+	cursor: pointer;
+	color: inherit;
+}
+
+.box-bottom .d_btn a:hover {
+	color: inherit;
+}
+
+.rdate {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.rdate dt {
+	font-weight: normal;
+	position: relative;
+}
+
+.rdate dt .d_icon{
+	background: url(icon.png) center no-repeat;
+	position: absolute;
+    right: 4px;
+    bottom: 0;
+    top: 0;
+    width: 25px;
+    border: none;
+}
+
+.rdate dd {
+	position: absolute;
+	top: 100%;
+	z-index: 2000;
+}

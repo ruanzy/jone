@@ -1,0 +1,157 @@
+.grid-table > thead > tr > th.sm,
+.grid-table > tbody > tr > td.sm{
+	text-align: center;
+	width : 36px;
+}
+.grid-table > thead > tr > th.linenum,
+.grid-table > tbody > tr > td.linenum{
+	text-align: center;
+	width : 30px;
+}
+.grid-table > tbody > tr > td > div.expander{
+	width:16px; 
+	height:16px; 
+  	background: url("datagrid_icons.png") no-repeat;
+}
+.grid-table > tbody > tr > td > div.expander.collapse{
+	background-position: -32px center;
+}
+.grid-table > tbody > tr > td > div.expander.expand{
+	background-position: -48px center;
+}
+.grid-table > thead > tr > th > .single,
+.grid-table > thead > tr > th > .multi,
+.grid-table > tbody > tr > td > .single,
+.grid-table > tbody > tr > td > .multi {
+	display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+	width:15px; 
+	height:15px; 
+  	background: url("check.png") no-repeat;;
+}
+.grid-table > thead > tr > th > .single.checked,
+.grid-table > tbody > tr > td > .single.checked{
+	background-position:0 -15px;
+}
+.grid-table > thead > tr > th > .single.unchecked,
+.grid-table > tbody > tr > td > .single.unchecked{
+	background-position:0 0;
+}
+.grid-table > thead > tr > th > .multi.checked,
+.grid-table > tbody > tr > td > .multi.checked {
+	background-position: 0 -15px;
+}
+.grid-table > thead > tr > th > .multi.unchecked,
+.grid-table > tbody > tr > td > .multi.unchecked {
+	background-position:0 0;
+}
+.grid-table > tbody > tr.selected {
+/* 	background-color: #FAFAC2; */
+}
+.grid-resize {
+    float: right;
+    margin: 0 -2px -2px 0px;
+    height: 20px !important;
+    position: relative;
+    cursor: e-resize;
+    display: inline;
+    overflow: hidden;
+}
+.gridcell {
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+.noselected     
+{     
+   -moz-user-focus:   ignore;     
+   -moz-user-input:   disabled;     
+   -moz-user-select:   none;     
+}     
+.grid-table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+.grid-table-hover > tbody > tr.gridrow:hover {
+/*   background-color: #FAFAC2; */
+  cursor: pointer;
+}
+table col[class*="col-"] {
+  position: static;
+  float: none;
+  display: table-column;
+}
+table td[class*="col-"],
+table th[class*="col-"] {
+  position: static;
+  float: none;
+  display: table-cell;
+}
+
+.ui-widget-content .ui-icon {
+
+}
+.ui-icon-seek-first {
+    background-position: -80px -160px;
+}
+
+.ui-state-disabled {
+    cursor: default !important;
+}
+
+.ellipsis{
+	display: inline-block;
+    padding: 0.1em 0.4em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.widget-foot .pagination{
+	margin:3px 0px;
+	float: right;
+}
+.grid-table > thead > tr > th{	
+/* 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dddddd), color-stop(1, #fafafa)); */
+}
+.grid-table-bordered>thead>tr>th, .grid-table-bordered>thead>tr>td {
+    border-bottom-width: 2px;
+}
+
+
+
+.grid-table {
+    width: 100%;
+    border-left: 1px solid #d3e0e8;
+    border-collapse: collapse;
+}
+.grid-table thead th {
+    color: #1582c3;
+    border-right: 1px solid #d3e0e8;
+    border-bottom: 1px solid #d3e0e8;
+    border-top: 1px solid #d3e0e8;
+    text-align: left;
+    padding: 6px 6px 6px 12px;
+    background-color: #f6f7f9;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.grid-table tbody td {
+    border-right: 1px solid #d3e0e8;
+    border-bottom: 1px solid #d3e0e8;
+    background: #fff;
+    padding: 6px 6px 6px 12px;
+    color: #6D929B;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+
+.pagination li { border:0; margin:0; padding:0; font-size:11px; list-style:none; /* savers */ float:left; }
+.pagination a { border-right:solid 1px #DEDEDE; margin-right:2px;text-decoration: none; display:block; padding:3px 6px;color: #1a88c9;}
+.pagination .previous-off,
+.pagination .next-off { color:#888888; display:block; float:left; font-weight:bold; padding:3px 4px; }
+.pagination .next a,.pagination .previous a { border:none; font-weight:bold; }
+.pagination .active a{ color:#000000; font-weight:bold; display:block; float:left; padding:4px 6px; /* savers */ border-right:solid 1px #DEDEDE; }
+.pagination a:hover { text-decoration:underline; }
+.pagination .active a.pager-page {background: #1a88c9;color: #fff;}

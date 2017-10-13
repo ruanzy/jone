@@ -1,0 +1,56 @@
+<div class="nav">
+	<div class="logo">
+    	<img src="../images/default/main/logo.png" height="50">
+    </div>
+    <div class="menu">
+    	<ul class="menu_ul">
+    		{{if allow('1')}}
+        	<li class="menu_li nav_home active" id="dashboard">
+                <a><i class="fa fa-tv fa-2x"></i>{{'MENU_DASHBOARD' | i18n}}</a>
+            </li>
+            {{/if}}
+            {{if allow('2')}}
+            <li class="menu_li" id="datasource">
+                <a><i class="fa fa-database fa-2x"></i>{{'MENU_DATASOURCE' | i18n}}</a>
+            </li>
+            {{/if}}
+            {{if allow('3')}}
+            <li class="menu_li" id="charts">
+                <a><i class="fa fa-bar-chart fa-2x"></i>{{'MENU_CHARTS' | i18n}}</a>
+            </li>
+			{{/if}}
+            {{if allow('4')}}
+            <li class="menu_li" id="sys">
+                <a><i class="fa fa-gear fa-2x"></i>{{'MENU_SYSTEM' | i18n}}</a>
+            </li>
+			{{/if}}
+            {{if allow('5')}}
+            <li class="menu_li" id="log">
+                <a><i class="fa fa-file-text fa-2x"></i>{{'MENU_LOG' | i18n}}</a>
+            </li>
+			{{/if}}
+        </ul>
+    </div>
+    <div class="status">
+        <ul>
+            <li class="setting" id="setting">
+                <span class="icon_setting"></span>
+                <span>{{'SETTING' | i18n}}</span>
+            </li>
+            <li class="exit" id="exit">
+                <span class="icon_exit"></span>
+                <span>{{'LOGOUT' | i18n}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="toolbar">
+	<span class="username"><span></span><span id="loginuser">{{username}}</span></span>
+    <!--
+    <span class="searchinput">
+    	<input id="search" name=""  placeholder="搜索关键字" type="text">
+        <span class="icon_search"></span>
+    </span>
+    -->
+    <span class="refush"></span>
+</div>

@@ -1,0 +1,7 @@
+
+	{{each list as o}}
+		<p>
+			<input type="checkbox" id="{{o.id}}" value="{{o.id}}">
+			<label for="{{o.id}}" title="{{o.name}}">{{o.name}}</label>
+		</p>
+	{{/each}}

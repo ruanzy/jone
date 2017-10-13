@@ -1,0 +1,77 @@
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+
+.text-primary{
+	color: @primary;
+}
+
+.text-success{
+	color: @success;
+}
+
+.text-info{
+	color: @info;
+}
+
+.text-warning{
+	color: @warning;
+}
+
+.text-danger{
+	color: @danger;
+}
+
+.bg-primary{
+	background-color: @primary;
+	color: @white;
+}
+
+.bg-success{
+	background-color: @success;
+	color: @white;
+}
+
+.bg-info{
+	background-color: @info;
+	color: @white;	
+}
+
+.bg-warning{
+	background-color: @warning;
+	color: @white;	
+}
+
+.bg-danger{
+	background-color: @danger;
+	color: @white;	
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.pull-left {
+    float: left!important;
+}
+.pull-right {
+    float: right!important;
+}

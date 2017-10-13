@@ -1,0 +1,9 @@
+<ul class="addsource_condtab" style="width:300px;">
+	<li id="condtab_href_field" class="addsource_tabactive">字段</li>
+	<li id="condtab_href_cond"  style="display:none">编辑</li>
+</ul>
+<div style="overflow-y:auto;max-height:300px" id="col">
+			{{each cols as v i}}
+				<p> <input type="radio" name="col" value="{{v.name}}"  />{{v.name}}</p>
+			{{/each}}
+</div>

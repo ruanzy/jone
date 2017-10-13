@@ -1,0 +1,123 @@
+<div class="panel">
+	<div class="panel-body">
+<ul class="nav-tabs nav-tabs-line">
+
+<li class="active">
+                                <a class="" href="#demo"><i class="fa fa-comment-o"></i> 示例</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="" href="#code"><i class="fa fa-code"></i> 代码</a>
+                            </li>
+                            <li class="nav-item open">
+                                <a class="" href="#api"><i class="fa fa-text-file"></i> API</a>
+                            </li>
+
+</ul>
+<div class="tab-content" style="">
+<div id="demo" style="display: block;">
+	<button id='alert' type="button"
+		class="btn btn-primary">
+		<i class=""></i> alert
+	</button>
+	<button id='confirm' type="button"
+		class="btn btn-primary">
+		<i class=""></i> confirm
+	</button>
+	<button id='dialog' type="button"
+		class="btn btn-primary">
+		<i class=""></i> dialog
+	</button>
+</div>
+<div id="code" style="display: none;">
+<pre><code class="javascript">
+$.alert('哈喽, 哈喽!', function(){
+	alert('123');
+});
+$.confirm('确定要干掉它吗?', function(v){
+	if(v){
+		alert('yes');
+	}else{
+		alert('no');
+	}
+});
+$.dialog({
+	title: 'title',
+	width: 300,
+	height: 200,
+	content: 'html',
+	buttons: [
+		{
+			text: '同意',
+			click: function () {
+				this.title('你同意了');
+			}
+		},
+		{
+			text: '不同意',
+			click: function () {
+				alert('你不同意');
+			}
+		}
+	]
+});
+</code></pre>
+</div>
+<div id="api" style="display: none;">
+<p>配置说明</p>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>属性</th>
+			<th>类型</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>标题</td>
+		</tr>
+		<tr>
+			<td>width</td>
+			<td>int</td>
+			<td>宽度</td>
+		</tr>
+		<tr>
+			<td>height</td>
+			<td>int</td>
+			<td>高度</td>
+		</tr>
+		<tr>
+			<td>content</td>
+			<td>string</td>
+			<td>html内容</td>
+		</tr>
+		<tr>
+			<td>buttons</td>
+			<td>array</td>
+			<td><p>自定义按钮, 配置项:</p>
+				<p>text: 按钮文本</p>
+				<p>click: 按钮点击事件</p>
+				<pre><code>buttons:[
+	{
+		text: '同意',
+		click: function(){
+			alert('同意');
+		}
+	},
+	{
+		text: '不同意',
+		click: function(){
+			alert('不同意');
+		}
+	}
+]
+</code></pre></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+
+</div></div>

@@ -1,0 +1,14 @@
+
+<table id="roles" style="width: 100%;border-collapse: collapse;border-spacing: 0;">
+   {{each list as r k}}
+   {{if k%4 == 0}}
+   <tr>
+   {{/if}}
+   <td style="padding: 8px;line-height: 1.42857143;">
+      <input type="checkbox" id="role_{{r.id}}" value="{{r.id}}" name="role" {{if r.checked}}checked{{/if}}> {{r.name}}
+   </td>
+   {{if ((k + 1)%4) == 0}}
+   </tr>
+   {{/if}}
+   {{/each}}
+</table>

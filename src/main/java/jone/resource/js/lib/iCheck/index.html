@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>JOne Doc</title>
+<link rel="stylesheet" type="text/css"
+	href="custom.css">
+<script src="jquery-1.11.0.min.js"></script>
+<script src="icheck.min.js"></script>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<input type="checkbox" value=1>
+<input type="checkbox" checked value=2>
+<input type="checkbox" disabled value=3>
+<input type="radio" name="iCheck" checked value=1 disabled>是
+<input type="radio" name="iCheck" value=0>否
+<input type="radio" name="iCheck" value=2 disabled>否2
+
+<script>
+$(document).ready(function(){
+  $('input').iCheck({
+	checkboxClass: 'icheckbox_square-green',
+	radioClass: 'iradio_square-green',
+    increaseArea: '20%' // optional
+  });
+  var v = $('input[name=iCheck]:checked').val();
+  alert(v);
+});
+</script>
+</body>
+</html>

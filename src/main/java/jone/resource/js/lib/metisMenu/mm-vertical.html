@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>metisMenu - vertical menu</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="metisMenu.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <script src="jquery-1.11.0.min.js"></script>
+
+    <script src="metisMenu.min.js"></script>
+<style>
+body{
+margin: 0;
+font-size: 12px;
+}
+
+</style>
+  </head>
+
+  <body>
+
+
+
+<link href="mm-vertical.css" rel="stylesheet" type="text/css"/>
+
+     <aside style="width: 220px;">
+       <nav class="sidebar-nav">
+         <ul class="metismenu" id="menu1">
+           <li>
+             <a class="has-arrow" href="#">
+               <span class="fa fa-fw fa-github fa-lg"></span>
+               metisMenu
+             </a>
+             <ul aria-expanded="true">
+               <li>
+                 <a href="https://github.com/onokumus/metisMenu">
+                   <span class="fa fa-fw fa-code-fork"></span> Fork
+                 </a>
+               </li>
+               <li>
+                 <a href="https://github.com/onokumus/metisMenu">
+                   <span class="fa fa-fw fa-star"></span> Star
+                 </a>
+               </li>
+               <li>
+                 <a href="https://github.com/onokumus/metisMenu/issues">
+                   <span class="fa fa-fw fa-exclamation-triangle"></span> Issues
+                 </a>
+               </li>
+             </ul>
+           </li>
+           <li>
+             <a class="has-arrow" href="#" aria-expanded="false">Menu 0</a>
+             <ul aria-expanded="false">
+               <li><a href="#">item 0.1</a></li>
+               <li><a href="#">item 0.2</a></li>
+               <li><a href="http://onokumus.com">onokumus</a></li>
+               <li><a href="#">item 0.4</a></li>
+             </ul>
+           </li>
+           <li id="removable">
+             <a class="has-arrow" href="#" aria-expanded="false">Menu 1</a>
+             <ul aria-expanded="false">
+               <li><a href="#">item 1.1</a></li>
+               <li><a href="#">item 1.2</a></li>
+               <li>
+                 <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
+                 <ul aria-expanded="false">
+                   <li><a href="#">item 1.3.1</a></li>
+                   <li><a href="#">item 1.3.2</a></li>
+                   <li><a href="#">item 1.3.3</a></li>
+                   <li><a href="#">item 1.3.4</a></li>
+                 </ul>
+               </li>
+               <li><a href="#">item 1.4</a></li>
+               <li>
+                 <a class="has-arrow" href="#" aria-expanded="false">Menu 1.5</a>
+                 <ul aria-expanded="false">
+                   <li><a href="#">item 1.5.1</a></li>
+                   <li><a href="#">item 1.5.2</a></li>
+                   <li><a href="#">item 1.5.3</a></li>
+                   <li><a href="#">item 1.5.4</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </li>
+           <li>
+             <a class="has-arrow" href="#" aria-expanded="false">Menu 2</a>
+             <ul aria-expanded="false">
+               <li><a href="#">item 2.1</a></li>
+               <li><a href="#">item 2.2</a></li>
+               <li><a href="#">item 2.3</a></li>
+               <li><a href="#">item 2.4</a></li>
+             </ul>
+           </li>
+         </ul>
+       </nav>
+     </aside>
+
+
+
+
+
+
+ <script>
+   $(function () {
+
+       $('#menu1').metisMenu();
+
+       $('#menu2').metisMenu({
+           toggle: false
+       });
+
+       $('#menu3').metisMenu();
+
+   });
+ </script>
+
+
+
+
+
+  </body>
+
+</html>

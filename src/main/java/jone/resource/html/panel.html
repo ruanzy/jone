@@ -1,0 +1,190 @@
+<style>
+.dropdown, .dropup {
+    position: relative;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1200;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid #e4eaec;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.dropdown-menu {
+width: 100%;
+    padding: 1px 0;
+    margin-top: 1px;
+    border-radius: 0;
+    -webkit-box-shadow: 0 3px 12px rgba(0,0,0,.05);
+    box-shadow: 0 3px 12px rgba(0,0,0,.05);
+    -webkit-transition: .25s;
+    -o-transition: .25s;
+    transition: .25s;
+}
+.dropdown-menu>li {
+    padding: 0 3px;
+    margin: 2px 0;
+}
+.dropdown-menu>li>a {
+    -webkit-transition: background-color .25s;
+    -o-transition: background-color .25s;
+    transition: background-color .25s;
+    display: block;
+    padding: 3px 10px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #76838f;
+    white-space: nowrap;
+}
+.dropdown-menu>li>a>i {
+    margin-right: 6px;
+}
+.dropdown-menu-primary>.active>a, .dropdown-menu-primary>.active>a:focus, .dropdown-menu-primary>.active>a:hover {
+    color: #fff;
+    background-color: #20a8d8;
+}
+.dropdown-menu .divider {
+    margin: 6px 0;
+    height: 1px;
+    overflow: hidden;
+    background-color: #e4eaec;
+}
+.caret {
+    border-top: 4px solid;
+    -webkit-transition: .25s;
+    -o-transition: .25s;
+    transition: .25s;
+    -webkit-transform: scale(1.001);
+    -ms-transform: scale(1.001);
+    -o-transform: scale(1.001);
+    transform: scale(1.001);
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+</style>
+<div class="panel introduce-info">
+	<div class="panel-heading">
+		<div class="panel-actions">
+				<a href="#" class="panel-action">更多</a>
+				<a href="#" class="panel-action"><i class="fa fa-refresh"></i></a>
+				<a href="#" class="panel-action"><i class="fa fa-minus"></i></a>
+		</div>
+		<h1 class="panel-title">基本介绍</h1>
+	</div>
+	<div class="panel-body">
+		Admui 是一个基于最新 Web 技术的企业级通用管理系统快速开发框架，可以帮助企业极大的提高工作效率，节省开发成本，提升品牌形象。
+您可以 Admui 为基础，快速开发各种MIS系统，如CMS、OA、CRM、ERP、POS等。
+Admui 紧贴业务特性，涵盖了大量的常用组件和基础功能，最大程度上帮助企业节省时间成本和费用开支。
+<div class="progress progress-xs my-1">
+    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>	 
+<div class="progress progress-white progress-xs my-1">
+	<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+<label class="switch switch-text switch-primary">
+<input type="checkbox" class="switch-input" checked="">
+<span class="switch-label" data-on="On" data-off="Off"></span>
+<span class="switch-handle"></span>
+</label>	
+	
+</div>
+</div>
+
+
+<div class="panel introduce-info">
+	<div class="panel-heading">
+		<div class="panel-actions">
+				<a href="#" class="panel-action">更多</a>
+				<a href="#" class="panel-action"><i class="fa fa-refresh"></i></a>
+				<a href="#" class="panel-action"><i class="fa fa-minus"></i></a>
+		</div>
+		<h1 class="panel-title">综合示例</h1>
+	</div>
+	<div class="panel-body">
+	
+	<div style="margin-bottom: 15px;">
+<a type="button" class="btn btn-primary2 dropdown-toggle" id="exampleColorDropdown2" data-toggle="dropdown" aria-expanded="false">
+	增加
+</a>
+<a type="button" class="btn btn-primary2 dropdown-toggle" id="exampleColorDropdown2" data-toggle="dropdown" aria-expanded="false">
+	删除
+</a>
+<div class="btn-group">
+                                            <a type="button" class="btn btn-primary2 dropdown-toggle" id="exampleColorDropdown2" data-toggle="dropdown" aria-expanded="false">
+                                                更多 <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-primary" aria-labelledby="exampleColorDropdown2" role="menu">
+                                                <li role="presentation">
+                                                    <a href="javascript:;" role="menuitem"><i class="fa fa-reply"></i>回复</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="javascript:;" role="menuitem"><i class="fa fa-share-alt"></i>分享</a>
+                                                </li>
+                                                <li class="active" role="presentation">
+                                                    <a href="javascript:;" role="menuitem"><i class="fa fa-trash"></i>删除</a>
+                                                </li>
+												<li class="divider" role="presentation"></li>
+                                                <li role="presentation">
+                                                    <a href="javascript:;" role="menuitem"><i class="fa fa-cog"></i>设置</a>
+                                                </li>
+                                            </ul>
+
+
+	</div>
+	
+	</div>
+	
+			<div style="">
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>名称</th>
+			<th>参数</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>getSelected</td>
+			<td>none</td>
+			<td>返回所有选中的行，当没有选中的记录时，将返回空数组</td>
+		</tr>
+		<tr>
+			<td>reload</td>
+			<td>param</td>
+			<td>重新加载数据</td>
+		</tr>
+		<tr>
+			<td>setQueryParam</td>
+			<td>param</td>
+			<td>设置查询参数</td>
+		</tr>
+	</tbody>
+</table>
+	</div>
+	</div>
+</div>

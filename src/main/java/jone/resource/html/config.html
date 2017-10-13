@@ -1,0 +1,27 @@
+<div class="panel">
+	<div class="panel-body">
+<p>系统提供一个cfg.json文件,系统的所有配置都在这里</p>
+<pre><code>{	
+	datasource : { 
+		h2: { 
+			driverClassName : "org.h2.Driver", 
+			url : "jdbc:h2:file:d:/h2db/bione", 
+			username : "SA", 
+			password : "" 
+		},
+		dbone: { 
+			driverClassName : "com.intple.dbone.Driver", 
+			url : "jdbc:dbone://11.0.1.83:9001/", 
+			username : "dbone", 
+			password : "dbone" 
+		}
+	},
+	uploadDir: "d:/upload"
+}
+</code></pre>
+<p>获取系统配置</p>
+<pre><code>String url = Cfg.getString("datasource.h2.url");
+String uploadDir = Cfg.getString("uploadDir");
+</code></pre>
+</div>
+</div>

@@ -1,0 +1,16 @@
+<form id="form" class="form-horizontal">
+	<div class="form-group">
+		<label for="username" class="slabel"><em class="text-red">*</em>
+			{{'PASSWORD' | i18n}}</label> <input id="password" type="text" class="form-input"
+			name="password" /><input type="hidden" id="username"
+			name="username" value="{{username}}">
+	</div>
+	<div class="form-group">
+		<label for="username" class="slabel"><em class="text-red">*</em>
+			{{'REPASSWORD' | i18n}}</label> <input id="confirm_password" type="text" class="form-input"
+			name="confirm_password" />
+	</div>
+	<p id="error" style="color: #ff0000;visibility: hidden;font-size:13px;">
+		<i class="fa fa-warning"></i>&nbsp;&nbsp;<span id="errormsg"></span>
+	</p>
+</form>

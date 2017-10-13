@@ -1,0 +1,26 @@
+<p>
+	<label>{{'CHART_NAME' | i18n}}</label><input type="text" id="titleText" maxlength="40"/>
+</p>
+<table>
+	<thead>
+		<tr>
+			<td style="width: 75px; overflow: hidden;"><label>{{'FIELD' | i18n}}</label></td>
+			<td style="width: 20px;"><label>{{'NAME' | i18n}}</label></td>
+			<td style="width: 20px;"><label>{{'Axis' | i18n}}*</label></td>
+			<td style="width: 75px;"><label>{{'Axis_NAME' | i18n}}</label></td>
+			<td style="width: 75px;"><label>{{'Axis_MAX' | i18n}}</label></td>
+			
+		</tr>
+	</thead>
+	<tbody>
+	{{each list as column index}}
+		<tr>
+			<td title="{{index}}">{{index}}</td>
+			<td><input type="checkbox" id="n_{{index}}"></td>
+			<td><input type="checkbox" id="z_{{index}}"></td>
+			<td><input type="text" id="a_{{index}}" style="width: 100%;"/></td>
+			<td><input type="text" id="m_{{index}}" style="width: 100%;"/></td>
+		</tr>
+	{{/each}}
+	</tbody>
+</table>

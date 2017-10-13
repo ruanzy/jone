@@ -3,11 +3,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.ruanzy</groupId>
 	<artifactId>jone</artifactId>
-	<version>1.3.6</version>
+	<version>1.6.0</version>
 	<packaging>jar</packaging>
 
 	<name>jone</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jetty.version>9.2.10.v20150310</jetty.version>
+	</properties>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
@@ -32,9 +36,6 @@
 			<url>https://github.com/ruanzy</url>
 		</developer>
 	</developers>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<dependencies>
 		<dependency>
@@ -46,6 +47,16 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -89,6 +100,7 @@
 	            <directory>src/main/java</directory>
 	            <includes>
 	                <include>jone/logo.txt</include>
+	                <include>jone/resource/**</include>
 	            </includes>
 	            <filtering>false</filtering>
 	        </resource>

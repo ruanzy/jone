@@ -1,0 +1,162 @@
+<form id="form">
+	<div class="addsource_chart">
+		<div class="source_tree">
+			<div class="addsource_treetitle">
+				<i class="fa fa-database"></i> <select name="database_id"
+					id="database_select"></select>
+			</div>
+			<ul id="sourceTableTree" class="ztree"></ul>
+		</div>
+		<!-- source_tree End -->
+		<div class="source_rightcontent">
+			<ul class="addsource_maintab">
+				<li class="addsource_tabactive">图表视图</li>
+				<li>自定义SQL</li>
+			</ul>
+			<div class="addsource_maincontent tab_chart">
+				<div id="sourcetable_charts" class="addsource_chartimg"></div>
+				<div class="addsource_condcontent">
+					<ul class="addsource_condtab">
+						<li id="condtab_href_field" class="addsource_tabactive">字段</li>
+						<li id="condtab_href_cond">条件</li>
+						<li id="condtab_href_group">分组</li>
+						<li id="condtab_href_asc">排序</li>
+						<li id="condtab_href_sql">SQL预览</li>
+					</ul>
+					<div class="addsource_condtab_content">
+						<div class="condtab_field">
+							<div class="contenttable">
+								<table>
+									<thead>
+										<tr>
+											<td width="20%">表名</td>
+											<td width="20%">字段</td>
+											<td width="20%">函数</td>
+											<td width="20%">是否唯一</td>
+											<td>别名</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>table</td>
+											<td>col</td>
+											<td><select
+												style="width: 90%; border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px;">
+													<option>max</option>
+													<option>min</option>
+													<option>count</option>
+													<option>length</option>
+													<option>avg</option>
+											</select></td>
+											<td><input type="checkbox" value=""></td>
+											<td><input type="text" value=""
+												style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="condtab_condition">
+							<div class="contenttable">
+								<table>
+									<thead>
+										<tr>
+
+											<td width="20%">字段</td>
+											<td width="20%">条件</td>
+											<td width="20%">值</td>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+
+											<td><input type="text" value=""
+												style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'><a
+												href="#">...</a></td>
+											</td>
+											<td><select
+												style="width: 90%; border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px;">
+													<option>=</option>
+													<option>&gt;</option>
+													<option>&gt;=</option>
+													<option>&lt;</option>
+													<option>&lt;=</option>
+											</select></td>
+											<td><input type="text" value=""
+												style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'><a
+												href="#">...</a></td>
+
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="condtab_group">
+							<div class="contenttable">
+								<table>
+									<thead>
+										<tr>
+											
+											<td width="20%">字段</td>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											
+											<td><input type="text" value=""
+												style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'><a
+												href="#">...</a></td>
+										</tr>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="contab_orderby">
+							
+							<div class="contenttable">
+								<table>
+									<thead>
+										<tr>
+											<td width="20%">表名</td>
+											<td width="20%">字段</td>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											
+											<td><input type="text" value=""
+												style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'><a
+												href="#">...</a></td>
+										</tr>
+
+									</tbody>
+								</table>
+								<ul class="common_icon_button">
+								      <li><a id="addorderby"><i class="fa fa-plus"></i>新增</a></li>
+								      <li><a id="deleteorderby"><i class="fa fa-times-circle"></i>删除</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="condtab_sql">
+							<textarea class="sqltextarea" name="sql" id="sqltextarea_yl"
+								readonly></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- addsource_maincontent End -->
+			<div class="addsource_maincontent tab_sql">
+				<textarea class="sqltextarea" id="sqltextarea"></textarea>
+			</div>
+		</div>
+		<!-- source_rightcontent End -->
+	</div>
+</form>

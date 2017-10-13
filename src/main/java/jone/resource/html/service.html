@@ -1,0 +1,72 @@
+<div class="panel">
+	<div class="panel-body">
+<p>下面我们以用户登录为例学习业务的一般处理流程</p>
+<pre><code>public class UserService
+{
+	static DB db = DBs.getDB("h2");
+
+	public static boolean login(String username, String password)
+	{
+		String sql = "select  count(1) from users where username=? and pwd=? and state = '1'";
+		long count = db.count(sql, new Object[] { username, password });
+		return count &gt; 0;
+	}
+}
+</code></pre>
+<p>数据库操作工具类说明</p>
+<p>DBs: 系统所有的连接池 对应于cfg.json里的datasource</p>
+<p>DB: 代表一个连接池  对应于cfg.json里的一个具体的datasource</p>
+<p>获取DB</p>
+<pre><code>DB db = DBs.getDB("h2");
+</code></pre>
+<p>增、删、改 统一调用update</p>
+<pre><code>String sql = "delete from users where username = ?";
+db.begin();
+db.update(sql, new Object[] { username });
+db.commit();
+</code></pre>
+<p>查询单条记录</p>
+<pre><code>String sql = "select  * from users where username=? and pwd=?";
+R r = db.findOne(sql, new Object[] { username, password });
+</code></pre>
+<p>单值查询</p>
+<pre><code>String sql = "select  count(1) from users";
+Object o = db.scalar(sql);
+</code></pre>
+<p>查询多条记录</p>
+<pre><code>String sql = "select  * from users";
+List&lt;R&gt; list = db.find(sql);
+</code></pre>
+<p>分页查询</p>
+<pre><code>String sql = "select  * from users";
+List&lt;R&gt; list = db.pager(sql, 1, 10);
+</code></pre>
+<p>查询怎么编写、使用动态sql</p>
+<p>以用户相关的db操作为例，在sql目录下新建一个user.sql文件 内容如下;</p>
+<pre><code>count
+===
+select count(1) from users where 1=1
+@if(isNotEmpty(name)){
+and name = #{name}
+@}
+and isadmin = 0
+
+list
+===
+select * from users where 1=1
+@if(isNotEmpty(name)){
+and name = #{name}
+@}
+and isadmin = 0
+order by regtime DESC
+
+===上面的是sqlid(同一个文件唯一)
+</code></pre>
+<p>动态sql使用</p>
+<pre><code>DB db = DBs.getDB("h2");
+SQLExecutor executor = new SQLExecutor(db);
+long total = executor.count("user.count", params);
+List&lt;R&gt; list = executor.pager("user.list", params, page, pagesize);
+</code></pre>
+</div>
+</div>

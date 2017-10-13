@@ -1,0 +1,124 @@
+<ul class="common_icon_button">
+	<li id="add"><a><i class="fa fa-plus"></i>{{'ADD' | i18n}}</a></li>
+	<li id="query"><a><i class="fa fa-refresh" ></i>{{'REFRESH' | i18n}}</a></li>
+	<li id="list" style="display: none;"><a><i class="fa fa-reply"></i>{{'RETURN_LIST' | i18n}}</a></li>
+</ul>
+<div class="commontable" id="datalist" style="clear: both;"></div>
+<div id="restful" style="display: none;clear: both;">
+	<div class="resful_request">
+		<div class="resful_title">{{'REQUEST' | i18n}}</div>
+
+		<div class="resful_url">
+			<label>URL:</label> <input type="text" id="url" style="width: 450px;" />
+		</div>
+		<div class="resful_type">
+			<div class="resful_type_select">
+				<select id="type">
+					<option value="GET">GET</option>
+					<option value="POST">POST</option>
+					<!-- 
+				<option value="PUT">PUT</option>
+				<option value="DELETE">DELETE</option>
+				<option value="HEAD">HEAD</option>
+				<option value="PATCH">PATCH</option>
+				<option value="OPTIONS">OPTIONS</option>
+				<option value="PROPFIND">PROPFIND</option>
+				<option value="COPY">COPY</option>
+				<option value="MOVE">MOVE</option>
+				 -->
+				</select> <a class="common_btn restful_btn" id="button_submit">{{'SUBMIT' | i18n}}</a>
+			</div>
+
+			<a class="common_btn restful_btn" id="button_get" style="display: none;">GET</a> <a
+				class="common_btn restful_btn" id="button_post" style="display: none;">POST</a>
+		</div>
+
+		<ul class="resful_tab">
+			<li id="content" class="resful_tab_select">{{'CONTENT_TO_SEND' | i18n}}</li>
+			<li id="headers">{{'HEADERS' | i18n}}</li>
+			<li id="parameters">{{'PARAMETERS' | i18n}}</li>
+		</ul>
+
+		<!-- Content to Send -->
+		<div id="div_content" class="resful_tab_content"
+			style="display:block;">
+			<label style="float:left;width:90px;line-height: 18px;">{{'CONTENT_TYPE' | i18n}}:</label>
+			<div style="margin-left:90px;">
+				<select style="width:100%" id="content_type">
+					<option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+					<option value="application/json">application/json</option>
+					<!-- 
+				<option value="application/xml">application/xml</option>
+				<option value="text/plain">text/plain</option>
+				<option value="application/rdf+xml">application/rdf+xml</option>
+				<option value="text/html">text/html</option>
+				 -->
+				</select>
+			</div>
+			<div style="height: 213px;"></div>
+			<textarea id="contents"
+				style="margin-top:10px;width:100%;height:201px;resize:none;display: none;"></textarea>
+		</div>
+		<!-- Headers -->
+		<div id="div_headers" class="resful_tab_headers">
+			<div style="padding-bottom: 8px;">
+				<label style="display: inline-block;width:40px;">{{'NAME' | i18n}}:</label> <input
+					style="width:158px;" class="resful_common_input" id="header_name"
+					name="header_name" maxlength="50" /> <label
+					style="display: inline-block;width:40px;">{{'VALUE' | i18n}}:</label> <input
+					style="width:158px;" class="resful_common_input" id="header_value"
+					name="header_value" maxlength="50" /> <a class="common_btn restful_btn"
+					style="float:right" id="header_append">{{'ADD' | i18n}}</a>
+			</div>
+			<div style="padding-top:8px;border-top:1px solid #99bcd1;">
+				<div style="width:416px;display:inline-block;">
+					<div class="div_headers_sbox">
+						<div class="div_headers_s1">{{'NAME' | i18n}}</div>
+						<div class="div_headers_s2">{{'VALUE' | i18n}}</div>
+					</div>
+					<div class="div_headers_table">
+						<table id="headers_table">
+
+						</table>
+					</div>
+				</div>
+				<a class="common_btn restful_btn" style="float:right" id="header_remove">{{'DELETE' | i18n}}</a>
+			</div>
+		</div>
+		<!-- Parameters -->
+		<div id="div_parameters" class="resful_tab_parameters">
+			<div style="padding-bottom: 8px;">
+				<label style="display: inline-block;width:40px;">{{'NAME' | i18n}}:</label> <input
+					style="width:158px;" class="resful_common_input"
+					id="parameter_name" name="parameter_name" maxlength="50" /> <label
+					style="display: inline-block;width:40px;">{{'VALUE' | i18n}}:</label> <input
+					style="width:158px;" class="resful_common_input"
+					id="parameter_value" name="parameter_value" maxlength="50" /> <a
+					class="common_btn restful_btn" style="float:right" id="parameter_append">{{'ADD' | i18n}}</a>
+			</div>
+			<div style="padding-top:8px;border-top:1px solid #99bcd1;">
+				<div style="width:416px;display:inline-block;">
+					<div class="div_headers_sbox">
+						<div class="div_headers_s1">{{'NAME' | i18n}}</div>
+						<div class="div_headers_s2">{{'VALUE' | i18n}}</div>
+					</div>
+					<div class="div_headers_table">
+						<table id="parameters_table">
+
+						</table>
+					</div>
+				</div>
+				<a class="common_btn restful_btn" style="float:right" id="parameter_remove">{{'DELETE' | i18n}}</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="resful_response">
+		<div class="resful_title">{{'RESPONSE' | i18n}}</div>
+		<div class="resful_response_content"></div>
+		<div
+			style="padding-top:8px;height:30px;text-align: center;margin:0px auto;">
+			<a class="common_btn" id="create">{{'CREATE_CHART' | i18n}}</a>
+		</div>
+	</div>
+</div>

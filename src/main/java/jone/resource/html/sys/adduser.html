@@ -1,0 +1,33 @@
+<form id="form" class="form-horizontal">
+	<div class="form-group">
+		<label for="username" class="form-label"><em class="text-red">*</em>
+			{{'USERNAME' | i18n}}</label> 
+			<div class="form-input-block"><input id="username" type="text" class="form-input"
+			name="username" /></div>
+	</div>
+	<div class="form-group">
+		<label for="password" class="form-label"><em class="text-red">*</em>
+			{{'PASSWORD' | i18n}}</label> <div class="form-input-block"><input id="password" type="password" class="form-input"
+			name="password" /></div>
+	</div>
+	<div class="form-group">
+		<label for="repassword" class="form-label"><em class="text-red">*</em>
+			{{'REPASSWORD' | i18n}}</label> <div class="form-input-block"><input id="repassword" type="password" class="form-input"
+			name="repassword" /></div>
+	</div>
+	<div class="form-group">
+		<label for="dept" class="form-label"><em class="text-red">*</em> 部门</label>
+		<div class="form-input-block">
+			<div style="position: relative;" id="deptwrapper">
+				<input id="dept" type="text" name="dept" readonly="readonly" class="form-input"/>
+				<input id="deptid" type="hidden" name="deptid" />
+				<div id="menuContent" style="border: 1px solid #ddd; display:none; position: absolute;z-index: 20000; width:100%;max-height: 200px;background: #fff;overflow: auto;">
+					<ul id="treeDemo" class="ztree" style="margin-top:0; width:100%;"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="error" class="form-group" style="color: #ff0000;visibility: hidden;font-size:13px;">
+		<i class="fa fa-warning"></i>&nbsp;&nbsp;<span id="errormsg"></span>
+	</div>
+</form>

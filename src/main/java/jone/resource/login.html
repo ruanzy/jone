@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>数据管理分析--引跑科技</title>
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link href="css/login.css" rel="stylesheet" />
+</head>
+<body class="login_body">
+<div class="login_box">
+	<div class="login_logo"><!--logo--></div>
+    <!--登录框 开始-->
+    <form id="loginForm">
+	<div class="login_form">
+    	<ul>
+          <li>
+          	<label for="username" class="login_label">用户名：</label>
+            <input id="username" name="username" class="login_input" type="text">
+          </li>
+          <li>
+          	<label for="password" class="login_label">密　码：</label>
+            <input id="password" name="password" class="login_input" type="password">
+          </li>
+          <li><span class="login_info">用户名或密码无效,请重新输入</span></li>
+          <!--<li>
+            
+          	<a class="rem_click" >
+          		<span class="rem_checkbox"></span>
+				<span class="rem_label">记住用户名密码</span>
+            </a>
+            
+          </li>-->
+        </ul>
+        <div id="error"
+					style="padding: 10px;color: #a94442;background-color: #f2dede;border-color: #ebccd1;display: none;">
+					<i class="fa fa-warning"></i>&nbsp;&nbsp;<span id="errormsg"></span>
+				</div>
+        <div class="login_btn">
+        	<span class="btn_login" id="loginbtn">登录</span>
+            <span class="btn_reset">重置</span>
+        </div>
+        <div class="version_info"><span drawText="INDEX_INTPLE_TEXT">引跑科技&copy;版权所有</span>&nbsp;&nbsp;&nbsp;V3.1</div>
+    </div>
+    </form>
+    <!--登录框 结束-->
+</div>
+	<script src="js/lib/jquery-1.11.0.min.js"></script>
+	<script src="js/lib/jquery.i18n.properties.min.js"></script>
+	<script src="js/lib/base64.js"></script>
+	<script>
+		$(function() {
+			function load() {
+				$.i18n.properties({
+					name : 'i18n',
+					path : 'i18n/',
+					mode : 'map',
+					language : localStorage.getItem('lang') || 'zh',
+					cache : false,
+					encoding : 'UTF-8',
+					callback : function() {
+						$("[data-i18n]").each(function() {
+							$(this).html($.i18n.prop($(this).data("i18n")));
+						});
+					}
+				});
+			}
+			function login() {
+				var username = $('#username').val();
+				var password = $('#password').val();
+				if ($.trim(username).length < 1) {
+					$('#errormsg').text("请输入用户名!");
+					$('#error').show();
+					$('#username').focus();
+					return;
+				}
+				if ($.trim(password).length < 1) {
+					$('#errormsg').text("请输入密码!");
+					$('#error').show();
+					$('#password').focus();
+					return;
+				}
+				$('#errormsg').text("");
+				$('#error').hide();
+				var _password = $.base64.btoa(username + '_' + password);
+				var data = {
+					username : username,
+					password : _password
+				};
+				$.ajax({
+					url : "user/login",
+					type : 'post',
+					data : data,
+					dataType : 'json',
+					success : function(ret) {
+						if (ret.code == 0) {
+							sessionStorage["token"] = ret.token;
+							sessionStorage["username"] = ret.username;
+							location.href = './';
+						} else if (ret.code == 10001) {
+							$('#errormsg').text("用户名或密码错误!");
+							$('#error').show();
+						} else if (ret.code == 10002) {
+							$('#errormsg').text("没有赋予任何权限,请联系管理员!");
+							$('#error').show();
+						}
+					}
+				});
+			}
+			load();
+			$('#username').focus();
+			$(document).bind("keypress", function(event) {
+				if (event.keyCode == 13) {
+					login();
+				}
+			});
+			$('#loginbtn').on('click', function() {
+				login();
+			});
+		});
+	</script>
+</body>
+</html>

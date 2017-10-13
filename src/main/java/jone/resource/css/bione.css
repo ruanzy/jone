@@ -1,0 +1,697 @@
+body{
+	min-width:950px;
+	margin-top:50px;
+	overflow:hidden;
+}
+.addsource_chart {
+	height:400px;
+}
+.addsource_treetitle {
+	padding-left:8px;
+}
+.addsource_treetitle .fa {
+	color: #1582c3;
+    font-size: 14px;
+    margin-right: 5px;
+}
+.source_tree {
+	width: 200px;
+    height: 380px;
+    padding:10px;
+    overflow: auto;
+	float:left;
+}
+.source_rightcontent {
+	margin-left:220px;
+	padding-top: 10px;
+	margin-right: 10px;
+}
+.addsource_maintab {
+	height:25px;
+	border-left: 1px solid #99bcd1;
+}
+.addsource_maintab li {
+	float:left;
+	line-height: 22px;
+    border-top: 1px solid #99bcd1;
+    border-right: 1px solid #99bcd1;
+    padding: 2px 5px 0px 5px;
+    cursor: pointer;
+    background-color: #cde5f2;
+}
+.addsource_maintab li.addsource_tabactive {
+	background-color: #FFF;
+	border-bottom: 1px solid #FFF;
+}
+.addsource_maincontent {
+    width: 700px;
+    height: 350px;
+    border: 1px solid #99bcd1;
+}
+.addsource_chartimg {
+	height:220px;
+	border-bottom:1px solid #99bcd1;
+	overflow: auto;
+    background-color: #f9f9f9;
+}
+.addsource_condtab {
+	height:25px;
+	border-bottom:1px solid #99bcd1;
+}
+.addsource_condtab li {
+	float:left;
+	height:23px;
+	line-height: 22px;
+    border-right: 1px solid #99bcd1;
+    padding: 2px 5px 0px 5px;
+    cursor: pointer;
+    background-color: #cde5f2;
+}
+.addsource_condtab li.addsource_tabactive {
+	background-color: #FFF;
+	border-bottom: 1px solid #FFF;
+}
+.tab_sql , .condtab_condition, .condtab_group , .condtab_sql,.contab_orderby {
+	display:none;
+}
+.sqltextarea{
+	width:398px;
+	height: 298px;
+	resize:none;
+	border:none;
+}
+.addsource_condtab_content {
+	height:100px;
+	width:100%;
+	overflow: auto;
+}
+
+.contenttable {
+    width: 94%;
+    padding-left: 15px;
+    border: 1px solid #d3e0e8;
+	margin-top: 3px;
+}
+.contenttable table {
+    width: 99%;
+    border-left: 1px solid #d3e0e8;
+    border-collapse: collapse;
+}
+.contenttable table thead td {
+    color: #1582c3;
+    border-right: 1px solid #d3e0e8;
+    border-bottom: 1px solid #d3e0e8;
+    border-top: 1px solid #d3e0e8;
+    text-align: left;
+    padding: 2px 6px 2px 12px;
+    background-color: #f6f7f9;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.contenttable table tbody td {
+    border-right: 1px solid #d3e0e8;
+    border-bottom: 1px solid #d3e0e8;
+    background: #fff;
+    padding: 2px 6px 2px 12px;
+    color: #6D929B;
+    font-size: 12px;
+    word-break: break-all;
+}
+.contenttable table td input {
+	border:1px solid #c3dbdd;
+}
+/**
+.ui-dialog-button {
+    float: none;
+    text-align: center;
+}
+***/
+
+.charts_item{
+	border:1px solid #d3e0e8; 
+	width: 30%; 
+	height: 50px; 
+	margin: 2px; 
+	float: left;
+	text-align: center;
+}
+.dbcharts_box {
+	margin-top: 3px;
+	height:397px; 
+	overflow-y:auto;
+}
+.dbcharts_box .pie1{
+	background-image: url(../images/default/main/pie.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .pie2{
+	background-image: url(../images/default/main/pie2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .pie3{
+	background-image: url(../images/default/main/pie3.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .pie4{
+	background-image: url(../images/default/main/pie4.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .bar1{
+	background-image: url(../images/default/main/bar.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .bar2{
+	background-image: url(../images/default/main/bar2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .line1{
+	background-image: url(../images/default/main/line.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .line2{
+	background-image: url(../images/default/main/line2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .line3{
+	background-image: url(../images/default/main/line3.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .scatter1{
+	background-image: url(../images/default/main/scatter.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .radar{
+	background-image: url(../images/default/main/radar.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .cross{
+	background-image: url(../images/default/main/cross.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .boxplot{
+	background-image: url(../images/default/main/boxplot.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .heatmap1{
+	background-image: url(../images/default/main/heatmap.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .heatmap2{
+	background-image: url(../images/default/main/heatmap2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .graph1{
+	background-image: url(../images/default/main/graph.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .graph2{
+	background-image: url(../images/default/main/graph2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .treemap{
+	background-image: url(../images/default/main/treemap.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .sankey{
+	background-image: url(../images/default/main/sankey.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .funnel{
+	background-image: url(../images/default/main/funnel.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.dbcharts_box .gauge{
+	background-image: url(../images/default/main/gauge.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.charts_selected {
+	border:1px solid red;
+}
+.charts_explain {
+	padding-top:5px;
+	height: 45px;
+    background-color: #FFF;
+    display:none;
+}
+.charts_explain p{
+	font-size:12px;
+	line-height: 14px;
+}
+.disabled_item {
+	opacity:0.4;
+    filter:alpha(opacity=40);/* 针对 IE8 以及更早的版本 */
+}
+.data_source_box {
+	border: 1px solid #d3e0e8;
+	margin-top: 3px;
+    height: 395px;
+    overflow-y: auto;
+    margin-right: 15px;
+    padding-left: 10px;
+}
+.data_source_box label{
+	display: inline-block;
+	width: 80%;
+	overflow: hidden;
+}
+
+.c_item3 {
+	width:33.33%;
+}
+.c_item2 {
+	width:50%;
+}
+.c_item1 {
+	width:100%;
+}
+.custom_item{
+	float: left;
+}
+.c_item_chart {
+	border:1px solid #d3e0e8;
+	min-height:350px;
+	margin:10px;
+	background-color: #f0f5f6;
+} 
+.tbchart_box {
+	display: inline-block;
+	margin:10px;
+	position:relative;
+	width: 130px;
+}
+.data_tbchart_title {
+	border: 1px solid #d3e0e8;
+	background-color: #f6f7f9;
+	text-align: center;
+	position: relative;
+}
+.tb_close {
+	position: absolute;
+    right: 5px;
+    color: #cdcdcd;
+    cursor: pointer;
+}
+.tb_close:hover {
+    color: #333;
+}
+.data_tbchart {
+	display: inline-block;
+    height: 135px;
+    overflow: auto;
+    width: 130px;
+}
+.data_tbchart table {
+    border-left: 1px solid #d3e0e8;
+    border-collapse: collapse;
+    width: 100%;
+}
+.data_tbchart table thead td{
+	color: #1582c3;
+    border-right: 1px solid #d3e0e8;
+    border-bottom: 1px solid #d3e0e8;
+    text-align: left;
+    padding: 2px 6px 2px 12px;
+    background-color: #f6f7f9;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.data_tbchart table tbody td {
+    border-right: 1px solid #d3e0e8;
+    border-bottom: 1px solid #d3e0e8;
+    background: #fff;
+    padding: 2px 6px 2px 12px;
+    color: #6D929B;
+    font-size: 12px;
+    word-break: break-all;
+}
+.data_tbchart table td input {
+	border:1px solid #c3dbdd;
+}
+
+.tbchart_box_main {
+    width: 205px;
+	float: left;
+}
+.tbchart_box_slave{
+	position: relative;
+	margin-left: 205px;
+    height: 100%;
+}
+.tbchart_box:after {
+    content: '';                 /*CSS伪类用法*/
+    position: absolute;         /*定位背景横线的位置*/
+    top: 50px;
+    background: #47bcb5;       /*宽和高做出来的背景横线*/
+    width: 100%;
+    right:-100%;
+    height: 2px;
+    
+}
+.tbchart_box.noslave:after {
+    content: '';                 /*CSS伪类用法*/
+    position: absolute;         /*定位背景横线的位置*/
+    top: 50px;
+    background: #47bcb5;       /*宽和高做出来的背景横线*/
+    width: 0;
+    right:-100%;
+    height: 2px;
+}
+.tbchart_box_slave_main .tbchart_box:after {
+    content: '';                 /*CSS伪类用法*/
+    position: absolute;         /*定位背景横线的位置*/
+	top: 50px;
+    background: #47bcb5;       /*宽和高做出来的背景横线*/
+   	width: 338px;
+    left: -338px;
+    height: 2px;
+}
+.tbchart_relations {
+	width: 280px;
+    height: 70px;
+    float: left;
+    text-align: center;
+    position: absolute;
+	top: 22%;
+    z-index:2;
+}
+.tbchart_box_slave:before {
+    content: '';
+    position: absolute;
+	bottom: 72%;
+    background: #47bcb5;
+    height: 100%;
+    width: 2px;
+}
+.tbchart_box_slave_main {
+	float: right;
+}
+.tbchart_box_slave.first_slave:before {
+    content: '';
+    position: absolute;
+    height: 0px;
+    width: 0px;
+}
+
+.ass01 {
+	background-image: url(../images/default/main/ass01.png);
+}
+.ass02 {
+	background-image: url(../images/default/main/ass02.png);
+}
+.ass03 {
+	background-image: url(../images/default/main/ass03.png);
+}
+.ass04 {
+	background-image: url(../images/default/main/ass04.png);
+}
+.ass05 {
+	background-image: url(../images/default/main/ass05.png);
+}
+.ass01,.ass02,.ass03,.ass04,.ass05 {
+	position:relative;
+	padding-top:30px;
+	text-align:center;
+	background-repeat: no-repeat;
+    background-position: center top;
+    cursor: pointer;
+}
+.ass_list {
+	position: absolute;
+    width: 324px;
+    background-color: #cdcdcd;
+    left: 2%;
+    border:1px solid #99bcd1;
+    border-right:none;
+}
+.ass_list li {
+	float: left;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 10px;
+    text-align: center;
+    border-right:1px solid #99bcd1;
+    cursor: pointer;
+}
+.ass_list .selected {
+	background-color: #eee;
+}
+
+.resful_request {
+	border: 1px solid #99bcd1;
+	width: 500px;
+	float: left;
+	margin: 15px;
+	margin-top: 0px;
+}
+.resful_title {
+	text-align: center;
+	height: 25px;
+    line-height: 25px;
+	padding: 2px 5px 0px 5px;
+	background-color: #cde5f2;
+	border-bottom: 1px solid #99bcd1;
+}
+.resful_url {
+	border-bottom: 1px solid #99bcd1;
+	padding:5px 0px 5px 10px;
+}
+.resful_type {
+	border-bottom: 1px solid #99bcd1;
+	padding:5px 10px;
+}
+.resful_type_select {
+	border-right: 1px solid #99bcd1;
+	padding: 0px 15px 0px 0px;
+	display: inline-block;
+}
+.resful_url input {
+	width:70%;
+	height:22px;
+	vertical-align:baseline;
+	border: 1px solid #c3dbdd;
+}
+.resful_type_select select {
+	height:24px;
+	width: 80px;
+}
+a.restful_btn {
+	width: 35px;
+	margin-left: 10px;
+}
+.resful_tab li {
+	float:left;
+    line-height: 22px;
+    border-right: 1px solid #99bcd1;
+    padding: 2px 5px 0px 5px;
+    cursor: pointer;
+}
+.resful_tab_select {
+	background-color: #cde5f2;
+}
+.resful_tab_content , .resful_tab_headers , .resful_tab_parameters{
+	border-top: 1px solid #99bcd1;
+	padding:10px;
+	clear:both;
+	display: none;
+}
+
+.resful_response {
+	border: 1px solid #99bcd1;
+	margin: 15px;
+	margin-top: 0px;
+	margin-left: 530px;
+	min-width: 300px;
+}
+.resful_response_content {
+	height: 292px;
+    padding: 10px;
+    overflow: auto;
+}
+.ass_list_table {
+	position: absolute;
+	width: 324px;
+	left: 2%;
+    border: 1px solid #99bcd1;
+    border-right: none;
+    border-bottom: none;
+    top: 80px;
+    height: 70px;
+    overflow: auto;
+    background-color: #f5fff6;
+}
+.ass_list_table table {
+	width: 100%;
+    border-collapse: collapse;
+}
+.ass_list_table table td {
+	border-right: 1px solid #d3e0e8;
+    border-bottom: 1px solid #d3e0e8;
+    padding: 2px 6px 2px 12px;
+    color: #6D929B;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+.ass_list_table2 {
+	
+	width: 800px;
+	left: 2%;
+    border: 1px solid #99bcd1;
+    border-right: none;
+    border-bottom: none;
+    overflow: auto;
+    background-color: #f5fff6;
+}
+.ass_list_table_2 table {
+	width: 100%;
+    border-collapse: collapse;
+}
+.ass_list_table_2 table td {
+	border-right: 1px solid #99bcd1;
+    border-bottom: 1px solid #d3e0e8;
+    padding: 2px 6px 2px 12px;
+    color: #6D929B;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+.resful_common_input {
+	height: 22px;
+    vertical-align: baseline;
+    border: 1px solid #c3dbdd;
+}
+.div_headers_sbox {
+	border:1px solid #d3e0e8;
+	overflow: hidden;
+	width: 410px;
+	background-color: #f6f7f9;
+}
+.div_headers_s1 {
+    padding: 2px 10px;
+    margin: 0px;
+    width: 182px;
+    height: 18px;
+    line-height: 18px;
+    float: left;
+    border-right: 1px solid #d3e0e8;
+}
+.div_headers_s2 {
+    padding: 2px 10px;
+    margin: 0px;
+    height: 18px;
+    width: 188px;
+    line-height: 18px;
+    margin-left: 203px;
+}
+.div_headers_table {
+	width: 410px;
+    height: 165px;
+	overflow: auto;
+	border-bottom: 1px solid #d3e0e8;
+	border-left: 1px solid #d3e0e8;
+	border-right: 1px solid #d3e0e8;
+}
+
+    
+.div_headers_table table {
+	width:100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.div_headers_table table td {
+	height: 18px;
+    border-bottom: 1px solid #d3e0e8;
+    padding: 2px 6px 2px 12px;
+    color: #6D929B;
+    font-size: 12px;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.headers_td_left {
+	width: 184px;
+	border-right: 1px solid #d3e0e8;
+}
+.resful_tr_select {
+	background-color: #cde5f2;
+}
+#configChartDiv > * {
+	margin-top: 5px;
+}
+#configChartDiv table td {
+    padding: 2px 2px 2px 2px;
+}
+
+.slabel
+        {
+            width:80px;
+            display: -moz-inline-box;
+            line-height: 1.8;
+            display: inline-block;
+            text-align:left;
+        }
+        
+        .textred
+        {
+            color:#CD0A0A;
+        }
+        
+.column {
+    width: 33.33333%;
+    float: left;
+  }
+  .portlet {
+    margin: 0 1em 1em 0;
+    padding: 0.3em;
+  }
+  .portlet-header {
+    padding: 0.2em 0.3em;
+    margin-bottom: 0.5em;
+    position: relative;
+  }
+  .portlet-header .portlet-actions {
+    float: right;
+    display: inline-block;
+  }
+  .portlet-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -8px;
+  }
+  .portlet-content {
+    padding: 0.4em;
+    height: 350px;
+  }
+  .portlet-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+  }
+  
+#accordion.ui-accordion .ui-accordion-header {
+	margin: 0 0 0 0;
+}

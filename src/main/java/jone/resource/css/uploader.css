@@ -1,0 +1,39 @@
+.uploaderList{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.file-item {
+	position: relative;
+    height: 35px;
+	line-height: 35px;
+	border-bottom: 1px dashed #ebebeb;
+}
+.file-progress{
+	position: absolute;
+    z-index: 0;
+	width: 100%;
+    height: 100%;
+}
+.file-progress .progress-bar{
+	height: 100%;
+    background: #abd7fb;
+}
+.file-info{
+	position: absolute;
+    z-index: 1;
+	width: 100%;
+    height: 100%;
+}
+.file-name{
+	float: left;
+	width: 50%;
+}
+.file-size{
+	float: left;
+	width: 15%;
+}
+.file-status{
+	float: left;
+	width: 15%;
+}

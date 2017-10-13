@@ -1,0 +1,21 @@
+<p>
+	<label>{{'CHART_NAME' | i18n}}</label><input type="text" id="titleText" maxlength="40"/>
+</p>
+<table>
+	<thead>
+		<tr>
+			<td><label>{{'FIELD' | i18n}}</label></td>
+			<td style="width: 50px;"><label>{{'NAME' | i18n}}*</label></td>
+			<td style="width: 50px;"><label>{{'VALUE' | i18n}}*</label></td>
+		</tr>
+	</thead>
+	<tbody>
+	{{each list as column index}}
+		<tr>
+			<td title="{{index}}">{{index}}</td>
+			<td><input type="checkbox" id="name_{{index}}"></td>
+			<td><input type="checkbox" id="value_{{index}}"></td>
+		</tr>
+	{{/each}}
+	</tbody>
+</table>

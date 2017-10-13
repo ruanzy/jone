@@ -1,0 +1,26 @@
+﻿<div class="right-content">
+<div style="padding: 20px 20px 0 20px;">
+<form class="searchform" id="searchform">
+			<table>
+				<tr>
+					<td>{{'LOG_OPERATOR' | i18n}}</td>
+					<td><input id="operator" type="text"
+						name='operator' style="width:196px;"/></td>
+					<td style="text-align: right;">{{'LOG_OPERATETIME' | i18n}}</td>
+					<td><input id="begintime" class="commonInput" type="text"
+						name='begintime'/></td>
+					<td>{{'LOG_ZHI' | i18n}}</td>
+					<td><input id="endtime" class="commonInput" type="text"
+						name='endtime'/></td>
+					<td></td>
+					<td><a class="common_btn" id="search"><i
+							class="fa fa-search"></i> {{'SEARCH' | i18n}}</a>
+							</td>
+				</tr>
+			</table>
+		</form></div>
+					<ul class="common_icon_button">
+				<li id="del"><a><i class="fa fa-times-circle"></i>{{'DELETE' | i18n}}</a></li>
+			</ul>
+	<div class="commontable" id="list"></div>
+</div>

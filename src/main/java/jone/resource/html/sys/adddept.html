@@ -1,0 +1,13 @@
+<form id="addform" style="text-align: center;">
+	<p>
+		<label for="name" class="slabel"><em class="textred">*</em>
+			部门名称</label> <input id="name" type="text" name="name" />
+	</p>
+	<p>
+		<label for="pid" class="slabel"><em class="textred">*</em>
+			上级部门</label> <input id="pname" type="text" name="pname" readonly="readonly"/> <input id="pid" type="hidden" name="pid" />
+	</p>
+	<p id="error" style="color: #ff0000;visibility: hidden;font-size:13px;">
+		<i class="fa fa-warning"></i>&nbsp;&nbsp;<span id="errormsg"></span>
+	</p>
+</form>

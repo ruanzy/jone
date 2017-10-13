@@ -1,0 +1,46 @@
+.cronalert {
+	display: inline-block;
+	background-color: #fcf8e3;
+	border-color: #fbeed5;
+	color: #c09853;
+	padding: 8px;
+}
+
+.filenav-active {
+	background-color: #f9f9f9;
+}
+
+.commonbtn {
+	width: 80px;
+	height: 25px;
+	line-height: 25px;
+	border: 1px solid #336699;
+	background-color: #336666;
+	text-align: center;
+	color: #FFF;
+	cursor: pointer;
+}
+
+.datetime_input {
+	border: 1px solid #336699;
+}
+
+.deletethis {
+	cursor: pointer;
+}
+
+.searchform{
+	padding: 15px 0;
+}
+
+.searchform>table{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.searchform>table>tbody>tr>td{
+	padding: 5px;
+}
+.ui-resizable-helper{
+	border-right: 4px solid #E6EEF8;
+}

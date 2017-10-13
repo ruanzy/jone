@@ -1,0 +1,159 @@
+.rui-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    outline: 0;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1), 0 0 256px rgba(255, 255, 255, .3);
+	background: #fff;
+	color: #777777;
+}
+.rui-dialog .rui-dialog-body {
+    padding: 0;
+    background: #fff;
+ /* overflow-y: auto; */
+}
+.rui-dialog .rui-dialog-content {
+    position: relative;
+    border: 0;
+    padding: 0em;
+    background: #fff;
+}
+.rui-draggable .rui-dialog-titlebar {
+    cursor: move;
+}
+.rui-dialog .rui-dialog-titlebar {
+    padding: .7em;
+    position: relative;
+    white-space: nowrap;
+    /* border-bottom: 1px solid #e8e8e8; */
+    /* background-color: #fbfbfb; */
+}
+.rui-dialog .rui-dialog-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    cursor: default;
+    color: #777777;
+}
+.rui-dialog .rui-dialog-titlebar-close {
+    position: absolute;
+    right: 0;
+	/* top: 50%; */
+    width: 20px;
+    margin: -10px 0 0 0;
+    padding: 1px;
+    height: 20px;
+	color: #000;
+	cursor: pointer;
+	font-weight: bold;
+	opacity: .4;
+	font-size: 1.3em;
+}
+.rui-dialog .rui-dialog-buttonpane {
+    text-align: left;
+	border-top: 0px solid #eee;
+    background-image: none;
+    padding: 10px 20px;
+}
+.rui-helper-clearfix:before, .rui-helper-clearfix:after {
+    content: "";
+    display: table;
+    border-collapse: collapse;
+}
+.rui-helper-clearfix:after {
+    clear: both;
+}
+.rui-dialog .rui-dialog-buttonpane .rui-dialog-buttonset {
+    float: right;
+}
+.rui-dialog .rui-dialog-buttonpane .btn2 {
+	display: block;
+    cursor: pointer;
+    color: #333333;
+    background-color: #ffffff;
+    width: auto;
+    overflow: visible;
+    display: inline-block;
+    padding: 3px 12px;
+    _margin-left: 5px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+	border-color: #cccccc;
+    border-radius: 0px;
+    -webkit-user-select: none;
+}
+.rui-dialog .rui-dialog-buttonpane  .btn+.btn {
+    margin-left: 10px;
+}
+.rui-widget-overlay {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    opacity: 0.3;
+    background: #aaa;
+}
+.tip{
+background-color: #3595CC;
+color:#fff;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+	top:0px;
+}
+.tipinner {
+    position: relative;
+	padding: 10px;
+	width: 220px;
+	line-height: 22px;
+    min-width: 12px;
+}
+.tipinner i.layui-layer-TipsG {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    border-color: transparent;
+    border-style: dashed;
+	top:-8px;
+	left: 8px;
+}
+@-webkit-keyframes bounceIn {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(.5);
+		transform: scale(.5)
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		transform: scale(1)
+	}
+}
+
+@keyframes bounceIn {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(.5);
+		-ms-transform: scale(.5);
+		transform: scale(.5)
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		-ms-transform: scale(1);
+		transform: scale(1)
+	}
+}

@@ -1,0 +1,27 @@
+<p>
+	<label>{{'CHART_NAME' | i18n}}</label><input type="text" id="titleText" maxlength="40"/>
+</p>
+<table>
+	<thead>
+		<tr>
+			<td style="width: 75px;"><label>{{'FIELD' | i18n}}</label></td>
+			<td style="width: 25px;"><label>{{'xAxis' | i18n}}*</label></td>
+			<td style="width: 25px;"><label>{{'yAxis' | i18n}}*</label></td>
+			<td style="width: 50px;"><label>{{'NAME' | i18n}}</label></td>
+			<td style="width: 50px;"><label>{{'VALUE' | i18n}}</label></td>
+			<td style="width: 50px;"><label>{{'GROUP' | i18n}}</label></td>
+		</tr>
+	</thead>
+	<tbody>
+	{{each list as column index}}
+		<tr>
+			<td title="{{index}}">{{index}}</td>
+			<td><input type="checkbox" id="x_{{index}}" /></td>
+			<td><input type="checkbox" id="y_{{index}}" /></td>
+			<td><input type="checkbox" id="n_{{index}}" /></td>
+			<td><input type="checkbox" id="v_{{index}}" /></td>
+			<td><input type="checkbox" id="g_{{index}}" /></td>
+		</tr>
+	{{/each}}
+	</tbody>
+</table>

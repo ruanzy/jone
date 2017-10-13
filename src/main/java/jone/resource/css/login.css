@@ -1,0 +1,147 @@
+
+/***公用默认的CSS***/
+* {margin:0;padding:0;list-style:none;}
+*:focus {outline: none;}/*去掉chrome等浏览器点输入框时的边框*/
+html,body{height: 100%;width: 100%;}
+body {font-family: Tahoma, Arial, sans-serif, "宋体";font-size: 12px;}
+img{ border:none;}
+ul,li{ list-style:none;}
+label{vertical-align:middle;}
+input{vertical-align:middle;}
+a{outline: none;text-decoration: none; cursor: pointer;}
+select {border:1px solid #c3dbdd;}
+a:hover{text-decoration: underline;}
+.clear {clear: both;}
+.display {display: none;}
+.floatleft{float:left;}
+.floatright{float:right;}
+.bluefont {color:#117fc0;}
+.redfont { color: #CC0033}
+input.error {border: 1px dotted red;}
+label.error {color: red;}
+.disbaleinput {color: #adadad;}
+.requiredinput{
+	color: red;
+}
+
+/**共用***/
+.commonInput {
+    height: 22px;
+    line-height:22px;
+    border: 1px solid #c3dbdd;
+    background-color: #FFF;
+}
+/*===登录页 css 开始===*/
+.login_body {
+	height: 100%;
+	width: 100%;
+	background-image: url(../images/default/login/body_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-color:#0c66a4;
+	overflow-x:hidden;
+}
+.login_box {
+	height: 390px;
+	width: 650px;
+	background-image: url(../images/default/login/login_box.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	margin: 0px auto;
+	padding-top:120px;
+}
+.login_logo {
+	background-image: url(../images/default/login/logo.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	height: 135px;
+	width: 580px;
+	margin:35px auto 0px auto;
+}
+.login_form {
+	width:320px;
+	margin:0px auto;
+}
+.login_form ul li {
+	height:22px;
+	margin:10px 0px;
+	line-height: 22px;
+}
+.login_label {
+	width:60px;
+	color:#464646;
+	display:inline-block;
+}
+.login_input {
+	height: 20px;
+	width: 240px;
+	border:1px solid #c3dbdd;
+	background-color:#FFF;
+}
+.login_info {
+	color:#F00;
+	display:none;
+}
+a.rem_click {
+	text-decoration: none;
+}
+.rem_checkbox {
+	height: 12px;
+	width: 12px;
+	background-image: url(../images/default/login/checkbox.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	display:inline-block;
+	vertical-align:middle;
+}
+.rem_checked {
+	background-position: center bottom;
+}
+.rem_label {
+	color:#a0a8ad;
+}
+.login_btn {
+	width:320px;
+	margin:15px auto 0px auto;
+}
+.btn_login {
+	width: 120px;
+	height: 27px;
+	display:inline-block;
+	border: 1px solid #2e81a0;
+	border-radius: 3px;
+	background-image: url(../images/default/login/btn_login_bg.png);
+	background-repeat: repeat-x;
+	background-position: left top;
+	cursor:pointer;
+	line-height:27px;
+	text-align:center;
+	color:#fff;
+}
+.btn_reset {
+	width: 120px;
+	height: 27px;
+	display:inline-block;
+	border: 1px solid #94b7c2;
+	border-radius: 3px;
+	background-image: url(../images/default/login/btn_reset_bg.png);
+	background-repeat: repeat-x;
+	background-position: left top;
+	cursor:pointer;
+	line-height:27px;
+	text-align:center;
+	color:#94b7c2;
+	margin-left:50px;
+}
+.btn_login:hover {
+	color:#005d80;
+}
+.btn_reset:hover {
+	color:#005d80;
+}
+.version_info {
+	text-align:center;
+	margin-top:40px;
+	color:#a0a8ad;
+}
+/*===登录页 css 结束===*/

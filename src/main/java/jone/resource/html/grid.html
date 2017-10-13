@@ -1,0 +1,128 @@
+<div class="panel">
+	<div class="panel-body">
+<p>使用示例</p>
+<pre><code class="javascript">&lt;div id="datalist"&gt;&lt;/div&gt;
+$('#datalist').grid({
+	url : 'user/list',
+	columns: [
+		{ header: '用户名', field: 'username'},
+		{ header: '注册时间', field: 'regtime', align: 'center', width: 200},
+		{ header: '操作', field: 'op', render : opRender, align: 'center', width: 200}
+	]
+});
+function stateRender(v, r, rowid){
+	return (v == 1)? 'a': 'b';
+}
+</code></pre>
+<p>配置说明</p>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>属性</th>
+			<th>类型</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>columns</td>
+			<td>array</td>
+			<td>grid的列column的配置对象.更多细节请参见列column属性。</td>
+		</tr>
+		<tr>
+			<td>url</td>
+			<td>string</td>
+			<td>从远程站点请求数据的 URL</td>
+		</tr>
+		<tr>
+			<td>data</td>
+			<td>array</td>
+			<td>要加载的数据</td>
+		</tr>
+		<tr>
+			<td>sm</td>
+			<td>string</td>
+			<td>实现单选、多选 ('s':单选,'m':多选)</td>
+		</tr>
+		<tr>
+			<td>pagesize</td>
+			<td>int</td>
+			<td>分页的每页记录数(-1表示不分页)</td>
+		</tr>
+	</tbody>
+</table>
+<p>列属性说明</p>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>属性</th>
+			<th>类型</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>header</td>
+			<td>string</td>
+			<td>列的标题文本</td>
+		</tr>
+		<tr>
+			<td>field</td>
+			<td>string</td>
+			<td>列的字段名</td>
+		</tr>
+		<tr>
+			<td>width</td>
+			<td>int</td>
+			<td>如果未定义，则宽度会自动扩展以适应它的内容</td>
+		</tr>
+		<tr>
+			<td>align</td>
+			<td>string</td>
+			<td>指示如何对齐该列的数据，可以用 'left'、'right'、'center'</td>
+		</tr>
+		<tr>
+			<td>render</td>
+			<td>function</td>
+			<td>
+				<p>单元格的格式化函数，需要三个参数：</p>
+				<p>value：字段的值</p>
+				<p>rowData：行的记录数据</p>
+				<p>rowid：行的索引</p>
+<pre><code>function stateRender(v, r, rowid){
+	return (v == 1)? 'a': 'b';
+}
+</code></pre>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>方法</p>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>名称</th>
+			<th>参数</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>getSelected</td>
+			<td>none</td>
+			<td>返回所有选中的行，当没有选中的记录时，将返回空数组</td>
+		</tr>
+		<tr>
+			<td>reload</td>
+			<td>param</td>
+			<td>重新加载数据</td>
+		</tr>
+		<tr>
+			<td>setQueryParam</td>
+			<td>param</td>
+			<td>设置查询参数</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>

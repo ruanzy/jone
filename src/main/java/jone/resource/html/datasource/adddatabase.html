@@ -1,0 +1,54 @@
+<form id="form">
+	<table class="formtable">
+	<input class="commonInput required" id="id"
+				name="id" style="width:160px"  type="hidden" value="{{id}}">
+		<tr>
+			<td style="width:80px;" class="formlabel"><label>{{'NAME' | i18n}}</label></td>
+			<td><input class="commonInput required" id="name"
+				name="name" style="width:160px" type="text" value="{{name}}"></td>
+		</tr>
+		<tr>
+			<td style="width:80px;" class="formlabel"><label>{{'DATABASE_TYPE' | i18n}}</label></td>
+			<td><select id="database_type" name="database_type" >
+			
+			{{each ['mysql','idb','dbone','oracle'] as value i}}
+		<option value="{{value}}" {{if value==database_type}}selected{{/if}}>{{value}}</option>	
+			{{/each}}
+			
+			
+			</select></td>
+		</tr>
+		<tr>
+			<td style="width:80px;" class="formlabel"><label>{{'IP' | i18n}}</label></td>
+			<td><input class="commonInput required" id="ip"
+				name="ip" style="width:160px"  type="text" value="{{ip}}"></td>
+		</tr>
+			<tr>
+			<td style="width:80px;" class="formlabel"><label>{{'PORT' | i18n}}</label></td>
+			<td><input class="commonInput required" id="port"
+				name="port" style="width:160px"  type="text"  value="{{port}}"></td>
+		</tr>
+		<tr>
+			<td style="width:80px;" class="formlabel"><label>{{'USERNAME' | i18n}}</label></td>
+			<td><input class="commonInput required" id="user_name"
+				name="user_name" style="width:160px"  type="text" value="{{user_name}}"></td>
+		</tr>
+		<tr>
+			<td style="width:80px;" class="formlabel"><label>{{'PASSWORD' | i18n}}</label></td>
+			<td><input class="commonInput required" id="psw"
+				name="psw" style="width:160px"  type="password" value="{{psw}}"></td>
+		</tr>
+		<tr>
+			<td style="width:80px;" class="formlabel"><label>{{'CATALOG_NAME' | i18n}}</label></td>
+			<td><input class="commonInput required" id="database_name"
+				name="database_name" style="width:160px" value="{{database_name}}" type="text"></td>
+		</tr>
+		<tr>
+			<td style="width:80px;" class="formlabel"><label></label></td>
+			<td><div id="error"
+					style="padding: 10px;color: #a94442;background-color: #f2dede;border-color: #ebccd1;display: none;">
+					<i class="fa fa-warning"></i>&nbsp;&nbsp;<span id="errormsg"></span>
+				</div></td>
+		</tr>
+	</table>
+</form>

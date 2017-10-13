@@ -1,0 +1,29 @@
+.page-bar{
+	padding: 5px 0;
+	margin: 10px 0;
+}
+.page-bar > span{
+	background-color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	padding: 4px 8px;
+	border: 1px solid #ddd;
+	text-decoration: none;
+	margin-right: 5px;
+	font-size: 14px;
+}
+
+.page-bar > span.active{
+	background-color: #1fbba6;
+	color: #fff;
+}
+
+.page-bar > span.disable{
+	cursor: not-allowed;
+}
+
+.page-bar > span.hellip{
+	border: none;
+	cursor: default;
+	margin-right: 0;
+}
