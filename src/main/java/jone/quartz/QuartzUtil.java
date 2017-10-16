@@ -2,13 +2,19 @@ package jone.quartz;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
+import jone.R;
 import jone.data.db.DB;
 
+import org.apache.commons.io.IOUtils;
 import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -19,9 +25,13 @@ import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.GroupMatcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class QuartzUtil
 {
+	static final Logger logger = LoggerFactory.getLogger(QuartzUtil.class);
 	private static SchedulerFactory sf;
 	
 	public static void addJob(String name, String group, String cron, Class<? extends Job> jobClass,
@@ -56,18 +66,65 @@ public class QuartzUtil
 		}
 	}
 	
-	private static void createTables(DB db)
+	public static List<R> getAllJob()
 	{
 		try
 		{
-			boolean exist = db.existTable("QRTZ_JOB_DETAILS");
-			if(!exist)
+			Scheduler scheduler = sf.getScheduler();
+			GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();
+			Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);
+			List<R> jobList = new ArrayList<R>();
+			for (JobKey jobKey : jobKeys)
 			{
-				InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("/jone/quartz/quartz.sql");
-				db.runScript(new InputStreamReader(is, "UTF8"));
+				List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
+				JobDetail jd = scheduler.getJobDetail(jobKey);
+				for (Trigger trigger : triggers)
+				{
+					R r = new R();
+					r.put("name", jobKey.getName());
+					r.put("group", jobKey.getGroup());
+					r.put("jobclass", jd.getJobClass());
+					for (Map.Entry<String, Object> entry : jd.getJobDataMap().entrySet())
+					{
+						r.put(entry.getKey(), entry.getValue());
+					}
+					Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
+					r.put("status", triggerState.name());
+					r.put("starttime", trigger.getStartTime());
+					r.put("endtime", trigger.getEndTime());
+					if (trigger instanceof CronTrigger)
+					{
+						CronTrigger cronTrigger = (CronTrigger) trigger;
+						String cronExpression = cronTrigger.getCronExpression();
+						r.put("cron", cronExpression);
+					}
+					jobList.add(r);
+				}
 			}
+			return jobList;
 		}
 		catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static void start()
+	{
+		try
+		{
+			if (sf == null)
+			{
+				sf = new StdSchedulerFactory();
+			}
+			Scheduler scheduler = sf.getScheduler();
+			if (!scheduler.isStarted())
+			{
+				logger.debug("Quartz scheduler is starting...");
+				scheduler.start();
+			}
+		}
+		catch (SchedulerException e)
 		{
 			e.printStackTrace();
 		}
@@ -103,10 +160,31 @@ public class QuartzUtil
 			Scheduler scheduler = sf.getScheduler();
 			if (!scheduler.isStarted())
 			{
+				logger.debug("Quartz scheduler is starting...");
 				scheduler.start();
 			}
 		}
 		catch (SchedulerException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private static void createTables(DB db)
+	{
+		try
+		{
+			boolean exist = db.existTable("QRTZ_JOB_DETAILS");
+			logger.debug("Quartz dbtables already exist");
+			if(!exist)
+			{
+				InputStream is = QuartzUtil.class.getResourceAsStream("/jone/quartz/quartz.sql");
+				db.runScript(new InputStreamReader(is, "UTF8"));
+				logger.debug("Creating  quartz dbtables...");
+				System.out.println(IOUtils.toString(is));
+			}
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
