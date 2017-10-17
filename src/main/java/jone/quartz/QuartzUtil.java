@@ -66,6 +66,98 @@ public class QuartzUtil
 		}
 	}
 	
+	public static void pauseJobs(String group)
+	{
+		GroupMatcher<JobKey> gm = GroupMatcher.groupEquals(group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			scheduler.pauseJobs(gm);
+		}
+		catch (Exception e)
+		{
+			logger.error("pauseJobs group {} fail.", group);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	public static void resumeJob(String name, String group)
+	{
+		JobKey jobKey = JobKey.jobKey(name, group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			if (scheduler.checkExists(jobKey))
+			{
+				scheduler.resumeJob(jobKey);
+			}
+			else
+			{
+				logger.debug("Job {}  does't exist.", jobKey);
+			}
+		}
+		catch (Exception e)
+		{
+			logger.error("pauseJob job {} fail.", jobKey);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	public static void resumeJobs(String name, String group)
+	{
+		GroupMatcher<JobKey> gm = GroupMatcher.groupEquals(group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			scheduler.resumeJobs(gm);
+		}
+		catch (Exception e)
+		{
+			logger.error("pauseJob group {} fail.", group);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	public static void removeJob(String name, String group)
+	{
+		JobKey jobKey = JobKey.jobKey(name, group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			if (scheduler.checkExists(jobKey))
+			{
+				scheduler.deleteJob(jobKey);
+			}
+			else
+			{
+				logger.debug("Job {}  does't exist.", jobKey);
+			}
+		}
+		catch (Exception e)
+		{
+			logger.error("removeJob job {} fail.", jobKey);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	public static void removeJobs(String group)
+	{
+		GroupMatcher<JobKey> gm = GroupMatcher.groupEquals(group);
+		try
+		{
+			Scheduler scheduler = sf.getScheduler();
+			Set<JobKey> set = scheduler.getJobKeys(gm);
+			List<JobKey> list = new ArrayList<JobKey>();  
+			list.addAll(set);
+			scheduler.deleteJobs(list);
+		}
+		catch (Exception e)
+		{
+			logger.error("removeJob group {} fail.", group);
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
 	public static List<R> getAllJob()
 	{
 		try
@@ -83,15 +175,14 @@ public class QuartzUtil
 					R r = new R();
 					r.put("name", jobKey.getName());
 					r.put("group", jobKey.getGroup());
-					r.put("jobclass", jd.getJobClass());
-					for (Map.Entry<String, Object> entry : jd.getJobDataMap().entrySet())
-					{
-						r.put(entry.getKey(), entry.getValue());
-					}
+					r.put("jobClass", jd.getJobClass());
+					r.putAll(jd.getJobDataMap());
 					Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
 					r.put("status", triggerState.name());
-					r.put("starttime", trigger.getStartTime());
-					r.put("endtime", trigger.getEndTime());
+					r.put("startTime", trigger.getStartTime());
+					r.put("endTime", trigger.getEndTime());
+					r.put("PreviousFireTime", trigger.getPreviousFireTime());
+					r.put("NextFireTime", trigger.getNextFireTime());
 					if (trigger instanceof CronTrigger)
 					{
 						CronTrigger cronTrigger = (CronTrigger) trigger;
