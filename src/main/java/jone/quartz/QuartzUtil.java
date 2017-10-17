@@ -11,7 +11,6 @@ import java.util.Set;
 import jone.R;
 import jone.data.db.DB;
 
-import org.apache.commons.io.IOUtils;
 import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -266,14 +265,13 @@ public class QuartzUtil
 		try
 		{
 			boolean exist = db.existTable("QRTZ_JOB_DETAILS");
-			logger.debug("Quartz dbtables already exist");
-			if(!exist)
-			{
-				InputStream is = QuartzUtil.class.getResourceAsStream("/jone/quartz/quartz.sql");
-				db.runScript(new InputStreamReader(is, "UTF8"));
-				logger.debug("Creating  quartz dbtables...");
-				System.out.println(IOUtils.toString(is));
+			if(exist){
+				logger.debug("Quartz dbtables already exist");
+				return;
 			}
+			logger.debug("Creating quartz dbtables...");
+			InputStream is = QuartzUtil.class.getResourceAsStream("/jone/quartz/quartz.sql");
+			db.runScript(new InputStreamReader(is, "UTF8"));
 		}
 		catch (Exception e)
 		{
