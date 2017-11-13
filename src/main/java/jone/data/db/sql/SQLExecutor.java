@@ -20,18 +20,18 @@ public class SQLExecutor
 
 	public int update(String sqlid, Map<String, Object> params)
 	{
-		Sql _sql = SQLLoader.getSql(sqlid, params);
+		SqlPara _sql = SQLLoader.getSql(sqlid, params);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.update(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.update(sql, _params);
 	}
 	
 	public int update(String sqlid, R params)
 	{
-		Sql _sql = SQLLoader.getSql(sqlid, params);
+		SqlPara _sql = SQLLoader.getSql(sqlid, params);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.update(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.update(sql, _params);
 	}
 
 	public List<R> find(String sqlid, Map<String, String> params)
@@ -41,18 +41,18 @@ public class SQLExecutor
 		{
 			p.putAll(params);
 		}
-		Sql _sql = SQLLoader.getSql(sqlid, p);
+		SqlPara _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.find(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.find(sql, _params);
 	}
 	
 	public List<R> find(String sqlid, R params)
 	{
-		Sql _sql = SQLLoader.getSql(sqlid, params);
+		SqlPara _sql = SQLLoader.getSql(sqlid, params);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.find(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.find(sql, _params);
 	}
 	
 	public ResultSet findBigData(String sqlid, Map<String, String> params)
@@ -62,10 +62,10 @@ public class SQLExecutor
 		{
 			p.putAll(params);
 		}
-		Sql _sql = SQLLoader.getSql(sqlid, p);
+		SqlPara _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.findBigData(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.findBigData(sql, _params);
 	}
 
 	public R findOne(String sqlid, Map<String, String> params)
@@ -75,18 +75,18 @@ public class SQLExecutor
 		{
 			p.putAll(params);
 		}
-		Sql _sql = SQLLoader.getSql(sqlid, p);
+		SqlPara _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.findOne(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.findOne(sql, _params);
 	}
 	
 	public R findOne(String sqlid, R params)
 	{
-		Sql _sql = SQLLoader.getSql(sqlid, params);
+		SqlPara _sql = SQLLoader.getSql(sqlid, params);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.findOne(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.findOne(sql, _params);
 	}
 
 	public Object scalar(String sqlid, Map<String, String> params)
@@ -96,18 +96,18 @@ public class SQLExecutor
 		{
 			p.putAll(params);
 		}
-		Sql _sql = SQLLoader.getSql(sqlid, p);
+		SqlPara _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.scalar(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.scalar(sql, _params);
 	}
 	
 	public Object scalar(String sqlid, R params)
 	{
-		Sql _sql = SQLLoader.getSql(sqlid, params);
+		SqlPara _sql = SQLLoader.getSql(sqlid, params);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.scalar(sql, _params.toArray());
+		Object[] _params = _sql.getPara();
+		return db.scalar(sql, _params);
 	}
 
 	public List<R> pager(String sqlid, Map<String, String> params, int page, int pagesize)
@@ -117,18 +117,18 @@ public class SQLExecutor
 		{
 			p.putAll(params);
 		}
-		Sql _sql = SQLLoader.getSql(sqlid, p);
+		SqlPara _sql = SQLLoader.getSql(sqlid, p);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.pager(sql, _params.toArray(), page, pagesize);
+		Object[] _params = _sql.getPara();
+		return db.pager(sql, _params, page, pagesize);
 	}
 	
 	public List<R> pager(String sqlid, R params, int page, int pagesize)
 	{
-		Sql _sql = SQLLoader.getSql(sqlid, params);
+		SqlPara _sql = SQLLoader.getSql(sqlid, params);
 		String sql = _sql.getSql();
-		List<Object> _params = _sql.getParams();
-		return db.pager(sql, _params.toArray(), page, pagesize);
+		Object[] _params = _sql.getPara();
+		return db.pager(sql, _params, page, pagesize);
 	}
 
 	public R pager(String countsql, String pagesql, Map<String, String> params, int page, int pagesize)
@@ -140,19 +140,19 @@ public class SQLExecutor
 		{
 			p.putAll(params);
 		}
-		Sql _countsql = SQLLoader.getSql(countsql, p);
+		SqlPara _countsql = SQLLoader.getSql(countsql, p);
 		String sql1 = _countsql.getSql();
-		List<Object> params1 = _countsql.getParams();
+		Object[] params1 = _countsql.getPara();
 		//log.debug(sql);
-		Object count = db.scalar(sql1, params1.toArray());
+		Object count = db.scalar(sql1, params1);
 		long total = Long.parseLong(count.toString());
 		if (total > 0)
 		{
-			Sql _pagesql = SQLLoader.getSql(pagesql, p);
+			SqlPara _pagesql = SQLLoader.getSql(pagesql, p);
 			String sql2 = _pagesql.getSql();
-			List<Object> params2 = _pagesql.getParams();
+			Object[] params2 = _pagesql.getPara();
 			//log.debug(sql2);
-			data = db.pager(sql2, params2.toArray(), page, pagesize);
+			data = db.pager(sql2, params2, page, pagesize);
 		}
 		r.put("total", total);
 		r.put("data", data);
@@ -163,19 +163,19 @@ public class SQLExecutor
 	{
 		R r = new R();
 		List<R> data = new ArrayList<R>();
-		Sql _countsql = SQLLoader.getSql(countsql, params);
+		SqlPara _countsql = SQLLoader.getSql(countsql, params);
 		String sql1 = _countsql.getSql();
-		List<Object> params1 = _countsql.getParams();
+		Object[] params1 = _countsql.getPara();
 		//log.debug(sql);
-		Object count = db.scalar(sql1, params1.toArray());
+		Object count = db.scalar(sql1, params1);
 		long total = Long.parseLong(count.toString());
 		if (total > 0)
 		{
-			Sql _pagesql = SQLLoader.getSql(pagesql, params);
+			SqlPara _pagesql = SQLLoader.getSql(pagesql, params);
 			String sql2 = _pagesql.getSql();
-			List<Object> params2 = _pagesql.getParams();
+			Object[] params2 = _pagesql.getPara();
 			//log.debug(sql2);
-			data = db.pager(sql2, params2.toArray(), page, pagesize);
+			data = db.pager(sql2, params2, page, pagesize);
 		}
 		r.put("total", total);
 		r.put("data", data);

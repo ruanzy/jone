@@ -6,36 +6,24 @@ import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import org.beetl.core.Configuration;
-import org.beetl.core.GroupTemplate;
-import org.beetl.core.Template;
-import org.beetl.core.resource.StringTemplateResourceLoader;
+
+import jone.template.Engine;
+import jone.template.Template;
 
 public class SQLLoader {
 	static String lineSeparator = System.getProperty("line.separator", "\n");
-	static Map<String, String> sqls = new LinkedHashMap<String, String>();
-	static GroupTemplate gt;
+	public static Map<String, String> sqls = new LinkedHashMap<String, String>();
+	static Engine engine;
 	static {
 		try {
-			StringTemplateResourceLoader resourceLoader = new StringTemplateResourceLoader();
-			Configuration cfg = Configuration.defaultConfiguration();
-			String pck = SQLLoader.class.getPackage().getName();
-			cfg.setEngine(pck + ".SQLTemplateEngine");
-			cfg.setPlaceholderStart("#{");
-			cfg.setPlaceholderEnd("}");
-			cfg.setStatementStart("@");
-			cfg.setStatementEnd(null);
-			gt = new GroupTemplate(resourceLoader, cfg);
-			gt.registerFunction("join", new JoinFunction());
-			gt.registerFunction("like", new LikeFunction());
-			URL url = Thread.currentThread().getContextClassLoader()
-					.getResource("sql");
-			File f = new File(url.toURI());
+			File f = new File("d:/tpl");
+			engine = Engine.use();
+			engine.addDirective("p", new ParaDirective());
+			engine.addDirective("in", new InDirective());
+			engine.setBaseTemplatePath(f.getPath());
 			File[] sf = f.listFiles(new FilenameFilter() {
 				public boolean accept(File dir, String name) {
 					return name.endsWith("sql");
@@ -49,27 +37,24 @@ public class SQLLoader {
 		}
 	}
 
-	public static Sql getSql(String sqlid, Map<String, Object> params) {
-		Sql sql = null;
+	public static SqlPara getSql(String sqlid, Map<String, Object> params) {
 		String sqlTmpl = sqls.get(sqlid);
 		if(null == sqlTmpl){
 			String msg = String.format("Failed to obtain SQL through [%s]", sqlid);
 			throw new RuntimeException(msg);
 		}
-		Template t = gt.getTemplate(sqlTmpl);
-		t.binding(params);
-		List<Object> _paras = new LinkedList<Object>();
-		t.binding("_paras", _paras);
-		String sqltext = t.render();
-		sql = new Sql();
+		Template t = engine.getTemplateByString(sqlTmpl);
+		SqlPara sql = new SqlPara();
+		params.put("_SQL_PARA_", sql);
+		String sqltext = t.renderToString(params);
+		params.remove("_SQL_PARA_");
 		if (true) {
 			sqltext = sqltext.replaceAll("\n\t*", " ")
 					.replaceAll("\\s{2,}", " ").trim()
 					.replaceAll("where 1=1 and", "where")
 					.replaceAll("where 1=1", "");
 		}
-		sql.sql = sqltext;
-		sql.params = _paras;
+		sql.setSql(sqltext);
 		return sql;
 	}
 
