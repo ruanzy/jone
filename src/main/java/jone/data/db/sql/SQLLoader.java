@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -19,7 +20,8 @@ public class SQLLoader {
 	static Engine engine;
 	static {
 		try {
-			File f = new File("d:/tpl");
+			URL url = Thread.currentThread().getContextClassLoader().getResource("sql");
+			File f = new File(url.toURI());
 			engine = Engine.use();
 			engine.addDirective("p", new ParaDirective());
 			engine.addDirective("in", new InDirective());
