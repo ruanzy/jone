@@ -13,9 +13,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.jar.Attributes;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -466,24 +463,6 @@ public class WebUtil
 	
 	public static String getVersion()
 	{
-		JarFile jarFile = null;
-		try
-		{
-			String jarPath = WebUtil.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-			jarFile = new JarFile(jarPath);  
-			Manifest enu = jarFile.getManifest();  
-			Attributes attr = enu.getMainAttributes();
-			String version = attr.getValue("Build-Version");
-			return version;
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			IOUtils.closeQuietly(jarFile);
-		}
-		return "unknown";
+		return JOne.class.getPackage().getImplementationVersion();
 	}
 }

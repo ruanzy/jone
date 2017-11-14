@@ -77,8 +77,25 @@ public class Cfg
 		}
 		return null;
 	}
+	
+	public static String getString(String expression, String defaultVal)
+	{
+		try
+		{
+			Object obj = Ognl.getValue(expression, cfg);
+			if (null != obj)
+			{
+				return obj.toString();
+			}
+		}
+		catch (OgnlException e)
+		{
+			e.printStackTrace();
+		}
+		return defaultVal;
+	}
 
-	public static Integer getInt(String expression)
+	public static Integer getInt(String expression, int defaultVal)
 	{
 		try
 		{
@@ -92,6 +109,6 @@ public class Cfg
 		{
 			e.printStackTrace();
 		}
-		return null;
+		return defaultVal;
 	}
 }

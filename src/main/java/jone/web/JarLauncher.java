@@ -9,24 +9,24 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 public class JarLauncher
 {
-	public static void main(String[] args)
+	public static void run(Class<?> cls)
 	{
 		int port = 8088;
 		String contextPath = "/";
 		Server server = new Server(port);
 		server.setStopAtShutdown(true);
-		ProtectionDomain protectionDomain = JarLauncher.class.getProtectionDomain();
+		ProtectionDomain protectionDomain = cls.getProtectionDomain();
 		URL location = protectionDomain.getCodeSource().getLocation();
 		String warFile = location.toExternalForm();
 		WebAppContext context = new WebAppContext(warFile, contextPath);
-		context.setServer(server);
-		String currentDir = new File(location.getPath()).getParent();
-		File workDir = new File(currentDir, "work");
-		context.setTempDirectory(workDir);
-		context.setExtraClasspath(currentDir + "/conf");
-		server.setHandler(context);
 		try
 		{
+			context.setServer(server);
+			String currentDir = new File(location.getPath()).getParent();
+			File workDir = new File(currentDir, "work");
+			context.setTempDirectory(workDir);
+			context.setExtraClasspath(currentDir + "/conf");
+			server.setHandler(context);
 			server.start();
 			server.join();
 		}

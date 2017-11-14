@@ -5,7 +5,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Launcher
 {
-	public static void run(int port)
+	public static void start(int port)
 	{
 		String WebRoot = "src/main/webapp";
 		Server server = new Server(port);
