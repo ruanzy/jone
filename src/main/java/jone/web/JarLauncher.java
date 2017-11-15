@@ -16,9 +16,10 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 public class JarLauncher
 {
-	public static void run(int port)
+	public static void start()
 	{
-		String contextPath = "/";
+		int port = Cfg.getInt("server.port", 8080);
+		String contextPath = Cfg.getString("server.context", "/");
 		Server server = new Server(port);
 		server.setStopAtShutdown(true);
 		ProtectionDomain protectionDomain = JarLauncher.class.getProtectionDomain();
@@ -30,9 +31,11 @@ public class JarLauncher
 			context.setClassLoader(Thread.currentThread().getContextClassLoader());
 			context.setServer(server);
 			ServletHandler handler = new ServletHandler();
-			FilterHolder fh = handler.addFilterWithMapping(JOne.class, "/*", EnumSet.of(DispatcherType.REQUEST));
-	        fh.setInitParameter("basepackage", Cfg.getString("basepackage"));
-	        context.addFilter(fh, "/*", EnumSet.of(DispatcherType.REQUEST));
+			FilterHolder cors = handler.addFilterWithMapping(CorsFilter.class, "/*", EnumSet.of(DispatcherType.REQUEST));
+			context.addFilter(cors, "/*", EnumSet.of(DispatcherType.REQUEST));
+			FilterHolder jone = handler.addFilterWithMapping(JOne.class, "/*", EnumSet.of(DispatcherType.REQUEST));
+			jone.setInitParameter("basepackage", Cfg.getString("basepackage"));
+			context.addFilter(jone, "/*", EnumSet.of(DispatcherType.REQUEST));
 	        String currentDir = new File(location.getPath()).getParent();
 	        File workDir = new File(currentDir, "work");
 	        context.setTempDirectory(workDir);

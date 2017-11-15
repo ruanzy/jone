@@ -61,9 +61,12 @@ public class RrdUtils {
 			rrdDb = new RrdDb(rrdPath);
 			Sample sample = rrdDb.createSample();
 			long time = Util.normalize(Util.getTimestamp(), STEP);
-			sample.setTime(time);
-			sample.setValue(ds, v);
-			sample.update();
+			long lastUpdateTime = rrdDb.getLastUpdateTime();
+			if(time > lastUpdateTime){
+				sample.setTime(time);
+				sample.setValue(ds, v);
+				sample.update();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

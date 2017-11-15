@@ -11,17 +11,19 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CORSFilter implements Filter
+import org.apache.commons.lang.StringUtils;
+
+public class CorsFilter implements Filter
 {
-	String allowHeaders;
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
-			ServletException
+	String[] allowHeaders = new String[] { "Content-Type", "X-Requested-With" };
+
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException
 	{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		String method = request.getMethod();
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		response.addHeader("Access-Control-Allow-Headers", allowHeaders);
+		response.addHeader("Access-Control-Allow-Headers", StringUtils.join(allowHeaders));
 		if ("OPTIONS".equals(method))
 		{
 			response.getWriter().write("CORS");
@@ -32,7 +34,6 @@ public class CORSFilter implements Filter
 
 	public void init(FilterConfig config) throws ServletException
 	{
-		allowHeaders = config.getInitParameter("allowHeaders");
 	}
 
 	public void destroy()
