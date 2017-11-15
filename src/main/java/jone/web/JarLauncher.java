@@ -18,8 +18,8 @@ public class JarLauncher
 {
 	public static void start()
 	{
-		int port = Cfg.getInt("server.port", 8080);
-		String contextPath = Cfg.getString("server.context", "/");
+		int port = Cfg.getInt("port", 8080);
+		String contextPath = Cfg.getString("context", "");
 		Server server = new Server(port);
 		server.setStopAtShutdown(true);
 		ProtectionDomain protectionDomain = JarLauncher.class.getProtectionDomain();
@@ -42,7 +42,6 @@ public class JarLauncher
 	        context.setExtraClasspath(currentDir + "/conf");
 			server.setHandler(context);
 			server.start();
-			server.join();
 		}
 		catch (Exception e)
 		{

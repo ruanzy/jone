@@ -15,8 +15,8 @@ public class Launcher
 {
 	public static void start()
 	{
-		int port = Cfg.getInt("server.port", 8080);
-		String contextPath = Cfg.getString("server.context", "/");
+		int port = Cfg.getInt("port", 8080);
+		String contextPath = Cfg.getString("context", "");
 		String WebRoot = "src/main/webapp";
 		Server server = new Server(port);
 		server.setStopAtShutdown(true);
@@ -37,7 +37,6 @@ public class Launcher
 		try
 		{
 			server.start();
-			server.join();
 		}
 		catch (Exception e)
 		{
