@@ -22,6 +22,10 @@ public class Container
 	public static void init(String basePackage)
 	{
 		BASEPACKAGE = basePackage;
+		if (BASEPACKAGE == null || BASEPACKAGE.length() == 0){
+			log.debug("The basepackage is empty!!. We strongly recommend that you set the value of basepackage.");
+			return;
+		}
 		loadActions();
 		loadInterceptors();
 		initPlugins();

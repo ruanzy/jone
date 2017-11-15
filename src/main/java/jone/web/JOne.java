@@ -147,7 +147,7 @@ public class JOne implements Filter
 		try
 		{
 			this.context = cfg.getServletContext();
-			String basePackage = cfg.getInitParameter("base-package");
+			String basePackage = cfg.getInitParameter("basepackage");
 			logger.debug("JOne basePackage {}", basePackage);
 			Container.init(basePackage);
 			logger.debug("JOne Started Successfully!");
