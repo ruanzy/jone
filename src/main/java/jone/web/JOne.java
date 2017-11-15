@@ -1,7 +1,6 @@
 package jone.web;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -16,7 +15,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -128,21 +126,7 @@ public class JOne implements Filter
 
 	public void init(FilterConfig cfg) throws ServletException
 	{
-		InputStream is = this.getClass().getResourceAsStream("/jone/logo.txt");
-		try
-		{
-			String logo = IOUtils.toString(is);
-			logo = logo.replaceFirst("\\$\\{version\\}", WebUtil.getVersion());
-			System.out.println(logo);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			IOUtils.closeQuietly(is);
-		}
+		Banner.print();
 		logger.debug("JOne Starting...");
 		try
 		{
