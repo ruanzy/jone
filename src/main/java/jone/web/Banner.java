@@ -8,12 +8,13 @@ public class Banner
 {
 	public static void print()
 	{
-		ClassLoader classLoader = Banner.class.getClassLoader();
+		ClassLoader classLoader = JOne.class.getClassLoader();
 		InputStream is = classLoader.getResourceAsStream("/jone/logo.txt");
 		try
 		{
 			String logo = IOUtils.toString(is);
-			logo = logo.replaceFirst("\\$\\{version\\}", WebUtil.getVersion());
+			String version = JOne.class.getPackage().getImplementationVersion();
+			logo = logo.replaceFirst("\\$\\{version\\}", version);
 			System.out.println("\n" + logo);
 		}
 		catch (Exception e)
