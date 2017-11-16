@@ -6,6 +6,7 @@ import static org.rrd4j.DsType.GAUGE;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executors;
@@ -31,6 +32,17 @@ public class Indicators
 	static final int DAY = 60 * 60 * 24;
 	static final int HOUR = 60 * 60;
 	static final int MINUTE = 60;
+	
+	private Indicators()
+	{
+	}
+	
+	public static Indicators biuld(File dir)
+	{
+		Indicators me = new Indicators();
+		me.dir = dir;
+		return me;
+	}
 
 	public Indicators add(String ds, Gauge g)
 	{
@@ -38,22 +50,18 @@ public class Indicators
 		return this;
 	}
 
-	public void start(File dir, int step)
+	public void start(int step)
 	{
 		if(started){
 			return;
 		}
-		this.dir = dir;
 		this.step = step;
 		executor = Executors.newSingleThreadScheduledExecutor();
-		for (Map.Entry<String, Gauge> entry : metrics.entrySet())
-		{
-			String ds = entry.getKey();
-			String fileName = ds+ ".rrd";
-			createRrd(this.dir, fileName, ds, this.step);
+		Set<String> keys = metrics.keySet();
+		for (String key : keys) {
+			String fileName = key + ".rrd";
+			createRrd(fileName, key);	
 		}
-		final File d = this.dir;
-		final int s = this.step;
 		executor.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run()
@@ -63,9 +71,9 @@ public class Indicators
 					for (Map.Entry<String, Gauge> entry : metrics.entrySet())
 					{
 						String ds = entry.getKey();
-						String fileName = ds+ ".rrd";
+						String fileName = ds + ".rrd";
 						Double v = entry.getValue().getValue();
-						writeRrd(d, fileName, s, ds, v);
+						writeRrd(fileName, ds, v);
 					}
 				}
 				catch (RuntimeException ex)
@@ -76,7 +84,7 @@ public class Indicators
 		}, this.step, this.step, TimeUnit.SECONDS);
 	}
 	
-	private void createRrd(File dir, String fileName, String ds, int step) {
+	private void createRrd(String fileName, String ds) {
 		long START = Util.getTimestamp();
 		RrdDb rrdDb = null;
 		try {
@@ -107,7 +115,7 @@ public class Indicators
 		}
 	}
 	
-	private void writeRrd(File dir, String fileName, int step, String ds, double v) {
+	private void writeRrd(String fileName, String ds, double v) {
 		RrdDb rrdDb = null;
 		try {
 			String rrdPath = new File(dir, fileName).getPath();
@@ -138,15 +146,16 @@ public class Indicators
 		}
 	}
 	
-	public static double[] readRrd(String fileName, long start, long end) {
+	public static double[] fetch(File dir, String ds, long start, long end) {
 		RrdDb rrdDb = null;
 		try {
-			String rrdPath = new File("D:/metrics", "freeMemory.rrd").getPath();
+			String fileName = ds + ".rrd";
+			String rrdPath = new File(dir, fileName).getPath();
 			rrdDb = new RrdDb(rrdPath);
 			FetchRequest request = rrdDb.createFetchRequest(AVERAGE, start, end);
 			System.out.println(request.dump());
 			FetchData fetchData = request.fetchData();
-			return fetchData.getValues(0);
+			return fetchData.getValues(ds);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
