@@ -13,6 +13,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import jone.util.RrdUtils;
+
+import org.rrd4j.ConsolFun;
+import org.rrd4j.core.Archive;
 import org.rrd4j.core.FetchData;
 import org.rrd4j.core.FetchRequest;
 import org.rrd4j.core.RrdDb;
@@ -37,7 +41,7 @@ public class Indicators
 	{
 	}
 	
-	public static Indicators biuld(File dir)
+	public static Indicators build(File dir)
 	{
 		Indicators me = new Indicators();
 		me.dir = dir;
@@ -154,6 +158,36 @@ public class Indicators
 			rrdDb = new RrdDb(rrdPath);
 			FetchRequest request = rrdDb.createFetchRequest(AVERAGE, start, end);
 			System.out.println(request.dump());
+			FetchData fetchData = request.fetchData();
+			return fetchData.getValues(ds);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rrdDb != null){
+				try
+				{
+					rrdDb.close();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static double[] fetchLast(File dir, String ds, int size, int steps) {
+		RrdDb rrdDb = null;
+		try {
+			String fileName = ds + ".rrd";
+			long resolution = steps * RrdUtils.STEP;
+			String rrdPath = new File(dir, fileName).getPath();
+			rrdDb = new RrdDb(rrdPath);
+			Archive archive = rrdDb.getArchive(ConsolFun.AVERAGE, steps);
+			long end = archive.getEndTime();
+			long start = end - (size - 1) * resolution;
+			FetchRequest request = rrdDb.createFetchRequest(AVERAGE, start, end, resolution);
 			FetchData fetchData = request.fetchData();
 			return fetchData.getValues(ds);
 		} catch (Exception e) {
