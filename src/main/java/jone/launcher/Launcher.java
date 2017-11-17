@@ -1,11 +1,11 @@
-package jone.web;
+package jone.launcher;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Launcher
 {
-	public static void start(int port, String context)
+	public static void run(int port, String context)
 	{
 		String WebRoot = "src/main/webapp";
 		Server server = new Server(port);

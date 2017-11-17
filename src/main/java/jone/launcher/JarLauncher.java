@@ -1,4 +1,4 @@
-package jone.loader;
+package jone.launcher;
 
 import java.io.File;
 import java.net.URL;
