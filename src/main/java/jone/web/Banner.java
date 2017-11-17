@@ -15,7 +15,7 @@ public class Banner
 			String logo = IOUtils.toString(is);
 			String version = JOne.class.getPackage().getImplementationVersion();
 			logo = logo.replaceFirst("\\$\\{version\\}", version);
-			System.out.println("\r" + logo);
+			System.out.println("\n" + logo);
 		}
 		catch (Exception e)
 		{
