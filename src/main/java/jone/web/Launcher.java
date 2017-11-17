@@ -14,6 +14,7 @@ public class Launcher
 		wc.setDescriptor(WebRoot + "/WEB-INF/web.xml");
 		wc.setResourceBase(WebRoot);
 		wc.setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
+		wc.setClassLoader(Thread.currentThread().getContextClassLoader());
 		wc.setConfigurationDiscovered(true);
 		server.setHandler(wc);
 		try
